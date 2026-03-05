@@ -43,7 +43,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.3)_40%,transparent_75%)]" />
         <div className="relative max-w-4xl flex flex-col items-center animate-in fade-in zoom-in duration-1000 slide-in-from-bottom-10">
 
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-7xl md:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 drop-shadow-sm mb-6">
+          <h1 className="mt-8 text-5xl font-extrabold tracking-tight sm:text-7xl md:text-8xl bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 drop-shadow-sm mb-6">
             Your Mind<br />
             <span className="text-indigo-200">Understood.</span>
           </h1>
