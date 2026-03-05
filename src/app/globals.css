@@ -83,24 +83,21 @@ h6 {
 
   0%,
   100% {
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0);
     opacity: 0;
   }
 
   10% {
-    opacity: 0.6;
+    opacity: 0.5;
   }
 
   50% {
-    transform: translateY(-30px) scale(1.5);
-    opacity: 0.3;
-  }
-
-  90% {
-    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+    opacity: 0.2;
   }
 }
 
 .animate-float-particle {
-  animation: float-particle 3s ease-in-out infinite;
+  animation: float-particle 4s ease-in-out infinite;
+  will-change: transform, opacity;
 }
