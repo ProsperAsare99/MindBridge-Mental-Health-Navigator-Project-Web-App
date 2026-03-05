@@ -8,6 +8,7 @@ interface ParallaxSectionProps {
     speed?: number;
     direction?: "up" | "down";
     className?: string;
+    id?: string;
 }
 
 export default function ParallaxSection({
@@ -15,6 +16,7 @@ export default function ParallaxSection({
     speed = 0.3,
     direction = "up",
     className = "",
+    id,
 }: ParallaxSectionProps) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -28,7 +30,7 @@ export default function ParallaxSection({
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     return (
-        <div ref={ref} className={`relative overflow-hidden ${className}`}>
+        <div ref={ref} id={id} className={`relative ${className}`}>
             <motion.div style={{ y, opacity }}>
                 {children}
             </motion.div>
