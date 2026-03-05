@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ShaderBackground from "@/components/shader-background";
 import ParallaxSection from "@/components/parallax-section";
+import LogoCarousel from "@/components/logo-marquee";
 import { ArrowRight, LogIn, UserPlus, Brain, BarChart3, ShieldCheck, CircleDot } from "lucide-react";
 
 export default function Home() {
@@ -12,12 +13,7 @@ export default function Home() {
 
       {/* Navigation - Minimal and Floating */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-indigo-500/20 backdrop-blur-md border border-white/10 flex items-center justify-center">
-            <div className="h-3 w-3 rounded-full bg-indigo-400" />
-          </div>
-          <span className="text-xl font-semibold tracking-tight text-white/90">MindBridge</span>
-        </div>
+        <LogoCarousel />
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-white/70">
           <Link href="#features" className="hover:text-white transition-colors">Features</Link>
           <Link href="#how-it-works" className="hover:text-white transition-colors">How It Works</Link>

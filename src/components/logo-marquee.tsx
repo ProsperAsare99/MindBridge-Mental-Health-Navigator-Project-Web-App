@@ -1,44 +1,38 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const marqueeItems = [
-    "MindBridge",
-    "✦",
-    "Mental Health Navigator",
-    "✦",
-    "Your Mind Understood",
-    "✦",
-    "Context-Aware Support",
-    "✦",
-    "Mood Tracking",
-    "✦",
-    "AI-Powered Guidance",
-    "✦",
-    "Crisis Resources",
-    "✦",
-    "Confidential",
-    "✦",
-];
+const words = ["MindBridge", "Navigate", "Thrive", "Heal"];
 
-export default function LogoMarquee() {
+export default function LogoCarousel() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % words.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
-        <div className="relative z-10 overflow-hidden border-y border-white/5 bg-white/[0.02] backdrop-blur-sm">
-            <div className="flex animate-marquee whitespace-nowrap py-4">
-                {/* Render items twice for seamless loop */}
-                {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
-                    <span
-                        key={i}
-                        className={`mx-6 text-sm font-medium tracking-wider uppercase ${item === "✦"
-                                ? "text-indigo-400/60 text-xs"
-                                : item === "MindBridge"
-                                    ? "text-indigo-300 font-bold"
-                                    : "text-white/30"
-                            }`}
-                    >
-                        {item}
-                    </span>
-                ))}
+        <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-full bg-indigo-500/20 backdrop-blur-md border border-white/10 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-indigo-400" />
+            </div>
+            <div className="h-7 overflow-hidden relative">
+                <div
+                    className="transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateY(-${currentIndex * 28}px)` }}
+                >
+                    {words.map((word, i) => (
+                        <span
+                            key={i}
+                            className="block text-xl font-semibold tracking-tight text-white/90 leading-7 h-7"
+                        >
+                            {word}
+                        </span>
+                    ))}
+                </div>
             </div>
         </div>
     );
