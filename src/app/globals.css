@@ -78,3 +78,29 @@ h6 {
 .animate-marquee {
   animation: marquee 25s linear infinite;
 }
+
+@keyframes float-particle {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(-30px) scale(1.5);
+    opacity: 0.3;
+  }
+
+  90% {
+    opacity: 0;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle 3s ease-in-out infinite;
+}
