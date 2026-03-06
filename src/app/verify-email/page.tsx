@@ -18,9 +18,9 @@ export default function VerifyEmailPage() {
 
     useEffect(() => {
         if (!loading && !user) {
-            router.push("/login"); // Redirect if not logged in
+            router.push("/signin");
         } else if (!loading && user && user.emailVerified) {
-            router.push("/dashboard"); // Redirect if already verified
+            router.push("/dashboard");
         }
     }, [user, loading, router]);
 
@@ -56,7 +56,7 @@ export default function VerifyEmailPage() {
 
     const handleSignOut = async () => {
         await signOut(auth);
-        router.push("/login");
+        router.push("/signin");
     }
 
     if (loading) return null; // Or a loading spinner
@@ -66,49 +66,54 @@ export default function VerifyEmailPage() {
             {/* Background Shader */}
             <ShaderBackground />
 
-            <div className="relative z-10 w-full max-w-md space-y-8 bg-white/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20 animate-in fade-in zoom-in duration-500 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100/10 border border-white/10 mb-6">
-                    <Mail className="h-8 w-8 text-indigo-300" />
+            <div className="relative z-10 w-full max-w-xl space-y-10 bg-white/5 backdrop-blur-[40px] p-10 md:p-14 rounded-[3rem] shadow-[0_0_80px_rgba(0,0,0,0.4)] border-2 border-white/10 animate-in fade-in zoom-in duration-1000 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-10 opacity-5 transition-all duration-1000 group-hover:scale-110 group-hover:-rotate-12 group-hover:opacity-10 pointer-events-none">
+                    <Mail size={300} className="text-indigo-300" />
                 </div>
 
-                <div>
-                    <h2 className="text-2xl font-bold tracking-tight text-white drop-shadow-sm">Check your inbox</h2>
-                    <p className="mt-4 text-sm text-indigo-100/80 leading-relaxed">
-                        We sent a verification link to <span className="font-semibold text-white">{user?.email}</span>.
-                        Please click the link to verify your account.
+                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-[2rem] bg-indigo-500/20 border-2 border-indigo-400/30 shadow-[0_0_40px_rgba(99,102,241,0.3)] mb-8 relative z-10">
+                    <Mail className="h-10 w-10 text-indigo-200" />
+                </div>
+
+                <div className="text-center space-y-4 relative z-10">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white uppercase tracking-widest drop-shadow-2xl italic">
+                        Check Inbox
+                    </h2>
+                    <p className="text-sm font-bold text-indigo-300 uppercase tracking-[0.4em] opacity-80 leading-relaxed px-4">
+                        We sent a secure link to <span className="text-white block mt-2 text-lg font-black tracking-normal lowercase">{user?.email}</span>
                     </p>
                 </div>
 
                 {message && (
                     <div className={`mt-4 p-3 text-sm rounded-md border backdrop-blur-sm ${message.includes("sent")
-                            ? "bg-green-500/20 text-green-100 border-green-500/30"
-                            : "bg-amber-500/20 text-amber-100 border-amber-500/30"
+                        ? "bg-green-500/20 text-green-100 border-green-500/30"
+                        : "bg-amber-500/20 text-amber-100 border-amber-500/30"
                         }`}>
                         {message}
                     </div>
                 )}
 
-                <div className="space-y-4 mt-8">
+                <div className="space-y-6 mt-10 relative z-10">
                     <Button
                         onClick={handleCheckVerification}
-                        className="w-full h-11 bg-indigo-600 hover:bg-indigo-500 text-white border-0 shadow-lg shadow-indigo-500/30 transition-all hover:scale-[1.02] text-base font-semibold"
+                        className="w-full h-16 bg-gradient-to-r from-indigo-600 to-blue-700 hover:from-indigo-500 hover:to-blue-600 text-white border-2 border-indigo-400/30 shadow-[0_0_30px_rgba(99,102,241,0.4)] transition-all hover:scale-[1.02] active:scale-95 text-xl font-black uppercase tracking-widest rounded-2xl flex items-center justify-center"
                     >
-                        I've Verified My Email <ArrowRight className="ml-2 h-4 w-4" />
+                        Access Dashboard <ArrowRight className="ml-3 h-6 w-6" />
                     </Button>
 
                     <Button
                         variant="outline"
                         onClick={handleResend}
                         disabled={sending}
-                        className="w-full h-11 border-white/10 bg-white/5 text-indigo-100 hover:bg-white/10 hover:text-white transition-all"
+                        className="w-full h-16 border-2 border-white/10 bg-white/5 text-indigo-200 hover:bg-white/10 hover:text-white transition-all text-sm font-black uppercase tracking-widest rounded-2xl flex items-center justify-center backdrop-blur-xl"
                     >
-                        {sending ? "Sending..." : "Resend Verification Email"} <RefreshCcw className={`ml-2 h-4 w-4 ${sending ? "animate-spin" : ""}`} />
+                        {sending ? "Transmitting..." : "Resend Link"} <RefreshCcw className={`ml-3 h-5 w-5 ${sending ? "animate-spin" : ""}`} />
                     </Button>
                 </div>
 
-                <div className="text-center text-sm pt-6 border-t border-white/10 mt-6">
-                    <button onClick={handleSignOut} className="text-indigo-200/70 hover:text-white transition-colors">
-                        Sign out and complete later
+                <div className="text-center pt-8 border-t-2 border-white/10 mt-10 relative z-10">
+                    <button onClick={handleSignOut} className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400 hover:text-white transition-all">
+                        Abandon Session & Exit
                     </button>
                 </div>
             </div>

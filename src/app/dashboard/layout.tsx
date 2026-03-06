@@ -33,7 +33,7 @@ export default function DashboardLayout({
 
     useEffect(() => {
         if (!loading && !user) {
-            router.push("/login"); // Protect route
+            router.push("/signin"); // Protect route
         }
     }, [user, loading, router]);
 

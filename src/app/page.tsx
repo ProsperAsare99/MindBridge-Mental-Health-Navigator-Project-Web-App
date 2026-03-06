@@ -57,7 +57,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-              <Link href="/login" className="w-full sm:w-auto">
+              <Link href="/signin" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg bg-indigo-600 hover:bg-indigo-500 text-white border-none ring-1 ring-white/20 shadow-xl shadow-indigo-900/30 transition-all hover:scale-105">
                   <LogIn className="mr-2 h-5 w-5" />
                   Sign In

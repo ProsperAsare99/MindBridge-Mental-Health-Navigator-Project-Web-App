@@ -215,14 +215,22 @@ export default function RegisterPage() {
             {/* Background Shader */}
             <ShaderBackground />
 
-            <div className="relative z-10 w-full max-w-md space-y-8 bg-white/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20 animate-in fade-in zoom-in duration-500">
-                <Link href="/" className="inline-flex items-center text-sm text-indigo-200 hover:text-white transition-colors mb-4">
-                    <ArrowLeft className="h-4 w-4 mr-1" /> Back to Home
+            <div className="relative z-10 w-full max-w-xl space-y-10 bg-white/5 backdrop-blur-[40px] p-10 md:p-14 rounded-[3rem] shadow-[0_0_80px_rgba(0,0,0,0.4)] border-2 border-white/10 animate-in fade-in zoom-in duration-1000 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-10 opacity-5 transition-all duration-1000 group-hover:scale-110 group-hover:-rotate-12 group-hover:opacity-10 pointer-events-none">
+                    <UserPlus size={300} className="text-indigo-300" />
+                </div>
+
+                <Link href="/" className="inline-flex items-center text-xs font-black uppercase tracking-[0.3em] text-indigo-300 hover:text-white transition-all mb-4 group/back">
+                    <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover/back:-translate-x-1" /> Back to Home
                 </Link>
 
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold tracking-tight text-white drop-shadow-sm">Create an account</h2>
-                    <p className="mt-2 text-sm text-indigo-100/80">Start your journey with MindBridge</p>
+                <div className="text-center space-y-3">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white uppercase tracking-widest drop-shadow-2xl italic">
+                        Create Account
+                    </h2>
+                    <p className="text-sm font-bold text-indigo-300 uppercase tracking-[0.4em] opacity-80">
+                        Join the wellness circle
+                    </p>
                 </div>
 
                 {error && (
@@ -231,10 +239,12 @@ export default function RegisterPage() {
                     </div>
                 )}
 
-                <form className="mt-8 space-y-6" onSubmit={isPhoneSignup ? (otpSent ? handleVerifyOtp : handleSendOtp) : handleRegister}>
-                    <div className="space-y-4">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-indigo-100 mb-1">Full Name</label>
+                <form className="mt-8 space-y-8 relative z-10" onSubmit={isPhoneSignup ? (otpSent ? handleVerifyOtp : handleSendOtp) : handleRegister}>
+                    <div className="space-y-6">
+                        <div className="space-y-2.5">
+                            <label htmlFor="name" className="flex items-center gap-2 text-xs font-black text-indigo-300 uppercase tracking-widest ml-1">
+                                Full Name
+                            </label>
                             <input
                                 id="name"
                                 name="name"
@@ -242,23 +252,25 @@ export default function RegisterPage() {
                                 required
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
-                                placeholder="John Doe"
+                                className="relative block w-full rounded-2xl border-2 border-white/10 bg-white/5 py-4 px-5 text-white placeholder-white/20 focus:z-10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 sm:text-lg focus:outline-none transition-all shadow-xl backdrop-blur-3xl"
+                                placeholder="e.g. Ama Serwaa"
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor="institution" className="block text-sm font-medium text-indigo-100 mb-1">Institution</label>
-                            <div className="relative">
+                        <div className="space-y-2.5">
+                            <label htmlFor="institution" className="flex items-center gap-2 text-xs font-black text-indigo-300 uppercase tracking-widest ml-1">
+                                Institution
+                            </label>
+                            <div className="relative group">
                                 <select
                                     id="institution"
                                     name="institution"
                                     required
                                     value={institution}
                                     onChange={(e) => setInstitution(e.target.value)}
-                                    className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm appearance-none focus:outline-none transition-all [&>option]:bg-slate-900"
+                                    className="relative block w-full rounded-2xl border-2 border-white/10 bg-white/5 py-4 px-5 text-white focus:z-10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 sm:text-lg appearance-none focus:outline-none transition-all [&>option]:bg-[#0f172a] shadow-xl backdrop-blur-3xl cursor-pointer"
                                 >
-                                    <option value="" disabled className="text-white/30">Select your institution</option>
+                                    <option value="" disabled className="text-white/30">Select your university</option>
                                     <option value="UG LEGON">University of Ghana</option>
                                     <option value="KNUST">Kwame Nkrumah University of Science & Technology</option>
                                     <option value="UCC">University of Cape Coast</option>
@@ -273,15 +285,17 @@ export default function RegisterPage() {
                                     <option value="GTUC">Ghana Telecommunication University College</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-indigo-200">
-                                    <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-indigo-400 group-hover:text-white transition-colors">
+                                    <svg className="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <div>
-                                <label htmlFor="studentId" className="block text-sm font-medium text-indigo-100 mb-1">Student ID</label>
+                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                            <div className="space-y-2.5">
+                                <label htmlFor="studentId" className="flex items-center gap-2 text-xs font-black text-indigo-300 uppercase tracking-widest ml-1">
+                                    Student ID
+                                </label>
                                 <input
                                     id="studentId"
                                     name="studentId"
@@ -289,12 +303,14 @@ export default function RegisterPage() {
                                     required
                                     value={studentId}
                                     onChange={(e) => setStudentId(e.target.value)}
-                                    className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
-                                    placeholder="10293847"
+                                    className="relative block w-full rounded-2xl border-2 border-white/10 bg-white/5 py-4 px-5 text-white placeholder-white/20 focus:z-10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 sm:text-lg focus:outline-none transition-all shadow-xl backdrop-blur-3xl"
+                                    placeholder="10928374"
                                 />
                             </div>
-                            <div>
-                                <label htmlFor="course" className="block text-sm font-medium text-indigo-100 mb-1">Course of Study</label>
+                            <div className="space-y-2.5">
+                                <label htmlFor="course" className="flex items-center gap-2 text-xs font-black text-indigo-300 uppercase tracking-widest ml-1">
+                                    Program
+                                </label>
                                 <input
                                     id="course"
                                     name="course"
@@ -302,16 +318,18 @@ export default function RegisterPage() {
                                     required
                                     value={course}
                                     onChange={(e) => setCourse(e.target.value)}
-                                    className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
-                                    placeholder="e.g. Computer Science"
+                                    className="relative block w-full rounded-2xl border-2 border-white/10 bg-white/5 py-4 px-5 text-white placeholder-white/20 focus:z-10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 sm:text-lg focus:outline-none transition-all shadow-xl backdrop-blur-3xl"
+                                    placeholder="BSc. CS"
                                 />
                             </div>
                         </div>
 
                         {!isPhoneSignup ? (
                             <>
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-indigo-100 mb-1">Email address</label>
+                                <div className="space-y-2.5">
+                                    <label htmlFor="email" className="flex items-center gap-2 text-xs font-black text-indigo-300 uppercase tracking-widest ml-1">
+                                        Email Secret
+                                    </label>
                                     <input
                                         id="email"
                                         name="email"
@@ -319,12 +337,14 @@ export default function RegisterPage() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
-                                        placeholder="name@example.com"
+                                        className="relative block w-full rounded-2xl border-2 border-white/10 bg-white/5 py-4 px-5 text-white placeholder-white/20 focus:z-10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 sm:text-lg focus:outline-none transition-all shadow-xl backdrop-blur-3xl"
+                                        placeholder="your@email.com"
                                     />
                                 </div>
-                                <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-indigo-100 mb-1">Password</label>
+                                <div className="space-y-2.5">
+                                    <label htmlFor="password" className="flex items-center gap-2 text-xs font-black text-indigo-300 uppercase tracking-widest ml-1">
+                                        Password Key
+                                    </label>
                                     <input
                                         id="password"
                                         name="password"
@@ -332,25 +352,25 @@ export default function RegisterPage() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
+                                        className="relative block w-full rounded-2xl border-2 border-white/10 bg-white/5 py-4 px-5 text-white placeholder-white/20 focus:z-10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 sm:text-lg focus:outline-none transition-all shadow-xl backdrop-blur-3xl"
                                         placeholder="••••••••"
                                     />
                                 </div>
-                                <div>
+                                <div className="pt-4">
                                     <Button
                                         type="submit"
-                                        className="w-full h-11 bg-indigo-600 hover:bg-indigo-500 text-white border-0 shadow-lg shadow-indigo-500/30 transition-all hover:scale-[1.02] text-base font-semibold"
+                                        className="w-full h-16 bg-gradient-to-r from-indigo-600 to-blue-700 hover:from-indigo-500 hover:to-blue-600 text-white border-2 border-indigo-400/30 shadow-[0_0_30px_rgba(99,102,241,0.4)] transition-all hover:scale-[1.02] active:scale-95 text-xl font-black uppercase tracking-widest rounded-2xl"
                                         disabled={loading}
                                     >
-                                        {loading ? "Creating account..." : "Sign up"}
+                                        {loading ? "Forging Access..." : "Finalize Signup"}
                                     </Button>
-                                    <div className="mt-2 text-center">
+                                    <div className="mt-6 text-center">
                                         <button
                                             type="button"
                                             onClick={() => setIsPhoneSignup(true)}
-                                            className="text-sm text-indigo-200 hover:text-white transition-colors flex items-center justify-center w-full"
+                                            className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400 hover:text-white transition-all flex items-center justify-center w-full"
                                         >
-                                            <Phone className="w-3 h-3 mr-1" /> Use Phone Number instead
+                                            <Phone className="w-4 h-4 mr-2" /> Use Phone Number instead
                                         </button>
                                     </div>
                                 </div>
@@ -419,31 +439,31 @@ export default function RegisterPage() {
                     </div>
                 </form>
 
-                <div className="relative my-6">
+                <div className="relative my-10 relative z-10">
                     <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t border-white/10" />
+                        <span className="w-full border-t-2 border-white/10" />
                     </div>
-                    <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-white/5 px-2 text-indigo-200 rounded-full backdrop-blur-sm">Or continue with</span>
+                    <div className="relative flex justify-center text-[10px] font-black uppercase tracking-[0.4em]">
+                        <span className="bg-white/5 px-6 py-2 text-indigo-300 rounded-full backdrop-blur-3xl border border-white/10">Or connect via</span>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-3">
+                <div className="grid grid-cols-1 gap-4 relative z-10">
                     <Button
                         type="button"
                         onClick={handleGoogleSignIn}
-                        className="w-full bg-white text-slate-900 hover:bg-slate-100 font-semibold transition-transform hover:scale-[1.02]"
+                        className="w-full h-16 bg-white text-slate-900 hover:bg-slate-100 font-black uppercase tracking-widest transition-all hover:scale-[1.02] rounded-2xl shadow-xl flex items-center justify-center"
                     >
-                        <svg className="mr-2 h-4 w-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                        <svg className="mr-3 h-6 w-6" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
                             <path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
                         </svg>
-                        Google
+                        Google Core
                     </Button>
                 </div>
 
-                <div className="text-center text-sm pt-4 border-t border-white/10 mt-6">
-                    <span className="text-indigo-200/70">Already have an account? </span>
-                    <Link href="/login" className="font-medium text-white hover:text-indigo-200 transition-colors">Sign in</Link>
+                <div className="text-center text-xs pt-8 border-t-2 border-white/10 mt-10 relative z-10">
+                    <span className="text-indigo-200/50 font-bold uppercase tracking-widest">In the circle already? </span>
+                    <Link href="/signin" className="font-black text-white hover:text-indigo-300 transition-colors uppercase tracking-[0.2em] underline underline-offset-8">Authorize Here</Link>
                 </div>
             </div>
         </div>
