@@ -23,6 +23,8 @@
   /* Slate 100 */
   --color-muted-foreground: #64748b;
   /* Slate 500 */
+
+  --animate-aurora: aurora 60s linear infinite;
 }
 
 :root {
@@ -33,6 +35,16 @@
   --surface-muted: rgba(241, 245, 249, 0.8);
   --text-secondary: #475569;
   --text-muted: #64748b;
+
+  /* Aurora color variables */
+  --white: #fff;
+  --black: #000;
+  --transparent: transparent;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --violet-200: #ddd6fe;
 }
 
 .dark {
@@ -43,6 +55,15 @@
   --surface-muted: rgba(255, 255, 255, 0.05);
   --text-secondary: #c7d2fe;
   --text-muted: #a5b4fc;
+
+  --white: #fff;
+  --black: #000;
+  --transparent: transparent;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --violet-200: #ddd6fe;
 }
 
 body {
@@ -65,11 +86,19 @@ h6 {
   letter-spacing: -0.025em;
 }
 
+@keyframes aurora {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);
   }
-
   100% {
     transform: translateX(-33.333%);
   }
@@ -80,17 +109,14 @@ h6 {
 }
 
 @keyframes float-particle {
-
   0%,
   100% {
     transform: translate3d(0, 0, 0);
     opacity: 0;
   }
-
   10% {
     opacity: 0.5;
   }
-
   50% {
     transform: translate3d(0, -20px, 0);
     opacity: 0.2;
