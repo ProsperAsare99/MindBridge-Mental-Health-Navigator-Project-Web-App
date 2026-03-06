@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleA
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Phone, Mail } from "lucide-react";
+import { ArrowLeft, Phone, Mail, UserPlus } from "lucide-react";
 import { SparklesCore } from "@/components/sparkles-core";
 import { useEffect } from "react";
 
