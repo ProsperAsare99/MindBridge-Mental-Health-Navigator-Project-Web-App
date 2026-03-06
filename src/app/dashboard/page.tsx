@@ -15,7 +15,8 @@ import {
     Search,
     BrainCircuit,
     Compass,
-    Activity
+    Activity,
+    Sparkles
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -137,7 +138,7 @@ export default function DashboardPage() {
                                     <BrainCircuit className="h-5 w-5 text-primary" />
                                     Daily Reflection
                                 </CardTitle>
-                                <CardDescription>A space for your thoughts</CardDescription>
+                                <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-1">A space for your thoughts</CardTitle>
                             </CardHeader>
                             <CardContent className="pt-4">
                                 <AnimatePresence mode="wait">
@@ -163,21 +164,31 @@ export default function DashboardPage() {
                     </motion.div>
 
                     <motion.div variants={itemVariants}>
-                        <Card className="h-full group hover:shadow-2xl transition-all duration-500 border-none bg-accent/50">
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground/60">Mood Streak</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex flex-col justify-between pt-2 h-[calc(100%-80px)]">
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-5xl font-black text-primary">0</span>
-                                    <span className="text-sm font-bold text-muted-foreground uppercase">Days</span>
+                        <Link href="/dashboard/mood">
+                            <Card className="h-full group hover:shadow-2xl transition-all duration-500 border-accent/20 bg-accent/30 cursor-pointer overflow-hidden relative">
+                                <CardHeader className="pb-2">
+                                    <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Mood Streak</CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex flex-col justify-between pt-2 h-[calc(100%-80px)]">
+                                    <div className="flex items-baseline gap-2">
+                                        <span className="text-5xl font-black text-primary">0</span>
+                                        <span className="text-sm font-bold text-muted-foreground uppercase">Days</span>
+                                    </div>
+                                    <div className="mt-8 flex flex-col gap-4">
+                                        <div className="flex items-center gap-1.5 text-xs font-bold text-primary">
+                                            <Activity className="h-3 w-3" />
+                                            Start checking in!
+                                        </div>
+                                        <Button size="sm" variant="outline" className="rounded-xl w-full h-10 font-bold border-primary/20 hover:bg-primary/5 text-primary">
+                                            Check Trends
+                                        </Button>
+                                    </div>
+                                </CardContent>
+                                <div className="absolute top-[-10%] right-[-10%] opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                                    <Sparkles size={100} className="text-primary" />
                                 </div>
-                                <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-bold text-primary">
-                                    <Activity className="h-3 w-3" />
-                                    Start checking in!
-                                </div>
-                            </CardContent>
-                        </Card>
+                            </Card>
+                        </Link>
                     </motion.div>
 
                     <motion.div variants={itemVariants}>
