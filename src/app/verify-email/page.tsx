@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Mail, ArrowRight, RefreshCcw } from "lucide-react";
-import ShaderBackground from "@/components/shader-background";
+import { SparklesCore } from "@/components/sparkles-core";
 import { sendEmailVerification, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
@@ -63,8 +63,19 @@ export default function VerifyEmailPage() {
 
     return (
         <div className="relative min-h-screen font-sans text-white selection:bg-indigo-300 selection:text-indigo-900 flex flex-col items-center justify-center p-4 overflow-hidden">
-            {/* Background Shader */}
-            <ShaderBackground />
+            {/* Background Sparkles */}
+            <div className="fixed inset-0 z-0">
+                <SparklesCore
+                    id="verify-sparkles"
+                    background="#0a0118"
+                    minSize={0.6}
+                    maxSize={2.4}
+                    particleDensity={80}
+                    className="w-full h-full"
+                    particleColor="#a78bfa"
+                    speed={1.5}
+                />
+            </div>
 
             <div className="relative z-10 w-full max-w-xl space-y-10 bg-white/5 backdrop-blur-[40px] p-10 md:p-14 rounded-[3rem] shadow-[0_0_80px_rgba(0,0,0,0.4)] border-2 border-white/10 animate-in fade-in zoom-in duration-1000 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-10 opacity-5 transition-all duration-1000 group-hover:scale-110 group-hover:-rotate-12 group-hover:opacity-10 pointer-events-none">

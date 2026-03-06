@@ -19,7 +19,7 @@ import {
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { cn } from "@/lib/utils";
-import ShaderBackground from "@/components/shader-background";
+import { SparklesCore } from "@/components/sparkles-core";
 
 export default function DashboardLayout({
     children,
@@ -65,9 +65,18 @@ export default function DashboardLayout({
 
     return (
         <div className="min-h-screen relative font-sans text-foreground bg-background selection:bg-indigo-500/30 selection:text-indigo-900 dark:selection:text-indigo-200">
-            {/* Background Shader - visible in both themes */}
-            <div className="fixed inset-0 z-0 opacity-20 dark:opacity-70">
-                <ShaderBackground />
+            {/* Background Sparkles */}
+            <div className="fixed inset-0 z-0">
+                <SparklesCore
+                    id="dashboard-sparkles"
+                    background="#0a0118"
+                    minSize={0.6}
+                    maxSize={2.4}
+                    particleDensity={80}
+                    className="w-full h-full"
+                    particleColor="#a78bfa"
+                    speed={1.5}
+                />
             </div>
 
             {/* Mobile Sidebar Overlay */}

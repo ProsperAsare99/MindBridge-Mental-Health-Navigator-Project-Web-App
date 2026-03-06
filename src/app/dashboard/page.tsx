@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import ShaderBackground from "@/components/shader-background";
+
 
 const MOTIVATION_QUOTES = [
     { text: "You don't have to control your thoughts. You just have to stop letting them control you.", author: "Dan Millman" },

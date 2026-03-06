@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ShaderBackground from "@/components/shader-background";
+import { SparklesCore } from "@/components/sparkles-core";
 import ParallaxSection from "@/components/parallax-section";
 import LogoCarousel from "@/components/logo-marquee";
 import SplashWrapper from "@/components/splash-wrapper";
@@ -10,8 +10,19 @@ export default function Home() {
   return (
     <SplashWrapper>
       <div className="relative font-sans text-white selection:bg-indigo-300 selection:text-indigo-900">
-        {/* Background Shader */}
-        <ShaderBackground />
+        {/* Background Sparkles */}
+        <div className="fixed inset-0 z-0">
+          <SparklesCore
+            id="home-sparkles"
+            background="#0a0118"
+            minSize={0.6}
+            maxSize={2.4}
+            particleDensity={100}
+            className="w-full h-full"
+            particleColor="#a78bfa"
+            speed={1.5}
+          />
+        </div>
 
         {/* Navigation - Minimal and Floating */}
         <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12">
