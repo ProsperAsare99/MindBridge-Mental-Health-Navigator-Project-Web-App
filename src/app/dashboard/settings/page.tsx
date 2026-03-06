@@ -11,7 +11,7 @@ import {
     EmailAuthProvider,
     reauthenticateWithCredential,
 } from "firebase/auth";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
     User,
     Mail,

@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { db } from "@/lib/firebase";
 import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { ChevronRight, ChevronLeft, CheckCircle2, AlertTriangle, AlertCircle, Info, Activity, Sparkles, Heart } from "lucide-react";
 import Link from "next/link";
 

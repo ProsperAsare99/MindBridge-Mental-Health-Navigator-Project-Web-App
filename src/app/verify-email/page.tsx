@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Mail, ArrowRight, RefreshCcw } from "lucide-react";
 import { SparklesCore } from "@/components/sparkles-core";
 import { sendEmailVerification, signOut } from "firebase/auth";
