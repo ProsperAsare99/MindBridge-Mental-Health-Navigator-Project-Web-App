@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import ParallaxSection from "@/components/parallax-section";
 import {
   Heart,
   Sparkles,
@@ -19,8 +20,12 @@ export default function Home() {
     <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 selection:text-primary overflow-hidden">
       {/* Soft Background Accents */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-secondary/10 blur-[120px]" />
+        <ParallaxSection speed={0.05} direction="down" className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%]">
+          <div className="h-full w-full rounded-full bg-primary/5 blur-[120px]" />
+        </ParallaxSection>
+        <ParallaxSection speed={0.1} direction="up" className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%]">
+          <div className="h-full w-full rounded-full bg-secondary/10 blur-[120px]" />
+        </ParallaxSection>
       </div>
 
       {/* Navigation - Apple Style */}
@@ -86,16 +91,19 @@ export default function Home() {
           </motion.div>
 
           {/* Heading */}
-          <h1 className="text-6xl font-extrabold tracking-tight sm:text-7xl md:text-9xl text-foreground leading-[1.05]">
-            Mindfulness.<br />
-            <span className="text-primary/80">Redefined.</span>
-          </h1>
+          <ParallaxSection speed={0.15}>
+            <h1 className="text-6xl font-extrabold tracking-tight sm:text-7xl md:text-9xl text-foreground leading-[1.05]">
+              Your Mind,<br />
+              <span className="text-primary/80">Understood.</span>
+            </h1>
+          </ParallaxSection>
 
-          {/* Description */}
-          <p className="max-w-2xl mx-auto text-lg md:text-xl font-medium text-muted-foreground leading-relaxed">
-            Navigate the complexities of university life with Ghana's first
-            context-aware support system. Simple tools, deeper understanding.
-          </p>
+          <ParallaxSection speed={0.1}>
+            <p className="max-w-2xl mx-auto text-lg md:text-xl font-medium text-muted-foreground leading-relaxed">
+              Navigate the complexities of university life with Ghana's first
+              context-aware support system. Simple tools, deeper understanding.
+            </p>
+          </ParallaxSection>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
@@ -113,24 +121,26 @@ export default function Home() {
           </div>
 
           {/* Trust Assets */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="pt-16 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700"
-          >
-            {[
-              { icon: ShieldCheck, label: "Confidential" },
-              { icon: Brain, label: "AI-Powered" },
-              { icon: Sparkles, label: "Student-Led" },
-              { icon: Star, label: "Highly Rated" }
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center justify-center gap-2 group">
-                <Icon className="h-5 w-5 group-hover:text-primary transition-colors" />
-                <span className="text-sm font-bold tracking-tight uppercase">{label}</span>
-              </div>
-            ))}
-          </motion.div>
+          <ParallaxSection speed={0.05} direction="down">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="pt-16 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700"
+            >
+              {[
+                { icon: ShieldCheck, label: "Confidential" },
+                { icon: Brain, label: "AI-Powered" },
+                { icon: Sparkles, label: "Student-Led" },
+                { icon: Star, label: "Highly Rated" }
+              ].map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center justify-center gap-2 group">
+                  <Icon className="h-5 w-5 group-hover:text-primary transition-colors" />
+                  <span className="text-sm font-bold tracking-tight uppercase">{label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </ParallaxSection>
         </motion.div>
       </main>
 
