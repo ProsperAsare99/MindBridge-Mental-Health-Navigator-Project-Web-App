@@ -248,33 +248,34 @@ export default function CrisisPage() {
             <div className="relative z-10 space-y-8 p-6 md:p-10 max-w-4xl mx-auto">
 
                 {/* Urgent Banner */}
-                <div className="rounded-2xl border border-red-500/30 bg-red-900/20 backdrop-blur-md p-6 shadow-xl relative overflow-hidden animate-in fade-in zoom-in duration-500">
-                    <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-red-500/20 blur-3xl rounded-full pointer-events-none" />
+                <div className="rounded-3xl border border-red-500/40 bg-gradient-to-br from-red-600/20 to-orange-600/20 backdrop-blur-xl p-8 shadow-[0_0_40px_rgba(239,68,68,0.15)] relative overflow-hidden animate-in fade-in zoom-in duration-500 hover:shadow-[0_0_50px_rgba(239,68,68,0.25)] transition-all">
+                    <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-red-500/20 blur-[80px] rounded-full pointer-events-none" />
+                    <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-orange-500/10 blur-[60px] rounded-full pointer-events-none" />
                     <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-4">
                         <div className="flex-shrink-0 h-14 w-14 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center">
                             <AlertTriangle className="h-7 w-7 text-red-400 animate-pulse" />
                         </div>
                         <div className="flex-1">
-                            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-                                In immediate danger? Call 191 or 193
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
+                                In immediate danger? <span className="text-red-400">Call 191 or 193</span>
                             </h1>
-                            <p className="text-red-200/80 text-sm mt-1">
+                            <p className="text-red-100/90 text-lg font-medium mt-2">
                                 Your safety comes first. If you or someone you know is in a life-threatening situation, contact emergency services immediately.
                             </p>
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-2 flex-shrink-0">
+                        <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
                             <Button
                                 onClick={() => handleCall("191")}
-                                className="bg-red-600 hover:bg-red-500 text-white border-0 shadow-lg shadow-red-600/30 h-11 px-5 text-sm font-semibold"
+                                className="bg-red-600 hover:bg-red-500 text-white border-0 shadow-[0_0_20px_rgba(220,38,38,0.4)] h-14 px-8 text-lg font-black rounded-2xl transition-all hover:scale-105 active:scale-95"
                             >
-                                <Phone className="mr-2 h-4 w-4" />
+                                <Phone className="mr-2 h-5 w-5" />
                                 Police (191)
                             </Button>
                             <Button
                                 onClick={() => handleCall("193")}
-                                className="bg-red-600 hover:bg-red-500 text-white border-0 shadow-lg shadow-red-600/30 h-11 px-5 text-sm font-semibold"
+                                className="bg-red-600 hover:bg-red-500 text-white border-0 shadow-[0_0_20px_rgba(220,38,38,0.4)] h-14 px-8 text-lg font-black rounded-2xl transition-all hover:scale-105 active:scale-95"
                             >
-                                <Phone className="mr-2 h-4 w-4" />
+                                <Phone className="mr-2 h-5 w-5" />
                                 Ambulance (193)
                             </Button>
                         </div>
@@ -283,38 +284,39 @@ export default function CrisisPage() {
 
                 {/* Header */}
                 <div className="animate-in fade-in slide-in-from-top-5 duration-700">
-                    <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-                        <Heart className="h-5 w-5 text-indigo-300" />
-                        You are not alone. Help is available in Ghana.
+                    <h2 className="text-2xl md:text-3xl font-black text-white flex items-center gap-3">
+                        <Heart className="h-8 w-8 text-pink-400 drop-shadow-[0_0_10px_rgba(244,114,182,0.5)]" />
+                        You are not alone.
                     </h2>
-                    <p className="text-indigo-100 mt-1 text-sm leading-relaxed">
+                    <p className="text-indigo-100/90 mt-2 text-lg font-medium leading-relaxed max-w-2xl">
                         Reaching out takes courage. Below are confidential resources available to students across Ghana.
                     </p>
                 </div>
 
                 {/* Emergency Numbers */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <AlertTriangle className="h-5 w-5 text-red-400" />
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <AlertTriangle className="h-6 w-6 text-red-400" />
                         Emergency Numbers
                     </h3>
                     <div className="grid gap-4 md:grid-cols-3">
                         {EMERGENCY_LINES.map((line, index) => (
                             <div
                                 key={index}
-                                className="rounded-2xl border border-red-500/20 bg-red-900/10 backdrop-blur-md p-5 shadow-xl hover:bg-red-900/20 transition-all duration-300"
+                                className="rounded-2xl border border-red-500/20 bg-white/5 backdrop-blur-md p-6 shadow-xl hover:bg-white/10 transition-all duration-300 group relative overflow-hidden"
                             >
-                                <h4 className="font-semibold text-white text-sm">{line.name}</h4>
-                                <p className="text-xs text-red-200 mt-1">{line.description}</p>
-                                <div className="flex items-center gap-1 mt-2 text-xs text-red-300/60">
-                                    <Clock className="h-3 w-3" /> {line.available}
+                                <div className="absolute -right-4 -top-4 w-12 h-12 bg-red-500/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-all" />
+                                <h4 className="font-black text-white text-lg mb-2">{line.name}</h4>
+                                <p className="text-sm text-red-100/70 mb-4 leading-relaxed">{line.description}</p>
+                                <div className="flex items-center gap-2 mb-6 text-sm font-bold text-red-300/80">
+                                    <Clock className="h-4 w-4" /> {line.available}
                                 </div>
                                 <Button
                                     size="sm"
                                     onClick={() => handleCall(line.number)}
-                                    className="mt-3 bg-red-600 hover:bg-red-500 text-white border-0 shadow-md text-xs h-9 w-full"
+                                    className="mt-auto bg-red-600 hover:bg-red-500 text-white border-0 shadow-[0_0_15px_rgba(220,38,38,0.3)] text-sm h-11 w-full font-black rounded-xl"
                                 >
-                                    <Phone className="mr-1.5 h-3.5 w-3.5" />
+                                    <Phone className="mr-2 h-4 w-4" />
                                     Call {line.number}
                                 </Button>
                             </div>
@@ -323,30 +325,31 @@ export default function CrisisPage() {
                 </div>
 
                 {/* Mental Health Helplines */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Phone className="h-5 w-5 text-indigo-300" />
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Phone className="h-6 w-6 text-indigo-400" />
                         Mental Health Helplines
                     </h3>
                     <div className="grid gap-4 md:grid-cols-2">
                         {MENTAL_HEALTH_LINES.map((line, index) => (
                             <div
                                 key={index}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-xl hover:bg-white/10 transition-all duration-300 group"
+                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 shadow-xl hover:bg-white/10 transition-all duration-300 group relative overflow-hidden"
                             >
-                                <h4 className="font-semibold text-white group-hover:text-white transition-colors text-sm">
+                                <div className="absolute -right-4 -top-4 w-12 h-12 bg-indigo-500/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-all" />
+                                <h4 className="font-black text-white group-hover:text-indigo-200 transition-colors text-lg mb-2">
                                     {line.name}
                                 </h4>
-                                <p className="text-xs text-indigo-100 mt-1 leading-relaxed">{line.description}</p>
-                                <div className="flex items-center gap-1 mt-2 text-xs text-indigo-200/50">
-                                    <Clock className="h-3 w-3" /> {line.available}
+                                <p className="text-sm text-indigo-100/80 mb-4 leading-relaxed">{line.description}</p>
+                                <div className="flex items-center gap-2 mb-6 text-sm font-bold text-indigo-300/60">
+                                    <Clock className="h-4 w-4" /> {line.available}
                                 </div>
                                 <Button
                                     size="sm"
                                     onClick={() => handleCall(line.number)}
-                                    className="mt-3 bg-indigo-500 hover:bg-indigo-400 text-white shadow-md shadow-indigo-500/20 border border-indigo-400/50 text-xs h-9"
+                                    className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-[0_0_20px_rgba(79,70,229,0.3)] border border-indigo-500/50 text-sm h-11 w-full font-black rounded-xl transition-all"
                                 >
-                                    <Phone className="mr-1.5 h-3.5 w-3.5" />
+                                    <Phone className="mr-2 h-4 w-4" />
                                     Call {line.number}
                                 </Button>
                             </div>
@@ -355,36 +358,36 @@ export default function CrisisPage() {
                 </div>
 
                 {/* University Counselling Centres — Expanded */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Users className="h-5 w-5 text-indigo-300" />
-                        University Counselling Centres
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Users className="h-6 w-6 text-indigo-400" />
+                        University Centres
                     </h3>
                     <p className="text-xs text-indigo-100 -mt-2">
                         Free and confidential support at Ghanaian universities. Tap a card to see all contacts and resources.
                     </p>
 
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                         {UNIVERSITY_RESOURCES.map((uni, index) => (
                             <div
                                 key={index}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
+                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 hover:border-white/20"
                             >
                                 {/* Collapsed header — always visible */}
                                 <button
                                     onClick={() => setExpandedUni(expandedUni === index ? null : index)}
-                                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+                                    className={`w-full flex items-center justify-between p-6 text-left transition-all ${expandedUni === index ? "bg-white/10" : "hover:bg-white/5"}`}
                                 >
                                     <div>
-                                        <h4 className="font-semibold text-white text-sm">{uni.name}</h4>
-                                        <div className="flex items-center gap-1 mt-1 text-xs text-indigo-200">
-                                            <MapPin className="h-3 w-3 flex-shrink-0" /> {uni.location}
+                                        <h4 className="font-black text-white text-lg">{uni.name}</h4>
+                                        <div className="flex items-center gap-2 mt-1 text-sm font-bold text-indigo-300/80">
+                                            <MapPin className="h-4 w-4 flex-shrink-0" /> {uni.location}
                                         </div>
                                     </div>
                                     {expandedUni === index ? (
-                                        <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                        <ChevronUp className="h-5 w-5 text-indigo-400 flex-shrink-0 ml-4" />
                                     ) : (
-                                        <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                        <ChevronDown className="h-5 w-5 text-indigo-400 flex-shrink-0 ml-4" />
                                     )}
                                 </button>
 
@@ -406,12 +409,12 @@ export default function CrisisPage() {
                                                         onClick={() => handleCall(contact.phone)}
                                                         className="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-indigo-500/20 hover:border-indigo-400/30 transition-all duration-200 text-left group"
                                                     >
-                                                        <div className="h-8 w-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center flex-shrink-0">
-                                                            <Phone className="h-3.5 w-3.5 text-indigo-300" />
+                                                        <div className="h-10 w-10 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center flex-shrink-0">
+                                                            <Phone className="h-5 w-5 text-indigo-300" />
                                                         </div>
                                                         <div>
-                                                            <p className="text-xs font-medium text-white group-hover:text-indigo-200 transition-colors">{contact.label}</p>
-                                                            <p className="text-xs text-indigo-300/60">{contact.phone}</p>
+                                                            <p className="text-sm font-black text-white group-hover:text-indigo-200 transition-colors uppercase tracking-wider">{contact.label}</p>
+                                                            <p className="text-sm font-bold text-indigo-300/60">{contact.phone}</p>
                                                         </div>
                                                     </button>
                                                 ))}
@@ -453,31 +456,31 @@ export default function CrisisPage() {
                 </div>
 
                 {/* Immediate Self-Help */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Shield className="h-5 w-5 text-indigo-300" />
-                        Immediate Coping Techniques
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Shield className="h-6 w-6 text-indigo-400" />
+                        Coping Techniques
                     </h3>
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                         {SELF_HELP_TIPS.map((tip, index) => (
                             <div
                                 key={index}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
+                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 hover:border-white/20"
                             >
                                 <button
                                     onClick={() => setExpandedTip(expandedTip === index ? null : index)}
-                                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+                                    className={`w-full flex items-center justify-between p-6 text-left transition-all ${expandedTip === index ? "bg-white/10" : "hover:bg-white/5"}`}
                                 >
-                                    <span className="font-medium text-white text-sm">{tip.title}</span>
+                                    <span className="font-black text-white text-lg italic pr-4">&ldquo;{tip.title}&rdquo;</span>
                                     {expandedTip === index ? (
-                                        <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0" />
+                                        <ChevronUp className="h-5 w-5 text-indigo-400 flex-shrink-0" />
                                     ) : (
-                                        <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0" />
+                                        <ChevronDown className="h-5 w-5 text-indigo-400 flex-shrink-0" />
                                     )}
                                 </button>
                                 {expandedTip === index && (
-                                    <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
-                                        <p className="text-sm text-indigo-100/80 leading-relaxed">{tip.content}</p>
+                                    <div className="px-6 pb-6 animate-in fade-in slide-in-from-top-2 duration-300 border-t border-white/5 pt-4">
+                                        <p className="text-lg text-indigo-100/90 leading-relaxed font-medium">{tip.content}</p>
                                     </div>
                                 )}
                             </div>
@@ -486,27 +489,28 @@ export default function CrisisPage() {
                 </div>
 
                 {/* General Online Resources */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Globe className="h-5 w-5 text-indigo-300" />
-                        National Online Resources
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h3 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Globe className="h-6 w-6 text-indigo-400" />
+                        National Resources
                     </h3>
-                    <div className="grid gap-4 md:grid-cols-2">
+                    <div className="grid gap-6 md:grid-cols-2">
                         {ONLINE_RESOURCES.map((resource, index) => (
                             <a
                                 key={index}
                                 href={resource.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-xl hover:bg-white/10 transition-all duration-300 cursor-pointer block"
+                                className="group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 shadow-2xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer block relative overflow-hidden"
                             >
-                                <div className="flex items-start justify-between gap-2">
-                                    <h4 className="font-semibold text-white group-hover:text-white transition-colors text-sm">
+                                <div className="absolute -right-4 -top-4 w-12 h-12 bg-indigo-500/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-all" />
+                                <div className="flex items-start justify-between gap-4 mb-3">
+                                    <h4 className="font-black text-white group-hover:text-indigo-200 transition-colors text-lg italic">
                                         {resource.name}
                                     </h4>
-                                    <ExternalLink className="h-4 w-4 text-indigo-300 group-hover:text-indigo-300 transition-colors flex-shrink-0" />
+                                    <ExternalLink className="h-5 w-5 text-indigo-400 group-hover:text-white transition-all flex-shrink-0" />
                                 </div>
-                                <p className="text-xs text-indigo-100 mt-2 leading-relaxed">{resource.description}</p>
+                                <p className="text-sm text-indigo-100/80 leading-relaxed font-medium">{resource.description}</p>
                             </a>
                         ))}
                     </div>
