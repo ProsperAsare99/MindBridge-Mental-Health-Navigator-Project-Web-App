@@ -48,20 +48,20 @@ export function Select({
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
                 className={cn(
-                    "w-full bg-muted/30 dark:bg-card border border-primary/5 rounded-2xl py-4 pl-12 pr-10 text-sm font-medium text-left transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 flex items-center justify-between",
+                    "w-full bg-muted/30 dark:bg-card border border-primary/20 rounded-2xl py-4 pl-12 pr-10 text-sm font-medium text-left transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 flex items-center justify-between text-foreground",
                     isOpen && "ring-2 ring-primary/20 border-primary/20 shadow-lg shadow-primary/5"
                 )}
             >
                 <div className="flex items-center gap-3 truncate">
                     {icon && <span className="text-muted-foreground">{icon}</span>}
-                    <span className={cn("truncate", !selectedOption && "text-muted-foreground/50")}>
+                    <span className={cn("truncate font-semibold", !selectedOption && "text-muted-foreground")}>
                         {selectedOption ? selectedOption.label : placeholder}
                     </span>
                 </div>
                 <ChevronDown
                     className={cn(
                         "h-4 w-4 text-muted-foreground transition-transform duration-200",
-                        isOpen && "rotate-180"
+                        isOpen && "rotate-180 text-primary"
                     )}
                 />
             </button>
@@ -73,9 +73,12 @@ export function Select({
                         animate={{ opacity: 1, y: 5, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.15, ease: "easeOut" }}
-                        className="absolute z-50 w-full mt-1 bg-white dark:bg-[#121214] border border-primary/10 rounded-2xl shadow-2xl overflow-hidden"
+                        className="absolute z-[100] w-full mt-2 bg-white dark:bg-[#1c1c1e] border-2 border-primary rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden"
                     >
-                        <div className="max-h-60 overflow-y-auto py-2">
+                        <div className="max-h-60 overflow-y-auto py-2 bg-white dark:bg-[#1c1c1e]">
+                            <div className="px-5 py-1 text-[10px] font-black text-primary/50 uppercase tracking-widest border-b border-primary/10 mb-2">
+                                MindBridge Custom Select
+                            </div>
                             {options.map((option) => (
                                 <button
                                     key={option.value}
@@ -85,15 +88,15 @@ export function Select({
                                         setIsOpen(false);
                                     }}
                                     className={cn(
-                                        "w-full px-4 py-3 text-sm font-medium text-left transition-colors flex items-center justify-between group",
+                                        "w-full px-5 py-4 text-sm font-black text-left transition-all flex items-center justify-between",
                                         value === option.value
-                                            ? "bg-primary/10 text-primary"
-                                            : "text-foreground hover:bg-muted/50 dark:hover:bg-white/5"
+                                            ? "bg-primary text-white"
+                                            : "text-black dark:text-white hover:bg-primary/20 hover:text-primary"
                                     )}
                                 >
                                     <span className="truncate">{option.label}</span>
                                     {value === option.value && (
-                                        <Check className="h-4 w-4 text-primary" />
+                                        <Check className="h-5 w-5 text-white" />
                                     )}
                                 </button>
                             ))}
