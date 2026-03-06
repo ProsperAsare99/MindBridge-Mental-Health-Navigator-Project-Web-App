@@ -203,7 +203,7 @@ export default function SettingsPage() {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Email (Primary)</label>
-                                <div className="relative opacity-60">
+                                <div className="relative opacity-90">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                     <input
                                         type="email"

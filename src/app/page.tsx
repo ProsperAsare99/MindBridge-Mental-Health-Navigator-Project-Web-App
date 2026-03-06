@@ -39,7 +39,7 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="hidden md:flex items-center gap-8 text-sm font-semibold text-muted-foreground/80"
+          className="hidden md:flex items-center gap-8 text-sm font-bold text-muted-foreground"
         >
           {["About", "Resources", "Privacy", "Support"].map((item) => (
             <Link key={item} href="#" className="hover:text-primary transition-colors duration-300">
@@ -86,9 +86,9 @@ export default function Home() {
           </motion.div>
 
           {/* Heading */}
-          <h1 className="text-6xl font-extrabold tracking-tight sm:text-7xl md:text-9xl text-[#1D1D1F] leading-[1.05]">
+          <h1 className="text-6xl font-extrabold tracking-tight sm:text-7xl md:text-9xl text-foreground leading-[1.05]">
             Mindfulness.<br />
-            <span className="text-primary/70">Redefined.</span>
+            <span className="text-primary/80">Redefined.</span>
           </h1>
 
           {/* Description */}
@@ -141,7 +141,7 @@ export default function Home() {
         className="fixed bottom-10 right-10 z-50 md:flex hidden"
       >
         <div className="group relative">
-          <button className="h-16 w-16 rounded-full bg-white shadow-2xl border border-black/5 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300">
+          <button className="h-16 w-16 rounded-full bg-card shadow-2xl border border-primary/10 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300">
             <MessageCircle className="h-6 w-6 text-primary" />
           </button>
           <div className="absolute bottom-full right-0 mb-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">

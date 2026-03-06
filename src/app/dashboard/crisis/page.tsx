@@ -208,7 +208,7 @@ export default function CrisisPage() {
                                     <p className="text-xs text-muted-foreground font-medium leading-relaxed">{line.description}</p>
                                     <div className="flex items-center gap-2 pt-2">
                                         <Clock size={12} className="text-primary group-hover:text-red-500 transition-colors" />
-                                        <span className="text-[10px] font-bold text-muted-foreground/60">{line.available}</span>
+                                        <span className="text-[10px] font-bold text-muted-foreground">{line.available}</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -240,7 +240,7 @@ export default function CrisisPage() {
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-foreground/90 text-sm">{uni.name}</h4>
-                                            <p className="text-[10px] font-bold text-muted-foreground/60 flex items-center gap-1 uppercase tracking-widest mt-0.5">
+                                            <p className="text-[10px] font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-widest mt-0.5">
                                                 <MapPin size={10} /> {uni.location}
                                             </p>
                                         </div>

@@ -43,11 +43,11 @@ export default function MoodPage() {
     ];
 
     const moods = [
-        { value: 1, icon: CloudRain, label: "Awful", color: "from-slate-400 to-slate-500", bgColor: "bg-slate-100", textColor: "text-slate-600" },
-        { value: 2, icon: Frown, label: "Bad", color: "from-red-300 to-red-400", bgColor: "bg-red-50", textColor: "text-red-600" },
-        { value: 3, icon: Meh, label: "Okay", color: "from-amber-300 to-amber-400", bgColor: "bg-amber-50", textColor: "text-amber-600" },
-        { value: 4, icon: Smile, label: "Good", color: "from-primary/40 to-primary/60", bgColor: "bg-primary/10", textColor: "text-primary" },
-        { value: 5, icon: Sun, label: "Great", color: "from-secondary/40 to-secondary/60", bgColor: "bg-secondary/10", textColor: "text-secondary" },
+        { value: 1, icon: CloudRain, label: "Awful", color: "text-slate-500", bgColor: "bg-slate-500/10" },
+        { value: 2, icon: Frown, label: "Bad", color: "text-red-500", bgColor: "bg-red-500/10" },
+        { value: 3, icon: Meh, label: "Okay", color: "text-amber-500", bgColor: "bg-amber-500/10" },
+        { value: 4, icon: Smile, label: "Good", color: "text-primary", bgColor: "bg-primary/10" },
+        { value: 5, icon: Sun, label: "Great", color: "text-secondary", bgColor: "bg-secondary/10" },
     ];
 
     const stats = [
@@ -134,10 +134,10 @@ export default function MoodPage() {
                                                 : "bg-muted/30 border-2 border-transparent hover:border-primary/20 hover:bg-muted/50"
                                                 }`}
                                         >
-                                            <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>
+                                            <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 ${isSelected ? m.color : "text-muted-foreground"}`}>
                                                 <Icon size={32} strokeWidth={isSelected ? 2.5 : 2} />
                                             </div>
-                                            <span className={`text-[10px] font-bold uppercase tracking-widest ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{m.label}</span>
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest ${isSelected ? m.color : "text-muted-foreground"}`}>{m.label}</span>
                                         </button>
                                     );
                                 })}
@@ -175,7 +175,7 @@ export default function MoodPage() {
                                         <button
                                             key={t}
                                             onClick={() => setActiveTimeRange(t.toLowerCase() as any)}
-                                            className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${activeTimeRange === t.toLowerCase() ? "bg-white shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"
+                                            className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${activeTimeRange === t.toLowerCase() ? "bg-background shadow-md text-primary" : "text-muted-foreground hover:text-foreground"
                                                 }`}
                                         >
                                             {t}
@@ -241,7 +241,7 @@ export default function MoodPage() {
                                                 <p className="text-[10px] text-muted-foreground">{entry.val}</p>
                                             </div>
                                         </div>
-                                        <span className="text-[10px] font-bold text-muted-foreground/60">{entry.time}</span>
+                                        <span className="text-[10px] font-bold text-muted-foreground">{entry.time}</span>
                                     </div>
                                 ))}
                             </div>

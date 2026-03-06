@@ -206,7 +206,7 @@ export default function AssessmentPage() {
                                     }`}
                             >
                                 <div className="flex items-center justify-between">
-                                    <span className={`text-base md:text-lg font-bold ${answers[currentQuestionIndex] === opt.value ? "text-white" : "text-foreground/80"}`}>
+                                    <span className={`text-base md:text-lg font-bold ${answers[currentQuestionIndex] === opt.value ? "text-white" : "text-foreground"}`}>
                                         {opt.label}
                                     </span>
                                     {answers[currentQuestionIndex] === opt.value && (

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
     Search,
     BookOpen,
@@ -295,7 +296,7 @@ export default function ResourcesPage() {
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className={`px-5 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all border ${activeCategory === cat ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" : "bg-card/50 text-muted-foreground border-primary/10 hover:border-primary/30 hover:bg-card"}`}
+                                className={`px-5 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all border ${activeCategory === cat ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" : "bg-foreground/5 text-muted-foreground border-primary/10 hover:border-primary/30 hover:bg-card"}`}
                             >
                                 {cat}
                             </button>
@@ -322,12 +323,12 @@ export default function ResourcesPage() {
                                             <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                                 <Icon size={24} />
                                             </div>
-                                            <button onClick={() => setExpandedArticle(isExpanded ? null : index)} className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary/5">
+                                            <button onClick={() => setExpandedArticle(isExpanded ? null : index)} className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary/5 text-muted-foreground hover:text-primary transition-colors">
                                                 {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                                             </button>
                                         </div>
                                         <div className="mt-6 space-y-2">
-                                            <p className="text-[9px] font-bold text-primary/60 uppercase tracking-widest">{article.category} • {article.readTime}</p>
+                                            <p className="text-[9px] font-bold text-primary uppercase tracking-widest">{article.category} • {article.readTime}</p>
                                             <h3 className="text-xl font-bold text-foreground/90 group-hover:text-primary transition-colors">{article.title}</h3>
                                             <p className="text-sm text-muted-foreground font-medium line-clamp-2">{article.description}</p>
                                         </div>
@@ -480,8 +481,8 @@ export default function ResourcesPage() {
 
                 {/* Footer Quote */}
                 <div className="text-center pt-8 space-y-4">
-                    <p className="text-xs text-muted-foreground/60 italic font-medium">"Wo nkoa wo nti me nsa yare3, 3y3 s3 wob3 bisa mmoa y3."</p>
-                    <div className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">MindBridge Wellness Librarian</div>
+                    <p className="text-xs text-muted-foreground italic font-medium">"Wo nkoa wo nti me nsa yare3, 3y3 s3 wob3 bisa mmoa y3."</p>
+                    <div className="text-[10px] font-black text-primary uppercase tracking-widest">MindBridge Wellness Librarian</div>
                 </div>
             </div>
         </div>
