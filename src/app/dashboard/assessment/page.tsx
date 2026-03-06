@@ -141,32 +141,38 @@ export default function AssessmentPage() {
             <div className="min-h-screen relative font-sans text-white pb-20 pt-10 px-4">
                 {/* We assume ShaderBackground is in Layout or we can add it here if needed, keeping it clean for now */}
 
-                <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in zoom-in duration-500">
-                    <div className="text-center space-y-4">
-                        <div className="inline-flex items-center justify-center p-4 bg-white/10 rounded-full mb-4 ring-1 ring-white/20 shadow-lg backdrop-blur-md">
-                            <CheckCircle2 className="w-12 h-12 text-green-400" />
+                <div className="max-w-3xl mx-auto space-y-10 animate-in fade-in zoom-in duration-700">
+                    <div className="text-center space-y-6">
+                        <div className="inline-flex items-center justify-center p-6 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-3xl mb-4 ring-2 ring-white/20 shadow-[0_0_30px_rgba(99,102,241,0.2)] backdrop-blur-xl">
+                            <CheckCircle2 className="w-16 h-16 text-green-400 drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
                         </div>
-                        <h1 className="text-3xl font-bold tracking-tight text-white">Assessment Complete</h1>
-                        <p className="text-indigo-100">Here is your wellness snapshot based on your responses.</p>
+                        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white">Assessment Complete</h1>
+                        <p className="text-indigo-100/90 text-lg font-medium">Here is your wellness snapshot based on your responses.</p>
                     </div>
 
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
-                        <div className="flex flex-col items-center justify-center text-center space-y-2 mb-8">
-                            <span className="text-sm font-medium text-indigo-300 uppercase tracking-widest">Your Score</span>
-                            <span className="text-6xl font-extrabold text-white drop-shadow-md">{score}</span>
-                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold border ${severity === 'Severe' || severity === 'Moderately Severe' ? 'bg-red-500/20 text-red-200 border-red-500/30' :
-                                severity === 'Moderate' ? 'bg-yellow-500/20 text-yellow-200 border-yellow-500/30' :
-                                    'bg-green-500/20 text-green-200 border-green-500/30'
+                    <div className="bg-white/5 backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 md:p-14 shadow-[0_0_50px_rgba(0,0,0,0.3)] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-indigo-500/10 blur-[100px] rounded-full group-hover:bg-indigo-500/20 transition-all duration-700" />
+                        <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-purple-500/10 blur-[100px] rounded-full group-hover:bg-purple-500/20 transition-all duration-700" />
+
+                        <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-3 mb-12">
+                            <span className="text-sm font-black text-indigo-300 uppercase tracking-[0.3em] mb-2">Clinical Score</span>
+                            <div className="relative">
+                                <span className="text-8xl md:text-9xl font-black text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">{score}</span>
+                                <div className="absolute -inset-4 bg-white/5 blur-xl rounded-full -z-10" />
+                            </div>
+                            <span className={`mt-6 inline-flex items-center gap-2 px-6 py-2.5 rounded-2xl text-base font-black border-2 transition-all ${severity === 'Severe' || severity === 'Moderately Severe' ? 'bg-red-500/20 text-red-100 border-red-500/40 shadow-[0_0_20px_rgba(239,68,68,0.2)]' :
+                                severity === 'Moderate' ? 'bg-amber-500/20 text-amber-100 border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.2)]' :
+                                    'bg-green-500/20 text-green-100 border-green-500/40 shadow-[0_0_20px_rgba(34,197,94,0.2)]'
                                 }`}>
-                                {severity === 'Severe' || severity === 'Moderately Severe' ? <AlertTriangle className="w-3.5 h-3.5" /> :
-                                    severity === 'Moderate' ? <Info className="w-3.5 h-3.5" /> :
-                                        <CheckCircle2 className="w-3.5 h-3.5" />}
+                                {severity === 'Severe' || severity === 'Moderately Severe' ? <AlertTriangle className="w-5 h-5" /> :
+                                    severity === 'Moderate' ? <Info className="w-5 h-5" /> :
+                                        <CheckCircle2 className="w-5 h-5" />}
                                 {severity} Depression Severity
                             </span>
                         </div>
 
-                        <div className="space-y-4 text-center">
-                            <p className="text-white/80 leading-relaxed">
+                        <div className="space-y-6 text-center max-w-lg mx-auto relative z-10">
+                            <p className="text-lg md:text-xl text-indigo-100/90 leading-relaxed font-medium">
                                 {severity === 'None-minimal' && "Your responses suggest you're doing well, with few or no symptoms of depression. Keep practicing good self-care!"}
                                 {severity === 'Mild' && "You may be experiencing some mild symptoms. It might be helpful to monitor your mood and practice stress-reduction techniques."}
                                 {severity === 'Moderate' && "Your responses suggest moderate symptoms. Consider reaching out to a counselor or using our self-help resources to manage these feelings."}
@@ -174,25 +180,25 @@ export default function AssessmentPage() {
                             </p>
                         </div>
 
-                        <div className="mt-8 pt-8 border-t border-white/10 flex flex-col gap-3">
-                            <Link href="/dashboard" className="w-full">
-                                <Button className="w-full bg-white text-indigo-950 hover:bg-indigo-50 font-bold h-12 rounded-xl">
-                                    Return to Dashboard
+                        <div className="mt-12 pt-10 border-t border-white/10 flex flex-col sm:flex-row gap-4 relative z-10">
+                            <Link href="/dashboard" className="flex-1">
+                                <Button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white font-black h-16 rounded-2xl text-lg shadow-[0_0_30px_rgba(99,102,241,0.3)] transition-all">
+                                    Continue Dashboard
                                 </Button>
                             </Link>
                             {(severity === 'Moderately Severe' || severity === 'Severe' || severity === 'Moderate') && (
-                                <Link href="/dashboard/crisis" className="w-full">
-                                    <Button variant="outline" className="w-full border-red-400/50 text-red-200 hover:bg-red-950/30 hover:text-red-100 h-12 rounded-xl">
-                                        Get Immediate Support
+                                <Link href="/dashboard/crisis" className="flex-1">
+                                    <Button variant="outline" className="w-full border-red-500/50 bg-red-500/10 text-red-100 hover:bg-red-500/20 h-16 rounded-2xl text-lg font-black transition-all">
+                                        Immediate Support
                                     </Button>
                                 </Link>
                             )}
                         </div>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-indigo-900/20 border border-indigo-500/30 backdrop-blur-sm flex gap-3 text-sm text-indigo-100">
-                        <AlertCircle className="w-5 h-5 flex-shrink-0 text-indigo-400" />
-                        <p>This assessment is for screening purposes only and is not a medical diagnosis. Please consult a professional for a clinical evaluation.</p>
+                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex gap-4 text-base text-indigo-200/80 max-w-2xl mx-auto shadow-xl">
+                        <AlertCircle className="w-6 h-6 flex-shrink-0 text-indigo-400" />
+                        <p className="font-medium italic">This assessment is for screening purposes only and is not a medical diagnosis. Please consult a professional for a clinical evaluation.</p>
                     </div>
                 </div>
             </div>
@@ -202,76 +208,85 @@ export default function AssessmentPage() {
     return (
         <div className="min-h-screen relative font-sans text-white pb-20 pt-10 px-4 flex flex-col items-center">
 
-            <div className="w-full max-w-2xl mb-8 flex items-center justify-between">
-                <Button variant="ghost" size="sm" onClick={() => router.back()} className="text-indigo-100 hover:text-white hover:bg-white/10">
-                    <ChevronLeft className="w-4 h-4 mr-1" /> Exit
+            <div className="w-full max-w-3xl mb-8 flex items-center justify-between px-2">
+                <Button variant="ghost" size="sm" onClick={() => router.back()} className="text-white bg-white/5 hover:bg-white/10 h-10 px-4 rounded-xl font-bold">
+                    <ChevronLeft className="w-5 h-5 mr-1" /> Exit Quiz
                 </Button>
-                <span className="text-sm font-medium text-indigo-100">Question {currentQuestionIndex + 1} of {QUESTIONS.length}</span>
+                <div className="px-4 py-2 rounded-xl bg-indigo-500/20 border border-indigo-500/30">
+                    <span className="text-sm font-black text-indigo-100 uppercase tracking-widest">Step {currentQuestionIndex + 1} <span className="text-white/40">/ {QUESTIONS.length}</span></span>
+                </div>
             </div>
 
             {/* Progress Bar */}
-            <div className="w-full max-w-2xl h-1.5 bg-white/10 rounded-full mb-8 overflow-hidden">
+            <div className="w-full max-w-3xl h-3 bg-white/5 rounded-full mb-12 overflow-hidden border border-white/10">
                 <div
-                    className="h-full bg-indigo-500 transition-all duration-500 ease-out"
+                    className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-700 ease-out"
                     style={{ width: `${getProgress()}%` }}
                 ></div>
             </div>
 
-            <div className="w-full max-w-2xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 key={currentQuestionIndex}">
-                <h2 className="text-xl md:text-2xl font-medium leading-relaxed mb-2 text-white/90">
-                    Over the last 2 weeks, how often have you been bothered by...
+            <div className="w-full max-w-3xl bg-white/5 backdrop-blur-3xl border border-white/20 rounded-[40px] p-10 md:p-16 shadow-[0_0_50px_rgba(0,0,0,0.3)] animate-in fade-in slide-in-from-bottom-4 duration-500 key={currentQuestionIndex}">
+                <h2 className="text-xl md:text-2xl font-black italic mb-6 text-indigo-300 opacity-80 uppercase tracking-widest">
+                    Frequency Check
                 </h2>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-10 block min-h-[5rem]">
-                    {QUESTIONS[currentQuestionIndex].text}?
+                <h3 className="text-3xl md:text-4xl font-black text-white mb-14 block min-h-[6rem] leading-tight">
+                    {QUESTIONS[currentQuestionIndex].id}. {QUESTIONS[currentQuestionIndex].text}?
                 </h3>
 
-                <div className="space-y-3">
+                <div className="grid gap-4">
                     {OPTIONS.map((option) => (
                         <button
                             key={option.value}
                             onClick={() => handleOptionSelect(option.value)}
-                            className={`w-full p-4 rounded-xl text-left transition-all duration-200 border flex items-center justify-between group
+                            className={`w-full p-6 rounded-2xl text-left transition-all duration-300 border-2 flex items-center justify-between group relative overflow-hidden
                         ${answers[currentQuestionIndex] === option.value
-                                    ? 'bg-indigo-600 border-indigo-500 shadow-lg shadow-indigo-600/20 scale-[1.02]'
-                                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 hover:pl-5'
+                                    ? 'bg-gradient-to-r from-indigo-600 to-purple-700 border-white/40 shadow-[0_10px_30px_rgba(99,102,241,0.4)] scale-[1.03] z-10'
+                                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 hover:pl-8'
                                 }
                     `}
                         >
-                            <span className={`font-medium text-lg ${answers[currentQuestionIndex] === option.value ? 'text-white' : 'text-indigo-100'}`}>
+                            <span className={`font-black text-xl italic tracking-tight ${answers[currentQuestionIndex] === option.value ? 'text-white' : 'text-indigo-100 group-hover:text-white'}`}>
                                 {option.label}
                             </span>
                             {answers[currentQuestionIndex] === option.value && (
-                                <CheckCircle2 className="w-5 h-5 text-white animate-in zoom-in duration-300" />
+                                <CheckCircle2 className="w-8 h-8 text-white animate-in zoom-in spin-in-90 duration-500" />
                             )}
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-1000" />
                         </button>
                     ))}
                 </div>
 
-                <div className="mt-10 flex justify-between items-center">
+                <div className="mt-14 flex justify-between items-center px-2">
                     <Button
                         variant="ghost"
                         onClick={handlePrevious}
                         disabled={currentQuestionIndex === 0}
-                        className="text-indigo-100 hover:text-white hover:bg-white/5 disabled:opacity-30"
+                        className="text-white bg-white/5 hover:bg-white/10 h-14 px-8 rounded-2xl font-black disabled:opacity-20 transition-all"
                     >
-                        <ChevronLeft className="w-4 h-4 mr-2" /> Previous
+                        <ChevronLeft className="w-6 h-6 mr-2" /> Back
                     </Button>
-
                     {currentQuestionIndex === QUESTIONS.length - 1 ? (
                         <Button
                             onClick={handleSubmit}
                             disabled={answers.includes(-1) || isSubmitting}
-                            className="bg-white text-indigo-950 hover:bg-indigo-50 font-bold px-8 shadow-lg shadow-indigo-900/20"
+                            className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-black h-14 px-10 rounded-2xl text-lg shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all"
                         >
-                            {isSubmitting ? "Processing..." : "Finish Assessment"}
+                            {isSubmitting ? (
+                                <span className="flex items-center gap-2">
+                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    Analyzing...
+                                </span>
+                            ) : "Confirm & Results"}
                         </Button>
                     ) : (
                         <Button
                             onClick={handleNext}
                             disabled={answers[currentQuestionIndex] === -1}
-                            className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 px-6 rounded-full"
+                            className={`h-14 px-10 rounded-2xl font-black text-lg transition-all ${answers[currentQuestionIndex] === -1
+                                ? "bg-white/5 text-white/40 border border-white/10"
+                                : "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-[0_0_30px_rgba(99,102,241,0.3)] hover:scale-105"}`}
                         >
-                            Next <ChevronRight className="w-4 h-4 ml-2" />
+                            Next <ChevronRight className="w-6 h-6 ml-2" />
                         </Button>
                     )}
                 </div>

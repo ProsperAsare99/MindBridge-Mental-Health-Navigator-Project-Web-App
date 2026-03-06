@@ -27,6 +27,7 @@ import {
     FileText,
     Check,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // ─── Categories ───
 const CATEGORIES = ["All", "Self-Help", "Academic Stress", "Mindfulness", "Understanding Mental Health"] as const;
@@ -568,16 +569,22 @@ export default function ResourcesPage() {
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="space-y-2"
+                    transition={{ duration: 0.8 }}
+                    className="space-y-4"
                 >
-                    <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-md flex items-center gap-3">
-                        <BookOpen className="h-8 w-8 text-indigo-400" />
-                        Mental Health Resources
-                    </h1>
-                    <p className="text-indigo-200 text-sm md:text-base leading-relaxed max-w-2xl">
-                        Curated articles, self-help tools, and expert recommendations to support your mental well-being as a student.
-                    </p>
+                    <div className="flex items-center gap-4">
+                        <div className="h-16 w-16 rounded-[2rem] bg-indigo-500/20 border-2 border-indigo-400/30 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.2)]">
+                            <BookOpen className="h-8 w-8 text-indigo-300" />
+                        </div>
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white uppercase tracking-widest drop-shadow-2xl">
+                                Resources
+                            </h1>
+                            <p className="text-indigo-300 font-bold text-sm md:text-base uppercase tracking-widest opacity-80 mt-1">
+                                Your Wellness Library
+                            </p>
+                        </div>
+                    </div>
                 </motion.div>
 
                 {/* ── Quick Tip Banner ── */}
@@ -585,26 +592,26 @@ export default function ResourcesPage() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="rounded-2xl border border-indigo-400/20 bg-gradient-to-r from-indigo-600/30 to-purple-600/30 backdrop-blur-xl p-5 shadow-xl relative overflow-hidden"
+                    className="rounded-3xl border border-indigo-500/40 bg-gradient-to-r from-indigo-600/30 to-purple-600/30 backdrop-blur-2xl p-8 shadow-2xl relative overflow-hidden group"
                 >
-                    <div className="absolute top-0 right-0 p-3 opacity-10">
-                        <Lightbulb size={80} />
+                    <div className="absolute top-0 right-0 p-3 opacity-20 transition-all duration-700 group-hover:scale-110 group-hover:rotate-12 group-hover:opacity-40">
+                        <Lightbulb size={120} className="text-indigo-300" />
                     </div>
-                    <div className="relative z-10">
-                        <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                            <Sparkles className="h-3.5 w-3.5" />
-                            Daily Tip
+                    <div className="relative z-10 space-y-3">
+                        <p className="text-sm font-black text-indigo-300 uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
+                            <Sparkles className="h-5 w-5 animate-pulse" />
+                            Insight of the day
                         </p>
                         <AnimatePresence mode="wait">
                             <motion.p
                                 key={tipIndex}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.4 }}
-                                className="text-white text-sm md:text-base leading-relaxed"
+                                className="text-white text-xl md:text-2xl font-black italic max-w-2xl leading-tight"
                             >
-                                {QUICK_TIPS[tipIndex]}
+                                &ldquo;{QUICK_TIPS[tipIndex]}&rdquo;
                             </motion.p>
                         </AnimatePresence>
                     </div>
@@ -618,26 +625,25 @@ export default function ResourcesPage() {
                     className="space-y-4"
                 >
                     {/* Search bar */}
-                    <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-indigo-300/90" />
+                    <div className="relative group">
+                        <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-indigo-300 transition-colors group-focus-within:text-white" />
                         <input
                             type="text"
-                            placeholder="Search articles, tools, and resources..."
+                            placeholder="Find articles, tools, or guides..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full rounded-xl border border-white/10 bg-white/5 backdrop-blur-md pl-11 pr-4 py-3 text-sm text-white placeholder:text-indigo-300/70 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/30 transition-all"
+                            className="w-full rounded-2xl border-2 border-white/10 bg-white/5 backdrop-blur-2xl pl-14 pr-6 py-5 text-lg text-white font-medium placeholder:text-indigo-300/50 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500/40 transition-all shadow-xl"
                         />
                     </div>
 
-                    {/* Category tabs */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 pt-2">
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 border ${activeCategory === cat
-                                    ? "bg-indigo-500/20 text-indigo-200 border-indigo-400/30 shadow-sm"
-                                    : "bg-white/5 text-indigo-300/90 border-white/10 hover:bg-white/10 hover:text-white"
+                                className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 border-2 ${activeCategory === cat
+                                    ? "bg-indigo-600 border-indigo-400 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)] scale-105"
+                                    : "bg-white/5 text-indigo-200 border-white/10 hover:bg-white/10 hover:border-white/30 hover:text-white"
                                     }`}
                             >
                                 {cat}
@@ -647,10 +653,10 @@ export default function ResourcesPage() {
                 </motion.div>
 
                 {/* ── Featured Articles ── */}
-                <section className="space-y-4">
-                    <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <BookOpen className="h-5 w-5 text-indigo-300" />
-                        Featured Articles
+                <section className="space-y-6">
+                    <h2 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <BookOpen className="h-6 w-6 text-indigo-400" />
+                        Featured Guides
                     </h2>
                     <motion.div
                         variants={containerVariants}
@@ -669,32 +675,35 @@ export default function ResourcesPage() {
                                         variants={cardVariants}
                                         layout
                                         exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
-                                        className={`rounded-2xl border ${article.borderColor} bg-gradient-to-br ${article.color} backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300 cursor-pointer group ${isExpanded ? "md:col-span-2 lg:col-span-3" : ""}`}
+                                        className={`rounded-3xl border-2 ${article.borderColor} bg-gradient-to-br ${article.color} backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-500 cursor-pointer group/card relative ${isExpanded ? "md:col-span-2 lg:col-span-3 border-indigo-500/40" : "hover:-translate-y-2 hover:shadow-indigo-500/10"}`}
                                         onClick={() => setExpandedArticle(isExpanded ? null : originalIndex)}
                                     >
-                                        <div className="p-6">
-                                            <div className="flex items-start justify-between gap-3">
-                                                <div className="flex items-start gap-3 flex-1">
-                                                    <div className="h-10 w-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center flex-shrink-0">
-                                                        <Icon className="h-5 w-5 text-indigo-200" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity" />
+                                        <div className="p-8 relative z-10">
+                                            <div className="flex items-start justify-between gap-4">
+                                                <div className="flex items-start gap-5 flex-1">
+                                                    <div className="h-14 w-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 group-hover/card:scale-110 group-hover/card:rotate-6 transition-all shadow-xl">
+                                                        <Icon className="h-7 w-7 text-white" />
                                                     </div>
                                                     <div className="flex-1">
-                                                        <h3 className="font-semibold text-white text-sm group-hover:text-indigo-200 transition-colors">
+                                                        <h3 className="font-black text-white text-xl italic group-hover/card:text-indigo-200 transition-colors leading-tight">
                                                             {article.title}
                                                         </h3>
-                                                        <div className="flex items-center gap-3 mt-1">
-                                                            <span className="text-xs text-indigo-300/80">{article.readTime}</span>
-                                                            <span className="text-xs text-indigo-300/70 bg-white/5 px-2 py-0.5 rounded-full">{article.category}</span>
+                                                        <div className="flex items-center gap-4 mt-2">
+                                                            <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-300 uppercase tracking-widest">
+                                                                <Timer className="h-3.5 w-3.5" /> {article.readTime}
+                                                            </div>
+                                                            <span className="text-[10px] font-black text-white/50 bg-white/10 px-2.5 py-1 rounded-lg uppercase tracking-widest border border-white/5">{article.category}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {isExpanded ? (
-                                                    <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0 mt-1" />
+                                                    <ChevronUp className="h-6 w-6 text-indigo-300 flex-shrink-0 mt-1" />
                                                 ) : (
-                                                    <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0 mt-1" />
+                                                    <ChevronDown className="h-6 w-6 text-indigo-300 flex-shrink-0 mt-1" />
                                                 )}
                                             </div>
-                                            <p className="text-xs text-indigo-100/90 mt-3 leading-relaxed">
+                                            <p className="text-base text-indigo-100/90 mt-5 leading-relaxed font-medium">
                                                 {article.description}
                                             </p>
 
@@ -705,14 +714,19 @@ export default function ResourcesPage() {
                                                         initial={{ opacity: 0, height: 0 }}
                                                         animate={{ opacity: 1, height: "auto" }}
                                                         exit={{ opacity: 0, height: 0 }}
-                                                        transition={{ duration: 0.3 }}
-                                                        className="mt-4 space-y-3 border-t border-white/10 pt-4"
+                                                        transition={{ duration: 0.5, ease: "circOut" }}
+                                                        className="mt-8 space-y-6 border-t-2 border-white/10 pt-8"
                                                     >
                                                         {article.content.map((paragraph, pIdx) => (
-                                                            <p key={pIdx} className="text-sm text-indigo-100 leading-relaxed">
-                                                                {paragraph}
+                                                            <p key={pIdx} className="text-lg text-indigo-50/90 leading-relaxed font-medium italic pl-4 border-l-4 border-indigo-500/30">
+                                                                &ldquo;{paragraph}&rdquo;
                                                             </p>
                                                         ))}
+                                                        <div className="pt-4 flex justify-end">
+                                                            <Button className="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-8 py-4 h-auto rounded-xl shadow-lg">
+                                                                Mark as Completed
+                                                            </Button>
+                                                        </div>
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
@@ -732,13 +746,13 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* ── Self-Help Toolkit ── */}
-                <section className="space-y-4">
-                    <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-indigo-300" />
+                <section className="space-y-6">
+                    <h2 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Sparkles className="h-6 w-6 text-indigo-400" />
                         Self-Help Toolkit
                     </h2>
-                    <p className="text-xs text-indigo-200/90 -mt-2">
-                        Hands-on techniques you can practice right now. Tap any card to see the steps.
+                    <p className="text-sm text-indigo-200/90 font-medium italic -mt-2">
+                        Hands-on techniques for immediate relief. Tap to explore.
                     </p>
                     <motion.div
                         variants={containerVariants}
@@ -753,25 +767,25 @@ export default function ResourcesPage() {
                                 <motion.div
                                     key={tool.title}
                                     variants={cardVariants}
-                                    className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
+                                    className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 group"
                                 >
                                     <button
                                         onClick={() => setExpandedTool(isExpanded ? null : index)}
-                                        className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+                                        className={`w-full flex items-center justify-between p-6 text-left transition-all ${isExpanded ? "bg-white/10" : "hover:bg-white/5"}`}
                                     >
-                                        <div className="flex items-center gap-3">
-                                            <div className="h-9 w-9 rounded-xl bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">
-                                                <Icon className="h-4 w-4 text-indigo-300" />
+                                        <div className="flex items-center gap-4">
+                                            <div className="h-12 w-12 rounded-2xl bg-indigo-500/20 border-2 border-indigo-400/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                                <Icon className="h-6 w-6 text-indigo-300" />
                                             </div>
                                             <div>
-                                                <h3 className="font-medium text-white text-sm">{tool.title}</h3>
-                                                <p className="text-xs text-indigo-300/80 mt-0.5">{tool.description}</p>
+                                                <h3 className="font-black text-white text-lg italic">{tool.title}</h3>
+                                                <p className="text-sm text-indigo-200/60 font-medium">{tool.description}</p>
                                             </div>
                                         </div>
                                         {isExpanded ? (
-                                            <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                            <ChevronUp className="h-6 w-6 text-indigo-300 flex-shrink-0 ml-4" />
                                         ) : (
-                                            <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                            <ChevronDown className="h-6 w-6 text-indigo-300 flex-shrink-0 ml-4" />
                                         )}
                                     </button>
 
@@ -804,13 +818,13 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* ── Recommended Apps & Websites ── */}
-                <section className="space-y-4">
-                    <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Smartphone className="h-5 w-5 text-indigo-300" />
-                        Recommended Apps & Websites
+                <section className="space-y-6">
+                    <h2 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Smartphone className="h-6 w-6 text-indigo-400" />
+                        Curated Tech
                     </h2>
-                    <p className="text-xs text-indigo-200/90 -mt-2">
-                        Explore features, what&apos;s free, and how to get started — all without leaving this page.
+                    <p className="text-sm text-indigo-200/90 font-medium italic -mt-2">
+                        Explore tools, features, and getting started guides.
                     </p>
                     <motion.div
                         variants={containerVariants}
@@ -825,30 +839,30 @@ export default function ResourcesPage() {
                                 <motion.div
                                     key={app.name}
                                     variants={cardVariants}
-                                    className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
+                                    className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 group"
                                 >
                                     <button
                                         onClick={() => setExpandedApp(isExpanded ? null : index)}
-                                        className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+                                        className={`w-full flex items-center justify-between p-6 text-left transition-all ${isExpanded ? "bg-white/10" : "hover:bg-white/5"}`}
                                     >
-                                        <div className="flex items-center gap-3">
-                                            <div className="h-10 w-10 rounded-xl bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">
-                                                <Icon className="h-5 w-5 text-indigo-300" />
+                                        <div className="flex items-center gap-4">
+                                            <div className="h-14 w-14 rounded-2xl bg-indigo-500/20 border-2 border-indigo-400/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                                <Icon className="h-7 w-7 text-indigo-300" />
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-white text-sm">{app.name}</h3>
-                                                <div className="flex items-center gap-2 mt-0.5">
-                                                    <span className="text-xs text-indigo-400/90 bg-indigo-500/10 px-2 py-0.5 rounded-full">
+                                                <h3 className="font-black text-white text-xl italic leading-tight">{app.name}</h3>
+                                                <div className="flex items-center gap-3 mt-1.5">
+                                                    <span className="text-[10px] font-black text-indigo-400 bg-indigo-500/20 px-2.5 py-1 rounded-lg uppercase tracking-widest border border-indigo-500/30">
                                                         {app.tag}
                                                     </span>
-                                                    <span className="text-xs text-indigo-300/80">{app.description}</span>
+                                                    <span className="text-sm text-indigo-200/60 font-medium truncate max-w-[200px]">{app.description}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         {isExpanded ? (
-                                            <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                            <ChevronUp className="h-6 w-6 text-indigo-300 flex-shrink-0 ml-4" />
                                         ) : (
-                                            <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                            <ChevronDown className="h-6 w-6 text-indigo-300 flex-shrink-0 ml-4" />
                                         )}
                                     </button>
 
@@ -920,13 +934,13 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* ── Video Resources ── */}
-                <section className="space-y-4">
-                    <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Play className="h-5 w-5 text-indigo-300" />
+                <section className="space-y-6">
+                    <h2 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Play className="h-6 w-6 text-indigo-400" />
                         Watch & Learn
                     </h2>
-                    <p className="text-xs text-indigo-200/90 -mt-2">
-                        Watch inspiring talks directly here — no need to leave the page.
+                    <p className="text-sm text-indigo-200/90 font-medium italic -mt-2">
+                        Inspiring talks and sessions, available right here.
                     </p>
                     <motion.div
                         variants={containerVariants}
@@ -940,7 +954,7 @@ export default function ResourcesPage() {
                                 <motion.div
                                     key={video.title}
                                     variants={cardVariants}
-                                    className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
+                                    className="rounded-[32px] border-2 border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-500 group relative"
                                 >
                                     {/* Video Player / Thumbnail */}
                                     <div className="relative w-full aspect-video bg-black/40">
@@ -1004,13 +1018,13 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* ── Free Books & Guides ── */}
-                <section className="space-y-4">
-                    <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Download className="h-5 w-5 text-indigo-300" />
-                        Free Books & Guides
+                <section className="space-y-6">
+                    <h2 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                        <Download className="h-6 w-6 text-indigo-400" />
+                        Guided Reading
                     </h2>
-                    <p className="text-xs text-indigo-200/90 -mt-2">
-                        Explore key insights and topics from each book right here. Click any book to learn more.
+                    <p className="text-sm text-indigo-200/90 font-medium italic -mt-2">
+                        Deep dives into evidence-based strategies and workbooks.
                     </p>
                     <motion.div
                         variants={containerVariants}
@@ -1024,30 +1038,30 @@ export default function ResourcesPage() {
                                 <motion.div
                                     key={book.title}
                                     variants={cardVariants}
-                                    className={`rounded-2xl border ${book.borderColor} bg-gradient-to-br ${book.color} backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300`}
+                                    className={`rounded-3xl border-2 ${book.borderColor} bg-gradient-to-br ${book.color} backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-500 group relative`}
                                 >
                                     <button
                                         onClick={() => setExpandedBook(isExpanded ? null : index)}
-                                        className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+                                        className={`w-full flex items-center justify-between p-6 text-left transition-all ${isExpanded ? "bg-white/10" : "hover:bg-white/5"}`}
                                     >
-                                        <div className="flex items-center gap-3">
-                                            <div className="h-10 w-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center flex-shrink-0">
-                                                <FileText className="h-5 w-5 text-indigo-200" />
+                                        <div className="flex items-center gap-4">
+                                            <div className="h-14 w-14 rounded-2xl bg-white/10 border-2 border-white/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-xl">
+                                                <FileText className="h-7 w-7 text-white" />
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-white text-sm">{book.title}</h3>
-                                                <div className="flex items-center gap-2 mt-0.5">
-                                                    <span className="text-xs text-indigo-300/90">{book.author}</span>
-                                                    <span className="text-xs text-indigo-400/90 bg-indigo-500/10 px-2 py-0.5 rounded-full">
+                                                <h3 className="font-black text-white text-xl italic leading-tight">{book.title}</h3>
+                                                <div className="flex items-center gap-3 mt-1.5">
+                                                    <span className="text-sm font-bold text-indigo-200/60 uppercase tracking-widest">{book.author}</span>
+                                                    <span className="text-[10px] font-black text-indigo-400 bg-indigo-500/20 px-2.5 py-1 rounded-lg uppercase tracking-widest border border-indigo-500/30">
                                                         {book.category}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                         {isExpanded ? (
-                                            <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                            <ChevronUp className="h-6 w-6 text-indigo-300 flex-shrink-0 ml-4" />
                                         ) : (
-                                            <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
+                                            <ChevronDown className="h-6 w-6 text-indigo-300 flex-shrink-0 ml-4" />
                                         )}
                                     </button>
 
@@ -1123,18 +1137,22 @@ export default function ResourcesPage() {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    className="text-center py-8"
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="text-center py-16 space-y-6"
                 >
-                    <p className="text-sm text-indigo-200/80 italic">
-                        "The greatest glory in living lies not in never falling, but in rising every time we fall." — Nelson Mandela
-                    </p>
-                    <p className="text-xs text-indigo-300/60 mt-3">
-                        These resources are for informational purposes. If you are in crisis, please visit the{" "}
-                        <a href="/dashboard/crisis" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
-                            Crisis Support
-                        </a>{" "}
-                        page.
+                    <div className="max-w-3xl mx-auto p-10 rounded-[40px] border-2 border-white/10 bg-white/5 backdrop-blur-3xl shadow-[0_0_50px_rgba(0,0,0,0.3)] relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+                        <p className="text-2xl md:text-3xl font-black text-white italic leading-tight group-hover:scale-105 transition-transform duration-700">
+                            &ldquo;The greatest glory in living lies not in never falling, but in rising every time we fall.&rdquo;
+                        </p>
+                        <p className="text-indigo-300 uppercase tracking-[0.4em] font-black text-sm mt-6">— Nelson Mandela</p>
+                    </div>
+
+                    <p className="text-indigo-200/50 font-medium max-w-xl mx-auto leading-relaxed">
+                        These resources are for informational purposes. If you are in crisis, please visit our{" "}
+                        <a href="/dashboard/crisis" className="text-indigo-400 hover:text-white font-black underline underline-offset-8 decoration-2 transition-all">
+                            Crisis Support Centre
+                        </a>
                     </p>
                 </motion.div>
             </div>
