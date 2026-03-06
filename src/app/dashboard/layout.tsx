@@ -14,7 +14,11 @@ import {
     Menu,
     X,
     UserCircle,
-    Settings
+    Settings,
+    ChevronsRight,
+    ChevronDown,
+    ClipboardCheck,
+    Bell,
 } from "lucide-react";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
@@ -29,11 +33,12 @@ export default function DashboardLayout({
     const { user, loading } = useAuth();
     const router = useRouter();
     const pathname = usePathname();
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile
+    const [isExpanded, setIsExpanded] = useState(true); // desktop collapse
 
     useEffect(() => {
         if (!loading && !user) {
-            router.push("/signin"); // Protect route
+            router.push("/signin");
         }
     }, [user, loading, router]);
 
@@ -45,8 +50,12 @@ export default function DashboardLayout({
     const navItems = [
         { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
         { href: "/dashboard/mood", label: "Mood Tracker", icon: BarChart3 },
+        { href: "/dashboard/assessment", label: "Assessment", icon: ClipboardCheck },
         { href: "/dashboard/resources", label: "Resources", icon: BookOpen },
         { href: "/dashboard/crisis", label: "Crisis Support", icon: Phone },
+    ];
+
+    const bottomNavItems = [
         { href: "/dashboard/settings", label: "Settings", icon: Settings },
     ];
 
@@ -61,7 +70,7 @@ export default function DashboardLayout({
         );
     }
 
-    if (!user) return null; // Will redirect
+    if (!user) return null;
 
     return (
         <div className="min-h-screen relative font-sans text-foreground bg-background selection:bg-indigo-500/30 selection:text-indigo-900 dark:selection:text-indigo-200">
@@ -88,25 +97,89 @@ export default function DashboardLayout({
             )}
 
             {/* Sidebar */}
-            <aside className={cn(
-                "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-border bg-background/95 dark:bg-slate-900/50 backdrop-blur-xl transition-transform duration-300 ease-in-out lg:translate-x-0",
-                isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            )}>
-                <div className="flex h-16 items-center justify-between px-6 border-b border-border">
-                    <Link href="/dashboard" className="flex items-center gap-2 group">
-                        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:shadow-indigo-500/25 transition-all">
-                            <div className="h-2 w-2 rounded-full bg-white" />
-                        </div>
-                        <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">MindBridge</span>
-                    </Link>
-                    <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-foreground hover:text-primary transition-colors">
-                        <X className="h-5 w-5" />
-                    </button>
+            <nav
+                className={cn(
+                    "fixed inset-y-0 left-0 z-50 shrink-0 border-r transition-all duration-300 ease-in-out",
+                    "border-white/10 bg-slate-950/80 backdrop-blur-2xl p-2 shadow-[0_0_40px_rgba(0,0,0,0.3)]",
+                    // Desktop: collapsible
+                    isExpanded ? "lg:w-64" : "lg:w-[68px]",
+                    // Mobile: slide in/out
+                    isSidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0"
+                )}
+            >
+                {/* Title / Brand Section */}
+                <div className="mb-4 border-b border-white/10 pb-4">
+                    <div className="flex cursor-pointer items-center justify-between rounded-xl p-2.5 transition-colors hover:bg-white/5">
+                        <Link href="/dashboard" className="flex items-center gap-3" onClick={() => setIsSidebarOpen(false)}>
+                            <div className="grid size-10 shrink-0 place-content-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20 border border-indigo-400/30">
+                                <div className="h-2.5 w-2.5 rounded-full bg-white" />
+                            </div>
+                            {isExpanded && (
+                                <div className="transition-opacity duration-200">
+                                    <span className="block text-sm font-bold text-white tracking-wide">
+                                        MindBridge
+                                    </span>
+                                    <span className="block text-[10px] text-indigo-300/60 font-medium uppercase tracking-widest">
+                                        Navigator
+                                    </span>
+                                </div>
+                            )}
+                        </Link>
+                        {/* Mobile close */}
+                        <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-white/60 hover:text-white transition-colors">
+                            <X className="h-5 w-5" />
+                        </button>
+                        {/* Desktop chevron only when expanded */}
+                        {isExpanded && (
+                            <ChevronDown className="hidden lg:block h-4 w-4 text-white/30" />
+                        )}
+                    </div>
                 </div>
 
-                <div className="flex flex-col justify-between h-[calc(100vh-4rem)] p-4">
-                    <nav className="space-y-1">
-                        {navItems.map((item) => {
+                {/* Main Nav Items */}
+                <div className="space-y-1 mb-6">
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href;
+                        const Icon = item.icon;
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setIsSidebarOpen(false)}
+                                className={cn(
+                                    "relative flex h-11 w-full items-center rounded-xl transition-all duration-200 group",
+                                    isActive
+                                        ? "bg-indigo-500/15 text-indigo-300 shadow-sm border-l-2 border-indigo-400"
+                                        : "text-white/50 hover:bg-white/5 hover:text-white/90 border-l-2 border-transparent"
+                                )}
+                            >
+                                <div className="grid h-full w-12 shrink-0 place-content-center">
+                                    <Icon className={cn(
+                                        "h-[18px] w-[18px] transition-transform group-hover:scale-110",
+                                        isActive ? "text-indigo-400" : ""
+                                    )} />
+                                </div>
+                                {isExpanded && (
+                                    <span className="text-sm font-medium truncate transition-opacity duration-200">
+                                        {item.label}
+                                    </span>
+                                )}
+                                {/* Notification badge example for Crisis Support */}
+                                {item.label === "Crisis Support" && isExpanded && (
+                                    <span className="absolute right-3 flex h-2 w-2 rounded-full bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.6)]" />
+                                )}
+                            </Link>
+                        );
+                    })}
+                </div>
+
+                {/* Account Section (visible when expanded) */}
+                {isExpanded && (
+                    <div className="border-t border-white/10 pt-4 space-y-1">
+                        <div className="px-3 py-2 text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">
+                            Account
+                        </div>
+                        {bottomNavItems.map((item) => {
                             const isActive = pathname === item.href;
                             const Icon = item.icon;
                             return (
@@ -115,55 +188,115 @@ export default function DashboardLayout({
                                     href={item.href}
                                     onClick={() => setIsSidebarOpen(false)}
                                     className={cn(
-                                        "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 group relative overflow-hidden",
+                                        "relative flex h-11 w-full items-center rounded-xl transition-all duration-200 group",
                                         isActive
-                                            ? "text-primary bg-primary/10 border border-primary/20 shadow-sm"
-                                            : "text-muted-foreground hover:text-foreground hover:bg-primary/10 border border-transparent"
+                                            ? "bg-indigo-500/15 text-indigo-300 shadow-sm border-l-2 border-indigo-400"
+                                            : "text-white/50 hover:bg-white/5 hover:text-white/90 border-l-2 border-transparent"
                                     )}
                                 >
-                                    <Icon className={cn("h-5 w-5 relative z-10 transition-transform group-hover:scale-110", isActive ? "text-primary" : "text-current")} />
-                                    <span className="relative z-10">{item.label}</span>
+                                    <div className="grid h-full w-12 shrink-0 place-content-center">
+                                        <Icon className="h-[18px] w-[18px] transition-transform group-hover:scale-110" />
+                                    </div>
+                                    <span className="text-sm font-medium truncate">
+                                        {item.label}
+                                    </span>
                                 </Link>
                             );
                         })}
-                    </nav>
+                    </div>
+                )}
 
-                    <div className="border-t border-border pt-4 space-y-4">
-                        <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-primary/5 border border-border backdrop-blur-sm">
-                            <div className="h-9 w-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary">
+                {/* Collapsed: just Settings icon */}
+                {!isExpanded && (
+                    <div className="border-t border-white/10 pt-4 space-y-1">
+                        {bottomNavItems.map((item) => {
+                            const isActive = pathname === item.href;
+                            const Icon = item.icon;
+                            return (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={cn(
+                                        "relative flex h-11 w-full items-center rounded-xl transition-all duration-200 group",
+                                        isActive
+                                            ? "bg-indigo-500/15 text-indigo-300"
+                                            : "text-white/50 hover:bg-white/5 hover:text-white/90"
+                                    )}
+                                >
+                                    <div className="grid h-full w-12 shrink-0 place-content-center">
+                                        <Icon className="h-[18px] w-[18px]" />
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                )}
+
+                {/* User Profile (above toggle) */}
+                {isExpanded && (
+                    <div className="absolute bottom-14 left-2 right-2">
+                        <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                            <div className="h-9 w-9 shrink-0 rounded-full bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
                                 {user.displayName ? (
-                                    <span className="font-semibold">{user.displayName[0].toUpperCase()}</span>
+                                    <span className="text-sm font-bold">{user.displayName[0].toUpperCase()}</span>
                                 ) : (
                                     <UserCircle className="h-5 w-5" />
                                 )}
                             </div>
                             <div className="flex-1 overflow-hidden">
-                                <p className="truncate text-sm font-medium text-foreground">{user.displayName || "User"}</p>
-                                <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+                                <p className="truncate text-sm font-medium text-white">{user.displayName || "User"}</p>
+                                <p className="truncate text-[10px] text-white/40">{user.email}</p>
                             </div>
+                            <button
+                                onClick={handleSignOut}
+                                className="p-1.5 rounded-lg text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                                title="Sign Out"
+                            >
+                                <LogOut className="h-4 w-4" />
+                            </button>
                         </div>
-
-                        <Button
-                            variant="ghost"
-                            className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all rounded-xl h-10"
-                            onClick={handleSignOut}
-                        >
-                            <LogOut className="mr-2 h-4 w-4" />
-                            Sign Out
-                        </Button>
                     </div>
-                </div>
-            </aside>
+                )}
+
+                {/* Toggle Collapse Button (Desktop only) */}
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="hidden lg:flex absolute bottom-0 left-0 right-0 border-t border-white/10 transition-colors hover:bg-white/5 items-center p-3"
+                >
+                    <div className="grid size-10 place-content-center">
+                        <ChevronsRight
+                            className={cn(
+                                "h-4 w-4 transition-transform duration-300 text-white/40",
+                                isExpanded ? "rotate-180" : ""
+                            )}
+                        />
+                    </div>
+                    {isExpanded && (
+                        <span className="text-sm font-medium text-white/40 transition-opacity duration-200">
+                            Collapse
+                        </span>
+                    )}
+                </button>
+            </nav>
 
             {/* Main Content */}
-            <div className="lg:pl-64 relative z-10 min-h-screen transition-all duration-300">
+            <div className={cn(
+                "relative z-10 min-h-screen transition-all duration-300",
+                isExpanded ? "lg:pl-64" : "lg:pl-[68px]"
+            )}>
                 {/* Topbar (Mobile) */}
-                <header className="sticky top-0 z-30 flex h-16 items-center justify-between bg-background/80 px-6 backdrop-blur-xl border-b border-border lg:hidden">
+                <header className="sticky top-0 z-30 flex h-14 items-center justify-between bg-slate-950/80 px-6 backdrop-blur-2xl border-b border-white/10 lg:hidden">
                     <div className="flex items-center gap-4">
-                        <button onClick={() => setIsSidebarOpen(true)} className="text-foreground hover:text-primary transition-colors">
+                        <button onClick={() => setIsSidebarOpen(true)} className="text-white/60 hover:text-white transition-colors">
                             <Menu className="h-6 w-6" />
                         </button>
-                        <span className="font-semibold text-foreground">Dashboard</span>
+                        <span className="font-bold text-white text-sm tracking-wide">MindBridge</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <button className="relative p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/5 transition-colors">
+                            <Bell className="h-5 w-5" />
+                            <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full" />
+                        </button>
                     </div>
                 </header>
 
