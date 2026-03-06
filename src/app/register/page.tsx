@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, Recaptc
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { ArrowLeft, Phone, Mail, User, Lock, School, GraduationCap, IdCard, ChevronRight, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -218,26 +219,22 @@ export default function RegisterPage() {
 
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground ml-1">Institution</label>
-                                <div className="relative group">
-                                    <School className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors z-10" />
-                                    <select
-                                        required
-                                        value={institution}
-                                        onChange={(e) => setInstitution(e.target.value)}
-                                        className="w-full bg-muted/30 dark:bg-[#1c1c1e] border border-primary/5 rounded-2xl py-4 pl-12 pr-10 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all appearance-none cursor-pointer text-foreground dark:text-[#f5f5f7]"
-                                    >
-                                        <option value="" disabled className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">Select Institution</option>
-                                        <option value="UG LEGON" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">University of Ghana</option>
-                                        <option value="KNUST" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">KNUST</option>
-                                        <option value="UCC" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">UCC</option>
-                                        <option value="UEW" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">UEW</option>
-                                        <option value="UDS" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">UDS</option>
-                                        <option value="UPSA" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">UPSA</option>
-                                        <option value="ASHESI" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">Ashesi University</option>
-                                        <option value="Other" className="bg-white dark:bg-[#1c1c1e] text-foreground dark:text-[#f5f5f7]">Other</option>
-                                    </select>
-                                    <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground rotate-90" />
-                                </div>
+                                <Select
+                                    value={institution}
+                                    onChange={setInstitution}
+                                    options={[
+                                        { value: "UG LEGON", label: "University of Ghana" },
+                                        { value: "KNUST", label: "KNUST" },
+                                        { value: "UCC", label: "UCC" },
+                                        { value: "UEW", label: "UEW" },
+                                        { value: "UDS", label: "UDS" },
+                                        { value: "UPSA", label: "UPSA" },
+                                        { value: "ASHESI", label: "Ashesi University" },
+                                        { value: "Other", label: "Other" },
+                                    ]}
+                                    placeholder="Select Institution"
+                                    icon={<School className="h-4 w-4" />}
+                                />
                             </div>
 
                             <div className="space-y-2">
