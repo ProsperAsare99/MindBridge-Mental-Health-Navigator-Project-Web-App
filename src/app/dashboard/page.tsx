@@ -182,21 +182,21 @@ export default function DashboardPage() {
 
                     <motion.div variants={itemVariants}>
                         <Link href="/dashboard/assessment">
-                            <Card className="h-full border-none bg-secondary/10 group hover:bg-secondary/20 transition-all duration-500 cursor-pointer overflow-hidden relative">
+                            <Card className="h-full border-secondary/10 bg-secondary/10 group hover:bg-secondary/20 transition-all duration-500 cursor-pointer overflow-hidden relative">
                                 <CardHeader className="relative z-10">
-                                    <CardTitle className="text-sm font-bold uppercase tracking-widest text-secondary-foreground/60">Wellness</CardTitle>
+                                    <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Wellness</CardTitle>
                                 </CardHeader>
                                 <CardContent className="relative z-10 pb-8">
                                     <div className="space-y-2">
-                                        <h3 className="text-2xl font-black text-secondary-foreground">Take Assessment</h3>
-                                        <p className="text-xs font-medium text-secondary-foreground/60 leading-relaxed">Evaluate your current anxiety & stress levels.</p>
+                                        <h3 className="text-2xl font-black text-foreground">Take Assessment</h3>
+                                        <p className="text-xs font-medium text-muted-foreground leading-relaxed">Evaluate your current anxiety & stress levels.</p>
                                     </div>
                                     <div className="mt-8">
-                                        <Button size="sm" variant="secondary" className="rounded-xl w-full">Start Now</Button>
+                                        <Button size="sm" className="rounded-xl w-full h-10 font-bold shadow-lg shadow-primary/10 transition-transform active:scale-95">Start Now</Button>
                                     </div>
                                 </CardContent>
-                                <div className="absolute bottom-[-20%] right-[-10%] opacity-5 group-hover:opacity-10 transition-opacity">
-                                    <Compass size={140} />
+                                <div className="absolute bottom-[-20%] right-[-10%] opacity-5 group-hover:opacity-15 transition-opacity duration-500">
+                                    <Compass size={140} className="text-primary" />
                                 </div>
                             </Card>
                         </Link>
