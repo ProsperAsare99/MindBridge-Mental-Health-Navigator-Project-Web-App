@@ -15,7 +15,10 @@ import {
     Clock,
     MapPin,
     Mail,
+    ArrowUpRight,
+    Sparkles
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const EMERGENCY_LINES = [
     {
@@ -52,12 +55,6 @@ const MENTAL_HEALTH_LINES = [
         available: "Mon-Fri 9am-5pm",
     },
     {
-        name: "BasicNeeds Ghana",
-        number: "030-250-1994",
-        description: "Mental health and development organization providing community-based support.",
-        available: "Mon-Fri 8am-5pm",
-    },
-    {
         name: "Befrienders Worldwide – Ghana",
         number: "233-244-846-328",
         description: "Confidential emotional support for those in distress or at risk of suicide.",
@@ -70,173 +67,60 @@ const UNIVERSITY_RESOURCES = [
         name: "University of Ghana (UG)",
         location: "Legon Campus, Accra",
         centre: "Careers and Counselling Centre",
-        description: "Professional counselling services for all UG students. Walk-in and appointment-based sessions for academic stress, relationship issues, grief, and mental health. Also runs peer counselling.",
+        description: "Professional counselling services for all UG students. Walk-in and appointment-based sessions for academic stress, relationship issues, grief, and mental health.",
         contacts: [
             { label: "Counselling Centre", phone: "0245 945 752" },
-            { label: "Counselling Centre (Alt)", phone: "0204 999 221" },
         ],
         email: "pad@ug.edu.gh",
         website: "https://www.ug.edu.gh/careers/counselling-services",
     },
     {
-        name: "Kwame Nkrumah University of Science and Technology (KNUST)",
+        name: "KNUST",
         location: "Kumasi, Ashanti Region",
         centre: "KNUST Counselling Center (KCC)",
-        description: "Mental health facility with professional counselors and clinical psychologists. Offers individual and group counselling, crisis intervention, academic counselling, career guidance, and psychological assessments. Mon-Fri 8am-5pm.",
+        description: "Mental health facility with professional counselors and clinical psychologists. Offers individual and group counselling and crisis intervention.",
         contacts: [
             { label: "Counselling Centre", phone: "050 644 9747" },
-            { label: "Counselling Centre (Alt)", phone: "059 439 97772" },
         ],
         email: "counsellingcentre@knust.edu.gh",
         website: "https://www.knust.edu.gh/students/counselling",
     },
     {
-        name: "University of Cape Coast (UCC)",
+        name: "UCC",
         location: "Cape Coast, Central Region",
         centre: "Counselling Unit",
-        description: "Counselling for UCC students covering academic, vocational, and social/personal issues. Provides trauma counselling, stress management, peer-led support groups, and referral services. Located at the old site, Faculty of Educational Foundations building.",
+        description: "Counselling for UCC students covering academic, vocational, and social/personal issues. Provides trauma counselling and stress management.",
         contacts: [
             { label: "Counselling Unit", phone: "033 209 6884" },
-            { label: "University Main Line", phone: "033 213 2440" },
         ],
         email: "counselling@ucc.edu.gh",
         website: "https://www.ucc.edu.gh/",
     },
     {
-        name: "University of Education, Winneba (UEW)",
-        location: "Winneba, Central Region",
-        centre: "University Counselling Centre",
-        description: "Psychological and academic counselling for UEW students. Located adjacent to the old Library (opposite Taxi Rank), North Campus. Offers orientation counselling, crisis support, and referrals. Mon-Fri 8am-5:30pm.",
-        contacts: [
-            { label: "Counselling Centre", phone: "020 204 1040" },
-            { label: "Counselling Centre (Alt)", phone: "020 166 5951" },
-            { label: "Director (Mrs. Theresa Antwi)", phone: "024 351 6659" },
-        ],
-        email: "counselling@uew.edu.gh",
-        website: "https://www.uew.edu.gh/",
-    },
-    {
-        name: "University for Development Studies (UDS)",
-        location: "Tamale, Northern Region",
-        centre: "Office of the Dean of Students' Affairs",
-        description: "Counselling services across all UDS campuses. Offers crisis intervention, personal development programmes, group therapy, and referral to the Tamale Teaching Hospital.",
-        contacts: [
-            { label: "University Main Line", phone: "037 209 3697" },
-            { label: "University (Alt)", phone: "054 544 7445" },
-            { label: "Dean of Students", phone: "024 453 3268" },
-        ],
-        email: "mayamga@uds.edu.gh",
-        website: "https://www.uds.edu.gh/",
-    },
-    {
-        name: "Ghana Institute of Management & Public Administration (GIMPA)",
-        location: "Greenhill, Achimota, Accra",
-        centre: "Student Affairs & Counselling",
-        description: "Counselling support for GIMPA students. Individual sessions for personal and academic challenges. Career counselling and referral services also available.",
-        contacts: [
-            { label: "Main Line", phone: "030 240 1681" },
-            { label: "Main Line (Alt)", phone: "030 240 1682" },
-            { label: "General Enquiries", phone: "030 240 4664" },
-        ],
-        email: "info@gimpa.edu.gh",
-        website: "https://www.gimpa.edu.gh/",
-    },
-    {
         name: "Ashesi University",
         location: "Berekuso, Eastern Region",
-        centre: "Office of Students & Community Affairs – Counselling & Coaching Center",
-        description: "Trained on-campus counsellors available for confidential sessions in English and French. Mental health awareness campaigns, peer support networks, and wellness weeks.",
+        centre: "Counselling & Coaching Center",
+        description: "Trained on-campus counsellors available for confidential sessions in English and French. Mental health awareness campaigns and wellness weeks.",
         contacts: [
             { label: "Counselling & Coaching", phone: "030 261 0330" },
-            { label: "Counselling (French & English)", phone: "024 880 7992" },
-            { label: "Front Office", phone: "030 297 4980" },
         ],
         email: "studentlife@ashesi.edu.gh",
         website: "https://www.ashesi.edu.gh/student-life",
-    },
-    {
-        name: "University of Professional Studies, Accra (UPSA)",
-        location: "Legon, Accra",
-        centre: "Student Services Unit",
-        description: "Counselling services for UPSA students covering academic, emotional, and personal challenges. Workshops on stress management and exam preparation routinely held.",
-        contacts: [
-            { label: "Main Line", phone: "030 393 7542" },
-            { label: "Main Line (Alt)", phone: "030 393 7544" },
-            { label: "Student Helpdesk", phone: "020 838 1583" },
-        ],
-        email: "info@upsa.edu.gh",
-        website: "https://www.upsa.edu.gh/",
-    },
-    {
-        name: "Ghana Communication Technology University (GCTU)",
-        location: "Tesano, Accra",
-        centre: "Student Affairs Office",
-        description: "Counselling support for GCTU students. Offers individual sessions for personal development, career guidance, and mental health support.",
-        contacts: [
-            { label: "Student Affairs", phone: "030 220 0623" },
-        ],
-        email: "studentaffairs@gctu.edu.gh",
-        website: "https://www.gctu.edu.gh/",
-    },
-    {
-        name: "University of Health and Allied Sciences (UHAS)",
-        location: "Ho, Volta Region",
-        centre: "Student Affairs – Counselling Services",
-        description: "Counselling and wellness services for UHAS students. Located at Ground Floor, Central Administration building. Close ties with Ho Teaching Hospital for psychiatric referrals.",
-        contacts: [
-            { label: "Student Affairs", phone: "020 836 5644" },
-            { label: "Student Affairs (Alt)", phone: "036 229 0046" },
-        ],
-        email: "studentaffairs@uhas.edu.gh",
-        website: "https://www.uhas.edu.gh/",
-    },
-];
-
-
-const ONLINE_RESOURCES = [
-    {
-        name: "Mental Health Authority Ghana",
-        url: "https://www.mha.gov.gh/",
-        description: "Official government body overseeing mental health services in Ghana.",
-    },
-    {
-        name: "Ghana Health Service – Mental Health",
-        url: "https://www.ghs.gov.gh/",
-        description: "Information on public mental health services and facilities.",
-    },
-    {
-        name: "Lifeline Ghana",
-        url: "https://www.facebook.com/LifelineGhana/",
-        description: "Community mental health awareness and support initiative.",
-    },
-    {
-        name: "7 Cups (Free Online Chat)",
-        url: "https://www.7cups.com/",
-        description: "Free online chat with trained listeners for emotional support. Available worldwide.",
     },
 ];
 
 const SELF_HELP_TIPS = [
     {
-        title: "Grounding Technique: 5-4-3-2-1",
-        content: "Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. This helps bring you back to the present moment when you feel overwhelmed.",
+        title: "Grounding: 5-4-3-2-1",
+        content: "Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. This brings you back to the present.",
     },
     {
         title: "Box Breathing",
-        content: "Breathe in for 4 seconds, hold for 4 seconds, breathe out for 4 seconds, hold for 4 seconds. Repeat 4 times. This activates your body's calm response and reduces anxiety.",
-    },
-    {
-        title: "Talk to Someone You Trust",
-        content: "Reach out to a friend, family member, course mate, or hall tutor. You don't have to go through this alone. Even a brief conversation can help you feel less isolated.",
-    },
-    {
-        title: "Visit Your University Counselling Centre",
-        content: "Most Ghanaian universities offer free, confidential counselling. You don't need a referral — just walk in during office hours. Many centres also accept calls and WhatsApp messages.",
+        content: "Breathe in for 4s, hold for 4s, out for 4s, hold for 4s. Repeat 4 times. This activates your body's calm response.",
     },
 ];
 
 export default function CrisisPage() {
-    const [expandedTip, setExpandedTip] = useState<number | null>(null);
     const [expandedUni, setExpandedUni] = useState<number | null>(null);
 
     const handleCall = (number: string) => {
@@ -244,278 +128,185 @@ export default function CrisisPage() {
     };
 
     return (
-        <div className="min-h-screen relative font-sans text-white pb-20">
-            <div className="relative z-10 space-y-8 p-6 md:p-10 max-w-4xl mx-auto">
+        <div className="min-h-screen relative pb-20 selection:bg-red-500/10">
+            {/* Ambient background accents */}
+            <div className="fixed inset-0 pointer-events-none -z-10">
+                <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-red-500/5 blur-[150px] rounded-full" />
+                <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />
+            </div>
 
-                {/* Urgent Banner */}
-                <div className="rounded-2xl border border-red-500/30 bg-red-900/30 backdrop-blur-md p-6 shadow-xl relative overflow-hidden animate-in fade-in zoom-in duration-500">
-                    <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-red-500/20 blur-3xl rounded-full pointer-events-none" />
-                    <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-4">
-                        <div className="flex-shrink-0 h-14 w-14 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center">
-                            <AlertTriangle className="h-7 w-7 text-red-400 animate-pulse" />
-                        </div>
-                        <div className="flex-1">
-                            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-                                In immediate danger? Call 191 or 193
-                            </h1>
-                            <p className="text-red-200/80 text-sm mt-1">
-                                Your safety comes first. If you or someone you know is in a life-threatening situation, contact emergency services immediately.
-                            </p>
-                        </div>
-                        <div className="flex flex-col sm:flex-row gap-2 flex-shrink-0">
-                            <Button
-                                onClick={() => handleCall("191")}
-                                className="bg-red-600 hover:bg-red-500 text-white border-0 shadow-lg shadow-red-600/30 h-11 px-5 text-sm font-semibold"
-                            >
-                                <Phone className="mr-2 h-4 w-4" />
-                                Police (191)
-                            </Button>
-                            <Button
-                                onClick={() => handleCall("193")}
-                                className="bg-red-600 hover:bg-red-500 text-white border-0 shadow-lg shadow-red-600/30 h-11 px-5 text-sm font-semibold"
-                            >
-                                <Phone className="mr-2 h-4 w-4" />
-                                Ambulance (193)
-                            </Button>
-                        </div>
+            <div className="space-y-12 p-6 md:p-10 max-w-4xl mx-auto">
+                {/* Urgent Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-6"
+                >
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-600 text-[10px] font-bold uppercase tracking-widest border border-red-500/20 shadow-sm shadow-red-500/5">
+                        <AlertTriangle size={12} className="animate-pulse" /> Immediate Assistance
                     </div>
-                </div>
-
-                {/* Header */}
-                <div className="animate-in fade-in slide-in-from-top-5 duration-700">
-                    <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-                        <Heart className="h-5 w-5 text-indigo-300" />
-                        You are not alone. Help is available in Ghana.
-                    </h2>
-                    <p className="text-indigo-200/80 mt-1 text-sm leading-relaxed">
-                        Reaching out takes courage. Below are confidential resources available to students across Ghana.
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90 leading-[1.1]">
+                        You are safe. <br /><span className="text-red-600">Help is here.</span>
+                    </h1>
+                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                        If you are in a life-threatening situation or need immediate emergency care, please reach out to the services below. You are not alone.
                     </p>
-                </div>
+                </motion.div>
 
-                {/* Emergency Numbers */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <AlertTriangle className="h-5 w-5 text-red-400" />
-                        Emergency Numbers
-                    </h3>
-                    <div className="grid gap-4 md:grid-cols-3">
-                        {EMERGENCY_LINES.map((line, index) => (
-                            <div
-                                key={index}
-                                className="rounded-2xl border border-red-500/20 bg-red-900/10 backdrop-blur-md p-5 shadow-xl hover:bg-red-900/20 transition-all duration-300"
-                            >
-                                <h4 className="font-semibold text-white text-sm">{line.name}</h4>
-                                <p className="text-xs text-red-200/60 mt-1">{line.description}</p>
-                                <div className="flex items-center gap-1 mt-2 text-xs text-red-200/40">
-                                    <Clock className="h-3 w-3" /> {line.available}
+                {/* Primary Emergency Lines */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {[
+                        { name: "Police Emergency", num: "191", desc: "For security & danger", icon: Shield, color: "bg-red-600 shadow-red-600/30" },
+                        { name: "Ambulance National", num: "193", desc: "For medical emergencies", icon: Phone, color: "bg-red-500 shadow-red-500/30" }
+                    ].map((btn, i) => (
+                        <motion.button
+                            key={btn.num}
+                            initial={{ opacity: 0, x: i === 0 ? -20 : 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => handleCall(btn.num)}
+                            className={`flex items-center justify-between p-6 rounded-[2rem] text-white shadow-premium transition-all ${btn.color}`}
+                        >
+                            <div className="flex items-center gap-4 text-left">
+                                <div className="h-12 w-12 rounded-2xl bg-white/20 flex items-center justify-center">
+                                    <btn.icon size={24} />
                                 </div>
-                                <Button
-                                    size="sm"
-                                    onClick={() => handleCall(line.number)}
-                                    className="mt-3 bg-red-600 hover:bg-red-500 text-white border-0 shadow-md text-xs h-9 w-full"
-                                >
-                                    <Phone className="mr-1.5 h-3.5 w-3.5" />
-                                    Call {line.number}
-                                </Button>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Mental Health Helplines */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Phone className="h-5 w-5 text-indigo-300" />
-                        Mental Health Helplines
-                    </h3>
-                    <div className="grid gap-4 md:grid-cols-2">
-                        {MENTAL_HEALTH_LINES.map((line, index) => (
-                            <div
-                                key={index}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-xl hover:bg-white/10 transition-all duration-300 group"
-                            >
-                                <h4 className="font-semibold text-white group-hover:text-indigo-200 transition-colors text-sm">
-                                    {line.name}
-                                </h4>
-                                <p className="text-xs text-indigo-300/60 mt-1 leading-relaxed">{line.description}</p>
-                                <div className="flex items-center gap-1 mt-2 text-xs text-indigo-200/50">
-                                    <Clock className="h-3 w-3" /> {line.available}
+                                <div>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">{btn.name}</p>
+                                    <p className="text-2xl font-black">Call {btn.num}</p>
                                 </div>
-                                <Button
-                                    size="sm"
-                                    onClick={() => handleCall(line.number)}
-                                    className="mt-3 bg-indigo-500 hover:bg-indigo-400 text-white shadow-md shadow-indigo-500/20 border border-indigo-400/50 text-xs h-9"
-                                >
-                                    <Phone className="mr-1.5 h-3.5 w-3.5" />
-                                    Call {line.number}
-                                </Button>
                             </div>
-                        ))}
-                    </div>
+                            <ArrowUpRight size={20} className="opacity-50" />
+                        </motion.button>
+                    ))}
                 </div>
 
-                {/* University Counselling Centres — Expanded */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Users className="h-5 w-5 text-indigo-300" />
-                        University Counselling Centres
-                    </h3>
-                    <p className="text-xs text-indigo-200/60 -mt-2">
-                        Free and confidential support at Ghanaian universities. Tap a card to see all contacts and resources.
-                    </p>
-
-                    <div className="space-y-3">
-                        {UNIVERSITY_RESOURCES.map((uni, index) => (
-                            <div
-                                key={index}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
+                {/* Regional Helplines */}
+                <div className="space-y-6">
+                    <div className="flex items-center justify-between ml-1">
+                        <h3 className="font-bold text-foreground/90">Mental Health Helplines</h3>
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Ghana National</span>
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        {MENTAL_HEALTH_LINES.map((line, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-card glass rounded-[2.5rem] p-6 border border-primary/10 shadow-premium group hover:border-red-500/20 transition-all cursor-pointer"
+                                onClick={() => handleCall(line.number)}
                             >
-                                {/* Collapsed header — always visible */}
-                                <button
-                                    onClick={() => setExpandedUni(expandedUni === index ? null : index)}
-                                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
-                                >
-                                    <div>
-                                        <h4 className="font-semibold text-white text-sm">{uni.name}</h4>
-                                        <div className="flex items-center gap-1 mt-1 text-xs text-indigo-300/50">
-                                            <MapPin className="h-3 w-3 flex-shrink-0" /> {uni.location}
+                                <div className="space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <h4 className="font-bold text-foreground/90 text-sm">{line.name}</h4>
+                                        <div className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-red-500 group-hover:text-white transition-all">
+                                            <Phone size={14} />
                                         </div>
                                     </div>
-                                    {expandedUni === index ? (
-                                        <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
-                                    ) : (
-                                        <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0 ml-4" />
-                                    )}
-                                </button>
+                                    <p className="text-xs text-muted-foreground font-medium leading-relaxed">{line.description}</p>
+                                    <div className="flex items-center gap-2 pt-2">
+                                        <Clock size={12} className="text-primary group-hover:text-red-500 transition-colors" />
+                                        <span className="text-[10px] font-bold text-muted-foreground/60">{line.available}</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
 
-                                {/* Expanded content */}
-                                {expandedUni === index && (
-                                    <div className="px-5 pb-5 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300 border-t border-white/5 pt-4">
+                {/* University Specific Support */}
+                <div className="space-y-6">
+                    <div className="flex items-center justify-between ml-1">
+                        <h3 className="font-bold text-foreground/90">University Counselling Centers</h3>
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">On-Campus Support</span>
+                    </div>
+                    <div className="space-y-4">
+                        {UNIVERSITY_RESOURCES.map((uni, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-card glass rounded-[2rem] border border-primary/5 shadow-premium overflow-hidden transition-all"
+                            >
+                                <button
+                                    onClick={() => setExpandedUni(expandedUni === i ? null : i)}
+                                    className="w-full flex items-center justify-between p-6 hover:bg-muted/30 transition-colors text-left"
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+                                            <Users size={18} />
+                                        </div>
                                         <div>
-                                            <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wider mb-1">{uni.centre}</p>
-                                            <p className="text-sm text-indigo-100/80 leading-relaxed">{uni.description}</p>
-                                        </div>
-
-                                        {/* Emergency Contacts */}
-                                        <div className="space-y-2">
-                                            <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wider">Emergency Contacts</p>
-                                            <div className="grid gap-2 sm:grid-cols-2">
-                                                {uni.contacts.map((contact, cIdx) => (
-                                                    <button
-                                                        key={cIdx}
-                                                        onClick={() => handleCall(contact.phone)}
-                                                        className="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-indigo-500/20 hover:border-indigo-400/30 transition-all duration-200 text-left group"
-                                                    >
-                                                        <div className="h-8 w-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center flex-shrink-0">
-                                                            <Phone className="h-3.5 w-3.5 text-indigo-300" />
-                                                        </div>
-                                                        <div>
-                                                            <p className="text-xs font-medium text-white group-hover:text-indigo-200 transition-colors">{contact.label}</p>
-                                                            <p className="text-xs text-indigo-300/60">{contact.phone}</p>
-                                                        </div>
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* Online resources for this university */}
-                                        <div className="space-y-2">
-                                            <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wider">Online Resources</p>
-                                            <div className="flex flex-col sm:flex-row gap-2">
-                                                {uni.email && (
-                                                    <a
-                                                        href={`mailto:${uni.email}`}
-                                                        className="flex items-center gap-2 p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-indigo-500/20 hover:border-indigo-400/30 transition-all duration-200 group"
-                                                    >
-                                                        <Mail className="h-4 w-4 text-indigo-300 flex-shrink-0" />
-                                                        <span className="text-xs text-indigo-100/80 group-hover:text-indigo-200 transition-colors truncate">{uni.email}</span>
-                                                    </a>
-                                                )}
-                                                {uni.website && (
-                                                    <a
-                                                        href={uni.website}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="flex items-center gap-2 p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-indigo-500/20 hover:border-indigo-400/30 transition-all duration-200 group"
-                                                    >
-                                                        <Globe className="h-4 w-4 text-indigo-300 flex-shrink-0" />
-                                                        <span className="text-xs text-indigo-100/80 group-hover:text-indigo-200 transition-colors">Visit Website</span>
-                                                        <ExternalLink className="h-3 w-3 text-indigo-300/40 flex-shrink-0" />
-                                                    </a>
-                                                )}
-                                            </div>
+                                            <h4 className="font-bold text-foreground/90 text-sm">{uni.name}</h4>
+                                            <p className="text-[10px] font-bold text-muted-foreground/60 flex items-center gap-1 uppercase tracking-widest mt-0.5">
+                                                <MapPin size={10} /> {uni.location}
+                                            </p>
                                         </div>
                                     </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Immediate Self-Help */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Shield className="h-5 w-5 text-indigo-300" />
-                        Immediate Coping Techniques
-                    </h3>
-                    <div className="space-y-3">
-                        {SELF_HELP_TIPS.map((tip, index) => (
-                            <div
-                                key={index}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl overflow-hidden transition-all duration-300"
-                            >
-                                <button
-                                    onClick={() => setExpandedTip(expandedTip === index ? null : index)}
-                                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
-                                >
-                                    <span className="font-medium text-white text-sm">{tip.title}</span>
-                                    {expandedTip === index ? (
-                                        <ChevronUp className="h-4 w-4 text-indigo-300 flex-shrink-0" />
-                                    ) : (
-                                        <ChevronDown className="h-4 w-4 text-indigo-300 flex-shrink-0" />
-                                    )}
+                                    {expandedUni === i ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                                 </button>
-                                {expandedTip === index && (
-                                    <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
-                                        <p className="text-sm text-indigo-100/80 leading-relaxed">{tip.content}</p>
-                                    </div>
-                                )}
-                            </div>
+                                <AnimatePresence>
+                                    {expandedUni === i && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="px-6 pb-6 overflow-hidden"
+                                        >
+                                            <div className="pt-4 border-t border-primary/5 space-y-4">
+                                                <p className="text-xs text-muted-foreground font-medium leading-relaxed">{uni.description}</p>
+                                                <div className="grid gap-3 sm:grid-cols-2">
+                                                    {uni.contacts.map((c, j) => (
+                                                        <Button key={j} onClick={() => handleCall(c.phone)} variant="outline" className="h-12 justify-between rounded-xl border-secondary/20 hover:bg-secondary/5 font-bold group">
+                                                            <span className="text-[10px] uppercase tracking-widest">{c.label}</span>
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-xs text-secondary">{c.phone}</span>
+                                                                <Phone size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                                                            </div>
+                                                        </Button>
+                                                    ))}
+                                                    <a href={uni.website} target="_blank" rel="noreferrer" className="flex items-center justify-between px-4 h-12 rounded-xl border border-primary/10 bg-muted/20 hover:bg-muted/50 transition-all font-bold group">
+                                                        <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Portal</span>
+                                                        <Globe size={14} className="text-primary group-hover:scale-110 transition-transform" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
 
-                {/* General Online Resources */}
-                <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                        <Globe className="h-5 w-5 text-indigo-300" />
-                        National Online Resources
-                    </h3>
-                    <div className="grid gap-4 md:grid-cols-2">
-                        {ONLINE_RESOURCES.map((resource, index) => (
-                            <a
-                                key={index}
-                                href={resource.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-xl hover:bg-white/10 transition-all duration-300 cursor-pointer block"
-                            >
-                                <div className="flex items-start justify-between gap-2">
-                                    <h4 className="font-semibold text-white group-hover:text-indigo-200 transition-colors text-sm">
-                                        {resource.name}
-                                    </h4>
-                                    <ExternalLink className="h-4 w-4 text-indigo-300/50 group-hover:text-indigo-300 transition-colors flex-shrink-0" />
+                {/* Coping Grounding */}
+                <div className="bg-primary/5 rounded-[2.5rem] p-8 md:p-10 border border-primary/10 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-8 opacity-[0.05] pointer-events-none group-hover:scale-110 transition-transform duration-700">
+                        <Sparkles size={120} />
+                    </div>
+                    <div className="relative z-10 space-y-6">
+                        <div className="space-y-2">
+                            <h3 className="text-xl font-bold text-foreground">Self-Help Grounding</h3>
+                            <p className="text-sm text-muted-foreground font-medium">Techniques to center yourself right now.</p>
+                        </div>
+                        <div className="grid gap-6 sm:grid-cols-2">
+                            {SELF_HELP_TIPS.map((tip, i) => (
+                                <div key={i} className="space-y-2">
+                                    <p className="text-[10px] font-bold text-primary uppercase tracking-widest">{tip.title}</p>
+                                    <p className="text-xs text-foreground/70 font-medium leading-relaxed">{tip.content}</p>
                                 </div>
-                                <p className="text-xs text-indigo-300/60 mt-2 leading-relaxed">{resource.description}</p>
-                            </a>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                {/* Footer Reassurance */}
-                <div className="text-center py-6 animate-in fade-in duration-700">
-                    <p className="text-sm text-indigo-200/60 italic">
-                        "Wo nkoa wo nti me nsa yare3, 3y3 s3 wob3 bisa mmoa y3." — You alone cannot cure your illness. It is okay to ask for help.
+                {/* Quote */}
+                <div className="text-center pt-8">
+                    <p className="text-xs text-muted-foreground/60 italic font-medium leading-relaxed">
+                        "Wo nkoa wo nti me nsa yare3, 3y3 s3 wob3 bisa mmoa y3." <br />
+                        <span className="not-italic opacity-80 mt-1 block tracking-tight">— It is okay to ask for help.</span>
                     </p>
                 </div>
             </div>

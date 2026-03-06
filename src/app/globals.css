@@ -25,12 +25,12 @@
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
 
-  --shadow-premium: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+  --shadow-premium: 0 12px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
 }
 
 :root {
-  --background: #fbfbfd;
-  /* Apple Background */
+  --background: #f7f8f7;
+  /* Soft Sage-tinted Gray for better contrast */
   --foreground: #1d1d1f;
   /* Apple Text */
   --card: #ffffff;

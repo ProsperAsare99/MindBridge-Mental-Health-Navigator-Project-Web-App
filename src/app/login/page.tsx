@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import ShaderBackground from "@/components/shader-background";
+import { ArrowLeft, Heart, Mail, Lock, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            await signInWithEmailAndPassword(auth, email, password);
             router.push("/dashboard");
         } catch (err: any) {
             console.error(err);
@@ -38,108 +38,132 @@ export default function LoginPage() {
 
     const handleGoogleSignIn = async () => {
         try {
-            const result = await signInWithPopup(auth, googleProvider);
-            // Google accounts are usually verified, but good to check or ensure flow consistency
-            // if (!result.user.emailVerified) router.push("/verify-email"); // Optional for Google
+            await signInWithPopup(auth, googleProvider);
             router.push("/dashboard");
         } catch (error: any) {
             console.error(error);
-            if (error.code === 'auth/popup-closed-by-user') {
-                return; // User closed the popup, no need to show error
+            if (error.code !== 'auth/popup-closed-by-user') {
+                setError("Failed to sign in with Google.");
             }
-            setError("Failed to sign in with Google.");
         }
     };
 
     return (
-        <div className="relative min-h-screen font-sans text-white selection:bg-indigo-300 selection:text-indigo-900 flex flex-col items-center justify-center p-4 overflow-hidden">
-            {/* Background Shader */}
-            <ShaderBackground />
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 selection:bg-primary/20 overflow-hidden relative">
+            {/* Soft background accents */}
+            <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
+                <div className="absolute top-[10%] right-[15%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />
+                <div className="absolute bottom-[10%] left-[15%] w-[40%] h-[40%] bg-secondary/5 blur-[120px] rounded-full" />
+            </div>
 
-            <div className="relative z-10 w-full max-w-md space-y-8 bg-white/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20 animate-in fade-in zoom-in duration-500">
-                <Link href="/" className="inline-flex items-center text-sm text-indigo-200 hover:text-white transition-colors mb-4">
-                    <ArrowLeft className="h-4 w-4 mr-1" /> Back to Home
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="w-full max-w-md"
+            >
+                <Link href="/" className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-8 group">
+                    <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    Back to Home
                 </Link>
 
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold tracking-tight text-white drop-shadow-sm">Welcome back</h2>
-                    <p className="mt-2 text-sm text-indigo-100/80">Sign in to access your dashboard</p>
-                </div>
-
-                {error && (
-                    <div className="mt-4 p-3 bg-red-500/20 text-red-100 text-sm rounded-md text-center border border-red-500/30 backdrop-blur-sm">
-                        {error}
-                    </div>
-                )}
-
-                <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-                    <div className="space-y-4">
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-indigo-100 mb-1">Email address</label>
-                            <input
-                                id="email"
-                                name="email"
-                                type="email"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
-                                placeholder="name@example.com"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-indigo-100 mb-1">Password</label>
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="relative block w-full rounded-lg border border-white/10 bg-white/5 py-2.5 px-3 text-white placeholder-white/30 focus:z-10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm focus:outline-none transition-all"
-                                placeholder="••••••••"
-                            />
-                        </div>
+                <div className="bg-card glass rounded-[2.5rem] p-10 border border-primary/10 shadow-premium relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
+                        <Heart size={120} />
                     </div>
 
-                    <div>
+                    <div className="space-y-2 mb-10 text-center">
+                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 mb-4">
+                            <Heart className="h-6 w-6 text-primary" />
+                        </div>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-foreground/90">Welcome Back</h1>
+                        <p className="text-sm font-medium text-muted-foreground">Continue your wellness journey with MindBridge.</p>
+                    </div>
+
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="mb-6 p-4 bg-red-50 text-red-600 text-xs font-bold rounded-2xl border border-red-100 flex items-center gap-3"
+                        >
+                            <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
+                            {error}
+                        </motion.div>
+                    )}
+
+                    <form className="space-y-6" onSubmit={handleLogin}>
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Email address</label>
+                                <div className="relative group">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                                    <input
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all placeholder:text-muted-foreground/40"
+                                        placeholder="name@example.com"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Password</label>
+                                <div className="relative group">
+                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                                    <input
+                                        type="password"
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all placeholder:text-muted-foreground/40"
+                                        placeholder="••••••••"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
                         <Button
                             type="submit"
-                            className="w-full h-11 bg-indigo-600 hover:bg-indigo-500 text-white border-0 shadow-lg shadow-indigo-500/30 transition-all hover:scale-[1.02] text-base font-semibold"
+                            className="w-full h-14 rounded-2xl text-sm font-bold shadow-xl shadow-primary/20 group"
                             disabled={loading}
                         >
-                            {loading ? "Signing in..." : "Sign in"}
+                            {loading ? "Signing in..." : (
+                                <span className="flex items-center gap-2">
+                                    Sign In <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            )}
                         </Button>
-                    </div>
-                </form>
+                    </form>
 
-                <div className="relative my-6">
-                    <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t border-white/10" />
+                    <div className="relative my-8">
+                        <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t border-primary/5" />
+                        </div>
+                        <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em]">
+                            <span className="bg-card px-4 text-muted-foreground/40">Or continue with</span>
+                        </div>
                     </div>
-                    <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-white/5 px-2 text-indigo-200 rounded-full backdrop-blur-sm">Or continue with</span>
-                    </div>
-                </div>
 
-                <div className="grid grid-cols-1 gap-3">
                     <Button
                         type="button"
                         onClick={handleGoogleSignIn}
-                        className="w-full bg-white text-slate-900 hover:bg-slate-100 font-semibold transition-transform hover:scale-[1.02]"
+                        variant="secondary"
+                        className="w-full h-14 rounded-2xl border-primary/5 bg-secondary/10 hover:bg-secondary/20 shadow-none"
                     >
-                        <svg className="mr-2 h-4 w-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                        <svg className="mr-3 h-4 w-4" viewBox="0 0 488 512">
                             <path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
                         </svg>
-                        Google
+                        Google Account
                     </Button>
-                </div>
 
-                <div className="text-center text-sm pt-4 border-t border-white/10 mt-6">
-                    <span className="text-indigo-200/70">Don't have an account? </span>
-                    <Link href="/register" className="font-medium text-white hover:text-indigo-200 transition-colors">Sign up</Link>
+                    <div className="text-center mt-10 space-y-2">
+                        <p className="text-xs font-medium text-muted-foreground">
+                            Don't have an account? <Link href="/register" className="text-primary font-bold hover:underline underline-offset-4">Create one</Link>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }

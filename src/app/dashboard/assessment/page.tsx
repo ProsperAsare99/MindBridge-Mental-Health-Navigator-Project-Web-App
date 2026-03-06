@@ -6,60 +6,41 @@ import { useAuth } from "@/hooks/use-auth";
 import { db } from "@/lib/firebase";
 import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ChevronLeft, CheckCircle2, AlertTriangle, AlertCircle, Info } from "lucide-react";
+import {
+    ChevronRight,
+    ChevronLeft,
+    CheckCircle2,
+    AlertTriangle,
+    AlertCircle,
+    Info,
+    Sparkles,
+    ShieldCheck,
+    ArrowRight
+} from "lucide-react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
-// PHQ-9 Questions
 const QUESTIONS = [
-    {
-        id: 1,
-        text: "Little interest or pleasure in doing things",
-    },
-    {
-        id: 2,
-        text: "Feeling down, depressed, or hopeless",
-    },
-    {
-        id: 3,
-        text: "Trouble falling or staying asleep, or sleeping too much",
-    },
-    {
-        id: 4,
-        text: "Feeling tired or having little energy",
-    },
-    {
-        id: 5,
-        text: "Poor appetite or overeating",
-    },
-    {
-        id: 6,
-        text: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
-    },
-    {
-        id: 7,
-        text: "Trouble concentrating on things, such as reading the newspaper or watching television",
-    },
-    {
-        id: 8,
-        text: "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
-    },
-    {
-        id: 9,
-        text: "Thoughts that you would be better off dead or of hurting yourself in some way",
-    },
+    { id: 1, text: "Little interest or pleasure in doing things" },
+    { id: 2, text: "Feeling down, depressed, or hopeless" },
+    { id: 3, text: "Trouble falling or staying asleep, or sleeping too much" },
+    { id: 4, text: "Feeling tired or having little energy" },
+    { id: 5, text: "Poor appetite or overeating" },
+    { id: 6, text: "Feeling bad about yourself — or that you are a failure" },
+    { id: 7, text: "Trouble concentrating on things" },
+    { id: 8, text: "Moving or speaking slowly, or restless movement" },
+    { id: 9, text: "Thoughts that you would be better off dead" },
 ];
 
 const OPTIONS = [
     { value: 0, label: "Not at all" },
     { value: 1, label: "Several days" },
-    { value: 2, label: "More than half the days" },
+    { value: 2, label: "More than half" },
     { value: 3, label: "Nearly every day" },
 ];
 
 export default function AssessmentPage() {
     const { user } = useAuth();
-    const router = useRouter();
-
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<number[]>(new Array(QUESTIONS.length).fill(-1));
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,211 +53,200 @@ export default function AssessmentPage() {
         newAnswers[currentQuestionIndex] = value;
         setAnswers(newAnswers);
 
-        // Auto-advance after short delay if not last question
         if (currentQuestionIndex < QUESTIONS.length - 1) {
-            setTimeout(() => {
-                setCurrentQuestionIndex(prev => prev + 1);
-            }, 300);
+            setTimeout(() => setCurrentQuestionIndex(prev => prev + 1), 300);
         }
-    };
-
-    const handleNext = () => {
-        if (currentQuestionIndex < QUESTIONS.length - 1) {
-            setCurrentQuestionIndex(prev => prev + 1);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(prev => prev - 1);
-        }
-    };
-
-    const calculateResults = () => {
-        const totalScore = answers.reduce((a, b) => a + (b === -1 ? 0 : b), 0);
-        let severityLevel = "";
-
-        if (totalScore <= 4) severityLevel = "None-minimal";
-        else if (totalScore <= 9) severityLevel = "Mild";
-        else if (totalScore <= 14) severityLevel = "Moderate";
-        else if (totalScore <= 19) severityLevel = "Moderately Severe";
-        else severityLevel = "Severe";
-
-        return { totalScore, severityLevel };
     };
 
     const handleSubmit = async () => {
         setIsSubmitting(true);
-        const { totalScore, severityLevel } = calculateResults();
+        const totalScore = answers.reduce((a, b) => a + (b === -1 ? 0 : b), 0);
+        let severityLevel = totalScore <= 4 ? "None-minimal" :
+            totalScore <= 9 ? "Mild" :
+                totalScore <= 14 ? "Moderate" :
+                    totalScore <= 19 ? "Moderately Severe" : "Severe";
+
         setScore(totalScore);
         setSeverity(severityLevel);
 
         try {
             if (user) {
-                // Save to Firestore
                 await addDoc(collection(db, `users/${user.uid}/assessments`), {
                     type: 'PHQ-9',
                     score: totalScore,
-                    answers: answers,
                     severity: severityLevel,
                     timestamp: serverTimestamp(),
                 });
             }
             setShowResults(true);
         } catch (error) {
-            console.error("Error saving assessment:", error);
-            // Show results anyway even if save fails
             setShowResults(true);
         } finally {
             setIsSubmitting(false);
         }
     };
 
-    const getProgress = () => {
-        return ((currentQuestionIndex + 1) / QUESTIONS.length) * 100;
-    };
-
     if (showResults) {
         return (
-            <div className="min-h-screen relative font-sans text-white pb-20 pt-10 px-4">
-                {/* We assume ShaderBackground is in Layout or we can add it here if needed, keeping it clean for now */}
+            <div className="min-h-screen relative pb-20 pt-10 px-6 selection:bg-primary/10">
+                {/* Ambient background accents */}
+                <div className="fixed inset-0 pointer-events-none -z-10">
+                    <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />
+                    <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-secondary/5 blur-[150px] rounded-full" />
+                </div>
 
-                <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in zoom-in duration-500">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="max-w-2xl mx-auto space-y-8"
+                >
                     <div className="text-center space-y-4">
-                        <div className="inline-flex items-center justify-center p-4 bg-white/10 rounded-full mb-4 ring-1 ring-white/20 shadow-lg backdrop-blur-md">
-                            <CheckCircle2 className="w-12 h-12 text-green-400" />
+                        <div className="inline-flex items-center justify-center h-20 w-20 bg-primary/10 rounded-[2rem] border border-primary/20 shadow-xl mb-4">
+                            <ShieldCheck className="w-10 h-10 text-primary" />
                         </div>
-                        <h1 className="text-3xl font-bold tracking-tight">Assessment Complete</h1>
-                        <p className="text-indigo-200">Here is your wellness snapshot based on your responses.</p>
+                        <h1 className="text-4xl font-extrabold tracking-tight text-foreground/90">Insight <span className="text-primary">Summary</span></h1>
+                        <p className="text-muted-foreground font-medium">Your private wellness snapshot is ready for review.</p>
                     </div>
 
-                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
-                        <div className="flex flex-col items-center justify-center text-center space-y-2 mb-8">
-                            <span className="text-sm font-medium text-indigo-200 uppercase tracking-widest">Your Score</span>
-                            <span className="text-6xl font-extrabold text-white drop-shadow-md">{score}</span>
-                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold border ${severity === 'Severe' || severity === 'Moderately Severe' ? 'bg-red-500/20 text-red-200 border-red-500/30' :
-                                    severity === 'Moderate' ? 'bg-yellow-500/20 text-yellow-200 border-yellow-500/30' :
-                                        'bg-green-500/20 text-green-200 border-green-500/30'
-                                }`}>
-                                {severity === 'Severe' || severity === 'Moderately Severe' ? <AlertTriangle className="w-3.5 h-3.5" /> :
-                                    severity === 'Moderate' ? <Info className="w-3.5 h-3.5" /> :
-                                        <CheckCircle2 className="w-3.5 h-3.5" />}
-                                {severity} Depression Severity
-                            </span>
+                    <div className="bg-card glass rounded-[2.5rem] p-10 border border-primary/10 shadow-premium text-center">
+                        <div className="space-y-2 mb-10">
+                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Wellness Index</p>
+                            <span className="text-8xl font-black text-primary block leading-none">{score}</span>
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-bold mt-4 shadow-sm">
+                                <Sparkles size={16} /> {severity} Symptoms
+                            </div>
                         </div>
 
-                        <div className="space-y-4 text-center">
-                            <p className="text-white/80 leading-relaxed">
-                                {severity === 'None-minimal' && "Your responses suggest you're doing well, with few or no symptoms of depression. Keep practicing good self-care!"}
-                                {severity === 'Mild' && "You may be experiencing some mild symptoms. It might be helpful to monitor your mood and practice stress-reduction techniques."}
-                                {severity === 'Moderate' && "Your responses suggest moderate symptoms. Consider reaching out to a counselor or using our self-help resources to manage these feelings."}
-                                {(severity === 'Moderately Severe' || severity === 'Severe') && "Your responses indicate significant symptoms. We strongly recommend speaking with a mental health professional for support."}
-                            </p>
-                        </div>
+                        <p className="text-foreground/70 leading-relaxed font-medium mb-10 text-lg">
+                            {severity === 'None-minimal' && "Your responses suggest you're maintaining a healthy emotional balance."}
+                            {severity === 'Mild' && "You're experiencing gentle fluctuations. Consider the mindfulness tools in your dashboard."}
+                            {severity === 'Moderate' && "There's notable weight on your spirit right now. Our self-help guides can offer support."}
+                            {(severity === 'Moderately Severe' || severity === 'Severe') && "You're navigating deep waters. Professional conversation is highly recommended."}
+                        </p>
 
-                        <div className="mt-8 pt-8 border-t border-white/10 flex flex-col gap-3">
-                            <Link href="/dashboard" className="w-full">
-                                <Button className="w-full bg-white text-indigo-950 hover:bg-indigo-50 font-bold h-12 rounded-xl">
+                        <div className="flex flex-col gap-4">
+                            <Link href="/dashboard">
+                                <Button className="w-full h-14 rounded-2xl font-bold shadow-xl shadow-primary/20">
                                     Return to Dashboard
                                 </Button>
                             </Link>
-                            {(severity === 'Moderately Severe' || severity === 'Severe' || severity === 'Moderate') && (
-                                <Link href="/dashboard/crisis" className="w-full">
-                                    <Button variant="outline" className="w-full border-red-400/50 text-red-200 hover:bg-red-950/30 hover:text-red-100 h-12 rounded-xl">
-                                        Get Immediate Support
+                            {score > 9 && (
+                                <Link href="/dashboard/crisis">
+                                    <Button variant="secondary" className="w-full h-14 rounded-2xl font-bold bg-secondary/10 hover:bg-secondary/20 text-secondary border-secondary/20 transition-all">
+                                        Immediate Support <ArrowRight size={18} className="ml-2" />
                                     </Button>
                                 </Link>
                             )}
                         </div>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-indigo-900/40 border border-indigo-500/30 backdrop-blur-sm flex gap-3 text-sm text-indigo-200/80">
-                        <AlertCircle className="w-5 h-5 flex-shrink-0 text-indigo-400" />
-                        <p>This assessment is for screening purposes only and is not a medical diagnosis. Please consult a professional for a clinical evaluation.</p>
+                    <div className="p-6 rounded-[2rem] bg-muted/30 border border-primary/10 flex gap-4 text-xs font-medium text-muted-foreground leading-relaxed">
+                        <Info className="w-5 h-5 flex-shrink-0 text-primary" />
+                        <p>This is a screening reflection tool, not a medical diagnosis. Your data is encrypted and private to your account.</p>
                     </div>
-                </div>
+                </motion.div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen relative font-sans text-white pb-20 pt-10 px-4 flex flex-col items-center">
-
-            <div className="w-full max-w-2xl mb-8 flex items-center justify-between">
-                <Button variant="ghost" size="sm" onClick={() => router.back()} className="text-indigo-200 hover:text-white hover:bg-white/10">
-                    <ChevronLeft className="w-4 h-4 mr-1" /> Exit
-                </Button>
-                <span className="text-sm font-medium text-indigo-200">Question {currentQuestionIndex + 1} of {QUESTIONS.length}</span>
+        <div className="min-h-screen relative pb-20 pt-10 px-6 selection:bg-primary/10">
+            {/* Ambient background accents */}
+            <div className="fixed inset-0 pointer-events-none -z-10">
+                <div className="absolute top-0 left-0 w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />
+                <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-secondary/5 blur-[150px] rounded-full" />
             </div>
 
-            {/* Progress Bar */}
-            <div className="w-full max-w-2xl h-1.5 bg-white/10 rounded-full mb-8 overflow-hidden">
-                <div
-                    className="h-full bg-indigo-500 transition-all duration-500 ease-out"
-                    style={{ width: `${getProgress()}%` }}
-                ></div>
-            </div>
+            <div className="max-w-3xl mx-auto space-y-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-4"
+                >
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
+                        Wellness Check
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
+                        Private <span className="text-primary">Reflection</span>
+                    </h1>
+                    <div className="h-1.5 w-full bg-muted/40 rounded-full overflow-hidden mt-6">
+                        <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${(currentQuestionIndex / QUESTIONS.length) * 100}%` }}
+                            className="h-full bg-primary"
+                        />
+                    </div>
+                </motion.div>
 
-            <div className="w-full max-w-2xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 key={currentQuestionIndex}">
-                <h2 className="text-xl md:text-2xl font-medium leading-relaxed mb-2 text-white/90">
-                    Over the last 2 weeks, how often have you been bothered by...
-                </h2>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-10 block min-h-[5rem]">
-                    {QUESTIONS[currentQuestionIndex].text}?
-                </h3>
+                <motion.div
+                    key={currentQuestionIndex}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="bg-card glass rounded-[2.5rem] p-10 md:p-14 border border-primary/10 shadow-premium space-y-12 relative overflow-hidden"
+                >
+                    <div className="absolute top-0 right-0 p-10 opacity-[0.02] pointer-events-none">
+                        <Sparkles size={250} />
+                    </div>
 
-                <div className="space-y-3">
-                    {OPTIONS.map((option) => (
-                        <button
-                            key={option.value}
-                            onClick={() => handleOptionSelect(option.value)}
-                            className={`w-full p-4 rounded-xl text-left transition-all duration-200 border flex items-center justify-between group
-                        ${answers[currentQuestionIndex] === option.value
-                                    ? 'bg-indigo-600 border-indigo-500 shadow-lg shadow-indigo-600/20 scale-[1.02]'
-                                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 hover:pl-5'
-                                }
-                    `}
-                        >
-                            <span className={`font-medium text-lg ${answers[currentQuestionIndex] === option.value ? 'text-white' : 'text-indigo-100'}`}>
-                                {option.label}
-                            </span>
-                            {answers[currentQuestionIndex] === option.value && (
-                                <CheckCircle2 className="w-5 h-5 text-white animate-in zoom-in duration-300" />
-                            )}
-                        </button>
-                    ))}
-                </div>
+                    <div className="relative z-10 space-y-4">
+                        <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Question {currentQuestionIndex + 1} of {QUESTIONS.length}</span>
+                        <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
+                            {QUESTIONS[currentQuestionIndex].text}
+                        </h2>
+                    </div>
 
-                <div className="mt-10 flex justify-between items-center">
-                    <Button
-                        variant="ghost"
-                        onClick={handlePrevious}
-                        disabled={currentQuestionIndex === 0}
-                        className="text-indigo-200 hover:text-white hover:bg-white/5 disabled:opacity-30"
-                    >
-                        <ChevronLeft className="w-4 h-4 mr-2" /> Previous
-                    </Button>
+                    <div className="grid gap-4">
+                        {OPTIONS.map((opt) => (
+                            <button
+                                key={opt.value}
+                                onClick={() => handleOptionSelect(opt.value)}
+                                className={`w-full group text-left p-6 md:p-8 rounded-[2rem] border transition-all relative ${answers[currentQuestionIndex] === opt.value
+                                        ? "bg-primary border-primary shadow-xl shadow-primary/20 scale-[1.02]"
+                                        : "bg-muted/30 border-primary/5 hover:border-primary/30 hover:bg-muted/50"
+                                    }`}
+                            >
+                                <div className="flex items-center justify-between">
+                                    <span className={`text-base md:text-lg font-bold ${answers[currentQuestionIndex] === opt.value ? "text-white" : "text-foreground/80"}`}>
+                                        {opt.label}
+                                    </span>
+                                    {answers[currentQuestionIndex] === opt.value && (
+                                        <CheckCircle2 size={24} className="text-white" />
+                                    )}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
 
-                    {currentQuestionIndex === QUESTIONS.length - 1 ? (
+                    <div className="flex items-center justify-between pt-8 border-t border-primary/10">
                         <Button
-                            onClick={handleSubmit}
-                            disabled={answers.includes(-1) || isSubmitting}
-                            className="bg-white text-indigo-950 hover:bg-indigo-50 font-bold px-8 shadow-lg shadow-indigo-900/20"
+                            variant="ghost"
+                            onClick={() => setCurrentQuestionIndex(prev => prev - 1)}
+                            disabled={currentQuestionIndex === 0}
+                            className="h-12 px-6 rounded-xl font-bold text-muted-foreground hover:text-primary transition-colors"
                         >
-                            {isSubmitting ? "Processing..." : "Finish Assessment"}
+                            <ChevronLeft className="mr-2" size={18} /> Previous
                         </Button>
-                    ) : (
-                        <Button
-                            onClick={handleNext}
-                            disabled={answers[currentQuestionIndex] === -1}
-                            className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 px-6 rounded-full"
-                        >
-                            Next <ChevronRight className="w-4 h-4 ml-2" />
-                        </Button>
-                    )}
-                </div>
-            </div>
 
+                        {currentQuestionIndex === QUESTIONS.length - 1 ? (
+                            <Button
+                                onClick={handleSubmit}
+                                disabled={answers[currentQuestionIndex] === -1 || isSubmitting}
+                                className="h-14 px-10 rounded-2xl font-bold shadow-xl shadow-primary/20"
+                            >
+                                {isSubmitting ? "Processing..." : "Finish reflection"} <ArrowRight className="ml-2" size={18} />
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => setCurrentQuestionIndex(prev => prev + 1)}
+                                disabled={answers[currentQuestionIndex] === -1}
+                                className="h-12 px-8 rounded-xl font-bold shadow-lg shadow-primary/10 transition-all active:scale-95"
+                            >
+                                Next <ChevronRight className="ml-1" size={18} />
+                            </Button>
+                        )}
+                    </div>
+                </motion.div>
+            </div>
         </div>
     );
 }
