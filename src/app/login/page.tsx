@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Heart, Mail, Lock, ChevronRight } from "lucide-react";
+import { ArrowLeft, Mail, Lock, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Logo } from "@/components/brand/Logo";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -69,12 +70,12 @@ export default function LoginPage() {
 
                 <div className="bg-card glass rounded-[2.5rem] p-10 border border-primary/10 shadow-premium relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
-                        <Heart size={120} />
+                        <Logo iconOnly size="xl" />
                     </div>
 
                     <div className="space-y-2 mb-10 text-center">
-                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 mb-4">
-                            <Heart className="h-6 w-6 text-primary" />
+                        <div className="inline-flex mb-4">
+                            <Logo iconOnly size="md" />
                         </div>
                         <h1 className="text-3xl font-extrabold tracking-tight text-foreground/90">Welcome Back</h1>
                         <p className="text-sm font-medium text-muted-foreground">Continue your wellness journey with MindBridge.</p>

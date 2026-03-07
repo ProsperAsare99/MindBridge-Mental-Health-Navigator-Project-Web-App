@@ -70,41 +70,32 @@ export function Logo({
                 {/* Glassmorphism Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent z-1 pointer-events-none" />
 
-                {/* Brain SVG Icon (Recreated from Canva) */}
+                {/* Brain SVG Icon (Refined Line Art from Image) */}
                 <svg
                     viewBox="0 0 100 100"
-                    className={cn("relative z-10 drop-shadow-2xl", iconSizes[size])}
+                    className={cn("relative z-10 drop-shadow-xl", iconSizes[size])}
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                 >
-                    {/* Left Hemisphere (Mind) */}
-                    <path
-                        d="M48 25C38 25 30 33 30 42C30 45 31 48 33 51C30 54 28 58 28 63C28 72 36 80 45 80C46 80 47 80 48 79.5V25Z"
-                        fill="#F5F5F5"
-                        fillOpacity="0.95"
-                    />
-                    <path
-                        d="M48 15C32 15 20 27 20 42C20 45 20.5 48 21.5 51C18.5 55 17 60 17 65C17 76 25 85 36 85C37.5 85 39 84.5 40.5 84C42.5 87.5 46 90 50 90V15H48Z"
-                        fill="#F5F5F5"
-                        fillOpacity="0.15"
-                    />
+                    {/* Left Side - Mind (Adaptive Grey Line Art) */}
+                    <g stroke="currentColor" className="text-muted-foreground/60 dark:text-[#D1D5DB]" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M48 30C40 30 34 36 34 44C34 46.5 35 49 37 51" />
+                        <path d="M37 51C34 53 32 57 32 62C32 71 39 78 48 78" />
+                        <path d="M48 30V78" opacity="0.5" />
+                        {/* Squiggle detail */}
+                        <path d="M40 44C40 42 42 41 44 41" strokeWidth="2.5" opacity="0.6" />
+                        <path d="M38 62C38 64 40 65 42 65" strokeWidth="2.5" opacity="0.6" />
+                    </g>
 
-                    {/* Right Hemisphere (Bridge) */}
-                    <path
-                        d="M52 25C62 25 70 33 70 42C70 45 69 48 67 51C70 54 72 58 72 63C72 72 64 80 55 80C54 80 53 80 52 79.5V25Z"
-                        fill="#00D2D2"
-                    />
-                    <path
-                        d="M52 15C68 15 80 27 80 42C80 45 79.5 48 78.5 51C81.5 55 83 60 83 65C83 76 75 85 64 85C62.5 85 61 84.5 59.5 84C57.5 87.5 54 90 50 90V15H52Z"
-                        fill="#00D2D2"
-                        fillOpacity="0.2"
-                    />
-
-                    {/* Detailed Brain Patterns (Accent squiggles) */}
-                    <path d="M40 38C40 36 42 35 44 35" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5" />
-                    <path d="M60 38C60 36 58 35 56 35" stroke="#E0FFFF" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5" />
-                    <path d="M38 65C38 67 40 68 42 68" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5" />
-                    <path d="M62 65C62 67 60 68 58 68" stroke="#E0FFFF" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5" />
+                    {/* Right Side - Bridge (Teal Line Art) */}
+                    <g stroke="#00A9A9" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M52 30C60 30 66 36 66 44C66 46.5 65 49 63 51" />
+                        <path d="M63 51C66 53 68 57 68 62C68 71 61 78 52 78" />
+                        <path d="M52 30V78" opacity="0.5" />
+                        {/* Squiggle detail */}
+                        <path d="M60 44C60 42 58 41 56 41" strokeWidth="2.5" opacity="0.7" />
+                        <path d="M62 62C62 64 60 65 58 65" strokeWidth="2.5" opacity="0.7" />
+                    </g>
                 </svg>
             </motion.div>
 
@@ -116,7 +107,7 @@ export function Logo({
                         className={cn("font-serif font-black tracking-tight flex items-baseline", textSizes[size])}
                     >
                         <span className="text-foreground/90">Mind</span>
-                        <span className="text-[#00D2D2]">Bridge</span>
+                        <span className="text-[#00A9A9]">Bridge</span>
                     </motion.div>
                     {size === "xl" && (
                         <motion.p

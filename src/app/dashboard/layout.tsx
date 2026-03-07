@@ -17,6 +17,7 @@ import {
     Settings,
     Heart
 } from "lucide-react";
+import { Logo } from "@/components/brand/Logo";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { cn } from "@/lib/utils";
@@ -98,10 +99,6 @@ export default function DashboardLayout({
                 isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             )}>
                 <div className="flex h-20 items-center justify-between px-8">
-                    import {Logo} from "@/components/brand/Logo";
-
-                    // ... (inside the component)
-
                     <Link href="/dashboard" className="flex items-center gap-3 outline-none">
                         <Logo size="md" />
                     </Link>

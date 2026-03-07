@@ -8,8 +8,9 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
-import { ArrowLeft, Phone, Mail, User, Lock, School, GraduationCap, IdCard, ChevronRight, Heart } from "lucide-react";
+import { ArrowLeft, Phone, Mail, User, Lock, School, GraduationCap, IdCard, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "@/components/brand/Logo";
 
 declare global {
     interface Window {
@@ -177,13 +178,13 @@ export default function RegisterPage() {
                 </Link>
 
                 <div className="bg-card glass rounded-[3rem] p-10 md:p-14 border border-primary/10 shadow-premium relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-10 opacity-[0.02] pointer-events-none">
-                        <Heart size={200} />
+                    <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
+                        <Logo iconOnly size="xl" />
                     </div>
 
                     <div className="mb-12">
-                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 mb-4 transition-transform hover:scale-110">
-                            <Heart className="h-6 w-6 text-primary" />
+                        <div className="inline-flex mb-2">
+                            <Logo iconOnly size="md" />
                         </div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-foreground/90">Join MindBridge</h1>
                         <p className="text-sm font-medium text-muted-foreground mt-2">Start your journey towards better mental well-being.</p>
