@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   Star
 } from "lucide-react";
+import { Logo } from "@/components/brand/Logo";
 
 export default function Home() {
   return (
@@ -29,17 +30,15 @@ export default function Home() {
         </ParallaxSection>
       </div>
 
-      {/* Navigation - Apple Style */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-24">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2.5"
+          className="flex items-center gap-2.5 outline-none"
         >
-          <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-            <Heart className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tight text-foreground/90">MindBridge</span>
+          <Link href="/">
+            <Logo size="md" />
+          </Link>
         </motion.div>
 
         <motion.div

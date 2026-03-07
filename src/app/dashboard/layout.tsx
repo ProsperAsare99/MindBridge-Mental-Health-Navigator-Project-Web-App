@@ -98,11 +98,12 @@ export default function DashboardLayout({
                 isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             )}>
                 <div className="flex h-20 items-center justify-between px-8">
-                    <Link href="/dashboard" className="flex items-center gap-3">
-                        <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-                            <Heart className="h-5 w-5 text-white" />
-                        </div>
-                        <span className="text-xl font-extrabold tracking-tight text-foreground/90 leading-none">MindBridge</span>
+                    import {Logo} from "@/components/brand/Logo";
+
+                    // ... (inside the component)
+
+                    <Link href="/dashboard" className="flex items-center gap-3 outline-none">
+                        <Logo size="md" />
                     </Link>
                     <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-muted-foreground hover:text-foreground">
                         <X className="h-5 w-5" />

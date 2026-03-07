@@ -200,15 +200,15 @@ const SELF_HELP_TOOLS = [
 
 // ─── Recommended Apps ───
 const RECOMMENDED_APPS = [
-    { name: "Headspace", tag: "Meditation", icon: Sparkles, desc: "Guided mindfulness for students." },
-    { name: "7 Cups", tag: "Support", icon: MessageSquare, desc: "24/7 chat with trained listeners." },
-    { name: "Calm", tag: "Sleep", icon: Moon, desc: "Sleep stories and relaxation music." },
-    { name: "Woebot", tag: "AI CBT", icon: Brain, desc: "Daily check-ins with an AI therapist." },
-    { name: "Daylio", tag: "Mood", icon: Smile, desc: "Track your mood without writing a word." },
-    { name: "MindShift CBT", tag: "Anxiety", icon: Lightbulb, desc: "Tools for panic and worry." },
-    { name: "Happify", tag: "Happiness", icon: Target, desc: "Science-based games for stress." },
-    { name: "Sanvello", tag: "Wellness", icon: Leaf, desc: "CBT and mood tracking suite." },
-    { name: "Bearable", tag: "Tracking", icon: Stethoscope, desc: "Find correlations in your symptoms." }
+    { name: "Headspace", tag: "Meditation", icon: Sparkles, desc: "Guided mindfulness for students.", url: "https://www.headspace.com" },
+    { name: "7 Cups", tag: "Support", icon: MessageSquare, desc: "24/7 chat with trained listeners.", url: "https://www.7cups.com" },
+    { name: "Calm", tag: "Sleep", icon: Moon, desc: "Sleep stories and relaxation music.", url: "https://www.calm.com" },
+    { name: "Woebot", tag: "AI CBT", icon: Brain, desc: "Daily check-ins with an AI therapist.", url: "https://woebothealth.com" },
+    { name: "Daylio", tag: "Mood", icon: Smile, desc: "Track your mood without writing a word.", url: "https://daylio.net" },
+    { name: "MindShift CBT", tag: "Anxiety", icon: Lightbulb, desc: "Tools for panic and worry.", url: "https://www.anxietycanada.com/resources/mindshift-cbt/" },
+    { name: "Happify", tag: "Happiness", icon: Target, desc: "Science-based games for stress.", url: "https://www.happify.com" },
+    { name: "Sanvello", tag: "Wellness", icon: Leaf, desc: "CBT and mood tracking suite.", url: "https://www.sanvello.com" },
+    { name: "Bearable", tag: "Tracking", icon: Stethoscope, desc: "Find correlations in your symptoms.", url: "https://bearable.app" }
 ];
 
 // ─── Video Resources ───
@@ -386,23 +386,32 @@ export default function ResourcesPage() {
                     <h2 className="text-2xl font-bold text-foreground/90 flex items-center gap-3">
                         <Smartphone className="text-primary" /> Recommended Tools
                     </h2>
-                    <div className="grid gap-4 md:grid-cols-3">
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         {RECOMMENDED_APPS.map((app, i) => (
-                            <div key={i} className="bg-card glass rounded-[2rem] p-6 border border-primary/10 flex flex-col gap-4 group hover:scale-[1.02] transition-all">
+                            <a
+                                key={i}
+                                href={app.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="bg-card glass rounded-[2rem] p-6 border border-primary/10 flex flex-col gap-4 group hover:scale-[1.02] hover:border-primary/30 transition-all shadow-premium"
+                            >
                                 <div className="flex items-center justify-between">
-                                    <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
                                         <app.icon size={22} />
                                     </div>
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-primary/40 group-hover:text-primary transition-colors">{app.tag}</span>
                                 </div>
-                                <div className="space-y-1">
-                                    <h4 className="font-bold text-foreground/90">{app.name}</h4>
-                                    <p className="text-xs text-muted-foreground font-medium">{app.desc}</p>
+                                <div className="space-y-1 flex-1">
+                                    <h4 className="font-bold text-foreground/90 flex items-center justify-between">
+                                        {app.name}
+                                        <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    </h4>
+                                    <p className="text-xs text-muted-foreground font-medium leading-relaxed">{app.desc}</p>
                                 </div>
-                                <button className="mt-2 h-10 w-full rounded-xl border border-primary/10 flex items-center justify-center text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
-                                    Explore <ArrowUpRight size={12} className="ml-1" />
-                                </button>
-                            </div>
+                                <div className="pt-2 flex items-center gap-1 text-[9px] font-bold text-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                                    Open Tool <ArrowUpRight size={10} />
+                                </div>
+                            </a>
                         ))}
                     </div>
                 </div>
