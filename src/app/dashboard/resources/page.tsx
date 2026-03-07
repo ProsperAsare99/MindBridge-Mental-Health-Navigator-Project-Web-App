@@ -218,7 +218,7 @@ const VIDEO_RESOURCES = [
     { title: "Vulnerability Power", speaker: "Brené Brown", id: "iCvmsMzlF7o" },
     { title: "10 Mindful Minutes", speaker: "Andy Puddicombe", id: "qzR62JJCMBQ" },
     { title: "Emotional First Aid", speaker: "Guy Winch", id: "F2hc2FLOdhI" },
-    { title: "Resilience in Stress", speaker: "Simon Sinek", id: "o2M6uUpG4OQ" }
+    { title: "The JOURNEY of RESILIENCE", speaker: "Simon Sinek", id: "5p31Y8r83Is" }
 ];
 
 // ─── Free Books ───
@@ -258,7 +258,7 @@ export default function ResourcesPage() {
     });
 
     return (
-        <div className="min-h-screen relative pb-20 selection:bg-primary/10 bg-background/50">
+        <div className="min-h-screen relative pb-20 selection:bg-primary/10">
             {/* Ambient background accents */}
             <div className="fixed inset-0 pointer-events-none -z-10">
                 <div className="absolute top-0 right-0 w-[45%] h-[45%] bg-primary/5 blur-[150px] rounded-full" />
@@ -421,9 +421,9 @@ export default function ResourcesPage() {
                                     ) : (
                                         <>
                                             <img src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`} alt={v.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80" />
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="h-12 w-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white scale-100 group-hover:scale-125 transition-transform">
-                                                    <Play size={24} fill="white" />
+                                            <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+                                                <div className="h-12 w-12 rounded-full bg-primary/90 shadow-xl flex items-center justify-center text-white scale-100 group-hover:scale-110 transition-transform">
+                                                    <Play size={24} fill="currentColor" />
                                                 </div>
                                             </div>
                                         </>
