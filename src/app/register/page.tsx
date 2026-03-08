@@ -362,6 +362,7 @@ export default function RegisterPage() {
                             onClick={async () => {
                                 setLoading(true);
                                 try {
+                                    const { loginAnonymously } = (useAuth() as any);
                                     await loginAnonymously();
                                 } catch (err: any) {
                                     setError(err.message || "Anonymous login failed.");

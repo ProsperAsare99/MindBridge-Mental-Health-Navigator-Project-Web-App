@@ -205,7 +205,7 @@ export default function LoginPage() {
                                 }
                             }}
                             disabled={loading}
-                            className="w-full h-12 rounded-2xl flex items-center justify-center gap-3 border border-primary/5 hover:bg-primary/5 transition-all active:scale-95"
+                            className="w-full h-12 rounded-2xl flex items-center justify-center gap-3 border border-primary/10 hover:bg-muted/50 transition-all active:scale-95 bg-card/50"
                         >
                             <UserCircle className="h-5 w-5 text-muted-foreground" />
                             <span className="text-sm font-bold text-muted-foreground">Continue Anonymously</span>
