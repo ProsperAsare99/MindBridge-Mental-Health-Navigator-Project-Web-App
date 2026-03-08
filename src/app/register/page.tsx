@@ -28,7 +28,7 @@ export default function RegisterPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const { loginWithGoogle, loginAnonymously } = useAuth();
+    const { loginWithGoogle, loginAnonymously } = useAuth() as any;
 
 
     const handleRegister = async (e: React.FormEvent) => {
@@ -98,8 +98,8 @@ export default function RegisterPage() {
                         <Logo iconOnly size="xl" />
                     </div>
 
-                    <div className="mb-12">
-                        <div className="inline-flex mb-2">
+                    <div className="mb-12 text-center">
+                        <div className="inline-flex mb-4">
                             <Logo iconOnly size="md" />
                         </div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-foreground/90">Join MindBridge</h1>
@@ -362,8 +362,7 @@ export default function RegisterPage() {
                             onClick={async () => {
                                 setLoading(true);
                                 try {
-                                    const { loginAnonymously } = (useAuth() as any);
-                                    await loginAnonymously();
+                                    await (loginAnonymously as any)();
                                 } catch (err: any) {
                                     setError(err.message || "Anonymous login failed.");
                                 } finally {

@@ -15,7 +15,7 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const { loginWithGoogle, loginWithCredentials } = useAuth();
+    const { loginWithGoogle, loginWithCredentials, loginAnonymously } = useAuth() as any;
     const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
@@ -83,7 +83,7 @@ export default function LoginPage() {
                         <div className="inline-flex mb-4">
                             <Logo iconOnly size="md" />
                         </div>
-                        <h1 className="text-3xl font-extrabold tracking-tight text-foreground/90">Welcome Back</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-foreground/90">Join MindBridge</h1>
                         <p className="text-sm font-medium text-muted-foreground">Continue your wellness journey with MindBridge.</p>
                     </div>
 
@@ -197,7 +197,7 @@ export default function LoginPage() {
                             onClick={async () => {
                                 setLoading(true);
                                 try {
-                                    await (useAuth() as any).loginAnonymously();
+                                    await loginAnonymously();
                                 } catch (err: any) {
                                     setError(err.message || "Anonymous login failed.");
                                 } finally {

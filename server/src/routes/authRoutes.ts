@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, getMe, updateProfile, changePassword, verifyEmail, googleLogin, resendVerification, anonymousLogin } from '../controllers/authController';
+import { register, login, getMe, updateProfile, changePassword, verifyEmail, googleLogin, resendVerification, anonymousLogin, verifyToken } from '../controllers/authController';
 import { authenticateToken } from '../middleware/auth';
 
 const router = Router();
@@ -10,6 +10,7 @@ router.get('/verify', verifyEmail);
 router.post('/login', login);
 router.post('/google', googleLogin);
 router.post('/anonymous', anonymousLogin);
+router.get('/verify-token', authenticateToken, verifyToken);
 router.get('/me', authenticateToken, getMe);
 router.post('/profile', authenticateToken, updateProfile);
 router.post('/change-password', authenticateToken, changePassword);

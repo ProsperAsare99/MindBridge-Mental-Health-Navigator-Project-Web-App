@@ -69,7 +69,7 @@ export function useAuth() {
                 // We use NextAuth credentials provider internally for our custom session
                 await signIn("credentials", {
                     email: res.user.email,
-                    password: "anonymous_no_password", // The authorize callback handles this
+                    accessToken: res.token,
                     redirect: true,
                     callbackUrl: "/dashboard"
                 });
@@ -100,6 +100,7 @@ export function useAuth() {
         loading,
         logout,
         loginWithGoogle,
+        loginAnonymously,
         loginWithCredentials,
         isAuthenticated: !!session
     };

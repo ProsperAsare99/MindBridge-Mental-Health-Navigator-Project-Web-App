@@ -282,3 +282,20 @@ export const changePassword = async (req: AuthRequest, res: Response) => {
         res.status(500).json({ error: 'Server error changing password' });
     }
 };
+
+export const verifyToken = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.user) return res.status(401).json({ error: 'Invalid or expired token' });
+
+        const user = await prisma.user.findUnique({
+            where: { id: req.user.userId }
+        });
+
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        res.json({ user, token: req.header('Authorization')?.split(' ')[1] });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Token verification failed' });
+    }
+};

@@ -16,17 +16,42 @@ export const authOptions: NextAuthOptions = {
             credentials: {
                 email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" },
+                accessToken: { label: "Access Token", type: "text" },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials?.password) {
-                    throw new Error("Invalid credentials");
-                }
-
                 try {
+                    // Check if we have an explicit access token (e.g. from anonymous login)
+                    if (credentials?.accessToken) {
+                        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api'}/auth/verify-token`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${credentials.accessToken}`,
+                                'Content-Type': 'application/json'
+                            },
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Token verification failed");
+                        }
+
+                        const data = await response.json();
+                        return {
+                            id: data.user.id,
+                            email: data.user.email,
+                            name: data.user.name,
+                            isVerified: data.user.isVerified ?? true,
+                            accessToken: data.token || credentials.accessToken,
+                        };
+                    }
+
+                    if (!credentials?.email || !credentials?.password) {
+                        throw new Error("Invalid credentials");
+                    }
+
                     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api'}/auth/login`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(credentials),
+                        body: JSON.stringify({ email: credentials.email, password: credentials.password }),
                     });
 
                     if (!response.ok) {
