@@ -9,17 +9,19 @@ datasource db {
 }
 
 model User {
-  id           String       @id @default(uuid())
-  email        String       @unique
-  password     String?
-  name         String?
-  institution  String?
-  studentId    String?
-  course       String?
-  phoneNumber  String?
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  assessments  Assessment[]
+  id                 String       @id @default(uuid())
+  email              String       @unique
+  password           String?
+  name               String?
+  institution        String?
+  studentId          String?
+  course             String?
+  phoneNumber        String?
+  isVerified         Boolean      @default(false)
+  verificationToken  String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  assessments        Assessment[]
 }
 
 model Assessment {
@@ -33,4 +35,4 @@ model Assessment {
 }
 `;
 fs.writeFileSync('prisma/schema.prisma', content, { encoding: 'ascii' });
-console.log('Schema written using Node.js in ASCII (SQLite)');
+console.log('Schema updated to include verification fields (SQLite)');
