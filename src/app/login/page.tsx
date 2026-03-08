@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "@/lib/firebase";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Mail, Lock, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -23,30 +22,19 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const res = await api.post('/auth/login', { email, password });
+            api.setToken(res.token);
             router.push("/dashboard");
         } catch (err: any) {
             console.error(err);
-            if (err.code === 'auth/invalid-credential') {
-                setError("Invalid email or password.");
-            } else {
-                setError("Failed to sign in. Please try again.");
-            }
+            setError(err.message || "Failed to sign in. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
     const handleGoogleSignIn = async () => {
-        try {
-            await signInWithPopup(auth, googleProvider);
-            router.push("/dashboard");
-        } catch (error: any) {
-            console.error(error);
-            if (error.code !== 'auth/popup-closed-by-user') {
-                setError("Failed to sign in with Google.");
-            }
-        }
+        setError("Google Sign-In is temporarily disabled during backend migration.");
     };
 
     return (

@@ -1,19 +1,52 @@
 import { useState, useEffect } from 'react';
-import { auth } from '@/lib/firebase';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { api } from '@/lib/api';
+
+export interface User {
+    id: string;
+    email: string;
+    name: string;
+    institution?: string;
+    studentId?: string;
+    course?: string;
+    phoneNumber?: string;
+    displayName?: string; // For compatibility with existing UI
+}
 
 export function useAuth() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
+    const fetchUser = async () => {
+        const token = api.getToken();
+        if (!token) {
+            setUser(null);
             setLoading(false);
-        });
+            return;
+        }
 
-        return () => unsubscribe();
+        try {
+            const userData = await api.get('/auth/me');
+            setUser({
+                ...userData,
+                displayName: userData.name // Mapping for UI compatibility
+            });
+        } catch (error) {
+            console.error('Failed to fetch user:', error);
+            api.setToken(null);
+            setUser(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchUser();
     }, []);
 
-    return { user, loading };
+    const logout = () => {
+        api.setToken(null);
+        setUser(null);
+    };
+
+    return { user, loading, logout, refreshUser: fetchUser };
 }

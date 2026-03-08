@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  password      String?      // Optional for Google Auth users
+  name          String?
+  institution   String?
+  studentId     String?
+  course        String?
+  phoneNumber   String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  assessments   Assessment[]
+}
+
+model Assessment {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  type      String   // e.g., "PHQ-9"
+  score     Int
+  severity  String
+  timestamp DateTime @default(now())
+}
