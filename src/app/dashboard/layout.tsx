@@ -18,8 +18,7 @@ import {
     Heart
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
-import { auth } from "@/lib/firebase";
-import { signOut } from "firebase/auth";
+import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -36,13 +35,12 @@ export default function DashboardLayout({
 
     useEffect(() => {
         if (!loading && !user) {
-            router.push("/login");
+            router.replace("/login");
         }
     }, [user, loading, router]);
 
     const handleSignOut = async () => {
-        await signOut(auth);
-        router.push("/");
+        await signOut({ callbackUrl: "/" });
     };
 
     const navItems = [

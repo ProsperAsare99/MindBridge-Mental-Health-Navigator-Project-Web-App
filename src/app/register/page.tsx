@@ -131,7 +131,7 @@ export default function RegisterPage() {
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
-                                        placeholder="John Doe"
+                                        placeholder="Prosper Asare"
                                     />
                                 </div>
                             </div>

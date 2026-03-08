@@ -1,42 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Mail, ArrowRight, RefreshCcw } from "lucide-react";
-import ShaderBackground from "@/components/shader-background";
-import { sendEmailVerification, signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { api } from "@/lib/api";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
     const { user, loading } = useAuth();
+    const searchParams = useSearchParams();
+    const urlEmail = searchParams.get("email");
     const [sending, setSending] = useState(false);
     const [message, setMessage] = useState("");
     const router = useRouter();
 
+    const displayEmail = user?.email || urlEmail;
+
     useEffect(() => {
-        if (!loading && !user) {
-            router.push("/login"); // Redirect if not logged in
-        } else if (!loading && user && user.emailVerified) {
+        if (!loading && !user && !urlEmail) {
+            router.push("/login"); // Only redirect if neither session nor query email exists
+        } else if (!loading && user && (user as any).isVerified) {
             router.push("/dashboard"); // Redirect if already verified
         }
-    }, [user, loading, router]);
+    }, [user, loading, router, urlEmail]);
 
     const handleResend = async () => {
-        if (user) {
+        if (displayEmail) {
             setSending(true);
             try {
-                await sendEmailVerification(user);
+                await api.post('/auth/resend-verification', { email: displayEmail });
                 setMessage("Verification email sent! Please check your inbox.");
             } catch (error: any) {
                 console.error(error);
-                if (error.code === 'auth/too-many-requests') {
-                    setMessage("Too many requests. Please wait a bit.");
-                } else {
-                    setMessage("Failed to send email. Try again later.");
-                }
+                setMessage(error.message || "Failed to send email. Try again later.");
             } finally {
                 setSending(false);
             }
@@ -44,27 +43,20 @@ export default function VerifyEmailPage() {
     };
 
     const handleCheckVerification = async () => {
-        if (user) {
-            await user.reload(); // Refresh user state
-            if (user.emailVerified) {
-                router.push("/dashboard");
-            } else {
-                setMessage("Email not verified yet. Please check your inbox.");
-            }
-        }
+        // Redirect to login to force a session refresh
+        router.push("/login");
     };
 
     const handleSignOut = async () => {
-        await signOut(auth);
-        router.push("/login");
+        await signOut({ callbackUrl: "/login" });
     }
 
-    if (loading) return null; // Or a loading spinner
+    if (loading) return null;
 
     return (
         <div className="relative min-h-screen font-sans text-white selection:bg-indigo-300 selection:text-indigo-900 flex flex-col items-center justify-center p-4 overflow-hidden">
             {/* Background Shader */}
-            <ShaderBackground />
+            <div className="fixed inset-0 -z-10 bg-[#12141d]" />
 
             <div className="relative z-10 w-full max-w-md space-y-8 bg-white/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20 animate-in fade-in zoom-in duration-500 text-center">
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100/10 border border-white/10 mb-6">
@@ -81,8 +73,8 @@ export default function VerifyEmailPage() {
 
                 {message && (
                     <div className={`mt-4 p-3 text-sm rounded-md border backdrop-blur-sm ${message.includes("sent")
-                            ? "bg-green-500/20 text-green-100 border-green-500/30"
-                            : "bg-amber-500/20 text-amber-100 border-amber-500/30"
+                        ? "bg-green-500/20 text-green-100 border-green-500/30"
+                        : "bg-amber-500/20 text-amber-100 border-amber-500/30"
                         }`}>
                         {message}
                     </div>

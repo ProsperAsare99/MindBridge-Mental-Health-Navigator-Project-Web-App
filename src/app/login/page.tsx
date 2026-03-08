@@ -34,6 +34,10 @@ export default function LoginPage() {
             await loginWithCredentials(email, password);
             router.push("/dashboard");
         } catch (err: any) {
+            if (err.message && err.message.includes("PLEASE_VERIFY_EMAIL")) {
+                router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+                return;
+            }
             console.error('Login error detail:', err);
             setError(err.message || "Failed to sign in. Please try again.");
         } finally {

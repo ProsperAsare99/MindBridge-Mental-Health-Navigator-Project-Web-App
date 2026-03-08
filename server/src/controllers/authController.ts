@@ -131,6 +131,33 @@ export const googleLogin = async (req: Request, res: Response) => {
     }
 };
 
+export const resendVerification = async (req: Request, res: Response) => {
+    const { email } = req.body;
+
+    try {
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        if (user.isVerified) {
+            return res.status(400).json({ error: 'Email already verified' });
+        }
+
+        const verificationToken = crypto.randomBytes(32).toString('hex');
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { verificationToken }
+        });
+
+        await sendVerificationEmail(email, verificationToken);
+        res.json({ message: 'Verification email resent successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error during resending verification' });
+    }
+};
+
 export const verifyEmail = async (req: Request, res: Response) => {
     const { token } = req.query;
 

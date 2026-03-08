@@ -27,7 +27,17 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 
     try {
         const info = await transporter.sendMail(mailOptions);
-        console.log('Verification email sent:', nodemailer.getTestMessageUrl(info) || info.messageId);
+
+        const testUrl = nodemailer.getTestMessageUrl(info);
+        console.log('\n\n' + '='.repeat(50));
+        console.log('📧 VERIFICATION EMAIL SENT');
+        console.log(`To: ${email}`);
+        console.log(`URL: ${url}`);
+        if (testUrl) {
+            console.log(`View on Ethereal: ${testUrl}`);
+        }
+        console.log('='.repeat(50) + '\n\n');
+
         return true;
     } catch (error) {
         console.error('Error sending verification email:', error);
