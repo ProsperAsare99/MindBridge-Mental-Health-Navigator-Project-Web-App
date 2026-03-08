@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     callbacks: {
-        async session({ session, token }) {
+        async session({ session, token }: { session: any; token: any }) {
             if (token && session.user) {
                 (session.user as any).id = token.sub;
             }
@@ -64,10 +64,6 @@ export const authOptions: NextAuthOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
 };
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
 
 const handler = NextAuth(authOptions);
 

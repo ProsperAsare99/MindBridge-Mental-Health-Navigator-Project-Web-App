@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,14 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { loginWithGoogle, loginWithCredentials } = useAuth();
+    const [successMessage, setSuccessMessage] = useState("");
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('registered') === 'true') {
+            setSuccessMessage("Account created! Please check your email to verify your account before signing in.");
+        }
+    }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -85,6 +93,17 @@ export default function LoginPage() {
                         >
                             <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
                             {error}
+                        </motion.div>
+                    )}
+
+                    {successMessage && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="mb-6 p-4 bg-green-50 text-green-600 text-xs font-bold rounded-2xl border border-green-100 flex items-center gap-3"
+                        >
+                            <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
+                            {successMessage}
                         </motion.div>
                     )}
 
