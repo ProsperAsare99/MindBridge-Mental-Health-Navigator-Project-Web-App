@@ -66,7 +66,7 @@ function VerifyEmailContent() {
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight text-white drop-shadow-sm">Check your inbox</h2>
                     <p className="mt-4 text-sm text-indigo-100/80 leading-relaxed">
-                        We sent a verification link to <span className="font-semibold text-white">{user?.email}</span>.
+                        We sent a verification link to <span className="font-semibold text-white">{displayEmail}</span>.
                         Please click the link to verify your account.
                     </p>
                 </div>
@@ -100,10 +100,18 @@ function VerifyEmailContent() {
 
                 <div className="text-center text-sm pt-6 border-t border-white/10 mt-6">
                     <button onClick={handleSignOut} className="text-indigo-200/70 hover:text-white transition-colors">
-                        Sign out and complete later
+                        {user ? "Sign out and complete later" : "Go back to Login"}
                     </button>
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function VerifyEmailPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#12141d] flex items-center justify-center text-white">Loading...</div>}>
+            <VerifyEmailContent />
+        </Suspense>
     );
 }

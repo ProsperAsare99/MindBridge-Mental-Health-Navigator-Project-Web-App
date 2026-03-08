@@ -11,6 +11,7 @@ export interface User {
     course?: string;
     phoneNumber?: string;
     displayName?: string;
+    isVerified?: boolean;
 }
 
 export function useAuth() {
@@ -25,6 +26,7 @@ export function useAuth() {
                 email: session.user.email || "",
                 name: session.user.name || "",
                 displayName: session.user.name || "",
+                isVerified: (session.user as any).isVerified || false,
                 ...(session.user as any)
             });
         } else {

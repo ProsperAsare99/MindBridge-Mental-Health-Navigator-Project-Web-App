@@ -13,8 +13,11 @@ const transporter = nodemailer.createTransport({
 export const sendVerificationEmail = async (email: string, token: string) => {
     const url = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify?token=${token}`;
 
+    const fromName = process.env.EMAIL_FROM_NAME || 'MindBridge Navigator';
+    const fromEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || 'noreply@mindbridge.com';
+
     const mailOptions = {
-        from: '"MindBridge Navigator" <noreply@mindbridge.com>',
+        from: `"${fromName}" <${fromEmail}>`,
         to: email,
         subject: 'Verify your email address',
         html: `
