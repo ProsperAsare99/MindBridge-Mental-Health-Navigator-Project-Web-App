@@ -20,6 +20,7 @@ export function useAuth() {
     const loading = status === "loading";
 
     useEffect(() => {
+        console.log('useAuth: Hook effect triggered', { status, sessionUser: session?.user });
         if (session?.user) {
             setUser({
                 id: (session.user as any).id || "",
@@ -32,7 +33,7 @@ export function useAuth() {
         } else {
             setUser(null);
         }
-    }, [session]);
+    }, [session, status]);
 
     const logout = async () => {
         await signOut({ redirect: false });
