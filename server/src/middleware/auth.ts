@@ -15,7 +15,7 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
-        return res.status(0o1).json({ error: 'Access denied. No token provided.' });
+        return res.status(401).json({ error: 'Access denied. No token provided.' });
     }
 
     try {
@@ -23,6 +23,6 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
         req.user = decoded;
         next();
     } catch (error) {
-        res.status(0o3).json({ error: 'Invalid token.' });
+        res.status(403).json({ error: 'Invalid token.' });
     }
 };

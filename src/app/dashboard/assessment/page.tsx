@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
-import { db } from "@/lib/firebase";
-import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import {
     ChevronRight,
@@ -71,15 +70,15 @@ export default function AssessmentPage() {
 
         try {
             if (user) {
-                await addDoc(collection(db, `users/${user.uid}/assessments`), {
+                await api.post('/assessments', {
                     type: 'PHQ-9',
                     score: totalScore,
                     severity: severityLevel,
-                    timestamp: serverTimestamp(),
                 });
             }
             setShowResults(true);
         } catch (error) {
+            console.error('Failed to save assessment:', error);
             setShowResults(true);
         } finally {
             setIsSubmitting(false);

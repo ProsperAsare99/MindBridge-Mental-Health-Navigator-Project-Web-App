@@ -1,13 +1,9 @@
-import { Response } from 'express';
 import prisma from '../lib/prisma.js';
-import { AuthRequest } from '../middleware/auth.js';
-
-export const createAssessment = async (req: AuthRequest, res: Response) => {
+export const createAssessment = async (req, res) => {
     const { type, score, severity } = req.body;
-
     try {
-        if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
-
+        if (!req.user)
+            return res.status(401).json({ error: 'Not authenticated' });
         const assessment = await prisma.assessment.create({
             data: {
                 userId: req.user.userId,
@@ -16,26 +12,26 @@ export const createAssessment = async (req: AuthRequest, res: Response) => {
                 severity
             }
         });
-
         res.status(201).json(assessment);
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error creating assessment' });
     }
 };
-
-export const getUserAssessments = async (req: AuthRequest, res: Response) => {
+export const getUserAssessments = async (req, res) => {
     try {
-        if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
-
+        if (!req.user)
+            return res.status(401).json({ error: 'Not authenticated' });
         const assessments = await prisma.assessment.findMany({
             where: { userId: req.user.userId },
-            orderBy: { createdAt: 'desc' }
+            orderBy: { timestamp: 'desc' }
         });
-
         res.json(assessments);
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error fetching assessments' });
     }
 };
+//# sourceMappingURL=assessmentController.js.map

@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db, googleProvider } from "@/lib/firebase";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { ArrowLeft, Phone, Mail, User, Lock, School, GraduationCap, IdCard, ChevronRight } from "lucide-react";
@@ -50,113 +48,34 @@ export default function RegisterPage() {
         setLoading(true);
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            await updateProfile(userCredential.user, { displayName: name });
-            await setDoc(doc(db, "users", userCredential.user.uid), {
-                name,
+            const res = await api.post('/auth/register', {
                 email,
+                password,
+                name,
                 institution,
                 studentId,
-                course,
-                createdAt: new Date(),
+                course
             });
+            api.setToken(res.token);
             router.push("/dashboard");
         } catch (err: any) {
             console.error(err);
-            if (err.code === 'auth/email-already-in-use') setError("Email is already in use.");
-            else if (err.code === 'auth/weak-password') setError("Password should be at least 6 characters.");
-            else setError("Failed to create account.");
+            setError(err.message || "Failed to create account. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
-    const setupRecaptcha = () => {
-        if (!window.recaptchaVerifier) {
-            window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-                'size': 'invisible',
-            });
-        }
+    const handleSendOtp = () => {
+        setError("Phone registration is temporarily disabled during backend migration.");
     };
 
-    const handleSendOtp = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError("");
-        if (!phoneNumber) {
-            setError("Please enter a valid phone number.");
-            return;
-        }
-        setLoading(true);
-        setupRecaptcha();
-        const appVerifier = window.recaptchaVerifier;
-        let formattedNumber = phoneNumber.replace(/\s+/g, '');
-        if (formattedNumber.startsWith('0')) formattedNumber = '+233' + formattedNumber.substring(1);
-        else if (!formattedNumber.startsWith('+')) formattedNumber = '+233' + formattedNumber;
-
-        try {
-            const confirmation = await signInWithPhoneNumber(auth, formattedNumber, appVerifier);
-            setConfirmationResult(confirmation);
-            setOtpSent(true);
-        } catch (error: any) {
-            console.error(error);
-            setError("Failed to send code. Check your phone number.");
-        } finally {
-            setLoading(false);
-        }
+    const handleVerifyOtp = () => {
+        setError("Phone registration is temporarily disabled during backend migration.");
     };
 
-    const handleVerifyOtp = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError("");
-        setLoading(true);
-        if (!otp || !confirmationResult) {
-            setError("Please enter the verification code.");
-            setLoading(false);
-            return;
-        }
-        try {
-            const result = await confirmationResult.confirm(otp);
-            const user = result.user;
-            await updateProfile(user, { displayName: name });
-            await setDoc(doc(db, "users", user.uid), {
-                name,
-                email: "",
-                phoneNumber: user.phoneNumber,
-                institution,
-                studentId,
-                course,
-                createdAt: new Date(),
-            });
-            router.push("/dashboard");
-        } catch (error: any) {
-            console.error(error);
-            setError("Invalid verification code.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleGoogleSignIn = async () => {
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
-            const user = result.user;
-            const docRef = doc(db, "users", user.uid);
-            const docSnap = await getDoc(docRef);
-            if (!docSnap.exists()) {
-                await setDoc(docRef, {
-                    name: user.displayName,
-                    email: user.email,
-                    createdAt: new Date(),
-                    institution: "",
-                    course: "",
-                    studentId: ""
-                });
-            }
-            router.push("/dashboard");
-        } catch (error: any) {
-            console.error(error);
-            if (error.code !== 'auth/popup-closed-by-user') setError("Failed to sign in with Google.");
-        }
+    const handleGoogleSignIn = () => {
+        setError("Google Sign-In is temporarily disabled during backend migration.");
     };
 
     return (

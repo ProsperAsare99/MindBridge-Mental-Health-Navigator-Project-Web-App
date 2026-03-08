@@ -20,8 +20,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MOTIVATION_QUOTES = [
@@ -36,23 +34,9 @@ const MOTIVATION_QUOTES = [
 
 export default function DashboardPage() {
     const { user } = useAuth();
-    const [userProfile, setUserProfile] = useState<any>(null);
     const [quoteIndex, setQuoteIndex] = useState(0);
     const [greeting, setGreeting] = useState("");
     const router = useRouter();
-
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            if (user?.uid) {
-                const docRef = doc(db, "users", user.uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    setUserProfile(docSnap.data());
-                }
-            }
-        };
-        fetchUserProfile();
-    }, [user, router]);
 
     useEffect(() => {
         const hour = new Date().getHours();

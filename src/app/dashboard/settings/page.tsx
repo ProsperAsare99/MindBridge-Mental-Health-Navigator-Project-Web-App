@@ -2,14 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { db, auth } from "@/lib/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import {
-    updateProfile,
-    updatePassword,
-    EmailAuthProvider,
-    reauthenticateWithCredential,
-} from "firebase/auth";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import {
     User,
@@ -55,46 +48,31 @@ export default function SettingsPage() {
     const [passwordSuccess, setPasswordSuccess] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
-    const isPasswordUser = user?.providerData?.some((p) => p.providerId === "password");
+    const isPasswordUser = true; // All our custom backend users have passwords
 
     useEffect(() => {
-        const fetchProfile = async () => {
-            if (!user?.uid) return;
-            try {
-                const docRef = doc(db, "users", user.uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    setName(data.name || user.displayName || "");
-                    setEmail(user.email || "");
-                    setInstitution(data.institution || "");
-                    setStudentId(data.studentId || "");
-                    setCourse(data.course || "");
-                }
-            } catch (err) {
-                console.error("Error fetching profile:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProfile();
+        if (user) {
+            setName(user.name || user.displayName || "");
+            setEmail(user.email || "");
+            setInstitution(user.institution || "");
+            setStudentId(user.studentId || "");
+            setCourse(user.course || "");
+            setLoading(false);
+        }
     }, [user]);
 
     const handleSaveProfile = async () => {
-        if (!user?.uid) return;
         setSaving(true);
         setProfileError("");
         setProfileSuccess("");
 
         try {
-            const docRef = doc(db, "users", user.uid);
-            await updateDoc(docRef, { name, institution, studentId, course });
-            await updateProfile(user, { displayName: name });
-
+            await api.post('/auth/profile', { name, institution, studentId, course });
             setProfileSuccess("Profile updated successfully!");
             setTimeout(() => setProfileSuccess(""), 4000);
         } catch (err: any) {
-            setProfileError("Failed to update profile.");
+            console.error(err);
+            setProfileError(err.message || "Failed to update profile.");
         } finally {
             setSaving(false);
         }
@@ -115,17 +93,15 @@ export default function SettingsPage() {
 
         setChangingPassword(true);
         try {
-            const credential = EmailAuthProvider.credential(user!.email!, currentPassword);
-            await reauthenticateWithCredential(user!, credential);
-            await updatePassword(user!, newPassword);
-
+            await api.post('/auth/change-password', { currentPassword, newPassword });
             setPasswordSuccess("Password changed successfully!");
             setCurrentPassword("");
             setNewPassword("");
             setConfirmPassword("");
             setTimeout(() => setPasswordSuccess(""), 4000);
         } catch (err: any) {
-            setPasswordError("Incorrect current password or update failed.");
+            console.error(err);
+            setPasswordError(err.message || "Incorrect current password or update failed.");
         } finally {
             setChangingPassword(false);
         }
