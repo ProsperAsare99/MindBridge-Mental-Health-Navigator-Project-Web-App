@@ -1,4 +1,5 @@
-generator client {
+const fs = require('fs');
+const content = `generator client {
   provider = "prisma-client-js"
 }
 
@@ -33,3 +34,6 @@ model Assessment {
   severity  String
   createdAt DateTime @default(now())
 }
+`;
+fs.writeFileSync('prisma/schema.prisma', content, 'utf8');
+console.log('File written successfully');

@@ -1,0 +1,83 @@
+﻿node.exe : 
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (:String) [],    
+ RemoteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+[1m[31mError: [39m[
+22m[31m[1mPrisma 
+schema 
+validation[22m[39m - 
+(validate wasm)
+Error code: P1012
+[31m[1m[1;91merror[
+0m: [1mError 
+validating: This line 
+is invalid. It does 
+not start with any 
+known Prisma schema 
+keyword.[0m
+  [1;94m-->[0m  
+[4mschema.prisma:1[0m
+[1;94m   | [0m
+[1;94m   | [0m
+[1;94m 1 | [0m[1;91m
+´╗┐generator client 
+{[0m
+[1;94m 2 | [0m  
+provider = 
+"prisma-client-js"
+[1;94m   | [0m
+[1;91merror[0m: 
+[1mError validating: 
+This line is invalid. 
+It does not start with 
+any known Prisma 
+schema keyword.[0m
+  [1;94m-->[0m  
+[4mschema.prisma:2[0m
+[1;94m   | [0m
+[1;94m 1 | 
+[0m´╗┐generator 
+client {
+[1;94m 2 | [0m  
+[1;91mprovider = 
+"prisma-client-js"[0m
+[1;94m 3 | [0m}
+[1;94m   | [0m
+[1;91merror[0m: 
+[1mError validating: 
+This line is invalid. 
+It does not start with 
+any known Prisma 
+schema keyword.[0m
+  [1;94m-->[0m  
+[4mschema.prisma:3[0m
+[1;94m   | [0m
+[1;94m 2 | [0m  
+provider = 
+"prisma-client-js"
+[1;94m 3 | 
+[0m[1;91m}[0m
+[1;94m 4 | [0m
+[1;94m   | [0m
+
+Validation Error 
+Count: 3[22m[39m
+[Context: validate]
+
+Prisma CLI Version : 
+6.2.1
