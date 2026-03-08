@@ -17,6 +17,7 @@ model User {
   studentId          String?
   course             String?
   phoneNumber        String?
+  googleId           String?      @unique
   isVerified         Boolean      @default(false)
   verificationToken  String?
   createdAt          DateTime     @default(now())
@@ -35,4 +36,4 @@ model Assessment {
 }
 `;
 fs.writeFileSync('prisma/schema.prisma', content, { encoding: 'ascii' });
-console.log('Schema updated to include verification fields (SQLite)');
+console.log('Schema updated to include googleId (SQLite)');
