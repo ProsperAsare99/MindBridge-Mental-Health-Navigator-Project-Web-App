@@ -1,248 +1,190 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/use-auth";
-import { api } from "@/lib/api";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import {
-    ChevronRight,
-    ChevronLeft,
-    CheckCircle2,
-    AlertTriangle,
-    AlertCircle,
-    Info,
+    ClipboardList,
+    ArrowRight,
     Sparkles,
     ShieldCheck,
-    ArrowRight
+    Timer,
+    ChevronRight,
+    Search,
+    Filter
 } from "lucide-react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
-const QUESTIONS = [
-    { id: 1, text: "Little interest or pleasure in doing things" },
-    { id: 2, text: "Feeling down, depressed, or hopeless" },
-    { id: 3, text: "Trouble falling or staying asleep, or sleeping too much" },
-    { id: 4, text: "Feeling tired or having little energy" },
-    { id: 5, text: "Poor appetite or overeating" },
-    { id: 6, text: "Feeling bad about yourself — or that you are a failure" },
-    { id: 7, text: "Trouble concentrating on things" },
-    { id: 8, text: "Moving or speaking slowly, or restless movement" },
-    { id: 9, text: "Thoughts that you would be better off dead" },
-];
-
-const OPTIONS = [
-    { value: 0, label: "Not at all" },
-    { value: 1, label: "Several days" },
-    { value: 2, label: "More than half" },
-    { value: 3, label: "Nearly every day" },
+const assessments = [
+    {
+        id: "phq9",
+        title: "PHQ-9 (Depression Screen)",
+        description: "A standard clinical tool to help monitor the severity of depression and response to treatment.",
+        duration: "3-5 mins",
+        questions: 9,
+        category: "Clinical",
+        color: "text-blue-500",
+        bgColor: "bg-blue-500/10"
+    },
+    {
+        id: "gad7",
+        title: "GAD-7 (Anxiety Check)",
+        description: "A sensitive self-report tool for monitoring and measuring the severity of generalized anxiety disorder.",
+        duration: "2-4 mins",
+        questions: 7,
+        category: "Clinical",
+        color: "text-purple-500",
+        bgColor: "bg-purple-500/10"
+    },
+    {
+        id: "stress",
+        title: "Stress Level Evaluation",
+        description: "Understand your current stress landscape and identify key triggers in your daily life.",
+        duration: "5 mins",
+        questions: 12,
+        category: "Wellness",
+        color: "text-emerald-500",
+        bgColor: "bg-emerald-500/10"
+    },
+    {
+        id: "sleep",
+        title: "Sleep Quality Index",
+        description: "Analyze your restorative cycles and identify patterns that might be affecting your rest.",
+        duration: "4 mins",
+        questions: 10,
+        category: "Wellness",
+        color: "text-indigo-500",
+        bgColor: "bg-indigo-500/10"
+    }
 ];
 
 export default function AssessmentPage() {
-    const { user } = useAuth();
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<number[]>(new Array(QUESTIONS.length).fill(-1));
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showResults, setShowResults] = useState(false);
-    const [score, setScore] = useState(0);
-    const [severity, setSeverity] = useState("");
-
-    const handleOptionSelect = (value: number) => {
-        const newAnswers = [...answers];
-        newAnswers[currentQuestionIndex] = value;
-        setAnswers(newAnswers);
-
-        if (currentQuestionIndex < QUESTIONS.length - 1) {
-            setTimeout(() => setCurrentQuestionIndex(prev => prev + 1), 300);
-        }
-    };
-
-    const handleSubmit = async () => {
-        setIsSubmitting(true);
-        const totalScore = answers.reduce((a, b) => a + (b === -1 ? 0 : b), 0);
-        let severityLevel = totalScore <= 4 ? "None-minimal" :
-            totalScore <= 9 ? "Mild" :
-                totalScore <= 14 ? "Moderate" :
-                    totalScore <= 19 ? "Moderately Severe" : "Severe";
-
-        setScore(totalScore);
-        setSeverity(severityLevel);
-
-        try {
-            if (user) {
-                await api.post('/assessments', {
-                    type: 'PHQ-9',
-                    score: totalScore,
-                    severity: severityLevel,
-                });
-            }
-            setShowResults(true);
-        } catch (error) {
-            console.error('Failed to save assessment:', error);
-            setShowResults(true);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (showResults) {
-        return (
-            <div className="min-h-screen relative pb-20 pt-10 px-6 selection:bg-primary/10">
-                {/* Ambient background accents */}
-                <div className="fixed inset-0 pointer-events-none -z-10">
-                    <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />
-                    <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-secondary/5 blur-[150px] rounded-full" />
-                </div>
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="max-w-2xl mx-auto space-y-8"
-                >
-                    <div className="text-center space-y-4">
-                        <div className="inline-flex items-center justify-center h-20 w-20 bg-primary/10 rounded-[2rem] border border-primary/20 shadow-xl mb-4">
-                            <ShieldCheck className="w-10 h-10 text-primary" />
-                        </div>
-                        <h1 className="text-4xl font-extrabold tracking-tight text-foreground/90">Insight <span className="text-primary">Summary</span></h1>
-                        <p className="text-muted-foreground font-medium">Your private wellness snapshot is ready for review.</p>
-                    </div>
-
-                    <div className="bg-card glass rounded-[2.5rem] p-10 border border-primary/10 shadow-premium text-center">
-                        <div className="space-y-2 mb-10">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Wellness Index</p>
-                            <span className="text-8xl font-black text-primary block leading-none">{score}</span>
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-bold mt-4 shadow-sm">
-                                <Sparkles size={16} /> {severity} Symptoms
-                            </div>
-                        </div>
-
-                        <p className="text-foreground/70 leading-relaxed font-medium mb-10 text-lg">
-                            {severity === 'None-minimal' && "Your responses suggest you're maintaining a healthy emotional balance."}
-                            {severity === 'Mild' && "You're experiencing gentle fluctuations. Consider the mindfulness tools in your dashboard."}
-                            {severity === 'Moderate' && "There's notable weight on your spirit right now. Our self-help guides can offer support."}
-                            {(severity === 'Moderately Severe' || severity === 'Severe') && "You're navigating deep waters. Professional conversation is highly recommended."}
-                        </p>
-
-                        <div className="flex flex-col gap-4">
-                            <Link href="/dashboard">
-                                <Button className="w-full h-14 rounded-2xl font-bold shadow-xl shadow-primary/20">
-                                    Return to Dashboard
-                                </Button>
-                            </Link>
-                            {score > 9 && (
-                                <Link href="/dashboard/crisis">
-                                    <Button variant="secondary" className="w-full h-14 rounded-2xl font-bold transition-all">
-                                        Immediate Support <ArrowRight size={18} className="ml-2" />
-                                    </Button>
-                                </Link>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className="p-6 rounded-[2rem] bg-muted/30 border border-primary/10 flex gap-4 text-xs font-medium text-muted-foreground leading-relaxed">
-                        <Info className="w-5 h-5 flex-shrink-0 text-primary" />
-                        <p>This is a screening reflection tool, not a medical diagnosis. Your data is encrypted and private to your account.</p>
-                    </div>
-                </motion.div>
-            </div>
-        );
-    }
-
     return (
-        <div className="min-h-screen relative pb-20 pt-10 px-6 selection:bg-primary/10">
+        <div className="min-h-screen relative pb-20 selection:bg-primary/10">
             {/* Ambient background accents */}
             <div className="fixed inset-0 pointer-events-none -z-10">
-                <div className="absolute top-0 left-0 w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />
-                <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-secondary/5 blur-[150px] rounded-full" />
+                <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />
+                <div className="absolute bottom-1/2 left-0 w-[30%] h-[30%] bg-secondary/5 blur-[120px] rounded-full opacity-50" />
             </div>
 
-            <div className="max-w-3xl mx-auto space-y-12">
+            <div className="space-y-10 p-6 md:p-10 max-w-7xl mx-auto">
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-4"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
-                        Wellness Check
+                        <ClipboardList size={12} /> Diagnostic Center
                     </div>
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
-                        Private <span className="text-primary">Reflection</span>
+                        Personal <span className="text-primary">Assessments</span>
                     </h1>
-                    <div className="h-1.5 w-full bg-muted/40 rounded-full overflow-hidden mt-6">
-                        <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: `${(currentQuestionIndex / QUESTIONS.length) * 100}%` }}
-                            className="h-full bg-primary"
-                        />
-                    </div>
+                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                        Self-reflection is the first step toward growth. Use our clinically-validated tools to understand your internal landscape better.
+                    </p>
                 </motion.div>
 
-                <motion.div
-                    key={currentQuestionIndex}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="bg-card glass rounded-[2.5rem] p-10 md:p-14 border border-primary/10 shadow-premium space-y-12 relative overflow-hidden"
-                >
-                    <div className="absolute top-0 right-0 p-10 opacity-[0.02] pointer-events-none">
-                        <Sparkles size={250} />
+                {/* Filters/Search Row */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-card/50 glass p-4 rounded-3xl border border-primary/5">
+                    <div className="relative w-full sm:w-80">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+                        <input
+                            type="text"
+                            placeholder="Search assessments..."
+                            className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                        />
                     </div>
-
-                    <div className="relative z-10 space-y-4">
-                        <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Question {currentQuestionIndex + 1} of {QUESTIONS.length}</span>
-                        <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
-                            {QUESTIONS[currentQuestionIndex].text}
-                        </h2>
-                    </div>
-
-                    <div className="grid gap-4">
-                        {OPTIONS.map((opt) => (
-                            <button
-                                key={opt.value}
-                                onClick={() => handleOptionSelect(opt.value)}
-                                className={`w-full group text-left p-6 md:p-8 rounded-[2rem] border transition-all relative ${answers[currentQuestionIndex] === opt.value
-                                    ? "bg-primary border-primary shadow-xl shadow-primary/20 scale-[1.02]"
-                                    : "bg-muted/30 border-primary/5 hover:border-primary/30 hover:bg-muted/50"
-                                    }`}
-                            >
-                                <div className="flex items-center justify-between">
-                                    <span className={`text-base md:text-lg font-bold ${answers[currentQuestionIndex] === opt.value ? "text-white" : "text-foreground"}`}>
-                                        {opt.label}
-                                    </span>
-                                    {answers[currentQuestionIndex] === opt.value && (
-                                        <CheckCircle2 size={24} className="text-white" />
-                                    )}
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-
-                    <div className="flex items-center justify-between pt-8 border-t border-primary/10">
-                        <Button
-                            variant="ghost"
-                            onClick={() => setCurrentQuestionIndex(prev => prev - 1)}
-                            disabled={currentQuestionIndex === 0}
-                            className="h-12 px-6 rounded-xl font-bold text-muted-foreground hover:text-primary transition-colors"
-                        >
-                            <ChevronLeft className="mr-2" size={18} /> Previous
+                    <div className="flex gap-2 w-full sm:w-auto">
+                        <Button variant="outline" className="flex-1 sm:flex-none h-11 rounded-2xl gap-2 border-primary/5 hover:bg-primary/5">
+                            <Filter size={16} /> Categories
                         </Button>
+                        <Button variant="outline" className="flex-1 sm:flex-none h-11 rounded-2xl gap-2 border-primary/5 hover:bg-primary/5">
+                            Recent First
+                        </Button>
+                    </div>
+                </div>
 
-                        {currentQuestionIndex === QUESTIONS.length - 1 ? (
-                            <Button
-                                onClick={handleSubmit}
-                                disabled={answers[currentQuestionIndex] === -1 || isSubmitting}
-                                className="h-14 px-10 rounded-2xl font-bold shadow-xl shadow-primary/20"
-                            >
-                                {isSubmitting ? "Processing..." : "Finish reflection"} <ArrowRight className="ml-2" size={18} />
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {assessments.map((a, i) => (
+                        <motion.div
+                            key={a.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="group relative bg-card glass rounded-[2.5rem] p-8 border border-primary/10 shadow-premium hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 overflow-hidden"
+                        >
+                            {/* Decorative element */}
+                            <div className={`absolute -right-8 -top-8 w-24 h-24 rounded-full blur-3xl opacity-20 ${a.bgColor}`} />
+
+                            <div className="relative space-y-6">
+                                <div className="flex justify-between items-start">
+                                    <div className={`h-14 w-14 rounded-2xl ${a.bgColor} flex items-center justify-center ${a.color} transition-transform group-hover:scale-110 duration-500`}>
+                                        <ClipboardList size={28} strokeWidth={2.5} />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">{a.category}</span>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <h3 className="text-2xl font-black text-foreground/90 tracking-tight group-hover:text-primary transition-colors duration-300">
+                                        {a.title}
+                                    </h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed font-medium line-clamp-2">
+                                        {a.description}
+                                    </p>
+                                </div>
+
+                                <div className="flex items-center gap-6 text-muted-foreground">
+                                    <div className="flex items-center gap-2">
+                                        <Timer size={16} className="text-secondary" />
+                                        <span className="text-[11px] font-bold uppercase tracking-wider">{a.duration}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <ShieldCheck size={16} className="text-primary" />
+                                        <span className="text-[11px] font-bold uppercase tracking-wider">{a.questions} Qs</span>
+                                    </div>
+                                </div>
+
+                                <div className="pt-4 flex items-center justify-between">
+                                    <div className="flex -space-x-2">
+                                        {[1, 2, 3].map(i => (
+                                            <div key={i} className="h-6 w-6 rounded-full border-2 border-background bg-muted text-[8px] flex items-center justify-center font-bold">
+                                                {i}+
+                                            </div>
+                                        ))}
+                                        <span className="ml-4 text-[10px] text-muted-foreground font-bold flex items-center uppercase tracking-widest">
+                                            8.4k+ Taken
+                                        </span>
+                                    </div>
+
+                                    <Button className="h-12 px-6 rounded-2xl font-bold shadow-lg shadow-primary/10 flex items-center gap-2 group/btn">
+                                        Begin <ArrowRight size={16} className="transition-transform group-hover/btn:translate-x-1" />
+                                    </Button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Footer Banner */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="relative bg-primary/10 rounded-[3rem] p-10 md:p-14 overflow-hidden border border-primary/20"
+                >
+                    <div className="absolute top-0 right-0 p-12 opacity-10">
+                        <Sparkles size={120} className="text-primary" />
+                    </div>
+
+                    <div className="relative z-10 space-y-6 max-w-2xl text-center md:text-left">
+                        <h2 className="text-3xl font-extrabold tracking-tight">Your data is <span className="text-primary">private & safe.</span></h2>
+                        <p className="text-muted-foreground font-medium">
+                            MindBridge uses industry-standard encryption. Your assessment results are never shared and are used only to personalize your wellness path.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                            <Button variant="link" className="text-primary font-bold gap-2 p-0 h-auto">
+                                View Privacy Policy <ChevronRight size={16} />
                             </Button>
-                        ) : (
-                            <Button
-                                onClick={() => setCurrentQuestionIndex(prev => prev + 1)}
-                                disabled={answers[currentQuestionIndex] === -1}
-                                className="h-12 px-8 rounded-xl font-bold shadow-lg shadow-primary/10 transition-all active:scale-95"
-                            >
-                                Next <ChevronRight className="ml-1" size={18} />
-                            </Button>
-                        )}
+                        </div>
                     </div>
                 </motion.div>
             </div>

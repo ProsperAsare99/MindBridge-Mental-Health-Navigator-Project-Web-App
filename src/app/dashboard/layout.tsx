@@ -15,7 +15,8 @@ import {
     X,
     UserCircle,
     Settings,
-    Heart
+    Heart,
+    ClipboardList
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { signOut } from "next-auth/react";
@@ -48,6 +49,7 @@ export default function DashboardLayout({
     const navItems = [
         { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
         { href: "/dashboard/mood", label: "Mood Tracker", icon: BarChart3 },
+        { href: "/dashboard/assessment", label: "Assessment", icon: ClipboardList },
         { href: "/dashboard/resources", label: "Resources", icon: BookOpen },
         { href: "/dashboard/crisis", label: "Crisis Support", icon: Phone },
         { href: "/dashboard/settings", label: "Settings", icon: Settings },
