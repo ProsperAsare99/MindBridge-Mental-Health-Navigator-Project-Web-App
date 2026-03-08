@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { api } from '@/lib/api';
 
@@ -16,29 +16,25 @@ export interface User {
 
 export function useAuth() {
     const { data: session, status } = useSession();
-    const [user, setUser] = useState<User | null>(null);
     const loading = status === "loading";
 
-    useEffect(() => {
-        console.log('useAuth: Hook effect triggered', { status, sessionUser: session?.user });
-        if (session?.user) {
-            setUser({
-                id: (session.user as any).id || "",
-                email: session.user.email || "",
-                name: session.user.name || "",
-                displayName: session.user.name || "",
-                isVerified: (session.user as any).isVerified ?? true,
-                ...(session.user as any)
-            });
-        } else {
-            setUser(null);
-        }
+    const user = useMemo<User | null>(() => {
+        console.log('useAuth: deriving user', { status, sessionUser: session?.user });
+        if (!session?.user) return null;
+
+        return {
+            id: (session.user as any).id || "",
+            email: session.user.email || "",
+            name: session.user.name || "",
+            displayName: session.user.name || "",
+            isVerified: (session.user as any).isVerified ?? true,
+            ...(session.user as any)
+        };
     }, [session, status]);
 
     const logout = async () => {
         await signOut({ redirect: false });
         api.setToken(null);
-        setUser(null);
     };
 
     const loginWithGoogle = async (idToken?: string) => {
