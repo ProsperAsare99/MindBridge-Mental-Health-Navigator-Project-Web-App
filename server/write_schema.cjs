@@ -1,4 +1,5 @@
-generator client {
+const fs = require('fs');
+const content = `generator client {
   provider = "prisma-client-js"
 }
 
@@ -30,3 +31,6 @@ model Assessment {
   severity  String
   createdAt DateTime @default(now())
 }
+`;
+fs.writeFileSync('prisma/schema.prisma', content, { encoding: 'ascii' });
+console.log('Schema written using Node.js in ASCII (SQLite)');
