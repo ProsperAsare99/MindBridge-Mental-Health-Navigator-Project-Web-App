@@ -15,14 +15,12 @@ export const chatWithOracle = async (req: AuthRequest, res: Response) => {
 
     try {
         if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
-        console.log('Oracle: Request for user', req.user.userId);
 
         // 1. Fetch User Profile for personalization
         const user = await prisma.user.findUnique({
             where: { id: req.user.userId },
             select: { name: true }
         });
-        console.log('Oracle: User profile found', user?.name);
 
         // 2. Fetch User Context (recent moods)
         const recentMoods = await prisma.mood.findMany({
@@ -48,7 +46,7 @@ export const chatWithOracle = async (req: AuthRequest, res: Response) => {
             : 'No recent mood data recorded yet.';
 
         // 4. Prepare the sophisticated prompt
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         const systemInstructions = `You are "The Oracle", a highly empathetic, wise, and supportive AI mental health navigator for university students. 
 Your essence is a blend of a compassionate therapist, a wise mentor, and a calm sanctuary.
@@ -78,20 +76,16 @@ USER'S NEW MESSAGE:
 
 THE ORACLE'S RESPONSE:`;
 
-        console.log('Oracle: Generating content with Gemini...');
         const result = await model.generateContent(systemInstructions);
         const responseText = result.response.text();
-        console.log('Oracle: Gemini response received');
 
         // 5. Save messages to database
-        console.log('Oracle: Saving messages to DB...');
         await prisma.chatMessage.createMany({
             data: [
                 { userId: req.user.userId, content: message, role: 'user' },
                 { userId: req.user.userId, content: responseText, role: 'assistant' }
             ]
         });
-        console.log('Oracle: Messages saved');
 
         res.json({ response: responseText });
     } catch (error) {
