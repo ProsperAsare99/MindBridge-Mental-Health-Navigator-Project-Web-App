@@ -344,12 +344,12 @@ export default function CrisisPage() {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-card glass rounded-[2.5rem] p-6 border border-primary/10 shadow-premium group hover:border-red-500/20 transition-all cursor-pointer"
+                                className="glass rounded-[2.5rem] p-6 border border-border shadow-premium group hover:border-red-500/40 transition-all cursor-pointer"
                                 onClick={() => handleCall(line.number)}
                             >
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between">
-                                        <h4 className="font-bold text-foreground/90 text-sm">{line.name}</h4>
+                                        <h4 className="font-bold text-foreground/90 text-sm group-hover:text-red-500 transition-colors">{line.name}</h4>
                                         <div className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-red-500 group-hover:text-white transition-all">
                                             <Phone size={14} />
                                         </div>
@@ -390,7 +390,7 @@ export default function CrisisPage() {
                                 key={i}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="bg-card glass rounded-[2rem] border border-primary/5 shadow-premium overflow-hidden transition-all"
+                                className="glass rounded-[2rem] border border-border shadow-premium overflow-hidden transition-all"
                             >
                                 <button
                                     onClick={() => setExpandedUni(expandedUni === i ? null : i)}
@@ -417,15 +417,15 @@ export default function CrisisPage() {
                                             exit={{ height: 0, opacity: 0 }}
                                             className="px-6 pb-6 overflow-hidden"
                                         >
-                                            <div className="pt-4 border-t border-primary/5 space-y-4">
-                                                <p className="text-xs text-muted-foreground font-medium leading-relaxed">{uni.description}</p>
+                                            <div className="pt-4 border-t border-border space-y-4">
+                                                <p className="text-sm text-foreground/70 font-medium leading-relaxed italic">{uni.description}</p>
                                                 <div className="grid gap-3 sm:grid-cols-2">
                                                     {uni.contacts.map((c, j) => (
                                                         <Button
                                                             key={j}
                                                             onClick={() => handleCall(c.phone)}
                                                             variant="outline"
-                                                            className="h-12 justify-between rounded-xl border-primary/20 hover:bg-primary/10 font-bold group"
+                                                            className="h-12 justify-between rounded-xl border-border hover:bg-muted/80 font-bold group"
                                                         >
                                                             <span className="text-[10px] uppercase tracking-widest opacity-70">{c.label}</span>
                                                             <div className="flex items-center gap-2">
@@ -434,7 +434,7 @@ export default function CrisisPage() {
                                                             </div>
                                                         </Button>
                                                     ))}
-                                                    <a href={uni.website} target="_blank" rel="noreferrer" className="flex items-center justify-between px-4 h-12 rounded-xl border border-primary/10 bg-muted/20 hover:bg-muted/50 transition-all font-bold group">
+                                                    <a href={uni.website} target="_blank" rel="noreferrer" className="flex items-center justify-between px-4 h-12 rounded-xl border border-border bg-muted/20 hover:bg-muted/50 transition-all font-bold group">
                                                         <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Portal</span>
                                                         <Globe size={14} className="text-primary group-hover:scale-110 transition-transform" />
                                                     </a>
@@ -461,7 +461,7 @@ export default function CrisisPage() {
                                 href={resource.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="bg-card glass rounded-[2rem] p-6 border border-primary/10 shadow-premium group hover:border-primary/30 transition-all flex flex-col justify-between"
+                                className="glass rounded-[2rem] p-6 border border-border shadow-premium group hover:border-primary/40 transition-all flex flex-col justify-between"
                             >
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between">

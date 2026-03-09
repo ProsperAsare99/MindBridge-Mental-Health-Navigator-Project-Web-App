@@ -300,7 +300,7 @@ export default function ResourcesPage() {
                             placeholder="Find articles, tools, or support guides..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-card glass border border-primary/5 rounded-2xl py-5 pl-12 pr-6 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all shadow-premium"
+                            className="w-full bg-card/40 glass border border-border rounded-2xl py-5 pl-12 pr-6 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all shadow-premium text-foreground placeholder:text-muted-foreground"
                         />
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -308,7 +308,9 @@ export default function ResourcesPage() {
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className={`px-5 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all border ${activeCategory === cat ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-105" : "bg-foreground/5 text-muted-foreground border-primary/10 hover:border-primary/30 hover:bg-card"}`}
+                                className={`px-5 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all border ${activeCategory === cat
+                                    ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-105"
+                                    : "bg-muted/50 text-muted-foreground border-border hover:border-primary/30 hover:bg-muted/80"}`}
                             >
                                 {cat}
                             </button>
@@ -328,7 +330,7 @@ export default function ResourcesPage() {
                                     layout
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className={`bg-card glass rounded-[2rem] border border-primary/10 shadow-premium group overflow-hidden ${isExpanded ? "md:col-span-2 lg:col-span-3" : "hover:scale-[1.02] transition-transform"}`}
+                                    className={`glass rounded-[2rem] shadow-premium group overflow-hidden ${isExpanded ? "md:col-span-2 lg:col-span-3" : "hover:scale-[1.02] transition-transform"}`}
                                 >
                                     <div className="p-8">
                                         <div className="flex items-start justify-between">

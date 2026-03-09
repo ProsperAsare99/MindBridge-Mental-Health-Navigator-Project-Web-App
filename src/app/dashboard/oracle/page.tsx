@@ -169,11 +169,11 @@ export default function OraclePage() {
             </div>
 
             {/* Header */}
-            <header className="flex items-center justify-between p-5 mb-6 bg-background/60 backdrop-blur-3xl rounded-[2.5rem] border border-primary/10 shadow-premium">
+            <header className="flex items-center justify-between p-5 mb-6 glass rounded-[2.5rem] shadow-premium">
                 <div className="flex items-center space-x-5">
                     <div className="relative group">
                         <div className="absolute -inset-1 bg-gradient-to-tr from-primary to-purple-600 rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-1000"></div>
-                        <div className="relative w-12 h-12 rounded-2xl bg-black border border-white/10 flex items-center justify-center shadow-inner ring-1 ring-white/5">
+                        <div className="relative w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shadow-inner ring-1 ring-white/5">
                             <Sparkles className="text-primary w-6 h-6 animate-pulse" />
                         </div>
                     </div>
@@ -188,9 +188,9 @@ export default function OraclePage() {
                 <div className="flex items-center gap-3">
                     <Link href="/dashboard/mood">
                         <Button
-                            variant="ghost"
+                            variant="outline"
                             size="sm"
-                            className="rounded-2xl h-11 px-6 font-bold text-primary hover:bg-primary/5 transition-all text-xs uppercase cursor-pointer border border-primary/20"
+                            className="rounded-2xl h-11 px-6 font-bold text-xs uppercase"
                         >
                             <Activity className="w-4 h-4 mr-2" />
                             Vibe Check
@@ -200,7 +200,7 @@ export default function OraclePage() {
                         variant="ghost"
                         size="sm"
                         onClick={handleClearView}
-                        className="rounded-2xl h-11 px-6 font-bold text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-xs uppercase cursor-pointer"
+                        className="rounded-2xl h-11 px-6 font-bold text-muted-foreground hover:text-foreground text-xs uppercase cursor-pointer"
                     >
                         <PlusCircle className="w-4 h-4 mr-2" />
                         New Session
@@ -241,7 +241,7 @@ export default function OraclePage() {
                                             whileHover={{ y: -5, scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => handleSend(item.prompt)}
-                                            className="flex items-start p-6 text-left border border-primary/5 rounded-[2rem] bg-background/40 backdrop-blur-md hover:bg-background/60 hover:border-primary/20 hover:shadow-premium group"
+                                            className="flex items-start p-6 text-left border border-border rounded-[2rem] bg-card/40 backdrop-blur-md hover:bg-card/60 hover:border-primary/20 hover:shadow-premium group transition-all"
                                         >
                                             <div className={cn("p-3 rounded-2xl bg-gradient-to-br mr-4 mt-0.5", item.color)}>
                                                 <item.icon className="w-5 h-5 text-foreground group-hover:scale-110 transition-transform" />
@@ -271,19 +271,21 @@ export default function OraclePage() {
                                                 msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                                             )}>
                                                 <div className={cn(
-                                                    "w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg border relative",
-                                                    msg.role === 'user' ? "bg-primary text-white border-primary/20" : "bg-surface-above border-primary/10 text-primary"
+                                                    "w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg border relative transition-all",
+                                                    msg.role === 'user'
+                                                        ? "bg-primary text-primary-foreground border-primary/20"
+                                                        : "bg-surface-above border-border text-primary"
                                                 )}>
                                                     {msg.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-6 h-6" />}
                                                 </div>
 
                                                 <div className={cn(
-                                                    "relative p-6 px-7 rounded-[2.5rem] text-base shadow-premium",
+                                                    "relative p-6 px-7 rounded-[2.5rem] text-base shadow-premium transition-all",
                                                     msg.role === 'user'
                                                         ? "bg-primary/10 border border-primary/20 text-foreground rounded-tr-none"
-                                                        : "bg-background/80 backdrop-blur-2xl text-foreground/90 border border-primary/10 rounded-tl-none"
+                                                        : "bg-background border border-border text-foreground/90 rounded-tl-none dark:bg-surface-above/50"
                                                 )}>
-                                                    <div className="prose prose-invert prose-sm max-w-none">
+                                                    <div className="prose dark:prose-invert prose-sm max-w-none">
                                                         <ReactMarkdown>{msg.content}</ReactMarkdown>
                                                     </div>
                                                 </div>
@@ -340,19 +342,19 @@ export default function OraclePage() {
                     className="relative group max-w-4xl mx-auto"
                 >
                     <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/5 to-primary/20 rounded-[2.5rem] blur opacity-40 group-focus-within:opacity-100 transition duration-1000"></div>
-                    <div className="relative flex items-center bg-background/80 backdrop-blur-3xl border border-primary/20 rounded-[2.5rem] p-2 ring-1 ring-white/5 shadow-2xl">
+                    <div className="relative flex items-center glass rounded-[2.5rem] p-2 ring-1 ring-white/5 shadow-2xl">
                         <input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Share your thoughts..."
                             disabled={isLoading}
-                            className="flex-1 bg-transparent border-none py-4 px-6 text-base text-foreground placeholder:text-muted-foreground/50 focus:outline-none disabled:opacity-50 font-medium tracking-tight"
+                            className="flex-1 bg-transparent border-none py-4 px-6 text-base text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-50 font-medium tracking-tight"
                         />
                         <button
                             type="submit"
                             disabled={!input.trim() || isLoading}
-                            className="relative mr-1 h-14 px-8 rounded-[1.8rem] bg-primary font-black text-white hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/30 disabled:opacity-30"
+                            className="relative mr-1 h-14 px-8 rounded-[1.8rem] bg-primary font-black text-primary-foreground hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/30 disabled:opacity-30 flex items-center justify-center"
                         >
                             {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
                         </button>

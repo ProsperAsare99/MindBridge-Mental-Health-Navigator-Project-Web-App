@@ -131,7 +131,7 @@ export default function DashboardPage() {
                 {/* Main Stats Grid */}
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <motion.div variants={itemVariants} className="md:col-span-2">
-                        <Card className="h-full border-primary/5 bg-primary/5 overflow-hidden group">
+                        <Card className="h-full glass border-primary/20 bg-primary/5 overflow-hidden group">
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <BrainCircuit className="h-5 w-5 text-primary" />
@@ -166,7 +166,7 @@ export default function DashboardPage() {
 
                     <motion.div variants={itemVariants}>
                         <Link href="/dashboard/mood">
-                            <Card className="h-full group hover:shadow-2xl transition-all duration-500 border-accent/20 bg-accent/30 cursor-pointer overflow-hidden relative">
+                            <Card className="h-full group hover:shadow-2xl transition-all duration-500 glass border-secondary/20 bg-secondary/5 cursor-pointer overflow-hidden relative">
                                 <CardHeader className="pb-2">
                                     <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Mood Streak</CardTitle>
                                 </CardHeader>
@@ -180,7 +180,7 @@ export default function DashboardPage() {
                                             <Activity className="h-3 w-3" />
                                             {moodStats.count > 0 ? `${moodStats.count} total check-ins` : "Start checking in!"}
                                         </div>
-                                        <Button size="sm" variant="outline" className="rounded-xl w-full h-10 font-bold border-primary/20 hover:bg-primary/5 text-primary">
+                                        <Button size="sm" variant="outline" className="rounded-xl w-full h-10 font-bold">
                                             Check Trends
                                         </Button>
                                     </div>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
 
                     <motion.div variants={itemVariants}>
                         <Link href="/dashboard/assessment">
-                            <Card className="h-full border-secondary/10 bg-secondary/10 group hover:bg-secondary/20 transition-all duration-500 cursor-pointer overflow-hidden relative">
+                            <Card className="h-full glass border-primary/10 bg-primary/5 group hover:bg-primary/10 transition-all duration-500 cursor-pointer overflow-hidden relative">
                                 <CardHeader className="relative z-10">
                                     <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Wellness</CardTitle>
                                 </CardHeader>
@@ -226,13 +226,13 @@ export default function DashboardPage() {
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
                             {[
-                                { title: "Exam Stress Survival", time: "5 min", color: "bg-blue-50/50" },
-                                { title: "The Power of Sleep", time: "8 min", color: "bg-orange-50/50" }
+                                { title: "Exam Stress Survival", time: "5 min", color: "bg-primary/5" },
+                                { title: "The Power of Sleep", time: "8 min", color: "bg-secondary/5" }
                             ].map((res) => (
                                 <motion.div
                                     whileHover={{ y: -4 }}
                                     key={res.title}
-                                    className={`p-5 rounded-2xl border border-primary/5 ${res.color} group cursor-pointer hover:shadow-xl transition-all duration-500`}
+                                    className={`p-5 rounded-2xl border border-border glass ${res.color} group cursor-pointer hover:shadow-xl transition-all duration-500`}
                                 >
                                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{res.time} Read</span>
                                     <h4 className="text-base font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{res.title}</h4>
@@ -242,7 +242,7 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="md:col-span-2">
-                        <Card className="h-full border-red-500/10 bg-red-500/5 text-red-600 dark:text-red-400 shadow-xl shadow-red-500/5 relative overflow-hidden group">
+                        <Card className="h-full glass border-red-500/20 bg-red-500/5 text-red-600 dark:text-red-400 shadow-xl shadow-red-500/5 relative overflow-hidden group">
                             <CardHeader>
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <AlertCircle className="h-5 w-5" />
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                                     If you're feeling overwhelmed or in immediate distress, our crisis support team is here for you 24/7.
                                 </p>
                                 <Link href="/dashboard/crisis">
-                                    <Button className="w-full h-12 bg-red-600 hover:bg-red-700 text-white border-none rounded-2xl shadow-lg shadow-red-900/20">
+                                    <Button className="w-full h-12 bg-red-600 hover:bg-red-700 text-white dark:bg-red-500/20 dark:text-red-400 dark:border-red-500/50 border-none rounded-2xl shadow-lg shadow-red-900/20 active:scale-95 transition-all">
                                         Get Support Now
                                     </Button>
                                 </Link>

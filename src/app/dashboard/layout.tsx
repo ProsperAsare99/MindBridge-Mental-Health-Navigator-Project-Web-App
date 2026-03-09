@@ -98,20 +98,21 @@ export default function DashboardLayout({
 
             {/* Sidebar */}
             <aside className={cn(
-                "fixed inset-y-0 left-0 z-50 w-72 transform border-r border-primary/10 bg-background/80 backdrop-blur-2xl transition-all duration-500 ease-[0.23,1,0.32,1] lg:translate-x-0",
+                "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-primary/10 bg-background/80 backdrop-blur-2xl transition-all duration-500 ease-[0.23,1,0.32,1] lg:translate-x-0",
                 isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             )}>
-                <div className="flex h-20 items-center justify-between px-8">
+                <div className="flex h-20 items-center justify-between px-6">
                     <Link href="/dashboard" className="flex items-center gap-3 outline-none">
-                        <Logo size="md" />
+                        <Logo size="sm" />
                     </Link>
                     <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-muted-foreground hover:text-foreground">
                         <X className="h-5 w-5" />
                     </button>
                 </div>
 
-                <div className="flex flex-col justify-between h-[calc(100vh-5.5rem)] px-6 pb-8">
-                    <nav className="space-y-2 pt-6">
+                <div className="flex flex-col h-[calc(100vh-5rem)]">
+                    {/* Scrollable Nav Area */}
+                    <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 custom-scrollbar">
                         {navItems.map((item) => {
                             const isActive = pathname === item.href;
                             const Icon = item.icon;
@@ -121,34 +122,35 @@ export default function DashboardLayout({
                                     href={item.href}
                                     onClick={() => setIsSidebarOpen(false)}
                                     className={cn(
-                                        "flex items-center gap-4 rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300 relative group",
+                                        "flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 relative group",
                                         isActive
                                             ? "text-primary bg-primary/5 shadow-premium"
                                             : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
                                     )}
                                 >
-                                    <Icon className={cn("h-5 w-5", isActive ? "text-primary" : "opacity-60")} />
+                                    <Icon className={cn("h-4.5 w-4.5", isActive ? "text-primary border-primary" : "opacity-60")} />
                                     <span>{item.label}</span>
                                     {isActive && (
                                         <motion.div
                                             layoutId="nav-active"
-                                            className="absolute left-0 w-1 h-6 bg-primary rounded-full"
+                                            className="absolute left-0 w-1 h-5 bg-primary rounded-full"
                                         />
                                     )}
                                 </Link>
                             );
                         })}
-                    </nav>
+                    </div>
 
-                    <div className="space-y-6">
+                    {/* Bottom Fixed Area */}
+                    <div className="p-4 space-y-4 border-t border-primary/5">
                         {/* Profile Card Mini - Hidden for Anonymous Users */}
                         {!user.isAnonymous && (
                             <div
                                 onClick={() => router.push("/dashboard/profile")}
-                                className="p-4 rounded-3xl bg-muted/40 border border-primary/5 backdrop-blur-md hover:bg-muted/60 hover:border-primary/20 transition-all duration-300 cursor-pointer group"
+                                className="p-3 rounded-2xl bg-muted/20 border border-primary/5 backdrop-blur-md hover:bg-muted/40 hover:border-primary/10 transition-all duration-300 cursor-pointer group"
                             >
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className="h-10 w-10 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold group-hover:scale-105 transition-transform overflow-hidden">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="h-9 w-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold group-hover:scale-105 transition-transform overflow-hidden">
                                         {user.image ? (
                                             <img
                                                 src={user.image.startsWith('http') ? user.image : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000'}${user.image}`}
@@ -156,14 +158,14 @@ export default function DashboardLayout({
                                                 className="h-full w-full object-cover"
                                             />
                                         ) : (
-                                            user.displayName ? user.displayName[0].toUpperCase() : <UserCircle className="h-6 w-6" />
+                                            user.displayName ? user.displayName[0].toUpperCase() : <UserCircle className="h-5 w-5" />
                                         )}
                                     </div>
                                     <div className="flex-1 overflow-hidden">
-                                        <p className="truncate text-sm font-bold text-foreground group-hover:text-primary transition-colors">{user.displayName || "Student"}</p>
-                                        <div className="flex items-center gap-1.5">
-                                            <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Active</span>
+                                        <p className="truncate text-[13px] font-bold text-foreground group-hover:text-primary transition-colors">{user.displayName || "Student"}</p>
+                                        <div className="flex items-center gap-1">
+                                            <div className="h-1 w-1 rounded-full bg-green-500" />
+                                            <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none">Active</span>
                                         </div>
                                     </div>
                                 </div>
@@ -176,8 +178,8 @@ export default function DashboardLayout({
                                             setIsSidebarOpen(false);
                                         }}
                                     >
-                                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-xl">
-                                            <Settings className="h-4 w-4" />
+                                        <Button variant="ghost" size="sm" className="h-7 w-7 p-0 rounded-lg">
+                                            <Settings className="h-3.5 w-3.5" />
                                         </Button>
                                     </Link>
                                 </div>
@@ -186,10 +188,11 @@ export default function DashboardLayout({
 
                         <Button
                             variant="ghost"
-                            className="w-full justify-start text-red-500/80 hover:text-red-600 hover:bg-red-500/5 rounded-2xl h-12 font-bold px-6"
+                            size="sm"
+                            className="w-full justify-start text-red-500/70 hover:text-red-600 hover:bg-red-500/5 rounded-xl h-10 font-bold px-4 text-xs tracking-tight"
                             onClick={handleSignOut}
                         >
-                            <LogOut className="mr-3 h-4 w-4" />
+                            <LogOut className="mr-3 h-3.5 w-3.5" />
                             Sign Out
                         </Button>
                     </div>
@@ -197,7 +200,7 @@ export default function DashboardLayout({
             </aside>
 
             {/* Main Content */}
-            <div className="lg:pl-72 relative z-10 min-h-screen transition-all duration-500">
+            <div className="lg:pl-64 relative z-10 min-h-screen transition-all duration-500">
                 {/* Topbar (Mobile) */}
                 <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-background/80 px-8 backdrop-blur-2xl border-b border-primary/5 lg:hidden">
                     <button onClick={() => setIsSidebarOpen(true)} className="text-foreground">

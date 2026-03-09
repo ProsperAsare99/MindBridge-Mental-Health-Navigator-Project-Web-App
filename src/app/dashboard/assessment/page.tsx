@@ -274,20 +274,20 @@ export default function AssessmentPage() {
                             </div>
 
                             {/* Filters/Search Row */}
-                            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-card/50 glass p-4 rounded-3xl border border-primary/5">
-                                <div className="relative w-full sm:w-80">
-                                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+                            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center glass p-4 rounded-3xl border border-border">
+                                <div className="relative w-full sm:w-80 group">
+                                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" size={16} />
                                     <input
                                         type="text"
                                         placeholder="Search assessments..."
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-3.5 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all text-foreground placeholder:text-muted-foreground/60"
                                     />
                                 </div>
                                 <div className="flex gap-2 w-full sm:w-auto">
-                                    <Button variant="outline" className="flex-1 sm:flex-none h-11 rounded-2xl gap-2 border-primary/5 hover:bg-primary/5">
+                                    <Button variant="outline" className="flex-1 sm:flex-none h-11 rounded-2xl gap-2 active:scale-95 transition-transform">
                                         <Filter size={16} /> Categories
                                     </Button>
-                                    <Button variant="outline" className="flex-1 sm:flex-none h-11 rounded-2xl gap-2 border-primary/5 hover:bg-primary/5">
+                                    <Button variant="outline" className="flex-1 sm:flex-none h-11 rounded-2xl gap-2 active:scale-95 transition-transform">
                                         Recent First
                                     </Button>
                                 </div>
@@ -300,17 +300,24 @@ export default function AssessmentPage() {
                                         key={a.id}
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.1 }}
-                                        className="group relative bg-card glass rounded-[2.5rem] p-8 border border-primary/10 shadow-premium hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 overflow-hidden"
+                                        whileHover={{ y: -8 }}
+                                        transition={{
+                                            delay: i * 0.1,
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 20
+                                        }}
+                                        className="group relative glass rounded-[2.5rem] p-8 shadow-premium hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden cursor-pointer"
+                                        onClick={() => handleStart(a.id)}
                                     >
                                         <div className={`absolute -right-8 -top-8 w-24 h-24 rounded-full blur-3xl opacity-20 ${a.bgColor}`} />
 
                                         <div className="relative space-y-6">
                                             <div className="flex justify-between items-start">
-                                                <div className={`h-14 w-14 rounded-2xl ${a.bgColor} flex items-center justify-center ${a.color} transition-transform group-hover:scale-110 duration-500`}>
+                                                <div className={`h-14 w-14 rounded-2xl ${a.bgColor} flex items-center justify-center ${a.color} transition-transform group-hover:scale-110 duration-500 bg-opacity-20`}>
                                                     <ClipboardList size={28} strokeWidth={2.5} />
                                                 </div>
-                                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">{a.category}</span>
+                                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{a.category}</span>
                                             </div>
 
                                             <div className="space-y-3">
@@ -488,16 +495,18 @@ export default function AssessmentPage() {
 
                                 <div className="grid grid-cols-1 gap-4">
                                     {activeAssessment.options.map((opt: any) => (
-                                        <button
+                                        <motion.button
                                             key={opt.value}
                                             onClick={() => handleAnswer(opt.value)}
-                                            className="group relative h-16 flex items-center justify-between px-8 rounded-2xl bg-muted/30 border border-primary/5 hover:border-primary/20 hover:bg-primary/5 transition-all text-left overflow-hidden active:scale-[0.98]"
+                                            whileHover={{ y: -2, backgroundColor: "rgba(var(--primary-rgb), 0.1)" }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className="group relative h-16 flex items-center justify-between px-8 rounded-2xl bg-muted/40 border border-border hover:border-primary/40 transition-all text-left overflow-hidden"
                                         >
                                             <span className="font-bold text-foreground/80 group-hover:text-primary transition-colors">{opt.label}</span>
-                                            <div className="h-4 w-4 rounded-full border-2 border-muted group-hover:border-primary group-hover:bg-primary/20 transition-all flex items-center justify-center">
-                                                <div className="h-1.5 w-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <div className="h-5 w-5 rounded-full border-2 border-border group-hover:border-primary group-hover:bg-primary/20 transition-all flex items-center justify-center">
+                                                <div className="h-2 w-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                                             </div>
-                                        </button>
+                                        </motion.button>
                                     ))}
                                 </div>
                             </div>

@@ -90,11 +90,11 @@ export default function ProfilePage() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="bg-card glass rounded-[2.5rem] overflow-hidden border border-primary/10 shadow-premium"
+                    className="glass rounded-[2.5rem] overflow-hidden border border-border shadow-premium"
                 >
                     <div className="h-32 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/5 relative">
-                        <div className="absolute -bottom-12 left-8 p-1 rounded-[2rem] bg-background border border-primary/10 shadow-xl">
-                            <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-3xl font-black overflow-hidden relative group">
+                        <div className="absolute -bottom-12 left-8 p-1 rounded-[2rem] bg-background border border-border shadow-xl">
+                            <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-border flex items-center justify-center text-primary text-3xl font-black overflow-hidden relative group">
                                 {avatarUrl ? (
                                     <img src={avatarUrl} alt={user.name} className="h-full w-full object-cover" />
                                 ) : (
@@ -109,7 +109,7 @@ export default function ProfilePage() {
                             <button
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={uploading}
-                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center shadow-lg border-2 border-background hover:scale-110 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
+                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg border-2 border-background hover:scale-110 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
                             >
                                 <Camera size={14} />
                             </button>
@@ -122,7 +122,7 @@ export default function ProfilePage() {
                                 <h2 className="text-2xl font-black text-foreground/90">{user.displayName || user.name || "Student"}</h2>
                                 <div className="flex items-center gap-4 text-muted-foreground font-medium text-xs">
                                     <div className="flex items-center gap-1.5 uppercase tracking-widest font-bold">
-                                        <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
+                                        <div className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
                                         {user.isAnonymous ? "Anonymous Mode" : "Verified User"}
                                     </div>
                                     <div className="flex items-center gap-1.5">
@@ -132,7 +132,7 @@ export default function ProfilePage() {
                             </div>
                             <Button
                                 onClick={() => router.push("/dashboard/settings")}
-                                className="rounded-2xl font-bold h-12 px-6 shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-95 transition-all group"
+                                className="rounded-2xl font-bold h-12 px-6"
                             >
                                 <Edit3 size={16} className="mr-2 group-hover:rotate-12 transition-transform" />
                                 Edit Profile
@@ -141,14 +141,14 @@ export default function ProfilePage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {profileFields.map((field, i) => (
-                                <div key={i} className="p-6 rounded-[2rem] bg-muted/30 border border-primary/5 hover:border-primary/20 transition-all group">
+                                <div key={i} className="p-6 rounded-[2rem] bg-muted/40 glass border border-border hover:border-primary/20 transition-all group">
                                     <div className="flex items-center gap-4">
-                                        <div className="h-10 w-10 rounded-xl bg-background border border-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                                        <div className="h-10 w-10 rounded-xl bg-background border border-border flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                                             <field.icon size={18} />
                                         </div>
                                         <div className="space-y-0.5">
                                             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{field.label}</p>
-                                            <p className="text-sm font-bold text-foreground/80">{field.value}</p>
+                                            <p className="text-sm font-bold text-foreground/90">{field.value}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@ export default function ProfilePage() {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="bg-primary/5 border border-primary/10 rounded-[2.5rem] p-8 space-y-6 relative overflow-hidden group"
+                        className="glass border border-border rounded-[2.5rem] p-8 space-y-6 relative overflow-hidden group"
                     >
                         <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:rotate-12 transition-transform duration-700">
                             <Sparkles size={80} />

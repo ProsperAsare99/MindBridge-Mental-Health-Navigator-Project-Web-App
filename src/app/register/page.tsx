@@ -93,7 +93,7 @@ export default function RegisterPage() {
                     Back
                 </Link>
 
-                <div className="bg-card glass rounded-[3rem] p-10 md:p-14 border border-primary/10 shadow-premium relative overflow-hidden">
+                <div className="glass rounded-[3rem] p-10 md:p-14 border border-border shadow-premium relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
                         <Logo iconOnly size="xl" />
                     </div>
@@ -106,16 +106,19 @@ export default function RegisterPage() {
                         <p className="text-sm font-medium text-muted-foreground mt-2">Start your journey towards better mental well-being.</p>
                     </div>
 
-                    {error && (
-                        <motion.div
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="mb-8 p-4 bg-red-50 text-red-600 text-xs font-bold rounded-2xl border border-red-100 flex items-center gap-3"
-                        >
-                            <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
-                            {error}
-                        </motion.div>
-                    )}
+                    <AnimatePresence>
+                        {error && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="mb-8 p-4 bg-red-500/10 text-red-600 text-xs font-bold rounded-2xl border border-red-500/20 flex items-center gap-3 overflow-hidden"
+                            >
+                                <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
+                                {error}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
 
                     <form className="space-y-8" onSubmit={isPhoneSignup ? (otpSent ? handleVerifyOtp : handleSendOtp) : handleRegister}>
                         <div className="grid md:grid-cols-2 gap-6">
@@ -128,7 +131,7 @@ export default function RegisterPage() {
                                         required
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                         placeholder="Prosper Asare"
                                     />
                                 </div>
@@ -192,7 +195,7 @@ export default function RegisterPage() {
                                         required
                                         value={studentId}
                                         onChange={(e) => setStudentId(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                         placeholder="10XXXXXX"
                                     />
                                 </div>
@@ -207,7 +210,7 @@ export default function RegisterPage() {
                                         required
                                         value={course}
                                         onChange={(e) => setCourse(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                         placeholder="Computer Science"
                                     />
                                 </div>
@@ -234,7 +237,7 @@ export default function RegisterPage() {
                                                         required
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
-                                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
+                                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                                         placeholder="name@example.com"
                                                     />
                                                 </div>
@@ -248,7 +251,7 @@ export default function RegisterPage() {
                                                         required
                                                         value={password}
                                                         onChange={(e) => setPassword(e.target.value)}
-                                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
+                                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                                         placeholder="••••••••"
                                                     />
                                                 </div>
@@ -259,7 +262,7 @@ export default function RegisterPage() {
                                                 <span className="flex items-center gap-2">Create Account <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" /></span>
                                             )}
                                         </Button>
-                                        <button type="button" onClick={() => setIsPhoneSignup(true)} className="w-full text-xs font-bold text-primary active:scale-95 transition-all">
+                                        <button type="button" onClick={() => setIsPhoneSignup(true)} className="w-full text-xs font-bold text-primary active:scale-95 transition-all outline-none">
                                             Use Phone Number instead
                                         </button>
                                     </motion.div>
@@ -283,7 +286,7 @@ export default function RegisterPage() {
                                                             required
                                                             value={phoneNumber}
                                                             onChange={(e) => setPhoneNumber(e.target.value)}
-                                                            className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all"
+                                                            className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                                             placeholder="024 000 0000"
                                                         />
                                                     </div>
@@ -301,7 +304,7 @@ export default function RegisterPage() {
                                                         required
                                                         value={otp}
                                                         onChange={(e) => setOtp(e.target.value)}
-                                                        className="w-64 mx-auto block bg-muted/30 border border-primary/5 rounded-2xl py-4 px-4 text-center text-xl font-bold tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:tracking-normal placeholder:font-medium placeholder:text-muted-foreground/30"
+                                                        className="w-64 mx-auto block bg-muted/50 border border-border rounded-2xl py-4 px-4 text-center text-xl font-bold tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:tracking-normal placeholder:font-medium placeholder:text-muted-foreground/30"
                                                         placeholder="000000"
                                                     />
                                                 </div>
@@ -310,7 +313,7 @@ export default function RegisterPage() {
                                                 </Button>
                                             </div>
                                         )}
-                                        <button type="button" onClick={() => setIsPhoneSignup(false)} className="w-full text-xs font-bold text-primary active:scale-95 transition-all">
+                                        <button type="button" onClick={() => setIsPhoneSignup(false)} className="w-full text-xs font-bold text-primary active:scale-95 transition-all outline-none">
                                             Return to Email Registration
                                         </button>
                                     </motion.div>
@@ -321,20 +324,20 @@ export default function RegisterPage() {
 
                     <div className="relative my-10">
                         <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t border-primary/5" />
+                            <span className="w-full border-t border-border" />
                         </div>
                         <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em]">
-                            <span className="bg-card px-6 text-muted-foreground/30">Or join with</span>
+                            <span className="bg-background px-6 text-muted-foreground/50">Or join with</span>
                         </div>
                     </div>
 
-                    <div className="flex justify-center">
+                    <div className="flex flex-col sm:flex-row gap-3">
                         <Button
                             type="button"
                             variant="outline"
                             onClick={handleGoogleLogin}
                             disabled={loading}
-                            className="w-full h-12 rounded-2xl flex items-center justify-center gap-3 border-primary/10 hover:bg-primary/5 transition-colors"
+                            className="flex-1 h-12 rounded-2xl flex items-center justify-center gap-3 border-border hover:bg-muted/80 transition-colors"
                         >
                             <svg className="h-5 w-5" viewBox="0 0 24 24">
                                 <path
@@ -350,7 +353,7 @@ export default function RegisterPage() {
                                     fill="#FBBC05"
                                 />
                                 <path
-                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                                     fill="#EA4335"
                                 />
                             </svg>
@@ -358,7 +361,7 @@ export default function RegisterPage() {
                         </Button>
                         <Button
                             type="button"
-                            variant="ghost"
+                            variant="outline"
                             onClick={async () => {
                                 setLoading(true);
                                 try {
@@ -370,14 +373,14 @@ export default function RegisterPage() {
                                 }
                             }}
                             disabled={loading}
-                            className="w-full h-12 rounded-2xl flex items-center justify-center gap-3 border border-primary/5 hover:bg-primary/5 transition-all active:scale-95"
+                            className="flex-1 h-12 rounded-2xl flex items-center justify-center gap-3 border-border hover:bg-muted/80 transition-all active:scale-95"
                         >
                             <UserCircle className="h-5 w-5 text-muted-foreground" />
-                            <span className="text-sm font-bold text-muted-foreground">Continue Anonymously</span>
+                            <span className="text-sm font-bold text-muted-foreground">Anonymous</span>
                         </Button>
                     </div>
 
-                    <div className="text-center mt-12 pt-8 border-t border-primary/5">
+                    <div className="text-center mt-12 pt-8 border-t border-border">
                         <p className="text-xs font-medium text-muted-foreground">
                             Already have an account? <Link href="/login" className="text-primary font-bold hover:underline underline-offset-4">Sign in here</Link>
                         </p>

@@ -5,15 +5,15 @@ import { motion, HTMLMotionProps } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.95]",
+    "inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-sm font-bold tracking-tight transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
     {
         variants: {
             variant: {
-                primary: "bg-primary text-primary-foreground shadow-premium hover:bg-primary/90 hover:shadow-lg",
-                secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-                outline: "border-2 border-primary/20 bg-transparent hover:bg-primary/5 text-primary",
-                ghost: "hover:bg-primary/10 text-primary",
-                glass: "bg-foreground/5 backdrop-blur-md border border-foreground/10 text-foreground hover:bg-foreground/15",
+                primary: "bg-primary text-primary-foreground shadow-premium hover:brightness-110 hover:shadow-lg",
+                secondary: "bg-secondary text-secondary-foreground hover:brightness-110",
+                outline: "border-2 border-primary/30 bg-transparent hover:bg-primary/10 text-primary hover:border-primary/50",
+                ghost: "hover:bg-primary/15 text-primary",
+                glass: "glass text-foreground hover:bg-foreground/[0.08] dark:hover:bg-white/10",
             },
             size: {
                 sm: "h-9 px-4 rounded-xl text-xs",

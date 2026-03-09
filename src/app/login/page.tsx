@@ -74,7 +74,7 @@ export default function LoginPage() {
                     Back to Home
                 </Link>
 
-                <div className="bg-card glass rounded-[2.5rem] p-10 border border-primary/10 shadow-premium relative overflow-hidden">
+                <div className="glass rounded-[2.5rem] p-10 border border-border shadow-premium relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
                         <Logo iconOnly size="xl" />
                     </div>
@@ -87,27 +87,31 @@ export default function LoginPage() {
                         <p className="text-sm font-medium text-muted-foreground">Continue your wellness journey with MindBridge.</p>
                     </div>
 
-                    {error && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="mb-6 p-4 bg-red-50 text-red-600 text-xs font-bold rounded-2xl border border-red-100 flex items-center gap-3"
-                        >
-                            <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
-                            {error}
-                        </motion.div>
-                    )}
+                    <AnimatePresence>
+                        {error && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="mb-6 p-4 bg-red-500/10 text-red-600 text-xs font-bold rounded-2xl border border-red-500/20 flex items-center gap-3 overflow-hidden"
+                            >
+                                <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
+                                {error}
+                            </motion.div>
+                        )}
 
-                    {successMessage && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="mb-6 p-4 bg-green-50 text-green-600 text-xs font-bold rounded-2xl border border-green-100 flex items-center gap-3"
-                        >
-                            <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
-                            {successMessage}
-                        </motion.div>
-                    )}
+                        {successMessage && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="mb-6 p-4 bg-green-500/10 text-green-600 text-xs font-bold rounded-2xl border border-green-500/20 flex items-center gap-3 overflow-hidden"
+                            >
+                                <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
+                                {successMessage}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
 
                     <form className="space-y-6" onSubmit={handleLogin}>
                         <div className="space-y-4">
@@ -120,7 +124,7 @@ export default function LoginPage() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all placeholder:text-muted-foreground/40"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                         placeholder="name@example.com"
                                     />
                                 </div>
@@ -134,7 +138,7 @@ export default function LoginPage() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all placeholder:text-muted-foreground/40"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground/50"
                                         placeholder="••••••••"
                                     />
                                 </div>
@@ -156,20 +160,20 @@ export default function LoginPage() {
 
                     <div className="relative my-8">
                         <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t border-primary/5" />
+                            <span className="w-full border-t border-border" />
                         </div>
                         <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em]">
-                            <span className="bg-card px-4 text-muted-foreground/40">Or continue with</span>
+                            <span className="bg-background px-4 text-muted-foreground">Or continue with</span>
                         </div>
                     </div>
 
-                    <div className="flex justify-center">
+                    <div className="flex flex-col sm:flex-row gap-3">
                         <Button
                             type="button"
                             variant="outline"
                             onClick={handleGoogleLogin}
                             disabled={loading}
-                            className="w-full h-12 rounded-2xl flex items-center justify-center gap-3 border-primary/10 hover:bg-primary/5 transition-colors"
+                            className="flex-1 h-12 rounded-2xl flex items-center justify-center gap-3 border-border hover:bg-muted/80 transition-colors"
                         >
                             <svg className="h-5 w-5" viewBox="0 0 24 24">
                                 <path
@@ -193,7 +197,7 @@ export default function LoginPage() {
                         </Button>
                         <Button
                             type="button"
-                            variant="ghost"
+                            variant="outline"
                             onClick={async () => {
                                 setLoading(true);
                                 try {
@@ -205,10 +209,10 @@ export default function LoginPage() {
                                 }
                             }}
                             disabled={loading}
-                            className="w-full h-12 rounded-2xl flex items-center justify-center gap-3 border border-primary/10 hover:bg-muted/50 transition-all active:scale-95 bg-card/50"
+                            className="flex-1 h-12 rounded-2xl flex items-center justify-center gap-3 border-border hover:bg-muted/80 transition-all active:scale-95"
                         >
                             <UserCircle className="h-5 w-5 text-muted-foreground" />
-                            <span className="text-sm font-bold text-muted-foreground">Continue Anonymously</span>
+                            <span className="text-sm font-bold text-muted-foreground">Anonymous</span>
                         </Button>
                     </div>
 

@@ -48,13 +48,13 @@ export function Select({
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
                 className={cn(
-                    "w-full bg-muted/30 dark:bg-card border border-primary/20 rounded-2xl py-4 pl-12 pr-10 text-sm font-medium text-left transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 flex items-center justify-between text-foreground",
-                    isOpen && "ring-2 ring-primary/20 border-primary/20 shadow-lg shadow-primary/5"
+                    "w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-10 text-sm font-medium text-left transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/20 flex items-center justify-between text-foreground placeholder:text-muted-foreground/50",
+                    isOpen && "ring-2 ring-primary/20 border-primary/20 shadow-premium"
                 )}
             >
                 <div className="flex items-center gap-3 truncate">
-                    {icon && <span className="text-muted-foreground">{icon}</span>}
-                    <span className={cn("truncate font-semibold", !selectedOption && "text-muted-foreground")}>
+                    {icon && <span className="text-muted-foreground group-focus-within:text-primary transition-colors">{icon}</span>}
+                    <span className={cn("truncate font-semibold", !selectedOption && "text-muted-foreground/50")}>
                         {selectedOption ? selectedOption.label : placeholder}
                     </span>
                 </div>
@@ -73,11 +73,11 @@ export function Select({
                         animate={{ opacity: 1, y: 5, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.15, ease: "easeOut" }}
-                        className="absolute z-[100] w-full mt-2 bg-white dark:bg-[#1c1c1e] border-2 border-primary rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden"
+                        className="absolute z-[100] w-full mt-2 glass border border-border rounded-2xl shadow-premium overflow-hidden"
                     >
-                        <div className="max-h-60 overflow-y-auto py-2 bg-white dark:bg-[#1c1c1e]">
-                            <div className="px-5 py-1 text-[10px] font-black text-primary/50 uppercase tracking-widest border-b border-primary/10 mb-2">
-                                MindBridge Custom Select
+                        <div className="max-h-60 overflow-y-auto py-2">
+                            <div className="px-5 py-2 text-[10px] font-black text-primary/50 uppercase tracking-[0.2em] border-b border-border/50 mb-2">
+                                MindBridge Selection
                             </div>
                             {options.map((option) => (
                                 <button
@@ -88,15 +88,15 @@ export function Select({
                                         setIsOpen(false);
                                     }}
                                     className={cn(
-                                        "w-full px-5 py-4 text-sm font-black text-left transition-all flex items-center justify-between",
+                                        "w-full px-5 py-3.5 text-sm font-bold text-left transition-all flex items-center justify-between group",
                                         value === option.value
-                                            ? "bg-primary text-white"
-                                            : "text-black dark:text-white hover:bg-primary/20 hover:text-primary"
+                                            ? "bg-primary text-primary-foreground"
+                                            : "text-foreground hover:bg-primary/10 hover:text-primary"
                                     )}
                                 >
                                     <span className="truncate">{option.label}</span>
                                     {value === option.value && (
-                                        <Check className="h-5 w-5 text-white" />
+                                        <Check className="h-4 w-4 text-primary-foreground" />
                                     )}
                                 </button>
                             ))}

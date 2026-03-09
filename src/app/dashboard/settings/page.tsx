@@ -145,7 +145,7 @@ export default function SettingsPage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="bg-card glass rounded-[2.5rem] p-8 md:p-12 border border-primary/10 shadow-premium space-y-8 relative overflow-hidden"
+                        className="glass rounded-[2.5rem] p-8 md:p-12 border border-border shadow-premium space-y-8 relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 p-10 opacity-[0.02] pointer-events-none">
                             <User size={200} />
@@ -170,7 +170,7 @@ export default function SettingsPage() {
                                         type="text"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                                         placeholder="Add name"
                                     />
                                 </div>
@@ -183,7 +183,7 @@ export default function SettingsPage() {
                                         type="email"
                                         value={email}
                                         readOnly
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold cursor-not-allowed"
+                                        className="w-full bg-muted/20 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold cursor-not-allowed text-muted-foreground"
                                     />
                                 </div>
                             </div>
@@ -195,7 +195,7 @@ export default function SettingsPage() {
                                         type="text"
                                         value={institution}
                                         onChange={(e) => setInstitution(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                                         placeholder="Add institution"
                                     />
                                 </div>
@@ -208,28 +208,28 @@ export default function SettingsPage() {
                                         type="text"
                                         value={studentId}
                                         onChange={(e) => setStudentId(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                                         placeholder="Add student ID"
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-4 flex flex-col md:flex-row items-center gap-6 border-t border-primary/10 mt-6 pt-10">
+                        <div className="pt-4 flex flex-col md:flex-row items-center gap-6 border-t border-border mt-6 pt-10">
                             <Button
                                 onClick={handleSaveProfile}
                                 disabled={saving}
-                                className="h-14 px-10 rounded-2xl font-bold shadow-xl shadow-primary/20"
+                                className="h-14 px-10 rounded-2xl font-bold"
                             >
                                 <Save className="mr-2 h-4 w-4" /> {saving ? "Updating..." : "Update Profile"}
                             </Button>
                             {profileSuccess && (
-                                <p className="text-xs font-bold text-secondary flex items-center gap-2">
+                                <p className="text-xs font-bold text-secondary flex items-center gap-2 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20">
                                     <CheckCircle2 size={16} /> {profileSuccess}
                                 </p>
                             )}
                             {profileError && (
-                                <p className="text-xs font-bold text-red-500 flex items-center gap-2">
+                                <p className="text-xs font-bold text-red-500 flex items-center gap-2 bg-red-500/10 px-4 py-2 rounded-full border border-red-500/20">
                                     <AlertCircle size={16} /> {profileError}
                                 </p>
                             )}
@@ -242,7 +242,7 @@ export default function SettingsPage() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-card glass rounded-[2.5rem] p-8 md:p-12 border border-primary/10 shadow-premium space-y-8"
+                            className="glass rounded-[2.5rem] p-8 md:p-12 border border-border shadow-premium space-y-8"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="h-14 w-14 rounded-2xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
@@ -257,30 +257,30 @@ export default function SettingsPage() {
                             <div className="grid gap-6 md:grid-cols-3">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Current Secret</label>
-                                    <div className="relative">
+                                    <div className="relative group">
                                         <input
                                             type={showCurrentPassword ? "text" : "password"}
                                             value={currentPassword}
                                             onChange={(e) => setCurrentPassword(e.target.value)}
-                                            className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10"
+                                            className="w-full bg-muted/50 border border-border rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 text-foreground placeholder:text-muted-foreground"
                                             placeholder="••••••••"
                                         />
-                                        <button onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                                        <button onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors">
                                             {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                         </button>
                                     </div>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">New Secret</label>
-                                    <div className="relative">
+                                    <div className="relative group">
                                         <input
                                             type={showNewPassword ? "text" : "password"}
                                             value={newPassword}
                                             onChange={(e) => setNewPassword(e.target.value)}
-                                            className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10"
+                                            className="w-full bg-muted/50 border border-border rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 text-foreground placeholder:text-muted-foreground"
                                             placeholder="••••••••"
                                         />
-                                        <button onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                                        <button onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors">
                                             {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                         </button>
                                     </div>
@@ -291,13 +291,13 @@ export default function SettingsPage() {
                                         type="password"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="w-full bg-muted/30 border border-primary/5 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10"
+                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 text-foreground placeholder:text-muted-foreground"
                                         placeholder="••••••••"
                                     />
                                 </div>
                             </div>
 
-                            <div className="pt-4 flex flex-col md:flex-row items-center gap-6 border-t border-primary/10 mt-6 pt-10">
+                            <div className="pt-4 flex flex-col md:flex-row items-center gap-6 border-t border-border mt-6 pt-10">
                                 <Button
                                     onClick={handleChangePassword}
                                     disabled={changingPassword || !currentPassword}
@@ -306,8 +306,8 @@ export default function SettingsPage() {
                                 >
                                     <Lock className="mr-2 h-4 w-4" /> {changingPassword ? "Updating..." : "Change Password"}
                                 </Button>
-                                {passwordSuccess && <p className="text-xs font-bold text-secondary flex items-center gap-2"><CheckCircle2 size={16} /> {passwordSuccess}</p>}
-                                {passwordError && <p className="text-xs font-bold text-red-500 flex items-center gap-2"><AlertCircle size={16} /> {passwordError}</p>}
+                                {passwordSuccess && <p className="text-xs font-bold text-secondary flex items-center gap-2 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20"><CheckCircle2 size={16} /> {passwordSuccess}</p>}
+                                {passwordError && <p className="text-xs font-bold text-red-500 flex items-center gap-2 bg-red-500/10 px-4 py-2 rounded-full border border-red-500/20"><AlertCircle size={16} /> {passwordError}</p>}
                             </div>
                         </motion.div>
                     )}

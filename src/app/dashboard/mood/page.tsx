@@ -154,10 +154,10 @@ export default function MoodPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-card glass rounded-[2rem] p-6 border border-primary/5 shadow-premium group hover:scale-[1.02] transition-all"
+                                className="glass rounded-[2rem] p-6 shadow-premium group hover:scale-[1.02] transition-all"
                             >
                                 <div className="flex items-center gap-4">
-                                    <div className={`h-12 w-12 rounded-2xl bg-muted/50 flex items-center justify-center ${stat.color}`}>
+                                    <div className={`h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center ${stat.color}`}>
                                         <Icon size={20} />
                                     </div>
                                     <div>
@@ -176,7 +176,7 @@ export default function MoodPage() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-card glass rounded-[2.5rem] p-8 md:p-10 border border-primary/10 shadow-premium space-y-10"
+                            className="glass rounded-[2.5rem] p-8 md:p-10 shadow-premium space-y-10"
                         >
                             <div className="space-y-2">
                                 <h3 className="text-2xl font-bold text-foreground/90">How is your spirit today?</h3>
@@ -191,9 +191,9 @@ export default function MoodPage() {
                                         <button
                                             key={m.value}
                                             onClick={() => setSelectedMood(m.value)}
-                                            className={`flex flex-col items-center gap-4 p-4 rounded-[2rem] transition-all group relative active:scale-95 ${isSelected
-                                                ? "bg-primary/10 border-2 border-primary shadow-lg shadow-primary/10"
-                                                : "bg-muted/30 border-2 border-transparent hover:border-primary/20 hover:bg-muted/50"
+                                            className={`flex flex-col items-center gap-4 p-4 rounded-[2rem] transition-all group relative active:scale-95 border-2 ${isSelected
+                                                ? "bg-primary/20 border-primary shadow-lg shadow-primary/10"
+                                                : "bg-muted/50 border-transparent hover:border-primary/30 hover:bg-muted/80"
                                                 }`}
                                         >
                                             <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 ${isSelected ? m.color : "text-muted-foreground"}`}>
@@ -213,13 +213,14 @@ export default function MoodPage() {
                                     placeholder="What's on your mind?..."
                                     value={note}
                                     onChange={(e) => setNote(e.target.value)}
-                                    className="w-full bg-muted/30 border border-primary/5 rounded-[2rem] p-6 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all min-h-[120px] resize-none shadow-inner"
+                                    className="w-full bg-muted/50 border border-border rounded-[2rem] p-6 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all min-h-[120px] resize-none shadow-inner text-foreground placeholder:text-muted-foreground"
                                 />
                             </div>
 
                             <Button
                                 onClick={handleLogEntry}
-                                className="h-14 w-full rounded-2xl font-bold shadow-xl shadow-primary/20 scale-100 active:scale-[0.98] transition-transform"
+                                size="lg"
+                                className="w-full rounded-2xl font-bold shadow-xl shadow-primary/20 transition-transform"
                             >
                                 Log Entry <ArrowUpRight className="ml-2" size={18} />
                             </Button>
@@ -231,16 +232,16 @@ export default function MoodPage() {
                         <motion.div
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="bg-card glass rounded-[2.5rem] p-8 border border-primary/10 shadow-premium h-full space-y-8"
+                            className="glass rounded-[2.5rem] p-8 shadow-premium h-full space-y-8"
                         >
                             <div className="flex items-center justify-between">
-                                <h3 className="font-bold text-foreground/90">Activity Flow</h3>
-                                <div className="flex bg-muted rounded-full p-1 border border-primary/5">
+                                <h3 className="font-bold text-foreground/90 tracking-tight">Activity Flow</h3>
+                                <div className="flex bg-muted/80 rounded-full p-1 border border-border">
                                     {["Week", "Month"].map((t) => (
                                         <button
                                             key={t}
                                             onClick={() => setActiveTimeRange(t.toLowerCase() as any)}
-                                            className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${activeTimeRange === t.toLowerCase() ? "bg-card shadow-sm text-primary ring-1 ring-primary/10" : "text-muted-foreground hover:text-foreground"
+                                            className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${activeTimeRange === t.toLowerCase() ? "bg-card shadow-sm text-primary ring-1 ring-primary/20" : "text-muted-foreground hover:text-foreground"
                                                 }`}
                                         >
                                             {t}
