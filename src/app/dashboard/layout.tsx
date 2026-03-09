@@ -139,64 +139,26 @@ export default function DashboardLayout({
                     </nav>
 
                     <div className="space-y-6">
-                        {/* Profile Card Mini - Hidden for Anonymous Users */}
-                        <div
-                            onClick={() => router.push("/dashboard/profile")}
-                            className="p-4 rounded-3xl bg-muted/40 border border-primary/5 backdrop-blur-md hover:bg-muted/60 hover:border-primary/20 transition-all duration-300 cursor-pointer group"
-                        >
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="h-10 w-10 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold group-hover:scale-105 transition-transform overflow-hidden">
-                                    {user.image ? (
-                                        <img
-                                            src={user.image.startsWith('http') ? user.image : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000'}${user.image}`}
-                                            alt={user.name}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    ) : (
-                                        user.displayName ? user.displayName[0].toUpperCase() : <UserCircle className="h-6 w-6" />
-                                    )}
-                                </div>
-                                <div className="flex-1 overflow-hidden">
-                                    <p className="truncate text-sm font-bold text-foreground group-hover:text-primary transition-colors">{user.displayName || "Student"}</p>
-                                    <div className="flex items-center gap-1.5">
-                                        <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Active</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-between pt-2 border-t border-primary/5">
-                                <ModeToggle />
-                                <Link
-                                    href="/dashboard/settings"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setIsSidebarOpen(false);
-                                    }}
-                                >
-                                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-xl">
-                                        <Settings className="h-4 w-4" />
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                        )}
-
-                        <Button
-                            variant="ghost"
-                            className="w-full justify-start text-red-500/80 hover:text-red-600 hover:bg-red-500/5 rounded-2xl h-12 font-bold px-6"
-                            onClick={handleSignOut}
-                        >
-                            <LogOut className="mr-3 h-4 w-4" />
-                            Sign Out
-                        </Button>
                     </div>
                 </div>
-            </aside>
+                        )}
 
-            {/* Main Content */}
-            <div className="lg:pl-72 relative z-10 min-h-screen transition-all duration-500">
-                {/* Topbar (Mobile) */}
-                <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-background/80 px-8 backdrop-blur-2xl border-b border-primary/5 lg:hidden">
+                <Button
+                    variant="ghost"
+                    className="w-full justify-start text-red-500/80 hover:text-red-600 hover:bg-red-500/5 rounded-2xl h-12 font-bold px-6"
+                    onClick={handleSignOut}
+                >
+                    <LogOut className="mr-3 h-4 w-4" />
+                    Sign Out
+                </Button>
+        </div>
+                </div >
+            </aside >
+
+        {/* Main Content */ }
+        < div className = "lg:pl-72 relative z-10 min-h-screen transition-all duration-500" >
+            {/* Topbar (Mobile) */ }
+            < header className = "sticky top-0 z-30 flex h-20 items-center justify-between bg-background/80 px-8 backdrop-blur-2xl border-b border-primary/5 lg:hidden" >
                     <button onClick={() => setIsSidebarOpen(true)} className="text-foreground">
                         <Menu className="h-6 w-6" />
                     </button>
@@ -205,13 +167,13 @@ export default function DashboardLayout({
                             <Heart className="h-4 w-4 text-white" />
                         </div>
                     </div>
-                    <div className="w-6" /> {/* Spacer */}
-                </header>
+                    <div className="w-6" /> {/* Spacer */ }
+                </header >
 
-                <main className="animate-in fade-in duration-1000">
-                    {children}
-                </main>
-            </div>
-        </div>
+        <main className="animate-in fade-in duration-1000">
+            {children}
+        </main>
+            </div >
+        </div >
     );
 }
