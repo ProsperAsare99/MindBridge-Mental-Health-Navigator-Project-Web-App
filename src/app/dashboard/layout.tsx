@@ -48,9 +48,9 @@ export default function DashboardLayout({
         { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
         { href: "/dashboard/mood", label: "Mood Tracker", icon: BarChart3 },
         { href: "/dashboard/assessment", label: "Assessment", icon: ClipboardList },
-        { href: "/dashboard/profile", label: "My Profile", icon: UserCircle },
         { href: "/dashboard/resources", label: "Resources", icon: BookOpen },
         { href: "/dashboard/crisis", label: "Crisis Support", icon: Phone },
+        { href: "/dashboard/profile", label: "My Profile", icon: UserCircle },
         { href: "/dashboard/settings", label: "Settings", icon: Settings },
     ];
 
