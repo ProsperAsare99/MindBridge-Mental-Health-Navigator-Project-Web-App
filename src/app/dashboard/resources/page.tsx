@@ -250,6 +250,18 @@ export default function ResourcesPage() {
     const [expandedTool, setExpandedTool] = useState<number | null>(null);
     const [expandedBook, setExpandedBook] = useState<number | null>(null);
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
+    const [resourceStatus, setResourceStatus] = useState<string | null>(null);
+
+    const handleAccessResource = (title: string, author: string, url?: string) => {
+        setResourceStatus(`Accessing "${title}"...`);
+        const searchUrl = url || `https://www.google.com/search?q=${encodeURIComponent(`${title} ${author} book pdf free`)}`;
+
+        setTimeout(() => {
+            setResourceStatus(`"${title}" is ready! Opening in a new tab...`);
+            window.open(searchUrl, '_blank');
+            setTimeout(() => setResourceStatus(null), 3000);
+        }, 1500);
+    };
 
     const filteredArticles = ARTICLES.filter((a) => {
         const matchesCat = activeCategory === "All" || a.category === activeCategory;
@@ -480,13 +492,33 @@ export default function ResourcesPage() {
                                                 </div>
                                             ))}
                                         </div>
-                                        <Button className="w-full h-11 rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg shadow-primary/10">Access Full Guide</Button>
+                                        <Button
+                                            onClick={() => handleAccessResource(book.title, book.author)}
+                                            className="w-full h-11 rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg shadow-primary/10 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                                        >
+                                            Access Full Guide
+                                        </Button>
                                     </motion.div>
                                 )}
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {/* Floating Notification */}
+                <AnimatePresence>
+                    {resourceStatus && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-primary/90 text-white px-6 py-3 rounded-2xl shadow-2xl backdrop-blur-md flex items-center gap-3 border border-white/20"
+                        >
+                            <Sparkles className="h-4 w-4 animate-pulse" />
+                            <span className="text-xs font-bold uppercase tracking-widest">{resourceStatus}</span>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Footer Quote */}
                 <div className="text-center pt-8 space-y-4">
