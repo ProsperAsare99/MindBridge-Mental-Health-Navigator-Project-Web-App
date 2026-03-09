@@ -98,9 +98,6 @@ export const getChatHistory = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
 
-        console.log('Oracle: Fetching history for user:', req.user.userId);
-        console.log('Prisma Models available:', Object.keys(prisma).filter(k => !k.startsWith('_') && !k.startsWith('$')));
-
         const history = await prisma.chatMessage.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'asc' },
