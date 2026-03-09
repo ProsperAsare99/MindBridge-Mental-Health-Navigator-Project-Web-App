@@ -12,10 +12,12 @@ export interface User {
     phoneNumber?: string;
     displayName?: string;
     isVerified?: boolean;
+    isAnonymous?: boolean;
+    image?: string;
 }
 
 export function useAuth() {
-    const { data: session, status } = useSession();
+    const { data: session, status, update } = useSession();
     const loading = status === "loading";
 
     const user = useMemo<User | null>(() => {
@@ -27,6 +29,8 @@ export function useAuth() {
             name: session.user.name || "",
             displayName: session.user.name || "",
             isVerified: (session.user as any).isVerified ?? true,
+            isAnonymous: (session.user as any).isAnonymous ?? false,
+            image: (session.user as any).image || "",
             ...(session.user as any)
         };
     }, [session, status]);
@@ -44,6 +48,27 @@ export function useAuth() {
     const logout = async () => {
         await signOut({ redirect: false });
         api.setToken(null);
+    };
+
+    const updateAvatar = async (file: File) => {
+        const formData = new FormData();
+        formData.append('avatar', file);
+
+        try {
+            const res = await api.post('/auth/avatar', formData);
+            // Force session update
+            await update({
+                ...session,
+                user: {
+                    ...(session?.user || {}),
+                    image: res.imageUrl
+                }
+            });
+            return res;
+        } catch (error) {
+            console.error('Avatar update failed:', error);
+            throw error;
+        }
     };
 
     const loginWithGoogle = async (idToken?: string) => {
@@ -99,6 +124,7 @@ export function useAuth() {
         user,
         loading,
         logout,
+        updateAvatar,
         loginWithGoogle,
         loginAnonymously,
         loginWithCredentials,

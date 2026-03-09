@@ -3,6 +3,7 @@
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useState, useRef } from "react";
 import {
     User,
     Mail,
@@ -14,15 +15,32 @@ import {
     MapPin,
     Calendar,
     Sparkles,
-    Edit3
+    Edit3,
+    Loader2
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function ProfilePage() {
-    const { user } = useAuth();
+    const { user, updateAvatar } = useAuth();
     const router = useRouter();
+    const [uploading, setUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     if (!user) return null;
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploading(true);
+        try {
+            await updateAvatar(file);
+        } catch (error) {
+            console.error('Upload failed:', error);
+        } finally {
+            setUploading(false);
+        }
+    };
 
     const profileFields = [
         { icon: Mail, label: "Email Address", value: user.email },
@@ -32,8 +50,21 @@ export default function ProfilePage() {
         { icon: Phone, label: "Phone Number", value: user.phoneNumber || "Not specified" },
     ];
 
+    const avatarUrl = user.image
+        ? (user.image.startsWith('http') ? user.image : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000'}${user.image}`)
+        : null;
+
     return (
         <div className="min-h-screen relative pb-20 selection:bg-primary/10">
+            {/* Hidden File Input */}
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
+                accept="image/*"
+            />
+
             {/* Ambient background accents */}
             <div className="fixed inset-0 pointer-events-none -z-10">
                 <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />
@@ -63,12 +94,22 @@ export default function ProfilePage() {
                 >
                     <div className="h-32 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/5 relative">
                         <div className="absolute -bottom-12 left-8 p-1 rounded-[2rem] bg-background border border-primary/10 shadow-xl">
-                            <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-3xl font-black">
-                                {user.displayName ? user.displayName[0].toUpperCase() : "U"}
+                            <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-3xl font-black overflow-hidden relative group">
+                                {avatarUrl ? (
+                                    <img src={avatarUrl} alt={user.name} className="h-full w-full object-cover" />
+                                ) : (
+                                    user.displayName ? user.displayName[0].toUpperCase() : "U"
+                                )}
+                                {uploading && (
+                                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                                        <Loader2 className="h-8 w-8 text-white animate-spin" />
+                                    </div>
+                                )}
                             </div>
                             <button
-                                onClick={() => router.push("/dashboard/settings")}
-                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center shadow-lg border-2 border-background hover:scale-110 active:scale-95 transition-all"
+                                onClick={() => fileInputRef.current?.click()}
+                                disabled={uploading}
+                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center shadow-lg border-2 border-background hover:scale-110 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
                             >
                                 <Camera size={14} />
                             </button>

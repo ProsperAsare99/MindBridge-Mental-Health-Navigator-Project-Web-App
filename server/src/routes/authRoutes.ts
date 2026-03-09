@@ -1,3 +1,4 @@
+import { Router } from 'express';
 import { register, login, getMe, updateProfile, changePassword, verifyEmail, googleLogin, resendVerification, anonymousLogin, verifyToken, uploadAvatar } from '../controllers/authController';
 import { authenticateToken } from '../middleware/auth';
 import { upload } from '../middleware/upload';

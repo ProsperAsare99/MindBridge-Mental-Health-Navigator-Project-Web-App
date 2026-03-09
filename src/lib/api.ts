@@ -26,11 +26,12 @@ class ApiClient {
 
     private async request(endpoint: string, options: RequestInit = {}) {
         const url = `${API_URL}${endpoint}`;
+        const isFormData = options.body instanceof FormData;
         const headers = {
-            'Content-Type': 'application/json',
+            ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
             ...(this.token ? { 'Authorization': `Bearer ${this.token}` } : {}),
             ...options.headers,
-        };
+        } as Record<string, string>;
 
         let response;
         try {
@@ -55,7 +56,14 @@ class ApiClient {
     async post(endpoint: string, body: any) {
         return this.request(endpoint, {
             method: 'POST',
-            body: JSON.stringify(body),
+            body: body instanceof FormData ? body : JSON.stringify(body),
+        });
+    }
+
+    async put(endpoint: string, body: any) {
+        return this.request(endpoint, {
+            method: 'PUT',
+            body: body instanceof FormData ? body : JSON.stringify(body),
         });
     }
 }
