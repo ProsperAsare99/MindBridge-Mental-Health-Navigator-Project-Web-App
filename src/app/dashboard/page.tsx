@@ -17,7 +17,11 @@ import {
     BrainCircuit,
     Compass,
     Activity,
-    Sparkles
+    Sparkles,
+    CheckCircle2,
+    Users,
+    ShieldCheck,
+    Info
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -119,6 +123,13 @@ export default function DashboardPage() {
                         </p>
                     </div>
                     <div className="flex items-center gap-3">
+                        <div className="hidden lg:flex flex-col items-end mr-4">
+                            <div className="text-[10px] font-black uppercase tracking-widest text-primary/60 flex items-center gap-1.5">
+                                <ShieldCheck className="h-3 w-3" />
+                                Privacy-Validated
+                            </div>
+                            <div className="text-[9px] font-bold text-muted-foreground/40 uppercase">Ghanaian Data Standards</div>
+                        </div>
                         <Link href="/dashboard/mood">
                             <Button className="rounded-2xl shadow-xl shadow-primary/20">
                                 <PlusCircle className="mr-2 h-4 w-4" />
@@ -126,6 +137,53 @@ export default function DashboardPage() {
                             </Button>
                         </Link>
                     </div>
+                </motion.div>
+
+                {/* Persuasive Task Support: Next Best Action & Praise */}
+                <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="md:col-span-2 p-1 rounded-[2rem] bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 animate-pulse-slow">
+                        <div className="h-full w-full glass rounded-[1.9rem] p-8 flex flex-col md:flex-row items-center gap-8 border-none">
+                            <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                                <Sparkles className="h-8 w-8 text-primary" />
+                            </div>
+                            <div className="flex-1 text-center md:text-left space-y-2">
+                                <h3 className="text-xl font-extrabold tracking-tight">
+                                    {moodStats.streak > 0 
+                                        ? `Incredible! A ${moodStats.streak}-day streak.` 
+                                        : "Ready to start your journey?"}
+                                </h3>
+                                <p className="text-sm font-medium text-muted-foreground leading-relaxed">
+                                    {moodStats.streak > 0 
+                                        ? "Consistency is the foundation of mental resilience. Keep showing up for yourself." 
+                                        : "Your first step is just a check-in away. Small actions lead to big shifts."}
+                                </p>
+                            </div>
+                            <Link href="/dashboard/assessment" className="w-full md:w-auto">
+                                <Button variant="secondary" className="w-full rounded-xl font-bold h-12 px-8">
+                                    Complete Assessment
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <Card className="glass border-primary/10 bg-primary/5 flex flex-col justify-center p-8 overflow-hidden relative">
+                        <div className="relative z-10 space-y-4">
+                            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary">
+                                <Users className="h-3 w-3" />
+                                Community Pulse
+                            </div>
+                            <div className="space-y-1">
+                                <h4 className="text-2xl font-black">Supporting Minds</h4>
+                                <p className="text-xs font-bold text-muted-foreground/70 uppercase tracking-tight">At {user?.institution || "Your University"}</p>
+                            </div>
+                            <p className="text-xs font-medium text-muted-foreground leading-relaxed italic">
+                                "You're not alone. Our community is built on collective well-being and shared support."
+                            </p>
+                        </div>
+                        <div className="absolute -bottom-6 -right-6 opacity-5">
+                            <Users size={120} className="text-primary" />
+                        </div>
+                    </Card>
                 </motion.div>
 
                 {/* Main Stats Grid */}
@@ -200,6 +258,10 @@ export default function DashboardPage() {
                                 </CardHeader>
                                 <CardContent className="relative z-10 pb-8">
                                     <div className="space-y-2">
+                                        <div className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-tighter text-secondary/60 mb-1">
+                                            <CheckCircle2 className="h-2.5 w-2.5" />
+                                            Evidence-Based Framework
+                                        </div>
                                         <h3 className="text-2xl font-black text-foreground">Take Assessment</h3>
                                         <p className="text-xs font-medium text-muted-foreground leading-relaxed">Evaluate your current anxiety & stress levels.</p>
                                     </div>
@@ -260,6 +322,24 @@ export default function DashboardPage() {
                                 </Link>
                             </CardContent>
                         </Card>
+                    </div>
+                </motion.div>
+
+                {/* Credibility & Ethics Footer Support */}
+                <motion.div variants={itemVariants} className="pt-10 border-t border-primary/5">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 opacity-40 hover:opacity-100 transition-opacity duration-500">
+                        <div className="flex items-center gap-4">
+                            <div className="h-10 w-10 rounded-xl bg-muted flex items-center justify-center">
+                                <Info className="h-5 w-5 text-muted-foreground" />
+                            </div>
+                            <div className="space-y-0.5">
+                                <p className="text-[10px] font-black uppercase tracking-widest leading-none">AI Transparency</p>
+                                <p className="text-[9px] font-bold text-muted-foreground">Context-aware suggestions provided by MindBridge Navigator.</p>
+                            </div>
+                        </div>
+                        <p className="text-[9px] font-medium text-muted-foreground max-w-sm text-center md:text-right italic leading-relaxed">
+                            MindBridge is a supportive resource and does not provide clinical diagnoses. For professional psychiatric or psychological emergencies, please use the Crisis Support button.
+                        </p>
                     </div>
                 </motion.div>
             </motion.div>

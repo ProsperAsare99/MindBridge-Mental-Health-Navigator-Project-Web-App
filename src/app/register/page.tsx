@@ -7,7 +7,7 @@ import { api } from "@/lib/api";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
-import { ArrowLeft, Phone, Mail, User, Lock, School, GraduationCap, IdCard, ChevronRight, UserCircle } from "lucide-react";
+import { ArrowLeft, Phone, Mail, User, Lock, School, GraduationCap, IdCard, ChevronRight, UserCircle, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/brand/Logo";
 
@@ -29,6 +29,9 @@ export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { loginWithGoogle, loginAnonymously } = useAuth() as any;
+
+    const [showConsent, setShowConsent] = useState(true);
+    const [hasConsented, setHasConsented] = useState(false);
 
 
     const handleRegister = async (e: React.FormEvent) => {
