@@ -13,11 +13,15 @@ import {
   Brain,
   MessageCircle,
   ShieldCheck,
-  Star
+  Star,
+  Search
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
+import { useSearch } from "@/components/providers/SearchProvider";
 
 export default function Home() {
+  const { toggle } = useSearch();
+
   return (
     <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 selection:text-primary overflow-hidden">
       {/* Soft Background Accents */}
@@ -63,6 +67,14 @@ export default function Home() {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-3"
         >
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="rounded-full hover:bg-primary/5 group"
+            onClick={toggle}
+          >
+            <Search className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+          </Button>
           <Link href="/login">
             <Button variant="ghost" className="text-sm font-bold">
               Sign In

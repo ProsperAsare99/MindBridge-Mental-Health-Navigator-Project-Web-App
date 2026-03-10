@@ -24,6 +24,8 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearch } from "@/components/providers/SearchProvider";
+import { Search } from "lucide-react";
 
 export default function DashboardLayout({
     children,
@@ -34,6 +36,7 @@ export default function DashboardLayout({
     const router = useRouter();
     const pathname = usePathname();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { toggle } = useSearch();
 
     useEffect(() => {
         if (!loading && !user) {
@@ -77,10 +80,26 @@ export default function DashboardLayout({
 
     return (
         <div className="min-h-screen relative font-sans text-foreground bg-background selection:bg-primary/20 overflow-x-hidden">
-            {/* Soft Ambient Accents */}
+            {/* Background Accents (Aurora Style) */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-                <div className="absolute top-[-5%] right-[-5%] h-[30%] w-[30%] rounded-full bg-primary/3 blur-[100px]" />
-                <div className="absolute bottom-[-5%] left-[-5%] h-[30%] w-[30%] rounded-full bg-secondary/3 blur-[100px]" />
+                <motion.div 
+                    animate={{ 
+                        scale: [1, 1.2, 1],
+                        x: [0, 40, 0],
+                        y: [0, 20, 0]
+                    }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[-5%] right-[-5%] h-[40%] w-[40%] rounded-full bg-primary/10 blur-[120px]" 
+                />
+                <motion.div 
+                    animate={{ 
+                        scale: [1.2, 1, 1.2],
+                        x: [0, -30, 0],
+                        y: [0, -10, 0]
+                    }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    className="absolute bottom-[-5%] left-[-5%] h-[40%] w-[40%] rounded-full bg-secondary/10 blur-[120px]" 
+                />
             </div>
 
             {/* Mobile Sidebar Overlay */}
@@ -111,8 +130,26 @@ export default function DashboardLayout({
                 </div>
 
                 <div className="flex flex-col h-[calc(100vh-5rem)]">
+                    {/* Search Trigger */}
+                    <div className="px-4 mb-4">
+                        <Button 
+                            variant="outline" 
+                            className="w-full justify-start gap-4 h-12 rounded-2xl bg-primary/5 border-primary/10 hover:bg-primary/10 hover:border-primary/20 text-muted-foreground hover:text-primary transition-all group"
+                            onClick={() => {
+                                setIsSidebarOpen(false);
+                                toggle();
+                            }}
+                        >
+                            <Search className="h-4.5 w-4.5 group-hover:scale-110 transition-transform" />
+                            <span className="text-sm font-bold tracking-tight">Search...</span>
+                            <div className="ml-auto flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-background border border-border text-[8px] font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
+                                ⌘K
+                            </div>
+                        </Button>
+                    </div>
+
                     {/* Scrollable Nav Area */}
-                    <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 custom-scrollbar">
+                    <div className="flex-1 overflow-y-auto px-4 py-0 space-y-1 custom-scrollbar">
                         {navItems.map((item) => {
                             const isActive = pathname === item.href;
                             const Icon = item.icon;
@@ -209,6 +246,17 @@ export default function DashboardLayout({
                     <button onClick={() => setIsSidebarOpen(true)} className="text-foreground">
                         <Menu className="h-6 w-6" />
                     </button>
+                    
+                    {/* Mobile Search Button */}
+                    <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={toggle}
+                        className="rounded-full hover:bg-primary/5"
+                    >
+                        <Search className="h-5 w-5 text-muted-foreground" />
+                    </Button>
+
                     <div className="flex items-center gap-2">
                         <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center overflow-hidden">
                             {user.image ? (
