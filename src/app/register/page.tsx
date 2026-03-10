@@ -106,6 +106,70 @@ export default function RegisterPage() {
                         <p className="text-sm font-medium text-muted-foreground mt-2">Start your journey towards better mental well-being.</p>
                     </div>
 
+                    {/* Informed Consent Modal Overlay */}
+                    <AnimatePresence>
+                        {showConsent && (
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-background/80 backdrop-blur-xl"
+                            >
+                                <motion.div 
+                                    initial={{ scale: 0.9, y: 20 }}
+                                    animate={{ scale: 1, y: 0 }}
+                                    className="max-w-xl w-full glass p-10 md:p-14 border border-primary/20 shadow-2xl space-y-8 relative overflow-hidden"
+                                >
+                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-secondary/50" />
+                                    
+                                    <div className="space-y-4">
+                                        <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                                            <ShieldCheck className="h-7 w-7 text-primary" />
+                                        </div>
+                                        <h2 className="text-3xl font-extrabold tracking-tight">Our Commitment to You</h2>
+                                        <div className="space-y-4 overflow-y-auto max-h-[40vh] pr-4 custom-scrollbar text-sm font-medium text-muted-foreground leading-relaxed">
+                                            <p>Before you begin, we want to be fully transparent about how MindBridge works to ensure your safety and privacy:</p>
+                                            
+                                            <div className="space-y-4 pt-2">
+                                                <div className="flex gap-4">
+                                                    <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
+                                                    <p><span className="text-foreground font-bold">Privacy-First AI:</span> Our navigator uses AI to understand your context, but all data is anonymized. We never identify individuals in our community analytics.</p>
+                                                </div>
+                                                <div className="flex gap-4">
+                                                    <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
+                                                    <p><span className="text-foreground font-bold">Not a Clinical Tool:</span> MindBridge is a supporting navigator, not a clinical diagnosis system. Always consult a healthcare professional for medical advice.</p>
+                                                </div>
+                                                <div className="flex gap-4">
+                                                    <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
+                                                    <p><span className="text-foreground font-bold">Voluntary Participation:</span> You can request your data to be deleted or close your account at any time through Settings.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col gap-4 pt-4">
+                                        <Button 
+                                            onClick={() => {
+                                                setHasConsented(true);
+                                                setShowConsent(false);
+                                            }}
+                                            className="h-16 rounded-2xl text-lg font-extrabold shadow-xl shadow-primary/20"
+                                        >
+                                            I Understand & Accept
+                                        </Button>
+                                        <Button 
+                                            variant="ghost" 
+                                            onClick={() => router.push("/")}
+                                            className="font-bold text-muted-foreground"
+                                        >
+                                            Decline & Return Home
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                     <AnimatePresence>
                         {error && (
                             <motion.div
