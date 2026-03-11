@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Command, X, ArrowRight, MessageSquare, BookOpen, ShieldAlert, Sparkles } from "lucide-react";
 import { useSearch } from "@/components/providers/SearchProvider";
@@ -17,6 +17,15 @@ export function CommandMenu() {
   const { isOpen, setIsOpen } = useSearch();
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 10);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -56,7 +65,7 @@ export function CommandMenu() {
             <div className="p-6 border-b border-primary/10 flex items-center gap-4">
               <Search className="h-6 w-6 text-primary animate-pulse" />
               <input
-                autoFocus
+                ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search resources, topics, or help..."
