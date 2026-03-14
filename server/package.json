@@ -24,6 +24,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@genkit-ai/ai": "^1.29.0",
+    "@genkit-ai/googleai": "^1.28.0",
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.2.1",
     "@types/multer": "^2.1.0",
@@ -31,6 +33,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "genkit": "^1.29.0",
     "google-auth-library": "^10.6.1",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",

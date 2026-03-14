@@ -1,47 +1,41 @@
-import { Response } from 'express';
-import { AuthRequest } from '../middleware/auth';
-import prisma from '../lib/prisma';
-import { ai } from '../lib/genkit-config';
-
-export const chatWithOracle = async (req: AuthRequest, res: Response) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getChatHistory = exports.chatWithOracle = void 0;
+const prisma_1 = __importDefault(require("../lib/prisma"));
+const genkit_config_1 = require("../lib/genkit-config");
+const chatWithOracle = async (req, res) => {
     const { message } = req.body;
-
     if (!message) {
         return res.status(400).json({ error: 'Message is required' });
     }
-
     try {
-        if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
-
+        if (!req.user)
+            return res.status(401).json({ error: 'Not authenticated' });
         // 1. Fetch User Profile for personalization
-        const user = await prisma.user.findUnique({
+        const user = await prisma_1.default.user.findUnique({
             where: { id: req.user.userId },
             select: { name: true }
         });
-
         // 2. Fetch User Context (recent moods)
-        const recentMoods = await prisma.mood.findMany({
+        const recentMoods = await prisma_1.default.mood.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'desc' },
             take: 10
         });
-
         // 3. Fetch Recent Chat History for Context
-        const recentChats = await prisma.chatMessage.findMany({
+        const recentChats = await prisma_1.default.chatMessage.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'desc' },
             take: 10
         });
-
         // Reverse to get chronological order for prompt
-        const historyContext = recentChats.reverse().map((chat: any) =>
-            `${chat.role === 'user' ? 'User' : 'The Oracle'}: ${chat.content}`
-        ).join('\n');
-
+        const historyContext = recentChats.reverse().map((chat) => `${chat.role === 'user' ? 'User' : 'The Oracle'}: ${chat.content}`).join('\n');
         const moodContext = recentMoods.length > 0
             ? `Recent emotional trends (1-5 scale): ${recentMoods.map(m => `${m.value}${m.note ? ` (${m.note})` : ''}`).join(', ')}.`
             : 'No recent mood data recorded yet.';
-
         // 4. Prepare the sophisticated prompt
         const systemInstructions = `You are "The Oracle", a highly empathetic, wise, and supportive AI mental health navigator for university students. 
 Your essence is a blend of a compassionate therapist, a wise mentor, and a calm sanctuary.
@@ -70,38 +64,38 @@ USER'S NEW MESSAGE:
 "${message}"
 
 THE ORACLE'S RESPONSE:`;
-
-        const result = await ai.generate(systemInstructions);
+        const result = await genkit_config_1.ai.generate(systemInstructions);
         const responseText = result.text;
-
         // 5. Save messages to database
-        await prisma.chatMessage.createMany({
+        await prisma_1.default.chatMessage.createMany({
             data: [
                 { userId: req.user.userId, content: message, role: 'user' },
                 { userId: req.user.userId, content: responseText, role: 'assistant' }
             ]
         });
-
         res.json({ response: responseText });
-    } catch (error) {
+    }
+    catch (error) {
         console.error('Oracle Chat Error:', error);
         res.status(500).json({ error: 'The Oracle is currently in deep meditation. Please reach out again in a moment.' });
     }
 };
-
-export const getChatHistory = async (req: AuthRequest, res: Response) => {
+exports.chatWithOracle = chatWithOracle;
+const getChatHistory = async (req, res) => {
     try {
-        if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
-
-        const history = await prisma.chatMessage.findMany({
+        if (!req.user)
+            return res.status(401).json({ error: 'Not authenticated' });
+        const history = await prisma_1.default.chatMessage.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'asc' },
             take: 50
         });
-
         res.json(history);
-    } catch (error) {
+    }
+    catch (error) {
         console.error('Fetch Chat History Error:', error);
         res.status(500).json({ error: 'Failed to fetch your wisdom path.' });
     }
 };
+exports.getChatHistory = getChatHistory;
+//# sourceMappingURL=aiController.js.map

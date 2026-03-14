@@ -1,10 +1,16 @@
-import prisma from '../lib/prisma';
-export const createAssessment = async (req, res) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getUserAssessments = exports.createAssessment = void 0;
+const prisma_1 = __importDefault(require("../lib/prisma"));
+const createAssessment = async (req, res) => {
     const { type, score, severity } = req.body;
     try {
         if (!req.user)
             return res.status(401).json({ error: 'Not authenticated' });
-        const assessment = await prisma.assessment.create({
+        const assessment = await prisma_1.default.assessment.create({
             data: {
                 userId: req.user.userId,
                 type,
@@ -19,11 +25,12 @@ export const createAssessment = async (req, res) => {
         res.status(500).json({ error: 'Server error creating assessment' });
     }
 };
-export const getUserAssessments = async (req, res) => {
+exports.createAssessment = createAssessment;
+const getUserAssessments = async (req, res) => {
     try {
         if (!req.user)
             return res.status(401).json({ error: 'Not authenticated' });
-        const assessments = await prisma.assessment.findMany({
+        const assessments = await prisma_1.default.assessment.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'desc' }
         });
@@ -34,4 +41,5 @@ export const getUserAssessments = async (req, res) => {
         res.status(500).json({ error: 'Server error fetching assessments' });
     }
 };
+exports.getUserAssessments = getUserAssessments;
 //# sourceMappingURL=assessmentController.js.map

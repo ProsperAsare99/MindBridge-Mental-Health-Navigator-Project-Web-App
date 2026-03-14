@@ -1,0 +1,1 @@
+{"version":3,"file":"genkit-config.js","sourceRoot":"","sources":["../../src/lib/genkit-config.ts"],"names":[],"mappings":";;;AAAA,mCAAgC;AAChC,kDAA+C;AAElC,QAAA,EAAE,GAAG,IAAA,eAAM,EAAC;IACvB,OAAO,EAAE,CAAC,IAAA,mBAAQ,EAAC,EAAE,MAAM,EAAE,OAAO,CAAC,GAAG,CAAC,cAAc,EAAE,CAAC,CAAC;IAC3D,KAAK,EAAE,2BAA2B;CACnC,CAAC,CAAC"}
