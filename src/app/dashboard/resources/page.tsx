@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
     Search,
@@ -480,7 +481,14 @@ export default function ResourcesPage() {
                                         <iframe src={`https://www.youtube.com/embed/${v.id}?autoplay=1`} className="absolute inset-0 w-full h-full" allowFullScreen />
                                     ) : (
                                         <>
-                                            <img src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`} alt={v.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80" />
+                                            <Image 
+                                              src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`} 
+                                              alt={v.title} 
+                                              fill 
+                                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                              className="object-cover group-hover:scale-110 transition-transform duration-500 opacity-80" 
+                                              loading="lazy"
+                                            />
                                             <div className="absolute inset-0 flex items-center justify-center bg-black/10">
                                                 <div className="h-12 w-12 rounded-full bg-primary/90 shadow-xl flex items-center justify-center text-white scale-100 group-hover:scale-110 transition-transform">
                                                     <Play size={24} fill="currentColor" />

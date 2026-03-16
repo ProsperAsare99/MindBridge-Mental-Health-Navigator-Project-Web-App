@@ -1,6 +1,5 @@
-"use client";
-
 import { useAuth } from "@/hooks/use-auth";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
@@ -96,7 +95,7 @@ export default function ProfilePage() {
                         <div className="absolute -bottom-12 left-8 p-1 rounded-[2rem] bg-background border border-border shadow-xl">
                             <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-border flex items-center justify-center text-primary text-3xl font-black overflow-hidden relative group">
                                 {avatarUrl ? (
-                                    <img src={avatarUrl} alt={user.name} className="h-full w-full object-cover" />
+                                    <Image src={avatarUrl} alt={user.name || "Avatar"} width={96} height={96} priority className="h-full w-full object-cover" sizes="96px" />
                                 ) : (
                                     user.displayName ? user.displayName[0].toUpperCase() : "U"
                                 )}
