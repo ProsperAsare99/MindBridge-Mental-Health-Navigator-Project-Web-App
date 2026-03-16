@@ -11,6 +11,8 @@ import {
   Compass, 
   ArrowLeft 
 } from "lucide-react";
+import { AuroraBackground } from "@/components/animations/aurora-background";
+import { SpinningDecorativeLogo } from "@/components/animations/spinning-decorative-logo";
 
 export default function AboutPage() {
   const containerVariants = {
@@ -38,27 +40,7 @@ export default function AboutPage() {
 
   return (
     <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 overflow-x-hidden transition-colors duration-500">
-      {/* Background Accents (Aurora Style) */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <MotionDiv 
-          animate={{ 
-            scale: [1, 1.2, 1],
-            x: [0, 60, 0],
-            y: [0, 40, 0]
-          }}
-          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-5%] left-[-10%] h-[70%] w-[70%] rounded-full bg-primary/10 blur-[130px]" 
-        />
-        <MotionDiv 
-          animate={{ 
-            scale: [1.3, 1, 1.3],
-            x: [0, -50, 0],
-            y: [0, -30, 0]
-          }}
-          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] right-[-10%] h-[60%] w-[60%] rounded-full bg-secondary/10 blur-[130px]" 
-        />
-      </div>
+      <AuroraBackground primaryColor="bg-primary/10" secondaryColor="bg-secondary/10" />
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-24 backdrop-blur-md bg-background/50 border-b border-border/50">
         <MotionDiv
@@ -160,20 +142,7 @@ export default function AboutPage() {
             </ParallaxSection>
             
             <div className="relative">
-              <div className="aspect-square rounded-[3rem] bg-primary/5 border border-primary/20 overflow-hidden glass p-8 flex items-center justify-center">
-                 <Logo size="lg" className="scale-150 opacity-20 grayscale" />
-                 <MotionDiv 
-                   animate={{ 
-                     rotate: 360,
-                     scale: [1, 1.1, 1]
-                   }}
-                   transition={{ 
-                     rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                     scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                   }}
-                   className="absolute inset-0 border-2 border-dashed border-primary/20 rounded-full m-12"
-                 />
-              </div>
+              <SpinningDecorativeLogo />
             </div>
           </div>
         </section>

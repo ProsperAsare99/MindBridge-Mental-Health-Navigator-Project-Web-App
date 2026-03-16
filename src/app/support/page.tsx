@@ -15,6 +15,7 @@ import {
   ShieldAlert,
   Sparkles
 } from "lucide-react";
+import { AuroraBackground } from "@/components/animations/aurora-background";
 
 export default function SupportPage() {
   const categories = [
@@ -64,27 +65,7 @@ export default function SupportPage() {
 
   return (
     <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 overflow-x-hidden">
-      {/* Background Accents (Aurora Style) */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <MotionDiv 
-          animate={{ 
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, 30, 0]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] right-[-10%] h-[60%] w-[60%] rounded-full bg-primary/10 blur-[130px]" 
-        />
-        <MotionDiv 
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            x: [0, -40, 0],
-            y: [0, -20, 0]
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] left-[-10%] h-[60%] w-[60%] rounded-full bg-secondary/15 blur-[130px]" 
-        />
-      </div>
+      <AuroraBackground primaryColor="bg-primary/10" secondaryColor="bg-secondary/15" />
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-24 backdrop-blur-md bg-background/50 border-b border-border/50">
         <MotionDiv
