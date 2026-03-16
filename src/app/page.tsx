@@ -4,7 +4,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import ParallaxSection from "@/components/parallax-section";
-import { Card3D } from "@/components/card-3d";
+import dynamic from "next/dynamic";
+
+const Card3D = dynamic(() => import("@/components/card-3d").then((mod) => mod.Card3D), {
+  ssr: false,
+  loading: () => <div className="h-[500px] w-full rounded-[2.5rem] bg-muted/20 animate-pulse border border-border" />
+});
 import {
   Heart,
   Sparkles,

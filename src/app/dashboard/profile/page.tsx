@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "@/hooks/use-auth";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
