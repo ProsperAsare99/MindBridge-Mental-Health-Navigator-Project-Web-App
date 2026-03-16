@@ -69,7 +69,7 @@ USER'S NEW MESSAGE:
 "${message}"
 
 THE ORACLE'S RESPONSE:`;
-        const result = await genkit_config_1.ai.generate(systemInstructions);
+        const result = await genkit_config_1.ai.generate({ prompt: systemInstructions });
         const responseText = result.text;
         // 5. Save messages to database
         await prisma_1.default.chatMessage.createMany({
@@ -99,7 +99,7 @@ const getChatHistory = async (req, res) => {
     }
     catch (error) {
         console.error('Fetch Chat History Error:', error);
-        res.status(500).json({ error: 'Failed to fetch your wisdom path.' });
+        res.status(500).json({ error: 'Failed to fetch your wisdom path.', details: error instanceof Error ? error.message : String(error) });
     }
 };
 exports.getChatHistory = getChatHistory;

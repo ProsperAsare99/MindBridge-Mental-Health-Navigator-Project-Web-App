@@ -75,7 +75,7 @@ USER'S NEW MESSAGE:
 
 THE ORACLE'S RESPONSE:`;
 
-        const result = await ai.generate(systemInstructions);
+        const result = await ai.generate({ prompt: systemInstructions });
         const responseText = result.text;
 
         // 5. Save messages to database
