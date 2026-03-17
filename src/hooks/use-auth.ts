@@ -13,6 +13,7 @@ export interface User {
     displayName?: string;
     isVerified?: boolean;
     isAnonymous?: boolean;
+    googleId?: string;
     image?: string;
 }
 
@@ -53,8 +54,11 @@ export function useAuth() {
     const updateProfile = async (data: Partial<User>) => {
         try {
             const res = await api.post('/auth/profile', data);
+            
+            // Sync with NextAuth session
             await update({
                 user: {
+                    ...session?.user,
                     name: res.name,
                     institution: res.institution,
                     studentId: res.studentId,
@@ -62,9 +66,10 @@ export function useAuth() {
                     phoneNumber: res.phoneNumber
                 }
             });
+            
             return res;
-        } catch (error) {
-            console.error('Profile update failed:', error);
+        } catch (error: any) {
+            console.error('Profile update failed:', error.message);
             throw error;
         }
     };

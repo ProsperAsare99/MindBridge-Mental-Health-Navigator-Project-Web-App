@@ -50,7 +50,10 @@ export default function SettingsPage() {
     const [passwordSuccess, setPasswordSuccess] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
-    const isPasswordUser = true; // All our custom backend users have passwords
+    // Dynamic security state
+    const isPasswordUser = !!user && !user.googleId && !user.isAnonymous;
+    const isGoogleUser = !!user && !!user.googleId;
+    const isGuestUser = !!user && !!user.isAnonymous;
 
     useEffect(() => {
         if (user) {
@@ -64,6 +67,12 @@ export default function SettingsPage() {
     }, [user]);
 
     const handleSaveProfile = async () => {
+        // Simple validation
+        if (phoneNumber && !/^\+?[\d\s-]{8,20}$/.test(phoneNumber)) {
+            setProfileError("Please enter a valid phone number.");
+            return;
+        }
+
         setSaving(true);
         setProfileError("");
         setProfileSuccess("");
@@ -73,7 +82,6 @@ export default function SettingsPage() {
             setProfileSuccess("Profile updated successfully!");
             setTimeout(() => setProfileSuccess(""), 4000);
         } catch (err: any) {
-            console.error(err);
             setProfileError(err.message || "Failed to update profile.");
         } finally {
             setSaving(false);
@@ -256,6 +264,18 @@ export default function SettingsPage() {
                                 </div>
                             </div>
                         </div>
+
+                        {isGuestUser && (
+                            <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3">
+                                <AlertCircle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                                <div className="space-y-1">
+                                    <p className="text-sm font-bold text-amber-500">Guest Account</p>
+                                    <p className="text-xs text-amber-500/70 leading-relaxed">
+                                        You are currently using a guest account. Create a full account to persist your progress across devices.
+                                    </p>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="pt-4 flex flex-col md:flex-row items-center gap-6 border-t border-border mt-6 pt-10">
                             <Button

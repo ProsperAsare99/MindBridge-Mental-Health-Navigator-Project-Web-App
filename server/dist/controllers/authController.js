@@ -215,6 +215,13 @@ const updateProfile = async (req, res) => {
     try {
         if (!req.user)
             return res.status(401).json({ error: 'Not authenticated' });
+        // Basic server-side validation
+        if (phoneNumber && !/^\+?[\d\s-]{8,20}$/.test(phoneNumber)) {
+            return res.status(400).json({ error: 'Invalid phone number format' });
+        }
+        if (name && name.length > 100) {
+            return res.status(400).json({ error: 'Name is too long' });
+        }
         const user = await prisma_1.default.user.update({
             where: { id: req.user.userId },
             data: {
