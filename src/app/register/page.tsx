@@ -99,7 +99,7 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 selection:bg-primary/20 overflow-hidden relative">
+        <div className="soothing min-h-screen bg-background flex flex-col items-center justify-center p-6 selection:bg-primary/20 overflow-hidden relative">
             {/* Cinematic Aurora Background */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
                 <motion.div 

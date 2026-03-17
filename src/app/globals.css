@@ -101,6 +101,28 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
+/* Scoped Soothing Theme - Refined Oceanic Palette */
+.soothing {
+  --background: #D6F3F4;
+  --foreground: #172A3A;
+  --primary: #508991;
+  --secondary: #74B3CE;
+  --muted: #c4ecee;
+  --card: #ffffff;
+  --border: rgba(23, 42, 58, 0.1);
+}
+
+.dark .soothing {
+  --background: #172A3A;
+  --foreground: #D6F3F4;
+  --primary: #74B3CE;
+  --secondary: #508991;
+  --muted: #1c3447;
+  --accent: #2a4c63;
+  --card: #1d3345;
+  --border: rgba(214, 243, 244, 0.15);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

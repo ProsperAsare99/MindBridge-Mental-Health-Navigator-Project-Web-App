@@ -25,8 +25,10 @@ import {
   Play,
   ArrowUpRight,
   Download,
-  FileText
+  FileText,
+  Video
 } from "lucide-react";
+import VideoPlayer from "@/components/video-player";
 
 // --- Data (Shared or copied for simplicity in this dedicated page) ---
 const ARTICLES = [
@@ -127,7 +129,7 @@ export default function ResourcesPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 overflow-x-hidden">
+    <div className="soothing relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 overflow-x-hidden">
       {/* Background Accents (Aurora Style) */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <motion.div 
@@ -214,6 +216,20 @@ export default function ResourcesPage() {
                 />
               </div>
             </motion.div>
+          </motion.div>
+        </section>
+
+        {/* Featured Video Guide */}
+        <section className="mb-24">
+          <motion.div variants={itemVariants} className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-black mb-4">Featured <span className="text-primary">Video Guide</span></h2>
+            <p className="text-muted-foreground font-medium max-w-xl mx-auto">Watch our quick introduction to navigating student well-being and university life.</p>
+          </motion.div>
+          <motion.div 
+            variants={itemVariants}
+            className="rounded-[2.5rem] overflow-hidden shadow-premium border border-primary/10 glass p-4"
+          >
+            <VideoPlayer src="https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" />
           </motion.div>
         </section>
 

@@ -42,7 +42,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 overflow-x-hidden transition-colors duration-500">
+    <div className="soothing relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 overflow-x-hidden transition-colors duration-500">
       <AuroraBackground primaryColor="bg-primary/10" secondaryColor="bg-secondary/10" />
 
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-24 backdrop-blur-md bg-background/50 border-b border-border/50">
