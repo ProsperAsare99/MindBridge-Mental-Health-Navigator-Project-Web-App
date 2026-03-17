@@ -19,7 +19,7 @@ import {
     CloudRain,
     TrendingUp,
     Calendar,
-    Sparkles,
+    Flame,
     Clock,
     ChevronRight,
     Sun,
@@ -97,7 +97,7 @@ export default function MoodPage() {
     const stats = [
         { label: "Weekly Average", value: moodStats.average.toString(), icon: TrendingUp, color: "text-primary" },
         { label: "Check-ins", value: moodStats.count.toString(), icon: Calendar, color: "text-secondary" },
-        { label: "Active Streak", value: `${moodStats.streak}-Day`, icon: Sparkles, color: "text-primary" },
+        { label: "Active Streak", value: `${moodStats.streak}-Day`, icon: Flame, color: "text-primary" },
     ];
 
     const handleLogEntry = useCallback(async () => {

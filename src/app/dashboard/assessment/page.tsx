@@ -6,7 +6,6 @@ import { api } from "@/lib/api";
 import {
     ClipboardList,
     ArrowRight,
-    Sparkles,
     ShieldCheck,
     Timer,
     ChevronRight,
@@ -372,7 +371,7 @@ export default function AssessmentPage() {
                                 className="relative bg-primary/10 rounded-[3rem] p-10 md:p-14 overflow-hidden border border-primary/20"
                             >
                                 <div className="absolute top-0 right-0 p-12 opacity-10">
-                                    <Sparkles size={120} className="text-primary" />
+                                    <ShieldCheck size={120} className="text-primary" />
                                 </div>
                                 <div className="relative z-10 space-y-6 max-w-2xl text-center md:text-left">
                                     <h2 className="text-3xl font-extrabold tracking-tight">Your data is <span className="text-primary">private & safe.</span></h2>

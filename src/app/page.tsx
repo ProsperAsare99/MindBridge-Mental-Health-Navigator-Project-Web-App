@@ -18,8 +18,9 @@ import {
   Brain,
   MessageCircle,
   ShieldCheck,
-  Star,
-  Search
+  Trophy,
+  Search,
+  GraduationCap
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { useSearch } from "@/components/providers/SearchProvider";
@@ -162,8 +163,8 @@ export default function Home() {
                   {[
                     { icon: ShieldCheck, label: "Confidential" },
                     { icon: Brain, label: "AI-Powered" },
-                    { icon: Sparkles, label: "Student-Led" },
-                    { icon: Star, label: "Highly Rated" }
+                    { icon: GraduationCap, label: "Student-Led" },
+                    { icon: Trophy, label: "Highly Rated" }
                   ].map(({ icon: Icon, label }) => (
                     <div key={`${i}-${label}`} className="flex items-center gap-4 group cursor-default">
                       <div className="h-10 w-10 rounded-xl bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">

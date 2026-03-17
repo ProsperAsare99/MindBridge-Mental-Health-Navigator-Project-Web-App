@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    Sparkles,
+    BrainCircuit,
     Send,
     Loader2,
     User,
@@ -16,7 +16,6 @@ import {
     Sun,
     Zap,
     Compass,
-    Stars,
     Wind,
     ArrowDown,
     Activity,
@@ -174,7 +173,7 @@ export default function OraclePage() {
                     <div className="relative group">
                         <div className="absolute -inset-1 bg-gradient-to-tr from-primary to-purple-600 rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-1000"></div>
                         <div className="relative w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shadow-inner ring-1 ring-white/5">
-                            <Sparkles className="text-primary w-6 h-6 animate-pulse" />
+                            <BrainCircuit className="text-primary w-6 h-6 animate-pulse" />
                         </div>
                     </div>
                     <div>
@@ -227,7 +226,7 @@ export default function OraclePage() {
                                 className="flex flex-col items-center justify-center min-h-full py-12 text-center"
                             >
                                 <div className="relative mb-12">
-                                    <Stars className="relative text-primary/40 w-24 h-24 stroke-[1.5]" />
+                                    <BrainCircuit className="relative text-primary/40 w-24 h-24 stroke-[1.5]" />
                                 </div>
                                 <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 tracking-tighter">What's on your mind?</h2>
                                 <p className="text-lg text-muted-foreground font-serif italic max-w-xl mx-auto mb-12 opacity-80 decoration-primary/20 decoration-2 underline-offset-8">
