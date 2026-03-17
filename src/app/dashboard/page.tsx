@@ -9,7 +9,7 @@ import {
     BrainCircuit,
     Compass,
     Activity,
-    Sparkles,
+    Flame,
     CheckCircle2,
     Users,
     ShieldCheck,
@@ -65,7 +65,7 @@ export default async function DashboardPage() {
                     <div className="md:col-span-2 p-1 rounded-[2rem] bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 animate-pulse-slow">
                         <div className="h-full w-full glass rounded-[1.9rem] p-8 flex flex-col md:flex-row items-center gap-8 border-none">
                             <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-                                <Sparkles className="h-8 w-8 text-primary" />
+                                <Flame className="h-8 w-8 text-primary" />
                             </div>
                             <div className="flex-1 text-center md:text-left space-y-2">
                                 <h3 className="text-xl font-extrabold tracking-tight">
@@ -146,7 +146,7 @@ export default async function DashboardPage() {
                                     </div>
                                 </CardContent>
                                 <div className="absolute top-[-10%] right-[-10%] opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
-                                    <Sparkles size={100} className="text-primary" />
+                                    <Activity size={100} className="text-primary" />
                                 </div>
                             </Card>
                         </Link>
