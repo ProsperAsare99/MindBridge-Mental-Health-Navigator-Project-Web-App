@@ -18,11 +18,11 @@ interface SelectProps {
 
 const Select = ({ value, onChange, options, placeholder }: SelectProps) => (
     <div className="relative group">
-        <School className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+        <School className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
         <select
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 bg-muted/30 text-sm font-bold transition-all appearance-none cursor-pointer"
+            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all appearance-none cursor-pointer"
         >
             <option value="" disabled>{placeholder}</option>
             {options.map((opt) => (
@@ -84,7 +84,7 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-primary/30">
+        <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-orange-500/30 auth-theme">
             {/* Informed Consent Modal */}
             <AnimatePresence>
                 {showConsent && (
@@ -100,13 +100,13 @@ export default function RegisterPage() {
                             className="max-w-xl w-full bg-card p-8 md:p-12 border border-border shadow-2xl space-y-8 relative overflow-hidden rounded-3xl"
                         >
                             <div className="space-y-4">
-                                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                                    <ShieldCheck className="h-6 w-6 text-primary" />
+                                <div className="h-12 w-12 rounded-2xl bg-orange-500/10 flex items-center justify-center">
+                                    <ShieldCheck className="h-6 w-6 text-orange-500" />
                                 </div>
                                 <h2 className="text-2xl font-extrabold tracking-tight">System Commitment</h2>
                                 <p className="text-sm text-muted-foreground leading-relaxed">
                                     By proceeding with the MindBridge initialization, you acknowledge that this is a 
-                                    <span className="text-primary font-bold mx-1">supportive cognitive framework</span> 
+                                    <span className="text-orange-500 font-bold mx-1">supportive cognitive framework</span> 
                                     and not a replacement for clinical emergency services.
                                 </p>
                             </div>
@@ -120,7 +120,7 @@ export default function RegisterPage() {
                                         "Full ownership and right to immediate data erasure"
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-start gap-3 text-xs font-semibold text-foreground/80">
-                                            <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                                            <div className="h-1.5 w-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" />
                                             {item}
                                         </li>
                                     ))}
@@ -133,7 +133,7 @@ export default function RegisterPage() {
                                         setHasConsented(true);
                                         setShowConsent(false);
                                     }}
-                                    className="w-full py-4 bg-primary hover:brightness-110 text-white font-extrabold text-[11px] uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-primary/10"
+                                    className="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-[11px] uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-orange-500/10"
                                 >
                                     ACCEPT & PROCEED
                                 </button>
@@ -156,15 +156,15 @@ export default function RegisterPage() {
                 className="w-full max-w-6xl h-screen md:h-[min(900px,95vh)] overflow-hidden flex flex-col md:flex-row bg-card shadow-2xl md:rounded-3xl border border-border/50"
             >
                 {/* Left Panel: Brand & Visuals */}
-                <div className="hidden md:flex w-1/2 relative bg-[#0d1b2a] overflow-hidden flex-col justify-between p-12 border-r border-white/5">
+                <div className="hidden md:flex w-1/2 relative bg-zinc-950 overflow-hidden flex-col justify-between p-12 border-r border-white/5">
                     <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-40" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent opacity-40" />
                         <DotMap />
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(249,115,22,0.05),transparent_70%)]" />
                     </div>
 
                     <div className="relative z-10 flex items-center gap-4 group cursor-default">
-                        <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all duration-500">
+                        <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:border-orange-500/30 group-hover:bg-orange-500/5 transition-all duration-500">
                             <Logo iconOnly size="md" />
                         </div>
                         <span className="text-2xl font-extrabold tracking-tighter text-white">MindBridge</span>
@@ -177,7 +177,7 @@ export default function RegisterPage() {
                             transition={{ delay: 0.3 }}
                             className="text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-white uppercase"
                         >
-                            Your cognitive <span className="text-primary">resilience</span> starts here.
+                            Your cognitive <span className="text-orange-500">resilience</span> starts here.
                         </motion.h1>
                         <motion.p 
                             initial={{ opacity: 0, x: -20 }}
@@ -191,11 +191,11 @@ export default function RegisterPage() {
 
                     <div className="relative z-10 flex items-center gap-8 pt-8 border-t border-white/5">
                         <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <ShieldCheck className="h-4 w-4 text-primary/50" />
+                            <ShieldCheck className="h-4 w-4 text-orange-500/50" />
                             Privacy Centric
                         </div>
                         <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <PlusCircle className="h-4 w-4 text-primary/50" />
+                            <PlusCircle className="h-4 w-4 text-orange-500/50" />
                             Encrypted Data
                         </div>
                     </div>
@@ -229,12 +229,18 @@ export default function RegisterPage() {
                             <button
                                 onClick={async () => {
                                     setLoading(true);
-                                    loginAnonymously().catch((err: any) => setError(err.message || "Guest access failed"));
+                                    try {
+                                        await loginAnonymously();
+                                    } catch (err: any) {
+                                        setError(err.message || "Guest access failed.");
+                                    } finally {
+                                        setLoading(false);
+                                    }
                                 }}
                                 disabled={loading}
                                 className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group"
                             >
-                                <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-primary transition-colors" />
+                                <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-orange-500 transition-colors" />
                                 Guest
                             </button>
                         </div>
@@ -258,14 +264,14 @@ export default function RegisterPage() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Full Name</label>
                                     <div className="relative group">
-                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
                                             type="text"
                                             required
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                             placeholder="Prosper Asare"
-                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
                                         />
                                     </div>
                                 </div>
@@ -288,14 +294,14 @@ export default function RegisterPage() {
                                     <div className="space-y-2">
                                         <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Identity ID</label>
                                         <div className="relative group">
-                                            <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                            <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                             <input
                                                 type="text"
                                                 required
                                                 value={studentId}
                                                 onChange={(e) => setStudentId(e.target.value)}
                                                 placeholder="10XXXXXX"
-                                                className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                                className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
                                             />
                                         </div>
                                     </div>
@@ -304,14 +310,14 @@ export default function RegisterPage() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Cognitive Field</label>
                                     <div className="relative group">
-                                        <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
                                             type="text"
                                             required
                                             value={course}
                                             onChange={(e) => setCourse(e.target.value)}
                                             placeholder="Computer Science"
-                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
                                         />
                                     </div>
                                 </div>
@@ -319,14 +325,14 @@ export default function RegisterPage() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Network Identity</label>
                                     <div className="relative group">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
                                             type="email"
                                             required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="name@university.edu"
-                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
                                         />
                                     </div>
                                 </div>
@@ -334,16 +340,16 @@ export default function RegisterPage() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Create Access Key</label>
                                     <div className="relative group">
-                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             required
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             placeholder="••••••••"
-                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
                                         />
-                                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30 hover:text-primary">
+                                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30 hover:text-orange-500">
                                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
                                     </div>
@@ -357,7 +363,7 @@ export default function RegisterPage() {
                                 onHoverEnd={() => setIsHovered(false)}
                                 type="submit"
                                 disabled={loading}
-                                className="w-full h-14 mt-4 bg-primary hover:brightness-110 text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-all shadow-xl shadow-primary/10 disabled:opacity-50 relative overflow-hidden"
+                                className="w-full h-14 mt-4 bg-orange-500 hover:bg-orange-600 text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-all shadow-xl shadow-orange-500/10 disabled:opacity-50 relative overflow-hidden"
                             >
                                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>INITIALIZE PROFILE <ArrowRight className="h-4 w-4" /></>}
                                 {isHovered && !loading && (
@@ -373,7 +379,7 @@ export default function RegisterPage() {
 
                         <div className="text-center pt-6 text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40">
                             Already part of the network?{" "}
-                            <Link href="/login" className="text-primary hover:underline">
+                            <Link href="/login" className="text-orange-500 hover:underline">
                                 Log In
                             </Link>
                         </div>

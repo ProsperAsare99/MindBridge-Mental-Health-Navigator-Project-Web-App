@@ -32,89 +32,96 @@
 :root {
   color-scheme: light dark;
 
-  /* Core Colors - Light Theme (Parchment/Linen) */
-  --background: #f5ebe0; /* Linen */
-  --foreground: #0d1b2a; /* Ink Black for contrast */
+  /* New Global Theme - Light Mode (Palette 2 focus) */
+  --background: #edede9; /* Parchment */
+  --foreground: #415a77; /* Dusk Blue */
 
   --primary: #d5bdaf; /* Almond Silk */
-  --primary-foreground: #0d1b2a;
+  --primary-foreground: #415a77;
 
   --secondary: #e3d5ca; /* Powder Petal */
-  --secondary-foreground: #0d1b2a;
+  --secondary-foreground: #415a77;
 
-  --muted: #edede9; /* Parchment */
-  --muted-foreground: #d6ccc2; /* Dust Grey */
+  --muted: #f5ebe0; /* Linen */
+  --muted-foreground: #778da9; /* Dusty Denim */
 
   --accent: #d6ccc2; /* Dust Grey */
-  --accent-foreground: #0d1b2a;
+  --accent-foreground: #415a77;
 
-  --border: rgba(213, 189, 175, 0.3); /* Almond Silk based */
-  --input: rgba(213, 189, 175, 0.2);
-  --ring: rgba(213, 189, 175, 0.4);
+  --border: rgba(119, 141, 169, 0.2); /* Dusty Denim tint */
+  --input: rgba(119, 141, 169, 0.1);
+  --ring: rgba(119, 141, 169, 0.4);
 
-  --card: #edede9; /* Parchment */
-  --card-foreground: #0d1b2a;
-  --surface-above: #f5ebe0;
-}
-
-.light {
-  --background: #f5ebe0;
-  --foreground: #0d1b2a;
-  --primary: #d5bdaf;
-  --primary-foreground: #0d1b2a;
-  --secondary: #e3d5ca;
-  --secondary-foreground: #0d1b2a;
-  --muted: #edede9;
-  --muted-foreground: #d6ccc2;
-  --accent: #d6ccc2;
-  --accent-foreground: #0d1b2a;
-  --border: rgba(213, 189, 175, 0.3);
-  --input: rgba(213, 189, 175, 0.2);
-  --ring: rgba(213, 189, 175, 0.4);
-  --card: #edede9;
-  --card-foreground: #0d1b2a;
-  --surface-above: #f5ebe0;
+  --card: #f5ebe0; /* Linen */
+  --card-foreground: #415a77;
+  --surface-above: #e0e1dd; /* Alabaster Grey */
 }
 
 .dark {
-  /* Core Colors - Dark Theme (Ink/Dusk Blue) */
-  --background: #0d1b2a; /* Ink Black */
-  --foreground: #e0e1dd; /* Alabaster Grey */
+  /* New Global Theme - Dark Mode (Palette 1 focus) */
+  --background: #415a77; /* Dusk Blue */
+  --foreground: #edede9; /* Parchment */
 
-  --primary: #415a77; /* Dusk Blue */
-  --primary-foreground: #e0e1dd;
+  --primary: #778da9; /* Dusty Denim */
+  --primary-foreground: #edede9;
 
-  --secondary: #1b263b; /* Prussian Blue */
-  --secondary-foreground: #e0e1dd;
+  --secondary: #d5bdaf; /* Almond Silk */
+  --secondary-foreground: #415a77;
 
-  --muted: #1b263b; /* Prussian Blue */
-  --muted-foreground: #778da9; /* Dusty Denim */
+  --muted: #d6ccc2; /* Dust Grey */
+  --muted-foreground: #e0e1dd; /* Alabaster Grey */
 
-  --accent: #778da9; /* Dusty Denim */
-  --accent-foreground: #e0e1dd;
+  --accent: #e3d5ca; /* Powder Petal */
+  --accent-foreground: #415a77;
 
-  --border: rgba(65, 90, 119, 0.2); /* Dusk Blue based */
-  --input: rgba(65, 90, 119, 0.2);
-  --ring: rgba(65, 90, 119, 0.5);
+  --border: rgba(224, 225, 221, 0.2); /* Alabaster Grey tint */
+  --input: rgba(224, 225, 221, 0.1);
+  --ring: rgba(224, 225, 221, 0.4);
 
-  --card: #1b263b; /* Prussian Blue */
-  --card-foreground: #e0e1dd;
-  --surface-above: #1b263b;
+  --card: #415a77;
+  --card-foreground: #edede9;
+  --surface-above: #778da9;
+}
+
+/* Auth Theme - Preserved Teal/Deep Twilight Theme */
+.auth-theme {
+  --background: #03045e; /* Deep Twilight */
+  --foreground: #caf0f8; /* Light Cyan */
+
+  --primary: #0077b6; /* Bright Teal Blue */
+  --primary-foreground: #ffffff;
+
+  --secondary: #00b4d8; /* Turquoise Surf */
+  --secondary-foreground: #ffffff;
+
+  --muted: #023e8a; /* French Blue */
+  --muted-foreground: #90e0ef;
+
+  --accent: #023e8a;
+  --accent-foreground: #ffffff;
+
+  --border: rgba(144, 224, 239, 0.2);
+  --input: rgba(144, 224, 239, 0.2);
+  --ring: rgba(72, 202, 228, 0.5);
+
+  --card: #023e8a;
+  --card-foreground: #caf0f8;
+  --surface-above: #023e8a;
 }
 
 .glass {
-  background: rgba(245, 235, 224, 0.45); /* Linen tint */
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(213, 189, 175, 0.4); /* Almond Silk based */
+  border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow:
     0 8px 32px 0 rgba(31, 38, 135, 0.07),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .dark .glass {
-  background: rgba(27, 38, 59, 0.5); /* Prussian Blue tint */
+  background: rgba(3, 4, 94, 0.5); /* Deep Twilight tint */
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(224, 225, 221, 0.1); /* Alabaster Grey based */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
     0 8px 32px 0 rgba(0, 0, 0, 0.37),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);

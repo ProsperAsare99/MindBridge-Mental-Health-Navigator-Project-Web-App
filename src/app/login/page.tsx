@@ -58,7 +58,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-primary/30">
+        <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-orange-500/30 auth-theme">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -66,17 +66,17 @@ export default function LoginPage() {
                 className="w-full max-w-6xl h-screen md:h-[min(800px,90vh)] overflow-hidden flex flex-col md:flex-row bg-card shadow-2xl md:rounded-3xl border border-border/50"
             >
                 {/* Left Panel: Brand & Visuals */}
-                <div className="hidden md:flex w-1/2 relative bg-[#0d1b2a] overflow-hidden flex-col justify-between p-12 border-r border-white/5">
+                <div className="hidden md:flex w-1/2 relative bg-zinc-950 overflow-hidden flex-col justify-between p-12 border-r border-white/5">
                     {/* Background Layer */}
                     <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-40" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent opacity-40" />
                         <DotMap />
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(249,115,22,0.05),transparent_70%)]" />
                     </div>
 
                     {/* Logo Area */}
                     <div className="relative z-10 flex items-center gap-4 group cursor-default">
-                        <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all duration-500">
+                        <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:border-orange-500/30 group-hover:bg-orange-500/5 transition-all duration-500">
                             <Logo iconOnly size="md" />
                         </div>
                         <span className="text-2xl font-extrabold tracking-tighter text-white">MindBridge</span>
@@ -90,13 +90,13 @@ export default function LoginPage() {
                             transition={{ delay: 0.3 }}
                             className="text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-white"
                         >
-                            Resume your journey with <span className="text-primary">intelligent support.</span>
+                            Resume your journey with <span className="text-orange-500">intelligent support.</span>
                         </motion.h1>
                         <motion.p 
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="text-lg text-muted-foreground/60 font-medium leading-relaxed max-w-sm"
+                            className="text-lg text-zinc-400 font-medium leading-relaxed max-w-sm"
                         >
                             Enter your credentials to access your personalized wellness workspace and neuro-navigator.
                         </motion.p>
@@ -105,11 +105,11 @@ export default function LoginPage() {
                     {/* Trust Badges */}
                     <div className="relative z-10 flex items-center gap-8 pt-8 border-t border-white/5">
                         <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <ShieldCheck className="h-4 w-4 text-primary/50" />
+                            <ShieldCheck className="h-4 w-4 text-orange-500/50" />
                             Privacy Validated
                         </div>
                         <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <PlusCircle className="h-4 w-4 text-primary/50" />
+                            <PlusCircle className="h-4 w-4 text-orange-500/50" />
                             Secure Session
                         </div>
                     </div>
@@ -153,7 +153,7 @@ export default function LoginPage() {
                                 disabled={loading}
                                 className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group"
                             >
-                                <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-primary transition-colors" />
+                                <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-orange-500 transition-colors" />
                                 Guest
                             </button>
                         </div>
@@ -195,7 +195,7 @@ export default function LoginPage() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Network Identity</label>
                                     <div className="relative group">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
                                             type="email"
                                             required
@@ -210,7 +210,7 @@ export default function LoginPage() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Secure Access Key</label>
                                     <div className="relative group">
-                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             required
@@ -222,7 +222,7 @@ export default function LoginPage() {
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30 hover:text-primary"
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30 hover:text-orange-500"
                                         >
                                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
@@ -231,10 +231,10 @@ export default function LoginPage() {
                             </div>
 
                             <div className="flex items-center justify-between px-1">
-                                <button type="button" className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40 hover:text-primary transition-colors">
+                                <button type="button" className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40 hover:text-orange-500 transition-colors">
                                     Recovery Key?
                                 </button>
-                                <Link href="/register" className="text-[10px] font-extrabold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors">
+                                <Link href="/register" className="text-[10px] font-extrabold uppercase tracking-widest text-orange-500 hover:text-orange-600 transition-colors">
                                     Create Profile
                                 </Link>
                             </div>
@@ -246,7 +246,7 @@ export default function LoginPage() {
                                 onHoverEnd={() => setIsHovered(false)}
                                 type="submit"
                                 disabled={loading}
-                                className="w-full h-14 bg-primary hover:brightness-110 text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-all shadow-xl shadow-primary/10 disabled:opacity-50 relative overflow-hidden"
+                                className="w-full h-14 bg-orange-500 hover:bg-orange-600 text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-all shadow-xl shadow-orange-500/10 disabled:opacity-50 relative overflow-hidden"
                             >
                                 {loading ? (
                                     <Loader2 className="h-5 w-5 animate-spin" />
@@ -268,7 +268,7 @@ export default function LoginPage() {
                         </form>
 
                         <div className="pt-10 text-center">
-                            <Link href="/" className="inline-flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-[0.2em] text-muted-foreground/30 hover:text-primary transition-all group">
+                            <Link href="/" className="inline-flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-[0.2em] text-muted-foreground/30 hover:text-orange-500 transition-all group">
                                 <ArrowLeft className="h-3 w-3 group-hover:-translate-x-1 transition-transform" />
                                 Return to Navigation Node
                             </Link>

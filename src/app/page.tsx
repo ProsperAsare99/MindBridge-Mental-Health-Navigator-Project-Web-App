@@ -29,8 +29,7 @@ export default function Home() {
   const { toggle } = useSearch();
 
   return (
-    <main className="light">
-      <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 selection:text-primary overflow-hidden">
+    <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 selection:text-primary overflow-hidden">
       {/* Soft Background Accents */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <ParallaxSection speed={0.05} direction="down" className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%]">
@@ -387,7 +386,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      </div>
-    </main>
+    </div>
   );
 }
