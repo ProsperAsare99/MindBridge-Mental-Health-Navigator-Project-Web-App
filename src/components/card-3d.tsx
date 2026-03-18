@@ -250,10 +250,10 @@ export const Card3D = ({
     title,
     content,
     rotationSmoothness = 0.1,
-    hoverScale = 1.05,
-    hoverLift = 0.5,
+    hoverScale = 1.02,
+    hoverLift = 0.2,
     hoverColor = "#222",
-    hoverLightIntensity = 10,
+    hoverLightIntensity = 8,
     dynamicLight = true,
 }: Card3DProps) => {
     return (

@@ -234,8 +234,8 @@ export default function Home() {
 
             <div className="order-1 md:order-2 flex justify-center">
               <Card3D
-                hoverScale={1.1}
-                hoverLift={1}
+                hoverScale={1.05}
+                hoverLift={0.5}
                 color="transparent"
                 hoverColor="transparent"
                 className="h-[500px]"
