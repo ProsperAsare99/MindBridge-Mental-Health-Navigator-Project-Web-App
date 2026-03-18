@@ -199,6 +199,11 @@ export default function Home() {
                   title: "University Integration",
                   description: "Seamlessly connect with your institution's specific support resources and counselors.",
                   icon: ShieldCheck
+                },
+                {
+                  title: "Real-time Analysis",
+                  description: "Receive instant, expert-level feedback on your mental well-being and academic pulse.",
+                  icon: Sparkles
                 }
               ].map((feature, i) => (
                 <motion.div
