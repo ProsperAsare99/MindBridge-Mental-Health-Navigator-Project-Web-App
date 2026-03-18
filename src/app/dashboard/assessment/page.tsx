@@ -44,7 +44,7 @@ const ASSESSMENT_DATA = {
         ],
         getAnalysis: (score: number) => {
             if (score <= 4) return { level: "Minimal", color: "text-emerald-500", desc: "Your score suggests minimal symptoms of depression." };
-            if (score <= 9) return { level: "Mild", color: "text-blue-500", desc: "Your score suggests mild symptoms. It might be helpful to monitor how you feel." };
+            if (score <= 9) return { level: "Mild", color: "text-primary", desc: "Your score suggests mild symptoms. It might be helpful to monitor how you feel." };
             if (score <= 14) return { level: "Moderate", color: "text-amber-500", desc: "Your score suggests moderate symptoms. Consider speaking with a professional." };
             if (score <= 19) return { level: "Moderately Severe", color: "text-orange-500", desc: "Your score suggests moderately severe symptoms. We recommend reaching out to a therapist." };
             return { level: "Severe", color: "text-red-500", desc: "Your score suggests severe symptoms. Please prioritize seeking professional support soon." };
@@ -70,7 +70,7 @@ const ASSESSMENT_DATA = {
         ],
         getAnalysis: (score: number) => {
             if (score <= 4) return { level: "Minimal", color: "text-emerald-500", desc: "Your score suggests minimal anxiety levels." };
-            if (score <= 9) return { level: "Mild", color: "text-blue-500", desc: "Your score suggests mild anxiety. Practice grounding exercises." };
+            if (score <= 9) return { level: "Mild", color: "text-primary", desc: "Your score suggests mild anxiety. Practice grounding exercises." };
             if (score <= 14) return { level: "Moderate", color: "text-amber-500", desc: "Your score suggests moderate anxiety. Professional guidance may be beneficial." };
             return { level: "Severe", color: "text-red-500", desc: "Your score suggests severe anxiety. Please consider connecting with a counselor." };
         }
@@ -138,8 +138,8 @@ const assessments = [
         duration: "3-5 mins",
         questions: 9,
         category: "Clinical",
-        color: "text-blue-500",
-        bgColor: "bg-blue-500/10"
+        color: "text-primary",
+        bgColor: "bg-primary/10"
     },
     {
         id: "gad7",
@@ -168,8 +168,8 @@ const assessments = [
         duration: "4 mins",
         questions: 10,
         category: "Wellness",
-        color: "text-indigo-500",
-        bgColor: "bg-indigo-500/10"
+        color: "text-secondary",
+        bgColor: "bg-secondary/10"
     }
 ];
 

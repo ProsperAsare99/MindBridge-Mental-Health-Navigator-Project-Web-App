@@ -8,8 +8,8 @@ interface AuroraBackgroundProps {
 }
 
 export function AuroraBackground({ 
-  primaryColor = "bg-primary/10", 
-  secondaryColor = "bg-secondary/15" 
+  primaryColor = "bg-primary/5", 
+  secondaryColor = "bg-foreground/5" 
 }: AuroraBackgroundProps) {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">

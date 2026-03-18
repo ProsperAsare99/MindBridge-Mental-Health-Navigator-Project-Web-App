@@ -28,7 +28,7 @@ export default function SupportPage() {
       title: "Getting Started",
       description: "Learn how to set up your profile and start your well-being journey.",
       icon: BookOpen,
-      color: "bg-blue-500/10 text-blue-500"
+      color: "bg-primary/10 text-primary"
     },
     {
       title: "Technical Support",
@@ -155,7 +155,7 @@ export default function SupportPage() {
             </div>
             
             <div className="flex flex-col gap-4 w-full md:w-auto relative z-10">
-              <Button size="lg" className="h-20 px-12 rounded-full text-xl font-black gap-4 w-full shadow-2xl shadow-primary/30 group">
+              <Button size="lg" className="h-20 px-12 rounded-full text-xl font-black gap-4 w-full shadow-2xl shadow-foreground/5 group">
                 <MessageSquare className="h-6 w-6 group-hover:scale-110 transition-transform" />
                 Live Chat
               </Button>

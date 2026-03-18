@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const QUICK_LINKS = [
   { title: "Crisis Support", href: "/dashboard/crisis", icon: ShieldAlert, color: "text-red-500", bg: "bg-red-500/10" },
-  { title: "Mental Health Resources", href: "/dashboard/resources", icon: BookOpen, color: "text-blue-500", bg: "bg-blue-500/10" },
+  { title: "Mental Health Resources", href: "/dashboard/resources", icon: BookOpen, color: "text-primary", bg: "bg-primary/10" },
   { title: "Live Chat Support", href: "/support", icon: MessageSquare, color: "text-primary", bg: "bg-primary/10" },
   { title: "University Services", href: "/dashboard", icon: Sparkles, color: "text-secondary", bg: "bg-secondary/10" },
 ];

@@ -161,12 +161,12 @@
   backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow:
-    0 8px 32px 0 rgba(31, 38, 135, 0.07),
+    0 8px 32px 0 rgba(0, 0, 0, 0.05),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .dark .glass {
-  background: rgba(3, 4, 94, 0.5); /* Deep Twilight tint */
+  background: rgba(24, 24, 27, 0.45); /* Neutral Carbon Tint */
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:

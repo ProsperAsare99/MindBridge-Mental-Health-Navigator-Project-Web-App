@@ -105,13 +105,13 @@ export default function AboutPage() {
               title: "Our Vision",
               description: "To create a world where every student has the tools and support to navigate their academic and personal life with clarity and resilience.",
               icon: Target,
-              gradient: "from-primary/20 to-transparent"
+              gradient: "from-primary/10 to-transparent"
             },
             {
               title: "Our Commitment",
               description: "We are committed to providing confidential, AI-powered guidance that respects the unique cultural and social context of Ghanaian students.",
               icon: ShieldCheck,
-              gradient: "from-secondary/20 to-transparent"
+              gradient: "from-foreground/5 to-transparent"
             }
           ].map((card, i) => (
             <motion.div

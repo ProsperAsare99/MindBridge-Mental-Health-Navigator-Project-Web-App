@@ -87,7 +87,7 @@ export default function Home() {
             </Button>
           </Link>
           <Link href="/register">
-            <Button className="rounded-full px-6 shadow-xl shadow-primary/25">
+            <Button className="rounded-full px-6 shadow-xl shadow-foreground/5">
               Get Started
             </Button>
           </Link>
@@ -137,7 +137,7 @@ export default function Home() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
             <Link href="/register" className="w-full sm:w-auto">
-              <Button size="lg" className="h-16 px-10 rounded-full text-lg font-bold shadow-2xl shadow-primary/30">
+              <Button size="lg" className="h-16 px-10 rounded-full text-lg font-bold shadow-2xl shadow-foreground/5">
                 Join MindBridge
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
@@ -330,7 +330,7 @@ export default function Home() {
         className="fixed bottom-10 right-10 z-50 md:flex hidden"
       >
         <div className="group relative">
-          <button className="h-16 w-16 rounded-full glass bg-card shadow-premium border border-primary/20 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300">
+          <button className="h-16 w-16 rounded-full glass bg-card shadow-premium border border-foreground/5 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300">
             <MessageCircle className="h-7 w-7 text-primary" />
           </button>
           <div className="absolute bottom-full right-0 mb-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">

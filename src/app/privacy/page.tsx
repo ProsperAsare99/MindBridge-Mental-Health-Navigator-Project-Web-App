@@ -101,7 +101,7 @@ export default function PrivacyPage() {
             </div>
             <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none">
               Your Privacy, <br />
-              <span className="text-primary/80">Protected.</span>
+              <span className="text-foreground/80">Protected.</span>
             </h1>
             <p className="text-xl md:text-2xl font-medium text-muted-foreground max-w-2xl leading-relaxed">
               At MindBridge, we believe that mental health support must be built on a foundation of absolute trust and transparency.

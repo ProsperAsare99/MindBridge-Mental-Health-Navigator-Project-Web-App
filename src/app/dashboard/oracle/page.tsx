@@ -37,7 +37,7 @@ interface Message {
 
 const SUGGESTED_PROMPTS = [
     { title: "Manage Stress", icon: Zap, prompt: "How can I better manage my academic stress this week?", color: "from-amber-500/20 to-orange-500/20" },
-    { title: "Sleep Better", icon: Moon, prompt: "I'm having trouble sleeping. What can I do to improve my rest?", color: "from-indigo-500/20 to-blue-500/20" },
+    { title: "Sleep Better", icon: Moon, prompt: "I'm having trouble sleeping. What can I do to improve my rest?", color: "from-zinc-500/20 to-primary/20" },
     { title: "Connect More", icon: MessageSquare, prompt: "I'm feeling a bit lonely on campus. How can I connect more?", color: "from-pink-500/20 to-rose-500/20" },
     { title: "Mindfulness", icon: Wind, prompt: "Give me a 5-minute mindfulness exercise for between classes.", color: "from-emerald-500/20 to-teal-500/20" }
 ];
