@@ -126,7 +126,7 @@ export default function SettingsPage() {
     }
 
     return (
-        <div className="min-h-screen relative pb-20 selection:bg-primary/10">
+        <div className="min-h-screen relative pb-20 selection:bg-primary/10 theme-luxury">
             {/* Ambient background accents */}
             <div className="fixed inset-0 pointer-events-none -z-10">
                 <div className="absolute top-0 left-0 w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full" />

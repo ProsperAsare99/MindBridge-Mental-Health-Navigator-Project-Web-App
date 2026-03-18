@@ -32,55 +32,55 @@
 :root {
   color-scheme: light dark;
 
-  /* New Global Theme - Light Mode (Palette 2 focus) */
-  --background: #edede9; /* Parchment */
-  --foreground: #415a77; /* Dusk Blue */
+  /* New Global Theme - Light Mode (MAXIMUM Contrast) */
+  --background: #edede9; /* Parchment - Base surface */
+  --foreground: #1b263b; /* Deep Navy - Maximum readability */
 
-  --primary: #d5bdaf; /* Almond Silk */
-  --primary-foreground: #415a77;
+  --primary: #415a77; /* Dusk Blue */
+  --primary-foreground: #edede9;
 
-  --secondary: #e3d5ca; /* Powder Petal */
-  --secondary-foreground: #415a77;
+  --secondary: #d5bdaf; /* Almond Silk */
+  --secondary-foreground: #1b263b;
 
-  --muted: #f5ebe0; /* Linen */
-  --muted-foreground: #778da9; /* Dusty Denim */
+  --muted: #f1f1f1; /* Lightened for separation */
+  --muted-foreground: #415a77; /* Dusk Blue - Secondary text */
 
-  --accent: #d6ccc2; /* Dust Grey */
-  --accent-foreground: #415a77;
+  --accent: #e3d5ca; /* Powder Petal */
+  --accent-foreground: #1b263b;
 
-  --border: rgba(119, 141, 169, 0.2); /* Dusty Denim tint */
-  --input: rgba(119, 141, 169, 0.1);
-  --ring: rgba(119, 141, 169, 0.4);
+  --border: #d6ccc2; /* Dust Grey */
+  --input: #d6ccc2;
+  --ring: #778da9;
 
-  --card: #f5ebe0; /* Linen */
-  --card-foreground: #415a77;
-  --surface-above: #e0e1dd; /* Alabaster Grey */
+  --card: #f5ebe0; /* Linen - Surface elevation */
+  --card-foreground: #1b263b;
+  --surface-above: #e0e1dd;
 }
 
 .dark {
-  /* New Global Theme - Dark Mode (Palette 1 focus) */
-  --background: #415a77; /* Dusk Blue */
-  --foreground: #edede9; /* Parchment */
+  /* New Global Theme - Dark Mode (MAXIMUM Contrast) */
+  --background: #151a24; /* Absolute Dark Blue for contrast */
+  --foreground: #edede9; /* Parchment - Maximum legibility */
 
   --primary: #778da9; /* Dusty Denim */
   --primary-foreground: #edede9;
 
   --secondary: #d5bdaf; /* Almond Silk */
-  --secondary-foreground: #415a77;
+  --secondary-foreground: #1b263b;
 
-  --muted: #d6ccc2; /* Dust Grey */
-  --muted-foreground: #e0e1dd; /* Alabaster Grey */
+  --muted: #415a77; /* Dusk Blue */
+  --muted-foreground: #e0e1dd; /* Alabaster Grey (Subtext) */
 
   --accent: #e3d5ca; /* Powder Petal */
-  --accent-foreground: #415a77;
+  --accent-foreground: #1b263b;
 
-  --border: rgba(224, 225, 221, 0.2); /* Alabaster Grey tint */
+  --border: rgba(224, 225, 221, 0.2);
   --input: rgba(224, 225, 221, 0.1);
-  --ring: rgba(224, 225, 221, 0.4);
+  --ring: #778da9;
 
-  --card: #415a77;
+  --card: #1b263b; /* Deep Navy Surface */
   --card-foreground: #edede9;
-  --surface-above: #778da9;
+  --surface-above: #415a77;
 }
 
 /* Auth Theme - Preserved Teal/Deep Twilight Theme */
@@ -107,6 +107,53 @@
   --card: #023e8a;
   --card-foreground: #caf0f8;
   --surface-above: #023e8a;
+}
+
+/* Soft Luxury Theme - Profile & Settings Exclusive */
+.theme-luxury {
+  --background: #fdfcf9; /* Soft Ivory */
+  --foreground: #1b263b; /* Deep Navy (Contrast Optimization) */
+
+  --primary: #c5a059; /* Soft Antique Gold */
+  --primary-foreground: #ffffff;
+
+  --secondary: #d9c5b2; /* Champagne Beige */
+  --secondary-foreground: #1b263b;
+
+  --muted: #f7f3ef; /* Cream Stone */
+  --muted-foreground: #8a7e72; /* Taupe */
+
+  --accent: #e5d9cd; /* Sandstone */
+  --accent-foreground: #1b263b;
+
+  --border: #e3d9cf; /* Subtle Silk Border */
+  --input: #e3d9cf;
+  --ring: #c5a059;
+
+  --card: #ffffff;
+  --card-foreground: #1b263b;
+  --surface-above: #fdfcf9;
+}
+
+.dark .theme-luxury {
+  --background: #1c1c1c; /* Obsidian Black */
+  --foreground: #f5f5f0; /* Cream Text */
+
+  --primary: #ae9164; /* Muted Gold */
+  --primary-foreground: #1c1c1c;
+
+  --secondary: #3d3d3d; /* Dark Stone */
+  --secondary-foreground: #f5f5f0;
+
+  --muted: #2a2a2a;
+  --muted-foreground: #a0a090;
+
+  --accent: #ae9164;
+  --accent-foreground: #1c1c1c;
+
+  --border: #333333;
+  --card: #242424;
+  --surface-above: #1c1c1c;
 }
 
 .glass {

@@ -56,7 +56,7 @@ export default function ProfilePage() {
         : null;
 
     return (
-        <div className="min-h-screen relative pb-20 selection:bg-primary/10">
+        <div className="min-h-screen relative pb-20 selection:bg-primary/10 theme-luxury">
             {/* Hidden File Input */}
             <input
                 type="file"
