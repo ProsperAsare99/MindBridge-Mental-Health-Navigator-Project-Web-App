@@ -32,89 +32,89 @@
 :root {
   color-scheme: light dark;
 
-  /* Core Colors - Light Theme */
-  --background: #fdfdfd;
-  --foreground: #03045e; /* Deep Twilight */
+  /* Core Colors - Light Theme (Parchment/Linen) */
+  --background: #f5ebe0; /* Linen */
+  --foreground: #0d1b2a; /* Ink Black for contrast */
 
-  --primary: #0077b6; /* Bright Teal Blue */
-  --primary-foreground: #ffffff;
+  --primary: #d5bdaf; /* Almond Silk */
+  --primary-foreground: #0d1b2a;
 
-  --secondary: #00b4d8; /* Turquoise Surf */
-  --secondary-foreground: #ffffff;
+  --secondary: #e3d5ca; /* Powder Petal */
+  --secondary-foreground: #0d1b2a;
 
-  --muted: #f1f7fe;
-  --muted-foreground: #023e8a; /* French Blue */
+  --muted: #edede9; /* Parchment */
+  --muted-foreground: #d6ccc2; /* Dust Grey */
 
-  --accent: #caf0f8; /* Light Cyan */
-  --accent-foreground: #03045e;
+  --accent: #d6ccc2; /* Dust Grey */
+  --accent-foreground: #0d1b2a;
 
-  --border: rgba(0, 119, 182, 0.15);
-  --input: rgba(0, 119, 182, 0.1);
-  --ring: rgba(0, 119, 182, 0.4);
+  --border: rgba(213, 189, 175, 0.3); /* Almond Silk based */
+  --input: rgba(213, 189, 175, 0.2);
+  --ring: rgba(213, 189, 175, 0.4);
 
-  --card: #ffffff;
-  --card-foreground: #03045e;
-  --surface-above: #f8fafc;
+  --card: #edede9; /* Parchment */
+  --card-foreground: #0d1b2a;
+  --surface-above: #f5ebe0;
 }
 
 .light {
-  --background: #fdfdfd;
-  --foreground: #03045e;
-  --primary: #0077b6;
-  --primary-foreground: #ffffff;
-  --secondary: #00b4d8;
-  --secondary-foreground: #ffffff;
-  --muted: #f1f7fe;
-  --muted-foreground: #023e8a;
-  --accent: #caf0f8;
-  --accent-foreground: #03045e;
-  --border: rgba(0, 119, 182, 0.15);
-  --input: rgba(0, 119, 182, 0.1);
-  --ring: rgba(0, 119, 182, 0.4);
-  --card: #ffffff;
-  --card-foreground: #03045e;
-  --surface-above: #f8fafc;
+  --background: #f5ebe0;
+  --foreground: #0d1b2a;
+  --primary: #d5bdaf;
+  --primary-foreground: #0d1b2a;
+  --secondary: #e3d5ca;
+  --secondary-foreground: #0d1b2a;
+  --muted: #edede9;
+  --muted-foreground: #d6ccc2;
+  --accent: #d6ccc2;
+  --accent-foreground: #0d1b2a;
+  --border: rgba(213, 189, 175, 0.3);
+  --input: rgba(213, 189, 175, 0.2);
+  --ring: rgba(213, 189, 175, 0.4);
+  --card: #edede9;
+  --card-foreground: #0d1b2a;
+  --surface-above: #f5ebe0;
 }
 
 .dark {
-  /* Core Colors - Dark Theme */
-  --background: #03045e; /* Deep Twilight */
-  --foreground: #caf0f8; /* Light Cyan */
+  /* Core Colors - Dark Theme (Ink/Dusk Blue) */
+  --background: #0d1b2a; /* Ink Black */
+  --foreground: #e0e1dd; /* Alabaster Grey */
 
-  --primary: #48cae4; /* Sky Aqua */
-  --primary-foreground: #03045e;
+  --primary: #415a77; /* Dusk Blue */
+  --primary-foreground: #e0e1dd;
 
-  --secondary: #0096c7; /* Blue Green */
-  --secondary-foreground: #ffffff;
+  --secondary: #1b263b; /* Prussian Blue */
+  --secondary-foreground: #e0e1dd;
 
-  --muted: #023e8a; /* French Blue */
-  --muted-foreground: #90e0ef;
+  --muted: #1b263b; /* Prussian Blue */
+  --muted-foreground: #778da9; /* Dusty Denim */
 
-  --accent: #023e8a;
-  --accent-foreground: #ffffff;
+  --accent: #778da9; /* Dusty Denim */
+  --accent-foreground: #e0e1dd;
 
-  --border: rgba(144, 224, 239, 0.2);
-  --input: rgba(144, 224, 239, 0.2);
-  --ring: rgba(72, 202, 228, 0.5);
+  --border: rgba(65, 90, 119, 0.2); /* Dusk Blue based */
+  --input: rgba(65, 90, 119, 0.2);
+  --ring: rgba(65, 90, 119, 0.5);
 
-  --card: #023e8a;
-  --card-foreground: #caf0f8;
-  --surface-above: #023e8a;
+  --card: #1b263b; /* Prussian Blue */
+  --card-foreground: #e0e1dd;
+  --surface-above: #1b263b;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(245, 235, 224, 0.45); /* Linen tint */
   backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(213, 189, 175, 0.4); /* Almond Silk based */
   box-shadow:
     0 8px 32px 0 rgba(31, 38, 135, 0.07),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .dark .glass {
-  background: rgba(3, 4, 94, 0.5); /* Deep Twilight tint */
+  background: rgba(27, 38, 59, 0.5); /* Prussian Blue tint */
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(224, 225, 221, 0.1); /* Alabaster Grey based */
   box-shadow:
     0 8px 32px 0 rgba(0, 0, 0, 0.37),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);

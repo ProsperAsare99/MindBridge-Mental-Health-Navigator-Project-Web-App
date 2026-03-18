@@ -16,7 +16,7 @@ export const DotMap = () => {
     {
       start: { x: 100, y: 150, delay: 0 },
       end: { x: 200, y: 80, delay: 2 },
-      color: "rgba(249, 115, 22, 0.4)", // orange-500
+      color: "rgba(65, 90, 119, 0.4)", // Dusk Blue
     },
     {
       start: { x: 200, y: 80, delay: 2 },
@@ -100,7 +100,7 @@ export const DotMap = () => {
       dots.forEach(dot => {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(249, 115, 22, ${dot.opacity})`; 
+        ctx.fillStyle = `rgba(65, 90, 119, ${dot.opacity})`; // Dusk Blue
         ctx.fill();
       });
     }
@@ -128,7 +128,7 @@ export const DotMap = () => {
         
         ctx.beginPath();
         ctx.arc(x, y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(249, 115, 22, 0.8)";
+        ctx.fillStyle = "rgba(119, 141, 169, 0.8)"; // Dusty Denim
         ctx.fill();
       });
     }
