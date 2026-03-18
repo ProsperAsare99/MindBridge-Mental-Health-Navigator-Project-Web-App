@@ -32,55 +32,55 @@
 :root {
   color-scheme: light dark;
 
-  /* New Global Theme - Light Mode (MAXIMUM Contrast) */
+  /* New Global Theme - Light Mode (NEUTRAL & GOLD) */
   --background: #edede9; /* Parchment - Base surface */
-  --foreground: #1b263b; /* Deep Navy - Maximum readability */
+  --foreground: #1a1a1a; /* Pure Charcoal - Maximum readability */
 
-  --primary: #415a77; /* Dusk Blue */
-  --primary-foreground: #edede9;
+  --primary: #c5a059; /* Antique Gold - Replaces Dusk Blue */
+  --primary-foreground: #ffffff;
 
   --secondary: #d5bdaf; /* Almond Silk */
-  --secondary-foreground: #1b263b;
+  --secondary-foreground: #1a1a1a;
 
-  --muted: #f1f1f1; /* Lightened for separation */
-  --muted-foreground: #415a77; /* Dusk Blue - Secondary text */
+  --muted: #f1f1f1; 
+  --muted-foreground: #71717a; /* Neutral Zinc Zinc subtext */
 
-  --accent: #e3d5ca; /* Powder Petal */
-  --accent-foreground: #1b263b;
+  --accent: #e3d5ca; 
+  --accent-foreground: #1a1a1a;
 
-  --border: #d6ccc2; /* Dust Grey */
+  --border: #d6ccc2; 
   --input: #d6ccc2;
-  --ring: #778da9;
+  --ring: #c5a059;
 
-  --card: #f5ebe0; /* Linen - Surface elevation */
-  --card-foreground: #1b263b;
+  --card: #f5ebe0; 
+  --card-foreground: #1a1a1a;
   --surface-above: #e0e1dd;
 }
 
 .dark {
-  /* New Global Theme - Dark Mode (MAXIMUM Contrast) */
-  --background: #151a24; /* Absolute Dark Blue for contrast */
-  --foreground: #edede9; /* Parchment - Maximum legibility */
+  /* New Global Theme - Dark Mode (CARBON & GOLD) */
+  --background: #0f0f10; /* Deep Carbon */
+  --foreground: #f4f4f5; /* Zinc White */
 
-  --primary: #778da9; /* Dusty Denim */
-  --primary-foreground: #edede9;
+  --primary: #ae9164; /* Muted Gold */
+  --primary-foreground: #0f0f10;
 
-  --secondary: #d5bdaf; /* Almond Silk */
-  --secondary-foreground: #1b263b;
+  --secondary: #27272a; 
+  --secondary-foreground: #f4f4f5;
 
-  --muted: #415a77; /* Dusk Blue */
-  --muted-foreground: #e0e1dd; /* Alabaster Grey (Subtext) */
+  --muted: #1a1a1b; 
+  --muted-foreground: #a1a1aa; 
 
-  --accent: #e3d5ca; /* Powder Petal */
-  --accent-foreground: #1b263b;
+  --accent: #ae9164;
+  --accent-foreground: #0f0f10;
 
-  --border: rgba(224, 225, 221, 0.2);
-  --input: rgba(224, 225, 221, 0.1);
-  --ring: #778da9;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #ae9164;
 
-  --card: #1b263b; /* Deep Navy Surface */
-  --card-foreground: #edede9;
-  --surface-above: #415a77;
+  --card: #1a1a1b; 
+  --card-foreground: #f4f4f5;
+  --surface-above: #27272a;
 }
 
 /* Auth Theme - Preserved Teal/Deep Twilight Theme */

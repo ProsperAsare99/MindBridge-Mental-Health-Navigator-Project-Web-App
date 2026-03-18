@@ -66,7 +66,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                         y: [0, 20, 0]
                     }}
                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-[-5%] right-[-5%] h-[40%] w-[40%] rounded-full bg-primary/10 blur-[120px]" 
+                    className="absolute top-[-5%] right-[-5%] h-[40%] w-[40%] rounded-full bg-foreground/5 blur-[120px]" 
                 />
                 <motion.div 
                     animate={{ 
@@ -75,7 +75,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                         y: [0, -10, 0]
                     }}
                     transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-[-5%] left-[-5%] h-[40%] w-[40%] rounded-full bg-secondary/10 blur-[120px]" 
+                    className="absolute bottom-[-5%] left-[-5%] h-[40%] w-[40%] rounded-full bg-foreground/5 blur-[120px]" 
                 />
             </div>
 

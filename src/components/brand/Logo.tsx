@@ -88,7 +88,7 @@ export function Logo({
                     </g>
 
                     {/* Right Side - Bridge (Teal Line Art) */}
-                    <g stroke="#00A9A9" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                    <g stroke="currentColor" className="text-primary" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M52 30C60 30 66 36 66 44C66 46.5 65 49 63 51" />
                         <path d="M63 51C66 53 68 57 68 62C68 71 61 78 52 78" />
                         <path d="M52 30V78" opacity="0.5" />
@@ -107,7 +107,7 @@ export function Logo({
                         className={cn("font-serif font-black tracking-tight flex items-baseline", textSizes[size])}
                     >
                         <span className="text-foreground/90">Mind</span>
-                        <span className="text-[#00A9A9]">Bridge</span>
+                        <span className="text-primary">Bridge</span>
                     </motion.div>
                     {size === "xl" && (
                         <motion.p
