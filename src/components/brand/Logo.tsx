@@ -51,7 +51,7 @@ export function Logo({
                 className={cn(
                     "relative flex items-center justify-center overflow-hidden transition-[transform,background-color,border-color,box-shadow] duration-500 shadow-premium border border-primary/5",
                     containerSizes[size],
-                    videoSrc ? "bg-black" : "bg-[#0A1A1A] group-hover:bg-[#0D2424]"
+                    videoSrc ? "bg-black" : "bg-[#03045e] group-hover:bg-[#023e8a]"
                 )}
             >
                 {/* MP4 Video Logo Support */}
@@ -87,8 +87,8 @@ export function Logo({
                         <path d="M38 62C38 64 40 65 42 65" strokeWidth="2.5" opacity="0.6" />
                     </g>
 
-                    {/* Right Side - Bridge (Teal Line Art) */}
-                    <g stroke="#00A9A9" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                    {/* Right Side - Bridge (Blue Line Art) */}
+                    <g stroke="#00b4d8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M52 30C60 30 66 36 66 44C66 46.5 65 49 63 51" />
                         <path d="M63 51C66 53 68 57 68 62C68 71 61 78 52 78" />
                         <path d="M52 30V78" opacity="0.5" />
@@ -107,7 +107,7 @@ export function Logo({
                         className={cn("font-serif font-black tracking-tight flex items-baseline", textSizes[size])}
                     >
                         <span className="text-foreground/90">Mind</span>
-                        <span className="text-[#00A9A9]">Bridge</span>
+                        <span className="text-[#00b4d8]">Bridge</span>
                     </motion.div>
                     {size === "xl" && (
                         <motion.p

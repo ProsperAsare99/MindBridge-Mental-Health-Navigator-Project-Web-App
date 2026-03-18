@@ -97,7 +97,7 @@ export default function ProfilePage() {
                         <div className="absolute -bottom-12 left-8 p-1 rounded-[2rem] bg-background border border-border shadow-xl">
                             <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-border flex items-center justify-center text-primary text-3xl font-black overflow-hidden relative group">
                                 {avatarUrl ? (
-                                    <Image src={avatarUrl} alt={user.name || "Avatar"} width={96} height={96} priority className="h-full w-full object-cover" sizes="96px" />
+                                    <Image src={avatarUrl} alt={user.name || "Avatar"} width={96} height={96} priority unoptimized className="h-full w-full object-cover" sizes="96px" />
                                 ) : (
                                     user.displayName ? user.displayName[0].toUpperCase() : "U"
                                 )}
