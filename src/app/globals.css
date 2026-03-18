@@ -34,53 +34,72 @@
 
   /* Core Colors - Light Theme */
   --background: #fdfdfd;
-  --foreground: #141414;
+  --foreground: #03045e; /* Deep Twilight */
 
-  --primary: #5c6b5d;
+  --primary: #0077b6; /* Bright Teal Blue */
   --primary-foreground: #ffffff;
 
-  --secondary: #8e9e8f;
-  --secondary-foreground: #141414;
+  --secondary: #00b4d8; /* Turquoise Surf */
+  --secondary-foreground: #ffffff;
 
-  --muted: #f1f3f1;
-  --muted-foreground: #64748b;
+  --muted: #f1f7fe;
+  --muted-foreground: #023e8a; /* French Blue */
 
-  --accent: #f0f4f0;
-  --accent-foreground: #4a544b;
+  --accent: #caf0f8; /* Light Cyan */
+  --accent-foreground: #03045e;
 
-  --border: rgba(0, 0, 0, 0.12);
-  --input: rgba(0, 0, 0, 0.1);
-  --ring: rgba(92, 107, 93, 0.4);
+  --border: rgba(0, 119, 182, 0.15);
+  --input: rgba(0, 119, 182, 0.1);
+  --ring: rgba(0, 119, 182, 0.4);
 
   --card: #ffffff;
-  --card-foreground: #141414;
+  --card-foreground: #03045e;
+  --surface-above: #f8fafc;
+}
+
+.light {
+  --background: #fdfdfd;
+  --foreground: #03045e;
+  --primary: #0077b6;
+  --primary-foreground: #ffffff;
+  --secondary: #00b4d8;
+  --secondary-foreground: #ffffff;
+  --muted: #f1f7fe;
+  --muted-foreground: #023e8a;
+  --accent: #caf0f8;
+  --accent-foreground: #03045e;
+  --border: rgba(0, 119, 182, 0.15);
+  --input: rgba(0, 119, 182, 0.1);
+  --ring: rgba(0, 119, 182, 0.4);
+  --card: #ffffff;
+  --card-foreground: #03045e;
   --surface-above: #f8fafc;
 }
 
 .dark {
   /* Core Colors - Dark Theme */
-  --background: #000000;
-  --foreground: #f8fafc;
+  --background: #03045e; /* Deep Twilight */
+  --foreground: #caf0f8; /* Light Cyan */
 
-  --primary: #7d8a7e;
-  --primary-foreground: #ffffff;
+  --primary: #48cae4; /* Sky Aqua */
+  --primary-foreground: #03045e;
 
-  --secondary: #334155;
-  --secondary-foreground: #f8fafc;
+  --secondary: #0096c7; /* Blue Green */
+  --secondary-foreground: #ffffff;
 
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
+  --muted: #023e8a; /* French Blue */
+  --muted-foreground: #90e0ef;
 
-  --accent: #1e293b;
-  --accent-foreground: #e2e8f0;
+  --accent: #023e8a;
+  --accent-foreground: #ffffff;
 
-  --border: rgba(255, 255, 255, 0.15);
-  --input: rgba(255, 255, 255, 0.15);
-  --ring: rgba(125, 138, 126, 0.5);
+  --border: rgba(144, 224, 239, 0.2);
+  --input: rgba(144, 224, 239, 0.2);
+  --ring: rgba(72, 202, 228, 0.5);
 
-  --card: #141414;
-  --card-foreground: #f8fafc;
-  --surface-above: #1e293b;
+  --card: #023e8a;
+  --card-foreground: #caf0f8;
+  --surface-above: #023e8a;
 }
 
 .glass {
@@ -93,7 +112,7 @@
 }
 
 .dark .glass {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(3, 4, 94, 0.5); /* Deep Twilight tint */
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:

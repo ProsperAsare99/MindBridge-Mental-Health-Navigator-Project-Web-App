@@ -49,7 +49,7 @@ export default function RegisterPage() {
     const [hasConsented, setHasConsented] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const router = useRouter();
-    const { register, loginWithGoogle } = useAuth() as any;
+    const { register, loginWithGoogle, loginAnonymously } = useAuth() as any;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -226,9 +226,16 @@ export default function RegisterPage() {
                                 </svg>
                                 Google
                             </button>
-                            <button onClick={async () => router.push("/login")} className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs group">
+                            <button
+                                onClick={async () => {
+                                    setLoading(true);
+                                    loginAnonymously().catch((err: any) => setError(err.message || "Guest access failed"));
+                                }}
+                                disabled={loading}
+                                className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group"
+                            >
                                 <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-orange-500 transition-colors" />
-                                Login
+                                Guest
                             </button>
                         </div>
 
