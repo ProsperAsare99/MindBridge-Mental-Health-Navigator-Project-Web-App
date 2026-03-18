@@ -31,10 +31,17 @@ export const authOptions: NextAuthOptions = {
                         });
 
                         if (!response.ok) {
-                            throw new Error("Token verification failed");
+                            throw new Error(`Token verification failed: ${response.statusText}`);
                         }
 
-                        const data = await response.json();
+                        let data;
+                        try {
+                            data = await response.json();
+                        } catch (e) {
+                            console.error("Failed to parse token verification JSON:", e);
+                            throw new Error("Invalid response from auth server (Token Verification)");
+                        }
+
                         return {
                             id: data.user.id,
                             email: data.user.email,
@@ -60,11 +67,24 @@ export const authOptions: NextAuthOptions = {
                     });
 
                     if (!response.ok) {
-                        const error = await response.json();
-                        throw new Error(error.error || "Login failed");
+                        let errorDetail = "Login failed";
+                        try {
+                            const error = await response.json();
+                            errorDetail = error.error || errorDetail;
+                        } catch (e) {
+                            console.error("Failed to parse login error JSON:", e);
+                            errorDetail = `Server error: ${response.status} ${response.statusText}`;
+                        }
+                        throw new Error(errorDetail);
                     }
 
-                    const data = await response.json();
+                    let data;
+                    try {
+                        data = await response.json();
+                    } catch (e) {
+                        console.error("Failed to parse login success JSON:", e);
+                        throw new Error("Invalid response from auth server (Login Success)");
+                    }
 
                     if (data.user && data.token) {
                         return {

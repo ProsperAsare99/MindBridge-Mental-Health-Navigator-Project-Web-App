@@ -86,17 +86,17 @@ export default function RegisterPage() {
                             <div className="h-12 w-12 rounded-2xl bg-orange-500/10 flex items-center justify-center">
                                 <ShieldCheck className="h-6 w-6 text-orange-500" />
                             </div>
-                            <h2 className="text-3xl font-black tracking-tighter">System Commitment</h2>
+                            <h2 className="text-3xl font-extrabold tracking-tighter">System Commitment</h2>
                             <div className="space-y-4 text-sm font-bold text-zinc-400 leading-relaxed max-h-[40vh] overflow-y-auto pr-4 custom-scrollbar">
                                 <p>By initializing your profile, you agree to our core operational standards:</p>
                                 <ul className="space-y-4 pt-4 border-t border-white/5">
                                     <li className="flex gap-4">
                                         <div className="h-5 w-5 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0 mt-0.5"><div className="h-1.5 w-1.5 rounded-full bg-orange-500" /></div>
-                                        <p><span className="text-white font-black uppercase text-[10px] tracking-widest block mb-1">Privacy First</span> All identity markers are anonymized within our analytics core.</p>
+                                        <p><span className="text-white font-extrabold uppercase text-[10px] tracking-widest block mb-1">Privacy First</span> All identity markers are anonymized within our analytics core.</p>
                                     </li>
                                     <li className="flex gap-4">
                                         <div className="h-5 w-5 rounded-full bg-zinc-800 flex items-center justify-center shrink-0 mt-0.5"><div className="h-1.5 w-1.5 rounded-full bg-orange-500" /></div>
-                                        <p><span className="text-white font-black uppercase text-[10px] tracking-widest block mb-1">Support Tool</span> MindBridge is a navigation assistant, not a clinical replacement.</p>
+                                        <p><span className="text-white font-extrabold uppercase text-[10px] tracking-widest block mb-1">Support Tool</span> MindBridge is a navigation assistant, not a clinical replacement.</p>
                                     </li>
                                 </ul>
                             </div>
@@ -106,13 +106,13 @@ export default function RegisterPage() {
                                         setHasConsented(true);
                                         setShowConsent(false);
                                     }}
-                                    className="h-14 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-black shadow-xl shadow-orange-500/20 active:scale-95 transition-all text-sm"
+                                    className="h-14 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-extrabold shadow-xl shadow-orange-500/20 active:scale-95 transition-all text-sm"
                                 >
                                     ACCEPT & PROCEED
                                 </button>
                                 <button 
                                     onClick={() => router.push("/")}
-                                    className="text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-red-500 transition-colors py-2"
+                                    className="text-[10px] font-extrabold uppercase tracking-widest text-zinc-500 hover:text-red-500 transition-colors py-2"
                                 >
                                     CANCEL
                                 </button>

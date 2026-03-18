@@ -79,7 +79,7 @@ export default function LoginPage() {
                     <div className="relative z-10 space-y-8">
                         <div className="flex items-center gap-6">
                             <Logo iconOnly size="lg" />
-                            <span className="text-3xl md:text-5xl font-black tracking-tighter">MindBridge</span>
+                            <span className="text-3xl md:text-5xl font-extrabold tracking-tighter">MindBridge</span>
                         </div>
                         <div className="space-y-6">
                             <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-tight">
@@ -111,7 +111,7 @@ export default function LoginPage() {
                     </div>
                     
                     <div className="relative z-10 pt-20 border-t border-white/5 flex flex-col gap-8">
-                        <div className="flex items-center gap-12 text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
+                        <div className="flex items-center gap-12 text-[11px] font-extrabold uppercase tracking-[0.2em] text-zinc-500">
                             <div className="flex items-center gap-2.5">
                                 <ShieldCheck className="h-4 w-4 text-orange-500/50" />
                                 Privacy Validated
@@ -131,8 +131,8 @@ export default function LoginPage() {
                         <div className="text-orange-500 mb-8">
                             <Sunburst className="h-16 w-16 animate-pulse-slow font-black" />
                         </div>
-                        <h2 className="text-3xl font-black mb-2 tracking-tight">Sign In</h2>
-                        <p className="text-left text-sm font-bold text-muted-foreground/60 leading-relaxed uppercase tracking-tighter">
+                        <h2 className="text-3xl font-extrabold mb-2 tracking-tight">Sign In</h2>
+                        <p className="text-left text-sm font-semibold text-muted-foreground/60 leading-relaxed uppercase tracking-tighter">
                             Initialize your MindBridge session
                         </p>
                     </div>
@@ -144,7 +144,7 @@ export default function LoginPage() {
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        className="p-4 bg-red-500/10 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-xl border border-red-500/20 flex items-center gap-3"
+                                        className="p-4 bg-red-500/10 text-red-600 text-[10px] font-extrabold uppercase tracking-widest rounded-xl border border-red-500/20 flex items-center gap-3"
                                     >
                                         <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
                                         {error}
@@ -154,7 +154,7 @@ export default function LoginPage() {
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        className="p-4 bg-green-500/10 text-green-600 text-[10px] font-black uppercase tracking-widest rounded-xl border border-green-500/20 flex items-center gap-3"
+                                        className="p-4 bg-green-500/10 text-green-600 text-[10px] font-extrabold uppercase tracking-widest rounded-xl border border-green-500/20 flex items-center gap-3"
                                     >
                                         <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
                                         {successMessage}
@@ -163,7 +163,7 @@ export default function LoginPage() {
                             </AnimatePresence>
 
                             <div>
-                                <label className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 mb-2 ml-1">Network Identity</label>
+                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40 mb-2 ml-1">Network Identity</label>
                                 <div className="relative group">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                     <input
@@ -178,7 +178,7 @@ export default function LoginPage() {
                             </div>
 
                             <div>
-                                <label className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 mb-2 ml-1">Secure Access Key</label>
+                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40 mb-2 ml-1">Secure Access Key</label>
                                 <div className="relative group">
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                     <input
@@ -201,7 +201,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black py-4 px-4 rounded-2xl transition-all shadow-xl shadow-orange-500/20 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3 text-sm"
+                            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-extrabold py-4 px-4 rounded-2xl transition-all shadow-xl shadow-orange-500/20 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3 text-sm"
                         >
                             {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "ESTABLISH CONNECTION"}
                         </button>
