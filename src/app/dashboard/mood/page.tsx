@@ -61,9 +61,10 @@ export default function MoodPage() {
 
     const weekData = useMemo(() => {
         if (moodHistory.length === 0) return [
-            { name: "Mon", mood: 0 }, { name: "Tue", mood: 0 }, { name: "Wed", mood: 0 },
-            { name: "Thu", mood: 0 }, { name: "Fri", mood: 0 }, { name: "Sat", mood: 0 }, { name: "Sun", mood: 0 }
-        ];
+            { name: "Mon", date: "", mood: 0 }, { name: "Tue", date: "", mood: 0 }, { name: "Wed", date: "", mood: 0 },
+            { name: "Thu", date: "", mood: 0 }, { name: "Fri", date: "", mood: 0 }, { name: "Sat", date: "", mood: 0 }, { name: "Sun", date: "", mood: 0 }
+        ] as { name: string; date: string; mood: number }[];
+
 
         // Group by day for the last 7 days
         const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -91,8 +92,9 @@ export default function MoodPage() {
             name: d.name,
             date: d.date,
             mood: d.count > 0 ? parseFloat((d.val / d.count).toFixed(1)) : 0
-        }));
+        } as { name: string; date: string; mood: number }));
     }, [moodHistory]);
+
 
     const moods = [
         { value: 1, icon: CloudRain, label: "Awful", color: "text-slate-500", bgColor: "bg-slate-500/10" },
