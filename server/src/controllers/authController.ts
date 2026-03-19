@@ -37,7 +37,14 @@ export const register = async (req: Request, res: Response) => {
 
         const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
 
-        res.status(201).json({ user, token });
+        res.status(201).json({ 
+            user: {
+                ...user,
+                onboardingStep: (user as any).onboardingStep,
+                onboardingCompleted: (user as any).onboardingCompleted
+            }, 
+            token 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error during registration' });
@@ -68,7 +75,14 @@ export const login = async (req: Request, res: Response) => {
 
         const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
 
-        res.json({ user, token });
+        res.json({ 
+            user: {
+                ...user,
+                onboardingStep: (user as any).onboardingStep,
+                onboardingCompleted: (user as any).onboardingCompleted
+            }, 
+            token 
+        });
     } catch (error) {
         console.error("DETAILED LOGIN ERROR:", error);
         res.status(500).json({ error: 'Server error during login' });
@@ -126,7 +140,14 @@ export const googleLogin = async (req: Request, res: Response) => {
 
         const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
 
-        res.json({ user, token });
+        res.json({ 
+            user: {
+                ...user,
+                onboardingStep: (user as any).onboardingStep,
+                onboardingCompleted: (user as any).onboardingCompleted
+            }, 
+            token 
+        });
     } catch (error) {
         console.error('Google Auth Error:', error);
         res.status(500).json({ error: 'Server error during Google login' });
@@ -149,7 +170,14 @@ export const anonymousLogin = async (req: Request, res: Response) => {
 
         const token = jwt.sign({ userId: user.id, email: user.email, isAnonymous: true }, JWT_SECRET, { expiresIn: '1d' });
 
-        res.json({ user, token });
+        res.json({ 
+            user: {
+                ...user,
+                onboardingStep: (user as any).onboardingStep,
+                onboardingCompleted: (user as any).onboardingCompleted
+            }, 
+            token 
+        });
     } catch (error) {
         console.error('DETAILED ANONYMOUS LOGIN ERROR:', error);
         res.status(500).json({ error: 'Server error during anonymous login' });
@@ -225,7 +253,11 @@ export const getMe = async (req: AuthRequest, res: Response) => {
 
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        res.json(user);
+        res.json({
+            ...user,
+            onboardingStep: (user as any).onboardingStep,
+            onboardingCompleted: (user as any).onboardingCompleted
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error fetching profile' });
@@ -258,7 +290,11 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
             }
         });
 
-        res.json(user);
+        res.json({
+            ...user,
+            onboardingStep: (user as any).onboardingStep,
+            onboardingCompleted: (user as any).onboardingCompleted
+        });
     } catch (error: any) {
         console.error('Update Profile Error:', error);
         res.status(500).json({ error: 'Server error updating profile' });
@@ -277,7 +313,14 @@ export const uploadAvatar = async (req: AuthRequest, res: Response) => {
             data: { image: imageUrl }
         });
 
-        res.json({ user, imageUrl });
+        res.json({ 
+            user: {
+                ...user,
+                onboardingStep: (user as any).onboardingStep,
+                onboardingCompleted: (user as any).onboardingCompleted
+            }, 
+            imageUrl 
+        });
     } catch (error) {
         console.error('Avatar Upload Error:', error);
         res.status(500).json({ error: 'Server error during avatar upload' });
@@ -321,7 +364,14 @@ export const verifyToken = async (req: AuthRequest, res: Response) => {
 
         if (!user) return res.status(404).json({ error: 'User not found' });
 
-        res.json({ user, token: req.header('Authorization')?.split(' ')[1] });
+        res.json({ 
+            user: {
+                ...user,
+                onboardingStep: (user as any).onboardingStep,
+                onboardingCompleted: (user as any).onboardingCompleted
+            }, 
+            token: req.header('Authorization')?.split(' ')[1] 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Token verification failed' });

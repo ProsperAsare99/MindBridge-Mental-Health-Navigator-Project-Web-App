@@ -23,6 +23,34 @@ model User {
   verificationToken  String?
   createdAt          DateTime     @default(now())
   updatedAt          DateTime     @updatedAt
+  
+  // Onboarding & Personalization
+  onboardingStep     Int          @default(1)
+  onboardingCompleted Boolean     @default(false)
+  nickname           String?
+  yearOfStudy        String?
+  fieldOfStudy       String?      // Can correspond to 'course' but used for broader categorization
+  preferredLanguage  String?
+  notificationPreference String?
+  checkInTime        String?
+  wellbeingBaseline  String?
+  reasonsForJoining  String[]     @default([])
+  hasSupportSystem   String?
+  previousProfessionalSupport String?
+  selfHarmRisk       String?
+  emergencyContacts  Json?
+  copingStyles       String[]     @default([])
+  academicStressors  Json?
+  spiritualityImportance String?
+  preferredApproach  String?
+  goals              String[]     @default([])
+  trackingFrequency  String?
+  trackingMetrics    String[]     @default([])
+  dataSharingConsent Boolean?
+  dataVisibility     String?
+  preferredTheme     String?
+  dashboardLayout    String?
+
   assessments        Assessment[]
   moods              Mood[]
   chatMessages       ChatMessage[]

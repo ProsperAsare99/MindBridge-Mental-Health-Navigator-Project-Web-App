@@ -53,6 +53,8 @@ export const authOptions: NextAuthOptions = {
                             isVerified: data.user.isVerified ?? true,
                             isAnonymous: data.user.isAnonymous ?? false,
                             accessToken: data.token || credentials.accessToken,
+                            onboardingCompleted: data.user.onboardingCompleted ?? false,
+                            onboardingStep: data.user.onboardingStep ?? 1,
                         };
                     }
 
@@ -98,6 +100,8 @@ export const authOptions: NextAuthOptions = {
                             isVerified: data.user.isVerified ?? true,
                             isAnonymous: data.user.isAnonymous ?? false,
                             accessToken: data.token,
+                            onboardingCompleted: data.user.onboardingCompleted ?? false,
+                            onboardingStep: data.user.onboardingStep ?? 1,
                         };
                     }
                     return null;
@@ -130,6 +134,8 @@ export const authOptions: NextAuthOptions = {
                 token.course = user.course;
                 token.image = user.image;
                 token.phoneNumber = user.phoneNumber;
+                token.onboardingCompleted = user.onboardingCompleted;
+                token.onboardingStep = user.onboardingStep;
             }
             
             // Handle manual session updates
@@ -143,6 +149,8 @@ export const authOptions: NextAuthOptions = {
                    if (session.user.course) token.course = session.user.course;
                    if (session.user.image) token.image = session.user.image;
                    if (session.user.phoneNumber) token.phoneNumber = session.user.phoneNumber;
+                   if (session.user.onboardingCompleted !== undefined) token.onboardingCompleted = session.user.onboardingCompleted;
+                   if (session.user.onboardingStep !== undefined) token.onboardingStep = session.user.onboardingStep;
                 }
             }
             
@@ -160,6 +168,8 @@ export const authOptions: NextAuthOptions = {
                 session.user.image = token.image;
                 session.user.name = token.name;
                 session.user.phoneNumber = token.phoneNumber;
+                session.user.onboardingCompleted = token.onboardingCompleted;
+                session.user.onboardingStep = token.onboardingStep;
             }
             return session;
         },
