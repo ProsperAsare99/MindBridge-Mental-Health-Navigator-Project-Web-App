@@ -26,6 +26,7 @@ import { api } from "@/lib/api";
 import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useSensors } from "@/components/providers/SensorProvider";
 
 interface Message {
     id: string;
@@ -43,6 +44,7 @@ const SUGGESTED_PROMPTS = [
 ];
 
 export default function OraclePage() {
+    const { locationData, motionData } = useSensors();
     const { data: session } = useSession();
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
@@ -130,7 +132,14 @@ export default function OraclePage() {
         }]);
 
         try {
-            const res = await api.post('/ai/chat', { message: messageToSend.trim() });
+            const res = await api.post('/ai/chat', { 
+                message: messageToSend.trim(),
+                context: {
+                    location: locationData.area,
+                    motion: motionData.speed,
+                    isMoving: motionData.isMoving
+                }
+            });
             const { content, suggestions } = parseAIResponse(res.response);
 
             setMessages(prev => [...prev, {
@@ -181,7 +190,20 @@ export default function OraclePage() {
                             The Oracle
                             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary uppercase tracking-widest border border-primary/10">Interactive</span>
                         </h1>
-                        <p className="text-xs text-muted-foreground font-medium uppercase tracking-[0.2em] opacity-60">Wisdom · Guidance · Reflection</p>
+                        <div className="flex items-center gap-3 mt-1.5">
+                            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.2em] opacity-60">Wisdom · Guidance</p>
+                            <div className="h-1 w-1 rounded-full bg-border" />
+                            <div className="flex items-center gap-1.5 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
+                                <Compass className="w-3 h-3 text-primary/60" />
+                                <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">{locationData.area}</span>
+                            </div>
+                            {motionData.isMoving && (
+                                <div className="flex items-center gap-1.5 bg-primary/5 px-2 py-0.5 rounded-full border border-primary/10 animate-pulse">
+                                    <Activity className="w-3 h-3 text-primary" />
+                                    <span className="text-[9px] font-black text-primary uppercase tracking-widest">{motionData.speed}</span>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="flex items-center gap-3">

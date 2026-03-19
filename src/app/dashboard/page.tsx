@@ -20,6 +20,7 @@ import { redirect } from "next/navigation";
 import { MotivationalCarousel } from "@/components/dashboard/motivational-carousel";
 import { GreetingHeader } from "@/components/dashboard/greeting-header";
 import { DashboardContainer, DashboardItem } from "@/components/dashboard/dashboard-animations";
+import { LiveContextPanel } from "@/components/dashboard/live-context-panel";
 
 export default async function DashboardPage() {
     const session = await getAuthSession();
@@ -58,6 +59,11 @@ export default async function DashboardPage() {
                             </Button>
                         </Link>
                     </div>
+                </DashboardItem>
+
+                {/* Real-time Sensor Context */}
+                <DashboardItem>
+                    <LiveContextPanel />
                 </DashboardItem>
 
                 {/* Persuasive Task Support: Next Best Action & Praise */}

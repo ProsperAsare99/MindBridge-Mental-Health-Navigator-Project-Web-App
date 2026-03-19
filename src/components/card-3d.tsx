@@ -1,10 +1,10 @@
 "use client";
 
-import { ReactNode, useState, useRef, useEffect } from "react";
+import { ReactNode, useState, useRef, useEffect, memo, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber"
 import { MeshReflectorMaterial, RoundedBox, Html } from "@react-three/drei"
-import { Group, Mesh, Vector3, Color } from "three"
 import * as THREE from 'three';
+import { Group, Mesh, Vector3, Color } from "three"
 import { Canvas } from "@react-three/fiber";
 
 const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
@@ -28,7 +28,7 @@ interface Card3DProps {
     dynamicLight?: boolean
 }
 
-const CardContent = ({
+const CardContent = memo(({
     content,
     cardRotation,
     mousePosition,
@@ -43,26 +43,32 @@ const CardContent = ({
     const contentRef = useRef<THREE.Group>(null);
     const parallaxAmount = 0.1;
 
-    useFrame(() => {
+    useFrame((state, delta) => {
         if (contentRef.current && cardRotation && mousePosition && viewport) {
+            // Only update if there's significant rotation to save CPU
             const parallaxX = -cardRotation.y * parallaxAmount * 10;
             const parallaxY = cardRotation.x * parallaxAmount * 10;
 
-            contentRef.current.position.x = parallaxX;
-            contentRef.current.position.y = parallaxY;
+            if (Math.abs(contentRef.current.position.x - parallaxX) > 0.001 || 
+                Math.abs(contentRef.current.position.y - parallaxY) > 0.001) {
+                contentRef.current.position.x = THREE.MathUtils.lerp(contentRef.current.position.x, parallaxX, 0.1);
+                contentRef.current.position.y = THREE.MathUtils.lerp(contentRef.current.position.y, parallaxY, 0.1);
+            }
         }
     });
 
     return (
         <group ref={contentRef} position={[0, 0, 0.7]}>
-            <Html transform pointerEvents="none">
-                <div className="select-none">
+            <Html transform pointerEvents="none" distanceFactor={15}>
+                <div className="select-none will-change-transform">
                     {content}
                 </div>
             </Html>
         </group>
     );
-}
+});
+
+CardContent.displayName = "CardContent";
 
 const Scene = ({
     children,
@@ -113,8 +119,11 @@ const Scene = ({
     }, [hover, scale, position, hoverScale, hoverLift, color, hoverColor]);
 
 
-    useFrame(() => {
+    useFrame((state, delta) => {
         if (!group.current || !cardMesh.current) return;
+
+        // Skip heavy lerping if mouse is stationary and we are at rest
+        if (!hover && group.current.rotation.x === 0 && group.current.rotation.y === 0) return;
 
         const rotationTargetX = mouse.y * -maxRotation;
         const rotationTargetY = mouse.x * maxRotation;
@@ -150,24 +159,38 @@ const Scene = ({
         }
 
         if (dynamicLightRef.current && dynamicLight) {
-            const lightOffset = new THREE.Vector3(
-                group.current.rotation.y * 5,
-                -group.current.rotation.x * 5 + 3,
-                2
-            );
+            if (hover || dynamicLightRef.current.intensity > 0.01) {
+                const lightOffset = new THREE.Vector3(
+                    group.current.rotation.y * 5,
+                    -group.current.rotation.x * 5 + 3,
+                    2
+                );
 
-            lightOffset.applyEuler(group.current.rotation);
+                lightOffset.applyEuler(group.current.rotation);
+                dynamicLightRef.current.position.copy(lightOffset);
 
-            dynamicLightRef.current.position.copy(lightOffset);
-
-            dynamicLightRef.current.intensity = THREE.MathUtils.lerp(
-                dynamicLightRef.current.intensity,
-                hover ? (hoverLightIntensity || 5) : 0,
-                rotationSmoothness
-            );
+                dynamicLightRef.current.intensity = THREE.MathUtils.lerp(
+                    dynamicLightRef.current.intensity,
+                    hover ? (hoverLightIntensity || 5) : 0,
+                    rotationSmoothness
+                );
+            }
         }
-
     });
+
+    // Resource Disposal
+    useEffect(() => {
+        return () => {
+            if (cardMesh.current) {
+                cardMesh.current.geometry.dispose();
+                if (Array.isArray(cardMesh.current.material)) {
+                    cardMesh.current.material.forEach(m => m.dispose());
+                } else {
+                    cardMesh.current.material.dispose();
+                }
+            }
+        };
+    }, []);
 
 
     return (
@@ -261,7 +284,7 @@ export const Card3D = ({
             <Canvas
                 shadows
                 dpr={[1, 2]}
-                camera={{ position: [0, 0, 23], fov: 20 }}
+                camera={{ position: [0, 0, 28], fov: 20 }}
             >
                 <ambientLight intensity={0.5} />
                 <PointLights />

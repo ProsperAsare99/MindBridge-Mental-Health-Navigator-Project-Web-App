@@ -4,7 +4,7 @@ import prisma from '../lib/prisma';
 import { ai } from '../lib/genkit-config';
 
 export const chatWithOracle = async (req: AuthRequest, res: Response) => {
-    const { message } = req.body;
+    const { message, context } = req.body;
 
     if (!message) {
         return res.status(400).json({ error: 'Message is required' });
@@ -33,6 +33,11 @@ export const chatWithOracle = async (req: AuthRequest, res: Response) => {
             take: 10
         });
 
+        // Current Sensor Reality
+        const liveContext = context ? 
+            `CURRENT REALITY: Student is currently in ${context.location} and is ${context.motion}.` : 
+            'CURRENT REALITY: Sensors unavailable.';
+
         // Reverse to get chronological order for prompt
         const historyContext = recentChats.reverse().map((chat: any) =>
             `${chat.role === 'user' ? 'User' : 'The Oracle'}: ${chat.content}`
@@ -53,19 +58,19 @@ Your essence is a blend of a compassionate therapist, a wise mentor, and a calm 
 USER PROFILE:
 - Name: ${user?.name || 'Student'}
 - Mood Context: ${moodContext}
+- ${liveContext}
 
 CORE GUIDELINES FOR HELPFULNESS:
 1. PERSONALIZATION: Address the student by name occasionally. Reference their mood trends if relevant.
-2. ACTIONABLE WISDOM: Don't just validate; provide gentle, specific, and actionable feedback. 
+2. CONTEXTUAL WISDOM: If you see the student is "At Library" or "Off-Campus", tailor your advice (e.g., quiet focus vs outdoor reset).
+3. ACTIONABLE WISDOM: Don't just validate; provide gentle, specific, and actionable feedback. 
    - If they are stressed: Suggest a 4-7-8 breathing exercise or a 5-minute brain dump.
    - If they are lonely: Suggest small social experiments or self-compassion mantras.
    - If they are overwhelmed: Help them break down one big task into three tiny steps.
-3. CONTEXTUAL AWARENESS: Use the provided chat history to maintain a continuous, flowing conversation. Don't repeat yourself.
 4. THERAPEUTIC TONE: Use Cognitive Behavioral Therapy (CBT) principles to help them gently refit negative thought patterns.
 5. SAFETY: If severe distress is detected, immediately but gently prioritize recommending "Crisis Support" and professional help.
 6. STYLE: Keep responses poetic yet practical. Use Markdown for clarity (bolding for emphasis, bullet points for steps).
-7. INTERACTIVITY: At the very end of your response, provide exactly 2-3 concise follow-up questions or suggestions the user might ask next. Format them as a single line starting with "FOLLOW_UP: " and separate them with pipes.
-   Example: FOLLOW_UP: How do I start? | What if I fail? | Can we try a breathing exercise?
+7. INTERACTIVITY: At the very end of your response, provide exactly 2-3 concise follow-up questions or suggestions. Format them starting with "FOLLOW_UP: " and separate with pipes.
 
 RECENT CONVERSATION HISTORY:
 ${historyContext}
@@ -75,8 +80,18 @@ USER'S NEW MESSAGE:
 
 THE ORACLE'S RESPONSE:`;
 
-        const result = await ai.generate({ prompt: systemInstructions });
-        const responseText = result.text;
+        console.log(`[Oracle] Prompting model with context: ${context?.location || 'none'}, motion: ${context?.motion || 'none'}`);
+
+        let responseText = "";
+        try {
+            const result = await ai.generate({ 
+                prompt: systemInstructions 
+            });
+            responseText = result.text;
+        } catch (genError) {
+            console.error('Genkit Generation Error:', genError);
+            responseText = "I'm currently drifting between frequencies. I can still listen, but my guidance might be limited for a moment. How can I help? FOLLOW_UP: Tell me more | Can we try again?";
+        }
 
         // 5. Save messages to database
         await prisma.chatMessage.createMany({

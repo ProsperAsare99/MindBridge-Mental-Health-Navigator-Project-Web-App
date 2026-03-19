@@ -1,15 +1,11 @@
 "use client";
 
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import ParallaxSection from "@/components/parallax-section";
 import dynamic from "next/dynamic";
-
-const Card3D = dynamic(() => import("@/components/card-3d").then((mod) => mod.Card3D), {
-  ssr: false,
-  loading: () => <div className="h-[500px] w-full rounded-[2.5rem] bg-muted/20 animate-pulse border border-border" />
-});
 import {
   Heart,
   Sparkles,
@@ -24,9 +20,45 @@ import {
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { useSearch } from "@/components/providers/SearchProvider";
+import { cn } from "@/lib/utils";
+import { useSensors } from "@/components/providers/SensorProvider";
+
+const Card3D = dynamic(() => import("@/components/card-3d").then((mod) => mod.Card3D), {
+  ssr: false,
+  loading: () => <div className="h-[500px] w-full rounded-[2.5rem] bg-muted/20 animate-pulse border border-border" />
+});
 
 export default function Home() {
+  const { locationData, motionData } = useSensors();
   const { toggle } = useSearch();
+
+  // Performance: Memoize static data
+  const innovationFeatures = useMemo(() => [
+    {
+      title: "Smart Mood Tracking",
+      description: "Real-time emotional analytics mapped to your academic pulse. We correlate your moods with campus deadlines and events.",
+      icon: Activity,
+      color: "bg-primary/10 text-primary"
+    },
+    {
+      title: "AI Guidance",
+      description: "Personalized support paths derived from context-aware AI. Our engine understands the unique stressors of your institution.",
+      icon: Brain,
+      color: "bg-blue-500/10 text-blue-400"
+    },
+    {
+      title: "Institutional Bridge",
+      description: "Secure, encrypted connections to your campus ecosystem. Seamless communication with university counseling and support staff.",
+      icon: ShieldCheck,
+      color: "bg-emerald-500/10 text-emerald-400"
+    },
+    {
+      title: "Predictive Insights",
+      description: "Uncovering hidden patterns within your wellness journey. Stay ahead of academic burnout with visual trend analytics.",
+      icon: Sparkles,
+      color: "bg-amber-500/10 text-amber-400"
+    }
+  ], []);
 
   return (
     <div className="relative min-h-screen bg-background font-sans text-foreground selection:bg-primary/20 selection:text-primary overflow-hidden">
@@ -97,35 +129,45 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section: Editorial Luxury Style */}
-      <main className="relative z-10 pt-24 md:pt-32 pb-20">
+      {/* Hero Section: Refined Modernism */}
+      <main className="relative z-10 pt-32 md:pt-48 pb-20">
         {/* Floating Pill Visual Banner */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <motion.div 
             initial={{ opacity: 0, scale: 0.98, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-            className="relative h-[45vh] md:h-[65vh] w-full overflow-hidden rounded-[3rem] md:rounded-[5.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border border-primary/10 group"
+            className="relative h-[45vh] md:h-[60vh] w-full overflow-hidden rounded-[3rem] md:rounded-[5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.12)] border border-primary/10 group"
           >
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 group-hover:scale-105"
-              style={{ backgroundImage: 'url("/images/hero-landscape-nature.png")' }}
+              style={{ backgroundImage: 'url("/images/hero-mental-health-matters.png")' }}
             />
-            {/* Soft sophisticated overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60" />
+            {/* Subtle sophisticated overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-40" />
             <div className="absolute inset-0 bg-black/5" />
           </motion.div>
         </div>
 
-        {/* Layered Heading: Overlapping the bottom of the pill */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 md:px-8 -mt-16 md:-mt-24 text-center">
+        {/* Hero Content: Balanced spacing, no tight overlaps */}
+        <div className="relative z-20 max-w-6xl mx-auto px-6 md:px-12 mt-16 text-center space-y-10">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="inline-flex items-center gap-4 rounded-full border border-primary/30 bg-[#0f0f10] backdrop-blur-md px-10 py-5 text-xs md:text-sm font-black uppercase tracking-[0.4em] text-primary shadow-2xl shadow-primary/5"
           >
-            <ParallaxSection speed={0.05}>
-              <h1 className="text-7xl font-black tracking-tight sm:text-8xl md:text-[11rem] text-[#0f0f10] drop-shadow-[0_20px_40px_rgba(0,0,0,0.05)] leading-[0.9] inline-block">
+            <Activity className="h-4 w-4 animate-pulse text-primary" />
+            Designed for Academic Well-being
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <ParallaxSection speed={0.03}>
+              <h1 className="text-6xl font-black tracking-tighter sm:text-8xl md:text-[10rem] text-[#0f0f10] leading-[0.85] py-4">
                 Your Mind,<br />
                 <span className="text-primary tracking-tighter">Understood.</span>
               </h1>
@@ -133,231 +175,260 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Value Proposition: 2-Column Editorial Grid */}
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16 md:mt-24">
-          <div className="grid md:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Branding & Mission */}
-            <div className="md:col-span-7 space-y-10 text-left">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="inline-flex items-center gap-4 rounded-full border border-white/10 bg-[#0a0a0b] px-8 py-3.5 text-[10px] font-black uppercase tracking-[0.4em] text-primary shadow-2xl"
-              >
-                <Activity className="h-4 w-4 animate-pulse text-primary" />
-                Designed for Academic Well-being
-              </motion.div>
+        {/* Value Proposition: Refined & Narrative */}
+        <div className="max-w-6xl mx-auto px-6 md:px-12 mt-32 md:mt-48 relative">
+          {/* Decorative Background Element */}
+          <div className="absolute -top-24 -left-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 animate-pulse" />
+          
+          <div className="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
+            {/* Main Statement */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+              className="md:col-span-7 space-y-8"
+            >
+              <div className="inline-block px-5 py-2 rounded-full border border-primary/20 bg-primary/5 text-xs font-black uppercase tracking-[0.2em] text-primary mb-4">
+                The Mission
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-[#0f0f10] leading-[1.1] tracking-tight">
+                Empowering Minds across <span className="relative inline-block text-primary">
+                  Ghanaian
+                  <motion.svg 
+                    viewBox="0 0 200 20" 
+                    className="absolute -bottom-2 left-0 w-full h-3 text-primary/30"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  >
+                    <path d="M5 15 Q 100 5 195 15" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                  </motion.svg>
+                </span> Institutions.
+              </h2>
+              <p className="text-xl md:text-2xl font-medium text-[#0f0f10]/70 leading-relaxed max-w-xl">
+                MindBridge isn't just a platform; it's a context-aware navigator for the modern student journey.
+              </p>
+            </motion.div>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 1 }}
-                className="text-2xl md:text-4xl font-light text-[#0f0f10]/90 leading-tight max-w-2xl"
-              >
-                Navigate the complexities of university life with <span className="text-primary font-bold italic">Ghana's first </span> <span className="font-black text-[#0f0f10] border-b-4 border-primary/40 pb-1">Context-Aware Support System.</span>
-              </motion.p>
-            </div>
+            {/* Supporting Content & CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 1, ease: [0.23, 1, 0.32, 1] }}
+              className="md:col-span-5 space-y-10"
+            >
+              <p className="text-base font-bold text-[#0f0f10]/50 uppercase tracking-[0.2em] leading-relaxed">
+                We combine deep institutional knowledge with advanced AI to provide support that actually understands your environment.
+              </p>
 
-            {/* Right Column: Deep Insight & Actions */}
-            <div className="md:col-span-5 space-y-8 md:pt-16">
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 1 }}
-                className="text-lg font-bold text-[#0f0f10]/70 leading-relaxed uppercase tracking-widest"
-              >
-                Simple tools, deeper understanding. Your journey to wellness starts with clarity.
-              </motion.p>
-
-              <div className="flex flex-col sm:flex-row items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
                 <Link href="/register" className="w-full sm:w-auto">
-                  <Button size="lg" className="h-20 px-12 rounded-full text-xl font-black shadow-2xl bg-primary text-[#0f0f10] hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all outline-none">
-                    Join MindBridge
-                    <ChevronRight className="ml-2 h-6 w-6" />
+                  <Button size="lg" className="group h-18 px-12 rounded-full text-lg font-black shadow-2xl bg-primary text-[#0f0f10] hover:bg-black hover:text-primary transition-all duration-500 active:scale-95 border border-primary/20">
+                    Join Today
+                    <ChevronRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Link href="/resources" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="h-20 px-12 rounded-full text-xl font-black border-2 border-primary/30 bg-white/20 text-[#0f0f10] hover:bg-primary/5 transition-all backdrop-blur-md">
-                    Explore
+                  <Button variant="ghost" size="lg" className="h-18 px-10 rounded-full text-lg font-black text-[#0f0f10] hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20">
+                    Learn More
                   </Button>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Section Transition: Parchment to Carbon */}
-        <div className="mt-32 pt-24 pb-32 bg-gradient-to-b from-background via-[#0f0f10]/60 to-[#0f0f10] relative">
-          {/* Subtle noise/texture overlay for the dark section */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none mix-blend-overlay" />
+        {/* Section Transition: Smooth Cinematic Flow */}
+        <div className="mt-40 pt-48 pb-60 bg-gradient-to-b from-background via-[#0f0f10] to-[#010101] relative overflow-hidden">
+          {/* Background Decorative Elements */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-30" />
+          <div className="absolute -top-[20%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[160px]" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[140px]" />
           
-          {/* 3D Interactive Section: Embedded in Carbon */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="w-full max-w-7xl mx-auto px-4 relative z-10"
-          >
-            <div className="text-center mb-24">
-              <h2 className="text-4xl md:text-7xl font-black tracking-tight mb-6 text-white leading-tight">
-                Interactive <span className="text-primary italic">Experience.</span>
+          {/* Subtle noise/texture overlay for the dark section */}
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] pointer-events-none mix-blend-overlay" />
+          
+          <div className="w-full max-w-6xl mx-auto px-6 relative z-10">
+            {/* Section Header: Structured & Organized */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex flex-col items-center text-center mb-32 space-y-8"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-8 text-white font-black tracking-[1em] text-base uppercase"
+              >
+                <div className="w-16 h-0.5 bg-white/40" />
+                02 / Innovation
+                <div className="w-16 h-0.5 bg-white/40" />
+              </motion.div>
+              
+              <h2 className="text-5xl md:text-[5.5rem] font-black tracking-tighter text-white leading-[0.9] max-w-4xl">
+                Advanced <span className="text-primary tracking-tighter">Support.</span><br />
+                <span className="text-white/40">Simplified Interface.</span>
               </h2>
-              <p className="text-[#a1a1aa] font-medium max-w-2xl mx-auto text-lg md:text-xl">
-                Explore our innovative tools designed to help you navigate your academic journey with precision and confidence.
+              
+              <p className="text-[#a1a1aa] font-medium max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
+                Experience the intersection of psychological expertise and cutting-edge technology, tailored for your academic success.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid lg:grid-cols-12 gap-16 items-center">
-              <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
-                {/* Feature Cards Grid (Asymmetric offsets) */}
-                <div className="grid sm:grid-cols-2 gap-6">
-                  {[
-                    {
-                      title: "Smart Mood Tracking",
-                      description: "Monitor your emotional well-being over time with our context-aware analytics.",
-                      icon: Activity,
-                      className: "md:mt-0"
-                    },
-                    {
-                      title: "AI-Powered Guidance",
-                      description: "Get personalized support tailored to your unique academic and personal challenges.",
-                      icon: Brain,
-                      className: "md:mt-12"
-                    },
-                    {
-                      title: "University Integration",
-                      description: "Seamlessly connect with your institution's resources.",
-                      icon: ShieldCheck,
-                      className: "md:-mt-12"
-                    },
-                    {
-                      title: "Visual Mood Insights",
-                      description: "Deep-dive into your patterns with graphical trends.",
-                      icon: Sparkles,
-                      className: "md:mt-0"
-                    }
-                  ].map((feature, i) => (
+            <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+              {/* Feature Track: Vertical Narrative */}
+              <div className="lg:col-span-7 relative">
+                {/* Vertical Decorative Track Line */}
+                <div className="absolute left-[27px] top-10 bottom-10 w-px bg-gradient-to-b from-primary/50 via-primary/10 to-transparent hidden md:block" />
+                
+                <div className="space-y-12">
+                  {innovationFeatures.map((feature, i) => (
                     <motion.div
                       key={feature.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.1 * i + 0.3 }}
-                      className={cn(
-                        "flex flex-col gap-5 p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/5 shadow-2xl hover:bg-white/[0.05] hover:border-primary/20 transition-all group",
-                        feature.className
-                      )}
+                      transition={{ delay: 0.1 * i + 0.2, duration: 0.8 }}
+                      className="group relative flex gap-8 items-start"
                     >
-                      <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                        <feature.icon className="h-7 w-7 text-primary" />
+                      {/* Feature Icon with Glow */}
+                      <div className={cn(
+                        "relative h-14 w-14 shrink-0 rounded-2xl flex items-center justify-center border border-white/10 transition-all duration-500 group-hover:scale-110 group-hover:border-primary/40 group-hover:shadow-[0_0_20px_rgba(174,145,100,0.15)] z-10",
+                        feature.color
+                      )}>
+                        <feature.icon className="h-7 w-7" />
+                        <div className="absolute inset-0 rounded-2xl bg-current opacity-0 group-hover:opacity-5 transition-opacity" />
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                        <p className="text-sm text-[#a1a1aa] font-medium leading-relaxed">{feature.description}</p>
+
+                      {/* Feature Text */}
+                      <div className="space-y-3 pt-1">
+                        <h3 className="text-2xl font-black text-white group-hover:text-primary transition-colors duration-300 tracking-tight">
+                          {feature.title}
+                        </h3>
+                        <p className="text-[#a1a1aa] font-medium text-lg leading-relaxed max-w-xl group-hover:text-white/80 transition-colors duration-300">
+                          {feature.description}
+                        </p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </div>
 
-              <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end">
+              {/* Interactive Visualization Card (Static position but dynamic feeling) */}
+              <div className="lg:col-span-5 flex justify-center lg:justify-end sticky top-32 z-20">
                 <Card3D
-                  hoverScale={1.05}
-                  hoverLift={0.5}
-                  color="transparent"
-                  hoverColor="transparent"
-                  className="h-[550px]"
+                  hoverScale={1.03}
+                  hoverLift={0.4}
+                  color="#0f0f10"
+                  opacity={0.3}
+                  hoverColor="#1a1a1c"
                   content={
-                    <div className="w-[320px] p-8 text-left glass backdrop-blur-xl rounded-[2.5rem] border border-white/10 shadow-premium">
-                      <div className="flex items-center gap-3 mb-8">
-                        <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center relative shadow-inner">
-                          <Activity className="h-6 w-6 text-primary" />
-                          <div className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-background animate-pulse" />
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <div className="text-[10px] font-black uppercase tracking-widest text-primary/70">Mood Trend Analysis</div>
-                            <div className="h-1.5 w-1.5 rounded-full bg-red-500 animate-ping" />
+                    <div className="w-full h-full p-8 text-left bg-[#0f0f10]/80 backdrop-blur-3xl rounded-[3.5rem] border border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden group/card flex flex-col">
+                      {/* Animated background glow */}
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -z-10 group-hover/card:bg-primary/10 transition-colors duration-1000" />
+                      
+                      {/* Header: Identity & Status */}
+                      <div className="flex items-center justify-between mb-10 relative z-10">
+                        <div className="flex items-center gap-4">
+                          <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover/card:border-primary/30 transition-colors">
+                            {motionData.isMoving ? <Activity className="h-6 w-6 text-primary animate-pulse" /> : <Brain className="h-6 w-6 text-primary" />}
                           </div>
-                          <div className="text-sm font-bold text-white opacity-90">Weekly Pulse</div>
-                        </div>
-                      </div>
-
-                      {/* Graphical Mood Trends with Grid and Axis */}
-                      <div className="mb-10 relative">
-                        {/* Y-Axis Labels & Grid Lines */}
-                        <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pr-2 py-1">
-                          {[1, 2, 3].map((_, i) => (
-                            <div key={i} className="flex items-center gap-3 w-full">
-                              <span className="text-[8px] font-black text-white/20 w-4 text-right">
-                                {i === 0 ? 'H' : i === 1 ? 'A' : 'L'}
+                          <div>
+                            <div className="text-xs font-black text-white/90 uppercase tracking-widest">{locationData.area}</div>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <span className="relative flex h-2 w-2">
+                                <span className={cn("absolute inline-flex h-full w-full rounded-full opacity-75", motionData.isMoving ? "animate-ping bg-amber-400" : "animate-ping bg-emerald-400")} />
+                                <span className={cn("relative inline-flex rounded-full h-2 w-2", motionData.isMoving ? "bg-amber-500" : "bg-emerald-500")} />
                               </span>
-                              <div className="h-px flex-1 border-t border-dotted border-white/10" />
+                              <span className={cn("text-[10px] font-bold uppercase tracking-tighter", motionData.isMoving ? "text-amber-400/80" : "text-emerald-400/80")}>
+                                {motionData.isMoving ? `Motion: ${motionData.speed}` : "State: Focused"}
+                              </span>
                             </div>
-                          ))}
+                          </div>
                         </div>
-
-                        <div className="flex items-end justify-between h-28 gap-2 px-6 relative z-10 pt-4">
-                          {[40, 65, 45, 80, 55, 90, 75].map((height, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ height: 0, opacity: 0 }}
-                              whileInView={{ height: `${height}%`, opacity: 1 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: 0.6 + (i * 0.1), duration: 0.8, ease: "circOut" }}
-                              className="w-full bg-gradient-to-t from-primary/10 via-primary/40 to-primary rounded-t-sm relative group/bar shadow-[0_0_15px_rgba(174,145,100,0.1)]"
-                            >
-                              <div className="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover/bar:opacity-100 transition-all text-[9px] font-black text-primary bg-background/80 backdrop-blur-sm px-1.5 py-0.5 rounded-md border border-primary/20">
-                                {height}%
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
-
-                        <div className="flex justify-between text-[8px] font-black uppercase tracking-widest text-white/30 px-6 mt-3">
-                          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
-                            <span key={`${day}-${i}`} className="w-full text-center">{day[0]}</span>
-                          ))}
-                        </div>
+                        <div className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">Live Node</div>
                       </div>
-
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 1.5 }}
-                        className="p-5 rounded-[1.5rem] bg-primary/[0.03] border border-primary/10 relative overflow-hidden group/box shadow-inner"
-                      >
-                        <div className="flex items-center gap-2 mb-2 relative z-10">
-                          <div className="px-2 py-0.5 rounded-full bg-primary/20 text-[8px] font-black text-primary uppercase tracking-wider">Insight</div>
-                          <div className="h-px flex-1 bg-primary/5" />
-                        </div>
-                        <p className="text-[11px] font-semibold text-white italic leading-relaxed relative z-10">
-                          "Your weekend mood showed a 15% increase in resilience. Keep up the consistent mindfulness practice."
-                        </p>
-                      </motion.div>
-
-                      <div className="mt-8 pt-6 border-t border-white/5 flex justify-between items-center">
-                        <div className="text-[10px] font-black uppercase tracking-widest text-white/40">Session ID: #MB-0492</div>
-                        <div className="flex -space-x-2">
-                          {[1, 2, 3].map(i => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, scale: 0 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: 2.5 + (i * 0.1) }}
-                              className="h-6 w-6 rounded-full border-2 border-white bg-primary/20"
+                      
+                      {/* Central Radial Metric */}
+                      <div className="flex-1 flex flex-col items-center justify-center relative py-4">
+                        <div className="relative h-48 w-48 flex items-center justify-center">
+                          {/* Outer orbital rings (decorative) */}
+                          <div className="absolute inset-0 rounded-full border border-white/5 scale-110" />
+                          <div className="absolute inset-0 rounded-full border border-primary/10 scale-125 opacity-0 group-hover/card:opacity-100 transition-opacity duration-1000 animate-pulse" />
+                          
+                          {/* Main Ring */}
+                          <svg className="h-full w-full -rotate-90">
+                            <circle
+                              cx="96" cy="96" r="88"
+                              className="stroke-white/5 fill-none"
+                              strokeWidth="8"
                             />
-                          ))}
+                            <motion.circle
+                              cx="96" cy="96" r="88"
+                              className="stroke-primary fill-none"
+                              strokeWidth="8"
+                              strokeDasharray="553"
+                              initial={{ strokeDashoffset: 553 }}
+                              whileInView={{ strokeDashoffset: 553 * (1 - 0.84) }}
+                              transition={{ duration: 2, ease: [0.23, 1, 0.32, 1], delay: 0.5 }}
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          
+                          {/* Percentage Text */}
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <motion.span 
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              className="text-5xl font-black text-white tracking-tighter"
+                            >
+                              84%
+                            </motion.span>
+                            <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em] -mt-1">Resilience</span>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Micro Stats Grid */}
+                      <div className="grid grid-cols-3 gap-3 mb-8 relative z-10">
+                        {[
+                          { label: 'Energy', value: 'High', icon: Sparkles, color: 'text-amber-400' },
+                          { label: 'Focus', value: 'Prime', icon: Brain, color: 'text-primary' },
+                          { label: 'Mood', value: 'Stable', icon: Heart, color: 'text-rose-400' }
+                        ].map((stat, i) => (
+                          <div key={stat.label} className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col items-center gap-2 group/stat hover:bg-white/5 transition-colors">
+                            <stat.icon className={cn("h-4 w-4 opacity-40 group-hover/stat:opacity-100 transition-opacity", stat.color)} />
+                            <div className="flex flex-col items-center">
+                              <span className="text-[8px] font-black text-white/30 uppercase tracking-tighter">{stat.label}</span>
+                              <span className="text-[11px] font-black text-white">{stat.value}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Footer: Contextual Insights */}
+                      <div className="pt-6 border-t border-white/5 relative z-10">
+                        <div className="flex items-center gap-3">
+                          <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                            <ShieldCheck className="h-3 w-3 text-primary" />
+                          </div>
+                          <p className="text-[11px] font-medium text-white/50 leading-relaxed italic">
+                            Institutional data bridge <span className="text-primary/60 font-black tracking-widest uppercase text-[9px] ml-1">Secure</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                />
               </div>
             </div>
-          </motion.div>
-        </div>
+
+          </div>
         </div>
       </main>
 
