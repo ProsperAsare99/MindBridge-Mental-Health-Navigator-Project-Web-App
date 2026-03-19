@@ -59,7 +59,7 @@ model User {
 model ChatMessage {
   id        String   @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   content   String   @db.Text
   role      String   // 'user' or 'assistant'
   createdAt DateTime @default(now())
@@ -68,7 +68,7 @@ model ChatMessage {
 model Assessment {
   id        String   @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   type      String
   score     Int
   severity  String
@@ -78,7 +78,7 @@ model Assessment {
 model Mood {
   id             String   @id @default(uuid())
   userId         String
-  user           User     @relation(fields: [userId], references: [id])
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   value          Int      // 1-5 (Awful to Great)
   note           String?
   sentimentScore Float?
