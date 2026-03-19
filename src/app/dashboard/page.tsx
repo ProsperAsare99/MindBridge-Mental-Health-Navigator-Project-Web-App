@@ -20,7 +20,7 @@ import { redirect } from "next/navigation";
 import { MotivationalCarousel } from "@/components/dashboard/motivational-carousel";
 import { GreetingHeader } from "@/components/dashboard/greeting-header";
 import { DashboardContainer, DashboardItem } from "@/components/dashboard/dashboard-animations";
-import { LiveContextPanel } from "@/components/dashboard/live-context-panel";
+
 
 export default async function DashboardPage() {
     const session = await getAuthSession();
@@ -61,10 +61,7 @@ export default async function DashboardPage() {
                     </div>
                 </DashboardItem>
 
-                {/* Real-time Sensor Context */}
-                <DashboardItem>
-                    <LiveContextPanel />
-                </DashboardItem>
+
 
                 {/* Persuasive Task Support: Next Best Action & Praise */}
                 <DashboardItem className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -232,23 +229,7 @@ export default async function DashboardPage() {
                     </div>
                 </DashboardItem>
 
-                {/* Credibility & Ethics Footer Support */}
-                <DashboardItem className="pt-10 border-t border-primary/5">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 opacity-40 hover:opacity-100 transition-opacity duration-500">
-                        <div className="flex items-center gap-4">
-                            <div className="h-10 w-10 rounded-xl bg-muted flex items-center justify-center">
-                                <Info className="h-5 w-5 text-muted-foreground" />
-                            </div>
-                            <div className="space-y-0.5">
-                                <p className="text-[10px] font-black uppercase tracking-widest leading-none">AI Transparency</p>
-                                <p className="text-[9px] font-bold text-muted-foreground">Context-aware suggestions provided by MindBridge Navigator.</p>
-                            </div>
-                        </div>
-                        <p className="text-[9px] font-medium text-muted-foreground max-w-sm text-center md:text-right italic leading-relaxed">
-                            MindBridge is a supportive resource and does not provide clinical diagnoses. For professional psychiatric or psychological emergencies, please use the Crisis Support button.
-                        </p>
-                    </div>
-                </DashboardItem>
+
             </DashboardContainer>
         </div>
     );

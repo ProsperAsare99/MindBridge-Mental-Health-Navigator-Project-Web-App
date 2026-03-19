@@ -48,7 +48,6 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
         { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
         { href: "/dashboard/mood", label: "Mood Tracker", icon: BarChart3 },
         { href: "/dashboard/assessment", label: "Assessment", icon: ClipboardList },
-        { href: "/dashboard/oracle", label: "The Oracle", icon: Sparkles },
         { href: "/dashboard/resources", label: "Resources", icon: BookOpen },
         { href: "/dashboard/crisis", label: "Crisis Support", icon: Phone },
         { href: "/dashboard/profile", label: "My Profile", icon: UserCircle },

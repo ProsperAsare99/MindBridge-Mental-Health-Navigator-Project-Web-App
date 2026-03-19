@@ -21,7 +21,7 @@ import {
 import { Logo } from "@/components/brand/Logo";
 import { useSearch } from "@/components/providers/SearchProvider";
 import { cn } from "@/lib/utils";
-import { useSensors } from "@/components/providers/SensorProvider";
+
 
 const Card3D = dynamic(() => import("@/components/card-3d").then((mod) => mod.Card3D), {
   ssr: false,
@@ -29,7 +29,7 @@ const Card3D = dynamic(() => import("@/components/card-3d").then((mod) => mod.Ca
 });
 
 export default function Home() {
-  const { locationData, motionData } = useSensors();
+  // removed useSensors hook usage
   const { toggle } = useSearch();
 
   // Performance: Memoize static data
@@ -334,19 +334,19 @@ export default function Home() {
                       
                       {/* Header: Identity & Status */}
                       <div className="flex items-center justify-between mb-10 relative z-10">
-                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-4">
                           <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover/card:border-primary/30 transition-colors">
-                            {motionData.isMoving ? <Activity className="h-6 w-6 text-primary animate-pulse" /> : <Brain className="h-6 w-6 text-primary" />}
+                            <Brain className="h-6 w-6 text-primary" />
                           </div>
                           <div>
-                            <div className="text-xs font-black text-white/90 uppercase tracking-widest">{locationData.area}</div>
+                            <div className="text-xs font-black text-white/90 uppercase tracking-widest">MindBridge Core</div>
                             <div className="flex items-center gap-2 mt-0.5">
                               <span className="relative flex h-2 w-2">
-                                <span className={cn("absolute inline-flex h-full w-full rounded-full opacity-75", motionData.isMoving ? "animate-ping bg-amber-400" : "animate-ping bg-emerald-400")} />
-                                <span className={cn("relative inline-flex rounded-full h-2 w-2", motionData.isMoving ? "bg-amber-500" : "bg-emerald-500")} />
+                                <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping bg-emerald-400" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                               </span>
-                              <span className={cn("text-[10px] font-bold uppercase tracking-tighter", motionData.isMoving ? "text-amber-400/80" : "text-emerald-400/80")}>
-                                {motionData.isMoving ? `Motion: ${motionData.speed}` : "State: Focused"}
+                              <span className="text-[10px] font-bold uppercase tracking-tighter text-emerald-400/80">
+                                System: Optimal
                               </span>
                             </div>
                           </div>

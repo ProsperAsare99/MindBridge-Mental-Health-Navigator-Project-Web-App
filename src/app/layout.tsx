@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "Your safe space for mental wellness and navigation.",
 };
 
-import { SensorProvider } from "@/components/providers/SensorProvider";
+
 
 export default function RootLayout({
   children,
@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${outfit.variable} antialiased`}
       >
         <AuthProvider>
-          <SensorProvider>
+
             <SearchProvider>
               <ThemeProvider
                 attribute="class"
@@ -42,7 +42,7 @@ export default function RootLayout({
                 <CommandMenu />
               </ThemeProvider>
             </SearchProvider>
-          </SensorProvider>
+
         </AuthProvider>
       </body>
     </html>

@@ -48,10 +48,14 @@ model Assessment {
 }
 
 model Mood {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  value     Int      // 1-5 (Awful to Great)
-  note      String?
-  createdAt DateTime @default(now())
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  value          Int      // 1-5 (Awful to Great)
+  note           String?
+  sentimentScore Float?
+  sentimentLabel String?
+  crisisFlag     Boolean  @default(false)
+  createdAt      DateTime @default(now())
 }
+
