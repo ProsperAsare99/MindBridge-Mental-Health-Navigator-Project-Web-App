@@ -167,7 +167,7 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
           >
             <ParallaxSection speed={0.03}>
-              <h1 className="text-6xl font-black tracking-tighter sm:text-8xl md:text-[10rem] text-[#0f0f10] leading-[0.85] py-4">
+              <h1 className="text-6xl font-black tracking-tighter sm:text-8xl md:text-[10rem] text-foreground leading-[0.85] py-4">
                 Your Mind,<br />
                 <span className="text-primary tracking-tighter">Understood.</span>
               </h1>
@@ -192,7 +192,7 @@ export default function Home() {
               <div className="inline-block px-5 py-2 rounded-full border border-primary/20 bg-primary/5 text-xs font-black uppercase tracking-[0.2em] text-primary mb-4">
                 The Mission
               </div>
-              <h2 className="text-4xl md:text-6xl font-black text-[#0f0f10] leading-[1.1] tracking-tight">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground leading-[1.1] tracking-tight">
                 Empowering Minds across <span className="relative inline-block text-primary">
                   Ghanaian
                   <motion.svg 
@@ -206,7 +206,7 @@ export default function Home() {
                   </motion.svg>
                 </span> Institutions.
               </h2>
-              <p className="text-xl md:text-2xl font-medium text-[#0f0f10]/70 leading-relaxed max-w-xl">
+              <p className="text-xl md:text-2xl font-medium text-foreground/70 leading-relaxed max-w-xl">
                 MindBridge isn't just a platform; it's a context-aware navigator for the modern student journey.
               </p>
             </motion.div>
@@ -219,19 +219,18 @@ export default function Home() {
               transition={{ delay: 0.3, duration: 1, ease: [0.23, 1, 0.32, 1] }}
               className="md:col-span-5 space-y-10"
             >
-              <p className="text-base font-bold text-[#0f0f10]/50 uppercase tracking-[0.2em] leading-relaxed">
+              <p className="text-base font-bold text-foreground/50 uppercase tracking-[0.2em] leading-relaxed">
                 We combine deep institutional knowledge with advanced AI to provide support that actually understands your environment.
               </p>
-
               <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
                 <Link href="/register" className="w-full sm:w-auto">
-                  <Button size="lg" className="group h-18 px-12 rounded-full text-lg font-black shadow-2xl bg-primary text-[#0f0f10] hover:bg-black hover:text-primary transition-all duration-500 active:scale-95 border border-primary/20">
+                  <Button size="lg" className="group h-18 px-12 rounded-full text-lg font-black shadow-2xl bg-primary text-primary-foreground hover:bg-foreground hover:text-background transition-all duration-500 active:scale-95 border border-primary/20">
                     Join Today
                     <ChevronRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Link href="/resources" className="w-full sm:w-auto">
-                  <Button variant="ghost" size="lg" className="h-18 px-10 rounded-full text-lg font-black text-[#0f0f10] hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20">
+                  <Button variant="ghost" size="lg" className="h-18 px-10 rounded-full text-lg font-black text-foreground hover:bg-primary/10 transition-all border border-transparent hover:border-primary/20">
                     Learn More
                   </Button>
                 </Link>
