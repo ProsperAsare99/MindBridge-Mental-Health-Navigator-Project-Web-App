@@ -1,7 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Clock, Calendar, BarChart3, LineChart, PieChart, TrendingUp, Heart, Brain, Moon, Zap } from "lucide-react";
+import { 
+  Activity, 
+  Clock, 
+  Calendar, 
+  BarChart3, 
+  LineChart, 
+  PieChart, 
+  TrendingUp, 
+  Heart, 
+  Brain, 
+  Moon, 
+  Zap,
+  GraduationCap,
+  Users,
+  Battery,
+  HeartPulse
+} from "lucide-react";
 
 const frequencyOptions = [
   "Multiple times a day",
@@ -21,8 +37,6 @@ const metricOptions = [
   { label: "Energy Levels", icon: Battery },
   { label: "Physical Wellbeing", icon: HeartPulse }
 ];
-
-import { GraduationCap, Users, Battery, HeartPulse } from "lucide-react";
 
 export default function Step11Tracking({ data, update, onNext }: any) {
   const toggleMetric = (metric: string) => {
