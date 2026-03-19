@@ -56,8 +56,8 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         studentId,
         course,
         phoneNumber,
-        isVerified: false as any, // Defaulting to false, they might need email verification
-      } as any,
+        isVerified: false, // Defaulting to false, they might need email verification
+      },
     });
 
     // 5. Exclude the hashed password from the response

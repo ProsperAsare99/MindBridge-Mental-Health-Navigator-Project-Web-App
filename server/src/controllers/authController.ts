@@ -31,8 +31,8 @@ export const register = async (req: Request, res: Response) => {
                 studentId,
                 course,
                 phoneNumber,
-                isVerified: true as any
-            } as any
+                isVerified: true
+            }
         });
 
         const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
@@ -59,10 +59,10 @@ export const login = async (req: Request, res: Response) => {
         }
 
         // Auto-verify user if they are not already
-        if (!(user as any).isVerified) {
+        if (!user.isVerified) {
             user = await prisma.user.update({
                 where: { id: user.id },
-                data: { isVerified: true } as any
+                data: { isVerified: true }
             });
         }
 
