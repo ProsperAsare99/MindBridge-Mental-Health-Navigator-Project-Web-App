@@ -58,4 +58,11 @@ model Mood {
   crisisFlag     Boolean  @default(false)
   createdAt      DateTime @default(now())
 }
-
+model AcademicEvent {
+  id          String   @id @default(uuid())
+  title       String
+  type        String   // 'exam', 'deadline', 'holiday'
+  date        DateTime
+  importance  Int      @default(1) // 1-5
+  createdAt   DateTime @default(now())
+}

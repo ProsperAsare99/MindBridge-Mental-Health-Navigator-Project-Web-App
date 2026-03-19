@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middleware/auth';
+import { ai } from '../lib/genkit-config';
 
 export const createMood = async (req: AuthRequest, res: Response) => {
     const { value, note } = req.body;
@@ -8,11 +9,42 @@ export const createMood = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
 
+        let sentimentScore = null;
+        let sentimentLabel = null;
+        let crisisFlag = false;
+
+        if (note && note.trim().length > 0) {
+            try {
+                const result = await ai.generate({
+                    prompt: `Analyze the following journal entry for sentiment and potential crisis. 
+                    Provide the result as a JSON object with:
+                    - score: a float between -1.0 (very negative) and 1.0 (very positive)
+                    - label: a short string (e.g., "Positive", "Neutral", "Concerned", "Distressed")
+                    - crisis: boolean, true if the text indicates immediate self-harm or severe clinical distress.
+                    
+                    Entry: "${note}"`
+                });
+
+                // Extract JSON from response (handling potential markdown)
+                const text = result.text.replace(/```json|```/g, '').trim();
+                const analysis = JSON.parse(text);
+                
+                sentimentScore = analysis.score;
+                sentimentLabel = analysis.label;
+                crisisFlag = analysis.crisis || false;
+            } catch (aiError) {
+                console.error('Sentiment Analysis Error:', aiError);
+            }
+        }
+
         const mood = await prisma.mood.create({
             data: {
                 userId: req.user.userId,
                 value: parseInt(value),
-                note
+                note,
+                sentimentScore,
+                sentimentLabel,
+                crisisFlag
             }
         });
 
@@ -22,6 +54,7 @@ export const createMood = async (req: AuthRequest, res: Response) => {
         res.status(500).json({ error: 'Server error logging mood' });
     }
 };
+
 
 export const getUserMoods = async (req: AuthRequest, res: Response) => {
     try {

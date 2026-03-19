@@ -24,7 +24,10 @@ import {
     ChevronRight,
     Sun,
     PenLine,
-    ArrowUpRight
+    ArrowUpRight,
+    Mic,
+    MicOff,
+    AlertTriangle
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -35,6 +38,7 @@ export default function MoodPage() {
     const [activeTimeRange, setActiveTimeRange] = useState<"week" | "month">("week");
     const [moodHistory, setMoodHistory] = useState<any[]>([]);
     const [moodStats, setMoodStats] = useState({ average: 0, count: 0, streak: 0 });
+    const [isListening, setIsListening] = useState(false);
 
     const fetchMoodData = useCallback(async () => {
         if (loading || !user) return;
@@ -103,19 +107,48 @@ export default function MoodPage() {
     const handleLogEntry = useCallback(async () => {
         if (selectedMood === null) return;
         try {
-            await api.post('/moods', {
+            const res = await api.post('/moods', {
                 value: selectedMood,
                 note
             });
             setSelectedMood(null);
             setNote("");
-            alert("Mood logged successfully!");
+            
+            if (res.crisisFlag) {
+                alert("We noticed some concerning patterns in your note. Please remember that help is always available at the Crisis Support section.");
+            } else {
+                alert("Mood logged successfully!");
+            }
+            
             fetchMoodData(); // Refresh
         } catch (error) {
             console.error('Error logging mood:', error);
             alert("Failed to log mood. Please try again.");
         }
     }, [selectedMood, note, fetchMoodData]);
+
+    const startListening = () => {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Speech recognition is not supported in this browser.");
+            return;
+        }
+
+        const recognition = new (window as any).webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = () => setIsListening(true);
+        recognition.onend = () => setIsListening(false);
+        recognition.onerror = () => setIsListening(false);
+        
+        recognition.onresult = (event: any) => {
+            const transcript = event.results[0][0].transcript;
+            setNote(prev => prev ? `${prev} ${transcript}` : transcript);
+        };
+
+        recognition.start();
+    };
 
     return (
         <div className="min-h-screen relative pb-20 selection:bg-primary/10">
@@ -205,11 +238,20 @@ export default function MoodPage() {
                             </div>
 
                             <div className="space-y-4">
-                                <div className="flex items-center gap-2 text-sm font-bold text-foreground/80 ml-1">
-                                    <PenLine size={16} className="text-primary" /> Journal Reflection <span className="text-[10px] text-muted-foreground font-normal">(Optional)</span>
+                                <div className="flex items-center justify-between ml-1 pr-2">
+                                    <div className="flex items-center gap-2 text-sm font-bold text-foreground/80">
+                                        <PenLine size={16} className="text-primary" /> Journal Reflection <span className="text-[10px] text-muted-foreground font-normal">(Optional)</span>
+                                    </div>
+                                    <button 
+                                        onClick={startListening}
+                                        className={`p-2 rounded-full transition-all ${isListening ? "bg-red-500/20 text-red-500 animate-pulse" : "bg-primary/10 text-primary hover:bg-primary/20"}`}
+                                        title={isListening ? "Listening..." : "Voice Check-in"}
+                                    >
+                                        {isListening ? <MicOff size={18} /> : <Mic size={18} />}
+                                    </button>
                                 </div>
                                 <textarea
-                                    placeholder="What's on your mind?..."
+                                    placeholder={isListening ? "Listening to your wisdom..." : "What's on your mind?..."}
                                     value={note}
                                     onChange={(e) => setNote(e.target.value)}
                                     className="w-full bg-muted/50 border border-border rounded-[2rem] p-6 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all min-h-[120px] resize-none shadow-inner text-foreground placeholder:text-muted-foreground"
@@ -298,13 +340,28 @@ export default function MoodPage() {
                                     const Icon = moodMeta?.icon || Smile;
                                     const date = new Date(entry.createdAt);
                                     return (
-                                        <div key={idx} className="flex items-center justify-between p-4 rounded-2xl bg-muted/30 border border-primary/5 group hover:bg-muted/50 transition-colors">
+                                        <div key={idx} className={`flex items-center justify-between p-4 rounded-2xl border transition-colors ${entry.crisisFlag ? "bg-red-500/10 border-red-500/50" : "bg-muted/30 border-primary/5 group hover:bg-muted/50"}`}>
                                             <div className="flex items-center gap-3">
-                                                <Icon size={18} className="text-primary" />
+                                                <div className="relative">
+                                                    <Icon size={18} className={entry.crisisFlag ? "text-red-500" : "text-primary"} />
+                                                    {entry.crisisFlag && <AlertTriangle className="absolute -top-1 -right-1 h-2 w-2 text-red-500" />}
+                                                </div>
                                                 <div>
-                                                    <p className="text-xs font-bold text-foreground/90">
-                                                        {date.toLocaleDateString('en-US', { weekday: 'short' })}
-                                                    </p>
+                                                    <div className="flex items-center gap-2">
+                                                        <p className="text-xs font-bold text-foreground/90">
+                                                            {date.toLocaleDateString('en-US', { weekday: 'short' })}
+                                                        </p>
+                                                        {entry.sentimentLabel && (
+                                                            <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest ${
+                                                                entry.sentimentLabel === 'Positive' ? 'bg-emerald-500/10 text-emerald-500' :
+                                                                entry.sentimentLabel === 'Concerned' ? 'bg-amber-500/10 text-amber-500' :
+                                                                entry.sentimentLabel === 'Distressed' ? 'bg-rose-500/10 text-rose-500' :
+                                                                'bg-slate-500/10 text-slate-500'
+                                                            }`}>
+                                                                {entry.sentimentLabel}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                     <p className="text-[10px] text-muted-foreground">{moodMeta?.label || 'Unknown'}</p>
                                                 </div>
                                             </div>
