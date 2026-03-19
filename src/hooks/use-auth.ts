@@ -178,6 +178,7 @@ export function useAuth() {
         loginAnonymously,
         loginWithCredentials,
         updateSession: update,
+        status,
         isAuthenticated: !!session
     };
 }
