@@ -32,7 +32,7 @@ import Step13Interface from "@/components/onboarding/steps/Step13Interface";
 import OnboardingProgress from "./OnboardingProgress";
 
 const phases = [
-  { id: 1, title: "Foundation", icon: User, color: "text-blue-500" },
+  { id: 1, title: "Foundation", icon: User, color: "text-orange-500" },
   { id: 2, title: "Wellbeing", icon: Heart, color: "text-rose-500" },
   { id: 3, title: "Personalize", icon: Settings, color: "text-amber-500" },
   { id: 4, title: "Setup", icon: ShieldCheck, color: "text-emerald-500" },
@@ -125,28 +125,28 @@ export function OnboardingWizard() {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center p-4 selection:bg-primary/20">
+    <div className="relative flex min-h-screen flex-col items-center justify-center p-6 md:p-12 selection:bg-orange-500/30">
       {/* Background patterns */}
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.05),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.05),transparent_50%)]" />
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.05),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.05),transparent_50%)]" />
       
       {/* Progress Bar */}
-      <div className="mb-8 w-full max-w-2xl px-4">
+      <div className="mb-12 w-full max-w-3xl px-4">
         <OnboardingProgress currentStep={step} totalSteps={13} phases={phases} currentPhase={currentPhase} />
       </div>
 
       {/* Wizard Card */}
       <motion.div 
         layout
-        className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-border/50 bg-card/50 p-8 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:shadow-primary/5 dark:bg-zinc-900/50"
+        className="relative w-full max-w-3xl overflow-hidden rounded-[2.5rem] border border-border/40 bg-card/40 p-10 md:p-16 shadow-2xl backdrop-blur-2xl transition-all duration-500 hover:shadow-orange-500/5 dark:bg-zinc-900/40"
       >
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="min-h-[400px]"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="min-h-[450px]"
           >
             {step === 1 && <Step1Identity data={formData} update={updateFormData} onNext={nextStep} />}
             {step === 2 && <Step2Context data={formData} update={updateFormData} onNext={nextStep} />}
@@ -165,11 +165,11 @@ export function OnboardingWizard() {
         </AnimatePresence>
 
         {/* Footer Navigation */}
-        <div className="mt-12 flex items-center justify-between border-t border-border/50 pt-8">
+        <div className="mt-16 flex items-center justify-between border-t border-border/30 pt-10">
           <button
             onClick={prevStep}
             disabled={step === 1}
-            className="group flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 disabled:opacity-0 dark:hover:bg-zinc-800"
+            className="group flex items-center gap-3 rounded-2xl px-6 py-3 text-sm font-bold transition-all hover:bg-muted/50 disabled:opacity-0"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
             Back
@@ -178,18 +178,18 @@ export function OnboardingWizard() {
           <button
             onClick={nextStep}
             disabled={isSubmitting}
-            className="relative flex items-center gap-2 overflow-hidden rounded-xl bg-primary px-8 py-2 text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] hover:bg-primary/90 active:scale-95"
+            className="relative flex items-center gap-3 overflow-hidden rounded-2xl bg-orange-500 px-10 py-4 text-sm font-black text-white shadow-xl shadow-orange-500/25 transition-all hover:scale-[1.02] hover:bg-orange-600 active:scale-95 group"
           >
-            {step === 13 ? "Finish & Enter Dashboard" : "Continue"}
-            {step !== 13 && <ArrowRight className="h-4 w-4" />}
+            {step === 13 ? "Enter Dashboard" : "Continue"}
+            {step !== 13 && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
           </button>
         </div>
       </motion.div>
 
       {/* Footer Info */}
-      <p className="mt-8 flex items-center gap-2 text-xs text-muted-foreground transition-opacity hover:opacity-100 dark:text-zinc-500">
-        <ShieldCheck className="h-3 w-3 text-emerald-500" />
-        Your data is encrypted and confidential.
+      <p className="mt-10 flex items-center gap-2 text-xs font-bold text-muted-foreground/40 transition-opacity hover:opacity-100">
+        <ShieldCheck className="h-3.5 w-3.5 text-orange-500" />
+        Encrypted Core Connection • Privacy Protocol Active
       </p>
     </div>
   );

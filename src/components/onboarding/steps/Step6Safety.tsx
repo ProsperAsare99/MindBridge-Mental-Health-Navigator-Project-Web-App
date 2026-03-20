@@ -16,28 +16,28 @@ export default function Step6Safety({ data, update, onNext }: any) {
 
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground">Risk & Safety</h2>
-        <p className="text-muted-foreground italic">Your safety is our priority. This information is confidential.</p>
+      <div className="space-y-4">
+        <h2 className="text-4xl font-black tracking-tight text-foreground">Integrity & Safety</h2>
+        <p className="text-lg text-muted-foreground/80 font-medium italic">Safety is a core system requirement. All data is isolated and secure.</p>
       </div>
 
       <div className="space-y-6">
-        <div className="space-y-3">
-          <label className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
-            <ShieldAlert className="h-4 w-4 text-rose-500" />
-            In the past month, have you had thoughts of harming yourself?
+        <div className="space-y-4">
+          <label className="flex items-center gap-3 text-base font-bold text-foreground/90">
+            <ShieldAlert className="h-5 w-5 text-rose-500" />
+            Have you experienced self-harm impulses recently?
           </label>
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {riskOptions.map((opt) => (
               <button
                 key={opt}
                 onClick={() => update({ selfHarmRisk: opt })}
-                className={`rounded-2xl border p-4 text-left text-xs font-medium transition-all ${
+                className={`rounded-[1.25rem] border-2 p-5 text-left text-sm font-black transition-all ${
                   data.selfHarmRisk === opt 
                     ? opt === "No" 
-                      ? "border-emerald-500 bg-emerald-500/10 text-emerald-700" 
-                      : "border-rose-500 bg-rose-500/10 text-rose-700 shadow-sm" 
-                    : "border-border/50 bg-background/50 hover:bg-zinc-50 text-muted-foreground"
+                      ? "border-orange-500 bg-orange-500/10 text-orange-700 shadow-md shadow-orange-500/10" 
+                      : "border-rose-500 bg-rose-500/10 text-rose-700 shadow-md shadow-rose-500/10" 
+                    : "border-border/20 bg-muted/10 hover:bg-muted/20 text-muted-foreground/60"
                 }`}
               >
                 {opt}
@@ -54,37 +54,41 @@ export default function Step6Safety({ data, update, onNext }: any) {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
             >
-              <div className="rounded-2xl border-2 border-rose-500/20 bg-rose-50 p-6 dark:bg-rose-950/20">
-                <div className="flex items-center gap-3 text-rose-600 dark:text-rose-400">
-                  <AlertTriangle className="h-6 w-6" />
-                  <h3 className="text-base font-bold">You're not alone. Help is available.</h3>
+              <div className="rounded-[2rem] border-4 border-rose-500/20 bg-rose-500/5 p-8 backdrop-blur-sm">
+                <div className="flex items-center gap-4 text-rose-600 dark:text-rose-400">
+                  <AlertTriangle className="h-8 w-8 animate-bounce" />
+                  <h3 className="text-xl font-black uppercase tracking-tight">Active Support Required</h3>
                 </div>
-                <p className="mt-2 text-xs text-rose-600/80 dark:text-rose-400/80">
-                  Please consider reaching out to these resources immediately:
+                <p className="mt-3 text-sm font-bold text-rose-600/70 dark:text-rose-400/70">
+                  Please establish connection with one of these emergency nodes immediately:
                 </p>
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center justify-between rounded-xl bg-white p-3 shadow-sm dark:bg-zinc-900">
-                    <div className="flex items-center gap-3">
-                      <LifeBuoy className="h-4 w-4 text-rose-500" />
-                      <div className="text-xs">
-                        <p className="font-bold">Ghana National Suicide Prevention Line</p>
-                        <p className="text-muted-foreground">050 944 7711 / 024 445 0310</p>
+                <div className="mt-6 space-y-4">
+                  <div className="flex items-center justify-between rounded-[1.25rem] bg-card p-4 shadow-lg border border-rose-500/20">
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center">
+                        <LifeBuoy className="h-5 w-5 text-rose-500" />
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-black text-rose-600">Suicide Prevention Line</p>
+                        <p className="text-muted-foreground font-bold">050 944 7711</p>
                       </div>
                     </div>
-                    <a href="tel:0509447711" className="rounded-lg bg-rose-500 p-2 text-white shadow-lg shadow-rose-500/20 hover:bg-rose-600">
-                      <Phone className="h-4 w-4" />
+                    <a href="tel:0509447711" className="rounded-xl bg-rose-500 p-3 text-white shadow-xl shadow-rose-500/30 hover:bg-rose-600 transition-all active:scale-95">
+                      <Phone className="h-5 w-5" />
                     </a>
                   </div>
-                  <div className="flex items-center justify-between rounded-xl bg-white p-3 shadow-sm dark:bg-zinc-900">
-                    <div className="flex items-center gap-3">
-                      <LifeBuoy className="h-4 w-4 text-emerald-500" />
-                      <div className="text-xs">
-                        <p className="font-bold">MindBridge Crisis Support</p>
-                        <p className="text-muted-foreground">Available 24/7 in-app</p>
+                  <div className="flex items-center justify-between rounded-[1.25rem] bg-card p-4 shadow-lg border border-orange-500/20">
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-orange-500/10 flex items-center justify-center">
+                        <ShieldAlert className="h-5 w-5 text-orange-500" />
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-black text-orange-600">MindBridge Crisis Node</p>
+                        <p className="text-muted-foreground font-bold">Secure Connection (24/7)</p>
                       </div>
                     </div>
-                    <button className="rounded-lg bg-primary p-2 text-white shadow-lg shadow-primary/20 hover:bg-primary/90">
-                      <Phone className="h-4 w-4" />
+                    <button className="rounded-xl bg-orange-500 p-3 text-white shadow-xl shadow-orange-500/30 hover:bg-orange-600 transition-all active:scale-95">
+                      <Phone className="h-5 w-5" />
                     </button>
                   </div>
                 </div>
@@ -93,27 +97,30 @@ export default function Step6Safety({ data, update, onNext }: any) {
           )}
         </AnimatePresence>
 
-        <div className="space-y-3 pt-4">
-          <label className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
-            <UserPlus className="h-4 w-4 text-emerald-500" />
-            Would you like to set up emergency contacts?
+        <div className="space-y-4 pt-4">
+          <label className="flex items-center gap-3 text-base font-bold text-foreground/90">
+            <UserPlus className="h-5 w-5 text-orange-500" />
+            Initialize Emergency Contacts?
           </label>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {["Yes, add now", "Maybe later", "No thanks"].map((opt) => (
               <button
                 key={opt}
                 onClick={() => update({ emergencyContacts: { ...data.emergencyContacts, preference: opt } })}
-                className={`rounded-xl border p-4 text-center text-xs font-medium transition-all ${
+                className={`rounded-2xl border-2 p-5 text-center text-sm font-black transition-all ${
                   data.emergencyContacts?.preference === opt 
-                    ? "border-emerald-500 bg-emerald-500/10 text-emerald-700 shadow-sm" 
-                    : "border-border/50 bg-background/50 hover:bg-zinc-50 text-muted-foreground"
+                    ? "border-orange-500 bg-orange-500/10 text-orange-700 shadow-md shadow-orange-500/10" 
+                    : "border-border/20 bg-muted/10 hover:bg-muted/20 text-muted-foreground/60"
                 }`}
               >
                 {opt}
               </button>
             ))}
           </div>
-          <p className="text-[10px] text-muted-foreground">Why we ask: In a crisis, we can help you reach out quickly</p>
+          <p className="text-xs font-bold text-muted-foreground/40 uppercase tracking-widest flex items-center gap-2">
+            <div className="h-1 w-1 rounded-full bg-orange-500" />
+            Provides additional redundancy in critical states
+          </p>
         </div>
       </div>
     </div>

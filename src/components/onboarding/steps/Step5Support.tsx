@@ -20,56 +20,62 @@ const professionalOptions = [
 export default function Step5Support({ data, update, onNext }: any) {
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground">Support System</h2>
-        <p className="text-muted-foreground italic">Understanding your support network.</p>
+      <div className="space-y-4">
+        <h2 className="text-4xl font-black tracking-tight text-foreground">Social Framework</h2>
+        <p className="text-lg text-muted-foreground/80 font-medium italic">Mapping your external support nodes.</p>
       </div>
 
       <div className="space-y-6">
-        <div className="space-y-3">
-          <label className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
-            <Users className="h-4 w-4 text-emerald-500" />
-            Do you currently have someone to talk to about personal issues?
+        <div className="space-y-4">
+          <label className="flex items-center gap-3 text-base font-bold text-foreground/90">
+            <Users className="h-5 w-5 text-orange-500" />
+            Do you have an active support network?
           </label>
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {supportOptions.map((opt) => (
               <button
                 key={opt}
                 onClick={() => update({ hasSupportSystem: opt })}
-                className={`rounded-2xl border p-4 text-left text-xs font-medium transition-all ${
+                className={`rounded-[1.25rem] border-2 p-5 text-left text-sm font-black transition-all ${
                   data.hasSupportSystem === opt 
-                    ? "border-emerald-500 bg-emerald-500/10 text-emerald-700 shadow-sm" 
-                    : "border-border/50 bg-background/50 hover:border-emerald-500/30 text-muted-foreground"
+                    ? "border-orange-500 bg-orange-500/10 text-orange-700 shadow-md shadow-orange-500/10" 
+                    : "border-border/20 bg-muted/10 hover:border-orange-500/40 text-muted-foreground/60"
                 }`}
               >
                 {opt}
               </button>
             ))}
           </div>
-          <p className="text-[10px] text-muted-foreground">Why we ask: Helps us know when to suggest peer/professional support</p>
+          <p className="text-xs font-bold text-muted-foreground/40 uppercase tracking-widest flex items-center gap-2">
+            <div className="h-1 w-1 rounded-full bg-orange-500" />
+            Determines the frequency of empathetic interventions
+          </p>
         </div>
 
-        <div className="space-y-3">
-          <label className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
-            <ShieldCheck className="h-4 w-4 text-emerald-500" />
-            Have you spoken with a mental health professional before?
+        <div className="space-y-4">
+          <label className="flex items-center gap-3 text-base font-bold text-foreground/90">
+            <ShieldCheck className="h-5 w-5 text-orange-500" />
+            Prior Interaction with Professional Frameworks?
           </label>
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {professionalOptions.map((opt) => (
               <button
                 key={opt}
                 onClick={() => update({ previousProfessionalSupport: opt })}
-                className={`rounded-2xl border p-4 text-left text-xs font-medium transition-all ${
+                className={`rounded-[1.25rem] border-2 p-5 text-left text-sm font-black transition-all ${
                   data.previousProfessionalSupport === opt 
-                    ? "border-emerald-500 bg-emerald-500/10 text-emerald-700 shadow-sm" 
-                    : "border-border/50 bg-background/50 hover:border-emerald-500/30 text-muted-foreground"
+                    ? "border-orange-500 bg-orange-500/10 text-orange-700 shadow-md shadow-orange-500/10" 
+                    : "border-border/20 bg-muted/10 hover:border-orange-500/40 text-muted-foreground/60"
                 }`}
               >
                 {opt}
               </button>
             ))}
           </div>
-          <p className="text-[10px] text-muted-foreground">Why we ask: Tailors whether we introduce concepts or build on them</p>
+          <p className="text-xs font-bold text-muted-foreground/40 uppercase tracking-widest flex items-center gap-2">
+            <div className="h-1 w-1 rounded-full bg-orange-500" />
+            Used to adjust terminology and conceptual depth
+          </p>
         </div>
       </div>
     </div>
