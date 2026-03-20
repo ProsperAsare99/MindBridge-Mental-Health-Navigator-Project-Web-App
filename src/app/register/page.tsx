@@ -9,36 +9,12 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { DotMap } from "@/components/auth/DotMap";
 import { INSTITUTION_OPTIONS } from "@/lib/constants";
-
-interface SelectProps {
-    value: string;
-    onChange: (val: string) => void;
-    options: { value: string; label: string }[];
-    placeholder: string;
-}
-
-const Select = ({ value, onChange, options, placeholder }: SelectProps) => (
-    <div className="relative group">
-        <School className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
-        <select
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all appearance-none cursor-pointer"
-        >
-            <option value="" disabled>{placeholder}</option>
-            {options.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-        </select>
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground/30">
-            <ArrowLeft className="h-3 w-3 -rotate-90" />
-        </div>
-    </div>
-);
+import { AnimatedSelect } from "@/components/ui/animated-select";
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
     const [institution, setInstitution] = useState("");
+    const [otherInstitution, setOtherInstitution] = useState("");
     const [studentId, setStudentId] = useState("");
     const [course, setCourse] = useState("");
     const [email, setEmail] = useState("");
@@ -63,7 +39,8 @@ export default function RegisterPage() {
         setLoading(true);
 
         try {
-            await register(email, password, name, institution, studentId, course);
+            const finalInstitution = institution === "Other" ? otherInstitution : institution;
+            await register(email, password, name, finalInstitution, studentId, course);
             router.push("/login?registered=true");
         } catch (err: any) {
             setError(err.message || "An error occurred during registration.");
@@ -86,7 +63,8 @@ export default function RegisterPage() {
 
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-orange-500/30 auth-theme">
-            {/* Informed Consent Modal */}
+            {/* Informed Consent Modal omitted for brevity if unchanged, but I'll include form logic */}
+            {/* ... */}
             <AnimatePresence>
                 {showConsent && (
                     <motion.div 
@@ -156,7 +134,7 @@ export default function RegisterPage() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="w-full max-w-6xl h-screen md:h-[min(900px,95vh)] overflow-hidden flex flex-col md:flex-row bg-card shadow-2xl md:rounded-3xl border border-border/50"
             >
-                {/* Left Panel: Brand & Visuals */}
+                {/* Left Panel: Brand & Visuals (unchanged) */}
                 <div className="hidden md:flex w-1/2 relative bg-zinc-950 overflow-hidden flex-col justify-between p-12 border-r border-white/5">
                     <div className="absolute inset-0 z-0">
                         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent opacity-40" />
@@ -216,7 +194,7 @@ export default function RegisterPage() {
                             </p>
                         </div>
 
-                        {/* Social Auth */}
+                        {/* Social Auth (unchanged) */}
                         <div className="grid grid-cols-2 gap-4">
                             <button onClick={handleGoogleLogin} disabled={loading} className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group">
                                 <svg className="h-4 w-4 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
@@ -263,7 +241,7 @@ export default function RegisterPage() {
                         <form className="space-y-4" onSubmit={handleSubmit}>
                             <div className="space-y-4">
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Full Name</label>
+                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1 italic">Full Name</label>
                                     <div className="relative group">
                                         <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
@@ -277,18 +255,40 @@ export default function RegisterPage() {
                                     </div>
                                 </div>
 
+                                {/* Institution Row - Moved to its own row for layout fix */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1 italic">Institution</label>
+                                    <AnimatedSelect
+                                        value={institution}
+                                        onChange={setInstitution}
+                                        placeholder="Select Your Institution"
+                                        options={INSTITUTION_OPTIONS}
+                                        icon={<School className="h-4 w-4" />}
+                                    />
+                                    <AnimatePresence>
+                                        {institution === "Other" && (
+                                            <motion.div
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: "auto" }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                className="mt-2"
+                                            >
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={otherInstitution}
+                                                    onChange={(e) => setOtherInstitution(e.target.value)}
+                                                    placeholder="Enter your institution name"
+                                                    className="w-full py-3 px-4 border border-border/50 bg-background/50 rounded-xl text-sm font-medium focus:outline-none focus:border-orange-500/50"
+                                                />
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div className="space-y-2">
-                                        <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Institution</label>
-                                        <Select
-                                            value={institution}
-                                            onChange={setInstitution}
-                                            placeholder="Select Node"
-                                            options={INSTITUTION_OPTIONS}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Identity ID</label>
+                                        <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1 italic">Student ID</label>
                                         <div className="relative group">
                                             <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                             <input
@@ -301,25 +301,24 @@ export default function RegisterPage() {
                                             />
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Cognitive Field</label>
-                                    <div className="relative group">
-                                        <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
-                                        <input
-                                            type="text"
-                                            required
-                                            value={course}
-                                            onChange={(e) => setCourse(e.target.value)}
-                                            placeholder="Computer Science"
-                                            className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
-                                        />
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1 italic">Course of Study</label>
+                                        <div className="relative group">
+                                            <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
+                                            <input
+                                                type="text"
+                                                required
+                                                value={course}
+                                                onChange={(e) => setCourse(e.target.value)}
+                                                placeholder="Computer Science"
+                                                className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Network Identity</label>
+                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1 italic">Email Address</label>
                                     <div className="relative group">
                                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input
@@ -334,7 +333,7 @@ export default function RegisterPage() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 ml-1">Create Access Key</label>
+                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1 italic">Password</label>
                                     <div className="relative group">
                                         <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
                                         <input

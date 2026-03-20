@@ -58,9 +58,11 @@ export default function Step1Identity({ data, update, onNext }: any) {
               ))}
             </div>
           </div>
-          {data.institution === "Other" && (
+          {(!INSTITUTIONS.includes(data.institution) || data.institution === "Other") && data.institution !== "" && (
             <input
               type="text"
+              value={INSTITUTIONS.includes(data.institution) ? "" : data.institution}
+              onChange={(e) => update({ institution: e.target.value })}
               placeholder="Enter your university name"
               className="mt-3 w-full rounded-2xl border border-border/50 bg-background/50 p-4 text-xs outline-none transition-all focus:border-emerald-500/50"
             />
