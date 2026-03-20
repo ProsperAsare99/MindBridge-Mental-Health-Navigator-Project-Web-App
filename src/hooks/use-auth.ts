@@ -119,7 +119,7 @@ export function useAuth() {
         }
     };
 
-    const register = async (email, password, name, institution, studentId, course, phoneNumber) => {
+    const register = async (email: string, password?: string, name?: string, institution?: string, studentId?: string, course?: string, phoneNumber?: string) => {
         try {
             const res = await api.post('/auth/register', { email, password, name, institution, studentId, course, phoneNumber });
             

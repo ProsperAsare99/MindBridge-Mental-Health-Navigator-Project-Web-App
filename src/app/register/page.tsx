@@ -1,3 +1,5 @@
+"use client";
+
 import { SunIcon as Sunburst, ArrowLeft, Loader2, ShieldCheck, Mail, Lock, UserCircle, PlusCircle, User, School, Hash, BookOpen, Eye, EyeOff, ArrowRight, Phone } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
