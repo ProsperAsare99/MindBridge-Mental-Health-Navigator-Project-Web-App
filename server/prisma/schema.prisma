@@ -85,6 +85,7 @@ model User {
   usageLogs             UsageLog[]
   memoryEntries         MemoryEntry[]
   userGoals             UserGoal[]
+  carePlans             CarePlan[]
   
   @@index([email])
   @@index([university, academicLevel])
@@ -291,6 +292,25 @@ model UserGoal {
 
   @@index([userId])
   @@index([status])
+}
+
+model CarePlan {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  weekNumber    Int
+  year          Int
+  
+  summary       String   @db.Text
+  moodAnalysis  Json?    // e.g., { avgMood: number, trend: string }
+  growthTasks   Json     // Array of { task: string, reason: string, completed: boolean }
+  
+  generatedAt   DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, weekNumber, year])
+  @@index([userId])
 }
 
 

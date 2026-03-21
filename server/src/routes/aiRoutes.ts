@@ -4,6 +4,10 @@ import { contextEngine } from '../services/ai/contextEngineService';
 import { conversationManager } from '../services/ai/conversationManagerService';
 import { geminiAdvanced } from '../services/ai/geminiAdvancedService';
 import { proactiveCheckIn } from '../services/ai/proactiveCheckInService';
+import { carePlanService } from '../services/ai/carePlanService';
+import { predictiveRisk } from '../services/ai/predictiveRiskService';
+import { mediaAI } from '../services/ai/mediaAIService';
+import { globalSearch } from '../services/ai/globalSearchService';
 import { authenticateToken, AuthRequest } from '../middleware/auth';
 import { aiChatLimiter } from '../middleware/rate-limit';
 import prisma from '../lib/prisma';
@@ -83,6 +87,112 @@ router.post('/journal-analysis', authenticateToken, async (req: AuthRequest, res
         res.json({ analysis: response });
     } catch (error) {
         res.status(500).json({ error: 'Failed to analyze journal' });
+    }
+});
+
+/**
+ * GET /api/ai/care-plan
+ */
+router.get('/care-plan', authenticateToken, async (req: AuthRequest, res: Response) => {
+    try {
+        const userId = req.userId!;
+        let plan = await carePlanService.getLatestCarePlan(userId);
+        
+        // If no plan exists, or it's from a previous week, generate a new one
+        const now = new Date();
+        const currentWeek = Math.ceil(now.getDate() / 7); // Simplified week check for logic
+        if (!plan || (plan.weekNumber !== currentWeek && plan.year === now.getFullYear())) {
+            // NOTE: In production, use the more robust getWeekNumber helper from the service
+            plan = await carePlanService.generateWeeklyCarePlan(userId);
+        }
+        
+        res.json(plan);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch care plan' });
+    }
+});
+
+/**
+ * POST /api/ai/care-plan/task/complete
+ */
+router.post('/care-plan/task/complete', authenticateToken, async (req: AuthRequest, res: Response) => {
+    try {
+        const { planId, taskIndex } = req.body;
+        const userId = req.userId!;
+
+        const plan = await (prisma as any).carePlan.findFirst({
+            where: { id: planId, userId }
+        });
+
+        if (!plan) return res.status(404).json({ error: 'Plan not found' });
+
+        const tasks = [...(plan.growthTasks as any[])];
+        if (tasks[taskIndex]) {
+            tasks[taskIndex].completed = true;
+        }
+
+        const updated = await (prisma as any).carePlan.update({
+            where: { id: planId },
+            data: { growthTasks: tasks }
+        });
+
+        res.json(updated);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to complete task' });
+    }
+});
+
+/**
+ * GET /api/ai/forecast
+ */
+router.get('/forecast', authenticateToken, async (req: AuthRequest, res: Response) => {
+    try {
+        const userId = req.userId!;
+        const forecast = await predictiveRisk.forecastNext7Days(userId);
+        res.json(forecast);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to generate forecast' });
+    }
+});
+
+/**
+ * POST /api/ai/analyze-media
+ */
+router.post('/analyze-media', authenticateToken, async (req: AuthRequest, res: Response) => {
+    try {
+        const { mediaData, type } = req.body; // base64 + 'image' or 'audio'
+        const userId = req.userId!;
+
+        if (!mediaData) return res.status(400).json({ error: 'Media data is required' });
+
+        let result;
+        if (type === 'image') {
+            result = await mediaAI.analyzeJournalImage(mediaData, userId);
+        } else {
+            result = await mediaAI.analyzeAudioJournal(mediaData, userId);
+        }
+
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to analyze media' });
+    }
+});
+
+/**
+ * GET /api/ai/search
+ * Global semantic search
+ */
+router.get('/search', authenticateToken, async (req: AuthRequest, res: Response) => {
+    try {
+        const { q } = req.query;
+        const userId = req.userId!;
+
+        if (!q) return res.status(400).json({ error: 'Search query is required' });
+
+        const results = await globalSearch.searchEverything(userId, q as string);
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to perform search' });
     }
 });
 

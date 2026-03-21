@@ -28,6 +28,8 @@ import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
 import { ConversationHistory } from "@/components/dashboard/ConversationHistory";
 import { AIChatbot } from "@/components/dashboard/AIChatbot";
 import AINudge from "@/components/ai/AINudge";
+import CarePlanView from "@/components/dashboard/CarePlanView";
+import StabilityForecast from "@/components/dashboard/StabilityForecast";
 
 
 export default async function DashboardPage() {
@@ -121,9 +123,16 @@ export default async function DashboardPage() {
                     </Card>
                 </DashboardItem>
 
-                {/* Proactive Nudge */}
+                {/* Proactive Support Row */}
                 <DashboardItem>
-                    <AINudge />
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                        <div className="lg:col-span-2">
+                            <AINudge />
+                        </div>
+                        <div className="glass rounded-[2.5rem] p-8 border border-primary/10 bg-primary/5 flex flex-col justify-center">
+                            <StabilityForecast />
+                        </div>
+                    </div>
                 </DashboardItem>
 
 
@@ -205,7 +214,7 @@ export default async function DashboardPage() {
                         <AnalyticsDashboard />
                     </div>
                     <div className="glass rounded-[2.5rem] p-8 border border-border/40 min-h-[400px]">
-                        <ConversationHistory />
+                        <CarePlanView />
                     </div>
                 </DashboardItem>
 
