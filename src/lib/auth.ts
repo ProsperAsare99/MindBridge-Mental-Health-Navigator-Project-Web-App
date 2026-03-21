@@ -46,7 +46,7 @@ export const authOptions: NextAuthOptions = {
                         return {
                             id: data.user.id,
                             email: data.user.email,
-                            name: data.user.name,
+                            name: data.user.displayName || data.user.name,
                             institution: data.user.institution,
                             studentId: data.user.studentId,
                             course: data.user.course,
@@ -96,7 +96,7 @@ export const authOptions: NextAuthOptions = {
                         return {
                             id: data.user.id,
                             email: data.user.email,
-                            name: data.user.name,
+                            name: data.user.displayName || data.user.name,
                             institution: data.user.institution,
                             studentId: data.user.studentId,
                             course: data.user.course,

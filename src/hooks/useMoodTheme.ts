@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '@/lib/axios-config';
 
 export function useMoodTheme() {
   const [pulse, setPulse] = useState<any>(null);
@@ -9,11 +9,7 @@ export function useMoodTheme() {
   useEffect(() => {
     const fetchMoodPulse = async () => {
       try {
-        const response = await axios.get('/api/moods/stats', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
+        const response = await api.get('/moods/stats');
         const stats = response.data;
         applyTheme(stats.average, stats.trend);
         setPulse(stats);
