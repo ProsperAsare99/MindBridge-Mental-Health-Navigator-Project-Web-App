@@ -1,0 +1,16 @@
+[LOGIN ERROR] 2026-03-21T21:47:41.297Z: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+The column `User.displayName` does not exist in the current database.
+PrismaClientKnownRequestError: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+The column `User.displayName` does not exist in the current database.
+    at Vn.handleRequestError (C:\Users\asare\Desktop\MindBridge-Mental-Health-Navigator-Project\server\src\generated\client\runtime\library.js:121:7339)
+    at Vn.handleAndLogRequestError (C:\Users\asare\Desktop\MindBridge-Mental-Health-Navigator-Project\server\src\generated\client\runtime\library.js:121:6663)
+    at Vn.request (C:\Users\asare\Desktop\MindBridge-Mental-Health-Navigator-Project\server\src\generated\client\runtime\library.js:121:6370)
+    at async l (C:\Users\asare\Desktop\MindBridge-Mental-Health-Navigator-Project\server\src\generated\client\runtime\library.js:130:9617)
+    at async login (C:\Users\asare\Desktop\MindBridge-Mental-Health-Navigator-Project\server\src\controllers\authController.ts:68:20)
+

@@ -27,7 +27,9 @@ export default function NavigatorAssistant() {
       const response = await api.get('/ai/nudge');
       setPulse(response.data);
     } catch (error) {
-      console.error('Failed to fetch AI pulse:', error);
+      // Sliently fail if unauthenticated/stale token
+      console.warn('AI Pulse unavailable');
+      setPulse(null);
     }
   };
 
@@ -46,7 +48,8 @@ export default function NavigatorAssistant() {
         const response = await api.get(`/ai/search?q=${val}`);
         setSearchResults(response.data);
       } catch (error) {
-        console.error('Search error:', error);
+        console.warn('Search unavailable');
+        setSearchResults([]);
       }
     } else {
       setSearchResults([]);

@@ -32,8 +32,11 @@ axiosInstance.interceptors.response.use(
         const message = error.response?.data?.error || error.response?.data?.message || error.message || 'API Request failed';
         
         if (error.response?.status === 401) {
-            // Optional: Handle unauthorized (e.g., redirect to login)
-            console.warn('Unauthorized access - potential session expiry');
+            console.warn('Unauthorized access - clearing stale session');
+            if (typeof window !== 'undefined') {
+                localStorage.removeItem('token');
+                // Optional: window.location.href = '/login';
+            }
         }
 
         return Promise.reject(new Error(message));
