@@ -3,6 +3,9 @@ import { AuthRequest } from '../middleware/auth';
 import prisma from '../lib/prisma';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getAICoreContext } from '../lib/personalization-utils';
+import { geminiConfig } from '../config/geminiConfig';
+import { modelRouter } from '../services/ai/modelRouterService';
+import { promptBuilder, PromptContext } from '../services/ai/promptBuilderService';
 
 export const chatWithOracle = async (req: AuthRequest, res: Response) => {
     const { message, context } = req.body;
@@ -99,86 +102,67 @@ export const chatWithOracle = async (req: AuthRequest, res: Response) => {
             ? `Live sensor data: Student is in ${context.location}, currently ${context.motion}.`
             : 'No live sensor data.';
 
-        // 10. Build a comprehensive system prompt
-        const systemPrompt = `You are "The Oracle 2.0" — a deeply empathetic, wise, and culturally aware AI mental health companion designed specifically for Ghanaian tertiary students. You are a blend of a compassionate counselor, a wise mentor, and a trusted friend.
+        // 10. Build a comprehensive system prompt using PromptBuilder
+        const promptContext: PromptContext = {
+            user: {
+                displayName: personalization.displayName,
+                academicLevel: parseInt(personalization.academicLevel.replace('Level ', '')) || 100,
+                program: personalization.program,
+                university: personalization.institution || 'KNUST',
+                daysActive: 30, // Mocked for now
+                isNewUser: false,
+                examHeavyProgram: personalization.program.includes('Engineering') || personalization.program.includes('Medicine'),
+                isGraduating: personalization.academicLevel.includes('400'),
+                language: personalization.language,
+                supportLevel: user?.hasSupportSystem || 'Standard',
+                needsSupport: user?.hasSupportSystem === 'I feel mostly alone',
+                copingStyles: user?.copingStyles || [],
+                prefersFaith: personalization.faithLevel !== 'Not important',
+                faithLevel: personalization.faithLevel.toLowerCase().replace(' ', '_'),
+                approachPreference: personalization.approach.toLowerCase(),
+                culturalContext: {
+                    region: 'Ashanti', // Mocked, could be tracked
+                    commonLanguages: ['English', 'Twi']
+                },
+                emergencyContacts: [] // Could be fetched from user profile
+            },
+            temporal: {
+                currentTime: new Date(),
+                recentMoods: {
+                    average: parseFloat((recentMoods.reduce((acc: number, m: any) => acc + m.value, 0) / (recentMoods.length || 1)).toFixed(1)),
+                    trend: (moodTrend as any) || 'unknown',
+                    volatility: 1.5, // Mocked
+                    lowestPoint: Math.min(...recentMoods.map((m: any) => m.value)) || 1,
+                    highestPoint: Math.max(...recentMoods.map((m: any) => m.value)) || 5
+                },
+                academicCalendar: {
+                    isExamPeriod: stressors.exams >= 4,
+                    isBeginningOfSemester: false,
+                    isEndOfSemester: stressors.exams >= 3,
+                    isThesisPeriod: personalization.academicLevel.includes('400')
+                }
+            },
+            behavioral: {
+                patterns: {
+                    triggers: [] // Could be extracted from mood notes
+                },
+                engagementLevel: 'MEDIUM'
+            },
+            clinical: {
+                riskAssessment: {
+                    level: user?.selfHarmRisk === 'High' ? 'HIGH' : user?.selfHarmRisk === 'Extreme' ? 'CRITICAL' : 'LOW',
+                    score: user?.selfHarmRisk === 'High' ? 15 : 5,
+                    interventionNeeded: user?.selfHarmRisk === 'High' || user?.selfHarmRisk === 'Extreme',
+                    recommendations: ['Speak to a counselor', 'Call emergency hotline'],
+                    factors: [stressorContext]
+                },
+                concernTrends: {
+                    'Academic Stress': { isPrimary: true, mentionFrequency: 5, assessmentTrend: 'Decreasing' }
+                }
+            }
+        };
 
-═══════════════════════════════════════
-STUDENT PROFILE
-═══════════════════════════════════════
-Name: ${personalization.displayName}
-Institution: ${personalization.institution}
-Year & Programme: ${personalization.academicLevel} — ${personalization.program}
-Preferred Language: ${personalization.language}
-Faith/Spirituality: ${personalization.faithLevel}
-Preferred Approach: ${personalization.approach}
-Primary Concerns: ${personalization.concerns}
-Self-Harm Risk: ${user?.selfHarmRisk || 'Not specified'}
-${personalization.academicNote}
-${personalization.programNote}
-
-═══════════════════════════════════════
-EMOTIONAL & BEHAVIORAL CONTEXT
-═══════════════════════════════════════
-Mood Status: ${moodInsight}
-Support System: ${supportContext}
-${goalsContext}
-Active Stressors:
-- ${stressorContext}
-Coping Preferences: ${copingContext}
-Live Context: ${liveContext}
-
-═══════════════════════════════════════
-PERSONALIZATION RULES (FOLLOW STRICTLY)
-═══════════════════════════════════════
-
-1. NAME — Always address the student as "${personalization.displayName}". Never use generic terms like "you" without their name nearby.
-
-2. LANGUAGE — Primary language is English. ${personalization.language === 'Twi' ? 'This student prefers Twi. Sprinkle warm Twi phrases naturally: "Maakye", "Wo te sɛn?", "Wo ho yɛ", "Akwaaba", "Ɛyɛ" to affirm.' : 'Use clear, warm, accessible English.'}
-
-3. FAITH — ${personalization.faithLevel === 'Very Important' || personalization.faithLevel === 'Somewhat Important' 
-    ? `Faith is ${personalization.faithLevel.toLowerCase()} to this student. Naturally integrate spiritual references — suggest prayer, scripture, or leaning on faith as a coping source where appropriate. Use phrases like "Your faith can be an anchor."` 
-    : 'Faith is not important to this student. Keep all support secular. Never reference religion or spirituality.'}
-
-4. APPROACH — Use ${personalization.approach} framing:
-   ${personalization.approach === 'Clinical' ? '• Use clinical terms: anxiety, depression, CBT, therapy, mental health professional' : ''}
-   ${personalization.approach === 'Holistic' ? '• Use holistic terms: low energy, overwhelm, wellness journey, self-care, balance' : ''}
-   ${personalization.approach === 'Cultural' ? '• Use cultural terms: heavy heart, troubled mind, community care, restoration, ubuntu' : ''}
-
-5. COPING — ${copingContext} Never suggest a coping method not in their preferences unless it is a crisis situation.
-
-6. GOALS — ${goalsContext}
-
-7. SUPPORT SYSTEM — ${supportContext}
-
-8. STRESSORS — Acknowledge stressors proactively:
-   ${stressors.exams >= 4 ? `• Exam season: "I know exams are weighing heavily on you right now, ${personalization.displayName}."` : ''}
-   ${stressors.financial >= 4 ? '• Financial stress: Only recommend FREE resources. Never suggest paid products or services.' : ''}
-   ${stressors.social >= 4 ? `• Social isolation: Extra warmth and encouragement toward peer connection.` : ''}
-
-9. MOOD TREND — ${moodTrend === 'improving' ? `Celebrate progress: "${personalization.displayName}, your mood has been improving. Let's keep that momentum!"` : moodTrend === 'declining' ? `Show concern: "${personalization.displayName}, I've noticed things have been harder recently. I'm here."` : 'Maintain steady, supportive tone.'}
-
-10. CRISIS PROTOCOL — If self-harm risk is "${user?.selfHarmRisk}" or if you detect ANY language suggesting crisis:
-    • Ask directly but gently: "Are you safe right now, ${personalization.displayName}?"
-    • Immediately provide: Counseling Hotline: 0800-111-222 | Campus Counselor | Emergency: 999
-    • Do NOT change the subject until safety is confirmed.
-
-11. RESPONSE STYLE:
-    • Warm, poetic, culturally grounded — never clinical or robotic
-    • Use **bold** for key insights
-    • Keep paragraphs short (3-4 lines max)
-    • End with EXACTLY 2-3 follow-up options formatted as: FOLLOW_UP: [Option A] | [Option B] | [Option C]
-
-12. MEMORY — Reference their recent journal reflections naturally. Example: "You mentioned feeling overwhelmed last week — how has that been since?"
-
-═══════════════════════════════════════
-EXAMPLE RESPONSE PATTERNS
-═══════════════════════════════════════
-
-❌ BAD: "How are you feeling today? Try some breathing exercises."
-
-✅ GOOD: "Maakye, ${personalization.displayName}! I can see things have been weighing on you lately. As a ${personalization.academicLevel} ${personalization.program} student, the pressure you're carrying right now is real — and I want you to know you don't have to face it alone. Before we dive in, would you like to try a quick grounding exercise? 🙏
-
-FOLLOW_UP: Yes, let's ground first | Tell me what's on my mind | How do I manage exam stress?"`;
+        const systemPrompt = promptBuilder.buildSystemPrompt(promptContext);
 
         // Build conversation history as text
         const chronologicalChats = recentChats.reverse();
@@ -209,14 +193,34 @@ THE ORACLE'S RESPONSE:`;
             const geminiApiKey = process.env.GEMINI_API_KEY;
             if (!geminiApiKey) throw new Error('GEMINI_API_KEY is not set');
 
+            // 11. Determine Model Strategy using ModelRouter
+            const complexity = modelRouter.calculateComplexity(message, {
+                hasPreviousAssessments: true, // Assuming true for now, could be dynamic
+                hasJournalHistory: recentMoods.length > 0
+            });
+            const emotionalIntensity = modelRouter.detectEmotionalIntensity(message);
+            const crisisKeywords = ['suicide', 'self-harm', 'kill myself', 'end it all', 'die', 'hurt myself'];
+            const isCrisisMessage = crisisKeywords.some(kw => message.toLowerCase().includes(kw));
+
+            const routerContext = {
+                conversationLength: recentChats.length,
+                userRiskLevel: user?.selfHarmRisk || 'Not specified',
+                messageComplexity: complexity,
+                requiresAnalysis: recentChats.length % 5 === 0 || isCrisisMessage, // Periodic deep analysis
+                crisisDetected: isCrisisMessage,
+                emotionalIntensity: emotionalIntensity
+            };
+
+            const modelSelection = modelRouter.selectModel(routerContext);
+            const modelProfile = modelSelection.model;
+            
+            console.log(`[Oracle] Model Selection: ${modelProfile.name} | Reason: ${modelSelection.reason} | Complexity: ${complexity} | Intensity: ${emotionalIntensity}`);
+
             const genAI = new GoogleGenerativeAI(geminiApiKey);
             const model = genAI.getGenerativeModel({
-                model: 'gemini-2.0-flash',
-                generationConfig: {
-                    temperature: 0.85,
-                    maxOutputTokens: 1024,
-                    topP: 0.95,
-                },
+                model: modelProfile.name,
+                generationConfig: modelProfile.config,
+                safetySettings: geminiConfig.safetySettings
             });
 
             console.log(`[Oracle] Sending prompt (${fullPrompt.length} chars) to Gemini...`);
