@@ -115,7 +115,7 @@ export class ContextEngineService {
         const cutoffDate = new Date();
         cutoffDate.setDate(cutoffDate.getDate() - days);
 
-        const moods = await prisma.mood.findMany({
+        const moods = await prisma.moodEntry.findMany({
             where: {
                 userId,
                 createdAt: { gte: cutoffDate }
@@ -125,16 +125,17 @@ export class ContextEngineService {
 
         const entries = moods;
         const average = moods.length > 0 
-            ? parseFloat((moods.reduce((acc, m) => acc + m.value, 0) / moods.length).toFixed(1))
+            ? parseFloat((moods.reduce((acc: number, m: any) => acc + m.mood, 0) / moods.length).toFixed(1))
             : 3;
             
         return {
             entries,
             average,
+            entryCount: moods.length,
             trend: this.calculateTrend(moods),
             volatility: this.calculateVolatility(moods, average),
-            lowestPoint: moods.length > 0 ? Math.min(...moods.map(m => m.mood)) : 3,
-            highestPoint: moods.length > 0 ? Math.max(...moods.map(m => m.mood)) : 3,
+            lowestPoint: moods.length > 0 ? Math.min(...moods.map((m: any) => m.mood)) : 3,
+            highestPoint: moods.length > 0 ? Math.max(...moods.map((m: any) => m.mood)) : 3,
         };
     }
 

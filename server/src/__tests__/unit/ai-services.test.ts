@@ -14,9 +14,11 @@ jest.mock('../../lib/prisma', () => ({
             delete: jest.fn(),
             update: jest.fn()
         },
-        mood: { findMany: jest.fn() },
+        moodEntry: { findMany: jest.fn() },
         assessment: { findMany: jest.fn() },
-        chatMessage: { findMany: jest.fn() },
+        conversation: { findMany: jest.fn() },
+        message: { findMany: jest.fn() },
+        chatMessage: { findMany: jest.fn() }, // for legacy or other refs
         academicEvent: { findMany: jest.fn() },
         aIInteraction: { count: jest.fn() },
         crisisLog: { create: jest.fn() },
@@ -32,7 +34,7 @@ jest.mock('../../generated/client', () => ({
     RiskLevel: { LOW: 'LOW', MODERATE: 'MODERATE', HIGH: 'HIGH', CRITICAL: 'CRITICAL' },
     FaithLevel: { SOMEWHAT_IMPORTANT: 'SOMEWHAT_IMPORTANT' },
     ApproachPreference: { HOLISTIC: 'HOLISTIC' },
-    MessageRole: { USER: 'user', ASSISTANT: 'assistant' },
+    MessageRole: { USER: 'USER', ASSISTANT: 'ASSISTANT' },
     AssessmentType: { PHQ9: 'PHQ9' },
 }));
 
@@ -56,7 +58,14 @@ describe('AI Services Unit Tests', () => {
         academicLevel: 300,
         program: 'Computer Science',
         createdAt: new Date(),
-        emergencyContacts: []
+        emergencyContacts: [],
+        moodEntries: [],
+        assessments: [],
+        copingStyles: [],
+        language: 'ENGLISH',
+        supportLevel: 'SOMEWHAT',
+        faithLevel: 'SOMEWHAT_IMPORTANT',
+        approachPreference: 'HOLISTIC'
     };
 
     beforeEach(() => {
@@ -66,14 +75,15 @@ describe('AI Services Unit Tests', () => {
     describe('ContextEngineService', () => {
         it('should build comprehensive context for a user', async () => {
             (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
-            (prisma.mood.findMany as jest.Mock).mockResolvedValue([
-                { value: 4, createdAt: new Date() },
-                { value: 3, createdAt: new Date() },
-                { value: 5, createdAt: new Date() }
+            (prisma.moodEntry.findMany as jest.Mock).mockResolvedValue([
+                { mood: 4, createdAt: new Date() },
+                { mood: 3, createdAt: new Date() },
+                { mood: 5, createdAt: new Date() }
             ]);
             (prisma.assessment.findMany as jest.Mock).mockResolvedValue([]);
-            (prisma.chatMessage.findMany as jest.Mock).mockResolvedValue([]);
+            (prisma.conversation.findMany as jest.Mock).mockResolvedValue([]);
             (prisma.academicEvent.findMany as jest.Mock).mockResolvedValue([]);
+            (prisma.aIInteraction.count as jest.Mock).mockResolvedValue(0);
 
             const context = await contextEngine.buildContext(mockUserId);
 
@@ -86,17 +96,16 @@ describe('AI Services Unit Tests', () => {
     describe('SafetyModeratorService', () => {
         it('should detect crisis language', async () => {
             const message = "I feel like giving up on life completely";
-            // Mock counts for spam check
-            (prisma as any).aIInteraction = { count: jest.fn().mockResolvedValue(0) };
+            (prisma.aIInteraction.count as jest.Mock).mockResolvedValue(0);
             
             const result = await safetyModerator.moderateInput(mockUserId, message);
             expect(result.crisis).toBe(true);
-            expect(result.safe).toBe(true); // crisis language isn't technically unsafe (blocked) yet unless it's inappropriate
+            expect(result.safe).toBe(true);
         });
 
         it('should flag high emotional intensity', async () => {
             const message = "I am VERY EXTREMELY OVERWHELMED AND HOPELESS";
-             (prisma as any).aIInteraction = { count: jest.fn().mockResolvedValue(0) };
+            (prisma.aIInteraction.count as jest.Mock).mockResolvedValue(0);
             const result = await safetyModerator.moderateInput(mockUserId, message);
             expect(result.emotionalState.intensity).toBeGreaterThan(7);
         });

@@ -68,7 +68,7 @@ export class SafetyModeratorService {
         const patterns: Record<string, { keywords: string[], severity: number }> = {
             suicide: { keywords: ['kill myself', 'suicide', 'end my life', 'want to die', 'better off dead'], severity: 10 },
             selfHarm: { keywords: ['hurt myself', 'cut myself', 'self harm', 'harm myself'], severity: 9 },
-            hopelessness: { keywords: ['no point', 'can\'t go on', 'give up', 'nothing matters', 'no hope'], severity: 7 },
+            hopelessness: { keywords: ['no point', 'can\'t go on', 'give up', 'giving up', 'nothing matters', 'no hope'], severity: 7 },
             plan: { keywords: ['have a plan', 'going to do it', 'tonight', 'tomorrow', 'pills'], severity: 10 }
         };
 
