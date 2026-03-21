@@ -9,7 +9,7 @@ export const updateOnboarding = async (req: AuthRequest, res: Response) => {
             return res.status(401).json({ error: 'Not authenticated' });
         }
 
-        const userId = req.user.userId;
+        const userId = req.userId;
         const data = req.body;
 
         // Clean up the data to ensure we only update allowed fields
@@ -80,9 +80,14 @@ export const updateOnboarding = async (req: AuthRequest, res: Response) => {
             }
         });
 
-    } catch (error) {
-        console.error('Onboarding Update Error:', error);
-        res.status(500).json({ error: 'Failed to update onboarding data' });
+    } catch (error: any) {
+        console.error('Onboarding Update FULL ERROR:', {
+            message: error.message,
+            code: error.code,
+            meta: error.meta,
+            stack: error.stack
+        });
+        res.status(500).json({ error: 'Failed to update onboarding data', details: error.message });
     }
 };
 
@@ -93,7 +98,7 @@ export const getOnboardingStatus = async (req: AuthRequest, res: Response) => {
         }
 
         const user = await prisma.user.findUnique({
-            where: { id: req.user.userId },
+            where: { id: req.userId },
             select: {
                 onboardingStep: true,
                 onboardingCompleted: true,
