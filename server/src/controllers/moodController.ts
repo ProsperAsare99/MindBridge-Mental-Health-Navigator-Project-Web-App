@@ -42,7 +42,7 @@ export const createMood = async (req: AuthRequest, res: Response) => {
             data: {
                 userId: req.user.userId,
                 mood: parseInt(value),
-                note,
+                notes: note,
                 sentimentScore,
                 sentimentLabel,
                 crisisFlag

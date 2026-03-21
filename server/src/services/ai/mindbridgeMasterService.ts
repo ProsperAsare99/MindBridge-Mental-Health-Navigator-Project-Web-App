@@ -8,11 +8,11 @@ import { safetyModerator } from './safetyModeratorService';
 export class MindBridgeMasterService {
     
     /**
-     * Orchestrate the entire AI interaction flow
+     * Orchestrate the entire AI interaction flow with deep context and safety guardrails
      */
     async processUserMessage(userId: string, message: string, liveData?: any) {
-        // 1. Safety Check (Immediacy)
-        const isCrisis = safetyModerator.detectCrisis(message);
+        // 1. Initial Safety Moderation
+        const moderation = await safetyModerator.moderateInput(userId, message);
         
         // 2. Build Context
         const context = await contextEngine.buildContext(userId, liveData);
@@ -23,15 +23,14 @@ export class MindBridgeMasterService {
             hasPreviousAssessments: true, 
             hasJournalHistory: true
         });
-        const intensity = modelRouter.detectEmotionalIntensity(message);
 
         const modelSelection = modelRouter.selectModel({
             conversationLength: history.length,
             userRiskLevel: context.clinical.riskAssessment.level,
             messageComplexity: complexity,
-            requiresAnalysis: history.length % 5 === 0 || isCrisis,
-            crisisDetected: isCrisis,
-            emotionalIntensity: intensity
+            requiresAnalysis: history.length % 5 === 0 || moderation.crisis,
+            crisisDetected: moderation.crisis,
+            emotionalIntensity: moderation.emotionalState.intensity
         });
 
         // 4. Build Prompt
@@ -48,23 +47,33 @@ export class MindBridgeMasterService {
 
         // 5. Generate AI Response
         const startTime = Date.now();
-        const responseText = await geminiAdvanced.generateResponse(fullPrompt, modelSelection.model);
+        const rawResponse = await geminiAdvanced.generateResponse(fullPrompt, modelSelection.model);
         const responseTime = Date.now() - startTime;
 
-        // 6. Persist Interaction
-        await conversationManager.saveInteraction(userId, message, responseText, {
+        // 6. Post-Generation Safety Moderation
+        const outputModeration = await safetyModerator.moderateOutput(rawResponse, {
+            riskLevel: context.clinical.riskAssessment.level,
+            crisis: moderation.crisis
+        });
+
+        const finalResponse = outputModeration.modified;
+
+        // 7. Persist Interaction
+        await conversationManager.saveInteraction(userId, message, finalResponse, {
             model: modelSelection.model.name,
-            isCrisis: isCrisis,
-            responseTime
+            isCrisis: moderation.crisis,
+            responseTime,
+            emotionalIntensity: moderation.emotionalState.intensity,
+            safetyFlags: moderation.flags.map((f: any) => f.type || f.category)
         });
 
         return {
-            response: responseText,
+            response: finalResponse,
             model: modelSelection.model.name,
             reason: modelSelection.reason,
-            isCrisis: isCrisis
+            isCrisis: moderation.crisis,
+            safetyAlert: moderation.requiresIntervention
         };
-
     }
 }
 

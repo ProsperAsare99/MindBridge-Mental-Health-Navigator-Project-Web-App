@@ -1,0 +1,12 @@
+src/controllers/moodController.ts(45,17): error TS2561: Object literal may only specify known properties, but 'note' does not exist in type 'Without<MoodEntryCreateInput, MoodEntryUncheckedCreateInput> & MoodEntryUncheckedCreateInput'. Did you mean to write 'notes'?
+src/services/ai/contextEngineService.ts(32,17): error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+src/services/ai/contextEngineService.ts(33,17): error TS2322: Type 'number | null' is not assignable to type 'number'.
+  Type 'null' is not assignable to type 'number'.
+src/services/ai/contextEngineService.ts(34,17): error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+src/services/ai/contextEngineService.ts(265,30): error TS2322: Type '"CRITICAL"' is not assignable to type '"LOW"'.
+src/services/ai/contextEngineService.ts(266,34): error TS2322: Type '"HIGH"' is not assignable to type '"LOW"'.
+src/services/ai/contextEngineService.ts(267,34): error TS2322: Type '"MODERATE"' is not assignable to type '"LOW"'.
+src/services/ai/contextEngineService.ts(272,33): error TS2367: This comparison appears to be unintentional because the types '"LOW"' and '"HIGH"' have no overlap.
+src/services/ai/contextEngineService.ts(272,61): error TS2367: This comparison appears to be unintentional because the types '"LOW"' and '"CRITICAL"' have no overlap.

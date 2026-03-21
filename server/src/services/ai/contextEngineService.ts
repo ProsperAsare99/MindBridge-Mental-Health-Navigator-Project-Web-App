@@ -29,9 +29,9 @@ export class ContextEngineService {
 
         return {
             user: {
-                displayName: userProfile.displayName,
-                academicLevel: userProfile.academicLevel,
-                program: userProfile.program,
+                displayName: userProfile.displayName || 'Friend',
+                academicLevel: userProfile.academicLevel || 100,
+                program: userProfile.program || 'N/A',
                 university: this.mapUniversity(userProfile.university),
                 daysActive: userProfile.daysActive,
                 isNewUser: userProfile.isNewUser,
@@ -261,7 +261,7 @@ export class ContextEngineService {
         const hasCrisisLanguage = recentConversations.some(c => c.messages.some(m => crisisKeywords.some(k => m.content.toLowerCase().includes(k))));
         if (hasCrisisLanguage) riskScore += 8;
 
-        let level = RiskLevel.LOW;
+        let level: RiskLevel = RiskLevel.LOW;
         if (riskScore >= 12) level = RiskLevel.CRITICAL;
         else if (riskScore >= 7) level = RiskLevel.HIGH;
         else if (riskScore >= 4) level = RiskLevel.MODERATE;
