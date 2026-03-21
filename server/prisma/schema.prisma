@@ -12,52 +12,61 @@ datasource db {
 
 model User {
   id                 String       @id @default(uuid())
+  
+  // Authentication
   email              String       @unique
   password           String?
-  name               String?
-  institution        String?
-  studentId          String?
-  course             String?
-  phoneNumber        String?
   googleId           String?      @unique
   isVerified         Boolean      @default(false)
   isAnonymous        Boolean      @default(false)
-  image              String?
-  verificationToken  String?
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
   
-  // Onboarding & Personalization
+  // Basic Profile
+  displayName        String?      // From Mongoose: displayName
+  university         String?      // From Mongoose: university
+  academicLevel      Int?         // From Mongoose: academicLevel (100, 200, 300, 400)
+  program            String?      // From Mongoose: program
+  image              String?
+  
+  // Communication Preferences
+  language           String       @default("english") // english, twi, ga, ewe
+  notificationPreference String   @default("daily")   // daily, weekly, only_when_needed, none
+  preferredCheckInTime String     @default("morning") // morning, afternoon, evening, night
+  
+  // Mental Health Context
+  concerns           String[]     @default([])        // academic_stress, anxiety, etc.
+  supportLevel       String       @default("somewhat") // alone, somewhat, strong
+  riskLevel          String       @default("LOW")      // LOW, MODERATE, HIGH, CRITICAL
+  
+  // Personalization
+  copingStyles       String[]     @default([])        // exercise, journal, etc.
+  faithLevel         String       @default("somewhat_important") // very_important, etc.
+  approachPreference String       @default("holistic") // clinical, holistic, cultural, mixed
+  goals              String[]     @default([])        // reduce_stress, improve_mood, etc.
+  
+  // Complex Data (JSONB)
+  stressors          Json?        // exams, assignments, etc. (1-5 scale)
+  trackingPreferences Json?       // mood, sleep, etc. (Boolean map)
+  emergencyContacts  Json?        // Name, Relationship, Phone
+  
+  // Baseline & Metrics
+  baseline           Json?        // mood, joinDate
+  moodCheckInsCount  Int          @default(0)
+  conversationsCount Int          @default(0)
+  lastActive         DateTime?
+  
+  // Onboarding Status (Legacy/System)
   onboardingStep     Int          @default(1)
   onboardingCompleted Boolean     @default(false)
-  nickname           String?
-  yearOfStudy        String?
-  fieldOfStudy       String?      // Can correspond to 'course' but used for broader categorization
-  preferredLanguage  String?
-  notificationPreference String?
-  checkInTime        String?
-  wellbeingBaseline  String?
-  reasonsForJoining  String[]     @default([])
-  hasSupportSystem   String?
-  previousProfessionalSupport String?
-  selfHarmRisk       String?
-  emergencyContacts  Json?
-  copingStyles       String[]     @default([])
-  academicStressors  Json?
-  spiritualityImportance String?
-  preferredApproach  String?
-  goals              String[]     @default([])
-  trackingFrequency  String?
-  trackingMetrics    String[]     @default([])
-  dataSharingConsent Boolean?
-  dataVisibility     String?
-  preferredTheme     String?
-  dashboardLayout    String?
+  verificationToken  String?
+  
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
 
   assessments        Assessment[]
   moods              Mood[]
   chatMessages       ChatMessage[]
 }
+
 
 model ChatMessage {
   id        String   @id @default(uuid())

@@ -3,16 +3,16 @@
  * Translates user data into contextually rich strings for the AI prompt.
  */
 export const getAICoreContext = (user: any) => {
-  const rawName = user.nickname || user.name || 'Student';
-  // Always use first name only, properly capitalized (handles "PROSPER ASARE" → "Prosper")
+  const rawName = user.displayName || 'Student';
+  // Always use first name only, properly capitalized
   const name = rawName.split(' ')[0].charAt(0).toUpperCase() + rawName.split(' ')[0].slice(1).toLowerCase();
-  const language = user.preferredLanguage || 'English';
-  const academicLevel = user.yearOfStudy || 'N/A';
-  const program = user.fieldOfStudy || 'N/A';
-  const concerns = user.reasonsForJoining?.join(', ') || 'N/A';
-  const faithLevel = user.spiritualityImportance || 'Not specified';
-  const approach = user.preferredApproach || 'Holistic';
-  const institution = user.institution || 'N/A';
+  const language = user.language || 'English';
+  const academicLevel = user.academicLevel ? String(user.academicLevel) : 'N/A';
+  const program = user.program || 'N/A';
+  const concerns = user.concerns?.join(', ') || 'N/A';
+  const faithLevel = user.faithLevel || 'Not specified';
+  const approach = user.approachPreference || 'Holistic';
+  const university = user.university || 'N/A';
   
   // Custom logic for different academic levels
   let academicNote = '';
@@ -24,7 +24,7 @@ export const getAICoreContext = (user: any) => {
 
   // Custom logic for programs
   let programNote = '';
-  if (['Engineering', 'Medicine', 'Computer Science'].includes(program)) {
+  if (program && ['Engineering', 'Medicine', 'Computer Science'].some(p => program.includes(p))) {
     programNote = `In the ${program} field, workload is typically high with frequent exams and technical deadlines.`;
   }
 
@@ -39,9 +39,10 @@ export const getAICoreContext = (user: any) => {
     academicNote,
     programNote,
     displayName: name,
-    institution
+    institution: university
   };
 };
+
 
 export const getMoodInsight = (recentMoods: any[]) => {
   if (recentMoods.length === 0) return 'No recent mood data.';

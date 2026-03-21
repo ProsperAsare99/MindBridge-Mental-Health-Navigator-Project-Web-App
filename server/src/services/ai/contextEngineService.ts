@@ -12,24 +12,24 @@ export class ContextEngineService {
         const user = await prisma.user.findUnique({
             where: { id: userId },
             select: { 
-                name: true,
-                nickname: true,
-                yearOfStudy: true,
-                fieldOfStudy: true,
-                preferredLanguage: true,
-                reasonsForJoining: true,
-                spiritualityImportance: true,
-                preferredApproach: true,
-                selfHarmRisk: true,
-                academicStressors: true,
-                institution: true,
-                copingStyles: true,
-                goals: true,
-                hasSupportSystem: true,
-                wellbeingBaseline: true,
-                trackingMetrics: true,
-                checkInTime: true,
+                displayName: true,
+                university: true,
+                academicLevel: true,
+                program: true,
+                language: true,
                 notificationPreference: true,
+                preferredCheckInTime: true,
+                concerns: true,
+                supportLevel: true,
+                riskLevel: true,
+                copingStyles: true,
+                faithLevel: true,
+                approachPreference: true,
+                goals: true,
+                stressors: true,
+                trackingPreferences: true,
+                baseline: true,
+                createdAt: true,
             }
         });
 
@@ -57,38 +57,38 @@ export class ContextEngineService {
             : 3;
 
         // 4. Extract stressors
-        const stressors = user.academicStressors as any || {};
+        const stressors = user.stressors as any || {};
 
         // 5. Build final context
         return {
             user: {
                 displayName: personalization.displayName,
-                academicLevel: parseInt(personalization.academicLevel.replace('Level ', '')) || 100,
-                program: personalization.program,
-                university: personalization.institution || 'KNUST',
-                daysActive: 30, // Mocked for now - could be calculated from createdAt
-                isNewUser: false,
-                examHeavyProgram: personalization.program.includes('Engineering') || personalization.program.includes('Medicine'),
-                isGraduating: personalization.academicLevel.includes('400'),
-                language: personalization.language,
-                supportLevel: user.hasSupportSystem || 'Standard',
-                needsSupport: user.hasSupportSystem === 'I feel mostly alone',
+                academicLevel: user.academicLevel || 100,
+                program: user.program || 'N/A',
+                university: user.university || 'KNUST',
+                daysActive: Math.ceil((new Date().getTime() - new Date(user.createdAt).getTime()) / (1000 * 60 * 60 * 24)),
+                isNewUser: (new Date().getTime() - new Date(user.createdAt).getTime()) / (1000 * 60 * 60 * 24) < 7,
+                examHeavyProgram: (user.program || '').includes('Engineering') || (user.program || '').includes('Medicine'),
+                isGraduating: user.academicLevel === 400,
+                language: user.language || 'English',
+                supportLevel: user.supportLevel || 'somewhat',
+                needsSupport: user.supportLevel === 'alone',
                 copingStyles: user.copingStyles || [],
-                prefersFaith: personalization.faithLevel !== 'Not important',
-                faithLevel: personalization.faithLevel.toLowerCase().replace(' ', '_'),
-                approachPreference: personalization.approach.toLowerCase(),
+                prefersFaith: user.faithLevel !== 'not_important',
+                faithLevel: (user.faithLevel || 'somewhat_important'),
+                approachPreference: (user.approachPreference || 'holistic'),
                 culturalContext: {
-                    region: 'Ashanti', // Default to Ashanti for Ghana-centric context if not specified
+                    region: 'Ashanti',
                     commonLanguages: ['English', 'Twi']
                 },
-                emergencyContacts: [] // Could be expanded in future schema
+                emergencyContacts: (user.emergencyContacts as any[]) || []
             },
             temporal: {
                 currentTime: new Date(),
                 recentMoods: {
                     average: avgMood,
                     trend: moodTrend,
-                    volatility: 1.5, // Mocked
+                    volatility: 1.5,
                     lowestPoint: recentMoods.length > 0 ? Math.min(...recentMoods.map(m => m.value)) : 1,
                     highestPoint: recentMoods.length > 0 ? Math.max(...recentMoods.map(m => m.value)) : 5
                 },
@@ -96,28 +96,29 @@ export class ContextEngineService {
                     isExamPeriod: stressors.exams >= 4,
                     isBeginningOfSemester: false,
                     isEndOfSemester: stressors.exams >= 3,
-                    isThesisPeriod: personalization.academicLevel.includes('400')
+                    isThesisPeriod: user.academicLevel === 400
                 }
             },
             behavioral: {
                 patterns: {
-                    triggers: [] // Could be extracted from mood notes in future
+                    triggers: [] 
                 },
                 engagementLevel: 'MEDIUM'
             },
             clinical: {
                 riskAssessment: {
-                    level: user.selfHarmRisk === 'High' ? 'HIGH' : user.selfHarmRisk === 'Extreme' ? 'CRITICAL' : 'LOW',
-                    score: user.selfHarmRisk === 'High' ? 15 : 5,
-                    interventionNeeded: user.selfHarmRisk === 'High' || user.selfHarmRisk === 'Extreme',
+                    level: (user.riskLevel || 'LOW') as any,
+                    score: user.riskLevel === 'HIGH' ? 15 : user.riskLevel === 'CRITICAL' ? 25 : 5,
+                    interventionNeeded: user.riskLevel === 'HIGH' || user.riskLevel === 'CRITICAL',
                     recommendations: ['Speak to a counselor', 'Call emergency hotline'],
-                    factors: [] // Logic could be added here
+                    factors: []
                 },
                 concernTrends: {
                     'Academic Stress': { isPrimary: true, mentionFrequency: 5, assessmentTrend: 'Decreased' }
                 }
             }
         };
+
     }
 }
 

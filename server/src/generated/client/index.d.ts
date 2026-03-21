@@ -1295,10 +1295,16 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
+    academicLevel: number | null
+    moodCheckInsCount: number | null
+    conversationsCount: number | null
     onboardingStep: number | null
   }
 
   export type UserSumAggregateOutputType = {
+    academicLevel: number | null
+    moodCheckInsCount: number | null
+    conversationsCount: number | null
     onboardingStep: number | null
   }
 
@@ -1306,126 +1312,109 @@ export namespace Prisma {
     id: string | null
     email: string | null
     password: string | null
-    name: string | null
-    institution: string | null
-    studentId: string | null
-    course: string | null
-    phoneNumber: string | null
     googleId: string | null
     isVerified: boolean | null
     isAnonymous: boolean | null
+    displayName: string | null
+    university: string | null
+    academicLevel: number | null
+    program: string | null
     image: string | null
+    language: string | null
+    notificationPreference: string | null
+    preferredCheckInTime: string | null
+    supportLevel: string | null
+    riskLevel: string | null
+    faithLevel: string | null
+    approachPreference: string | null
+    moodCheckInsCount: number | null
+    conversationsCount: number | null
+    lastActive: Date | null
+    onboardingStep: number | null
+    onboardingCompleted: boolean | null
     verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    onboardingStep: number | null
-    onboardingCompleted: boolean | null
-    nickname: string | null
-    yearOfStudy: string | null
-    fieldOfStudy: string | null
-    preferredLanguage: string | null
-    notificationPreference: string | null
-    checkInTime: string | null
-    wellbeingBaseline: string | null
-    hasSupportSystem: string | null
-    previousProfessionalSupport: string | null
-    selfHarmRisk: string | null
-    spiritualityImportance: string | null
-    preferredApproach: string | null
-    trackingFrequency: string | null
-    dataSharingConsent: boolean | null
-    dataVisibility: string | null
-    preferredTheme: string | null
-    dashboardLayout: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
     password: string | null
-    name: string | null
-    institution: string | null
-    studentId: string | null
-    course: string | null
-    phoneNumber: string | null
     googleId: string | null
     isVerified: boolean | null
     isAnonymous: boolean | null
+    displayName: string | null
+    university: string | null
+    academicLevel: number | null
+    program: string | null
     image: string | null
+    language: string | null
+    notificationPreference: string | null
+    preferredCheckInTime: string | null
+    supportLevel: string | null
+    riskLevel: string | null
+    faithLevel: string | null
+    approachPreference: string | null
+    moodCheckInsCount: number | null
+    conversationsCount: number | null
+    lastActive: Date | null
+    onboardingStep: number | null
+    onboardingCompleted: boolean | null
     verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    onboardingStep: number | null
-    onboardingCompleted: boolean | null
-    nickname: string | null
-    yearOfStudy: string | null
-    fieldOfStudy: string | null
-    preferredLanguage: string | null
-    notificationPreference: string | null
-    checkInTime: string | null
-    wellbeingBaseline: string | null
-    hasSupportSystem: string | null
-    previousProfessionalSupport: string | null
-    selfHarmRisk: string | null
-    spiritualityImportance: string | null
-    preferredApproach: string | null
-    trackingFrequency: string | null
-    dataSharingConsent: boolean | null
-    dataVisibility: string | null
-    preferredTheme: string | null
-    dashboardLayout: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
     password: number
-    name: number
-    institution: number
-    studentId: number
-    course: number
-    phoneNumber: number
     googleId: number
     isVerified: number
     isAnonymous: number
+    displayName: number
+    university: number
+    academicLevel: number
+    program: number
     image: number
+    language: number
+    notificationPreference: number
+    preferredCheckInTime: number
+    concerns: number
+    supportLevel: number
+    riskLevel: number
+    copingStyles: number
+    faithLevel: number
+    approachPreference: number
+    goals: number
+    stressors: number
+    trackingPreferences: number
+    emergencyContacts: number
+    baseline: number
+    moodCheckInsCount: number
+    conversationsCount: number
+    lastActive: number
+    onboardingStep: number
+    onboardingCompleted: number
     verificationToken: number
     createdAt: number
     updatedAt: number
-    onboardingStep: number
-    onboardingCompleted: number
-    nickname: number
-    yearOfStudy: number
-    fieldOfStudy: number
-    preferredLanguage: number
-    notificationPreference: number
-    checkInTime: number
-    wellbeingBaseline: number
-    reasonsForJoining: number
-    hasSupportSystem: number
-    previousProfessionalSupport: number
-    selfHarmRisk: number
-    emergencyContacts: number
-    copingStyles: number
-    academicStressors: number
-    spiritualityImportance: number
-    preferredApproach: number
-    goals: number
-    trackingFrequency: number
-    trackingMetrics: number
-    dataSharingConsent: number
-    dataVisibility: number
-    preferredTheme: number
-    dashboardLayout: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
+    academicLevel?: true
+    moodCheckInsCount?: true
+    conversationsCount?: true
     onboardingStep?: true
   }
 
   export type UserSumAggregateInputType = {
+    academicLevel?: true
+    moodCheckInsCount?: true
+    conversationsCount?: true
     onboardingStep?: true
   }
 
@@ -1433,117 +1422,94 @@ export namespace Prisma {
     id?: true
     email?: true
     password?: true
-    name?: true
-    institution?: true
-    studentId?: true
-    course?: true
-    phoneNumber?: true
     googleId?: true
     isVerified?: true
     isAnonymous?: true
+    displayName?: true
+    university?: true
+    academicLevel?: true
+    program?: true
     image?: true
+    language?: true
+    notificationPreference?: true
+    preferredCheckInTime?: true
+    supportLevel?: true
+    riskLevel?: true
+    faithLevel?: true
+    approachPreference?: true
+    moodCheckInsCount?: true
+    conversationsCount?: true
+    lastActive?: true
+    onboardingStep?: true
+    onboardingCompleted?: true
     verificationToken?: true
     createdAt?: true
     updatedAt?: true
-    onboardingStep?: true
-    onboardingCompleted?: true
-    nickname?: true
-    yearOfStudy?: true
-    fieldOfStudy?: true
-    preferredLanguage?: true
-    notificationPreference?: true
-    checkInTime?: true
-    wellbeingBaseline?: true
-    hasSupportSystem?: true
-    previousProfessionalSupport?: true
-    selfHarmRisk?: true
-    spiritualityImportance?: true
-    preferredApproach?: true
-    trackingFrequency?: true
-    dataSharingConsent?: true
-    dataVisibility?: true
-    preferredTheme?: true
-    dashboardLayout?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
     password?: true
-    name?: true
-    institution?: true
-    studentId?: true
-    course?: true
-    phoneNumber?: true
     googleId?: true
     isVerified?: true
     isAnonymous?: true
+    displayName?: true
+    university?: true
+    academicLevel?: true
+    program?: true
     image?: true
+    language?: true
+    notificationPreference?: true
+    preferredCheckInTime?: true
+    supportLevel?: true
+    riskLevel?: true
+    faithLevel?: true
+    approachPreference?: true
+    moodCheckInsCount?: true
+    conversationsCount?: true
+    lastActive?: true
+    onboardingStep?: true
+    onboardingCompleted?: true
     verificationToken?: true
     createdAt?: true
     updatedAt?: true
-    onboardingStep?: true
-    onboardingCompleted?: true
-    nickname?: true
-    yearOfStudy?: true
-    fieldOfStudy?: true
-    preferredLanguage?: true
-    notificationPreference?: true
-    checkInTime?: true
-    wellbeingBaseline?: true
-    hasSupportSystem?: true
-    previousProfessionalSupport?: true
-    selfHarmRisk?: true
-    spiritualityImportance?: true
-    preferredApproach?: true
-    trackingFrequency?: true
-    dataSharingConsent?: true
-    dataVisibility?: true
-    preferredTheme?: true
-    dashboardLayout?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
     password?: true
-    name?: true
-    institution?: true
-    studentId?: true
-    course?: true
-    phoneNumber?: true
     googleId?: true
     isVerified?: true
     isAnonymous?: true
+    displayName?: true
+    university?: true
+    academicLevel?: true
+    program?: true
     image?: true
+    language?: true
+    notificationPreference?: true
+    preferredCheckInTime?: true
+    concerns?: true
+    supportLevel?: true
+    riskLevel?: true
+    copingStyles?: true
+    faithLevel?: true
+    approachPreference?: true
+    goals?: true
+    stressors?: true
+    trackingPreferences?: true
+    emergencyContacts?: true
+    baseline?: true
+    moodCheckInsCount?: true
+    conversationsCount?: true
+    lastActive?: true
+    onboardingStep?: true
+    onboardingCompleted?: true
     verificationToken?: true
     createdAt?: true
     updatedAt?: true
-    onboardingStep?: true
-    onboardingCompleted?: true
-    nickname?: true
-    yearOfStudy?: true
-    fieldOfStudy?: true
-    preferredLanguage?: true
-    notificationPreference?: true
-    checkInTime?: true
-    wellbeingBaseline?: true
-    reasonsForJoining?: true
-    hasSupportSystem?: true
-    previousProfessionalSupport?: true
-    selfHarmRisk?: true
-    emergencyContacts?: true
-    copingStyles?: true
-    academicStressors?: true
-    spiritualityImportance?: true
-    preferredApproach?: true
-    goals?: true
-    trackingFrequency?: true
-    trackingMetrics?: true
-    dataSharingConsent?: true
-    dataVisibility?: true
-    preferredTheme?: true
-    dashboardLayout?: true
     _all?: true
   }
 
@@ -1637,43 +1603,36 @@ export namespace Prisma {
     id: string
     email: string
     password: string | null
-    name: string | null
-    institution: string | null
-    studentId: string | null
-    course: string | null
-    phoneNumber: string | null
     googleId: string | null
     isVerified: boolean
     isAnonymous: boolean
+    displayName: string | null
+    university: string | null
+    academicLevel: number | null
+    program: string | null
     image: string | null
+    language: string
+    notificationPreference: string
+    preferredCheckInTime: string
+    concerns: string[]
+    supportLevel: string
+    riskLevel: string
+    copingStyles: string[]
+    faithLevel: string
+    approachPreference: string
+    goals: string[]
+    stressors: JsonValue | null
+    trackingPreferences: JsonValue | null
+    emergencyContacts: JsonValue | null
+    baseline: JsonValue | null
+    moodCheckInsCount: number
+    conversationsCount: number
+    lastActive: Date | null
+    onboardingStep: number
+    onboardingCompleted: boolean
     verificationToken: string | null
     createdAt: Date
     updatedAt: Date
-    onboardingStep: number
-    onboardingCompleted: boolean
-    nickname: string | null
-    yearOfStudy: string | null
-    fieldOfStudy: string | null
-    preferredLanguage: string | null
-    notificationPreference: string | null
-    checkInTime: string | null
-    wellbeingBaseline: string | null
-    reasonsForJoining: string[]
-    hasSupportSystem: string | null
-    previousProfessionalSupport: string | null
-    selfHarmRisk: string | null
-    emergencyContacts: JsonValue | null
-    copingStyles: string[]
-    academicStressors: JsonValue | null
-    spiritualityImportance: string | null
-    preferredApproach: string | null
-    goals: string[]
-    trackingFrequency: string | null
-    trackingMetrics: string[]
-    dataSharingConsent: boolean | null
-    dataVisibility: string | null
-    preferredTheme: string | null
-    dashboardLayout: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1699,43 +1658,36 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     password?: boolean
-    name?: boolean
-    institution?: boolean
-    studentId?: boolean
-    course?: boolean
-    phoneNumber?: boolean
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: boolean
+    university?: boolean
+    academicLevel?: boolean
+    program?: boolean
     image?: boolean
+    language?: boolean
+    notificationPreference?: boolean
+    preferredCheckInTime?: boolean
+    concerns?: boolean
+    supportLevel?: boolean
+    riskLevel?: boolean
+    copingStyles?: boolean
+    faithLevel?: boolean
+    approachPreference?: boolean
+    goals?: boolean
+    stressors?: boolean
+    trackingPreferences?: boolean
+    emergencyContacts?: boolean
+    baseline?: boolean
+    moodCheckInsCount?: boolean
+    conversationsCount?: boolean
+    lastActive?: boolean
+    onboardingStep?: boolean
+    onboardingCompleted?: boolean
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    onboardingStep?: boolean
-    onboardingCompleted?: boolean
-    nickname?: boolean
-    yearOfStudy?: boolean
-    fieldOfStudy?: boolean
-    preferredLanguage?: boolean
-    notificationPreference?: boolean
-    checkInTime?: boolean
-    wellbeingBaseline?: boolean
-    reasonsForJoining?: boolean
-    hasSupportSystem?: boolean
-    previousProfessionalSupport?: boolean
-    selfHarmRisk?: boolean
-    emergencyContacts?: boolean
-    copingStyles?: boolean
-    academicStressors?: boolean
-    spiritualityImportance?: boolean
-    preferredApproach?: boolean
-    goals?: boolean
-    trackingFrequency?: boolean
-    trackingMetrics?: boolean
-    dataSharingConsent?: boolean
-    dataVisibility?: boolean
-    preferredTheme?: boolean
-    dashboardLayout?: boolean
     assessments?: boolean | User$assessmentsArgs<ExtArgs>
     moods?: boolean | User$moodsArgs<ExtArgs>
     chatMessages?: boolean | User$chatMessagesArgs<ExtArgs>
@@ -1746,132 +1698,111 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     password?: boolean
-    name?: boolean
-    institution?: boolean
-    studentId?: boolean
-    course?: boolean
-    phoneNumber?: boolean
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: boolean
+    university?: boolean
+    academicLevel?: boolean
+    program?: boolean
     image?: boolean
+    language?: boolean
+    notificationPreference?: boolean
+    preferredCheckInTime?: boolean
+    concerns?: boolean
+    supportLevel?: boolean
+    riskLevel?: boolean
+    copingStyles?: boolean
+    faithLevel?: boolean
+    approachPreference?: boolean
+    goals?: boolean
+    stressors?: boolean
+    trackingPreferences?: boolean
+    emergencyContacts?: boolean
+    baseline?: boolean
+    moodCheckInsCount?: boolean
+    conversationsCount?: boolean
+    lastActive?: boolean
+    onboardingStep?: boolean
+    onboardingCompleted?: boolean
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    onboardingStep?: boolean
-    onboardingCompleted?: boolean
-    nickname?: boolean
-    yearOfStudy?: boolean
-    fieldOfStudy?: boolean
-    preferredLanguage?: boolean
-    notificationPreference?: boolean
-    checkInTime?: boolean
-    wellbeingBaseline?: boolean
-    reasonsForJoining?: boolean
-    hasSupportSystem?: boolean
-    previousProfessionalSupport?: boolean
-    selfHarmRisk?: boolean
-    emergencyContacts?: boolean
-    copingStyles?: boolean
-    academicStressors?: boolean
-    spiritualityImportance?: boolean
-    preferredApproach?: boolean
-    goals?: boolean
-    trackingFrequency?: boolean
-    trackingMetrics?: boolean
-    dataSharingConsent?: boolean
-    dataVisibility?: boolean
-    preferredTheme?: boolean
-    dashboardLayout?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
     password?: boolean
-    name?: boolean
-    institution?: boolean
-    studentId?: boolean
-    course?: boolean
-    phoneNumber?: boolean
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: boolean
+    university?: boolean
+    academicLevel?: boolean
+    program?: boolean
     image?: boolean
+    language?: boolean
+    notificationPreference?: boolean
+    preferredCheckInTime?: boolean
+    concerns?: boolean
+    supportLevel?: boolean
+    riskLevel?: boolean
+    copingStyles?: boolean
+    faithLevel?: boolean
+    approachPreference?: boolean
+    goals?: boolean
+    stressors?: boolean
+    trackingPreferences?: boolean
+    emergencyContacts?: boolean
+    baseline?: boolean
+    moodCheckInsCount?: boolean
+    conversationsCount?: boolean
+    lastActive?: boolean
+    onboardingStep?: boolean
+    onboardingCompleted?: boolean
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    onboardingStep?: boolean
-    onboardingCompleted?: boolean
-    nickname?: boolean
-    yearOfStudy?: boolean
-    fieldOfStudy?: boolean
-    preferredLanguage?: boolean
-    notificationPreference?: boolean
-    checkInTime?: boolean
-    wellbeingBaseline?: boolean
-    reasonsForJoining?: boolean
-    hasSupportSystem?: boolean
-    previousProfessionalSupport?: boolean
-    selfHarmRisk?: boolean
-    emergencyContacts?: boolean
-    copingStyles?: boolean
-    academicStressors?: boolean
-    spiritualityImportance?: boolean
-    preferredApproach?: boolean
-    goals?: boolean
-    trackingFrequency?: boolean
-    trackingMetrics?: boolean
-    dataSharingConsent?: boolean
-    dataVisibility?: boolean
-    preferredTheme?: boolean
-    dashboardLayout?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
     password?: boolean
-    name?: boolean
-    institution?: boolean
-    studentId?: boolean
-    course?: boolean
-    phoneNumber?: boolean
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: boolean
+    university?: boolean
+    academicLevel?: boolean
+    program?: boolean
     image?: boolean
+    language?: boolean
+    notificationPreference?: boolean
+    preferredCheckInTime?: boolean
+    concerns?: boolean
+    supportLevel?: boolean
+    riskLevel?: boolean
+    copingStyles?: boolean
+    faithLevel?: boolean
+    approachPreference?: boolean
+    goals?: boolean
+    stressors?: boolean
+    trackingPreferences?: boolean
+    emergencyContacts?: boolean
+    baseline?: boolean
+    moodCheckInsCount?: boolean
+    conversationsCount?: boolean
+    lastActive?: boolean
+    onboardingStep?: boolean
+    onboardingCompleted?: boolean
     verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    onboardingStep?: boolean
-    onboardingCompleted?: boolean
-    nickname?: boolean
-    yearOfStudy?: boolean
-    fieldOfStudy?: boolean
-    preferredLanguage?: boolean
-    notificationPreference?: boolean
-    checkInTime?: boolean
-    wellbeingBaseline?: boolean
-    reasonsForJoining?: boolean
-    hasSupportSystem?: boolean
-    previousProfessionalSupport?: boolean
-    selfHarmRisk?: boolean
-    emergencyContacts?: boolean
-    copingStyles?: boolean
-    academicStressors?: boolean
-    spiritualityImportance?: boolean
-    preferredApproach?: boolean
-    goals?: boolean
-    trackingFrequency?: boolean
-    trackingMetrics?: boolean
-    dataSharingConsent?: boolean
-    dataVisibility?: boolean
-    preferredTheme?: boolean
-    dashboardLayout?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "institution" | "studentId" | "course" | "phoneNumber" | "googleId" | "isVerified" | "isAnonymous" | "image" | "verificationToken" | "createdAt" | "updatedAt" | "onboardingStep" | "onboardingCompleted" | "nickname" | "yearOfStudy" | "fieldOfStudy" | "preferredLanguage" | "notificationPreference" | "checkInTime" | "wellbeingBaseline" | "reasonsForJoining" | "hasSupportSystem" | "previousProfessionalSupport" | "selfHarmRisk" | "emergencyContacts" | "copingStyles" | "academicStressors" | "spiritualityImportance" | "preferredApproach" | "goals" | "trackingFrequency" | "trackingMetrics" | "dataSharingConsent" | "dataVisibility" | "preferredTheme" | "dashboardLayout", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "displayName" | "university" | "academicLevel" | "program" | "image" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baseline" | "moodCheckInsCount" | "conversationsCount" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "verificationToken" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assessments?: boolean | User$assessmentsArgs<ExtArgs>
     moods?: boolean | User$moodsArgs<ExtArgs>
@@ -1892,43 +1823,36 @@ export namespace Prisma {
       id: string
       email: string
       password: string | null
-      name: string | null
-      institution: string | null
-      studentId: string | null
-      course: string | null
-      phoneNumber: string | null
       googleId: string | null
       isVerified: boolean
       isAnonymous: boolean
+      displayName: string | null
+      university: string | null
+      academicLevel: number | null
+      program: string | null
       image: string | null
+      language: string
+      notificationPreference: string
+      preferredCheckInTime: string
+      concerns: string[]
+      supportLevel: string
+      riskLevel: string
+      copingStyles: string[]
+      faithLevel: string
+      approachPreference: string
+      goals: string[]
+      stressors: Prisma.JsonValue | null
+      trackingPreferences: Prisma.JsonValue | null
+      emergencyContacts: Prisma.JsonValue | null
+      baseline: Prisma.JsonValue | null
+      moodCheckInsCount: number
+      conversationsCount: number
+      lastActive: Date | null
+      onboardingStep: number
+      onboardingCompleted: boolean
       verificationToken: string | null
       createdAt: Date
       updatedAt: Date
-      onboardingStep: number
-      onboardingCompleted: boolean
-      nickname: string | null
-      yearOfStudy: string | null
-      fieldOfStudy: string | null
-      preferredLanguage: string | null
-      notificationPreference: string | null
-      checkInTime: string | null
-      wellbeingBaseline: string | null
-      reasonsForJoining: string[]
-      hasSupportSystem: string | null
-      previousProfessionalSupport: string | null
-      selfHarmRisk: string | null
-      emergencyContacts: Prisma.JsonValue | null
-      copingStyles: string[]
-      academicStressors: Prisma.JsonValue | null
-      spiritualityImportance: string | null
-      preferredApproach: string | null
-      goals: string[]
-      trackingFrequency: string | null
-      trackingMetrics: string[]
-      dataSharingConsent: boolean | null
-      dataVisibility: string | null
-      preferredTheme: string | null
-      dashboardLayout: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2358,43 +2282,36 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly institution: FieldRef<"User", 'String'>
-    readonly studentId: FieldRef<"User", 'String'>
-    readonly course: FieldRef<"User", 'String'>
-    readonly phoneNumber: FieldRef<"User", 'String'>
     readonly googleId: FieldRef<"User", 'String'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
     readonly isAnonymous: FieldRef<"User", 'Boolean'>
+    readonly displayName: FieldRef<"User", 'String'>
+    readonly university: FieldRef<"User", 'String'>
+    readonly academicLevel: FieldRef<"User", 'Int'>
+    readonly program: FieldRef<"User", 'String'>
     readonly image: FieldRef<"User", 'String'>
+    readonly language: FieldRef<"User", 'String'>
+    readonly notificationPreference: FieldRef<"User", 'String'>
+    readonly preferredCheckInTime: FieldRef<"User", 'String'>
+    readonly concerns: FieldRef<"User", 'String[]'>
+    readonly supportLevel: FieldRef<"User", 'String'>
+    readonly riskLevel: FieldRef<"User", 'String'>
+    readonly copingStyles: FieldRef<"User", 'String[]'>
+    readonly faithLevel: FieldRef<"User", 'String'>
+    readonly approachPreference: FieldRef<"User", 'String'>
+    readonly goals: FieldRef<"User", 'String[]'>
+    readonly stressors: FieldRef<"User", 'Json'>
+    readonly trackingPreferences: FieldRef<"User", 'Json'>
+    readonly emergencyContacts: FieldRef<"User", 'Json'>
+    readonly baseline: FieldRef<"User", 'Json'>
+    readonly moodCheckInsCount: FieldRef<"User", 'Int'>
+    readonly conversationsCount: FieldRef<"User", 'Int'>
+    readonly lastActive: FieldRef<"User", 'DateTime'>
+    readonly onboardingStep: FieldRef<"User", 'Int'>
+    readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
     readonly verificationToken: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
-    readonly onboardingStep: FieldRef<"User", 'Int'>
-    readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
-    readonly nickname: FieldRef<"User", 'String'>
-    readonly yearOfStudy: FieldRef<"User", 'String'>
-    readonly fieldOfStudy: FieldRef<"User", 'String'>
-    readonly preferredLanguage: FieldRef<"User", 'String'>
-    readonly notificationPreference: FieldRef<"User", 'String'>
-    readonly checkInTime: FieldRef<"User", 'String'>
-    readonly wellbeingBaseline: FieldRef<"User", 'String'>
-    readonly reasonsForJoining: FieldRef<"User", 'String[]'>
-    readonly hasSupportSystem: FieldRef<"User", 'String'>
-    readonly previousProfessionalSupport: FieldRef<"User", 'String'>
-    readonly selfHarmRisk: FieldRef<"User", 'String'>
-    readonly emergencyContacts: FieldRef<"User", 'Json'>
-    readonly copingStyles: FieldRef<"User", 'String[]'>
-    readonly academicStressors: FieldRef<"User", 'Json'>
-    readonly spiritualityImportance: FieldRef<"User", 'String'>
-    readonly preferredApproach: FieldRef<"User", 'String'>
-    readonly goals: FieldRef<"User", 'String[]'>
-    readonly trackingFrequency: FieldRef<"User", 'String'>
-    readonly trackingMetrics: FieldRef<"User", 'String[]'>
-    readonly dataSharingConsent: FieldRef<"User", 'Boolean'>
-    readonly dataVisibility: FieldRef<"User", 'String'>
-    readonly preferredTheme: FieldRef<"User", 'String'>
-    readonly dashboardLayout: FieldRef<"User", 'String'>
   }
     
 
@@ -7171,43 +7088,36 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     password: 'password',
-    name: 'name',
-    institution: 'institution',
-    studentId: 'studentId',
-    course: 'course',
-    phoneNumber: 'phoneNumber',
     googleId: 'googleId',
     isVerified: 'isVerified',
     isAnonymous: 'isAnonymous',
+    displayName: 'displayName',
+    university: 'university',
+    academicLevel: 'academicLevel',
+    program: 'program',
     image: 'image',
-    verificationToken: 'verificationToken',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
+    language: 'language',
+    notificationPreference: 'notificationPreference',
+    preferredCheckInTime: 'preferredCheckInTime',
+    concerns: 'concerns',
+    supportLevel: 'supportLevel',
+    riskLevel: 'riskLevel',
+    copingStyles: 'copingStyles',
+    faithLevel: 'faithLevel',
+    approachPreference: 'approachPreference',
+    goals: 'goals',
+    stressors: 'stressors',
+    trackingPreferences: 'trackingPreferences',
+    emergencyContacts: 'emergencyContacts',
+    baseline: 'baseline',
+    moodCheckInsCount: 'moodCheckInsCount',
+    conversationsCount: 'conversationsCount',
+    lastActive: 'lastActive',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
-    nickname: 'nickname',
-    yearOfStudy: 'yearOfStudy',
-    fieldOfStudy: 'fieldOfStudy',
-    preferredLanguage: 'preferredLanguage',
-    notificationPreference: 'notificationPreference',
-    checkInTime: 'checkInTime',
-    wellbeingBaseline: 'wellbeingBaseline',
-    reasonsForJoining: 'reasonsForJoining',
-    hasSupportSystem: 'hasSupportSystem',
-    previousProfessionalSupport: 'previousProfessionalSupport',
-    selfHarmRisk: 'selfHarmRisk',
-    emergencyContacts: 'emergencyContacts',
-    copingStyles: 'copingStyles',
-    academicStressors: 'academicStressors',
-    spiritualityImportance: 'spiritualityImportance',
-    preferredApproach: 'preferredApproach',
-    goals: 'goals',
-    trackingFrequency: 'trackingFrequency',
-    trackingMetrics: 'trackingMetrics',
-    dataSharingConsent: 'dataSharingConsent',
-    dataVisibility: 'dataVisibility',
-    preferredTheme: 'preferredTheme',
-    dashboardLayout: 'dashboardLayout'
+    verificationToken: 'verificationToken',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -7330,20 +7240,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7361,6 +7257,20 @@ export namespace Prisma {
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -7388,43 +7298,36 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringNullableFilter<"User"> | string | null
-    name?: StringNullableFilter<"User"> | string | null
-    institution?: StringNullableFilter<"User"> | string | null
-    studentId?: StringNullableFilter<"User"> | string | null
-    course?: StringNullableFilter<"User"> | string | null
-    phoneNumber?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isAnonymous?: BoolFilter<"User"> | boolean
+    displayName?: StringNullableFilter<"User"> | string | null
+    university?: StringNullableFilter<"User"> | string | null
+    academicLevel?: IntNullableFilter<"User"> | number | null
+    program?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
+    language?: StringFilter<"User"> | string
+    notificationPreference?: StringFilter<"User"> | string
+    preferredCheckInTime?: StringFilter<"User"> | string
+    concerns?: StringNullableListFilter<"User">
+    supportLevel?: StringFilter<"User"> | string
+    riskLevel?: StringFilter<"User"> | string
+    copingStyles?: StringNullableListFilter<"User">
+    faithLevel?: StringFilter<"User"> | string
+    approachPreference?: StringFilter<"User"> | string
+    goals?: StringNullableListFilter<"User">
+    stressors?: JsonNullableFilter<"User">
+    trackingPreferences?: JsonNullableFilter<"User">
+    emergencyContacts?: JsonNullableFilter<"User">
+    baseline?: JsonNullableFilter<"User">
+    moodCheckInsCount?: IntFilter<"User"> | number
+    conversationsCount?: IntFilter<"User"> | number
+    lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
+    onboardingStep?: IntFilter<"User"> | number
+    onboardingCompleted?: BoolFilter<"User"> | boolean
     verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    onboardingStep?: IntFilter<"User"> | number
-    onboardingCompleted?: BoolFilter<"User"> | boolean
-    nickname?: StringNullableFilter<"User"> | string | null
-    yearOfStudy?: StringNullableFilter<"User"> | string | null
-    fieldOfStudy?: StringNullableFilter<"User"> | string | null
-    preferredLanguage?: StringNullableFilter<"User"> | string | null
-    notificationPreference?: StringNullableFilter<"User"> | string | null
-    checkInTime?: StringNullableFilter<"User"> | string | null
-    wellbeingBaseline?: StringNullableFilter<"User"> | string | null
-    reasonsForJoining?: StringNullableListFilter<"User">
-    hasSupportSystem?: StringNullableFilter<"User"> | string | null
-    previousProfessionalSupport?: StringNullableFilter<"User"> | string | null
-    selfHarmRisk?: StringNullableFilter<"User"> | string | null
-    emergencyContacts?: JsonNullableFilter<"User">
-    copingStyles?: StringNullableListFilter<"User">
-    academicStressors?: JsonNullableFilter<"User">
-    spiritualityImportance?: StringNullableFilter<"User"> | string | null
-    preferredApproach?: StringNullableFilter<"User"> | string | null
-    goals?: StringNullableListFilter<"User">
-    trackingFrequency?: StringNullableFilter<"User"> | string | null
-    trackingMetrics?: StringNullableListFilter<"User">
-    dataSharingConsent?: BoolNullableFilter<"User"> | boolean | null
-    dataVisibility?: StringNullableFilter<"User"> | string | null
-    preferredTheme?: StringNullableFilter<"User"> | string | null
-    dashboardLayout?: StringNullableFilter<"User"> | string | null
     assessments?: AssessmentListRelationFilter
     moods?: MoodListRelationFilter
     chatMessages?: ChatMessageListRelationFilter
@@ -7434,43 +7337,36 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
-    institution?: SortOrderInput | SortOrder
-    studentId?: SortOrderInput | SortOrder
-    course?: SortOrderInput | SortOrder
-    phoneNumber?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    displayName?: SortOrderInput | SortOrder
+    university?: SortOrderInput | SortOrder
+    academicLevel?: SortOrderInput | SortOrder
+    program?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    language?: SortOrder
+    notificationPreference?: SortOrder
+    preferredCheckInTime?: SortOrder
+    concerns?: SortOrder
+    supportLevel?: SortOrder
+    riskLevel?: SortOrder
+    copingStyles?: SortOrder
+    faithLevel?: SortOrder
+    approachPreference?: SortOrder
+    goals?: SortOrder
+    stressors?: SortOrderInput | SortOrder
+    trackingPreferences?: SortOrderInput | SortOrder
+    emergencyContacts?: SortOrderInput | SortOrder
+    baseline?: SortOrderInput | SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
+    lastActive?: SortOrderInput | SortOrder
+    onboardingStep?: SortOrder
+    onboardingCompleted?: SortOrder
     verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    onboardingStep?: SortOrder
-    onboardingCompleted?: SortOrder
-    nickname?: SortOrderInput | SortOrder
-    yearOfStudy?: SortOrderInput | SortOrder
-    fieldOfStudy?: SortOrderInput | SortOrder
-    preferredLanguage?: SortOrderInput | SortOrder
-    notificationPreference?: SortOrderInput | SortOrder
-    checkInTime?: SortOrderInput | SortOrder
-    wellbeingBaseline?: SortOrderInput | SortOrder
-    reasonsForJoining?: SortOrder
-    hasSupportSystem?: SortOrderInput | SortOrder
-    previousProfessionalSupport?: SortOrderInput | SortOrder
-    selfHarmRisk?: SortOrderInput | SortOrder
-    emergencyContacts?: SortOrderInput | SortOrder
-    copingStyles?: SortOrder
-    academicStressors?: SortOrderInput | SortOrder
-    spiritualityImportance?: SortOrderInput | SortOrder
-    preferredApproach?: SortOrderInput | SortOrder
-    goals?: SortOrder
-    trackingFrequency?: SortOrderInput | SortOrder
-    trackingMetrics?: SortOrder
-    dataSharingConsent?: SortOrderInput | SortOrder
-    dataVisibility?: SortOrderInput | SortOrder
-    preferredTheme?: SortOrderInput | SortOrder
-    dashboardLayout?: SortOrderInput | SortOrder
     assessments?: AssessmentOrderByRelationAggregateInput
     moods?: MoodOrderByRelationAggregateInput
     chatMessages?: ChatMessageOrderByRelationAggregateInput
@@ -7484,42 +7380,35 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringNullableFilter<"User"> | string | null
-    name?: StringNullableFilter<"User"> | string | null
-    institution?: StringNullableFilter<"User"> | string | null
-    studentId?: StringNullableFilter<"User"> | string | null
-    course?: StringNullableFilter<"User"> | string | null
-    phoneNumber?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isAnonymous?: BoolFilter<"User"> | boolean
+    displayName?: StringNullableFilter<"User"> | string | null
+    university?: StringNullableFilter<"User"> | string | null
+    academicLevel?: IntNullableFilter<"User"> | number | null
+    program?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
+    language?: StringFilter<"User"> | string
+    notificationPreference?: StringFilter<"User"> | string
+    preferredCheckInTime?: StringFilter<"User"> | string
+    concerns?: StringNullableListFilter<"User">
+    supportLevel?: StringFilter<"User"> | string
+    riskLevel?: StringFilter<"User"> | string
+    copingStyles?: StringNullableListFilter<"User">
+    faithLevel?: StringFilter<"User"> | string
+    approachPreference?: StringFilter<"User"> | string
+    goals?: StringNullableListFilter<"User">
+    stressors?: JsonNullableFilter<"User">
+    trackingPreferences?: JsonNullableFilter<"User">
+    emergencyContacts?: JsonNullableFilter<"User">
+    baseline?: JsonNullableFilter<"User">
+    moodCheckInsCount?: IntFilter<"User"> | number
+    conversationsCount?: IntFilter<"User"> | number
+    lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
+    onboardingStep?: IntFilter<"User"> | number
+    onboardingCompleted?: BoolFilter<"User"> | boolean
     verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    onboardingStep?: IntFilter<"User"> | number
-    onboardingCompleted?: BoolFilter<"User"> | boolean
-    nickname?: StringNullableFilter<"User"> | string | null
-    yearOfStudy?: StringNullableFilter<"User"> | string | null
-    fieldOfStudy?: StringNullableFilter<"User"> | string | null
-    preferredLanguage?: StringNullableFilter<"User"> | string | null
-    notificationPreference?: StringNullableFilter<"User"> | string | null
-    checkInTime?: StringNullableFilter<"User"> | string | null
-    wellbeingBaseline?: StringNullableFilter<"User"> | string | null
-    reasonsForJoining?: StringNullableListFilter<"User">
-    hasSupportSystem?: StringNullableFilter<"User"> | string | null
-    previousProfessionalSupport?: StringNullableFilter<"User"> | string | null
-    selfHarmRisk?: StringNullableFilter<"User"> | string | null
-    emergencyContacts?: JsonNullableFilter<"User">
-    copingStyles?: StringNullableListFilter<"User">
-    academicStressors?: JsonNullableFilter<"User">
-    spiritualityImportance?: StringNullableFilter<"User"> | string | null
-    preferredApproach?: StringNullableFilter<"User"> | string | null
-    goals?: StringNullableListFilter<"User">
-    trackingFrequency?: StringNullableFilter<"User"> | string | null
-    trackingMetrics?: StringNullableListFilter<"User">
-    dataSharingConsent?: BoolNullableFilter<"User"> | boolean | null
-    dataVisibility?: StringNullableFilter<"User"> | string | null
-    preferredTheme?: StringNullableFilter<"User"> | string | null
-    dashboardLayout?: StringNullableFilter<"User"> | string | null
     assessments?: AssessmentListRelationFilter
     moods?: MoodListRelationFilter
     chatMessages?: ChatMessageListRelationFilter
@@ -7529,43 +7418,36 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
-    institution?: SortOrderInput | SortOrder
-    studentId?: SortOrderInput | SortOrder
-    course?: SortOrderInput | SortOrder
-    phoneNumber?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    displayName?: SortOrderInput | SortOrder
+    university?: SortOrderInput | SortOrder
+    academicLevel?: SortOrderInput | SortOrder
+    program?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    language?: SortOrder
+    notificationPreference?: SortOrder
+    preferredCheckInTime?: SortOrder
+    concerns?: SortOrder
+    supportLevel?: SortOrder
+    riskLevel?: SortOrder
+    copingStyles?: SortOrder
+    faithLevel?: SortOrder
+    approachPreference?: SortOrder
+    goals?: SortOrder
+    stressors?: SortOrderInput | SortOrder
+    trackingPreferences?: SortOrderInput | SortOrder
+    emergencyContacts?: SortOrderInput | SortOrder
+    baseline?: SortOrderInput | SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
+    lastActive?: SortOrderInput | SortOrder
+    onboardingStep?: SortOrder
+    onboardingCompleted?: SortOrder
     verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    onboardingStep?: SortOrder
-    onboardingCompleted?: SortOrder
-    nickname?: SortOrderInput | SortOrder
-    yearOfStudy?: SortOrderInput | SortOrder
-    fieldOfStudy?: SortOrderInput | SortOrder
-    preferredLanguage?: SortOrderInput | SortOrder
-    notificationPreference?: SortOrderInput | SortOrder
-    checkInTime?: SortOrderInput | SortOrder
-    wellbeingBaseline?: SortOrderInput | SortOrder
-    reasonsForJoining?: SortOrder
-    hasSupportSystem?: SortOrderInput | SortOrder
-    previousProfessionalSupport?: SortOrderInput | SortOrder
-    selfHarmRisk?: SortOrderInput | SortOrder
-    emergencyContacts?: SortOrderInput | SortOrder
-    copingStyles?: SortOrder
-    academicStressors?: SortOrderInput | SortOrder
-    spiritualityImportance?: SortOrderInput | SortOrder
-    preferredApproach?: SortOrderInput | SortOrder
-    goals?: SortOrder
-    trackingFrequency?: SortOrderInput | SortOrder
-    trackingMetrics?: SortOrder
-    dataSharingConsent?: SortOrderInput | SortOrder
-    dataVisibility?: SortOrderInput | SortOrder
-    preferredTheme?: SortOrderInput | SortOrder
-    dashboardLayout?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -7580,43 +7462,36 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
-    institution?: StringNullableWithAggregatesFilter<"User"> | string | null
-    studentId?: StringNullableWithAggregatesFilter<"User"> | string | null
-    course?: StringNullableWithAggregatesFilter<"User"> | string | null
-    phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     isAnonymous?: BoolWithAggregatesFilter<"User"> | boolean
+    displayName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    university?: StringNullableWithAggregatesFilter<"User"> | string | null
+    academicLevel?: IntNullableWithAggregatesFilter<"User"> | number | null
+    program?: StringNullableWithAggregatesFilter<"User"> | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    language?: StringWithAggregatesFilter<"User"> | string
+    notificationPreference?: StringWithAggregatesFilter<"User"> | string
+    preferredCheckInTime?: StringWithAggregatesFilter<"User"> | string
+    concerns?: StringNullableListFilter<"User">
+    supportLevel?: StringWithAggregatesFilter<"User"> | string
+    riskLevel?: StringWithAggregatesFilter<"User"> | string
+    copingStyles?: StringNullableListFilter<"User">
+    faithLevel?: StringWithAggregatesFilter<"User"> | string
+    approachPreference?: StringWithAggregatesFilter<"User"> | string
+    goals?: StringNullableListFilter<"User">
+    stressors?: JsonNullableWithAggregatesFilter<"User">
+    trackingPreferences?: JsonNullableWithAggregatesFilter<"User">
+    emergencyContacts?: JsonNullableWithAggregatesFilter<"User">
+    baseline?: JsonNullableWithAggregatesFilter<"User">
+    moodCheckInsCount?: IntWithAggregatesFilter<"User"> | number
+    conversationsCount?: IntWithAggregatesFilter<"User"> | number
+    lastActive?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    onboardingStep?: IntWithAggregatesFilter<"User"> | number
+    onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
     verificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    onboardingStep?: IntWithAggregatesFilter<"User"> | number
-    onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
-    nickname?: StringNullableWithAggregatesFilter<"User"> | string | null
-    yearOfStudy?: StringNullableWithAggregatesFilter<"User"> | string | null
-    fieldOfStudy?: StringNullableWithAggregatesFilter<"User"> | string | null
-    preferredLanguage?: StringNullableWithAggregatesFilter<"User"> | string | null
-    notificationPreference?: StringNullableWithAggregatesFilter<"User"> | string | null
-    checkInTime?: StringNullableWithAggregatesFilter<"User"> | string | null
-    wellbeingBaseline?: StringNullableWithAggregatesFilter<"User"> | string | null
-    reasonsForJoining?: StringNullableListFilter<"User">
-    hasSupportSystem?: StringNullableWithAggregatesFilter<"User"> | string | null
-    previousProfessionalSupport?: StringNullableWithAggregatesFilter<"User"> | string | null
-    selfHarmRisk?: StringNullableWithAggregatesFilter<"User"> | string | null
-    emergencyContacts?: JsonNullableWithAggregatesFilter<"User">
-    copingStyles?: StringNullableListFilter<"User">
-    academicStressors?: JsonNullableWithAggregatesFilter<"User">
-    spiritualityImportance?: StringNullableWithAggregatesFilter<"User"> | string | null
-    preferredApproach?: StringNullableWithAggregatesFilter<"User"> | string | null
-    goals?: StringNullableListFilter<"User">
-    trackingFrequency?: StringNullableWithAggregatesFilter<"User"> | string | null
-    trackingMetrics?: StringNullableListFilter<"User">
-    dataSharingConsent?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
-    dataVisibility?: StringNullableWithAggregatesFilter<"User"> | string | null
-    preferredTheme?: StringNullableWithAggregatesFilter<"User"> | string | null
-    dashboardLayout?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type ChatMessageWhereInput = {
@@ -7871,43 +7746,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     assessments?: AssessmentCreateNestedManyWithoutUserInput
     moods?: MoodCreateNestedManyWithoutUserInput
     chatMessages?: ChatMessageCreateNestedManyWithoutUserInput
@@ -7917,43 +7785,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
     moods?: MoodUncheckedCreateNestedManyWithoutUserInput
     chatMessages?: ChatMessageUncheckedCreateNestedManyWithoutUserInput
@@ -7963,43 +7824,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     assessments?: AssessmentUpdateManyWithoutUserNestedInput
     moods?: MoodUpdateManyWithoutUserNestedInput
     chatMessages?: ChatMessageUpdateManyWithoutUserNestedInput
@@ -8009,43 +7863,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
     moods?: MoodUncheckedUpdateManyWithoutUserNestedInput
     chatMessages?: ChatMessageUncheckedUpdateManyWithoutUserNestedInput
@@ -8055,129 +7902,108 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ChatMessageCreateInput = {
@@ -8471,26 +8297,15 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type StringNullableListFilter<$PrismaModel = never> = {
@@ -8523,9 +8338,37 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type AssessmentListRelationFilter = {
@@ -8567,46 +8410,42 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
-    institution?: SortOrder
-    studentId?: SortOrder
-    course?: SortOrder
-    phoneNumber?: SortOrder
     googleId?: SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    displayName?: SortOrder
+    university?: SortOrder
+    academicLevel?: SortOrder
+    program?: SortOrder
     image?: SortOrder
+    language?: SortOrder
+    notificationPreference?: SortOrder
+    preferredCheckInTime?: SortOrder
+    concerns?: SortOrder
+    supportLevel?: SortOrder
+    riskLevel?: SortOrder
+    copingStyles?: SortOrder
+    faithLevel?: SortOrder
+    approachPreference?: SortOrder
+    goals?: SortOrder
+    stressors?: SortOrder
+    trackingPreferences?: SortOrder
+    emergencyContacts?: SortOrder
+    baseline?: SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
+    lastActive?: SortOrder
+    onboardingStep?: SortOrder
+    onboardingCompleted?: SortOrder
     verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    onboardingStep?: SortOrder
-    onboardingCompleted?: SortOrder
-    nickname?: SortOrder
-    yearOfStudy?: SortOrder
-    fieldOfStudy?: SortOrder
-    preferredLanguage?: SortOrder
-    notificationPreference?: SortOrder
-    checkInTime?: SortOrder
-    wellbeingBaseline?: SortOrder
-    reasonsForJoining?: SortOrder
-    hasSupportSystem?: SortOrder
-    previousProfessionalSupport?: SortOrder
-    selfHarmRisk?: SortOrder
-    emergencyContacts?: SortOrder
-    copingStyles?: SortOrder
-    academicStressors?: SortOrder
-    spiritualityImportance?: SortOrder
-    preferredApproach?: SortOrder
-    goals?: SortOrder
-    trackingFrequency?: SortOrder
-    trackingMetrics?: SortOrder
-    dataSharingConsent?: SortOrder
-    dataVisibility?: SortOrder
-    preferredTheme?: SortOrder
-    dashboardLayout?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
+    academicLevel?: SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
     onboardingStep?: SortOrder
   }
 
@@ -8614,77 +8453,64 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
-    institution?: SortOrder
-    studentId?: SortOrder
-    course?: SortOrder
-    phoneNumber?: SortOrder
     googleId?: SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    displayName?: SortOrder
+    university?: SortOrder
+    academicLevel?: SortOrder
+    program?: SortOrder
     image?: SortOrder
+    language?: SortOrder
+    notificationPreference?: SortOrder
+    preferredCheckInTime?: SortOrder
+    supportLevel?: SortOrder
+    riskLevel?: SortOrder
+    faithLevel?: SortOrder
+    approachPreference?: SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
+    lastActive?: SortOrder
+    onboardingStep?: SortOrder
+    onboardingCompleted?: SortOrder
     verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    onboardingStep?: SortOrder
-    onboardingCompleted?: SortOrder
-    nickname?: SortOrder
-    yearOfStudy?: SortOrder
-    fieldOfStudy?: SortOrder
-    preferredLanguage?: SortOrder
-    notificationPreference?: SortOrder
-    checkInTime?: SortOrder
-    wellbeingBaseline?: SortOrder
-    hasSupportSystem?: SortOrder
-    previousProfessionalSupport?: SortOrder
-    selfHarmRisk?: SortOrder
-    spiritualityImportance?: SortOrder
-    preferredApproach?: SortOrder
-    trackingFrequency?: SortOrder
-    dataSharingConsent?: SortOrder
-    dataVisibility?: SortOrder
-    preferredTheme?: SortOrder
-    dashboardLayout?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    name?: SortOrder
-    institution?: SortOrder
-    studentId?: SortOrder
-    course?: SortOrder
-    phoneNumber?: SortOrder
     googleId?: SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    displayName?: SortOrder
+    university?: SortOrder
+    academicLevel?: SortOrder
+    program?: SortOrder
     image?: SortOrder
+    language?: SortOrder
+    notificationPreference?: SortOrder
+    preferredCheckInTime?: SortOrder
+    supportLevel?: SortOrder
+    riskLevel?: SortOrder
+    faithLevel?: SortOrder
+    approachPreference?: SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
+    lastActive?: SortOrder
+    onboardingStep?: SortOrder
+    onboardingCompleted?: SortOrder
     verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    onboardingStep?: SortOrder
-    onboardingCompleted?: SortOrder
-    nickname?: SortOrder
-    yearOfStudy?: SortOrder
-    fieldOfStudy?: SortOrder
-    preferredLanguage?: SortOrder
-    notificationPreference?: SortOrder
-    checkInTime?: SortOrder
-    wellbeingBaseline?: SortOrder
-    hasSupportSystem?: SortOrder
-    previousProfessionalSupport?: SortOrder
-    selfHarmRisk?: SortOrder
-    spiritualityImportance?: SortOrder
-    preferredApproach?: SortOrder
-    trackingFrequency?: SortOrder
-    dataSharingConsent?: SortOrder
-    dataVisibility?: SortOrder
-    preferredTheme?: SortOrder
-    dashboardLayout?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
+    academicLevel?: SortOrder
+    moodCheckInsCount?: SortOrder
+    conversationsCount?: SortOrder
     onboardingStep?: SortOrder
   }
 
@@ -8732,34 +8558,20 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -8787,12 +8599,48 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -8964,7 +8812,7 @@ export namespace Prisma {
     importance?: SortOrder
   }
 
-  export type UserCreatereasonsForJoiningInput = {
+  export type UserCreateconcernsInput = {
     set: string[]
   }
 
@@ -8973,10 +8821,6 @@ export namespace Prisma {
   }
 
   export type UserCreategoalsInput = {
-    set: string[]
-  }
-
-  export type UserCreatetrackingMetricsInput = {
     set: string[]
   }
 
@@ -9034,19 +8878,15 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
   }
 
-  export type UserUpdatereasonsForJoiningInput = {
+  export type UserUpdateconcernsInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -9061,13 +8901,20 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type UserUpdatetrackingMetricsInput = {
-    set?: string[]
-    push?: string | string[]
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type AssessmentUpdateManyWithoutUserNestedInput = {
@@ -9237,15 +9084,15 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -9259,9 +9106,26 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9298,17 +9162,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -9317,18 +9170,53 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9357,46 +9245,33 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
-  export type NestedJsonNullableFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9584,43 +9459,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     assessments?: AssessmentCreateNestedManyWithoutUserInput
     moods?: MoodCreateNestedManyWithoutUserInput
   }
@@ -9629,43 +9497,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
     moods?: MoodUncheckedCreateNestedManyWithoutUserInput
   }
@@ -9690,43 +9551,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     assessments?: AssessmentUpdateManyWithoutUserNestedInput
     moods?: MoodUpdateManyWithoutUserNestedInput
   }
@@ -9735,43 +9589,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
     moods?: MoodUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -9780,43 +9627,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     moods?: MoodCreateNestedManyWithoutUserInput
     chatMessages?: ChatMessageCreateNestedManyWithoutUserInput
   }
@@ -9825,43 +9665,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     moods?: MoodUncheckedCreateNestedManyWithoutUserInput
     chatMessages?: ChatMessageUncheckedCreateNestedManyWithoutUserInput
   }
@@ -9886,43 +9719,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     moods?: MoodUpdateManyWithoutUserNestedInput
     chatMessages?: ChatMessageUpdateManyWithoutUserNestedInput
   }
@@ -9931,43 +9757,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     moods?: MoodUncheckedUpdateManyWithoutUserNestedInput
     chatMessages?: ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -9976,43 +9795,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     assessments?: AssessmentCreateNestedManyWithoutUserInput
     chatMessages?: ChatMessageCreateNestedManyWithoutUserInput
   }
@@ -10021,43 +9833,36 @@ export namespace Prisma {
     id?: string
     email: string
     password?: string | null
-    name?: string | null
-    institution?: string | null
-    studentId?: string | null
-    course?: string | null
-    phoneNumber?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    displayName?: string | null
+    university?: string | null
+    academicLevel?: number | null
+    program?: string | null
     image?: string | null
+    language?: string
+    notificationPreference?: string
+    preferredCheckInTime?: string
+    concerns?: UserCreateconcernsInput | string[]
+    supportLevel?: string
+    riskLevel?: string
+    copingStyles?: UserCreatecopingStylesInput | string[]
+    faithLevel?: string
+    approachPreference?: string
+    goals?: UserCreategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    onboardingStep?: number
-    onboardingCompleted?: boolean
-    nickname?: string | null
-    yearOfStudy?: string | null
-    fieldOfStudy?: string | null
-    preferredLanguage?: string | null
-    notificationPreference?: string | null
-    checkInTime?: string | null
-    wellbeingBaseline?: string | null
-    reasonsForJoining?: UserCreatereasonsForJoiningInput | string[]
-    hasSupportSystem?: string | null
-    previousProfessionalSupport?: string | null
-    selfHarmRisk?: string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: string | null
-    preferredApproach?: string | null
-    goals?: UserCreategoalsInput | string[]
-    trackingFrequency?: string | null
-    trackingMetrics?: UserCreatetrackingMetricsInput | string[]
-    dataSharingConsent?: boolean | null
-    dataVisibility?: string | null
-    preferredTheme?: string | null
-    dashboardLayout?: string | null
     assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
     chatMessages?: ChatMessageUncheckedCreateNestedManyWithoutUserInput
   }
@@ -10082,43 +9887,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     assessments?: AssessmentUpdateManyWithoutUserNestedInput
     chatMessages?: ChatMessageUpdateManyWithoutUserNestedInput
   }
@@ -10127,43 +9925,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    institution?: NullableStringFieldUpdateOperationsInput | string | null
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    course?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableStringFieldUpdateOperationsInput | string | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    notificationPreference?: StringFieldUpdateOperationsInput | string
+    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
+    concerns?: UserUpdateconcernsInput | string[]
+    supportLevel?: StringFieldUpdateOperationsInput | string
+    riskLevel?: StringFieldUpdateOperationsInput | string
+    copingStyles?: UserUpdatecopingStylesInput | string[]
+    faithLevel?: StringFieldUpdateOperationsInput | string
+    approachPreference?: StringFieldUpdateOperationsInput | string
+    goals?: UserUpdategoalsInput | string[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    onboardingStep?: IntFieldUpdateOperationsInput | number
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    yearOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    fieldOfStudy?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredLanguage?: NullableStringFieldUpdateOperationsInput | string | null
-    notificationPreference?: NullableStringFieldUpdateOperationsInput | string | null
-    checkInTime?: NullableStringFieldUpdateOperationsInput | string | null
-    wellbeingBaseline?: NullableStringFieldUpdateOperationsInput | string | null
-    reasonsForJoining?: UserUpdatereasonsForJoiningInput | string[]
-    hasSupportSystem?: NullableStringFieldUpdateOperationsInput | string | null
-    previousProfessionalSupport?: NullableStringFieldUpdateOperationsInput | string | null
-    selfHarmRisk?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    academicStressors?: NullableJsonNullValueInput | InputJsonValue
-    spiritualityImportance?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredApproach?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: UserUpdategoalsInput | string[]
-    trackingFrequency?: NullableStringFieldUpdateOperationsInput | string | null
-    trackingMetrics?: UserUpdatetrackingMetricsInput | string[]
-    dataSharingConsent?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    dataVisibility?: NullableStringFieldUpdateOperationsInput | string | null
-    preferredTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    dashboardLayout?: NullableStringFieldUpdateOperationsInput | string | null
     assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
     chatMessages?: ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   }
