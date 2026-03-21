@@ -90,8 +90,15 @@ export function OnboardingWizard() {
       // Update backend periodically
       await saveProgress(next, false);
     } else {
-      await saveProgress(13, true);
-      router.push("/dashboard");
+      setIsSubmitting(true);
+      const success = await saveProgress(13, true);
+      if (success) {
+        // Use window.location.href for the final redirect to ensure the session 
+        // is re-fetched on the server-side before the dashboard layout checks it.
+        window.location.href = "/dashboard";
+      } else {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -123,9 +130,12 @@ export function OnboardingWizard() {
             onboardingCompleted: completed
           }
         });
+        return true;
       }
+      return false;
     } catch (error) {
       console.error("Failed to save onboarding progress:", error);
+      return false;
     }
   };
 

@@ -29,8 +29,7 @@ export default function Step6Safety({ data, update, onNext }: any) {
           </label>
           <div className="grid grid-cols-1 gap-3">
             {[
-              { label: "No, I feel safe", value: "LOW" },
-              { label: "Rarely / Mildly", value: "LOW" },
+              { label: "No, I feel safe / Rarely", value: "LOW" },
               { label: "Sometimes / Moderate", value: "MODERATE" },
               { label: "Often / High", value: "HIGH" },
               { label: "I am in crisis right now", value: "CRITICAL" }

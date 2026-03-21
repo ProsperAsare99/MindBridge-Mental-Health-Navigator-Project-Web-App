@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 import { Target, TrendingUp, Shield, BookOpen, Moon, Activity, Users, FileText, Sparkles, Brain } from "lucide-react";
 
 const goalOptions = [
-  { label: "Better understand my emotions", value: "IMPROVE_MOOD", icon: Brain },
+  { label: "Understand emotions & improve mood", value: "IMPROVE_MOOD", icon: Brain },
   { label: "Reduce stress and anxiety", value: "REDUCE_STRESS", icon: Shield },
-  { label: "Improve my mood", value: "IMPROVE_MOOD", icon: TrendingUp },
   { label: "Build resilience", value: "BUILD_RESILIENCE", icon: Activity },
   { label: "Improve academic performance", value: "IMPROVE_ACADEMICS", icon: BookOpen },
   { label: "Better sleep", value: "BETTER_SLEEP", icon: Moon },
