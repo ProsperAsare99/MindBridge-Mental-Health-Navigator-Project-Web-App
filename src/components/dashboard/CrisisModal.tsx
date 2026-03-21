@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
     AlertCircle, 
@@ -7,129 +8,280 @@ import {
     X, 
     Heart, 
     ShieldAlert,
-    ExternalLink,
-    Clock
+    Clock,
+    User,
+    MapPin,
+    LifeBuoy
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+interface Resource {
+    name: string;
+    number: string;
+    description: string;
+}
+
+interface CampusResource {
+    name: string;
+    location: string;
+    hours: string;
+    emergency: string;
+}
 
 interface CrisisModalProps {
     isOpen: boolean;
     onClose: () => void;
+    userUniversity?: string;
+    emergencyContacts?: { name: string; phone: string; relationship: string }[];
 }
 
-export function CrisisModal({ isOpen, onClose }: CrisisModalProps) {
-    const crisisResources = [
+export function CrisisModal({ 
+    isOpen, 
+    onClose, 
+    userUniversity = "KNUST",
+    emergencyContacts = []
+}: CrisisModalProps) {
+    const [activeTab, setActiveTab] = useState<'hotlines' | 'campus' | 'contacts'>('hotlines');
+
+    const nationalHotlines: Resource[] = [
         {
-            name: "Ghana Emergency",
+            name: "Ghana National Emergency",
             number: "112",
-            description: "Immediate emergency response",
-            icon: ShieldAlert,
-            color: "text-red-500",
-            bg: "bg-red-500/10"
+            description: "Immediate emergency response services 24/7"
         },
         {
             name: "Mental Health Helpline",
             number: "0800 900 900",
-            description: "National support line",
-            icon: Phone,
-            color: "text-blue-500",
-            bg: "bg-blue-500/10"
+            description: "Dedicated national psychological support"
         },
         {
-            name: "Campus Counseling",
-            number: "Internal Extension",
-            description: "Located at the Student Admin Block",
-            icon: Clock,
-            color: "text-emerald-500",
-            bg: "bg-emerald-500/10"
+            name: "Suicide Prevention",
+            number: "020 000 0000",
+            description: "Voluntary crisis intervention service"
         }
+    ];
+
+    const campusResources: Record<string, CampusResource> = {
+        "KNUST": {
+            name: "KNUST Counseling Center",
+            location: "New Administration Block, 1st Floor",
+            hours: "8:00 AM - 5:00 PM (Emergency 24/7)",
+            emergency: "024 400 0000"
+        },
+        "University of Ghana": {
+            name: "UG Counseling Centre",
+            location: "Legon Campus, Student Affairs",
+            hours: "8:00 AM - 4:30 PM",
+            emergency: "055 500 0000"
+        }
+    };
+
+    const currentCampus = campusResources[userUniversity] || campusResources["KNUST"];
+
+    const handleCall = (number: string) => {
+        window.location.href = `tel:${number.replace(/\s/g, '')}`;
+    };
+
+    const tabs = [
+        { id: 'hotlines', label: 'Hotlines', icon: Phone },
+        { id: 'campus', label: 'Campus', icon: MapPin },
+        { id: 'contacts', label: 'Contacts', icon: User }
     ];
 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-background/60 backdrop-blur-md"
+                        className="absolute inset-0 bg-background/60 backdrop-blur-xl"
                     />
 
-                    {/* Modal */}
+                    {/* Modal Container */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.9, y: 30 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative w-full max-w-lg bg-card border border-red-500/20 shadow-2xl rounded-[2.5rem] overflow-hidden"
+                        exit={{ opacity: 0, scale: 0.9, y: 30 }}
+                        className="relative w-full max-w-[500px] bg-card border border-red-500/20 shadow-2xl rounded-[2.5rem] overflow-hidden flex flex-col"
                     >
-                        {/* Status Bar */}
-                        <div className="bg-red-500 h-1.5 w-full" />
-
-                        <div className="p-8">
-                            <div className="flex justify-between items-start mb-6">
-                                <div className="h-14 w-14 rounded-2xl bg-red-500/10 flex items-center justify-center border border-red-500/20">
-                                    <AlertCircle className="h-8 w-8 text-red-500" />
+                        {/* Emergency Header */}
+                        <div className="bg-red-500 p-6 text-white relative overflow-hidden">
+                            <motion.div 
+                                animate={{ scale: [1, 1.1, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="absolute -right-4 -top-4 opacity-10"
+                            >
+                                <ShieldAlert size={120} />
+                            </motion.div>
+                            
+                            <div className="flex justify-between items-start relative z-10">
+                                <div className="space-y-1">
+                                    <div className="flex items-center gap-2">
+                                        <AlertCircle className="h-5 w-5" />
+                                        <h2 className="text-lg font-black uppercase tracking-tight">Crisis Support</h2>
+                                    </div>
+                                    <p className="text-xs font-bold text-red-100 uppercase tracking-widest">You are safe here. We are with you.</p>
                                 </div>
                                 <Button 
                                     variant="ghost" 
                                     size="icon" 
                                     onClick={onClose}
-                                    className="rounded-full hover:bg-muted/50"
+                                    className="rounded-full hover:bg-white/10 text-white"
                                 >
                                     <X className="h-5 w-5" />
                                 </Button>
                             </div>
 
-                            <div className="space-y-2 mb-8">
-                                <h2 className="text-3xl font-black tracking-tight text-foreground">You are not alone.</h2>
-                                <p className="text-muted-foreground font-medium leading-relaxed">
-                                    What you're feeling is heavy, but there is immediate support available to help you through this moment safely.
-                                </p>
-                            </div>
+                            <button
+                                onClick={() => handleCall('112')}
+                                className="mt-6 w-full h-14 bg-white text-red-600 rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-lg shadow-black/10 active:scale-95 transition-transform"
+                            >
+                                <Phone className="h-6 w-6" />
+                                CALL EMERGENCY (112)
+                            </button>
+                        </div>
 
-                            <div className="space-y-3">
-                                {crisisResources.map((resource, i) => (
+                        {/* Custom Tabs */}
+                        <div className="flex p-2 gap-1 bg-muted/30 border-b border-border/40">
+                            {tabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id as any)}
+                                    className={cn(
+                                        "flex-1 py-3 rounded-2xl flex items-center justify-center gap-2 transition-all",
+                                        activeTab === tab.id 
+                                            ? "bg-white border border-border/40 shadow-sm text-primary" 
+                                            : "text-muted-foreground hover:text-foreground"
+                                    )}
+                                >
+                                    <tab.icon size={16} />
+                                    <span className="text-[10px] font-black uppercase tracking-tight">{tab.label}</span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Tab Content */}
+                        <div className="p-6 h-[320px] overflow-y-auto custom-scrollbar">
+                            <AnimatePresence mode="wait">
+                                {activeTab === 'hotlines' && (
                                     <motion.div
-                                        key={resource.name}
+                                        key="hotlines"
                                         initial={{ opacity: 0, x: -10 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.1 * i }}
-                                        className="flex items-center gap-4 p-4 rounded-3xl bg-muted/30 border border-border/50 hover:bg-muted/50 transition-colors group"
+                                        exit={{ opacity: 0, x: 10 }}
+                                        className="space-y-3"
                                     >
-                                        <div className={`h-12 w-12 rounded-2xl ${resource.bg} flex items-center justify-center border border-border/20`}>
-                                            <resource.icon className={`h-6 w-6 ${resource.color}`} />
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className="text-sm font-bold text-foreground">{resource.name}</h3>
-                                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{resource.description}</p>
-                                        </div>
-                                        <div className="text-lg font-black text-primary group-hover:scale-105 transition-transform">
-                                            {resource.number}
+                                        {nationalHotlines.map((res, i) => (
+                                            <div key={i} className="p-4 rounded-3xl bg-muted/30 border border-border/40 group hover:border-primary/20 transition-all">
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <div>
+                                                        <h4 className="text-sm font-bold text-foreground">{res.name}</h4>
+                                                        <p className="text-[10px] font-medium text-muted-foreground leading-relaxed">{res.description}</p>
+                                                    </div>
+                                                    <Button 
+                                                        size="icon" 
+                                                        variant="ghost"
+                                                        onClick={() => handleCall(res.number)}
+                                                        className="rounded-full h-8 w-8 text-primary shadow-sm"
+                                                    >
+                                                        <Phone size={14} />
+                                                    </Button>
+                                                </div>
+                                                <div className="text-xs font-black text-primary/60 tracking-tighter">{res.number}</div>
+                                            </div>
+                                        ))}
+                                    </motion.div>
+                                )}
+
+                                {activeTab === 'campus' && (
+                                    <motion.div
+                                        key="campus"
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        className="space-y-6"
+                                    >
+                                        <div className="p-6 rounded-[2rem] bg-primary/5 border border-primary/10 space-y-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center border border-primary/10">
+                                                    <MapPin className="text-primary h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-sm font-black text-foreground uppercase tracking-tight">{currentCampus.name}</h4>
+                                                    <p className="text-[10px] font-bold text-muted-foreground uppercase">{userUniversity}</p>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="flex items-start gap-2 text-[11px] font-medium text-muted-foreground">
+                                                    <Clock className="h-3 w-3 mt-0.5" />
+                                                    <span>{currentCampus.hours}</span>
+                                                </div>
+                                                <div className="flex items-start gap-2 text-[11px] font-medium text-muted-foreground">
+                                                    <ShieldAlert className="h-3 w-3 mt-0.5" />
+                                                    <span>{currentCampus.location}</span>
+                                                </div>
+                                            </div>
+                                            <Button 
+                                                className="w-full h-12 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold gap-2"
+                                                onClick={() => handleCall(currentCampus.emergency)}
+                                            >
+                                                <Phone size={16} />
+                                                Contact Counseling Center
+                                            </Button>
                                         </div>
                                     </motion.div>
-                                ))}
-                            </div>
+                                )}
 
-                            <div className="mt-8 pt-8 border-t border-border/50 flex flex-col gap-4">
-                                <Button 
-                                    className="w-full h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-bold text-lg shadow-xl shadow-red-500/20 gap-2"
-                                    onClick={() => window.location.href = "tel:112"}
-                                >
-                                    <Phone className="h-5 w-5" />
-                                    Call Emergency Now
-                                </Button>
-                                <Button 
-                                    variant="outline"
-                                    className="w-full h-14 rounded-2xl font-bold gap-2"
-                                    onClick={onClose}
-                                >
-                                    <Heart className="h-5 w-5 text-red-500" />
-                                    I'm safe for now, thank you
-                                </Button>
-                            </div>
+                                {activeTab === 'contacts' && (
+                                    <motion.div
+                                        key="contacts"
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        className="space-y-4"
+                                    >
+                                        {emergencyContacts.length > 0 ? (
+                                            emergencyContacts.map((contact, i) => (
+                                                <div key={i} className="flex items-center gap-4 p-4 rounded-3xl bg-muted/30 border border-border/40">
+                                                    <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                                                        <User className="h-5 w-5 text-primary" />
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <h4 className="text-sm font-bold text-foreground">{contact.name}</h4>
+                                                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{contact.relationship}</p>
+                                                    </div>
+                                                    <Button 
+                                                        size="icon" 
+                                                        variant="ghost"
+                                                        onClick={() => handleCall(contact.phone)}
+                                                        className="rounded-full text-primary"
+                                                    >
+                                                        <Phone size={16} />
+                                                    </Button>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-10 opacity-40">
+                                                <User size={48} className="text-muted-foreground" />
+                                                <p className="text-xs font-bold text-muted-foreground uppercase leading-relaxed max-w-[200px]">No emergency contacts configured in settings.</p>
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        {/* Footer Message */}
+                        <div className="p-4 bg-muted/10 border-t border-border/40 text-center">
+                            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest flex items-center justify-center gap-2">
+                                <Heart className="h-3 w-3 text-red-500 fill-red-500" />
+                                You are deeply valued. Stay with us.
+                            </p>
                         </div>
                     </motion.div>
                 </div>

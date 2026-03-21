@@ -9,10 +9,12 @@ import { BrainCircuit, Info } from "lucide-react";
 
 export default function OraclePage() {
     const [moods, setMoods] = useState<any[]>([]);
+    const [userProfile, setUserProfile] = useState<any>(null);
     const [isCrisisModalOpen, setIsCrisisModalOpen] = useState(false);
 
     useEffect(() => {
         fetchMoods();
+        fetchProfile();
     }, []);
 
     const fetchMoods = async () => {
@@ -21,6 +23,15 @@ export default function OraclePage() {
             setMoods(data);
         } catch (error) {
             console.error("Error fetching moods:", error);
+        }
+    };
+
+    const fetchProfile = async () => {
+        try {
+            const data = await api.get('/auth/me');
+            setUserProfile(data);
+        } catch (error) {
+            console.error("Error fetching profile:", error);
         }
     };
 
@@ -53,6 +64,8 @@ export default function OraclePage() {
             <CrisisModal 
                 isOpen={isCrisisModalOpen} 
                 onClose={() => setIsCrisisModalOpen(false)} 
+                userUniversity={userProfile?.university}
+                emergencyContacts={userProfile?.emergencyContacts}
             />
         </div>
     );
