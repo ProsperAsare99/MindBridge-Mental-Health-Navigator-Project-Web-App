@@ -1,16 +1,7 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
+import axiosInstance from './axios-config';
 
 class ApiClient {
-    private token: string | null = null;
-
-    constructor() {
-        if (typeof window !== 'undefined') {
-            this.token = localStorage.getItem('token');
-        }
-    }
-
     setToken(token: string | null) {
-        this.token = token;
         if (typeof window !== 'undefined') {
             if (token) {
                 localStorage.setItem('token', token);
@@ -21,58 +12,32 @@ class ApiClient {
     }
 
     getToken() {
-        return this.token;
-    }
-
-    private async request(endpoint: string, options: RequestInit = {}) {
-        const url = `${API_URL}${endpoint}`;
-        const isFormData = options.body instanceof FormData;
-        const headers = {
-            ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
-            ...(this.token ? { 'Authorization': `Bearer ${this.token}` } : {}),
-            ...options.headers,
-        } as Record<string, string>;
-
-        let response;
-        try {
-            response = await fetch(url, { ...options, headers });
-        } catch (error: any) {
-            console.error('Fetch error:', error);
-            throw new Error(`Connection failed: ${error.message}. Is the backend server running?`);
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('token');
         }
-
-        if (!response.ok) {
-            let errorMessage = 'API Request failed';
-            try {
-                const errorData = await response.json();
-                errorMessage = errorData.error || errorData.message || errorMessage;
-            } catch (e) {
-                // Fallback to status text if JSON parsing fails
-                errorMessage = response.statusText || errorMessage;
-            }
-            throw new Error(errorMessage);
-        }
-
-        return response.json();
+        return null;
     }
 
     async get(endpoint: string) {
-        return this.request(endpoint, { method: 'GET' });
+        const response = await axiosInstance.get(endpoint);
+        return response.data;
     }
 
     async post(endpoint: string, body: any) {
-        return this.request(endpoint, {
-            method: 'POST',
-            body: body instanceof FormData ? body : JSON.stringify(body),
-        });
+        const response = await axiosInstance.post(endpoint, body);
+        return response.data;
     }
 
     async put(endpoint: string, body: any) {
-        return this.request(endpoint, {
-            method: 'PUT',
-            body: body instanceof FormData ? body : JSON.stringify(body),
-        });
+        const response = await axiosInstance.put(endpoint, body);
+        return response.data;
+    }
+
+    async delete(endpoint: string) {
+        const response = await axiosInstance.delete(endpoint);
+        return response.data;
     }
 }
 
 export const api = new ApiClient();
+

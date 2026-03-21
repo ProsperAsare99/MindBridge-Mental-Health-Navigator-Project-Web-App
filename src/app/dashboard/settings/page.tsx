@@ -73,8 +73,7 @@ export default function SettingsPage() {
             await updateProfile({ displayName, university, academicLevel, program });
             setProfileSuccess("Profile updated successfully!");
             setTimeout(() => setProfileSuccess(""), 4000);
-        }
- catch (err: any) {
+        } catch (err: any) {
             setProfileError(err.message || "Failed to update profile.");
         } finally {
             setSaving(false);
@@ -119,6 +118,7 @@ export default function SettingsPage() {
     }
 
     return (
+
         <div className="min-h-screen relative pb-20 selection:bg-primary/10 theme-luxury">
             {/* Ambient background accents */}
             <div className="fixed inset-0 pointer-events-none -z-10">
@@ -248,20 +248,8 @@ export default function SettingsPage() {
                                     />
                                 </div>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Phone Number</label>
-                                <div className="relative group">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
-                                    <input
-                                        type="tel"
-                                        value={phoneNumber}
-                                        onChange={(e) => setPhoneNumber(e.target.value)}
-                                        className="w-full bg-muted/50 border border-border rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
-                                        placeholder="Add phone number"
-                                    />
-                                </div>
-                            </div>
                         </div>
+
 
                         {isGuestUser && (
                             <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3">

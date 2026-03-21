@@ -24,6 +24,9 @@ import { redirect } from "next/navigation";
 import { MotivationalCarousel } from "@/components/dashboard/motivational-carousel";
 import { GreetingHeader } from "@/components/dashboard/greeting-header";
 import { DashboardContainer, DashboardItem } from "@/components/dashboard/dashboard-animations";
+import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
+import { ConversationHistory } from "@/components/dashboard/ConversationHistory";
+import { AIChatbot } from "@/components/dashboard/AIChatbot";
 
 
 export default async function DashboardPage() {
@@ -221,6 +224,16 @@ export default async function DashboardPage() {
                         </Link>
                     </DashboardItem>
                 </div>
+
+                {/* Advanced Insights & History */}
+                <DashboardItem className="grid gap-8 lg:grid-cols-3">
+                    <div className="lg:col-span-2">
+                        <AnalyticsDashboard />
+                    </div>
+                    <div className="glass rounded-[2.5rem] p-8 border border-border/40 min-h-[400px]">
+                        <ConversationHistory />
+                    </div>
+                </DashboardItem>
 
                 {/* Featured Sections */}
                 <DashboardItem className="grid md:grid-cols-5 gap-8">
