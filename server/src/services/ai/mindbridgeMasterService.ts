@@ -39,18 +39,24 @@ export class MindBridgeMasterService {
         
         // Build history context for inclusion in prompt
         const historyContext = history.length > 0
-            ? history.reverse().map((chat: any) =>
-                `${chat.role === 'user' ? context.user.displayName : 'The Oracle'}: ${chat.content}`
+            ? history.map((chat: any) =>
+                `${chat.role === 'USER' ? (context.user.displayName || 'User') : 'The Oracle'}: ${chat.content}`
               ).join('\n')
             : 'This is the start of the conversation.';
 
         const fullPrompt = `${systemPrompt}\n\n## HISTORY\n${historyContext}\n\n## NEW MESSAGE\n"${message}"\n\nTHE ORACLE'S RESPONSE:`;
 
         // 5. Generate AI Response
+        const startTime = Date.now();
         const responseText = await geminiAdvanced.generateResponse(fullPrompt, modelSelection.model);
+        const responseTime = Date.now() - startTime;
 
         // 6. Persist Interaction
-        await conversationManager.saveInteraction(userId, message, responseText);
+        await conversationManager.saveInteraction(userId, message, responseText, {
+            model: modelSelection.model.name,
+            isCrisis: isCrisis,
+            responseTime
+        });
 
         return {
             response: responseText,
@@ -58,6 +64,7 @@ export class MindBridgeMasterService {
             reason: modelSelection.reason,
             isCrisis: isCrisis
         };
+
     }
 }
 

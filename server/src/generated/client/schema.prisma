@@ -10,99 +10,361 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// ============================================
+// USER MODEL
+// ============================================
 model User {
-  id String @id @default(uuid())
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String?
 
-  // Authentication
-  email       String  @unique
-  password    String?
-  googleId    String? @unique
-  isVerified  Boolean @default(false)
-  isAnonymous Boolean @default(false)
+  // Authentication Extras (Retained)
+  googleId          String? @unique
+  isVerified        Boolean @default(false)
+  isAnonymous       Boolean @default(false)
+  verificationToken String?
+  image             String?
 
   // Basic Profile
-  displayName   String? // From Mongoose: displayName
-  university    String? // From Mongoose: university
-  academicLevel Int? // From Mongoose: academicLevel (100, 200, 300, 400)
-  program       String? // From Mongoose: program
-  image         String?
+  displayName   String?
+  university    University?
+  academicLevel Int?
+  program       String?
 
   // Communication Preferences
-  language               String @default("english") // english, twi, ga, ewe
-  notificationPreference String @default("daily") // daily, weekly, only_when_needed, none
-  preferredCheckInTime   String @default("morning") // morning, afternoon, evening, night
+  language               Language              @default(ENGLISH)
+  notificationPreference NotificationFrequency @default(DAILY)
+  preferredCheckInTime   TimeOfDay             @default(MORNING)
 
   // Mental Health Context
-  concerns     String[] @default([]) // academic_stress, anxiety, etc.
-  supportLevel String   @default("somewhat") // alone, somewhat, strong
-  riskLevel    String   @default("LOW") // LOW, MODERATE, HIGH, CRITICAL
+  concerns     Concern[]    @default([])
+  supportLevel SupportLevel @default(SOMEWHAT)
+  riskLevel    RiskLevel    @default(LOW)
 
   // Personalization
-  copingStyles       String[] @default([]) // exercise, journal, etc.
-  faithLevel         String   @default("somewhat_important") // very_important, etc.
-  approachPreference String   @default("holistic") // clinical, holistic, cultural, mixed
-  goals              String[] @default([]) // reduce_stress, improve_mood, etc.
+  copingStyles       CopingStyle[]      @default([])
+  faithLevel         FaithLevel         @default(SOMEWHAT_IMPORTANT)
+  approachPreference ApproachPreference @default(HOLISTIC)
+  goals              Goal[]             @default([])
 
-  // Complex Data (JSONB)
-  stressors           Json? // exams, assignments, etc. (1-5 scale)
-  trackingPreferences Json? // mood, sleep, etc. (Boolean map)
-  emergencyContacts   Json? // Name, Relationship, Phone
+  // Academic Stressors (JSON for flexibility)
+  stressors Json? // { exams: 3, assignments: 4, financial: 5, ... }
 
-  // Baseline & Metrics
-  baseline           Json? // mood, joinDate
+  // Tracking Preferences (JSON)
+  trackingPreferences Json? // { mood: true, sleep: false, ... }
+
+  // Emergency Contacts (JSON array)
+  emergencyContacts Json? // [{ name: "", relationship: "", phone: "" }]
+
+  // Baseline Data
+  baselineMood Int?
+  baseline     Json? // Retained for existing complex baseline data
+  joinDate     DateTime @default(now())
+
+  // Usage Metrics
   moodCheckInsCount  Int       @default(0)
   conversationsCount Int       @default(0)
   lastActive         DateTime?
 
-  // Onboarding Status (Legacy/System)
+  // Onboarding Status (Retained)
   onboardingStep      Int     @default(1)
   onboardingCompleted Boolean @default(false)
-  verificationToken   String?
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  conversations  Conversation[]
+  moodEntries    MoodEntry[]
+  assessments    Assessment[]
+  aiInteractions AIInteraction[]
+  crisisLogs     CrisisLog[]
+  usageLogs      UsageLog[]
+
+  @@index([email])
+  @@index([university, academicLevel])
+  @@index([riskLevel])
+}
+
+// ============================================
+// CONVERSATION MODEL
+// ============================================
+model Conversation {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  startedAt     DateTime  @default(now())
+  lastMessageAt DateTime  @default(now())
+  endedAt       DateTime?
+
+  status ConversationStatus @default(ACTIVE)
+
+  // Metadata (JSON)
+  metadata Json? // { userRiskLevel: "LOW", initialMood: 3, context: "" }
+
+  summary String?
+
+  // Relations
+  messages Message[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  assessments  Assessment[]
-  moods        Mood[]
-  chatMessages ChatMessage[]
+  @@index([userId, startedAt(sort: Desc)])
+  @@index([status])
 }
 
-model ChatMessage {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  content   String   @db.Text
-  role      String // 'user' or 'assistant'
-  createdAt DateTime @default(now())
+// ============================================
+// MESSAGE MODEL
+// ============================================
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  role      MessageRole
+  content   String      @db.Text
+  timestamp DateTime    @default(now())
+
+  // Metadata (JSON)
+  metadata Json? // { model: "", tokensUsed: 0, crisisDetected: false, ... }
+
+  @@index([conversationId, timestamp(sort: Desc)])
 }
 
-model Assessment {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type      String
-  score     Int
-  severity  String
-  createdAt DateTime @default(now())
-}
+// ============================================
+// MOOD ENTRY MODEL
+// ============================================
+model MoodEntry {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-model Mood {
-  id             String   @id @default(uuid())
-  userId         String
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  value          Int // 1-5 (Awful to Great)
-  note           String?
+  mood    Int // 1-5 scale
+  energy  Int? // 1-5 scale
+  sleep   Int? // 1-5 scale
+  social  Int? // 1-5 scale
+  anxiety Int? // 1-10 scale
+
+  notes          String?
+  tags           String[] // Array of tags
   sentimentScore Float?
   sentimentLabel String?
   crisisFlag     Boolean  @default(false)
-  createdAt      DateTime @default(now())
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt(sort: Desc)])
 }
 
-model AcademicEvent {
-  id         String   @id @default(uuid())
-  title      String
-  type       String // 'exam', 'deadline', 'holiday'
-  date       DateTime
-  importance Int      @default(1) // 1-5
-  createdAt  DateTime @default(now())
+// ============================================
+// ASSESSMENT MODEL
+// ============================================
+model Assessment {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type           AssessmentType
+  responses      Json // Array of { question: "", answer: "" }
+  score          Int
+  severity       Severity?
+  interpretation String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, type, createdAt(sort: Desc)])
+}
+
+// ============================================
+// AI INTERACTION LOG
+// ============================================
+model AIInteraction {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userMessage        String  @db.Text
+  aiResponse         String  @db.Text
+  model              String?
+  tokensUsed         Int?
+  crisisDetected     Boolean @default(false)
+  emotionalIntensity Int?
+  responseTime       Int? // milliseconds
+
+  timestamp DateTime @default(now())
+
+  @@index([userId, timestamp(sort: Desc)])
+  @@index([crisisDetected])
+}
+
+// ============================================
+// CRISIS LOG
+// ============================================
+model CrisisLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  message    String @db.Text
+  severity   Int // 1-10 scale
+  categories Json // Array of { category: "", matches: [], severity: 0 }
+
+  responseProvided       Boolean @default(false)
+  resourcesShown         Boolean @default(false)
+  emergencyContactCalled Boolean @default(false)
+
+  timestamp DateTime @default(now())
+
+  @@index([userId, timestamp(sort: Desc)])
+  @@index([severity(sort: Desc)])
+}
+
+// ============================================
+// USAGE LOG
+// ============================================
+model UsageLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  service      Service
+  model        String?
+  tokensUsed   Int?
+  finishReason String?
+
+  timestamp DateTime @default(now())
+
+  @@index([userId, timestamp(sort: Desc)])
+  @@index([service])
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum University {
+  KNUST
+  UNIVERSITY_OF_GHANA
+  UNIVERSITY_OF_CAPE_COAST
+  ASHESI_UNIVERSITY
+  GIMPA
+  OTHER
+}
+
+enum Language {
+  ENGLISH
+  TWI
+  GA
+  EWE
+}
+
+enum NotificationFrequency {
+  DAILY
+  WEEKLY
+  ONLY_WHEN_NEEDED
+  NONE
+}
+
+enum TimeOfDay {
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+}
+
+enum Concern {
+  ACADEMIC_STRESS
+  ANXIETY
+  DEPRESSION
+  LONELINESS
+  RELATIONSHIP_ISSUES
+  FINANCIAL_STRESS
+  FAMILY_PRESSURE
+  OTHER
+}
+
+enum SupportLevel {
+  ALONE
+  SOMEWHAT
+  STRONG
+}
+
+enum RiskLevel {
+  LOW
+  MODERATE
+  HIGH
+  CRITICAL
+}
+
+enum CopingStyle {
+  EXERCISE
+  JOURNAL
+  PRAY
+  TALK
+  MUSIC
+  SLEEP
+  MEDITATE
+  OTHER
+}
+
+enum FaithLevel {
+  VERY_IMPORTANT
+  SOMEWHAT_IMPORTANT
+  NOT_IMPORTANT
+}
+
+enum ApproachPreference {
+  CLINICAL
+  HOLISTIC
+  CULTURAL
+  MIXED
+}
+
+enum Goal {
+  REDUCE_STRESS
+  IMPROVE_MOOD
+  BUILD_RESILIENCE
+  BETTER_SLEEP
+  DEVELOP_HABITS
+  CONNECT_SUPPORT
+  TRACK_JOURNEY
+  PREPARE_COUNSELING
+  BE_MINDFUL
+  IMPROVE_ACADEMICS
+}
+
+enum ConversationStatus {
+  ACTIVE
+  ENDED
+  ARCHIVED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+enum AssessmentType {
+  PHQ9
+  GAD7
+  PSS
+  CUSTOM
+}
+
+enum Severity {
+  MINIMAL
+  MILD
+  MODERATE
+  MODERATELY_SEVERE
+  SEVERE
+}
+
+enum Service {
+  GEMINI
+  CHAT
+  MOOD
+  ASSESSMENT
 }

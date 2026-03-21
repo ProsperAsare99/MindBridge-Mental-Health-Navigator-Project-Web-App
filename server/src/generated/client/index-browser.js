@@ -124,11 +124,12 @@ exports.Prisma.UserScalarFieldEnum = {
   googleId: 'googleId',
   isVerified: 'isVerified',
   isAnonymous: 'isAnonymous',
+  verificationToken: 'verificationToken',
+  image: 'image',
   displayName: 'displayName',
   university: 'university',
   academicLevel: 'academicLevel',
   program: 'program',
-  image: 'image',
   language: 'language',
   notificationPreference: 'notificationPreference',
   preferredCheckInTime: 'preferredCheckInTime',
@@ -142,22 +143,53 @@ exports.Prisma.UserScalarFieldEnum = {
   stressors: 'stressors',
   trackingPreferences: 'trackingPreferences',
   emergencyContacts: 'emergencyContacts',
+  baselineMood: 'baselineMood',
   baseline: 'baseline',
+  joinDate: 'joinDate',
   moodCheckInsCount: 'moodCheckInsCount',
   conversationsCount: 'conversationsCount',
   lastActive: 'lastActive',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
-  verificationToken: 'verificationToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ChatMessageScalarFieldEnum = {
+exports.Prisma.ConversationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  content: 'content',
+  startedAt: 'startedAt',
+  lastMessageAt: 'lastMessageAt',
+  endedAt: 'endedAt',
+  status: 'status',
+  metadata: 'metadata',
+  summary: 'summary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
   role: 'role',
+  content: 'content',
+  timestamp: 'timestamp',
+  metadata: 'metadata'
+};
+
+exports.Prisma.MoodEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mood: 'mood',
+  energy: 'energy',
+  sleep: 'sleep',
+  social: 'social',
+  anxiety: 'anxiety',
+  notes: 'notes',
+  tags: 'tags',
+  sentimentScore: 'sentimentScore',
+  sentimentLabel: 'sentimentLabel',
+  crisisFlag: 'crisisFlag',
   createdAt: 'createdAt'
 };
 
@@ -165,29 +197,46 @@ exports.Prisma.AssessmentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   type: 'type',
+  responses: 'responses',
   score: 'score',
   severity: 'severity',
+  interpretation: 'interpretation',
   createdAt: 'createdAt'
 };
 
-exports.Prisma.MoodScalarFieldEnum = {
+exports.Prisma.AIInteractionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  value: 'value',
-  note: 'note',
-  sentimentScore: 'sentimentScore',
-  sentimentLabel: 'sentimentLabel',
-  crisisFlag: 'crisisFlag',
-  createdAt: 'createdAt'
+  userMessage: 'userMessage',
+  aiResponse: 'aiResponse',
+  model: 'model',
+  tokensUsed: 'tokensUsed',
+  crisisDetected: 'crisisDetected',
+  emotionalIntensity: 'emotionalIntensity',
+  responseTime: 'responseTime',
+  timestamp: 'timestamp'
 };
 
-exports.Prisma.AcademicEventScalarFieldEnum = {
+exports.Prisma.CrisisLogScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  type: 'type',
-  date: 'date',
-  importance: 'importance',
-  createdAt: 'createdAt'
+  userId: 'userId',
+  message: 'message',
+  severity: 'severity',
+  categories: 'categories',
+  responseProvided: 'responseProvided',
+  resourcesShown: 'resourcesShown',
+  emergencyContactCalled: 'emergencyContactCalled',
+  timestamp: 'timestamp'
+};
+
+exports.Prisma.UsageLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  service: 'service',
+  model: 'model',
+  tokensUsed: 'tokensUsed',
+  finishReason: 'finishReason',
+  timestamp: 'timestamp'
 };
 
 exports.Prisma.SortOrder = {
@@ -197,6 +246,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -215,14 +268,139 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.University = exports.$Enums.University = {
+  KNUST: 'KNUST',
+  UNIVERSITY_OF_GHANA: 'UNIVERSITY_OF_GHANA',
+  UNIVERSITY_OF_CAPE_COAST: 'UNIVERSITY_OF_CAPE_COAST',
+  ASHESI_UNIVERSITY: 'ASHESI_UNIVERSITY',
+  GIMPA: 'GIMPA',
+  OTHER: 'OTHER'
+};
 
+exports.Language = exports.$Enums.Language = {
+  ENGLISH: 'ENGLISH',
+  TWI: 'TWI',
+  GA: 'GA',
+  EWE: 'EWE'
+};
+
+exports.NotificationFrequency = exports.$Enums.NotificationFrequency = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  ONLY_WHEN_NEEDED: 'ONLY_WHEN_NEEDED',
+  NONE: 'NONE'
+};
+
+exports.TimeOfDay = exports.$Enums.TimeOfDay = {
+  MORNING: 'MORNING',
+  AFTERNOON: 'AFTERNOON',
+  EVENING: 'EVENING',
+  NIGHT: 'NIGHT'
+};
+
+exports.SupportLevel = exports.$Enums.SupportLevel = {
+  ALONE: 'ALONE',
+  SOMEWHAT: 'SOMEWHAT',
+  STRONG: 'STRONG'
+};
+
+exports.RiskLevel = exports.$Enums.RiskLevel = {
+  LOW: 'LOW',
+  MODERATE: 'MODERATE',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+exports.FaithLevel = exports.$Enums.FaithLevel = {
+  VERY_IMPORTANT: 'VERY_IMPORTANT',
+  SOMEWHAT_IMPORTANT: 'SOMEWHAT_IMPORTANT',
+  NOT_IMPORTANT: 'NOT_IMPORTANT'
+};
+
+exports.ApproachPreference = exports.$Enums.ApproachPreference = {
+  CLINICAL: 'CLINICAL',
+  HOLISTIC: 'HOLISTIC',
+  CULTURAL: 'CULTURAL',
+  MIXED: 'MIXED'
+};
+
+exports.Concern = exports.$Enums.Concern = {
+  ACADEMIC_STRESS: 'ACADEMIC_STRESS',
+  ANXIETY: 'ANXIETY',
+  DEPRESSION: 'DEPRESSION',
+  LONELINESS: 'LONELINESS',
+  RELATIONSHIP_ISSUES: 'RELATIONSHIP_ISSUES',
+  FINANCIAL_STRESS: 'FINANCIAL_STRESS',
+  FAMILY_PRESSURE: 'FAMILY_PRESSURE',
+  OTHER: 'OTHER'
+};
+
+exports.CopingStyle = exports.$Enums.CopingStyle = {
+  EXERCISE: 'EXERCISE',
+  JOURNAL: 'JOURNAL',
+  PRAY: 'PRAY',
+  TALK: 'TALK',
+  MUSIC: 'MUSIC',
+  SLEEP: 'SLEEP',
+  MEDITATE: 'MEDITATE',
+  OTHER: 'OTHER'
+};
+
+exports.Goal = exports.$Enums.Goal = {
+  REDUCE_STRESS: 'REDUCE_STRESS',
+  IMPROVE_MOOD: 'IMPROVE_MOOD',
+  BUILD_RESILIENCE: 'BUILD_RESILIENCE',
+  BETTER_SLEEP: 'BETTER_SLEEP',
+  DEVELOP_HABITS: 'DEVELOP_HABITS',
+  CONNECT_SUPPORT: 'CONNECT_SUPPORT',
+  TRACK_JOURNEY: 'TRACK_JOURNEY',
+  PREPARE_COUNSELING: 'PREPARE_COUNSELING',
+  BE_MINDFUL: 'BE_MINDFUL',
+  IMPROVE_ACADEMICS: 'IMPROVE_ACADEMICS'
+};
+
+exports.ConversationStatus = exports.$Enums.ConversationStatus = {
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.MessageRole = exports.$Enums.MessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+};
+
+exports.AssessmentType = exports.$Enums.AssessmentType = {
+  PHQ9: 'PHQ9',
+  GAD7: 'GAD7',
+  PSS: 'PSS',
+  CUSTOM: 'CUSTOM'
+};
+
+exports.Severity = exports.$Enums.Severity = {
+  MINIMAL: 'MINIMAL',
+  MILD: 'MILD',
+  MODERATE: 'MODERATE',
+  MODERATELY_SEVERE: 'MODERATELY_SEVERE',
+  SEVERE: 'SEVERE'
+};
+
+exports.Service = exports.$Enums.Service = {
+  GEMINI: 'GEMINI',
+  CHAT: 'CHAT',
+  MOOD: 'MOOD',
+  ASSESSMENT: 'ASSESSMENT'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
-  ChatMessage: 'ChatMessage',
+  Conversation: 'Conversation',
+  Message: 'Message',
+  MoodEntry: 'MoodEntry',
   Assessment: 'Assessment',
-  Mood: 'Mood',
-  AcademicEvent: 'AcademicEvent'
+  AIInteraction: 'AIInteraction',
+  CrisisLog: 'CrisisLog',
+  UsageLog: 'UsageLog'
 };
 
 /**

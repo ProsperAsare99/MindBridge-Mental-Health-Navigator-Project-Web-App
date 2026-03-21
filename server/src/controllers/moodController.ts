@@ -2,6 +2,7 @@ import { Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { ai } from '../lib/genkit-config';
+import { MessageRole, University } from '../generated/client';
 
 export const createMood = async (req: AuthRequest, res: Response) => {
     const { value, note } = req.body;
@@ -37,10 +38,10 @@ export const createMood = async (req: AuthRequest, res: Response) => {
             }
         }
 
-        const mood = await prisma.mood.create({
+        const mood = await prisma.moodEntry.create({
             data: {
                 userId: req.user.userId,
-                value: parseInt(value),
+                mood: parseInt(value),
                 note,
                 sentimentScore,
                 sentimentLabel,
@@ -60,7 +61,7 @@ export const getUserMoods = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
 
-        const moods = await prisma.mood.findMany({
+        const moods = await prisma.moodEntry.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'desc' },
             take: 30 // Last 30 entries
@@ -77,7 +78,7 @@ export const getMoodStats = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
 
-        const moods = await prisma.mood.findMany({
+        const moods = await prisma.moodEntry.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'desc' }
         });
@@ -86,7 +87,7 @@ export const getMoodStats = async (req: AuthRequest, res: Response) => {
             return res.json({ average: 0, count: 0, streak: 0 });
         }
 
-        const average = moods.reduce((acc, curr) => acc + curr.value, 0) / moods.length;
+        const average = moods.reduce((acc, curr) => acc + curr.mood, 0) / moods.length;
 
         // Simple streak calculation (daily)
         let streak = 0;
@@ -130,7 +131,7 @@ export const getProactiveNudges = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ error: 'Not authenticated' });
 
-        const moods = await prisma.mood.findMany({
+        const moods = await prisma.moodEntry.findMany({
             where: { userId: req.user.userId },
             orderBy: { createdAt: 'desc' },
             take: 100
@@ -144,7 +145,7 @@ export const getProactiveNudges = async (req: AuthRequest, res: Response) => {
             moods.forEach(m => {
                 const day = new Date(m.createdAt).getDay();
                 if (!dayScores[day]) dayScores[day] = { sum: 0, count: 0 };
-                dayScores[day].sum += m.value;
+                dayScores[day].sum += m.mood;
                 dayScores[day].count++;
             });
 
@@ -169,7 +170,7 @@ export const getProactiveNudges = async (req: AuthRequest, res: Response) => {
                 const hour = new Date(m.createdAt).getHours();
                 const bucket = Math.floor(hour / 6); // 0: night, 1: morning, 2: afternoon, 3: evening
                 if (!hourScores[bucket]) hourScores[bucket] = { sum: 0, count: 0 };
-                hourScores[bucket].sum += m.value;
+                hourScores[bucket].sum += m.mood;
                 hourScores[bucket].count++;
             });
 

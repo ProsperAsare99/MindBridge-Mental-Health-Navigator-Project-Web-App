@@ -95,11 +95,12 @@ exports.Prisma.UserScalarFieldEnum = {
   googleId: 'googleId',
   isVerified: 'isVerified',
   isAnonymous: 'isAnonymous',
+  verificationToken: 'verificationToken',
+  image: 'image',
   displayName: 'displayName',
   university: 'university',
   academicLevel: 'academicLevel',
   program: 'program',
-  image: 'image',
   language: 'language',
   notificationPreference: 'notificationPreference',
   preferredCheckInTime: 'preferredCheckInTime',
@@ -113,22 +114,53 @@ exports.Prisma.UserScalarFieldEnum = {
   stressors: 'stressors',
   trackingPreferences: 'trackingPreferences',
   emergencyContacts: 'emergencyContacts',
+  baselineMood: 'baselineMood',
   baseline: 'baseline',
+  joinDate: 'joinDate',
   moodCheckInsCount: 'moodCheckInsCount',
   conversationsCount: 'conversationsCount',
   lastActive: 'lastActive',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
-  verificationToken: 'verificationToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ChatMessageScalarFieldEnum = {
+exports.Prisma.ConversationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  content: 'content',
+  startedAt: 'startedAt',
+  lastMessageAt: 'lastMessageAt',
+  endedAt: 'endedAt',
+  status: 'status',
+  metadata: 'metadata',
+  summary: 'summary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
   role: 'role',
+  content: 'content',
+  timestamp: 'timestamp',
+  metadata: 'metadata'
+};
+
+exports.Prisma.MoodEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mood: 'mood',
+  energy: 'energy',
+  sleep: 'sleep',
+  social: 'social',
+  anxiety: 'anxiety',
+  notes: 'notes',
+  tags: 'tags',
+  sentimentScore: 'sentimentScore',
+  sentimentLabel: 'sentimentLabel',
+  crisisFlag: 'crisisFlag',
   createdAt: 'createdAt'
 };
 
@@ -136,29 +168,46 @@ exports.Prisma.AssessmentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   type: 'type',
+  responses: 'responses',
   score: 'score',
   severity: 'severity',
+  interpretation: 'interpretation',
   createdAt: 'createdAt'
 };
 
-exports.Prisma.MoodScalarFieldEnum = {
+exports.Prisma.AIInteractionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  value: 'value',
-  note: 'note',
-  sentimentScore: 'sentimentScore',
-  sentimentLabel: 'sentimentLabel',
-  crisisFlag: 'crisisFlag',
-  createdAt: 'createdAt'
+  userMessage: 'userMessage',
+  aiResponse: 'aiResponse',
+  model: 'model',
+  tokensUsed: 'tokensUsed',
+  crisisDetected: 'crisisDetected',
+  emotionalIntensity: 'emotionalIntensity',
+  responseTime: 'responseTime',
+  timestamp: 'timestamp'
 };
 
-exports.Prisma.AcademicEventScalarFieldEnum = {
+exports.Prisma.CrisisLogScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  type: 'type',
-  date: 'date',
-  importance: 'importance',
-  createdAt: 'createdAt'
+  userId: 'userId',
+  message: 'message',
+  severity: 'severity',
+  categories: 'categories',
+  responseProvided: 'responseProvided',
+  resourcesShown: 'resourcesShown',
+  emergencyContactCalled: 'emergencyContactCalled',
+  timestamp: 'timestamp'
+};
+
+exports.Prisma.UsageLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  service: 'service',
+  model: 'model',
+  tokensUsed: 'tokensUsed',
+  finishReason: 'finishReason',
+  timestamp: 'timestamp'
 };
 
 exports.Prisma.SortOrder = {
@@ -168,6 +217,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -186,14 +239,139 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.University = exports.$Enums.University = {
+  KNUST: 'KNUST',
+  UNIVERSITY_OF_GHANA: 'UNIVERSITY_OF_GHANA',
+  UNIVERSITY_OF_CAPE_COAST: 'UNIVERSITY_OF_CAPE_COAST',
+  ASHESI_UNIVERSITY: 'ASHESI_UNIVERSITY',
+  GIMPA: 'GIMPA',
+  OTHER: 'OTHER'
+};
 
+exports.Language = exports.$Enums.Language = {
+  ENGLISH: 'ENGLISH',
+  TWI: 'TWI',
+  GA: 'GA',
+  EWE: 'EWE'
+};
+
+exports.NotificationFrequency = exports.$Enums.NotificationFrequency = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  ONLY_WHEN_NEEDED: 'ONLY_WHEN_NEEDED',
+  NONE: 'NONE'
+};
+
+exports.TimeOfDay = exports.$Enums.TimeOfDay = {
+  MORNING: 'MORNING',
+  AFTERNOON: 'AFTERNOON',
+  EVENING: 'EVENING',
+  NIGHT: 'NIGHT'
+};
+
+exports.Concern = exports.$Enums.Concern = {
+  ACADEMIC_STRESS: 'ACADEMIC_STRESS',
+  ANXIETY: 'ANXIETY',
+  DEPRESSION: 'DEPRESSION',
+  LONELINESS: 'LONELINESS',
+  RELATIONSHIP_ISSUES: 'RELATIONSHIP_ISSUES',
+  FINANCIAL_STRESS: 'FINANCIAL_STRESS',
+  FAMILY_PRESSURE: 'FAMILY_PRESSURE',
+  OTHER: 'OTHER'
+};
+
+exports.SupportLevel = exports.$Enums.SupportLevel = {
+  ALONE: 'ALONE',
+  SOMEWHAT: 'SOMEWHAT',
+  STRONG: 'STRONG'
+};
+
+exports.RiskLevel = exports.$Enums.RiskLevel = {
+  LOW: 'LOW',
+  MODERATE: 'MODERATE',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+exports.CopingStyle = exports.$Enums.CopingStyle = {
+  EXERCISE: 'EXERCISE',
+  JOURNAL: 'JOURNAL',
+  PRAY: 'PRAY',
+  TALK: 'TALK',
+  MUSIC: 'MUSIC',
+  SLEEP: 'SLEEP',
+  MEDITATE: 'MEDITATE',
+  OTHER: 'OTHER'
+};
+
+exports.FaithLevel = exports.$Enums.FaithLevel = {
+  VERY_IMPORTANT: 'VERY_IMPORTANT',
+  SOMEWHAT_IMPORTANT: 'SOMEWHAT_IMPORTANT',
+  NOT_IMPORTANT: 'NOT_IMPORTANT'
+};
+
+exports.ApproachPreference = exports.$Enums.ApproachPreference = {
+  CLINICAL: 'CLINICAL',
+  HOLISTIC: 'HOLISTIC',
+  CULTURAL: 'CULTURAL',
+  MIXED: 'MIXED'
+};
+
+exports.Goal = exports.$Enums.Goal = {
+  REDUCE_STRESS: 'REDUCE_STRESS',
+  IMPROVE_MOOD: 'IMPROVE_MOOD',
+  BUILD_RESILIENCE: 'BUILD_RESILIENCE',
+  BETTER_SLEEP: 'BETTER_SLEEP',
+  DEVELOP_HABITS: 'DEVELOP_HABITS',
+  CONNECT_SUPPORT: 'CONNECT_SUPPORT',
+  TRACK_JOURNEY: 'TRACK_JOURNEY',
+  PREPARE_COUNSELING: 'PREPARE_COUNSELING',
+  BE_MINDFUL: 'BE_MINDFUL',
+  IMPROVE_ACADEMICS: 'IMPROVE_ACADEMICS'
+};
+
+exports.ConversationStatus = exports.$Enums.ConversationStatus = {
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.MessageRole = exports.$Enums.MessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+};
+
+exports.AssessmentType = exports.$Enums.AssessmentType = {
+  PHQ9: 'PHQ9',
+  GAD7: 'GAD7',
+  PSS: 'PSS',
+  CUSTOM: 'CUSTOM'
+};
+
+exports.Severity = exports.$Enums.Severity = {
+  MINIMAL: 'MINIMAL',
+  MILD: 'MILD',
+  MODERATE: 'MODERATE',
+  MODERATELY_SEVERE: 'MODERATELY_SEVERE',
+  SEVERE: 'SEVERE'
+};
+
+exports.Service = exports.$Enums.Service = {
+  GEMINI: 'GEMINI',
+  CHAT: 'CHAT',
+  MOOD: 'MOOD',
+  ASSESSMENT: 'ASSESSMENT'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
-  ChatMessage: 'ChatMessage',
+  Conversation: 'Conversation',
+  Message: 'Message',
+  MoodEntry: 'MoodEntry',
   Assessment: 'Assessment',
-  Mood: 'Mood',
-  AcademicEvent: 'AcademicEvent'
+  AIInteraction: 'AIInteraction',
+  CrisisLog: 'CrisisLog',
+  UsageLog: 'UsageLog'
 };
 /**
  * Create the Client
@@ -245,13 +423,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider        = \"prisma-client-js\"\n  previewFeatures = [\"driverAdapters\"]\n  output          = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel User {\n  id String @id @default(uuid())\n\n  // Authentication\n  email       String  @unique\n  password    String?\n  googleId    String? @unique\n  isVerified  Boolean @default(false)\n  isAnonymous Boolean @default(false)\n\n  // Basic Profile\n  displayName   String? // From Mongoose: displayName\n  university    String? // From Mongoose: university\n  academicLevel Int? // From Mongoose: academicLevel (100, 200, 300, 400)\n  program       String? // From Mongoose: program\n  image         String?\n\n  // Communication Preferences\n  language               String @default(\"english\") // english, twi, ga, ewe\n  notificationPreference String @default(\"daily\") // daily, weekly, only_when_needed, none\n  preferredCheckInTime   String @default(\"morning\") // morning, afternoon, evening, night\n\n  // Mental Health Context\n  concerns     String[] @default([]) // academic_stress, anxiety, etc.\n  supportLevel String   @default(\"somewhat\") // alone, somewhat, strong\n  riskLevel    String   @default(\"LOW\") // LOW, MODERATE, HIGH, CRITICAL\n\n  // Personalization\n  copingStyles       String[] @default([]) // exercise, journal, etc.\n  faithLevel         String   @default(\"somewhat_important\") // very_important, etc.\n  approachPreference String   @default(\"holistic\") // clinical, holistic, cultural, mixed\n  goals              String[] @default([]) // reduce_stress, improve_mood, etc.\n\n  // Complex Data (JSONB)\n  stressors           Json? // exams, assignments, etc. (1-5 scale)\n  trackingPreferences Json? // mood, sleep, etc. (Boolean map)\n  emergencyContacts   Json? // Name, Relationship, Phone\n\n  // Baseline & Metrics\n  baseline           Json? // mood, joinDate\n  moodCheckInsCount  Int       @default(0)\n  conversationsCount Int       @default(0)\n  lastActive         DateTime?\n\n  // Onboarding Status (Legacy/System)\n  onboardingStep      Int     @default(1)\n  onboardingCompleted Boolean @default(false)\n  verificationToken   String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  assessments  Assessment[]\n  moods        Mood[]\n  chatMessages ChatMessage[]\n}\n\nmodel ChatMessage {\n  id        String   @id @default(uuid())\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  content   String   @db.Text\n  role      String // 'user' or 'assistant'\n  createdAt DateTime @default(now())\n}\n\nmodel Assessment {\n  id        String   @id @default(uuid())\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  type      String\n  score     Int\n  severity  String\n  createdAt DateTime @default(now())\n}\n\nmodel Mood {\n  id             String   @id @default(uuid())\n  userId         String\n  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  value          Int // 1-5 (Awful to Great)\n  note           String?\n  sentimentScore Float?\n  sentimentLabel String?\n  crisisFlag     Boolean  @default(false)\n  createdAt      DateTime @default(now())\n}\n\nmodel AcademicEvent {\n  id         String   @id @default(uuid())\n  title      String\n  type       String // 'exam', 'deadline', 'holiday'\n  date       DateTime\n  importance Int      @default(1) // 1-5\n  createdAt  DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "fa600d8285cf560a3e9d8de7c85259fa79f680010df6b173a7f22ce4c295a90f",
+  "inlineSchema": "generator client {\n  provider        = \"prisma-client-js\"\n  previewFeatures = [\"driverAdapters\"]\n  output          = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\n// ============================================\n// USER MODEL\n// ============================================\nmodel User {\n  id       String  @id @default(uuid())\n  email    String  @unique\n  password String?\n\n  // Authentication Extras (Retained)\n  googleId          String? @unique\n  isVerified        Boolean @default(false)\n  isAnonymous       Boolean @default(false)\n  verificationToken String?\n  image             String?\n\n  // Basic Profile\n  displayName   String?\n  university    University?\n  academicLevel Int?\n  program       String?\n\n  // Communication Preferences\n  language               Language              @default(ENGLISH)\n  notificationPreference NotificationFrequency @default(DAILY)\n  preferredCheckInTime   TimeOfDay             @default(MORNING)\n\n  // Mental Health Context\n  concerns     Concern[]    @default([])\n  supportLevel SupportLevel @default(SOMEWHAT)\n  riskLevel    RiskLevel    @default(LOW)\n\n  // Personalization\n  copingStyles       CopingStyle[]      @default([])\n  faithLevel         FaithLevel         @default(SOMEWHAT_IMPORTANT)\n  approachPreference ApproachPreference @default(HOLISTIC)\n  goals              Goal[]             @default([])\n\n  // Academic Stressors (JSON for flexibility)\n  stressors Json? // { exams: 3, assignments: 4, financial: 5, ... }\n\n  // Tracking Preferences (JSON)\n  trackingPreferences Json? // { mood: true, sleep: false, ... }\n\n  // Emergency Contacts (JSON array)\n  emergencyContacts Json? // [{ name: \"\", relationship: \"\", phone: \"\" }]\n\n  // Baseline Data\n  baselineMood Int?\n  baseline     Json? // Retained for existing complex baseline data\n  joinDate     DateTime @default(now())\n\n  // Usage Metrics\n  moodCheckInsCount  Int       @default(0)\n  conversationsCount Int       @default(0)\n  lastActive         DateTime?\n\n  // Onboarding Status (Retained)\n  onboardingStep      Int     @default(1)\n  onboardingCompleted Boolean @default(false)\n\n  // Timestamps\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  conversations  Conversation[]\n  moodEntries    MoodEntry[]\n  assessments    Assessment[]\n  aiInteractions AIInteraction[]\n  crisisLogs     CrisisLog[]\n  usageLogs      UsageLog[]\n\n  @@index([email])\n  @@index([university, academicLevel])\n  @@index([riskLevel])\n}\n\n// ============================================\n// CONVERSATION MODEL\n// ============================================\nmodel Conversation {\n  id     String @id @default(uuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  startedAt     DateTime  @default(now())\n  lastMessageAt DateTime  @default(now())\n  endedAt       DateTime?\n\n  status ConversationStatus @default(ACTIVE)\n\n  // Metadata (JSON)\n  metadata Json? // { userRiskLevel: \"LOW\", initialMood: 3, context: \"\" }\n\n  summary String?\n\n  // Relations\n  messages Message[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([userId, startedAt(sort: Desc)])\n  @@index([status])\n}\n\n// ============================================\n// MESSAGE MODEL\n// ============================================\nmodel Message {\n  id             String       @id @default(uuid())\n  conversationId String\n  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)\n\n  role      MessageRole\n  content   String      @db.Text\n  timestamp DateTime    @default(now())\n\n  // Metadata (JSON)\n  metadata Json? // { model: \"\", tokensUsed: 0, crisisDetected: false, ... }\n\n  @@index([conversationId, timestamp(sort: Desc)])\n}\n\n// ============================================\n// MOOD ENTRY MODEL\n// ============================================\nmodel MoodEntry {\n  id     String @id @default(uuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  mood    Int // 1-5 scale\n  energy  Int? // 1-5 scale\n  sleep   Int? // 1-5 scale\n  social  Int? // 1-5 scale\n  anxiety Int? // 1-10 scale\n\n  notes          String?\n  tags           String[] // Array of tags\n  sentimentScore Float?\n  sentimentLabel String?\n  crisisFlag     Boolean  @default(false)\n\n  createdAt DateTime @default(now())\n\n  @@index([userId, createdAt(sort: Desc)])\n}\n\n// ============================================\n// ASSESSMENT MODEL\n// ============================================\nmodel Assessment {\n  id     String @id @default(uuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  type           AssessmentType\n  responses      Json // Array of { question: \"\", answer: \"\" }\n  score          Int\n  severity       Severity?\n  interpretation String?\n\n  createdAt DateTime @default(now())\n\n  @@index([userId, type, createdAt(sort: Desc)])\n}\n\n// ============================================\n// AI INTERACTION LOG\n// ============================================\nmodel AIInteraction {\n  id     String @id @default(uuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  userMessage        String  @db.Text\n  aiResponse         String  @db.Text\n  model              String?\n  tokensUsed         Int?\n  crisisDetected     Boolean @default(false)\n  emotionalIntensity Int?\n  responseTime       Int? // milliseconds\n\n  timestamp DateTime @default(now())\n\n  @@index([userId, timestamp(sort: Desc)])\n  @@index([crisisDetected])\n}\n\n// ============================================\n// CRISIS LOG\n// ============================================\nmodel CrisisLog {\n  id     String @id @default(uuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  message    String @db.Text\n  severity   Int // 1-10 scale\n  categories Json // Array of { category: \"\", matches: [], severity: 0 }\n\n  responseProvided       Boolean @default(false)\n  resourcesShown         Boolean @default(false)\n  emergencyContactCalled Boolean @default(false)\n\n  timestamp DateTime @default(now())\n\n  @@index([userId, timestamp(sort: Desc)])\n  @@index([severity(sort: Desc)])\n}\n\n// ============================================\n// USAGE LOG\n// ============================================\nmodel UsageLog {\n  id     String @id @default(uuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  service      Service\n  model        String?\n  tokensUsed   Int?\n  finishReason String?\n\n  timestamp DateTime @default(now())\n\n  @@index([userId, timestamp(sort: Desc)])\n  @@index([service])\n}\n\n// ============================================\n// ENUMS\n// ============================================\n\nenum University {\n  KNUST\n  UNIVERSITY_OF_GHANA\n  UNIVERSITY_OF_CAPE_COAST\n  ASHESI_UNIVERSITY\n  GIMPA\n  OTHER\n}\n\nenum Language {\n  ENGLISH\n  TWI\n  GA\n  EWE\n}\n\nenum NotificationFrequency {\n  DAILY\n  WEEKLY\n  ONLY_WHEN_NEEDED\n  NONE\n}\n\nenum TimeOfDay {\n  MORNING\n  AFTERNOON\n  EVENING\n  NIGHT\n}\n\nenum Concern {\n  ACADEMIC_STRESS\n  ANXIETY\n  DEPRESSION\n  LONELINESS\n  RELATIONSHIP_ISSUES\n  FINANCIAL_STRESS\n  FAMILY_PRESSURE\n  OTHER\n}\n\nenum SupportLevel {\n  ALONE\n  SOMEWHAT\n  STRONG\n}\n\nenum RiskLevel {\n  LOW\n  MODERATE\n  HIGH\n  CRITICAL\n}\n\nenum CopingStyle {\n  EXERCISE\n  JOURNAL\n  PRAY\n  TALK\n  MUSIC\n  SLEEP\n  MEDITATE\n  OTHER\n}\n\nenum FaithLevel {\n  VERY_IMPORTANT\n  SOMEWHAT_IMPORTANT\n  NOT_IMPORTANT\n}\n\nenum ApproachPreference {\n  CLINICAL\n  HOLISTIC\n  CULTURAL\n  MIXED\n}\n\nenum Goal {\n  REDUCE_STRESS\n  IMPROVE_MOOD\n  BUILD_RESILIENCE\n  BETTER_SLEEP\n  DEVELOP_HABITS\n  CONNECT_SUPPORT\n  TRACK_JOURNEY\n  PREPARE_COUNSELING\n  BE_MINDFUL\n  IMPROVE_ACADEMICS\n}\n\nenum ConversationStatus {\n  ACTIVE\n  ENDED\n  ARCHIVED\n}\n\nenum MessageRole {\n  USER\n  ASSISTANT\n}\n\nenum AssessmentType {\n  PHQ9\n  GAD7\n  PSS\n  CUSTOM\n}\n\nenum Severity {\n  MINIMAL\n  MILD\n  MODERATE\n  MODERATELY_SEVERE\n  SEVERE\n}\n\nenum Service {\n  GEMINI\n  CHAT\n  MOOD\n  ASSESSMENT\n}\n",
+  "inlineSchemaHash": "0b051bbeae7a44ab25487204d8d160217aeca0e0b24ec242a5b7f6c2ca4c7868",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"googleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isAnonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"displayName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"university\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"academicLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"program\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"language\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notificationPreference\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"preferredCheckInTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"concerns\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"supportLevel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"riskLevel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"copingStyles\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"faithLevel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"approachPreference\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"goals\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stressors\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"trackingPreferences\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"emergencyContacts\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"baseline\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"moodCheckInsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"conversationsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lastActive\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"onboardingStep\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"onboardingCompleted\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"verificationToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"assessments\",\"kind\":\"object\",\"type\":\"Assessment\",\"relationName\":\"AssessmentToUser\"},{\"name\":\"moods\",\"kind\":\"object\",\"type\":\"Mood\",\"relationName\":\"MoodToUser\"},{\"name\":\"chatMessages\",\"kind\":\"object\",\"type\":\"ChatMessage\",\"relationName\":\"ChatMessageToUser\"}],\"dbName\":null},\"ChatMessage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ChatMessageToUser\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Assessment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AssessmentToUser\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"severity\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Mood\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MoodToUser\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"note\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sentimentScore\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"sentimentLabel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"crisisFlag\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"AcademicEvent\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"importance\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"googleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isAnonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"verificationToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"displayName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"university\",\"kind\":\"enum\",\"type\":\"University\"},{\"name\":\"academicLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"program\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"language\",\"kind\":\"enum\",\"type\":\"Language\"},{\"name\":\"notificationPreference\",\"kind\":\"enum\",\"type\":\"NotificationFrequency\"},{\"name\":\"preferredCheckInTime\",\"kind\":\"enum\",\"type\":\"TimeOfDay\"},{\"name\":\"concerns\",\"kind\":\"enum\",\"type\":\"Concern\"},{\"name\":\"supportLevel\",\"kind\":\"enum\",\"type\":\"SupportLevel\"},{\"name\":\"riskLevel\",\"kind\":\"enum\",\"type\":\"RiskLevel\"},{\"name\":\"copingStyles\",\"kind\":\"enum\",\"type\":\"CopingStyle\"},{\"name\":\"faithLevel\",\"kind\":\"enum\",\"type\":\"FaithLevel\"},{\"name\":\"approachPreference\",\"kind\":\"enum\",\"type\":\"ApproachPreference\"},{\"name\":\"goals\",\"kind\":\"enum\",\"type\":\"Goal\"},{\"name\":\"stressors\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"trackingPreferences\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"emergencyContacts\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"baselineMood\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"baseline\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"joinDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"moodCheckInsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"conversationsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lastActive\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"onboardingStep\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"onboardingCompleted\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"conversations\",\"kind\":\"object\",\"type\":\"Conversation\",\"relationName\":\"ConversationToUser\"},{\"name\":\"moodEntries\",\"kind\":\"object\",\"type\":\"MoodEntry\",\"relationName\":\"MoodEntryToUser\"},{\"name\":\"assessments\",\"kind\":\"object\",\"type\":\"Assessment\",\"relationName\":\"AssessmentToUser\"},{\"name\":\"aiInteractions\",\"kind\":\"object\",\"type\":\"AIInteraction\",\"relationName\":\"AIInteractionToUser\"},{\"name\":\"crisisLogs\",\"kind\":\"object\",\"type\":\"CrisisLog\",\"relationName\":\"CrisisLogToUser\"},{\"name\":\"usageLogs\",\"kind\":\"object\",\"type\":\"UsageLog\",\"relationName\":\"UsageLogToUser\"}],\"dbName\":null},\"Conversation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ConversationToUser\"},{\"name\":\"startedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"lastMessageAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ConversationStatus\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"summary\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"ConversationToMessage\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"conversationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"conversation\",\"kind\":\"object\",\"type\":\"Conversation\",\"relationName\":\"ConversationToMessage\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"MessageRole\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"}],\"dbName\":null},\"MoodEntry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MoodEntryToUser\"},{\"name\":\"mood\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"energy\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"sleep\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"social\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"anxiety\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sentimentScore\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"sentimentLabel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"crisisFlag\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Assessment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AssessmentToUser\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"AssessmentType\"},{\"name\":\"responses\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"severity\",\"kind\":\"enum\",\"type\":\"Severity\"},{\"name\":\"interpretation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"AIInteraction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AIInteractionToUser\"},{\"name\":\"userMessage\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"aiResponse\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"model\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tokensUsed\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"crisisDetected\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"emotionalIntensity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"responseTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"CrisisLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"CrisisLogToUser\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"severity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"categories\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"responseProvided\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"resourcesShown\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"emergencyContactCalled\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"UsageLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UsageLogToUser\"},{\"name\":\"service\",\"kind\":\"enum\",\"type\":\"Service\"},{\"name\":\"model\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tokensUsed\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"finishReason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: () => require('./query_engine_bg.js'),

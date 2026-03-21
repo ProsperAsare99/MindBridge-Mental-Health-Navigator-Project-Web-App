@@ -19,25 +19,281 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model ChatMessage
+ * Model Conversation
  * 
  */
-export type ChatMessage = $Result.DefaultSelection<Prisma.$ChatMessagePayload>
+export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
+/**
+ * Model Message
+ * 
+ */
+export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model MoodEntry
+ * 
+ */
+export type MoodEntry = $Result.DefaultSelection<Prisma.$MoodEntryPayload>
 /**
  * Model Assessment
  * 
  */
 export type Assessment = $Result.DefaultSelection<Prisma.$AssessmentPayload>
 /**
- * Model Mood
+ * Model AIInteraction
  * 
  */
-export type Mood = $Result.DefaultSelection<Prisma.$MoodPayload>
+export type AIInteraction = $Result.DefaultSelection<Prisma.$AIInteractionPayload>
 /**
- * Model AcademicEvent
+ * Model CrisisLog
  * 
  */
-export type AcademicEvent = $Result.DefaultSelection<Prisma.$AcademicEventPayload>
+export type CrisisLog = $Result.DefaultSelection<Prisma.$CrisisLogPayload>
+/**
+ * Model UsageLog
+ * 
+ */
+export type UsageLog = $Result.DefaultSelection<Prisma.$UsageLogPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const University: {
+  KNUST: 'KNUST',
+  UNIVERSITY_OF_GHANA: 'UNIVERSITY_OF_GHANA',
+  UNIVERSITY_OF_CAPE_COAST: 'UNIVERSITY_OF_CAPE_COAST',
+  ASHESI_UNIVERSITY: 'ASHESI_UNIVERSITY',
+  GIMPA: 'GIMPA',
+  OTHER: 'OTHER'
+};
+
+export type University = (typeof University)[keyof typeof University]
+
+
+export const Language: {
+  ENGLISH: 'ENGLISH',
+  TWI: 'TWI',
+  GA: 'GA',
+  EWE: 'EWE'
+};
+
+export type Language = (typeof Language)[keyof typeof Language]
+
+
+export const NotificationFrequency: {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  ONLY_WHEN_NEEDED: 'ONLY_WHEN_NEEDED',
+  NONE: 'NONE'
+};
+
+export type NotificationFrequency = (typeof NotificationFrequency)[keyof typeof NotificationFrequency]
+
+
+export const TimeOfDay: {
+  MORNING: 'MORNING',
+  AFTERNOON: 'AFTERNOON',
+  EVENING: 'EVENING',
+  NIGHT: 'NIGHT'
+};
+
+export type TimeOfDay = (typeof TimeOfDay)[keyof typeof TimeOfDay]
+
+
+export const Concern: {
+  ACADEMIC_STRESS: 'ACADEMIC_STRESS',
+  ANXIETY: 'ANXIETY',
+  DEPRESSION: 'DEPRESSION',
+  LONELINESS: 'LONELINESS',
+  RELATIONSHIP_ISSUES: 'RELATIONSHIP_ISSUES',
+  FINANCIAL_STRESS: 'FINANCIAL_STRESS',
+  FAMILY_PRESSURE: 'FAMILY_PRESSURE',
+  OTHER: 'OTHER'
+};
+
+export type Concern = (typeof Concern)[keyof typeof Concern]
+
+
+export const SupportLevel: {
+  ALONE: 'ALONE',
+  SOMEWHAT: 'SOMEWHAT',
+  STRONG: 'STRONG'
+};
+
+export type SupportLevel = (typeof SupportLevel)[keyof typeof SupportLevel]
+
+
+export const RiskLevel: {
+  LOW: 'LOW',
+  MODERATE: 'MODERATE',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+export type RiskLevel = (typeof RiskLevel)[keyof typeof RiskLevel]
+
+
+export const CopingStyle: {
+  EXERCISE: 'EXERCISE',
+  JOURNAL: 'JOURNAL',
+  PRAY: 'PRAY',
+  TALK: 'TALK',
+  MUSIC: 'MUSIC',
+  SLEEP: 'SLEEP',
+  MEDITATE: 'MEDITATE',
+  OTHER: 'OTHER'
+};
+
+export type CopingStyle = (typeof CopingStyle)[keyof typeof CopingStyle]
+
+
+export const FaithLevel: {
+  VERY_IMPORTANT: 'VERY_IMPORTANT',
+  SOMEWHAT_IMPORTANT: 'SOMEWHAT_IMPORTANT',
+  NOT_IMPORTANT: 'NOT_IMPORTANT'
+};
+
+export type FaithLevel = (typeof FaithLevel)[keyof typeof FaithLevel]
+
+
+export const ApproachPreference: {
+  CLINICAL: 'CLINICAL',
+  HOLISTIC: 'HOLISTIC',
+  CULTURAL: 'CULTURAL',
+  MIXED: 'MIXED'
+};
+
+export type ApproachPreference = (typeof ApproachPreference)[keyof typeof ApproachPreference]
+
+
+export const Goal: {
+  REDUCE_STRESS: 'REDUCE_STRESS',
+  IMPROVE_MOOD: 'IMPROVE_MOOD',
+  BUILD_RESILIENCE: 'BUILD_RESILIENCE',
+  BETTER_SLEEP: 'BETTER_SLEEP',
+  DEVELOP_HABITS: 'DEVELOP_HABITS',
+  CONNECT_SUPPORT: 'CONNECT_SUPPORT',
+  TRACK_JOURNEY: 'TRACK_JOURNEY',
+  PREPARE_COUNSELING: 'PREPARE_COUNSELING',
+  BE_MINDFUL: 'BE_MINDFUL',
+  IMPROVE_ACADEMICS: 'IMPROVE_ACADEMICS'
+};
+
+export type Goal = (typeof Goal)[keyof typeof Goal]
+
+
+export const ConversationStatus: {
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+export type ConversationStatus = (typeof ConversationStatus)[keyof typeof ConversationStatus]
+
+
+export const MessageRole: {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+};
+
+export type MessageRole = (typeof MessageRole)[keyof typeof MessageRole]
+
+
+export const AssessmentType: {
+  PHQ9: 'PHQ9',
+  GAD7: 'GAD7',
+  PSS: 'PSS',
+  CUSTOM: 'CUSTOM'
+};
+
+export type AssessmentType = (typeof AssessmentType)[keyof typeof AssessmentType]
+
+
+export const Severity: {
+  MINIMAL: 'MINIMAL',
+  MILD: 'MILD',
+  MODERATE: 'MODERATE',
+  MODERATELY_SEVERE: 'MODERATELY_SEVERE',
+  SEVERE: 'SEVERE'
+};
+
+export type Severity = (typeof Severity)[keyof typeof Severity]
+
+
+export const Service: {
+  GEMINI: 'GEMINI',
+  CHAT: 'CHAT',
+  MOOD: 'MOOD',
+  ASSESSMENT: 'ASSESSMENT'
+};
+
+export type Service = (typeof Service)[keyof typeof Service]
+
+}
+
+export type University = $Enums.University
+
+export const University: typeof $Enums.University
+
+export type Language = $Enums.Language
+
+export const Language: typeof $Enums.Language
+
+export type NotificationFrequency = $Enums.NotificationFrequency
+
+export const NotificationFrequency: typeof $Enums.NotificationFrequency
+
+export type TimeOfDay = $Enums.TimeOfDay
+
+export const TimeOfDay: typeof $Enums.TimeOfDay
+
+export type Concern = $Enums.Concern
+
+export const Concern: typeof $Enums.Concern
+
+export type SupportLevel = $Enums.SupportLevel
+
+export const SupportLevel: typeof $Enums.SupportLevel
+
+export type RiskLevel = $Enums.RiskLevel
+
+export const RiskLevel: typeof $Enums.RiskLevel
+
+export type CopingStyle = $Enums.CopingStyle
+
+export const CopingStyle: typeof $Enums.CopingStyle
+
+export type FaithLevel = $Enums.FaithLevel
+
+export const FaithLevel: typeof $Enums.FaithLevel
+
+export type ApproachPreference = $Enums.ApproachPreference
+
+export const ApproachPreference: typeof $Enums.ApproachPreference
+
+export type Goal = $Enums.Goal
+
+export const Goal: typeof $Enums.Goal
+
+export type ConversationStatus = $Enums.ConversationStatus
+
+export const ConversationStatus: typeof $Enums.ConversationStatus
+
+export type MessageRole = $Enums.MessageRole
+
+export const MessageRole: typeof $Enums.MessageRole
+
+export type AssessmentType = $Enums.AssessmentType
+
+export const AssessmentType: typeof $Enums.AssessmentType
+
+export type Severity = $Enums.Severity
+
+export const Severity: typeof $Enums.Severity
+
+export type Service = $Enums.Service
+
+export const Service: typeof $Enums.Service
 
 /**
  * ##  Prisma Client ʲˢ
@@ -175,14 +431,34 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.chatMessage`: Exposes CRUD operations for the **ChatMessage** model.
+   * `prisma.conversation`: Exposes CRUD operations for the **Conversation** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more ChatMessages
-    * const chatMessages = await prisma.chatMessage.findMany()
+    * // Fetch zero or more Conversations
+    * const conversations = await prisma.conversation.findMany()
     * ```
     */
-  get chatMessage(): Prisma.ChatMessageDelegate<ExtArgs, ClientOptions>;
+  get conversation(): Prisma.ConversationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.message`: Exposes CRUD operations for the **Message** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Messages
+    * const messages = await prisma.message.findMany()
+    * ```
+    */
+  get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.moodEntry`: Exposes CRUD operations for the **MoodEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MoodEntries
+    * const moodEntries = await prisma.moodEntry.findMany()
+    * ```
+    */
+  get moodEntry(): Prisma.MoodEntryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.assessment`: Exposes CRUD operations for the **Assessment** model.
@@ -195,24 +471,34 @@ export class PrismaClient<
   get assessment(): Prisma.AssessmentDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.mood`: Exposes CRUD operations for the **Mood** model.
+   * `prisma.aIInteraction`: Exposes CRUD operations for the **AIInteraction** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Moods
-    * const moods = await prisma.mood.findMany()
+    * // Fetch zero or more AIInteractions
+    * const aIInteractions = await prisma.aIInteraction.findMany()
     * ```
     */
-  get mood(): Prisma.MoodDelegate<ExtArgs, ClientOptions>;
+  get aIInteraction(): Prisma.AIInteractionDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.academicEvent`: Exposes CRUD operations for the **AcademicEvent** model.
+   * `prisma.crisisLog`: Exposes CRUD operations for the **CrisisLog** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more AcademicEvents
-    * const academicEvents = await prisma.academicEvent.findMany()
+    * // Fetch zero or more CrisisLogs
+    * const crisisLogs = await prisma.crisisLog.findMany()
     * ```
     */
-  get academicEvent(): Prisma.AcademicEventDelegate<ExtArgs, ClientOptions>;
+  get crisisLog(): Prisma.CrisisLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.usageLog`: Exposes CRUD operations for the **UsageLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UsageLogs
+    * const usageLogs = await prisma.usageLog.findMany()
+    * ```
+    */
+  get usageLog(): Prisma.UsageLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -654,10 +940,13 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    ChatMessage: 'ChatMessage',
+    Conversation: 'Conversation',
+    Message: 'Message',
+    MoodEntry: 'MoodEntry',
     Assessment: 'Assessment',
-    Mood: 'Mood',
-    AcademicEvent: 'AcademicEvent'
+    AIInteraction: 'AIInteraction',
+    CrisisLog: 'CrisisLog',
+    UsageLog: 'UsageLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -673,7 +962,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "chatMessage" | "assessment" | "mood" | "academicEvent"
+      modelProps: "user" | "conversation" | "message" | "moodEntry" | "assessment" | "aIInteraction" | "crisisLog" | "usageLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -751,77 +1040,225 @@ export namespace Prisma {
           }
         }
       }
-      ChatMessage: {
-        payload: Prisma.$ChatMessagePayload<ExtArgs>
-        fields: Prisma.ChatMessageFieldRefs
+      Conversation: {
+        payload: Prisma.$ConversationPayload<ExtArgs>
+        fields: Prisma.ConversationFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ChatMessageFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload> | null
+            args: Prisma.ConversationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ChatMessageFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+            args: Prisma.ConversationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
           }
           findFirst: {
-            args: Prisma.ChatMessageFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload> | null
+            args: Prisma.ConversationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ChatMessageFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+            args: Prisma.ConversationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
           }
           findMany: {
-            args: Prisma.ChatMessageFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>[]
+            args: Prisma.ConversationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
           }
           create: {
-            args: Prisma.ChatMessageCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+            args: Prisma.ConversationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
           }
           createMany: {
-            args: Prisma.ChatMessageCreateManyArgs<ExtArgs>
+            args: Prisma.ConversationCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ChatMessageCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>[]
+            args: Prisma.ConversationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
           }
           delete: {
-            args: Prisma.ChatMessageDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+            args: Prisma.ConversationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
           }
           update: {
-            args: Prisma.ChatMessageUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+            args: Prisma.ConversationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
           }
           deleteMany: {
-            args: Prisma.ChatMessageDeleteManyArgs<ExtArgs>
+            args: Prisma.ConversationDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ChatMessageUpdateManyArgs<ExtArgs>
+            args: Prisma.ConversationUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ChatMessageUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>[]
+            args: Prisma.ConversationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
           }
           upsert: {
-            args: Prisma.ChatMessageUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+            args: Prisma.ConversationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
           }
           aggregate: {
-            args: Prisma.ChatMessageAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateChatMessage>
+            args: Prisma.ConversationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversation>
           }
           groupBy: {
-            args: Prisma.ChatMessageGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ChatMessageGroupByOutputType>[]
+            args: Prisma.ConversationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversationGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ChatMessageCountArgs<ExtArgs>
-            result: $Utils.Optional<ChatMessageCountAggregateOutputType> | number
+            args: Prisma.ConversationCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Message: {
+        payload: Prisma.$MessagePayload<ExtArgs>
+        fields: Prisma.MessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findFirst: {
+            args: Prisma.MessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findMany: {
+            args: Prisma.MessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          create: {
+            args: Prisma.MessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          createMany: {
+            args: Prisma.MessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          delete: {
+            args: Prisma.MessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          update: {
+            args: Prisma.MessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.MessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.MessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          aggregate: {
+            args: Prisma.MessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessage>
+          }
+          groupBy: {
+            args: Prisma.MessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MessageCountArgs<ExtArgs>
+            result: $Utils.Optional<MessageCountAggregateOutputType> | number
+          }
+        }
+      }
+      MoodEntry: {
+        payload: Prisma.$MoodEntryPayload<ExtArgs>
+        fields: Prisma.MoodEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MoodEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MoodEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.MoodEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MoodEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>
+          }
+          findMany: {
+            args: Prisma.MoodEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>[]
+          }
+          create: {
+            args: Prisma.MoodEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>
+          }
+          createMany: {
+            args: Prisma.MoodEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MoodEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.MoodEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>
+          }
+          update: {
+            args: Prisma.MoodEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.MoodEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MoodEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MoodEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.MoodEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.MoodEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMoodEntry>
+          }
+          groupBy: {
+            args: Prisma.MoodEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MoodEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MoodEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<MoodEntryCountAggregateOutputType> | number
           }
         }
       }
@@ -899,151 +1336,225 @@ export namespace Prisma {
           }
         }
       }
-      Mood: {
-        payload: Prisma.$MoodPayload<ExtArgs>
-        fields: Prisma.MoodFieldRefs
+      AIInteraction: {
+        payload: Prisma.$AIInteractionPayload<ExtArgs>
+        fields: Prisma.AIInteractionFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.MoodFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload> | null
+            args: Prisma.AIInteractionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.MoodFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>
+            args: Prisma.AIInteractionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>
           }
           findFirst: {
-            args: Prisma.MoodFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload> | null
+            args: Prisma.AIInteractionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.MoodFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>
+            args: Prisma.AIInteractionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>
           }
           findMany: {
-            args: Prisma.MoodFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>[]
+            args: Prisma.AIInteractionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>[]
           }
           create: {
-            args: Prisma.MoodCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>
+            args: Prisma.AIInteractionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>
           }
           createMany: {
-            args: Prisma.MoodCreateManyArgs<ExtArgs>
+            args: Prisma.AIInteractionCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.MoodCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>[]
+            args: Prisma.AIInteractionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>[]
           }
           delete: {
-            args: Prisma.MoodDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>
+            args: Prisma.AIInteractionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>
           }
           update: {
-            args: Prisma.MoodUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>
+            args: Prisma.AIInteractionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>
           }
           deleteMany: {
-            args: Prisma.MoodDeleteManyArgs<ExtArgs>
+            args: Prisma.AIInteractionDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.MoodUpdateManyArgs<ExtArgs>
+            args: Prisma.AIInteractionUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.MoodUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>[]
+            args: Prisma.AIInteractionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>[]
           }
           upsert: {
-            args: Prisma.MoodUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodPayload>
+            args: Prisma.AIInteractionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AIInteractionPayload>
           }
           aggregate: {
-            args: Prisma.MoodAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMood>
+            args: Prisma.AIInteractionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAIInteraction>
           }
           groupBy: {
-            args: Prisma.MoodGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MoodGroupByOutputType>[]
+            args: Prisma.AIInteractionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AIInteractionGroupByOutputType>[]
           }
           count: {
-            args: Prisma.MoodCountArgs<ExtArgs>
-            result: $Utils.Optional<MoodCountAggregateOutputType> | number
+            args: Prisma.AIInteractionCountArgs<ExtArgs>
+            result: $Utils.Optional<AIInteractionCountAggregateOutputType> | number
           }
         }
       }
-      AcademicEvent: {
-        payload: Prisma.$AcademicEventPayload<ExtArgs>
-        fields: Prisma.AcademicEventFieldRefs
+      CrisisLog: {
+        payload: Prisma.$CrisisLogPayload<ExtArgs>
+        fields: Prisma.CrisisLogFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.AcademicEventFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload> | null
+            args: Prisma.CrisisLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.AcademicEventFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>
+            args: Prisma.CrisisLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>
           }
           findFirst: {
-            args: Prisma.AcademicEventFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload> | null
+            args: Prisma.CrisisLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.AcademicEventFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>
+            args: Prisma.CrisisLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>
           }
           findMany: {
-            args: Prisma.AcademicEventFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>[]
+            args: Prisma.CrisisLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>[]
           }
           create: {
-            args: Prisma.AcademicEventCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>
+            args: Prisma.CrisisLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>
           }
           createMany: {
-            args: Prisma.AcademicEventCreateManyArgs<ExtArgs>
+            args: Prisma.CrisisLogCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.AcademicEventCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>[]
+            args: Prisma.CrisisLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>[]
           }
           delete: {
-            args: Prisma.AcademicEventDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>
+            args: Prisma.CrisisLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>
           }
           update: {
-            args: Prisma.AcademicEventUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>
+            args: Prisma.CrisisLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>
           }
           deleteMany: {
-            args: Prisma.AcademicEventDeleteManyArgs<ExtArgs>
+            args: Prisma.CrisisLogDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.AcademicEventUpdateManyArgs<ExtArgs>
+            args: Prisma.CrisisLogUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.AcademicEventUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>[]
+            args: Prisma.CrisisLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>[]
           }
           upsert: {
-            args: Prisma.AcademicEventUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicEventPayload>
+            args: Prisma.CrisisLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CrisisLogPayload>
           }
           aggregate: {
-            args: Prisma.AcademicEventAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAcademicEvent>
+            args: Prisma.CrisisLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCrisisLog>
           }
           groupBy: {
-            args: Prisma.AcademicEventGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AcademicEventGroupByOutputType>[]
+            args: Prisma.CrisisLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CrisisLogGroupByOutputType>[]
           }
           count: {
-            args: Prisma.AcademicEventCountArgs<ExtArgs>
-            result: $Utils.Optional<AcademicEventCountAggregateOutputType> | number
+            args: Prisma.CrisisLogCountArgs<ExtArgs>
+            result: $Utils.Optional<CrisisLogCountAggregateOutputType> | number
+          }
+        }
+      }
+      UsageLog: {
+        payload: Prisma.$UsageLogPayload<ExtArgs>
+        fields: Prisma.UsageLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UsageLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UsageLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>
+          }
+          findFirst: {
+            args: Prisma.UsageLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UsageLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>
+          }
+          findMany: {
+            args: Prisma.UsageLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>[]
+          }
+          create: {
+            args: Prisma.UsageLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>
+          }
+          createMany: {
+            args: Prisma.UsageLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UsageLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>[]
+          }
+          delete: {
+            args: Prisma.UsageLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>
+          }
+          update: {
+            args: Prisma.UsageLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.UsageLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UsageLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UsageLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.UsageLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsageLogPayload>
+          }
+          aggregate: {
+            args: Prisma.UsageLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsageLog>
+          }
+          groupBy: {
+            args: Prisma.UsageLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsageLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UsageLogCountArgs<ExtArgs>
+            result: $Utils.Optional<UsageLogCountAggregateOutputType> | number
           }
         }
       }
@@ -1136,10 +1647,13 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
-    chatMessage?: ChatMessageOmit
+    conversation?: ConversationOmit
+    message?: MessageOmit
+    moodEntry?: MoodEntryOmit
     assessment?: AssessmentOmit
-    mood?: MoodOmit
-    academicEvent?: AcademicEventOmit
+    aIInteraction?: AIInteractionOmit
+    crisisLog?: CrisisLogOmit
+    usageLog?: UsageLogOmit
   }
 
   /* Types for Logging */
@@ -1234,15 +1748,21 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    conversations: number
+    moodEntries: number
     assessments: number
-    moods: number
-    chatMessages: number
+    aiInteractions: number
+    crisisLogs: number
+    usageLogs: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations?: boolean | UserCountOutputTypeCountConversationsArgs
+    moodEntries?: boolean | UserCountOutputTypeCountMoodEntriesArgs
     assessments?: boolean | UserCountOutputTypeCountAssessmentsArgs
-    moods?: boolean | UserCountOutputTypeCountMoodsArgs
-    chatMessages?: boolean | UserCountOutputTypeCountChatMessagesArgs
+    aiInteractions?: boolean | UserCountOutputTypeCountAiInteractionsArgs
+    crisisLogs?: boolean | UserCountOutputTypeCountCrisisLogsArgs
+    usageLogs?: boolean | UserCountOutputTypeCountUsageLogsArgs
   }
 
   // Custom InputTypes
@@ -1259,6 +1779,20 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMoodEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoodEntryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountAssessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AssessmentWhereInput
   }
@@ -1266,15 +1800,53 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMoodsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MoodWhereInput
+  export type UserCountOutputTypeCountAiInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AIInteractionWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountChatMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ChatMessageWhereInput
+  export type UserCountOutputTypeCountCrisisLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisLogWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUsageLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsageLogWhereInput
+  }
+
+
+  /**
+   * Count Type ConversationCountOutputType
+   */
+
+  export type ConversationCountOutputType = {
+    messages: number
+  }
+
+  export type ConversationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationCountOutputType
+     */
+    select?: ConversationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
   }
 
 
@@ -1296,6 +1868,7 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     academicLevel: number | null
+    baselineMood: number | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
     onboardingStep: number | null
@@ -1303,6 +1876,7 @@ export namespace Prisma {
 
   export type UserSumAggregateOutputType = {
     academicLevel: number | null
+    baselineMood: number | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
     onboardingStep: number | null
@@ -1315,24 +1889,26 @@ export namespace Prisma {
     googleId: string | null
     isVerified: boolean | null
     isAnonymous: boolean | null
+    verificationToken: string | null
+    image: string | null
     displayName: string | null
-    university: string | null
+    university: $Enums.University | null
     academicLevel: number | null
     program: string | null
-    image: string | null
-    language: string | null
-    notificationPreference: string | null
-    preferredCheckInTime: string | null
-    supportLevel: string | null
-    riskLevel: string | null
-    faithLevel: string | null
-    approachPreference: string | null
+    language: $Enums.Language | null
+    notificationPreference: $Enums.NotificationFrequency | null
+    preferredCheckInTime: $Enums.TimeOfDay | null
+    supportLevel: $Enums.SupportLevel | null
+    riskLevel: $Enums.RiskLevel | null
+    faithLevel: $Enums.FaithLevel | null
+    approachPreference: $Enums.ApproachPreference | null
+    baselineMood: number | null
+    joinDate: Date | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
     lastActive: Date | null
     onboardingStep: number | null
     onboardingCompleted: boolean | null
-    verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1344,24 +1920,26 @@ export namespace Prisma {
     googleId: string | null
     isVerified: boolean | null
     isAnonymous: boolean | null
+    verificationToken: string | null
+    image: string | null
     displayName: string | null
-    university: string | null
+    university: $Enums.University | null
     academicLevel: number | null
     program: string | null
-    image: string | null
-    language: string | null
-    notificationPreference: string | null
-    preferredCheckInTime: string | null
-    supportLevel: string | null
-    riskLevel: string | null
-    faithLevel: string | null
-    approachPreference: string | null
+    language: $Enums.Language | null
+    notificationPreference: $Enums.NotificationFrequency | null
+    preferredCheckInTime: $Enums.TimeOfDay | null
+    supportLevel: $Enums.SupportLevel | null
+    riskLevel: $Enums.RiskLevel | null
+    faithLevel: $Enums.FaithLevel | null
+    approachPreference: $Enums.ApproachPreference | null
+    baselineMood: number | null
+    joinDate: Date | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
     lastActive: Date | null
     onboardingStep: number | null
     onboardingCompleted: boolean | null
-    verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1373,11 +1951,12 @@ export namespace Prisma {
     googleId: number
     isVerified: number
     isAnonymous: number
+    verificationToken: number
+    image: number
     displayName: number
     university: number
     academicLevel: number
     program: number
-    image: number
     language: number
     notificationPreference: number
     preferredCheckInTime: number
@@ -1391,13 +1970,14 @@ export namespace Prisma {
     stressors: number
     trackingPreferences: number
     emergencyContacts: number
+    baselineMood: number
     baseline: number
+    joinDate: number
     moodCheckInsCount: number
     conversationsCount: number
     lastActive: number
     onboardingStep: number
     onboardingCompleted: number
-    verificationToken: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1406,6 +1986,7 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     academicLevel?: true
+    baselineMood?: true
     moodCheckInsCount?: true
     conversationsCount?: true
     onboardingStep?: true
@@ -1413,6 +1994,7 @@ export namespace Prisma {
 
   export type UserSumAggregateInputType = {
     academicLevel?: true
+    baselineMood?: true
     moodCheckInsCount?: true
     conversationsCount?: true
     onboardingStep?: true
@@ -1425,11 +2007,12 @@ export namespace Prisma {
     googleId?: true
     isVerified?: true
     isAnonymous?: true
+    verificationToken?: true
+    image?: true
     displayName?: true
     university?: true
     academicLevel?: true
     program?: true
-    image?: true
     language?: true
     notificationPreference?: true
     preferredCheckInTime?: true
@@ -1437,12 +2020,13 @@ export namespace Prisma {
     riskLevel?: true
     faithLevel?: true
     approachPreference?: true
+    baselineMood?: true
+    joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
-    verificationToken?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1454,11 +2038,12 @@ export namespace Prisma {
     googleId?: true
     isVerified?: true
     isAnonymous?: true
+    verificationToken?: true
+    image?: true
     displayName?: true
     university?: true
     academicLevel?: true
     program?: true
-    image?: true
     language?: true
     notificationPreference?: true
     preferredCheckInTime?: true
@@ -1466,12 +2051,13 @@ export namespace Prisma {
     riskLevel?: true
     faithLevel?: true
     approachPreference?: true
+    baselineMood?: true
+    joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
-    verificationToken?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1483,11 +2069,12 @@ export namespace Prisma {
     googleId?: true
     isVerified?: true
     isAnonymous?: true
+    verificationToken?: true
+    image?: true
     displayName?: true
     university?: true
     academicLevel?: true
     program?: true
-    image?: true
     language?: true
     notificationPreference?: true
     preferredCheckInTime?: true
@@ -1501,13 +2088,14 @@ export namespace Prisma {
     stressors?: true
     trackingPreferences?: true
     emergencyContacts?: true
+    baselineMood?: true
     baseline?: true
+    joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
-    verificationToken?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1606,31 +2194,33 @@ export namespace Prisma {
     googleId: string | null
     isVerified: boolean
     isAnonymous: boolean
+    verificationToken: string | null
+    image: string | null
     displayName: string | null
-    university: string | null
+    university: $Enums.University | null
     academicLevel: number | null
     program: string | null
-    image: string | null
-    language: string
-    notificationPreference: string
-    preferredCheckInTime: string
-    concerns: string[]
-    supportLevel: string
-    riskLevel: string
-    copingStyles: string[]
-    faithLevel: string
-    approachPreference: string
-    goals: string[]
+    language: $Enums.Language
+    notificationPreference: $Enums.NotificationFrequency
+    preferredCheckInTime: $Enums.TimeOfDay
+    concerns: $Enums.Concern[]
+    supportLevel: $Enums.SupportLevel
+    riskLevel: $Enums.RiskLevel
+    copingStyles: $Enums.CopingStyle[]
+    faithLevel: $Enums.FaithLevel
+    approachPreference: $Enums.ApproachPreference
+    goals: $Enums.Goal[]
     stressors: JsonValue | null
     trackingPreferences: JsonValue | null
     emergencyContacts: JsonValue | null
+    baselineMood: number | null
     baseline: JsonValue | null
+    joinDate: Date
     moodCheckInsCount: number
     conversationsCount: number
     lastActive: Date | null
     onboardingStep: number
     onboardingCompleted: boolean
-    verificationToken: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1661,11 +2251,12 @@ export namespace Prisma {
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: boolean
+    image?: boolean
     displayName?: boolean
     university?: boolean
     academicLevel?: boolean
     program?: boolean
-    image?: boolean
     language?: boolean
     notificationPreference?: boolean
     preferredCheckInTime?: boolean
@@ -1679,18 +2270,22 @@ export namespace Prisma {
     stressors?: boolean
     trackingPreferences?: boolean
     emergencyContacts?: boolean
+    baselineMood?: boolean
     baseline?: boolean
+    joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
-    verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    conversations?: boolean | User$conversationsArgs<ExtArgs>
+    moodEntries?: boolean | User$moodEntriesArgs<ExtArgs>
     assessments?: boolean | User$assessmentsArgs<ExtArgs>
-    moods?: boolean | User$moodsArgs<ExtArgs>
-    chatMessages?: boolean | User$chatMessagesArgs<ExtArgs>
+    aiInteractions?: boolean | User$aiInteractionsArgs<ExtArgs>
+    crisisLogs?: boolean | User$crisisLogsArgs<ExtArgs>
+    usageLogs?: boolean | User$usageLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1701,11 +2296,12 @@ export namespace Prisma {
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: boolean
+    image?: boolean
     displayName?: boolean
     university?: boolean
     academicLevel?: boolean
     program?: boolean
-    image?: boolean
     language?: boolean
     notificationPreference?: boolean
     preferredCheckInTime?: boolean
@@ -1719,13 +2315,14 @@ export namespace Prisma {
     stressors?: boolean
     trackingPreferences?: boolean
     emergencyContacts?: boolean
+    baselineMood?: boolean
     baseline?: boolean
+    joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
-    verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1737,11 +2334,12 @@ export namespace Prisma {
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: boolean
+    image?: boolean
     displayName?: boolean
     university?: boolean
     academicLevel?: boolean
     program?: boolean
-    image?: boolean
     language?: boolean
     notificationPreference?: boolean
     preferredCheckInTime?: boolean
@@ -1755,13 +2353,14 @@ export namespace Prisma {
     stressors?: boolean
     trackingPreferences?: boolean
     emergencyContacts?: boolean
+    baselineMood?: boolean
     baseline?: boolean
+    joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
-    verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1773,11 +2372,12 @@ export namespace Prisma {
     googleId?: boolean
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: boolean
+    image?: boolean
     displayName?: boolean
     university?: boolean
     academicLevel?: boolean
     program?: boolean
-    image?: boolean
     language?: boolean
     notificationPreference?: boolean
     preferredCheckInTime?: boolean
@@ -1791,22 +2391,26 @@ export namespace Prisma {
     stressors?: boolean
     trackingPreferences?: boolean
     emergencyContacts?: boolean
+    baselineMood?: boolean
     baseline?: boolean
+    joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
-    verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "displayName" | "university" | "academicLevel" | "program" | "image" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baseline" | "moodCheckInsCount" | "conversationsCount" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "verificationToken" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "verificationToken" | "image" | "displayName" | "university" | "academicLevel" | "program" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baselineMood" | "baseline" | "joinDate" | "moodCheckInsCount" | "conversationsCount" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations?: boolean | User$conversationsArgs<ExtArgs>
+    moodEntries?: boolean | User$moodEntriesArgs<ExtArgs>
     assessments?: boolean | User$assessmentsArgs<ExtArgs>
-    moods?: boolean | User$moodsArgs<ExtArgs>
-    chatMessages?: boolean | User$chatMessagesArgs<ExtArgs>
+    aiInteractions?: boolean | User$aiInteractionsArgs<ExtArgs>
+    crisisLogs?: boolean | User$crisisLogsArgs<ExtArgs>
+    usageLogs?: boolean | User$usageLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1815,9 +2419,12 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
+      moodEntries: Prisma.$MoodEntryPayload<ExtArgs>[]
       assessments: Prisma.$AssessmentPayload<ExtArgs>[]
-      moods: Prisma.$MoodPayload<ExtArgs>[]
-      chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
+      aiInteractions: Prisma.$AIInteractionPayload<ExtArgs>[]
+      crisisLogs: Prisma.$CrisisLogPayload<ExtArgs>[]
+      usageLogs: Prisma.$UsageLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1826,31 +2433,33 @@ export namespace Prisma {
       googleId: string | null
       isVerified: boolean
       isAnonymous: boolean
+      verificationToken: string | null
+      image: string | null
       displayName: string | null
-      university: string | null
+      university: $Enums.University | null
       academicLevel: number | null
       program: string | null
-      image: string | null
-      language: string
-      notificationPreference: string
-      preferredCheckInTime: string
-      concerns: string[]
-      supportLevel: string
-      riskLevel: string
-      copingStyles: string[]
-      faithLevel: string
-      approachPreference: string
-      goals: string[]
+      language: $Enums.Language
+      notificationPreference: $Enums.NotificationFrequency
+      preferredCheckInTime: $Enums.TimeOfDay
+      concerns: $Enums.Concern[]
+      supportLevel: $Enums.SupportLevel
+      riskLevel: $Enums.RiskLevel
+      copingStyles: $Enums.CopingStyle[]
+      faithLevel: $Enums.FaithLevel
+      approachPreference: $Enums.ApproachPreference
+      goals: $Enums.Goal[]
       stressors: Prisma.JsonValue | null
       trackingPreferences: Prisma.JsonValue | null
       emergencyContacts: Prisma.JsonValue | null
+      baselineMood: number | null
       baseline: Prisma.JsonValue | null
+      joinDate: Date
       moodCheckInsCount: number
       conversationsCount: number
       lastActive: Date | null
       onboardingStep: number
       onboardingCompleted: boolean
-      verificationToken: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2247,9 +2856,12 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    conversations<T extends User$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    moodEntries<T extends User$moodEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$moodEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     assessments<T extends User$assessmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$assessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssessmentPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    moods<T extends User$moodsArgs<ExtArgs> = {}>(args?: Subset<T, User$moodsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    chatMessages<T extends User$chatMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    aiInteractions<T extends User$aiInteractionsArgs<ExtArgs> = {}>(args?: Subset<T, User$aiInteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    crisisLogs<T extends User$crisisLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$crisisLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    usageLogs<T extends User$usageLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$usageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2285,31 +2897,33 @@ export namespace Prisma {
     readonly googleId: FieldRef<"User", 'String'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
     readonly isAnonymous: FieldRef<"User", 'Boolean'>
+    readonly verificationToken: FieldRef<"User", 'String'>
+    readonly image: FieldRef<"User", 'String'>
     readonly displayName: FieldRef<"User", 'String'>
-    readonly university: FieldRef<"User", 'String'>
+    readonly university: FieldRef<"User", 'University'>
     readonly academicLevel: FieldRef<"User", 'Int'>
     readonly program: FieldRef<"User", 'String'>
-    readonly image: FieldRef<"User", 'String'>
-    readonly language: FieldRef<"User", 'String'>
-    readonly notificationPreference: FieldRef<"User", 'String'>
-    readonly preferredCheckInTime: FieldRef<"User", 'String'>
-    readonly concerns: FieldRef<"User", 'String[]'>
-    readonly supportLevel: FieldRef<"User", 'String'>
-    readonly riskLevel: FieldRef<"User", 'String'>
-    readonly copingStyles: FieldRef<"User", 'String[]'>
-    readonly faithLevel: FieldRef<"User", 'String'>
-    readonly approachPreference: FieldRef<"User", 'String'>
-    readonly goals: FieldRef<"User", 'String[]'>
+    readonly language: FieldRef<"User", 'Language'>
+    readonly notificationPreference: FieldRef<"User", 'NotificationFrequency'>
+    readonly preferredCheckInTime: FieldRef<"User", 'TimeOfDay'>
+    readonly concerns: FieldRef<"User", 'Concern[]'>
+    readonly supportLevel: FieldRef<"User", 'SupportLevel'>
+    readonly riskLevel: FieldRef<"User", 'RiskLevel'>
+    readonly copingStyles: FieldRef<"User", 'CopingStyle[]'>
+    readonly faithLevel: FieldRef<"User", 'FaithLevel'>
+    readonly approachPreference: FieldRef<"User", 'ApproachPreference'>
+    readonly goals: FieldRef<"User", 'Goal[]'>
     readonly stressors: FieldRef<"User", 'Json'>
     readonly trackingPreferences: FieldRef<"User", 'Json'>
     readonly emergencyContacts: FieldRef<"User", 'Json'>
+    readonly baselineMood: FieldRef<"User", 'Int'>
     readonly baseline: FieldRef<"User", 'Json'>
+    readonly joinDate: FieldRef<"User", 'DateTime'>
     readonly moodCheckInsCount: FieldRef<"User", 'Int'>
     readonly conversationsCount: FieldRef<"User", 'Int'>
     readonly lastActive: FieldRef<"User", 'DateTime'>
     readonly onboardingStep: FieldRef<"User", 'Int'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
-    readonly verificationToken: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -2688,6 +3302,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.conversations
+   */
+  export type User$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * User.moodEntries
+   */
+  export type User$moodEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodEntry
+     */
+    select?: MoodEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MoodEntry
+     */
+    omit?: MoodEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodEntryInclude<ExtArgs> | null
+    where?: MoodEntryWhereInput
+    orderBy?: MoodEntryOrderByWithRelationInput | MoodEntryOrderByWithRelationInput[]
+    cursor?: MoodEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MoodEntryScalarFieldEnum | MoodEntryScalarFieldEnum[]
+  }
+
+  /**
    * User.assessments
    */
   export type User$assessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2712,51 +3374,75 @@ export namespace Prisma {
   }
 
   /**
-   * User.moods
+   * User.aiInteractions
    */
-  export type User$moodsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$aiInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
-    where?: MoodWhereInput
-    orderBy?: MoodOrderByWithRelationInput | MoodOrderByWithRelationInput[]
-    cursor?: MoodWhereUniqueInput
+    include?: AIInteractionInclude<ExtArgs> | null
+    where?: AIInteractionWhereInput
+    orderBy?: AIInteractionOrderByWithRelationInput | AIInteractionOrderByWithRelationInput[]
+    cursor?: AIInteractionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MoodScalarFieldEnum | MoodScalarFieldEnum[]
+    distinct?: AIInteractionScalarFieldEnum | AIInteractionScalarFieldEnum[]
   }
 
   /**
-   * User.chatMessages
+   * User.crisisLogs
    */
-  export type User$chatMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$crisisLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the CrisisLog
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
-    where?: ChatMessageWhereInput
-    orderBy?: ChatMessageOrderByWithRelationInput | ChatMessageOrderByWithRelationInput[]
-    cursor?: ChatMessageWhereUniqueInput
+    include?: CrisisLogInclude<ExtArgs> | null
+    where?: CrisisLogWhereInput
+    orderBy?: CrisisLogOrderByWithRelationInput | CrisisLogOrderByWithRelationInput[]
+    cursor?: CrisisLogWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ChatMessageScalarFieldEnum | ChatMessageScalarFieldEnum[]
+    distinct?: CrisisLogScalarFieldEnum | CrisisLogScalarFieldEnum[]
+  }
+
+  /**
+   * User.usageLogs
+   */
+  export type User$usageLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    where?: UsageLogWhereInput
+    orderBy?: UsageLogOrderByWithRelationInput | UsageLogOrderByWithRelationInput[]
+    cursor?: UsageLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsageLogScalarFieldEnum | UsageLogScalarFieldEnum[]
   }
 
   /**
@@ -2779,350 +3465,411 @@ export namespace Prisma {
 
 
   /**
-   * Model ChatMessage
+   * Model Conversation
    */
 
-  export type AggregateChatMessage = {
-    _count: ChatMessageCountAggregateOutputType | null
-    _min: ChatMessageMinAggregateOutputType | null
-    _max: ChatMessageMaxAggregateOutputType | null
+  export type AggregateConversation = {
+    _count: ConversationCountAggregateOutputType | null
+    _min: ConversationMinAggregateOutputType | null
+    _max: ConversationMaxAggregateOutputType | null
   }
 
-  export type ChatMessageMinAggregateOutputType = {
+  export type ConversationMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    content: string | null
-    role: string | null
+    startedAt: Date | null
+    lastMessageAt: Date | null
+    endedAt: Date | null
+    status: $Enums.ConversationStatus | null
+    summary: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type ChatMessageMaxAggregateOutputType = {
+  export type ConversationMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    content: string | null
-    role: string | null
+    startedAt: Date | null
+    lastMessageAt: Date | null
+    endedAt: Date | null
+    status: $Enums.ConversationStatus | null
+    summary: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type ChatMessageCountAggregateOutputType = {
+  export type ConversationCountAggregateOutputType = {
     id: number
     userId: number
-    content: number
-    role: number
+    startedAt: number
+    lastMessageAt: number
+    endedAt: number
+    status: number
+    metadata: number
+    summary: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type ChatMessageMinAggregateInputType = {
+  export type ConversationMinAggregateInputType = {
     id?: true
     userId?: true
-    content?: true
-    role?: true
+    startedAt?: true
+    lastMessageAt?: true
+    endedAt?: true
+    status?: true
+    summary?: true
     createdAt?: true
+    updatedAt?: true
   }
 
-  export type ChatMessageMaxAggregateInputType = {
+  export type ConversationMaxAggregateInputType = {
     id?: true
     userId?: true
-    content?: true
-    role?: true
+    startedAt?: true
+    lastMessageAt?: true
+    endedAt?: true
+    status?: true
+    summary?: true
     createdAt?: true
+    updatedAt?: true
   }
 
-  export type ChatMessageCountAggregateInputType = {
+  export type ConversationCountAggregateInputType = {
     id?: true
     userId?: true
-    content?: true
-    role?: true
+    startedAt?: true
+    lastMessageAt?: true
+    endedAt?: true
+    status?: true
+    metadata?: true
+    summary?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type ChatMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConversationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which ChatMessage to aggregate.
+     * Filter which Conversation to aggregate.
      */
-    where?: ChatMessageWhereInput
+    where?: ConversationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ChatMessages to fetch.
+     * Determine the order of Conversations to fetch.
      */
-    orderBy?: ChatMessageOrderByWithRelationInput | ChatMessageOrderByWithRelationInput[]
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ChatMessageWhereUniqueInput
+    cursor?: ConversationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ChatMessages from the position of the cursor.
+     * Take `±n` Conversations from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ChatMessages.
+     * Skip the first `n` Conversations.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned ChatMessages
+     * Count returned Conversations
     **/
-    _count?: true | ChatMessageCountAggregateInputType
+    _count?: true | ConversationCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ChatMessageMinAggregateInputType
+    _min?: ConversationMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ChatMessageMaxAggregateInputType
+    _max?: ConversationMaxAggregateInputType
   }
 
-  export type GetChatMessageAggregateType<T extends ChatMessageAggregateArgs> = {
-        [P in keyof T & keyof AggregateChatMessage]: P extends '_count' | 'count'
+  export type GetConversationAggregateType<T extends ConversationAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversation]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateChatMessage[P]>
-      : GetScalarType<T[P], AggregateChatMessage[P]>
+        : GetScalarType<T[P], AggregateConversation[P]>
+      : GetScalarType<T[P], AggregateConversation[P]>
   }
 
 
 
 
-  export type ChatMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ChatMessageWhereInput
-    orderBy?: ChatMessageOrderByWithAggregationInput | ChatMessageOrderByWithAggregationInput[]
-    by: ChatMessageScalarFieldEnum[] | ChatMessageScalarFieldEnum
-    having?: ChatMessageScalarWhereWithAggregatesInput
+  export type ConversationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithAggregationInput | ConversationOrderByWithAggregationInput[]
+    by: ConversationScalarFieldEnum[] | ConversationScalarFieldEnum
+    having?: ConversationScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ChatMessageCountAggregateInputType | true
-    _min?: ChatMessageMinAggregateInputType
-    _max?: ChatMessageMaxAggregateInputType
+    _count?: ConversationCountAggregateInputType | true
+    _min?: ConversationMinAggregateInputType
+    _max?: ConversationMaxAggregateInputType
   }
 
-  export type ChatMessageGroupByOutputType = {
+  export type ConversationGroupByOutputType = {
     id: string
     userId: string
-    content: string
-    role: string
+    startedAt: Date
+    lastMessageAt: Date
+    endedAt: Date | null
+    status: $Enums.ConversationStatus
+    metadata: JsonValue | null
+    summary: string | null
     createdAt: Date
-    _count: ChatMessageCountAggregateOutputType | null
-    _min: ChatMessageMinAggregateOutputType | null
-    _max: ChatMessageMaxAggregateOutputType | null
+    updatedAt: Date
+    _count: ConversationCountAggregateOutputType | null
+    _min: ConversationMinAggregateOutputType | null
+    _max: ConversationMaxAggregateOutputType | null
   }
 
-  type GetChatMessageGroupByPayload<T extends ChatMessageGroupByArgs> = Prisma.PrismaPromise<
+  type GetConversationGroupByPayload<T extends ConversationGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ChatMessageGroupByOutputType, T['by']> &
+      PickEnumerable<ConversationGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ChatMessageGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ConversationGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ChatMessageGroupByOutputType[P]>
-            : GetScalarType<T[P], ChatMessageGroupByOutputType[P]>
+              : GetScalarType<T[P], ConversationGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversationGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ChatMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ConversationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    content?: boolean
-    role?: boolean
+    startedAt?: boolean
+    lastMessageAt?: boolean
+    endedAt?: boolean
+    status?: boolean
+    metadata?: boolean
+    summary?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["chatMessage"]>
+    messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
 
-  export type ChatMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ConversationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    content?: boolean
-    role?: boolean
+    startedAt?: boolean
+    lastMessageAt?: boolean
+    endedAt?: boolean
+    status?: boolean
+    metadata?: boolean
+    summary?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["chatMessage"]>
+  }, ExtArgs["result"]["conversation"]>
 
-  export type ChatMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ConversationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    content?: boolean
-    role?: boolean
+    startedAt?: boolean
+    lastMessageAt?: boolean
+    endedAt?: boolean
+    status?: boolean
+    metadata?: boolean
+    summary?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["chatMessage"]>
+  }, ExtArgs["result"]["conversation"]>
 
-  export type ChatMessageSelectScalar = {
+  export type ConversationSelectScalar = {
     id?: boolean
     userId?: boolean
-    content?: boolean
-    role?: boolean
+    startedAt?: boolean
+    lastMessageAt?: boolean
+    endedAt?: boolean
+    status?: boolean
+    metadata?: boolean
+    summary?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ChatMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "content" | "role" | "createdAt", ExtArgs["result"]["chatMessage"]>
-  export type ChatMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "startedAt" | "lastMessageAt" | "endedAt" | "status" | "metadata" | "summary" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
+  export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type ChatMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type ChatMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConversationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $ChatMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ChatMessage"
+  export type $ConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Conversation"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      messages: Prisma.$MessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      content: string
-      role: string
+      startedAt: Date
+      lastMessageAt: Date
+      endedAt: Date | null
+      status: $Enums.ConversationStatus
+      metadata: Prisma.JsonValue | null
+      summary: string | null
       createdAt: Date
-    }, ExtArgs["result"]["chatMessage"]>
+      updatedAt: Date
+    }, ExtArgs["result"]["conversation"]>
     composites: {}
   }
 
-  type ChatMessageGetPayload<S extends boolean | null | undefined | ChatMessageDefaultArgs> = $Result.GetResult<Prisma.$ChatMessagePayload, S>
+  type ConversationGetPayload<S extends boolean | null | undefined | ConversationDefaultArgs> = $Result.GetResult<Prisma.$ConversationPayload, S>
 
-  type ChatMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ChatMessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ChatMessageCountAggregateInputType | true
+  type ConversationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversationCountAggregateInputType | true
     }
 
-  export interface ChatMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChatMessage'], meta: { name: 'ChatMessage' } }
+  export interface ConversationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Conversation'], meta: { name: 'Conversation' } }
     /**
-     * Find zero or one ChatMessage that matches the filter.
-     * @param {ChatMessageFindUniqueArgs} args - Arguments to find a ChatMessage
+     * Find zero or one Conversation that matches the filter.
+     * @param {ConversationFindUniqueArgs} args - Arguments to find a Conversation
      * @example
-     * // Get one ChatMessage
-     * const chatMessage = await prisma.chatMessage.findUnique({
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ChatMessageFindUniqueArgs>(args: SelectSubset<T, ChatMessageFindUniqueArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends ConversationFindUniqueArgs>(args: SelectSubset<T, ConversationFindUniqueArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find one ChatMessage that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Conversation that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ChatMessageFindUniqueOrThrowArgs} args - Arguments to find a ChatMessage
+     * @param {ConversationFindUniqueOrThrowArgs} args - Arguments to find a Conversation
      * @example
-     * // Get one ChatMessage
-     * const chatMessage = await prisma.chatMessage.findUniqueOrThrow({
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ChatMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, ChatMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends ConversationFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find the first ChatMessage that matches the filter.
+     * Find the first Conversation that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageFindFirstArgs} args - Arguments to find a ChatMessage
+     * @param {ConversationFindFirstArgs} args - Arguments to find a Conversation
      * @example
-     * // Get one ChatMessage
-     * const chatMessage = await prisma.chatMessage.findFirst({
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ChatMessageFindFirstArgs>(args?: SelectSubset<T, ChatMessageFindFirstArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends ConversationFindFirstArgs>(args?: SelectSubset<T, ConversationFindFirstArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find the first ChatMessage that matches the filter or
+     * Find the first Conversation that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageFindFirstOrThrowArgs} args - Arguments to find a ChatMessage
+     * @param {ConversationFindFirstOrThrowArgs} args - Arguments to find a Conversation
      * @example
-     * // Get one ChatMessage
-     * const chatMessage = await prisma.chatMessage.findFirstOrThrow({
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ChatMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, ChatMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends ConversationFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find zero or more ChatMessages that matches the filter.
+     * Find zero or more Conversations that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ConversationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all ChatMessages
-     * const chatMessages = await prisma.chatMessage.findMany()
+     * // Get all Conversations
+     * const conversations = await prisma.conversation.findMany()
      * 
-     * // Get first 10 ChatMessages
-     * const chatMessages = await prisma.chatMessage.findMany({ take: 10 })
+     * // Get first 10 Conversations
+     * const conversations = await prisma.conversation.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const chatMessageWithIdOnly = await prisma.chatMessage.findMany({ select: { id: true } })
+     * const conversationWithIdOnly = await prisma.conversation.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ChatMessageFindManyArgs>(args?: SelectSubset<T, ChatMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends ConversationFindManyArgs>(args?: SelectSubset<T, ConversationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
-     * Create a ChatMessage.
-     * @param {ChatMessageCreateArgs} args - Arguments to create a ChatMessage.
+     * Create a Conversation.
+     * @param {ConversationCreateArgs} args - Arguments to create a Conversation.
      * @example
-     * // Create one ChatMessage
-     * const ChatMessage = await prisma.chatMessage.create({
+     * // Create one Conversation
+     * const Conversation = await prisma.conversation.create({
      *   data: {
-     *     // ... data to create a ChatMessage
+     *     // ... data to create a Conversation
      *   }
      * })
      * 
      */
-    create<T extends ChatMessageCreateArgs>(args: SelectSubset<T, ChatMessageCreateArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends ConversationCreateArgs>(args: SelectSubset<T, ConversationCreateArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Create many ChatMessages.
-     * @param {ChatMessageCreateManyArgs} args - Arguments to create many ChatMessages.
+     * Create many Conversations.
+     * @param {ConversationCreateManyArgs} args - Arguments to create many Conversations.
      * @example
-     * // Create many ChatMessages
-     * const chatMessage = await prisma.chatMessage.createMany({
+     * // Create many Conversations
+     * const conversation = await prisma.conversation.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ChatMessageCreateManyArgs>(args?: SelectSubset<T, ChatMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ConversationCreateManyArgs>(args?: SelectSubset<T, ConversationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many ChatMessages and returns the data saved in the database.
-     * @param {ChatMessageCreateManyAndReturnArgs} args - Arguments to create many ChatMessages.
+     * Create many Conversations and returns the data saved in the database.
+     * @param {ConversationCreateManyAndReturnArgs} args - Arguments to create many Conversations.
      * @example
-     * // Create many ChatMessages
-     * const chatMessage = await prisma.chatMessage.createManyAndReturn({
+     * // Create many Conversations
+     * const conversation = await prisma.conversation.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many ChatMessages and only return the `id`
-     * const chatMessageWithIdOnly = await prisma.chatMessage.createManyAndReturn({
+     * // Create many Conversations and only return the `id`
+     * const conversationWithIdOnly = await prisma.conversation.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -3132,28 +3879,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ChatMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, ChatMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends ConversationCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
-     * Delete a ChatMessage.
-     * @param {ChatMessageDeleteArgs} args - Arguments to delete one ChatMessage.
+     * Delete a Conversation.
+     * @param {ConversationDeleteArgs} args - Arguments to delete one Conversation.
      * @example
-     * // Delete one ChatMessage
-     * const ChatMessage = await prisma.chatMessage.delete({
+     * // Delete one Conversation
+     * const Conversation = await prisma.conversation.delete({
      *   where: {
-     *     // ... filter to delete one ChatMessage
+     *     // ... filter to delete one Conversation
      *   }
      * })
      * 
      */
-    delete<T extends ChatMessageDeleteArgs>(args: SelectSubset<T, ChatMessageDeleteArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends ConversationDeleteArgs>(args: SelectSubset<T, ConversationDeleteArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Update one ChatMessage.
-     * @param {ChatMessageUpdateArgs} args - Arguments to update one ChatMessage.
+     * Update one Conversation.
+     * @param {ConversationUpdateArgs} args - Arguments to update one Conversation.
      * @example
-     * // Update one ChatMessage
-     * const chatMessage = await prisma.chatMessage.update({
+     * // Update one Conversation
+     * const conversation = await prisma.conversation.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3163,30 +3910,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ChatMessageUpdateArgs>(args: SelectSubset<T, ChatMessageUpdateArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends ConversationUpdateArgs>(args: SelectSubset<T, ConversationUpdateArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Delete zero or more ChatMessages.
-     * @param {ChatMessageDeleteManyArgs} args - Arguments to filter ChatMessages to delete.
+     * Delete zero or more Conversations.
+     * @param {ConversationDeleteManyArgs} args - Arguments to filter Conversations to delete.
      * @example
-     * // Delete a few ChatMessages
-     * const { count } = await prisma.chatMessage.deleteMany({
+     * // Delete a few Conversations
+     * const { count } = await prisma.conversation.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ChatMessageDeleteManyArgs>(args?: SelectSubset<T, ChatMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ConversationDeleteManyArgs>(args?: SelectSubset<T, ConversationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more ChatMessages.
+     * Update zero or more Conversations.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ConversationUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many ChatMessages
-     * const chatMessage = await prisma.chatMessage.updateMany({
+     * // Update many Conversations
+     * const conversation = await prisma.conversation.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3196,14 +3943,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ChatMessageUpdateManyArgs>(args: SelectSubset<T, ChatMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ConversationUpdateManyArgs>(args: SelectSubset<T, ConversationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more ChatMessages and returns the data updated in the database.
-     * @param {ChatMessageUpdateManyAndReturnArgs} args - Arguments to update many ChatMessages.
+     * Update zero or more Conversations and returns the data updated in the database.
+     * @param {ConversationUpdateManyAndReturnArgs} args - Arguments to update many Conversations.
      * @example
-     * // Update many ChatMessages
-     * const chatMessage = await prisma.chatMessage.updateManyAndReturn({
+     * // Update many Conversations
+     * const conversation = await prisma.conversation.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3212,8 +3959,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more ChatMessages and only return the `id`
-     * const chatMessageWithIdOnly = await prisma.chatMessage.updateManyAndReturn({
+     * // Update zero or more Conversations and only return the `id`
+     * const conversationWithIdOnly = await prisma.conversation.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -3226,56 +3973,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ChatMessageUpdateManyAndReturnArgs>(args: SelectSubset<T, ChatMessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends ConversationUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
-     * Create or update one ChatMessage.
-     * @param {ChatMessageUpsertArgs} args - Arguments to update or create a ChatMessage.
+     * Create or update one Conversation.
+     * @param {ConversationUpsertArgs} args - Arguments to update or create a Conversation.
      * @example
-     * // Update or create a ChatMessage
-     * const chatMessage = await prisma.chatMessage.upsert({
+     * // Update or create a Conversation
+     * const conversation = await prisma.conversation.upsert({
      *   create: {
-     *     // ... data to create a ChatMessage
+     *     // ... data to create a Conversation
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the ChatMessage we want to update
+     *     // ... the filter for the Conversation we want to update
      *   }
      * })
      */
-    upsert<T extends ChatMessageUpsertArgs>(args: SelectSubset<T, ChatMessageUpsertArgs<ExtArgs>>): Prisma__ChatMessageClient<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends ConversationUpsertArgs>(args: SelectSubset<T, ConversationUpsertArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
-     * Count the number of ChatMessages.
+     * Count the number of Conversations.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageCountArgs} args - Arguments to filter ChatMessages to count.
+     * @param {ConversationCountArgs} args - Arguments to filter Conversations to count.
      * @example
-     * // Count the number of ChatMessages
-     * const count = await prisma.chatMessage.count({
+     * // Count the number of Conversations
+     * const count = await prisma.conversation.count({
      *   where: {
-     *     // ... the filter for the ChatMessages we want to count
+     *     // ... the filter for the Conversations we want to count
      *   }
      * })
     **/
-    count<T extends ChatMessageCountArgs>(
-      args?: Subset<T, ChatMessageCountArgs>,
+    count<T extends ConversationCountArgs>(
+      args?: Subset<T, ConversationCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ChatMessageCountAggregateOutputType>
+          : GetScalarType<T['select'], ConversationCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a ChatMessage.
+     * Allows you to perform aggregations operations on a Conversation.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ConversationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3295,13 +4042,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ChatMessageAggregateArgs>(args: Subset<T, ChatMessageAggregateArgs>): Prisma.PrismaPromise<GetChatMessageAggregateType<T>>
+    aggregate<T extends ConversationAggregateArgs>(args: Subset<T, ConversationAggregateArgs>): Prisma.PrismaPromise<GetConversationAggregateType<T>>
 
     /**
-     * Group by ChatMessage.
+     * Group by Conversation.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChatMessageGroupByArgs} args - Group by arguments.
+     * @param {ConversationGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3316,14 +4063,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ChatMessageGroupByArgs,
+      T extends ConversationGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ChatMessageGroupByArgs['orderBy'] }
-        : { orderBy?: ChatMessageGroupByArgs['orderBy'] },
+        ? { orderBy: ConversationGroupByArgs['orderBy'] }
+        : { orderBy?: ConversationGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3372,20 +4119,2297 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ChatMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChatMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ConversationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the ChatMessage model
+   * Fields of the Conversation model
    */
-  readonly fields: ChatMessageFieldRefs;
+  readonly fields: ConversationFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for ChatMessage.
+   * The delegate class that acts as a "Promise-like" for Conversation.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ChatMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Conversation model
+   */ 
+  interface ConversationFieldRefs {
+    readonly id: FieldRef<"Conversation", 'String'>
+    readonly userId: FieldRef<"Conversation", 'String'>
+    readonly startedAt: FieldRef<"Conversation", 'DateTime'>
+    readonly lastMessageAt: FieldRef<"Conversation", 'DateTime'>
+    readonly endedAt: FieldRef<"Conversation", 'DateTime'>
+    readonly status: FieldRef<"Conversation", 'ConversationStatus'>
+    readonly metadata: FieldRef<"Conversation", 'Json'>
+    readonly summary: FieldRef<"Conversation", 'String'>
+    readonly createdAt: FieldRef<"Conversation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Conversation findUnique
+   */
+  export type ConversationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation findUniqueOrThrow
+   */
+  export type ConversationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation findFirst
+   */
+  export type ConversationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation findFirstOrThrow
+   */
+  export type ConversationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation findMany
+   */
+  export type ConversationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversations to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation create
+   */
+  export type ConversationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Conversation.
+     */
+    data: XOR<ConversationCreateInput, ConversationUncheckedCreateInput>
+  }
+
+  /**
+   * Conversation createMany
+   */
+  export type ConversationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Conversations.
+     */
+    data: ConversationCreateManyInput | ConversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Conversation createManyAndReturn
+   */
+  export type ConversationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Conversations.
+     */
+    data: ConversationCreateManyInput | ConversationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Conversation update
+   */
+  export type ConversationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Conversation.
+     */
+    data: XOR<ConversationUpdateInput, ConversationUncheckedUpdateInput>
+    /**
+     * Choose, which Conversation to update.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation updateMany
+   */
+  export type ConversationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Conversations.
+     */
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which Conversations to update
+     */
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * Conversation updateManyAndReturn
+   */
+  export type ConversationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * The data used to update Conversations.
+     */
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which Conversations to update
+     */
+    where?: ConversationWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Conversation upsert
+   */
+  export type ConversationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Conversation to update in case it exists.
+     */
+    where: ConversationWhereUniqueInput
+    /**
+     * In case the Conversation found by the `where` argument doesn't exist, create a new Conversation with this data.
+     */
+    create: XOR<ConversationCreateInput, ConversationUncheckedCreateInput>
+    /**
+     * In case the Conversation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversationUpdateInput, ConversationUncheckedUpdateInput>
+  }
+
+  /**
+   * Conversation delete
+   */
+  export type ConversationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter which Conversation to delete.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation deleteMany
+   */
+  export type ConversationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Conversations to delete
+     */
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * Conversation.messages
+   */
+  export type Conversation$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation without action
+   */
+  export type ConversationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Message
+   */
+
+  export type AggregateMessage = {
+    _count: MessageCountAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  export type MessageMinAggregateOutputType = {
+    id: string | null
+    conversationId: string | null
+    role: $Enums.MessageRole | null
+    content: string | null
+    timestamp: Date | null
+  }
+
+  export type MessageMaxAggregateOutputType = {
+    id: string | null
+    conversationId: string | null
+    role: $Enums.MessageRole | null
+    content: string | null
+    timestamp: Date | null
+  }
+
+  export type MessageCountAggregateOutputType = {
+    id: number
+    conversationId: number
+    role: number
+    content: number
+    timestamp: number
+    metadata: number
+    _all: number
+  }
+
+
+  export type MessageMinAggregateInputType = {
+    id?: true
+    conversationId?: true
+    role?: true
+    content?: true
+    timestamp?: true
+  }
+
+  export type MessageMaxAggregateInputType = {
+    id?: true
+    conversationId?: true
+    role?: true
+    content?: true
+    timestamp?: true
+  }
+
+  export type MessageCountAggregateInputType = {
+    id?: true
+    conversationId?: true
+    role?: true
+    content?: true
+    timestamp?: true
+    metadata?: true
+    _all?: true
+  }
+
+  export type MessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Message to aggregate.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Messages
+    **/
+    _count?: true | MessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type GetMessageAggregateType<T extends MessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessage[P]>
+      : GetScalarType<T[P], AggregateMessage[P]>
+  }
+
+
+
+
+  export type MessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithAggregationInput | MessageOrderByWithAggregationInput[]
+    by: MessageScalarFieldEnum[] | MessageScalarFieldEnum
+    having?: MessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessageCountAggregateInputType | true
+    _min?: MessageMinAggregateInputType
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type MessageGroupByOutputType = {
+    id: string
+    conversationId: string
+    role: $Enums.MessageRole
+    content: string
+    timestamp: Date
+    metadata: JsonValue | null
+    _count: MessageCountAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  type GetMessageGroupByPayload<T extends MessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessageGroupByOutputType[P]>
+            : GetScalarType<T[P], MessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    timestamp?: boolean
+    metadata?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    timestamp?: boolean
+    metadata?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    timestamp?: boolean
+    metadata?: boolean
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectScalar = {
+    id?: boolean
+    conversationId?: boolean
+    role?: boolean
+    content?: boolean
+    timestamp?: boolean
+    metadata?: boolean
+  }
+
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conversationId" | "role" | "content" | "timestamp" | "metadata", ExtArgs["result"]["message"]>
+  export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+
+  export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Message"
+    objects: {
+      conversation: Prisma.$ConversationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      conversationId: string
+      role: $Enums.MessageRole
+      content: string
+      timestamp: Date
+      metadata: Prisma.JsonValue | null
+    }, ExtArgs["result"]["message"]>
+    composites: {}
+  }
+
+  type MessageGetPayload<S extends boolean | null | undefined | MessageDefaultArgs> = $Result.GetResult<Prisma.$MessagePayload, S>
+
+  type MessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessageCountAggregateInputType | true
+    }
+
+  export interface MessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Message'], meta: { name: 'Message' } }
+    /**
+     * Find zero or one Message that matches the filter.
+     * @param {MessageFindUniqueArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MessageFindUniqueArgs>(args: SelectSubset<T, MessageFindUniqueArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Message that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MessageFindUniqueOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MessageFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Message that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MessageFindFirstArgs>(args?: SelectSubset<T, MessageFindFirstArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Message that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MessageFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Messages
+     * const messages = await prisma.message.findMany()
+     * 
+     * // Get first 10 Messages
+     * const messages = await prisma.message.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messageWithIdOnly = await prisma.message.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MessageFindManyArgs>(args?: SelectSubset<T, MessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Message.
+     * @param {MessageCreateArgs} args - Arguments to create a Message.
+     * @example
+     * // Create one Message
+     * const Message = await prisma.message.create({
+     *   data: {
+     *     // ... data to create a Message
+     *   }
+     * })
+     * 
+     */
+    create<T extends MessageCreateArgs>(args: SelectSubset<T, MessageCreateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Messages.
+     * @param {MessageCreateManyArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MessageCreateManyArgs>(args?: SelectSubset<T, MessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Messages and returns the data saved in the database.
+     * @param {MessageCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MessageCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Message.
+     * @param {MessageDeleteArgs} args - Arguments to delete one Message.
+     * @example
+     * // Delete one Message
+     * const Message = await prisma.message.delete({
+     *   where: {
+     *     // ... filter to delete one Message
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MessageDeleteArgs>(args: SelectSubset<T, MessageDeleteArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Message.
+     * @param {MessageUpdateArgs} args - Arguments to update one Message.
+     * @example
+     * // Update one Message
+     * const message = await prisma.message.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MessageUpdateArgs>(args: SelectSubset<T, MessageUpdateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Messages.
+     * @param {MessageDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * @example
+     * // Delete a few Messages
+     * const { count } = await prisma.message.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MessageDeleteManyArgs>(args?: SelectSubset<T, MessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MessageUpdateManyArgs>(args: SelectSubset<T, MessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages and returns the data updated in the database.
+     * @param {MessageUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MessageUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Message.
+     * @param {MessageUpsertArgs} args - Arguments to update or create a Message.
+     * @example
+     * // Update or create a Message
+     * const message = await prisma.message.upsert({
+     *   create: {
+     *     // ... data to create a Message
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Message we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MessageUpsertArgs>(args: SelectSubset<T, MessageUpsertArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageCountArgs} args - Arguments to filter Messages to count.
+     * @example
+     * // Count the number of Messages
+     * const count = await prisma.message.count({
+     *   where: {
+     *     // ... the filter for the Messages we want to count
+     *   }
+     * })
+    **/
+    count<T extends MessageCountArgs>(
+      args?: Subset<T, MessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessageAggregateArgs>(args: Subset<T, MessageAggregateArgs>): Prisma.PrismaPromise<GetMessageAggregateType<T>>
+
+    /**
+     * Group by Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MessageGroupByArgs['orderBy'] }
+        : { orderBy?: MessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Message model
+   */
+  readonly fields: MessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Message.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Message model
+   */ 
+  interface MessageFieldRefs {
+    readonly id: FieldRef<"Message", 'String'>
+    readonly conversationId: FieldRef<"Message", 'String'>
+    readonly role: FieldRef<"Message", 'MessageRole'>
+    readonly content: FieldRef<"Message", 'String'>
+    readonly timestamp: FieldRef<"Message", 'DateTime'>
+    readonly metadata: FieldRef<"Message", 'Json'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Message findUnique
+   */
+  export type MessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findUniqueOrThrow
+   */
+  export type MessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findFirst
+   */
+  export type MessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findFirstOrThrow
+   */
+  export type MessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findMany
+   */
+  export type MessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Messages to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message create
+   */
+  export type MessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Message.
+     */
+    data: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+  }
+
+  /**
+   * Message createMany
+   */
+  export type MessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Message createManyAndReturn
+   */
+  export type MessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message update
+   */
+  export type MessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Message.
+     */
+    data: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+    /**
+     * Choose, which Message to update.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message updateMany
+   */
+  export type MessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+  }
+
+  /**
+   * Message updateManyAndReturn
+   */
+  export type MessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message upsert
+   */
+  export type MessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Message to update in case it exists.
+     */
+    where: MessageWhereUniqueInput
+    /**
+     * In case the Message found by the `where` argument doesn't exist, create a new Message with this data.
+     */
+    create: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+    /**
+     * In case the Message was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+  }
+
+  /**
+   * Message delete
+   */
+  export type MessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter which Message to delete.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message deleteMany
+   */
+  export type MessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Messages to delete
+     */
+    where?: MessageWhereInput
+  }
+
+  /**
+   * Message without action
+   */
+  export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MoodEntry
+   */
+
+  export type AggregateMoodEntry = {
+    _count: MoodEntryCountAggregateOutputType | null
+    _avg: MoodEntryAvgAggregateOutputType | null
+    _sum: MoodEntrySumAggregateOutputType | null
+    _min: MoodEntryMinAggregateOutputType | null
+    _max: MoodEntryMaxAggregateOutputType | null
+  }
+
+  export type MoodEntryAvgAggregateOutputType = {
+    mood: number | null
+    energy: number | null
+    sleep: number | null
+    social: number | null
+    anxiety: number | null
+    sentimentScore: number | null
+  }
+
+  export type MoodEntrySumAggregateOutputType = {
+    mood: number | null
+    energy: number | null
+    sleep: number | null
+    social: number | null
+    anxiety: number | null
+    sentimentScore: number | null
+  }
+
+  export type MoodEntryMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mood: number | null
+    energy: number | null
+    sleep: number | null
+    social: number | null
+    anxiety: number | null
+    notes: string | null
+    sentimentScore: number | null
+    sentimentLabel: string | null
+    crisisFlag: boolean | null
+    createdAt: Date | null
+  }
+
+  export type MoodEntryMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mood: number | null
+    energy: number | null
+    sleep: number | null
+    social: number | null
+    anxiety: number | null
+    notes: string | null
+    sentimentScore: number | null
+    sentimentLabel: string | null
+    crisisFlag: boolean | null
+    createdAt: Date | null
+  }
+
+  export type MoodEntryCountAggregateOutputType = {
+    id: number
+    userId: number
+    mood: number
+    energy: number
+    sleep: number
+    social: number
+    anxiety: number
+    notes: number
+    tags: number
+    sentimentScore: number
+    sentimentLabel: number
+    crisisFlag: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MoodEntryAvgAggregateInputType = {
+    mood?: true
+    energy?: true
+    sleep?: true
+    social?: true
+    anxiety?: true
+    sentimentScore?: true
+  }
+
+  export type MoodEntrySumAggregateInputType = {
+    mood?: true
+    energy?: true
+    sleep?: true
+    social?: true
+    anxiety?: true
+    sentimentScore?: true
+  }
+
+  export type MoodEntryMinAggregateInputType = {
+    id?: true
+    userId?: true
+    mood?: true
+    energy?: true
+    sleep?: true
+    social?: true
+    anxiety?: true
+    notes?: true
+    sentimentScore?: true
+    sentimentLabel?: true
+    crisisFlag?: true
+    createdAt?: true
+  }
+
+  export type MoodEntryMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    mood?: true
+    energy?: true
+    sleep?: true
+    social?: true
+    anxiety?: true
+    notes?: true
+    sentimentScore?: true
+    sentimentLabel?: true
+    crisisFlag?: true
+    createdAt?: true
+  }
+
+  export type MoodEntryCountAggregateInputType = {
+    id?: true
+    userId?: true
+    mood?: true
+    energy?: true
+    sleep?: true
+    social?: true
+    anxiety?: true
+    notes?: true
+    tags?: true
+    sentimentScore?: true
+    sentimentLabel?: true
+    crisisFlag?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MoodEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MoodEntry to aggregate.
+     */
+    where?: MoodEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodEntries to fetch.
+     */
+    orderBy?: MoodEntryOrderByWithRelationInput | MoodEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MoodEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MoodEntries
+    **/
+    _count?: true | MoodEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MoodEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MoodEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MoodEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MoodEntryMaxAggregateInputType
+  }
+
+  export type GetMoodEntryAggregateType<T extends MoodEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateMoodEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMoodEntry[P]>
+      : GetScalarType<T[P], AggregateMoodEntry[P]>
+  }
+
+
+
+
+  export type MoodEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoodEntryWhereInput
+    orderBy?: MoodEntryOrderByWithAggregationInput | MoodEntryOrderByWithAggregationInput[]
+    by: MoodEntryScalarFieldEnum[] | MoodEntryScalarFieldEnum
+    having?: MoodEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MoodEntryCountAggregateInputType | true
+    _avg?: MoodEntryAvgAggregateInputType
+    _sum?: MoodEntrySumAggregateInputType
+    _min?: MoodEntryMinAggregateInputType
+    _max?: MoodEntryMaxAggregateInputType
+  }
+
+  export type MoodEntryGroupByOutputType = {
+    id: string
+    userId: string
+    mood: number
+    energy: number | null
+    sleep: number | null
+    social: number | null
+    anxiety: number | null
+    notes: string | null
+    tags: string[]
+    sentimentScore: number | null
+    sentimentLabel: string | null
+    crisisFlag: boolean
+    createdAt: Date
+    _count: MoodEntryCountAggregateOutputType | null
+    _avg: MoodEntryAvgAggregateOutputType | null
+    _sum: MoodEntrySumAggregateOutputType | null
+    _min: MoodEntryMinAggregateOutputType | null
+    _max: MoodEntryMaxAggregateOutputType | null
+  }
+
+  type GetMoodEntryGroupByPayload<T extends MoodEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MoodEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MoodEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MoodEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], MoodEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MoodEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    energy?: boolean
+    sleep?: boolean
+    social?: boolean
+    anxiety?: boolean
+    notes?: boolean
+    tags?: boolean
+    sentimentScore?: boolean
+    sentimentLabel?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodEntry"]>
+
+  export type MoodEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    energy?: boolean
+    sleep?: boolean
+    social?: boolean
+    anxiety?: boolean
+    notes?: boolean
+    tags?: boolean
+    sentimentScore?: boolean
+    sentimentLabel?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodEntry"]>
+
+  export type MoodEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    energy?: boolean
+    sleep?: boolean
+    social?: boolean
+    anxiety?: boolean
+    notes?: boolean
+    tags?: boolean
+    sentimentScore?: boolean
+    sentimentLabel?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodEntry"]>
+
+  export type MoodEntrySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    energy?: boolean
+    sleep?: boolean
+    social?: boolean
+    anxiety?: boolean
+    notes?: boolean
+    tags?: boolean
+    sentimentScore?: boolean
+    sentimentLabel?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+  }
+
+  export type MoodEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "mood" | "energy" | "sleep" | "social" | "anxiety" | "notes" | "tags" | "sentimentScore" | "sentimentLabel" | "crisisFlag" | "createdAt", ExtArgs["result"]["moodEntry"]>
+  export type MoodEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MoodEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MoodEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MoodEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MoodEntry"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      mood: number
+      energy: number | null
+      sleep: number | null
+      social: number | null
+      anxiety: number | null
+      notes: string | null
+      tags: string[]
+      sentimentScore: number | null
+      sentimentLabel: string | null
+      crisisFlag: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["moodEntry"]>
+    composites: {}
+  }
+
+  type MoodEntryGetPayload<S extends boolean | null | undefined | MoodEntryDefaultArgs> = $Result.GetResult<Prisma.$MoodEntryPayload, S>
+
+  type MoodEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MoodEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MoodEntryCountAggregateInputType | true
+    }
+
+  export interface MoodEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MoodEntry'], meta: { name: 'MoodEntry' } }
+    /**
+     * Find zero or one MoodEntry that matches the filter.
+     * @param {MoodEntryFindUniqueArgs} args - Arguments to find a MoodEntry
+     * @example
+     * // Get one MoodEntry
+     * const moodEntry = await prisma.moodEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MoodEntryFindUniqueArgs>(args: SelectSubset<T, MoodEntryFindUniqueArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one MoodEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MoodEntryFindUniqueOrThrowArgs} args - Arguments to find a MoodEntry
+     * @example
+     * // Get one MoodEntry
+     * const moodEntry = await prisma.moodEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MoodEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, MoodEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MoodEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryFindFirstArgs} args - Arguments to find a MoodEntry
+     * @example
+     * // Get one MoodEntry
+     * const moodEntry = await prisma.moodEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MoodEntryFindFirstArgs>(args?: SelectSubset<T, MoodEntryFindFirstArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MoodEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryFindFirstOrThrowArgs} args - Arguments to find a MoodEntry
+     * @example
+     * // Get one MoodEntry
+     * const moodEntry = await prisma.moodEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MoodEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, MoodEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more MoodEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MoodEntries
+     * const moodEntries = await prisma.moodEntry.findMany()
+     * 
+     * // Get first 10 MoodEntries
+     * const moodEntries = await prisma.moodEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const moodEntryWithIdOnly = await prisma.moodEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MoodEntryFindManyArgs>(args?: SelectSubset<T, MoodEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a MoodEntry.
+     * @param {MoodEntryCreateArgs} args - Arguments to create a MoodEntry.
+     * @example
+     * // Create one MoodEntry
+     * const MoodEntry = await prisma.moodEntry.create({
+     *   data: {
+     *     // ... data to create a MoodEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends MoodEntryCreateArgs>(args: SelectSubset<T, MoodEntryCreateArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many MoodEntries.
+     * @param {MoodEntryCreateManyArgs} args - Arguments to create many MoodEntries.
+     * @example
+     * // Create many MoodEntries
+     * const moodEntry = await prisma.moodEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MoodEntryCreateManyArgs>(args?: SelectSubset<T, MoodEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MoodEntries and returns the data saved in the database.
+     * @param {MoodEntryCreateManyAndReturnArgs} args - Arguments to create many MoodEntries.
+     * @example
+     * // Create many MoodEntries
+     * const moodEntry = await prisma.moodEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MoodEntries and only return the `id`
+     * const moodEntryWithIdOnly = await prisma.moodEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MoodEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, MoodEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a MoodEntry.
+     * @param {MoodEntryDeleteArgs} args - Arguments to delete one MoodEntry.
+     * @example
+     * // Delete one MoodEntry
+     * const MoodEntry = await prisma.moodEntry.delete({
+     *   where: {
+     *     // ... filter to delete one MoodEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MoodEntryDeleteArgs>(args: SelectSubset<T, MoodEntryDeleteArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one MoodEntry.
+     * @param {MoodEntryUpdateArgs} args - Arguments to update one MoodEntry.
+     * @example
+     * // Update one MoodEntry
+     * const moodEntry = await prisma.moodEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MoodEntryUpdateArgs>(args: SelectSubset<T, MoodEntryUpdateArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more MoodEntries.
+     * @param {MoodEntryDeleteManyArgs} args - Arguments to filter MoodEntries to delete.
+     * @example
+     * // Delete a few MoodEntries
+     * const { count } = await prisma.moodEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MoodEntryDeleteManyArgs>(args?: SelectSubset<T, MoodEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MoodEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MoodEntries
+     * const moodEntry = await prisma.moodEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MoodEntryUpdateManyArgs>(args: SelectSubset<T, MoodEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MoodEntries and returns the data updated in the database.
+     * @param {MoodEntryUpdateManyAndReturnArgs} args - Arguments to update many MoodEntries.
+     * @example
+     * // Update many MoodEntries
+     * const moodEntry = await prisma.moodEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MoodEntries and only return the `id`
+     * const moodEntryWithIdOnly = await prisma.moodEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MoodEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, MoodEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one MoodEntry.
+     * @param {MoodEntryUpsertArgs} args - Arguments to update or create a MoodEntry.
+     * @example
+     * // Update or create a MoodEntry
+     * const moodEntry = await prisma.moodEntry.upsert({
+     *   create: {
+     *     // ... data to create a MoodEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MoodEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MoodEntryUpsertArgs>(args: SelectSubset<T, MoodEntryUpsertArgs<ExtArgs>>): Prisma__MoodEntryClient<$Result.GetResult<Prisma.$MoodEntryPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of MoodEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryCountArgs} args - Arguments to filter MoodEntries to count.
+     * @example
+     * // Count the number of MoodEntries
+     * const count = await prisma.moodEntry.count({
+     *   where: {
+     *     // ... the filter for the MoodEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends MoodEntryCountArgs>(
+      args?: Subset<T, MoodEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MoodEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MoodEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MoodEntryAggregateArgs>(args: Subset<T, MoodEntryAggregateArgs>): Prisma.PrismaPromise<GetMoodEntryAggregateType<T>>
+
+    /**
+     * Group by MoodEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MoodEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MoodEntryGroupByArgs['orderBy'] }
+        : { orderBy?: MoodEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MoodEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMoodEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MoodEntry model
+   */
+  readonly fields: MoodEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MoodEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MoodEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
@@ -3414,413 +6438,421 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the ChatMessage model
+   * Fields of the MoodEntry model
    */ 
-  interface ChatMessageFieldRefs {
-    readonly id: FieldRef<"ChatMessage", 'String'>
-    readonly userId: FieldRef<"ChatMessage", 'String'>
-    readonly content: FieldRef<"ChatMessage", 'String'>
-    readonly role: FieldRef<"ChatMessage", 'String'>
-    readonly createdAt: FieldRef<"ChatMessage", 'DateTime'>
+  interface MoodEntryFieldRefs {
+    readonly id: FieldRef<"MoodEntry", 'String'>
+    readonly userId: FieldRef<"MoodEntry", 'String'>
+    readonly mood: FieldRef<"MoodEntry", 'Int'>
+    readonly energy: FieldRef<"MoodEntry", 'Int'>
+    readonly sleep: FieldRef<"MoodEntry", 'Int'>
+    readonly social: FieldRef<"MoodEntry", 'Int'>
+    readonly anxiety: FieldRef<"MoodEntry", 'Int'>
+    readonly notes: FieldRef<"MoodEntry", 'String'>
+    readonly tags: FieldRef<"MoodEntry", 'String[]'>
+    readonly sentimentScore: FieldRef<"MoodEntry", 'Float'>
+    readonly sentimentLabel: FieldRef<"MoodEntry", 'String'>
+    readonly crisisFlag: FieldRef<"MoodEntry", 'Boolean'>
+    readonly createdAt: FieldRef<"MoodEntry", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * ChatMessage findUnique
+   * MoodEntry findUnique
    */
-  export type ChatMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * Filter, which ChatMessage to fetch.
+     * Filter, which MoodEntry to fetch.
      */
-    where: ChatMessageWhereUniqueInput
+    where: MoodEntryWhereUniqueInput
   }
 
   /**
-   * ChatMessage findUniqueOrThrow
+   * MoodEntry findUniqueOrThrow
    */
-  export type ChatMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * Filter, which ChatMessage to fetch.
+     * Filter, which MoodEntry to fetch.
      */
-    where: ChatMessageWhereUniqueInput
+    where: MoodEntryWhereUniqueInput
   }
 
   /**
-   * ChatMessage findFirst
+   * MoodEntry findFirst
    */
-  export type ChatMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * Filter, which ChatMessage to fetch.
+     * Filter, which MoodEntry to fetch.
      */
-    where?: ChatMessageWhereInput
+    where?: MoodEntryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ChatMessages to fetch.
+     * Determine the order of MoodEntries to fetch.
      */
-    orderBy?: ChatMessageOrderByWithRelationInput | ChatMessageOrderByWithRelationInput[]
+    orderBy?: MoodEntryOrderByWithRelationInput | MoodEntryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for ChatMessages.
+     * Sets the position for searching for MoodEntries.
      */
-    cursor?: ChatMessageWhereUniqueInput
+    cursor?: MoodEntryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ChatMessages from the position of the cursor.
+     * Take `±n` MoodEntries from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ChatMessages.
+     * Skip the first `n` MoodEntries.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of ChatMessages.
+     * Filter by unique combinations of MoodEntries.
      */
-    distinct?: ChatMessageScalarFieldEnum | ChatMessageScalarFieldEnum[]
+    distinct?: MoodEntryScalarFieldEnum | MoodEntryScalarFieldEnum[]
   }
 
   /**
-   * ChatMessage findFirstOrThrow
+   * MoodEntry findFirstOrThrow
    */
-  export type ChatMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * Filter, which ChatMessage to fetch.
+     * Filter, which MoodEntry to fetch.
      */
-    where?: ChatMessageWhereInput
+    where?: MoodEntryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ChatMessages to fetch.
+     * Determine the order of MoodEntries to fetch.
      */
-    orderBy?: ChatMessageOrderByWithRelationInput | ChatMessageOrderByWithRelationInput[]
+    orderBy?: MoodEntryOrderByWithRelationInput | MoodEntryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for ChatMessages.
+     * Sets the position for searching for MoodEntries.
      */
-    cursor?: ChatMessageWhereUniqueInput
+    cursor?: MoodEntryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ChatMessages from the position of the cursor.
+     * Take `±n` MoodEntries from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ChatMessages.
+     * Skip the first `n` MoodEntries.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of ChatMessages.
+     * Filter by unique combinations of MoodEntries.
      */
-    distinct?: ChatMessageScalarFieldEnum | ChatMessageScalarFieldEnum[]
+    distinct?: MoodEntryScalarFieldEnum | MoodEntryScalarFieldEnum[]
   }
 
   /**
-   * ChatMessage findMany
+   * MoodEntry findMany
    */
-  export type ChatMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * Filter, which ChatMessages to fetch.
+     * Filter, which MoodEntries to fetch.
      */
-    where?: ChatMessageWhereInput
+    where?: MoodEntryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ChatMessages to fetch.
+     * Determine the order of MoodEntries to fetch.
      */
-    orderBy?: ChatMessageOrderByWithRelationInput | ChatMessageOrderByWithRelationInput[]
+    orderBy?: MoodEntryOrderByWithRelationInput | MoodEntryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing ChatMessages.
+     * Sets the position for listing MoodEntries.
      */
-    cursor?: ChatMessageWhereUniqueInput
+    cursor?: MoodEntryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ChatMessages from the position of the cursor.
+     * Take `±n` MoodEntries from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ChatMessages.
+     * Skip the first `n` MoodEntries.
      */
     skip?: number
-    distinct?: ChatMessageScalarFieldEnum | ChatMessageScalarFieldEnum[]
+    distinct?: MoodEntryScalarFieldEnum | MoodEntryScalarFieldEnum[]
   }
 
   /**
-   * ChatMessage create
+   * MoodEntry create
    */
-  export type ChatMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * The data needed to create a ChatMessage.
+     * The data needed to create a MoodEntry.
      */
-    data: XOR<ChatMessageCreateInput, ChatMessageUncheckedCreateInput>
+    data: XOR<MoodEntryCreateInput, MoodEntryUncheckedCreateInput>
   }
 
   /**
-   * ChatMessage createMany
+   * MoodEntry createMany
    */
-  export type ChatMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many ChatMessages.
+     * The data used to create many MoodEntries.
      */
-    data: ChatMessageCreateManyInput | ChatMessageCreateManyInput[]
+    data: MoodEntryCreateManyInput | MoodEntryCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * ChatMessage createManyAndReturn
+   * MoodEntry createManyAndReturn
    */
-  export type ChatMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelectCreateManyAndReturn<ExtArgs> | null
+    select?: MoodEntrySelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
-     * The data used to create many ChatMessages.
+     * The data used to create many MoodEntries.
      */
-    data: ChatMessageCreateManyInput | ChatMessageCreateManyInput[]
+    data: MoodEntryCreateManyInput | MoodEntryCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: MoodEntryIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * ChatMessage update
+   * MoodEntry update
    */
-  export type ChatMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * The data needed to update a ChatMessage.
+     * The data needed to update a MoodEntry.
      */
-    data: XOR<ChatMessageUpdateInput, ChatMessageUncheckedUpdateInput>
+    data: XOR<MoodEntryUpdateInput, MoodEntryUncheckedUpdateInput>
     /**
-     * Choose, which ChatMessage to update.
+     * Choose, which MoodEntry to update.
      */
-    where: ChatMessageWhereUniqueInput
+    where: MoodEntryWhereUniqueInput
   }
 
   /**
-   * ChatMessage updateMany
+   * MoodEntry updateMany
    */
-  export type ChatMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update ChatMessages.
+     * The data used to update MoodEntries.
      */
-    data: XOR<ChatMessageUpdateManyMutationInput, ChatMessageUncheckedUpdateManyInput>
+    data: XOR<MoodEntryUpdateManyMutationInput, MoodEntryUncheckedUpdateManyInput>
     /**
-     * Filter which ChatMessages to update
+     * Filter which MoodEntries to update
      */
-    where?: ChatMessageWhereInput
+    where?: MoodEntryWhereInput
   }
 
   /**
-   * ChatMessage updateManyAndReturn
+   * MoodEntry updateManyAndReturn
    */
-  export type ChatMessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: MoodEntrySelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
-     * The data used to update ChatMessages.
+     * The data used to update MoodEntries.
      */
-    data: XOR<ChatMessageUpdateManyMutationInput, ChatMessageUncheckedUpdateManyInput>
+    data: XOR<MoodEntryUpdateManyMutationInput, MoodEntryUncheckedUpdateManyInput>
     /**
-     * Filter which ChatMessages to update
+     * Filter which MoodEntries to update
      */
-    where?: ChatMessageWhereInput
+    where?: MoodEntryWhereInput
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: MoodEntryIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * ChatMessage upsert
+   * MoodEntry upsert
    */
-  export type ChatMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * The filter to search for the ChatMessage to update in case it exists.
+     * The filter to search for the MoodEntry to update in case it exists.
      */
-    where: ChatMessageWhereUniqueInput
+    where: MoodEntryWhereUniqueInput
     /**
-     * In case the ChatMessage found by the `where` argument doesn't exist, create a new ChatMessage with this data.
+     * In case the MoodEntry found by the `where` argument doesn't exist, create a new MoodEntry with this data.
      */
-    create: XOR<ChatMessageCreateInput, ChatMessageUncheckedCreateInput>
+    create: XOR<MoodEntryCreateInput, MoodEntryUncheckedCreateInput>
     /**
-     * In case the ChatMessage was found with the provided `where` argument, update it with this data.
+     * In case the MoodEntry was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ChatMessageUpdateInput, ChatMessageUncheckedUpdateInput>
+    update: XOR<MoodEntryUpdateInput, MoodEntryUncheckedUpdateInput>
   }
 
   /**
-   * ChatMessage delete
+   * MoodEntry delete
    */
-  export type ChatMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
     /**
-     * Filter which ChatMessage to delete.
+     * Filter which MoodEntry to delete.
      */
-    where: ChatMessageWhereUniqueInput
+    where: MoodEntryWhereUniqueInput
   }
 
   /**
-   * ChatMessage deleteMany
+   * MoodEntry deleteMany
    */
-  export type ChatMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which ChatMessages to delete
+     * Filter which MoodEntries to delete
      */
-    where?: ChatMessageWhereInput
+    where?: MoodEntryWhereInput
   }
 
   /**
-   * ChatMessage without action
+   * MoodEntry without action
    */
-  export type ChatMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MoodEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatMessage
+     * Select specific fields to fetch from the MoodEntry
      */
-    select?: ChatMessageSelect<ExtArgs> | null
+    select?: MoodEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatMessage
+     * Omit specific fields from the MoodEntry
      */
-    omit?: ChatMessageOmit<ExtArgs> | null
+    omit?: MoodEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatMessageInclude<ExtArgs> | null
+    include?: MoodEntryInclude<ExtArgs> | null
   }
 
 
@@ -3847,18 +6879,20 @@ export namespace Prisma {
   export type AssessmentMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    type: string | null
+    type: $Enums.AssessmentType | null
     score: number | null
-    severity: string | null
+    severity: $Enums.Severity | null
+    interpretation: string | null
     createdAt: Date | null
   }
 
   export type AssessmentMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    type: string | null
+    type: $Enums.AssessmentType | null
     score: number | null
-    severity: string | null
+    severity: $Enums.Severity | null
+    interpretation: string | null
     createdAt: Date | null
   }
 
@@ -3866,8 +6900,10 @@ export namespace Prisma {
     id: number
     userId: number
     type: number
+    responses: number
     score: number
     severity: number
+    interpretation: number
     createdAt: number
     _all: number
   }
@@ -3887,6 +6923,7 @@ export namespace Prisma {
     type?: true
     score?: true
     severity?: true
+    interpretation?: true
     createdAt?: true
   }
 
@@ -3896,6 +6933,7 @@ export namespace Prisma {
     type?: true
     score?: true
     severity?: true
+    interpretation?: true
     createdAt?: true
   }
 
@@ -3903,8 +6941,10 @@ export namespace Prisma {
     id?: true
     userId?: true
     type?: true
+    responses?: true
     score?: true
     severity?: true
+    interpretation?: true
     createdAt?: true
     _all?: true
   }
@@ -3998,9 +7038,11 @@ export namespace Prisma {
   export type AssessmentGroupByOutputType = {
     id: string
     userId: string
-    type: string
+    type: $Enums.AssessmentType
+    responses: JsonValue
     score: number
-    severity: string
+    severity: $Enums.Severity | null
+    interpretation: string | null
     createdAt: Date
     _count: AssessmentCountAggregateOutputType | null
     _avg: AssessmentAvgAggregateOutputType | null
@@ -4027,8 +7069,10 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     type?: boolean
+    responses?: boolean
     score?: boolean
     severity?: boolean
+    interpretation?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["assessment"]>
@@ -4037,8 +7081,10 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     type?: boolean
+    responses?: boolean
     score?: boolean
     severity?: boolean
+    interpretation?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["assessment"]>
@@ -4047,8 +7093,10 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     type?: boolean
+    responses?: boolean
     score?: boolean
     severity?: boolean
+    interpretation?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["assessment"]>
@@ -4057,12 +7105,14 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     type?: boolean
+    responses?: boolean
     score?: boolean
     severity?: boolean
+    interpretation?: boolean
     createdAt?: boolean
   }
 
-  export type AssessmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "score" | "severity" | "createdAt", ExtArgs["result"]["assessment"]>
+  export type AssessmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "responses" | "score" | "severity" | "interpretation" | "createdAt", ExtArgs["result"]["assessment"]>
   export type AssessmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4081,9 +7131,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      type: string
+      type: $Enums.AssessmentType
+      responses: Prisma.JsonValue
       score: number
-      severity: string
+      severity: $Enums.Severity | null
+      interpretation: string | null
       createdAt: Date
     }, ExtArgs["result"]["assessment"]>
     composites: {}
@@ -4511,9 +7563,11 @@ export namespace Prisma {
   interface AssessmentFieldRefs {
     readonly id: FieldRef<"Assessment", 'String'>
     readonly userId: FieldRef<"Assessment", 'String'>
-    readonly type: FieldRef<"Assessment", 'String'>
+    readonly type: FieldRef<"Assessment", 'AssessmentType'>
+    readonly responses: FieldRef<"Assessment", 'Json'>
     readonly score: FieldRef<"Assessment", 'Int'>
-    readonly severity: FieldRef<"Assessment", 'String'>
+    readonly severity: FieldRef<"Assessment", 'Severity'>
+    readonly interpretation: FieldRef<"Assessment", 'String'>
     readonly createdAt: FieldRef<"Assessment", 'DateTime'>
   }
     
@@ -4918,424 +7972,452 @@ export namespace Prisma {
 
 
   /**
-   * Model Mood
+   * Model AIInteraction
    */
 
-  export type AggregateMood = {
-    _count: MoodCountAggregateOutputType | null
-    _avg: MoodAvgAggregateOutputType | null
-    _sum: MoodSumAggregateOutputType | null
-    _min: MoodMinAggregateOutputType | null
-    _max: MoodMaxAggregateOutputType | null
+  export type AggregateAIInteraction = {
+    _count: AIInteractionCountAggregateOutputType | null
+    _avg: AIInteractionAvgAggregateOutputType | null
+    _sum: AIInteractionSumAggregateOutputType | null
+    _min: AIInteractionMinAggregateOutputType | null
+    _max: AIInteractionMaxAggregateOutputType | null
   }
 
-  export type MoodAvgAggregateOutputType = {
-    value: number | null
-    sentimentScore: number | null
+  export type AIInteractionAvgAggregateOutputType = {
+    tokensUsed: number | null
+    emotionalIntensity: number | null
+    responseTime: number | null
   }
 
-  export type MoodSumAggregateOutputType = {
-    value: number | null
-    sentimentScore: number | null
+  export type AIInteractionSumAggregateOutputType = {
+    tokensUsed: number | null
+    emotionalIntensity: number | null
+    responseTime: number | null
   }
 
-  export type MoodMinAggregateOutputType = {
+  export type AIInteractionMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    value: number | null
-    note: string | null
-    sentimentScore: number | null
-    sentimentLabel: string | null
-    crisisFlag: boolean | null
-    createdAt: Date | null
+    userMessage: string | null
+    aiResponse: string | null
+    model: string | null
+    tokensUsed: number | null
+    crisisDetected: boolean | null
+    emotionalIntensity: number | null
+    responseTime: number | null
+    timestamp: Date | null
   }
 
-  export type MoodMaxAggregateOutputType = {
+  export type AIInteractionMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    value: number | null
-    note: string | null
-    sentimentScore: number | null
-    sentimentLabel: string | null
-    crisisFlag: boolean | null
-    createdAt: Date | null
+    userMessage: string | null
+    aiResponse: string | null
+    model: string | null
+    tokensUsed: number | null
+    crisisDetected: boolean | null
+    emotionalIntensity: number | null
+    responseTime: number | null
+    timestamp: Date | null
   }
 
-  export type MoodCountAggregateOutputType = {
+  export type AIInteractionCountAggregateOutputType = {
     id: number
     userId: number
-    value: number
-    note: number
-    sentimentScore: number
-    sentimentLabel: number
-    crisisFlag: number
-    createdAt: number
+    userMessage: number
+    aiResponse: number
+    model: number
+    tokensUsed: number
+    crisisDetected: number
+    emotionalIntensity: number
+    responseTime: number
+    timestamp: number
     _all: number
   }
 
 
-  export type MoodAvgAggregateInputType = {
-    value?: true
-    sentimentScore?: true
+  export type AIInteractionAvgAggregateInputType = {
+    tokensUsed?: true
+    emotionalIntensity?: true
+    responseTime?: true
   }
 
-  export type MoodSumAggregateInputType = {
-    value?: true
-    sentimentScore?: true
+  export type AIInteractionSumAggregateInputType = {
+    tokensUsed?: true
+    emotionalIntensity?: true
+    responseTime?: true
   }
 
-  export type MoodMinAggregateInputType = {
+  export type AIInteractionMinAggregateInputType = {
     id?: true
     userId?: true
-    value?: true
-    note?: true
-    sentimentScore?: true
-    sentimentLabel?: true
-    crisisFlag?: true
-    createdAt?: true
+    userMessage?: true
+    aiResponse?: true
+    model?: true
+    tokensUsed?: true
+    crisisDetected?: true
+    emotionalIntensity?: true
+    responseTime?: true
+    timestamp?: true
   }
 
-  export type MoodMaxAggregateInputType = {
+  export type AIInteractionMaxAggregateInputType = {
     id?: true
     userId?: true
-    value?: true
-    note?: true
-    sentimentScore?: true
-    sentimentLabel?: true
-    crisisFlag?: true
-    createdAt?: true
+    userMessage?: true
+    aiResponse?: true
+    model?: true
+    tokensUsed?: true
+    crisisDetected?: true
+    emotionalIntensity?: true
+    responseTime?: true
+    timestamp?: true
   }
 
-  export type MoodCountAggregateInputType = {
+  export type AIInteractionCountAggregateInputType = {
     id?: true
     userId?: true
-    value?: true
-    note?: true
-    sentimentScore?: true
-    sentimentLabel?: true
-    crisisFlag?: true
-    createdAt?: true
+    userMessage?: true
+    aiResponse?: true
+    model?: true
+    tokensUsed?: true
+    crisisDetected?: true
+    emotionalIntensity?: true
+    responseTime?: true
+    timestamp?: true
     _all?: true
   }
 
-  export type MoodAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Mood to aggregate.
+     * Filter which AIInteraction to aggregate.
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Moods to fetch.
+     * Determine the order of AIInteractions to fetch.
      */
-    orderBy?: MoodOrderByWithRelationInput | MoodOrderByWithRelationInput[]
+    orderBy?: AIInteractionOrderByWithRelationInput | AIInteractionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: MoodWhereUniqueInput
+    cursor?: AIInteractionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Moods from the position of the cursor.
+     * Take `±n` AIInteractions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Moods.
+     * Skip the first `n` AIInteractions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Moods
+     * Count returned AIInteractions
     **/
-    _count?: true | MoodCountAggregateInputType
+    _count?: true | AIInteractionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: MoodAvgAggregateInputType
+    _avg?: AIInteractionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: MoodSumAggregateInputType
+    _sum?: AIInteractionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: MoodMinAggregateInputType
+    _min?: AIInteractionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: MoodMaxAggregateInputType
+    _max?: AIInteractionMaxAggregateInputType
   }
 
-  export type GetMoodAggregateType<T extends MoodAggregateArgs> = {
-        [P in keyof T & keyof AggregateMood]: P extends '_count' | 'count'
+  export type GetAIInteractionAggregateType<T extends AIInteractionAggregateArgs> = {
+        [P in keyof T & keyof AggregateAIInteraction]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateMood[P]>
-      : GetScalarType<T[P], AggregateMood[P]>
+        : GetScalarType<T[P], AggregateAIInteraction[P]>
+      : GetScalarType<T[P], AggregateAIInteraction[P]>
   }
 
 
 
 
-  export type MoodGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MoodWhereInput
-    orderBy?: MoodOrderByWithAggregationInput | MoodOrderByWithAggregationInput[]
-    by: MoodScalarFieldEnum[] | MoodScalarFieldEnum
-    having?: MoodScalarWhereWithAggregatesInput
+  export type AIInteractionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AIInteractionWhereInput
+    orderBy?: AIInteractionOrderByWithAggregationInput | AIInteractionOrderByWithAggregationInput[]
+    by: AIInteractionScalarFieldEnum[] | AIInteractionScalarFieldEnum
+    having?: AIInteractionScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: MoodCountAggregateInputType | true
-    _avg?: MoodAvgAggregateInputType
-    _sum?: MoodSumAggregateInputType
-    _min?: MoodMinAggregateInputType
-    _max?: MoodMaxAggregateInputType
+    _count?: AIInteractionCountAggregateInputType | true
+    _avg?: AIInteractionAvgAggregateInputType
+    _sum?: AIInteractionSumAggregateInputType
+    _min?: AIInteractionMinAggregateInputType
+    _max?: AIInteractionMaxAggregateInputType
   }
 
-  export type MoodGroupByOutputType = {
+  export type AIInteractionGroupByOutputType = {
     id: string
     userId: string
-    value: number
-    note: string | null
-    sentimentScore: number | null
-    sentimentLabel: string | null
-    crisisFlag: boolean
-    createdAt: Date
-    _count: MoodCountAggregateOutputType | null
-    _avg: MoodAvgAggregateOutputType | null
-    _sum: MoodSumAggregateOutputType | null
-    _min: MoodMinAggregateOutputType | null
-    _max: MoodMaxAggregateOutputType | null
+    userMessage: string
+    aiResponse: string
+    model: string | null
+    tokensUsed: number | null
+    crisisDetected: boolean
+    emotionalIntensity: number | null
+    responseTime: number | null
+    timestamp: Date
+    _count: AIInteractionCountAggregateOutputType | null
+    _avg: AIInteractionAvgAggregateOutputType | null
+    _sum: AIInteractionSumAggregateOutputType | null
+    _min: AIInteractionMinAggregateOutputType | null
+    _max: AIInteractionMaxAggregateOutputType | null
   }
 
-  type GetMoodGroupByPayload<T extends MoodGroupByArgs> = Prisma.PrismaPromise<
+  type GetAIInteractionGroupByPayload<T extends AIInteractionGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<MoodGroupByOutputType, T['by']> &
+      PickEnumerable<AIInteractionGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof MoodGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AIInteractionGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], MoodGroupByOutputType[P]>
-            : GetScalarType<T[P], MoodGroupByOutputType[P]>
+              : GetScalarType<T[P], AIInteractionGroupByOutputType[P]>
+            : GetScalarType<T[P], AIInteractionGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type MoodSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AIInteractionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    value?: boolean
-    note?: boolean
-    sentimentScore?: boolean
-    sentimentLabel?: boolean
-    crisisFlag?: boolean
-    createdAt?: boolean
+    userMessage?: boolean
+    aiResponse?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    crisisDetected?: boolean
+    emotionalIntensity?: boolean
+    responseTime?: boolean
+    timestamp?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mood"]>
+  }, ExtArgs["result"]["aIInteraction"]>
 
-  export type MoodSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AIInteractionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    value?: boolean
-    note?: boolean
-    sentimentScore?: boolean
-    sentimentLabel?: boolean
-    crisisFlag?: boolean
-    createdAt?: boolean
+    userMessage?: boolean
+    aiResponse?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    crisisDetected?: boolean
+    emotionalIntensity?: boolean
+    responseTime?: boolean
+    timestamp?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mood"]>
+  }, ExtArgs["result"]["aIInteraction"]>
 
-  export type MoodSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AIInteractionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    value?: boolean
-    note?: boolean
-    sentimentScore?: boolean
-    sentimentLabel?: boolean
-    crisisFlag?: boolean
-    createdAt?: boolean
+    userMessage?: boolean
+    aiResponse?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    crisisDetected?: boolean
+    emotionalIntensity?: boolean
+    responseTime?: boolean
+    timestamp?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mood"]>
+  }, ExtArgs["result"]["aIInteraction"]>
 
-  export type MoodSelectScalar = {
+  export type AIInteractionSelectScalar = {
     id?: boolean
     userId?: boolean
-    value?: boolean
-    note?: boolean
-    sentimentScore?: boolean
-    sentimentLabel?: boolean
-    crisisFlag?: boolean
-    createdAt?: boolean
+    userMessage?: boolean
+    aiResponse?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    crisisDetected?: boolean
+    emotionalIntensity?: boolean
+    responseTime?: boolean
+    timestamp?: boolean
   }
 
-  export type MoodOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "value" | "note" | "sentimentScore" | "sentimentLabel" | "crisisFlag" | "createdAt", ExtArgs["result"]["mood"]>
-  export type MoodInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "userMessage" | "aiResponse" | "model" | "tokensUsed" | "crisisDetected" | "emotionalIntensity" | "responseTime" | "timestamp", ExtArgs["result"]["aIInteraction"]>
+  export type AIInteractionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type MoodIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type MoodIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $MoodPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Mood"
+  export type $AIInteractionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AIInteraction"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      value: number
-      note: string | null
-      sentimentScore: number | null
-      sentimentLabel: string | null
-      crisisFlag: boolean
-      createdAt: Date
-    }, ExtArgs["result"]["mood"]>
+      userMessage: string
+      aiResponse: string
+      model: string | null
+      tokensUsed: number | null
+      crisisDetected: boolean
+      emotionalIntensity: number | null
+      responseTime: number | null
+      timestamp: Date
+    }, ExtArgs["result"]["aIInteraction"]>
     composites: {}
   }
 
-  type MoodGetPayload<S extends boolean | null | undefined | MoodDefaultArgs> = $Result.GetResult<Prisma.$MoodPayload, S>
+  type AIInteractionGetPayload<S extends boolean | null | undefined | AIInteractionDefaultArgs> = $Result.GetResult<Prisma.$AIInteractionPayload, S>
 
-  type MoodCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MoodFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MoodCountAggregateInputType | true
+  type AIInteractionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AIInteractionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AIInteractionCountAggregateInputType | true
     }
 
-  export interface MoodDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Mood'], meta: { name: 'Mood' } }
+  export interface AIInteractionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AIInteraction'], meta: { name: 'AIInteraction' } }
     /**
-     * Find zero or one Mood that matches the filter.
-     * @param {MoodFindUniqueArgs} args - Arguments to find a Mood
+     * Find zero or one AIInteraction that matches the filter.
+     * @param {AIInteractionFindUniqueArgs} args - Arguments to find a AIInteraction
      * @example
-     * // Get one Mood
-     * const mood = await prisma.mood.findUnique({
+     * // Get one AIInteraction
+     * const aIInteraction = await prisma.aIInteraction.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends MoodFindUniqueArgs>(args: SelectSubset<T, MoodFindUniqueArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends AIInteractionFindUniqueArgs>(args: SelectSubset<T, AIInteractionFindUniqueArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find one Mood that matches the filter or throw an error with `error.code='P2025'`
+     * Find one AIInteraction that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {MoodFindUniqueOrThrowArgs} args - Arguments to find a Mood
+     * @param {AIInteractionFindUniqueOrThrowArgs} args - Arguments to find a AIInteraction
      * @example
-     * // Get one Mood
-     * const mood = await prisma.mood.findUniqueOrThrow({
+     * // Get one AIInteraction
+     * const aIInteraction = await prisma.aIInteraction.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MoodFindUniqueOrThrowArgs>(args: SelectSubset<T, MoodFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends AIInteractionFindUniqueOrThrowArgs>(args: SelectSubset<T, AIInteractionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find the first Mood that matches the filter.
+     * Find the first AIInteraction that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodFindFirstArgs} args - Arguments to find a Mood
+     * @param {AIInteractionFindFirstArgs} args - Arguments to find a AIInteraction
      * @example
-     * // Get one Mood
-     * const mood = await prisma.mood.findFirst({
+     * // Get one AIInteraction
+     * const aIInteraction = await prisma.aIInteraction.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends MoodFindFirstArgs>(args?: SelectSubset<T, MoodFindFirstArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends AIInteractionFindFirstArgs>(args?: SelectSubset<T, AIInteractionFindFirstArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find the first Mood that matches the filter or
+     * Find the first AIInteraction that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodFindFirstOrThrowArgs} args - Arguments to find a Mood
+     * @param {AIInteractionFindFirstOrThrowArgs} args - Arguments to find a AIInteraction
      * @example
-     * // Get one Mood
-     * const mood = await prisma.mood.findFirstOrThrow({
+     * // Get one AIInteraction
+     * const aIInteraction = await prisma.aIInteraction.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends MoodFindFirstOrThrowArgs>(args?: SelectSubset<T, MoodFindFirstOrThrowArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends AIInteractionFindFirstOrThrowArgs>(args?: SelectSubset<T, AIInteractionFindFirstOrThrowArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find zero or more Moods that matches the filter.
+     * Find zero or more AIInteractions that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {AIInteractionFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Moods
-     * const moods = await prisma.mood.findMany()
+     * // Get all AIInteractions
+     * const aIInteractions = await prisma.aIInteraction.findMany()
      * 
-     * // Get first 10 Moods
-     * const moods = await prisma.mood.findMany({ take: 10 })
+     * // Get first 10 AIInteractions
+     * const aIInteractions = await prisma.aIInteraction.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const moodWithIdOnly = await prisma.mood.findMany({ select: { id: true } })
+     * const aIInteractionWithIdOnly = await prisma.aIInteraction.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends MoodFindManyArgs>(args?: SelectSubset<T, MoodFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends AIInteractionFindManyArgs>(args?: SelectSubset<T, AIInteractionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
-     * Create a Mood.
-     * @param {MoodCreateArgs} args - Arguments to create a Mood.
+     * Create a AIInteraction.
+     * @param {AIInteractionCreateArgs} args - Arguments to create a AIInteraction.
      * @example
-     * // Create one Mood
-     * const Mood = await prisma.mood.create({
+     * // Create one AIInteraction
+     * const AIInteraction = await prisma.aIInteraction.create({
      *   data: {
-     *     // ... data to create a Mood
+     *     // ... data to create a AIInteraction
      *   }
      * })
      * 
      */
-    create<T extends MoodCreateArgs>(args: SelectSubset<T, MoodCreateArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends AIInteractionCreateArgs>(args: SelectSubset<T, AIInteractionCreateArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Create many Moods.
-     * @param {MoodCreateManyArgs} args - Arguments to create many Moods.
+     * Create many AIInteractions.
+     * @param {AIInteractionCreateManyArgs} args - Arguments to create many AIInteractions.
      * @example
-     * // Create many Moods
-     * const mood = await prisma.mood.createMany({
+     * // Create many AIInteractions
+     * const aIInteraction = await prisma.aIInteraction.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends MoodCreateManyArgs>(args?: SelectSubset<T, MoodCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends AIInteractionCreateManyArgs>(args?: SelectSubset<T, AIInteractionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Moods and returns the data saved in the database.
-     * @param {MoodCreateManyAndReturnArgs} args - Arguments to create many Moods.
+     * Create many AIInteractions and returns the data saved in the database.
+     * @param {AIInteractionCreateManyAndReturnArgs} args - Arguments to create many AIInteractions.
      * @example
-     * // Create many Moods
-     * const mood = await prisma.mood.createManyAndReturn({
+     * // Create many AIInteractions
+     * const aIInteraction = await prisma.aIInteraction.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Moods and only return the `id`
-     * const moodWithIdOnly = await prisma.mood.createManyAndReturn({
+     * // Create many AIInteractions and only return the `id`
+     * const aIInteractionWithIdOnly = await prisma.aIInteraction.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5345,28 +8427,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MoodCreateManyAndReturnArgs>(args?: SelectSubset<T, MoodCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends AIInteractionCreateManyAndReturnArgs>(args?: SelectSubset<T, AIInteractionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
-     * Delete a Mood.
-     * @param {MoodDeleteArgs} args - Arguments to delete one Mood.
+     * Delete a AIInteraction.
+     * @param {AIInteractionDeleteArgs} args - Arguments to delete one AIInteraction.
      * @example
-     * // Delete one Mood
-     * const Mood = await prisma.mood.delete({
+     * // Delete one AIInteraction
+     * const AIInteraction = await prisma.aIInteraction.delete({
      *   where: {
-     *     // ... filter to delete one Mood
+     *     // ... filter to delete one AIInteraction
      *   }
      * })
      * 
      */
-    delete<T extends MoodDeleteArgs>(args: SelectSubset<T, MoodDeleteArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends AIInteractionDeleteArgs>(args: SelectSubset<T, AIInteractionDeleteArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Update one Mood.
-     * @param {MoodUpdateArgs} args - Arguments to update one Mood.
+     * Update one AIInteraction.
+     * @param {AIInteractionUpdateArgs} args - Arguments to update one AIInteraction.
      * @example
-     * // Update one Mood
-     * const mood = await prisma.mood.update({
+     * // Update one AIInteraction
+     * const aIInteraction = await prisma.aIInteraction.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5376,30 +8458,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MoodUpdateArgs>(args: SelectSubset<T, MoodUpdateArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends AIInteractionUpdateArgs>(args: SelectSubset<T, AIInteractionUpdateArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Delete zero or more Moods.
-     * @param {MoodDeleteManyArgs} args - Arguments to filter Moods to delete.
+     * Delete zero or more AIInteractions.
+     * @param {AIInteractionDeleteManyArgs} args - Arguments to filter AIInteractions to delete.
      * @example
-     * // Delete a few Moods
-     * const { count } = await prisma.mood.deleteMany({
+     * // Delete a few AIInteractions
+     * const { count } = await prisma.aIInteraction.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends MoodDeleteManyArgs>(args?: SelectSubset<T, MoodDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends AIInteractionDeleteManyArgs>(args?: SelectSubset<T, AIInteractionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Moods.
+     * Update zero or more AIInteractions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {AIInteractionUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Moods
-     * const mood = await prisma.mood.updateMany({
+     * // Update many AIInteractions
+     * const aIInteraction = await prisma.aIInteraction.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5409,14 +8491,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends MoodUpdateManyArgs>(args: SelectSubset<T, MoodUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends AIInteractionUpdateManyArgs>(args: SelectSubset<T, AIInteractionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Moods and returns the data updated in the database.
-     * @param {MoodUpdateManyAndReturnArgs} args - Arguments to update many Moods.
+     * Update zero or more AIInteractions and returns the data updated in the database.
+     * @param {AIInteractionUpdateManyAndReturnArgs} args - Arguments to update many AIInteractions.
      * @example
-     * // Update many Moods
-     * const mood = await prisma.mood.updateManyAndReturn({
+     * // Update many AIInteractions
+     * const aIInteraction = await prisma.aIInteraction.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5425,8 +8507,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Moods and only return the `id`
-     * const moodWithIdOnly = await prisma.mood.updateManyAndReturn({
+     * // Update zero or more AIInteractions and only return the `id`
+     * const aIInteractionWithIdOnly = await prisma.aIInteraction.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5439,56 +8521,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MoodUpdateManyAndReturnArgs>(args: SelectSubset<T, MoodUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends AIInteractionUpdateManyAndReturnArgs>(args: SelectSubset<T, AIInteractionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
-     * Create or update one Mood.
-     * @param {MoodUpsertArgs} args - Arguments to update or create a Mood.
+     * Create or update one AIInteraction.
+     * @param {AIInteractionUpsertArgs} args - Arguments to update or create a AIInteraction.
      * @example
-     * // Update or create a Mood
-     * const mood = await prisma.mood.upsert({
+     * // Update or create a AIInteraction
+     * const aIInteraction = await prisma.aIInteraction.upsert({
      *   create: {
-     *     // ... data to create a Mood
+     *     // ... data to create a AIInteraction
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Mood we want to update
+     *     // ... the filter for the AIInteraction we want to update
      *   }
      * })
      */
-    upsert<T extends MoodUpsertArgs>(args: SelectSubset<T, MoodUpsertArgs<ExtArgs>>): Prisma__MoodClient<$Result.GetResult<Prisma.$MoodPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends AIInteractionUpsertArgs>(args: SelectSubset<T, AIInteractionUpsertArgs<ExtArgs>>): Prisma__AIInteractionClient<$Result.GetResult<Prisma.$AIInteractionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
-     * Count the number of Moods.
+     * Count the number of AIInteractions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodCountArgs} args - Arguments to filter Moods to count.
+     * @param {AIInteractionCountArgs} args - Arguments to filter AIInteractions to count.
      * @example
-     * // Count the number of Moods
-     * const count = await prisma.mood.count({
+     * // Count the number of AIInteractions
+     * const count = await prisma.aIInteraction.count({
      *   where: {
-     *     // ... the filter for the Moods we want to count
+     *     // ... the filter for the AIInteractions we want to count
      *   }
      * })
     **/
-    count<T extends MoodCountArgs>(
-      args?: Subset<T, MoodCountArgs>,
+    count<T extends AIInteractionCountArgs>(
+      args?: Subset<T, AIInteractionCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], MoodCountAggregateOutputType>
+          : GetScalarType<T['select'], AIInteractionCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Mood.
+     * Allows you to perform aggregations operations on a AIInteraction.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {AIInteractionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5508,13 +8590,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends MoodAggregateArgs>(args: Subset<T, MoodAggregateArgs>): Prisma.PrismaPromise<GetMoodAggregateType<T>>
+    aggregate<T extends AIInteractionAggregateArgs>(args: Subset<T, AIInteractionAggregateArgs>): Prisma.PrismaPromise<GetAIInteractionAggregateType<T>>
 
     /**
-     * Group by Mood.
+     * Group by AIInteraction.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodGroupByArgs} args - Group by arguments.
+     * @param {AIInteractionGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5529,14 +8611,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends MoodGroupByArgs,
+      T extends AIInteractionGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MoodGroupByArgs['orderBy'] }
-        : { orderBy?: MoodGroupByArgs['orderBy'] },
+        ? { orderBy: AIInteractionGroupByArgs['orderBy'] }
+        : { orderBy?: AIInteractionGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5585,20 +8667,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, MoodGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMoodGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, AIInteractionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAIInteractionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Mood model
+   * Fields of the AIInteraction model
    */
-  readonly fields: MoodFieldRefs;
+  readonly fields: AIInteractionFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Mood.
+   * The delegate class that acts as a "Promise-like" for AIInteraction.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MoodClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AIInteractionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
@@ -5627,796 +8709,844 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Mood model
+   * Fields of the AIInteraction model
    */ 
-  interface MoodFieldRefs {
-    readonly id: FieldRef<"Mood", 'String'>
-    readonly userId: FieldRef<"Mood", 'String'>
-    readonly value: FieldRef<"Mood", 'Int'>
-    readonly note: FieldRef<"Mood", 'String'>
-    readonly sentimentScore: FieldRef<"Mood", 'Float'>
-    readonly sentimentLabel: FieldRef<"Mood", 'String'>
-    readonly crisisFlag: FieldRef<"Mood", 'Boolean'>
-    readonly createdAt: FieldRef<"Mood", 'DateTime'>
+  interface AIInteractionFieldRefs {
+    readonly id: FieldRef<"AIInteraction", 'String'>
+    readonly userId: FieldRef<"AIInteraction", 'String'>
+    readonly userMessage: FieldRef<"AIInteraction", 'String'>
+    readonly aiResponse: FieldRef<"AIInteraction", 'String'>
+    readonly model: FieldRef<"AIInteraction", 'String'>
+    readonly tokensUsed: FieldRef<"AIInteraction", 'Int'>
+    readonly crisisDetected: FieldRef<"AIInteraction", 'Boolean'>
+    readonly emotionalIntensity: FieldRef<"AIInteraction", 'Int'>
+    readonly responseTime: FieldRef<"AIInteraction", 'Int'>
+    readonly timestamp: FieldRef<"AIInteraction", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Mood findUnique
+   * AIInteraction findUnique
    */
-  export type MoodFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * Filter, which Mood to fetch.
+     * Filter, which AIInteraction to fetch.
      */
-    where: MoodWhereUniqueInput
+    where: AIInteractionWhereUniqueInput
   }
 
   /**
-   * Mood findUniqueOrThrow
+   * AIInteraction findUniqueOrThrow
    */
-  export type MoodFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * Filter, which Mood to fetch.
+     * Filter, which AIInteraction to fetch.
      */
-    where: MoodWhereUniqueInput
+    where: AIInteractionWhereUniqueInput
   }
 
   /**
-   * Mood findFirst
+   * AIInteraction findFirst
    */
-  export type MoodFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * Filter, which Mood to fetch.
+     * Filter, which AIInteraction to fetch.
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Moods to fetch.
+     * Determine the order of AIInteractions to fetch.
      */
-    orderBy?: MoodOrderByWithRelationInput | MoodOrderByWithRelationInput[]
+    orderBy?: AIInteractionOrderByWithRelationInput | AIInteractionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Moods.
+     * Sets the position for searching for AIInteractions.
      */
-    cursor?: MoodWhereUniqueInput
+    cursor?: AIInteractionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Moods from the position of the cursor.
+     * Take `±n` AIInteractions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Moods.
+     * Skip the first `n` AIInteractions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Moods.
+     * Filter by unique combinations of AIInteractions.
      */
-    distinct?: MoodScalarFieldEnum | MoodScalarFieldEnum[]
+    distinct?: AIInteractionScalarFieldEnum | AIInteractionScalarFieldEnum[]
   }
 
   /**
-   * Mood findFirstOrThrow
+   * AIInteraction findFirstOrThrow
    */
-  export type MoodFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * Filter, which Mood to fetch.
+     * Filter, which AIInteraction to fetch.
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Moods to fetch.
+     * Determine the order of AIInteractions to fetch.
      */
-    orderBy?: MoodOrderByWithRelationInput | MoodOrderByWithRelationInput[]
+    orderBy?: AIInteractionOrderByWithRelationInput | AIInteractionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Moods.
+     * Sets the position for searching for AIInteractions.
      */
-    cursor?: MoodWhereUniqueInput
+    cursor?: AIInteractionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Moods from the position of the cursor.
+     * Take `±n` AIInteractions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Moods.
+     * Skip the first `n` AIInteractions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Moods.
+     * Filter by unique combinations of AIInteractions.
      */
-    distinct?: MoodScalarFieldEnum | MoodScalarFieldEnum[]
+    distinct?: AIInteractionScalarFieldEnum | AIInteractionScalarFieldEnum[]
   }
 
   /**
-   * Mood findMany
+   * AIInteraction findMany
    */
-  export type MoodFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * Filter, which Moods to fetch.
+     * Filter, which AIInteractions to fetch.
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Moods to fetch.
+     * Determine the order of AIInteractions to fetch.
      */
-    orderBy?: MoodOrderByWithRelationInput | MoodOrderByWithRelationInput[]
+    orderBy?: AIInteractionOrderByWithRelationInput | AIInteractionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Moods.
+     * Sets the position for listing AIInteractions.
      */
-    cursor?: MoodWhereUniqueInput
+    cursor?: AIInteractionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Moods from the position of the cursor.
+     * Take `±n` AIInteractions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Moods.
+     * Skip the first `n` AIInteractions.
      */
     skip?: number
-    distinct?: MoodScalarFieldEnum | MoodScalarFieldEnum[]
+    distinct?: AIInteractionScalarFieldEnum | AIInteractionScalarFieldEnum[]
   }
 
   /**
-   * Mood create
+   * AIInteraction create
    */
-  export type MoodCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * The data needed to create a Mood.
+     * The data needed to create a AIInteraction.
      */
-    data: XOR<MoodCreateInput, MoodUncheckedCreateInput>
+    data: XOR<AIInteractionCreateInput, AIInteractionUncheckedCreateInput>
   }
 
   /**
-   * Mood createMany
+   * AIInteraction createMany
    */
-  export type MoodCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Moods.
+     * The data used to create many AIInteractions.
      */
-    data: MoodCreateManyInput | MoodCreateManyInput[]
+    data: AIInteractionCreateManyInput | AIInteractionCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Mood createManyAndReturn
+   * AIInteraction createManyAndReturn
    */
-  export type MoodCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelectCreateManyAndReturn<ExtArgs> | null
+    select?: AIInteractionSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
-     * The data used to create many Moods.
+     * The data used to create many AIInteractions.
      */
-    data: MoodCreateManyInput | MoodCreateManyInput[]
+    data: AIInteractionCreateManyInput | AIInteractionCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: AIInteractionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Mood update
+   * AIInteraction update
    */
-  export type MoodUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * The data needed to update a Mood.
+     * The data needed to update a AIInteraction.
      */
-    data: XOR<MoodUpdateInput, MoodUncheckedUpdateInput>
+    data: XOR<AIInteractionUpdateInput, AIInteractionUncheckedUpdateInput>
     /**
-     * Choose, which Mood to update.
+     * Choose, which AIInteraction to update.
      */
-    where: MoodWhereUniqueInput
+    where: AIInteractionWhereUniqueInput
   }
 
   /**
-   * Mood updateMany
+   * AIInteraction updateMany
    */
-  export type MoodUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Moods.
+     * The data used to update AIInteractions.
      */
-    data: XOR<MoodUpdateManyMutationInput, MoodUncheckedUpdateManyInput>
+    data: XOR<AIInteractionUpdateManyMutationInput, AIInteractionUncheckedUpdateManyInput>
     /**
-     * Filter which Moods to update
+     * Filter which AIInteractions to update
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
   }
 
   /**
-   * Mood updateManyAndReturn
+   * AIInteraction updateManyAndReturn
    */
-  export type MoodUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: AIInteractionSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
-     * The data used to update Moods.
+     * The data used to update AIInteractions.
      */
-    data: XOR<MoodUpdateManyMutationInput, MoodUncheckedUpdateManyInput>
+    data: XOR<AIInteractionUpdateManyMutationInput, AIInteractionUncheckedUpdateManyInput>
     /**
-     * Filter which Moods to update
+     * Filter which AIInteractions to update
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: AIInteractionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Mood upsert
+   * AIInteraction upsert
    */
-  export type MoodUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * The filter to search for the Mood to update in case it exists.
+     * The filter to search for the AIInteraction to update in case it exists.
      */
-    where: MoodWhereUniqueInput
+    where: AIInteractionWhereUniqueInput
     /**
-     * In case the Mood found by the `where` argument doesn't exist, create a new Mood with this data.
+     * In case the AIInteraction found by the `where` argument doesn't exist, create a new AIInteraction with this data.
      */
-    create: XOR<MoodCreateInput, MoodUncheckedCreateInput>
+    create: XOR<AIInteractionCreateInput, AIInteractionUncheckedCreateInput>
     /**
-     * In case the Mood was found with the provided `where` argument, update it with this data.
+     * In case the AIInteraction was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<MoodUpdateInput, MoodUncheckedUpdateInput>
+    update: XOR<AIInteractionUpdateInput, AIInteractionUncheckedUpdateInput>
   }
 
   /**
-   * Mood delete
+   * AIInteraction delete
    */
-  export type MoodDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
     /**
-     * Filter which Mood to delete.
+     * Filter which AIInteraction to delete.
      */
-    where: MoodWhereUniqueInput
+    where: AIInteractionWhereUniqueInput
   }
 
   /**
-   * Mood deleteMany
+   * AIInteraction deleteMany
    */
-  export type MoodDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Moods to delete
+     * Filter which AIInteractions to delete
      */
-    where?: MoodWhereInput
+    where?: AIInteractionWhereInput
   }
 
   /**
-   * Mood without action
+   * AIInteraction without action
    */
-  export type MoodDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AIInteractionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mood
+     * Select specific fields to fetch from the AIInteraction
      */
-    select?: MoodSelect<ExtArgs> | null
+    select?: AIInteractionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mood
+     * Omit specific fields from the AIInteraction
      */
-    omit?: MoodOmit<ExtArgs> | null
+    omit?: AIInteractionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MoodInclude<ExtArgs> | null
+    include?: AIInteractionInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model AcademicEvent
+   * Model CrisisLog
    */
 
-  export type AggregateAcademicEvent = {
-    _count: AcademicEventCountAggregateOutputType | null
-    _avg: AcademicEventAvgAggregateOutputType | null
-    _sum: AcademicEventSumAggregateOutputType | null
-    _min: AcademicEventMinAggregateOutputType | null
-    _max: AcademicEventMaxAggregateOutputType | null
+  export type AggregateCrisisLog = {
+    _count: CrisisLogCountAggregateOutputType | null
+    _avg: CrisisLogAvgAggregateOutputType | null
+    _sum: CrisisLogSumAggregateOutputType | null
+    _min: CrisisLogMinAggregateOutputType | null
+    _max: CrisisLogMaxAggregateOutputType | null
   }
 
-  export type AcademicEventAvgAggregateOutputType = {
-    importance: number | null
+  export type CrisisLogAvgAggregateOutputType = {
+    severity: number | null
   }
 
-  export type AcademicEventSumAggregateOutputType = {
-    importance: number | null
+  export type CrisisLogSumAggregateOutputType = {
+    severity: number | null
   }
 
-  export type AcademicEventMinAggregateOutputType = {
+  export type CrisisLogMinAggregateOutputType = {
     id: string | null
-    title: string | null
-    type: string | null
-    date: Date | null
-    importance: number | null
-    createdAt: Date | null
+    userId: string | null
+    message: string | null
+    severity: number | null
+    responseProvided: boolean | null
+    resourcesShown: boolean | null
+    emergencyContactCalled: boolean | null
+    timestamp: Date | null
   }
 
-  export type AcademicEventMaxAggregateOutputType = {
+  export type CrisisLogMaxAggregateOutputType = {
     id: string | null
-    title: string | null
-    type: string | null
-    date: Date | null
-    importance: number | null
-    createdAt: Date | null
+    userId: string | null
+    message: string | null
+    severity: number | null
+    responseProvided: boolean | null
+    resourcesShown: boolean | null
+    emergencyContactCalled: boolean | null
+    timestamp: Date | null
   }
 
-  export type AcademicEventCountAggregateOutputType = {
+  export type CrisisLogCountAggregateOutputType = {
     id: number
-    title: number
-    type: number
-    date: number
-    importance: number
-    createdAt: number
+    userId: number
+    message: number
+    severity: number
+    categories: number
+    responseProvided: number
+    resourcesShown: number
+    emergencyContactCalled: number
+    timestamp: number
     _all: number
   }
 
 
-  export type AcademicEventAvgAggregateInputType = {
-    importance?: true
+  export type CrisisLogAvgAggregateInputType = {
+    severity?: true
   }
 
-  export type AcademicEventSumAggregateInputType = {
-    importance?: true
+  export type CrisisLogSumAggregateInputType = {
+    severity?: true
   }
 
-  export type AcademicEventMinAggregateInputType = {
+  export type CrisisLogMinAggregateInputType = {
     id?: true
-    title?: true
-    type?: true
-    date?: true
-    importance?: true
-    createdAt?: true
+    userId?: true
+    message?: true
+    severity?: true
+    responseProvided?: true
+    resourcesShown?: true
+    emergencyContactCalled?: true
+    timestamp?: true
   }
 
-  export type AcademicEventMaxAggregateInputType = {
+  export type CrisisLogMaxAggregateInputType = {
     id?: true
-    title?: true
-    type?: true
-    date?: true
-    importance?: true
-    createdAt?: true
+    userId?: true
+    message?: true
+    severity?: true
+    responseProvided?: true
+    resourcesShown?: true
+    emergencyContactCalled?: true
+    timestamp?: true
   }
 
-  export type AcademicEventCountAggregateInputType = {
+  export type CrisisLogCountAggregateInputType = {
     id?: true
-    title?: true
-    type?: true
-    date?: true
-    importance?: true
-    createdAt?: true
+    userId?: true
+    message?: true
+    severity?: true
+    categories?: true
+    responseProvided?: true
+    resourcesShown?: true
+    emergencyContactCalled?: true
+    timestamp?: true
     _all?: true
   }
 
-  export type AcademicEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which AcademicEvent to aggregate.
+     * Filter which CrisisLog to aggregate.
      */
-    where?: AcademicEventWhereInput
+    where?: CrisisLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of AcademicEvents to fetch.
+     * Determine the order of CrisisLogs to fetch.
      */
-    orderBy?: AcademicEventOrderByWithRelationInput | AcademicEventOrderByWithRelationInput[]
+    orderBy?: CrisisLogOrderByWithRelationInput | CrisisLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: AcademicEventWhereUniqueInput
+    cursor?: CrisisLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` AcademicEvents from the position of the cursor.
+     * Take `±n` CrisisLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` AcademicEvents.
+     * Skip the first `n` CrisisLogs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned AcademicEvents
+     * Count returned CrisisLogs
     **/
-    _count?: true | AcademicEventCountAggregateInputType
+    _count?: true | CrisisLogCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: AcademicEventAvgAggregateInputType
+    _avg?: CrisisLogAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: AcademicEventSumAggregateInputType
+    _sum?: CrisisLogSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: AcademicEventMinAggregateInputType
+    _min?: CrisisLogMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: AcademicEventMaxAggregateInputType
+    _max?: CrisisLogMaxAggregateInputType
   }
 
-  export type GetAcademicEventAggregateType<T extends AcademicEventAggregateArgs> = {
-        [P in keyof T & keyof AggregateAcademicEvent]: P extends '_count' | 'count'
+  export type GetCrisisLogAggregateType<T extends CrisisLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateCrisisLog]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateAcademicEvent[P]>
-      : GetScalarType<T[P], AggregateAcademicEvent[P]>
+        : GetScalarType<T[P], AggregateCrisisLog[P]>
+      : GetScalarType<T[P], AggregateCrisisLog[P]>
   }
 
 
 
 
-  export type AcademicEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AcademicEventWhereInput
-    orderBy?: AcademicEventOrderByWithAggregationInput | AcademicEventOrderByWithAggregationInput[]
-    by: AcademicEventScalarFieldEnum[] | AcademicEventScalarFieldEnum
-    having?: AcademicEventScalarWhereWithAggregatesInput
+  export type CrisisLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CrisisLogWhereInput
+    orderBy?: CrisisLogOrderByWithAggregationInput | CrisisLogOrderByWithAggregationInput[]
+    by: CrisisLogScalarFieldEnum[] | CrisisLogScalarFieldEnum
+    having?: CrisisLogScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: AcademicEventCountAggregateInputType | true
-    _avg?: AcademicEventAvgAggregateInputType
-    _sum?: AcademicEventSumAggregateInputType
-    _min?: AcademicEventMinAggregateInputType
-    _max?: AcademicEventMaxAggregateInputType
+    _count?: CrisisLogCountAggregateInputType | true
+    _avg?: CrisisLogAvgAggregateInputType
+    _sum?: CrisisLogSumAggregateInputType
+    _min?: CrisisLogMinAggregateInputType
+    _max?: CrisisLogMaxAggregateInputType
   }
 
-  export type AcademicEventGroupByOutputType = {
+  export type CrisisLogGroupByOutputType = {
     id: string
-    title: string
-    type: string
-    date: Date
-    importance: number
-    createdAt: Date
-    _count: AcademicEventCountAggregateOutputType | null
-    _avg: AcademicEventAvgAggregateOutputType | null
-    _sum: AcademicEventSumAggregateOutputType | null
-    _min: AcademicEventMinAggregateOutputType | null
-    _max: AcademicEventMaxAggregateOutputType | null
+    userId: string
+    message: string
+    severity: number
+    categories: JsonValue
+    responseProvided: boolean
+    resourcesShown: boolean
+    emergencyContactCalled: boolean
+    timestamp: Date
+    _count: CrisisLogCountAggregateOutputType | null
+    _avg: CrisisLogAvgAggregateOutputType | null
+    _sum: CrisisLogSumAggregateOutputType | null
+    _min: CrisisLogMinAggregateOutputType | null
+    _max: CrisisLogMaxAggregateOutputType | null
   }
 
-  type GetAcademicEventGroupByPayload<T extends AcademicEventGroupByArgs> = Prisma.PrismaPromise<
+  type GetCrisisLogGroupByPayload<T extends CrisisLogGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AcademicEventGroupByOutputType, T['by']> &
+      PickEnumerable<CrisisLogGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AcademicEventGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof CrisisLogGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], AcademicEventGroupByOutputType[P]>
-            : GetScalarType<T[P], AcademicEventGroupByOutputType[P]>
+              : GetScalarType<T[P], CrisisLogGroupByOutputType[P]>
+            : GetScalarType<T[P], CrisisLogGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type AcademicEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CrisisLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    type?: boolean
-    date?: boolean
-    importance?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["academicEvent"]>
+    userId?: boolean
+    message?: boolean
+    severity?: boolean
+    categories?: boolean
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisisLog"]>
 
-  export type AcademicEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CrisisLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    type?: boolean
-    date?: boolean
-    importance?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["academicEvent"]>
+    userId?: boolean
+    message?: boolean
+    severity?: boolean
+    categories?: boolean
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisisLog"]>
 
-  export type AcademicEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CrisisLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    type?: boolean
-    date?: boolean
-    importance?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["academicEvent"]>
+    userId?: boolean
+    message?: boolean
+    severity?: boolean
+    categories?: boolean
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["crisisLog"]>
 
-  export type AcademicEventSelectScalar = {
+  export type CrisisLogSelectScalar = {
     id?: boolean
-    title?: boolean
-    type?: boolean
-    date?: boolean
-    importance?: boolean
-    createdAt?: boolean
+    userId?: boolean
+    message?: boolean
+    severity?: boolean
+    categories?: boolean
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: boolean
   }
 
-  export type AcademicEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "date" | "importance" | "createdAt", ExtArgs["result"]["academicEvent"]>
+  export type CrisisLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "message" | "severity" | "categories" | "responseProvided" | "resourcesShown" | "emergencyContactCalled" | "timestamp", ExtArgs["result"]["crisisLog"]>
+  export type CrisisLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CrisisLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CrisisLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
-  export type $AcademicEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "AcademicEvent"
-    objects: {}
+  export type $CrisisLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CrisisLog"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      title: string
-      type: string
-      date: Date
-      importance: number
-      createdAt: Date
-    }, ExtArgs["result"]["academicEvent"]>
+      userId: string
+      message: string
+      severity: number
+      categories: Prisma.JsonValue
+      responseProvided: boolean
+      resourcesShown: boolean
+      emergencyContactCalled: boolean
+      timestamp: Date
+    }, ExtArgs["result"]["crisisLog"]>
     composites: {}
   }
 
-  type AcademicEventGetPayload<S extends boolean | null | undefined | AcademicEventDefaultArgs> = $Result.GetResult<Prisma.$AcademicEventPayload, S>
+  type CrisisLogGetPayload<S extends boolean | null | undefined | CrisisLogDefaultArgs> = $Result.GetResult<Prisma.$CrisisLogPayload, S>
 
-  type AcademicEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AcademicEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AcademicEventCountAggregateInputType | true
+  type CrisisLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CrisisLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CrisisLogCountAggregateInputType | true
     }
 
-  export interface AcademicEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AcademicEvent'], meta: { name: 'AcademicEvent' } }
+  export interface CrisisLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CrisisLog'], meta: { name: 'CrisisLog' } }
     /**
-     * Find zero or one AcademicEvent that matches the filter.
-     * @param {AcademicEventFindUniqueArgs} args - Arguments to find a AcademicEvent
+     * Find zero or one CrisisLog that matches the filter.
+     * @param {CrisisLogFindUniqueArgs} args - Arguments to find a CrisisLog
      * @example
-     * // Get one AcademicEvent
-     * const academicEvent = await prisma.academicEvent.findUnique({
+     * // Get one CrisisLog
+     * const crisisLog = await prisma.crisisLog.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends AcademicEventFindUniqueArgs>(args: SelectSubset<T, AcademicEventFindUniqueArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CrisisLogFindUniqueArgs>(args: SelectSubset<T, CrisisLogFindUniqueArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find one AcademicEvent that matches the filter or throw an error with `error.code='P2025'`
+     * Find one CrisisLog that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {AcademicEventFindUniqueOrThrowArgs} args - Arguments to find a AcademicEvent
+     * @param {CrisisLogFindUniqueOrThrowArgs} args - Arguments to find a CrisisLog
      * @example
-     * // Get one AcademicEvent
-     * const academicEvent = await prisma.academicEvent.findUniqueOrThrow({
+     * // Get one CrisisLog
+     * const crisisLog = await prisma.crisisLog.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends AcademicEventFindUniqueOrThrowArgs>(args: SelectSubset<T, AcademicEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CrisisLogFindUniqueOrThrowArgs>(args: SelectSubset<T, CrisisLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find the first AcademicEvent that matches the filter.
+     * Find the first CrisisLog that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventFindFirstArgs} args - Arguments to find a AcademicEvent
+     * @param {CrisisLogFindFirstArgs} args - Arguments to find a CrisisLog
      * @example
-     * // Get one AcademicEvent
-     * const academicEvent = await prisma.academicEvent.findFirst({
+     * // Get one CrisisLog
+     * const crisisLog = await prisma.crisisLog.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends AcademicEventFindFirstArgs>(args?: SelectSubset<T, AcademicEventFindFirstArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CrisisLogFindFirstArgs>(args?: SelectSubset<T, CrisisLogFindFirstArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find the first AcademicEvent that matches the filter or
+     * Find the first CrisisLog that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventFindFirstOrThrowArgs} args - Arguments to find a AcademicEvent
+     * @param {CrisisLogFindFirstOrThrowArgs} args - Arguments to find a CrisisLog
      * @example
-     * // Get one AcademicEvent
-     * const academicEvent = await prisma.academicEvent.findFirstOrThrow({
+     * // Get one CrisisLog
+     * const crisisLog = await prisma.crisisLog.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends AcademicEventFindFirstOrThrowArgs>(args?: SelectSubset<T, AcademicEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CrisisLogFindFirstOrThrowArgs>(args?: SelectSubset<T, CrisisLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find zero or more AcademicEvents that matches the filter.
+     * Find zero or more CrisisLogs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {CrisisLogFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all AcademicEvents
-     * const academicEvents = await prisma.academicEvent.findMany()
+     * // Get all CrisisLogs
+     * const crisisLogs = await prisma.crisisLog.findMany()
      * 
-     * // Get first 10 AcademicEvents
-     * const academicEvents = await prisma.academicEvent.findMany({ take: 10 })
+     * // Get first 10 CrisisLogs
+     * const crisisLogs = await prisma.crisisLog.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const academicEventWithIdOnly = await prisma.academicEvent.findMany({ select: { id: true } })
+     * const crisisLogWithIdOnly = await prisma.crisisLog.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends AcademicEventFindManyArgs>(args?: SelectSubset<T, AcademicEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CrisisLogFindManyArgs>(args?: SelectSubset<T, CrisisLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
-     * Create a AcademicEvent.
-     * @param {AcademicEventCreateArgs} args - Arguments to create a AcademicEvent.
+     * Create a CrisisLog.
+     * @param {CrisisLogCreateArgs} args - Arguments to create a CrisisLog.
      * @example
-     * // Create one AcademicEvent
-     * const AcademicEvent = await prisma.academicEvent.create({
+     * // Create one CrisisLog
+     * const CrisisLog = await prisma.crisisLog.create({
      *   data: {
-     *     // ... data to create a AcademicEvent
+     *     // ... data to create a CrisisLog
      *   }
      * })
      * 
      */
-    create<T extends AcademicEventCreateArgs>(args: SelectSubset<T, AcademicEventCreateArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CrisisLogCreateArgs>(args: SelectSubset<T, CrisisLogCreateArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Create many AcademicEvents.
-     * @param {AcademicEventCreateManyArgs} args - Arguments to create many AcademicEvents.
+     * Create many CrisisLogs.
+     * @param {CrisisLogCreateManyArgs} args - Arguments to create many CrisisLogs.
      * @example
-     * // Create many AcademicEvents
-     * const academicEvent = await prisma.academicEvent.createMany({
+     * // Create many CrisisLogs
+     * const crisisLog = await prisma.crisisLog.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends AcademicEventCreateManyArgs>(args?: SelectSubset<T, AcademicEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CrisisLogCreateManyArgs>(args?: SelectSubset<T, CrisisLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many AcademicEvents and returns the data saved in the database.
-     * @param {AcademicEventCreateManyAndReturnArgs} args - Arguments to create many AcademicEvents.
+     * Create many CrisisLogs and returns the data saved in the database.
+     * @param {CrisisLogCreateManyAndReturnArgs} args - Arguments to create many CrisisLogs.
      * @example
-     * // Create many AcademicEvents
-     * const academicEvent = await prisma.academicEvent.createManyAndReturn({
+     * // Create many CrisisLogs
+     * const crisisLog = await prisma.crisisLog.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many AcademicEvents and only return the `id`
-     * const academicEventWithIdOnly = await prisma.academicEvent.createManyAndReturn({
+     * // Create many CrisisLogs and only return the `id`
+     * const crisisLogWithIdOnly = await prisma.crisisLog.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -6426,28 +9556,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends AcademicEventCreateManyAndReturnArgs>(args?: SelectSubset<T, AcademicEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CrisisLogCreateManyAndReturnArgs>(args?: SelectSubset<T, CrisisLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
-     * Delete a AcademicEvent.
-     * @param {AcademicEventDeleteArgs} args - Arguments to delete one AcademicEvent.
+     * Delete a CrisisLog.
+     * @param {CrisisLogDeleteArgs} args - Arguments to delete one CrisisLog.
      * @example
-     * // Delete one AcademicEvent
-     * const AcademicEvent = await prisma.academicEvent.delete({
+     * // Delete one CrisisLog
+     * const CrisisLog = await prisma.crisisLog.delete({
      *   where: {
-     *     // ... filter to delete one AcademicEvent
+     *     // ... filter to delete one CrisisLog
      *   }
      * })
      * 
      */
-    delete<T extends AcademicEventDeleteArgs>(args: SelectSubset<T, AcademicEventDeleteArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CrisisLogDeleteArgs>(args: SelectSubset<T, CrisisLogDeleteArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Update one AcademicEvent.
-     * @param {AcademicEventUpdateArgs} args - Arguments to update one AcademicEvent.
+     * Update one CrisisLog.
+     * @param {CrisisLogUpdateArgs} args - Arguments to update one CrisisLog.
      * @example
-     * // Update one AcademicEvent
-     * const academicEvent = await prisma.academicEvent.update({
+     * // Update one CrisisLog
+     * const crisisLog = await prisma.crisisLog.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6457,30 +9587,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends AcademicEventUpdateArgs>(args: SelectSubset<T, AcademicEventUpdateArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CrisisLogUpdateArgs>(args: SelectSubset<T, CrisisLogUpdateArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Delete zero or more AcademicEvents.
-     * @param {AcademicEventDeleteManyArgs} args - Arguments to filter AcademicEvents to delete.
+     * Delete zero or more CrisisLogs.
+     * @param {CrisisLogDeleteManyArgs} args - Arguments to filter CrisisLogs to delete.
      * @example
-     * // Delete a few AcademicEvents
-     * const { count } = await prisma.academicEvent.deleteMany({
+     * // Delete a few CrisisLogs
+     * const { count } = await prisma.crisisLog.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends AcademicEventDeleteManyArgs>(args?: SelectSubset<T, AcademicEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CrisisLogDeleteManyArgs>(args?: SelectSubset<T, CrisisLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more AcademicEvents.
+     * Update zero or more CrisisLogs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CrisisLogUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many AcademicEvents
-     * const academicEvent = await prisma.academicEvent.updateMany({
+     * // Update many CrisisLogs
+     * const crisisLog = await prisma.crisisLog.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6490,14 +9620,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends AcademicEventUpdateManyArgs>(args: SelectSubset<T, AcademicEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CrisisLogUpdateManyArgs>(args: SelectSubset<T, CrisisLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more AcademicEvents and returns the data updated in the database.
-     * @param {AcademicEventUpdateManyAndReturnArgs} args - Arguments to update many AcademicEvents.
+     * Update zero or more CrisisLogs and returns the data updated in the database.
+     * @param {CrisisLogUpdateManyAndReturnArgs} args - Arguments to update many CrisisLogs.
      * @example
-     * // Update many AcademicEvents
-     * const academicEvent = await prisma.academicEvent.updateManyAndReturn({
+     * // Update many CrisisLogs
+     * const crisisLog = await prisma.crisisLog.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6506,8 +9636,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more AcademicEvents and only return the `id`
-     * const academicEventWithIdOnly = await prisma.academicEvent.updateManyAndReturn({
+     * // Update zero or more CrisisLogs and only return the `id`
+     * const crisisLogWithIdOnly = await prisma.crisisLog.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -6520,56 +9650,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends AcademicEventUpdateManyAndReturnArgs>(args: SelectSubset<T, AcademicEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CrisisLogUpdateManyAndReturnArgs>(args: SelectSubset<T, CrisisLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
-     * Create or update one AcademicEvent.
-     * @param {AcademicEventUpsertArgs} args - Arguments to update or create a AcademicEvent.
+     * Create or update one CrisisLog.
+     * @param {CrisisLogUpsertArgs} args - Arguments to update or create a CrisisLog.
      * @example
-     * // Update or create a AcademicEvent
-     * const academicEvent = await prisma.academicEvent.upsert({
+     * // Update or create a CrisisLog
+     * const crisisLog = await prisma.crisisLog.upsert({
      *   create: {
-     *     // ... data to create a AcademicEvent
+     *     // ... data to create a CrisisLog
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the AcademicEvent we want to update
+     *     // ... the filter for the CrisisLog we want to update
      *   }
      * })
      */
-    upsert<T extends AcademicEventUpsertArgs>(args: SelectSubset<T, AcademicEventUpsertArgs<ExtArgs>>): Prisma__AcademicEventClient<$Result.GetResult<Prisma.$AcademicEventPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CrisisLogUpsertArgs>(args: SelectSubset<T, CrisisLogUpsertArgs<ExtArgs>>): Prisma__CrisisLogClient<$Result.GetResult<Prisma.$CrisisLogPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
-     * Count the number of AcademicEvents.
+     * Count the number of CrisisLogs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventCountArgs} args - Arguments to filter AcademicEvents to count.
+     * @param {CrisisLogCountArgs} args - Arguments to filter CrisisLogs to count.
      * @example
-     * // Count the number of AcademicEvents
-     * const count = await prisma.academicEvent.count({
+     * // Count the number of CrisisLogs
+     * const count = await prisma.crisisLog.count({
      *   where: {
-     *     // ... the filter for the AcademicEvents we want to count
+     *     // ... the filter for the CrisisLogs we want to count
      *   }
      * })
     **/
-    count<T extends AcademicEventCountArgs>(
-      args?: Subset<T, AcademicEventCountArgs>,
+    count<T extends CrisisLogCountArgs>(
+      args?: Subset<T, CrisisLogCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], AcademicEventCountAggregateOutputType>
+          : GetScalarType<T['select'], CrisisLogCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a AcademicEvent.
+     * Allows you to perform aggregations operations on a CrisisLog.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {CrisisLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -6589,13 +9719,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends AcademicEventAggregateArgs>(args: Subset<T, AcademicEventAggregateArgs>): Prisma.PrismaPromise<GetAcademicEventAggregateType<T>>
+    aggregate<T extends CrisisLogAggregateArgs>(args: Subset<T, CrisisLogAggregateArgs>): Prisma.PrismaPromise<GetCrisisLogAggregateType<T>>
 
     /**
-     * Group by AcademicEvent.
+     * Group by CrisisLog.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicEventGroupByArgs} args - Group by arguments.
+     * @param {CrisisLogGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -6610,14 +9740,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends AcademicEventGroupByArgs,
+      T extends CrisisLogGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AcademicEventGroupByArgs['orderBy'] }
-        : { orderBy?: AcademicEventGroupByArgs['orderBy'] },
+        ? { orderBy: CrisisLogGroupByArgs['orderBy'] }
+        : { orderBy?: CrisisLogGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6666,21 +9796,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, AcademicEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAcademicEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CrisisLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCrisisLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the AcademicEvent model
+   * Fields of the CrisisLog model
    */
-  readonly fields: AcademicEventFieldRefs;
+  readonly fields: CrisisLogFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for AcademicEvent.
+   * The delegate class that acts as a "Promise-like" for CrisisLog.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AcademicEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CrisisLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6707,366 +9838,1523 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the AcademicEvent model
+   * Fields of the CrisisLog model
    */ 
-  interface AcademicEventFieldRefs {
-    readonly id: FieldRef<"AcademicEvent", 'String'>
-    readonly title: FieldRef<"AcademicEvent", 'String'>
-    readonly type: FieldRef<"AcademicEvent", 'String'>
-    readonly date: FieldRef<"AcademicEvent", 'DateTime'>
-    readonly importance: FieldRef<"AcademicEvent", 'Int'>
-    readonly createdAt: FieldRef<"AcademicEvent", 'DateTime'>
+  interface CrisisLogFieldRefs {
+    readonly id: FieldRef<"CrisisLog", 'String'>
+    readonly userId: FieldRef<"CrisisLog", 'String'>
+    readonly message: FieldRef<"CrisisLog", 'String'>
+    readonly severity: FieldRef<"CrisisLog", 'Int'>
+    readonly categories: FieldRef<"CrisisLog", 'Json'>
+    readonly responseProvided: FieldRef<"CrisisLog", 'Boolean'>
+    readonly resourcesShown: FieldRef<"CrisisLog", 'Boolean'>
+    readonly emergencyContactCalled: FieldRef<"CrisisLog", 'Boolean'>
+    readonly timestamp: FieldRef<"CrisisLog", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * AcademicEvent findUnique
+   * CrisisLog findUnique
    */
-  export type AcademicEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * Filter, which AcademicEvent to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: AcademicEventWhereUniqueInput
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * Filter, which CrisisLog to fetch.
+     */
+    where: CrisisLogWhereUniqueInput
   }
 
   /**
-   * AcademicEvent findUniqueOrThrow
+   * CrisisLog findUniqueOrThrow
    */
-  export type AcademicEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * Filter, which AcademicEvent to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: AcademicEventWhereUniqueInput
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * Filter, which CrisisLog to fetch.
+     */
+    where: CrisisLogWhereUniqueInput
   }
 
   /**
-   * AcademicEvent findFirst
+   * CrisisLog findFirst
    */
-  export type AcademicEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * Filter, which AcademicEvent to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: AcademicEventWhereInput
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * Filter, which CrisisLog to fetch.
+     */
+    where?: CrisisLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of AcademicEvents to fetch.
+     * Determine the order of CrisisLogs to fetch.
      */
-    orderBy?: AcademicEventOrderByWithRelationInput | AcademicEventOrderByWithRelationInput[]
+    orderBy?: CrisisLogOrderByWithRelationInput | CrisisLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for AcademicEvents.
+     * Sets the position for searching for CrisisLogs.
      */
-    cursor?: AcademicEventWhereUniqueInput
+    cursor?: CrisisLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` AcademicEvents from the position of the cursor.
+     * Take `±n` CrisisLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` AcademicEvents.
+     * Skip the first `n` CrisisLogs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of AcademicEvents.
+     * Filter by unique combinations of CrisisLogs.
      */
-    distinct?: AcademicEventScalarFieldEnum | AcademicEventScalarFieldEnum[]
+    distinct?: CrisisLogScalarFieldEnum | CrisisLogScalarFieldEnum[]
   }
 
   /**
-   * AcademicEvent findFirstOrThrow
+   * CrisisLog findFirstOrThrow
    */
-  export type AcademicEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * Filter, which AcademicEvent to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: AcademicEventWhereInput
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * Filter, which CrisisLog to fetch.
+     */
+    where?: CrisisLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of AcademicEvents to fetch.
+     * Determine the order of CrisisLogs to fetch.
      */
-    orderBy?: AcademicEventOrderByWithRelationInput | AcademicEventOrderByWithRelationInput[]
+    orderBy?: CrisisLogOrderByWithRelationInput | CrisisLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for AcademicEvents.
+     * Sets the position for searching for CrisisLogs.
      */
-    cursor?: AcademicEventWhereUniqueInput
+    cursor?: CrisisLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` AcademicEvents from the position of the cursor.
+     * Take `±n` CrisisLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` AcademicEvents.
+     * Skip the first `n` CrisisLogs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of AcademicEvents.
+     * Filter by unique combinations of CrisisLogs.
      */
-    distinct?: AcademicEventScalarFieldEnum | AcademicEventScalarFieldEnum[]
+    distinct?: CrisisLogScalarFieldEnum | CrisisLogScalarFieldEnum[]
   }
 
   /**
-   * AcademicEvent findMany
+   * CrisisLog findMany
    */
-  export type AcademicEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * Filter, which AcademicEvents to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: AcademicEventWhereInput
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * Filter, which CrisisLogs to fetch.
+     */
+    where?: CrisisLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of AcademicEvents to fetch.
+     * Determine the order of CrisisLogs to fetch.
      */
-    orderBy?: AcademicEventOrderByWithRelationInput | AcademicEventOrderByWithRelationInput[]
+    orderBy?: CrisisLogOrderByWithRelationInput | CrisisLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing AcademicEvents.
+     * Sets the position for listing CrisisLogs.
      */
-    cursor?: AcademicEventWhereUniqueInput
+    cursor?: CrisisLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` AcademicEvents from the position of the cursor.
+     * Take `±n` CrisisLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` AcademicEvents.
+     * Skip the first `n` CrisisLogs.
      */
     skip?: number
-    distinct?: AcademicEventScalarFieldEnum | AcademicEventScalarFieldEnum[]
+    distinct?: CrisisLogScalarFieldEnum | CrisisLogScalarFieldEnum[]
   }
 
   /**
-   * AcademicEvent create
+   * CrisisLog create
    */
-  export type AcademicEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: CrisisLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * The data needed to create a AcademicEvent.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<AcademicEventCreateInput, AcademicEventUncheckedCreateInput>
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CrisisLog.
+     */
+    data: XOR<CrisisLogCreateInput, CrisisLogUncheckedCreateInput>
   }
 
   /**
-   * AcademicEvent createMany
+   * CrisisLog createMany
    */
-  export type AcademicEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many AcademicEvents.
+     * The data used to create many CrisisLogs.
      */
-    data: AcademicEventCreateManyInput | AcademicEventCreateManyInput[]
+    data: CrisisLogCreateManyInput | CrisisLogCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * AcademicEvent createManyAndReturn
+   * CrisisLog createManyAndReturn
    */
-  export type AcademicEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CrisisLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the CrisisLog
      */
-    select?: AcademicEventSelectCreateManyAndReturn<ExtArgs> | null
+    select?: CrisisLogSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the CrisisLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: CrisisLogOmit<ExtArgs> | null
     /**
-     * The data used to create many AcademicEvents.
+     * The data used to create many CrisisLogs.
      */
-    data: AcademicEventCreateManyInput | AcademicEventCreateManyInput[]
+    data: CrisisLogCreateManyInput | CrisisLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CrisisLog update
+   */
+  export type CrisisLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisLog
+     */
+    select?: CrisisLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CrisisLog
+     */
+    omit?: CrisisLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CrisisLog.
+     */
+    data: XOR<CrisisLogUpdateInput, CrisisLogUncheckedUpdateInput>
+    /**
+     * Choose, which CrisisLog to update.
+     */
+    where: CrisisLogWhereUniqueInput
+  }
+
+  /**
+   * CrisisLog updateMany
+   */
+  export type CrisisLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CrisisLogs.
+     */
+    data: XOR<CrisisLogUpdateManyMutationInput, CrisisLogUncheckedUpdateManyInput>
+    /**
+     * Filter which CrisisLogs to update
+     */
+    where?: CrisisLogWhereInput
+  }
+
+  /**
+   * CrisisLog updateManyAndReturn
+   */
+  export type CrisisLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisLog
+     */
+    select?: CrisisLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CrisisLog
+     */
+    omit?: CrisisLogOmit<ExtArgs> | null
+    /**
+     * The data used to update CrisisLogs.
+     */
+    data: XOR<CrisisLogUpdateManyMutationInput, CrisisLogUncheckedUpdateManyInput>
+    /**
+     * Filter which CrisisLogs to update
+     */
+    where?: CrisisLogWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisLogIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CrisisLog upsert
+   */
+  export type CrisisLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisLog
+     */
+    select?: CrisisLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CrisisLog
+     */
+    omit?: CrisisLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CrisisLog to update in case it exists.
+     */
+    where: CrisisLogWhereUniqueInput
+    /**
+     * In case the CrisisLog found by the `where` argument doesn't exist, create a new CrisisLog with this data.
+     */
+    create: XOR<CrisisLogCreateInput, CrisisLogUncheckedCreateInput>
+    /**
+     * In case the CrisisLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CrisisLogUpdateInput, CrisisLogUncheckedUpdateInput>
+  }
+
+  /**
+   * CrisisLog delete
+   */
+  export type CrisisLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisLog
+     */
+    select?: CrisisLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CrisisLog
+     */
+    omit?: CrisisLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisLogInclude<ExtArgs> | null
+    /**
+     * Filter which CrisisLog to delete.
+     */
+    where: CrisisLogWhereUniqueInput
+  }
+
+  /**
+   * CrisisLog deleteMany
+   */
+  export type CrisisLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CrisisLogs to delete
+     */
+    where?: CrisisLogWhereInput
+  }
+
+  /**
+   * CrisisLog without action
+   */
+  export type CrisisLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CrisisLog
+     */
+    select?: CrisisLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CrisisLog
+     */
+    omit?: CrisisLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CrisisLogInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UsageLog
+   */
+
+  export type AggregateUsageLog = {
+    _count: UsageLogCountAggregateOutputType | null
+    _avg: UsageLogAvgAggregateOutputType | null
+    _sum: UsageLogSumAggregateOutputType | null
+    _min: UsageLogMinAggregateOutputType | null
+    _max: UsageLogMaxAggregateOutputType | null
+  }
+
+  export type UsageLogAvgAggregateOutputType = {
+    tokensUsed: number | null
+  }
+
+  export type UsageLogSumAggregateOutputType = {
+    tokensUsed: number | null
+  }
+
+  export type UsageLogMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    service: $Enums.Service | null
+    model: string | null
+    tokensUsed: number | null
+    finishReason: string | null
+    timestamp: Date | null
+  }
+
+  export type UsageLogMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    service: $Enums.Service | null
+    model: string | null
+    tokensUsed: number | null
+    finishReason: string | null
+    timestamp: Date | null
+  }
+
+  export type UsageLogCountAggregateOutputType = {
+    id: number
+    userId: number
+    service: number
+    model: number
+    tokensUsed: number
+    finishReason: number
+    timestamp: number
+    _all: number
+  }
+
+
+  export type UsageLogAvgAggregateInputType = {
+    tokensUsed?: true
+  }
+
+  export type UsageLogSumAggregateInputType = {
+    tokensUsed?: true
+  }
+
+  export type UsageLogMinAggregateInputType = {
+    id?: true
+    userId?: true
+    service?: true
+    model?: true
+    tokensUsed?: true
+    finishReason?: true
+    timestamp?: true
+  }
+
+  export type UsageLogMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    service?: true
+    model?: true
+    tokensUsed?: true
+    finishReason?: true
+    timestamp?: true
+  }
+
+  export type UsageLogCountAggregateInputType = {
+    id?: true
+    userId?: true
+    service?: true
+    model?: true
+    tokensUsed?: true
+    finishReason?: true
+    timestamp?: true
+    _all?: true
+  }
+
+  export type UsageLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UsageLog to aggregate.
+     */
+    where?: UsageLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsageLogs to fetch.
+     */
+    orderBy?: UsageLogOrderByWithRelationInput | UsageLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UsageLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsageLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsageLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UsageLogs
+    **/
+    _count?: true | UsageLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UsageLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsageLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsageLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsageLogMaxAggregateInputType
+  }
+
+  export type GetUsageLogAggregateType<T extends UsageLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsageLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsageLog[P]>
+      : GetScalarType<T[P], AggregateUsageLog[P]>
+  }
+
+
+
+
+  export type UsageLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsageLogWhereInput
+    orderBy?: UsageLogOrderByWithAggregationInput | UsageLogOrderByWithAggregationInput[]
+    by: UsageLogScalarFieldEnum[] | UsageLogScalarFieldEnum
+    having?: UsageLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsageLogCountAggregateInputType | true
+    _avg?: UsageLogAvgAggregateInputType
+    _sum?: UsageLogSumAggregateInputType
+    _min?: UsageLogMinAggregateInputType
+    _max?: UsageLogMaxAggregateInputType
+  }
+
+  export type UsageLogGroupByOutputType = {
+    id: string
+    userId: string
+    service: $Enums.Service
+    model: string | null
+    tokensUsed: number | null
+    finishReason: string | null
+    timestamp: Date
+    _count: UsageLogCountAggregateOutputType | null
+    _avg: UsageLogAvgAggregateOutputType | null
+    _sum: UsageLogSumAggregateOutputType | null
+    _min: UsageLogMinAggregateOutputType | null
+    _max: UsageLogMaxAggregateOutputType | null
+  }
+
+  type GetUsageLogGroupByPayload<T extends UsageLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsageLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsageLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsageLogGroupByOutputType[P]>
+            : GetScalarType<T[P], UsageLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UsageLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    service?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    finishReason?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usageLog"]>
+
+  export type UsageLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    service?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    finishReason?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usageLog"]>
+
+  export type UsageLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    service?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    finishReason?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usageLog"]>
+
+  export type UsageLogSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    service?: boolean
+    model?: boolean
+    tokensUsed?: boolean
+    finishReason?: boolean
+    timestamp?: boolean
+  }
+
+  export type UsageLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "service" | "model" | "tokensUsed" | "finishReason" | "timestamp", ExtArgs["result"]["usageLog"]>
+  export type UsageLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UsageLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UsageLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UsageLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UsageLog"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      service: $Enums.Service
+      model: string | null
+      tokensUsed: number | null
+      finishReason: string | null
+      timestamp: Date
+    }, ExtArgs["result"]["usageLog"]>
+    composites: {}
+  }
+
+  type UsageLogGetPayload<S extends boolean | null | undefined | UsageLogDefaultArgs> = $Result.GetResult<Prisma.$UsageLogPayload, S>
+
+  type UsageLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UsageLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsageLogCountAggregateInputType | true
+    }
+
+  export interface UsageLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UsageLog'], meta: { name: 'UsageLog' } }
+    /**
+     * Find zero or one UsageLog that matches the filter.
+     * @param {UsageLogFindUniqueArgs} args - Arguments to find a UsageLog
+     * @example
+     * // Get one UsageLog
+     * const usageLog = await prisma.usageLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UsageLogFindUniqueArgs>(args: SelectSubset<T, UsageLogFindUniqueArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one UsageLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UsageLogFindUniqueOrThrowArgs} args - Arguments to find a UsageLog
+     * @example
+     * // Get one UsageLog
+     * const usageLog = await prisma.usageLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UsageLogFindUniqueOrThrowArgs>(args: SelectSubset<T, UsageLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first UsageLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogFindFirstArgs} args - Arguments to find a UsageLog
+     * @example
+     * // Get one UsageLog
+     * const usageLog = await prisma.usageLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UsageLogFindFirstArgs>(args?: SelectSubset<T, UsageLogFindFirstArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first UsageLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogFindFirstOrThrowArgs} args - Arguments to find a UsageLog
+     * @example
+     * // Get one UsageLog
+     * const usageLog = await prisma.usageLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UsageLogFindFirstOrThrowArgs>(args?: SelectSubset<T, UsageLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more UsageLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UsageLogs
+     * const usageLogs = await prisma.usageLog.findMany()
+     * 
+     * // Get first 10 UsageLogs
+     * const usageLogs = await prisma.usageLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usageLogWithIdOnly = await prisma.usageLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UsageLogFindManyArgs>(args?: SelectSubset<T, UsageLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a UsageLog.
+     * @param {UsageLogCreateArgs} args - Arguments to create a UsageLog.
+     * @example
+     * // Create one UsageLog
+     * const UsageLog = await prisma.usageLog.create({
+     *   data: {
+     *     // ... data to create a UsageLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends UsageLogCreateArgs>(args: SelectSubset<T, UsageLogCreateArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many UsageLogs.
+     * @param {UsageLogCreateManyArgs} args - Arguments to create many UsageLogs.
+     * @example
+     * // Create many UsageLogs
+     * const usageLog = await prisma.usageLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UsageLogCreateManyArgs>(args?: SelectSubset<T, UsageLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UsageLogs and returns the data saved in the database.
+     * @param {UsageLogCreateManyAndReturnArgs} args - Arguments to create many UsageLogs.
+     * @example
+     * // Create many UsageLogs
+     * const usageLog = await prisma.usageLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UsageLogs and only return the `id`
+     * const usageLogWithIdOnly = await prisma.usageLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UsageLogCreateManyAndReturnArgs>(args?: SelectSubset<T, UsageLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a UsageLog.
+     * @param {UsageLogDeleteArgs} args - Arguments to delete one UsageLog.
+     * @example
+     * // Delete one UsageLog
+     * const UsageLog = await prisma.usageLog.delete({
+     *   where: {
+     *     // ... filter to delete one UsageLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UsageLogDeleteArgs>(args: SelectSubset<T, UsageLogDeleteArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one UsageLog.
+     * @param {UsageLogUpdateArgs} args - Arguments to update one UsageLog.
+     * @example
+     * // Update one UsageLog
+     * const usageLog = await prisma.usageLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UsageLogUpdateArgs>(args: SelectSubset<T, UsageLogUpdateArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more UsageLogs.
+     * @param {UsageLogDeleteManyArgs} args - Arguments to filter UsageLogs to delete.
+     * @example
+     * // Delete a few UsageLogs
+     * const { count } = await prisma.usageLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UsageLogDeleteManyArgs>(args?: SelectSubset<T, UsageLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UsageLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UsageLogs
+     * const usageLog = await prisma.usageLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UsageLogUpdateManyArgs>(args: SelectSubset<T, UsageLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UsageLogs and returns the data updated in the database.
+     * @param {UsageLogUpdateManyAndReturnArgs} args - Arguments to update many UsageLogs.
+     * @example
+     * // Update many UsageLogs
+     * const usageLog = await prisma.usageLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UsageLogs and only return the `id`
+     * const usageLogWithIdOnly = await prisma.usageLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UsageLogUpdateManyAndReturnArgs>(args: SelectSubset<T, UsageLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one UsageLog.
+     * @param {UsageLogUpsertArgs} args - Arguments to update or create a UsageLog.
+     * @example
+     * // Update or create a UsageLog
+     * const usageLog = await prisma.usageLog.upsert({
+     *   create: {
+     *     // ... data to create a UsageLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UsageLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UsageLogUpsertArgs>(args: SelectSubset<T, UsageLogUpsertArgs<ExtArgs>>): Prisma__UsageLogClient<$Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of UsageLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogCountArgs} args - Arguments to filter UsageLogs to count.
+     * @example
+     * // Count the number of UsageLogs
+     * const count = await prisma.usageLog.count({
+     *   where: {
+     *     // ... the filter for the UsageLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends UsageLogCountArgs>(
+      args?: Subset<T, UsageLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsageLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UsageLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsageLogAggregateArgs>(args: Subset<T, UsageLogAggregateArgs>): Prisma.PrismaPromise<GetUsageLogAggregateType<T>>
+
+    /**
+     * Group by UsageLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsageLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UsageLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UsageLogGroupByArgs['orderBy'] }
+        : { orderBy?: UsageLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UsageLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsageLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UsageLog model
+   */
+  readonly fields: UsageLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UsageLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UsageLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UsageLog model
+   */ 
+  interface UsageLogFieldRefs {
+    readonly id: FieldRef<"UsageLog", 'String'>
+    readonly userId: FieldRef<"UsageLog", 'String'>
+    readonly service: FieldRef<"UsageLog", 'Service'>
+    readonly model: FieldRef<"UsageLog", 'String'>
+    readonly tokensUsed: FieldRef<"UsageLog", 'Int'>
+    readonly finishReason: FieldRef<"UsageLog", 'String'>
+    readonly timestamp: FieldRef<"UsageLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UsageLog findUnique
+   */
+  export type UsageLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * Filter, which UsageLog to fetch.
+     */
+    where: UsageLogWhereUniqueInput
+  }
+
+  /**
+   * UsageLog findUniqueOrThrow
+   */
+  export type UsageLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * Filter, which UsageLog to fetch.
+     */
+    where: UsageLogWhereUniqueInput
+  }
+
+  /**
+   * UsageLog findFirst
+   */
+  export type UsageLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * Filter, which UsageLog to fetch.
+     */
+    where?: UsageLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsageLogs to fetch.
+     */
+    orderBy?: UsageLogOrderByWithRelationInput | UsageLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UsageLogs.
+     */
+    cursor?: UsageLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsageLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsageLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UsageLogs.
+     */
+    distinct?: UsageLogScalarFieldEnum | UsageLogScalarFieldEnum[]
+  }
+
+  /**
+   * UsageLog findFirstOrThrow
+   */
+  export type UsageLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * Filter, which UsageLog to fetch.
+     */
+    where?: UsageLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsageLogs to fetch.
+     */
+    orderBy?: UsageLogOrderByWithRelationInput | UsageLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UsageLogs.
+     */
+    cursor?: UsageLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsageLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsageLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UsageLogs.
+     */
+    distinct?: UsageLogScalarFieldEnum | UsageLogScalarFieldEnum[]
+  }
+
+  /**
+   * UsageLog findMany
+   */
+  export type UsageLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * Filter, which UsageLogs to fetch.
+     */
+    where?: UsageLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsageLogs to fetch.
+     */
+    orderBy?: UsageLogOrderByWithRelationInput | UsageLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UsageLogs.
+     */
+    cursor?: UsageLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsageLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsageLogs.
+     */
+    skip?: number
+    distinct?: UsageLogScalarFieldEnum | UsageLogScalarFieldEnum[]
+  }
+
+  /**
+   * UsageLog create
+   */
+  export type UsageLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsageLog
+     */
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UsageLog.
+     */
+    data: XOR<UsageLogCreateInput, UsageLogUncheckedCreateInput>
+  }
+
+  /**
+   * UsageLog createMany
+   */
+  export type UsageLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UsageLogs.
+     */
+    data: UsageLogCreateManyInput | UsageLogCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * AcademicEvent update
+   * UsageLog createManyAndReturn
    */
-  export type AcademicEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the UsageLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: UsageLogSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the UsageLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: UsageLogOmit<ExtArgs> | null
     /**
-     * The data needed to update a AcademicEvent.
+     * The data used to create many UsageLogs.
      */
-    data: XOR<AcademicEventUpdateInput, AcademicEventUncheckedUpdateInput>
+    data: UsageLogCreateManyInput | UsageLogCreateManyInput[]
+    skipDuplicates?: boolean
     /**
-     * Choose, which AcademicEvent to update.
+     * Choose, which related nodes to fetch as well
      */
-    where: AcademicEventWhereUniqueInput
+    include?: UsageLogIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * AcademicEvent updateMany
+   * UsageLog update
    */
-  export type AcademicEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update AcademicEvents.
+     * Select specific fields to fetch from the UsageLog
      */
-    data: XOR<AcademicEventUpdateManyMutationInput, AcademicEventUncheckedUpdateManyInput>
+    select?: UsageLogSelect<ExtArgs> | null
     /**
-     * Filter which AcademicEvents to update
+     * Omit specific fields from the UsageLog
      */
-    where?: AcademicEventWhereInput
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UsageLog.
+     */
+    data: XOR<UsageLogUpdateInput, UsageLogUncheckedUpdateInput>
+    /**
+     * Choose, which UsageLog to update.
+     */
+    where: UsageLogWhereUniqueInput
   }
 
   /**
-   * AcademicEvent updateManyAndReturn
+   * UsageLog updateMany
    */
-  export type AcademicEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * The data used to update UsageLogs.
      */
-    select?: AcademicEventSelectUpdateManyAndReturn<ExtArgs> | null
+    data: XOR<UsageLogUpdateManyMutationInput, UsageLogUncheckedUpdateManyInput>
     /**
-     * Omit specific fields from the AcademicEvent
+     * Filter which UsageLogs to update
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
-    /**
-     * The data used to update AcademicEvents.
-     */
-    data: XOR<AcademicEventUpdateManyMutationInput, AcademicEventUncheckedUpdateManyInput>
-    /**
-     * Filter which AcademicEvents to update
-     */
-    where?: AcademicEventWhereInput
+    where?: UsageLogWhereInput
   }
 
   /**
-   * AcademicEvent upsert
+   * UsageLog updateManyAndReturn
    */
-  export type AcademicEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the UsageLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: UsageLogSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the UsageLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: UsageLogOmit<ExtArgs> | null
     /**
-     * The filter to search for the AcademicEvent to update in case it exists.
+     * The data used to update UsageLogs.
      */
-    where: AcademicEventWhereUniqueInput
+    data: XOR<UsageLogUpdateManyMutationInput, UsageLogUncheckedUpdateManyInput>
     /**
-     * In case the AcademicEvent found by the `where` argument doesn't exist, create a new AcademicEvent with this data.
+     * Filter which UsageLogs to update
      */
-    create: XOR<AcademicEventCreateInput, AcademicEventUncheckedCreateInput>
+    where?: UsageLogWhereInput
     /**
-     * In case the AcademicEvent was found with the provided `where` argument, update it with this data.
+     * Choose, which related nodes to fetch as well
      */
-    update: XOR<AcademicEventUpdateInput, AcademicEventUncheckedUpdateInput>
+    include?: UsageLogIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * AcademicEvent delete
+   * UsageLog upsert
    */
-  export type AcademicEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Select specific fields to fetch from the UsageLog
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    select?: UsageLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the AcademicEvent
+     * Omit specific fields from the UsageLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    omit?: UsageLogOmit<ExtArgs> | null
     /**
-     * Filter which AcademicEvent to delete.
+     * Choose, which related nodes to fetch as well
      */
-    where: AcademicEventWhereUniqueInput
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UsageLog to update in case it exists.
+     */
+    where: UsageLogWhereUniqueInput
+    /**
+     * In case the UsageLog found by the `where` argument doesn't exist, create a new UsageLog with this data.
+     */
+    create: XOR<UsageLogCreateInput, UsageLogUncheckedCreateInput>
+    /**
+     * In case the UsageLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UsageLogUpdateInput, UsageLogUncheckedUpdateInput>
   }
 
   /**
-   * AcademicEvent deleteMany
+   * UsageLog delete
    */
-  export type AcademicEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which AcademicEvents to delete
+     * Select specific fields to fetch from the UsageLog
      */
-    where?: AcademicEventWhereInput
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
+    /**
+     * Filter which UsageLog to delete.
+     */
+    where: UsageLogWhereUniqueInput
   }
 
   /**
-   * AcademicEvent without action
+   * UsageLog deleteMany
    */
-  export type AcademicEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AcademicEvent
+     * Filter which UsageLogs to delete
      */
-    select?: AcademicEventSelect<ExtArgs> | null
+    where?: UsageLogWhereInput
+  }
+
+  /**
+   * UsageLog without action
+   */
+  export type UsageLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Omit specific fields from the AcademicEvent
+     * Select specific fields to fetch from the UsageLog
      */
-    omit?: AcademicEventOmit<ExtArgs> | null
+    select?: UsageLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UsageLog
+     */
+    omit?: UsageLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsageLogInclude<ExtArgs> | null
   }
 
 
@@ -7091,11 +11379,12 @@ export namespace Prisma {
     googleId: 'googleId',
     isVerified: 'isVerified',
     isAnonymous: 'isAnonymous',
+    verificationToken: 'verificationToken',
+    image: 'image',
     displayName: 'displayName',
     university: 'university',
     academicLevel: 'academicLevel',
     program: 'program',
-    image: 'image',
     language: 'language',
     notificationPreference: 'notificationPreference',
     preferredCheckInTime: 'preferredCheckInTime',
@@ -7109,13 +11398,14 @@ export namespace Prisma {
     stressors: 'stressors',
     trackingPreferences: 'trackingPreferences',
     emergencyContacts: 'emergencyContacts',
+    baselineMood: 'baselineMood',
     baseline: 'baseline',
+    joinDate: 'joinDate',
     moodCheckInsCount: 'moodCheckInsCount',
     conversationsCount: 'conversationsCount',
     lastActive: 'lastActive',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
-    verificationToken: 'verificationToken',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7123,53 +11413,109 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const ChatMessageScalarFieldEnum: {
+  export const ConversationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    content: 'content',
+    startedAt: 'startedAt',
+    lastMessageAt: 'lastMessageAt',
+    endedAt: 'endedAt',
+    status: 'status',
+    metadata: 'metadata',
+    summary: 'summary',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+  export const MessageScalarFieldEnum: {
+    id: 'id',
+    conversationId: 'conversationId',
     role: 'role',
-    createdAt: 'createdAt'
+    content: 'content',
+    timestamp: 'timestamp',
+    metadata: 'metadata'
   };
 
-  export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
+  export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
-  export const AssessmentScalarFieldEnum: {
+  export const MoodEntryScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    type: 'type',
-    score: 'score',
-    severity: 'severity',
-    createdAt: 'createdAt'
-  };
-
-  export type AssessmentScalarFieldEnum = (typeof AssessmentScalarFieldEnum)[keyof typeof AssessmentScalarFieldEnum]
-
-
-  export const MoodScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    value: 'value',
-    note: 'note',
+    mood: 'mood',
+    energy: 'energy',
+    sleep: 'sleep',
+    social: 'social',
+    anxiety: 'anxiety',
+    notes: 'notes',
+    tags: 'tags',
     sentimentScore: 'sentimentScore',
     sentimentLabel: 'sentimentLabel',
     crisisFlag: 'crisisFlag',
     createdAt: 'createdAt'
   };
 
-  export type MoodScalarFieldEnum = (typeof MoodScalarFieldEnum)[keyof typeof MoodScalarFieldEnum]
+  export type MoodEntryScalarFieldEnum = (typeof MoodEntryScalarFieldEnum)[keyof typeof MoodEntryScalarFieldEnum]
 
 
-  export const AcademicEventScalarFieldEnum: {
+  export const AssessmentScalarFieldEnum: {
     id: 'id',
-    title: 'title',
+    userId: 'userId',
     type: 'type',
-    date: 'date',
-    importance: 'importance',
+    responses: 'responses',
+    score: 'score',
+    severity: 'severity',
+    interpretation: 'interpretation',
     createdAt: 'createdAt'
   };
 
-  export type AcademicEventScalarFieldEnum = (typeof AcademicEventScalarFieldEnum)[keyof typeof AcademicEventScalarFieldEnum]
+  export type AssessmentScalarFieldEnum = (typeof AssessmentScalarFieldEnum)[keyof typeof AssessmentScalarFieldEnum]
+
+
+  export const AIInteractionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    userMessage: 'userMessage',
+    aiResponse: 'aiResponse',
+    model: 'model',
+    tokensUsed: 'tokensUsed',
+    crisisDetected: 'crisisDetected',
+    emotionalIntensity: 'emotionalIntensity',
+    responseTime: 'responseTime',
+    timestamp: 'timestamp'
+  };
+
+  export type AIInteractionScalarFieldEnum = (typeof AIInteractionScalarFieldEnum)[keyof typeof AIInteractionScalarFieldEnum]
+
+
+  export const CrisisLogScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    message: 'message',
+    severity: 'severity',
+    categories: 'categories',
+    responseProvided: 'responseProvided',
+    resourcesShown: 'resourcesShown',
+    emergencyContactCalled: 'emergencyContactCalled',
+    timestamp: 'timestamp'
+  };
+
+  export type CrisisLogScalarFieldEnum = (typeof CrisisLogScalarFieldEnum)[keyof typeof CrisisLogScalarFieldEnum]
+
+
+  export const UsageLogScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    service: 'service',
+    model: 'model',
+    tokensUsed: 'tokensUsed',
+    finishReason: 'finishReason',
+    timestamp: 'timestamp'
+  };
+
+  export type UsageLogScalarFieldEnum = (typeof UsageLogScalarFieldEnum)[keyof typeof UsageLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7186,6 +11532,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -7240,6 +11593,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'University'
+   */
+  export type EnumUniversityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'University'>
+    
+
+
+  /**
+   * Reference to a field of type 'University[]'
+   */
+  export type ListEnumUniversityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'University[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7250,6 +11617,146 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Language'
+   */
+  export type EnumLanguageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Language'>
+    
+
+
+  /**
+   * Reference to a field of type 'Language[]'
+   */
+  export type ListEnumLanguageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Language[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationFrequency'
+   */
+  export type EnumNotificationFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationFrequency'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotificationFrequency[]'
+   */
+  export type ListEnumNotificationFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationFrequency[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TimeOfDay'
+   */
+  export type EnumTimeOfDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TimeOfDay'>
+    
+
+
+  /**
+   * Reference to a field of type 'TimeOfDay[]'
+   */
+  export type ListEnumTimeOfDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TimeOfDay[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Concern[]'
+   */
+  export type ListEnumConcernFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Concern[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Concern'
+   */
+  export type EnumConcernFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Concern'>
+    
+
+
+  /**
+   * Reference to a field of type 'SupportLevel'
+   */
+  export type EnumSupportLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SupportLevel'>
+    
+
+
+  /**
+   * Reference to a field of type 'SupportLevel[]'
+   */
+  export type ListEnumSupportLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SupportLevel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskLevel'
+   */
+  export type EnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskLevel[]'
+   */
+  export type ListEnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CopingStyle[]'
+   */
+  export type ListEnumCopingStyleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CopingStyle[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CopingStyle'
+   */
+  export type EnumCopingStyleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CopingStyle'>
+    
+
+
+  /**
+   * Reference to a field of type 'FaithLevel'
+   */
+  export type EnumFaithLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FaithLevel'>
+    
+
+
+  /**
+   * Reference to a field of type 'FaithLevel[]'
+   */
+  export type ListEnumFaithLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FaithLevel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ApproachPreference'
+   */
+  export type EnumApproachPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApproachPreference'>
+    
+
+
+  /**
+   * Reference to a field of type 'ApproachPreference[]'
+   */
+  export type ListEnumApproachPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApproachPreference[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Goal[]'
+   */
+  export type ListEnumGoalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Goal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Goal'
+   */
+  export type EnumGoalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Goal'>
     
 
 
@@ -7275,6 +11782,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ConversationStatus'
+   */
+  export type EnumConversationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ConversationStatus[]'
+   */
+  export type ListEnumConversationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageRole'
+   */
+  export type EnumMessageRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageRole[]'
+   */
+  export type ListEnumMessageRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -7285,6 +11820,48 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'AssessmentType'
+   */
+  export type EnumAssessmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssessmentType'>
+    
+
+
+  /**
+   * Reference to a field of type 'AssessmentType[]'
+   */
+  export type ListEnumAssessmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssessmentType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Severity'
+   */
+  export type EnumSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Severity'>
+    
+
+
+  /**
+   * Reference to a field of type 'Severity[]'
+   */
+  export type ListEnumSeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Severity[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Service'
+   */
+  export type EnumServiceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Service'>
+    
+
+
+  /**
+   * Reference to a field of type 'Service[]'
+   */
+  export type ListEnumServiceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Service[]'>
     
   /**
    * Deep Input Types
@@ -7301,36 +11878,41 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isAnonymous?: BoolFilter<"User"> | boolean
+    verificationToken?: StringNullableFilter<"User"> | string | null
+    image?: StringNullableFilter<"User"> | string | null
     displayName?: StringNullableFilter<"User"> | string | null
-    university?: StringNullableFilter<"User"> | string | null
+    university?: EnumUniversityNullableFilter<"User"> | $Enums.University | null
     academicLevel?: IntNullableFilter<"User"> | number | null
     program?: StringNullableFilter<"User"> | string | null
-    image?: StringNullableFilter<"User"> | string | null
-    language?: StringFilter<"User"> | string
-    notificationPreference?: StringFilter<"User"> | string
-    preferredCheckInTime?: StringFilter<"User"> | string
-    concerns?: StringNullableListFilter<"User">
-    supportLevel?: StringFilter<"User"> | string
-    riskLevel?: StringFilter<"User"> | string
-    copingStyles?: StringNullableListFilter<"User">
-    faithLevel?: StringFilter<"User"> | string
-    approachPreference?: StringFilter<"User"> | string
-    goals?: StringNullableListFilter<"User">
+    language?: EnumLanguageFilter<"User"> | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFilter<"User"> | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFilter<"User"> | $Enums.TimeOfDay
+    concerns?: EnumConcernNullableListFilter<"User">
+    supportLevel?: EnumSupportLevelFilter<"User"> | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFilter<"User"> | $Enums.RiskLevel
+    copingStyles?: EnumCopingStyleNullableListFilter<"User">
+    faithLevel?: EnumFaithLevelFilter<"User"> | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFilter<"User"> | $Enums.ApproachPreference
+    goals?: EnumGoalNullableListFilter<"User">
     stressors?: JsonNullableFilter<"User">
     trackingPreferences?: JsonNullableFilter<"User">
     emergencyContacts?: JsonNullableFilter<"User">
+    baselineMood?: IntNullableFilter<"User"> | number | null
     baseline?: JsonNullableFilter<"User">
+    joinDate?: DateTimeFilter<"User"> | Date | string
     moodCheckInsCount?: IntFilter<"User"> | number
     conversationsCount?: IntFilter<"User"> | number
     lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: IntFilter<"User"> | number
     onboardingCompleted?: BoolFilter<"User"> | boolean
-    verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    conversations?: ConversationListRelationFilter
+    moodEntries?: MoodEntryListRelationFilter
     assessments?: AssessmentListRelationFilter
-    moods?: MoodListRelationFilter
-    chatMessages?: ChatMessageListRelationFilter
+    aiInteractions?: AIInteractionListRelationFilter
+    crisisLogs?: CrisisLogListRelationFilter
+    usageLogs?: UsageLogListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7340,11 +11922,12 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    verificationToken?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
     displayName?: SortOrderInput | SortOrder
     university?: SortOrderInput | SortOrder
     academicLevel?: SortOrderInput | SortOrder
     program?: SortOrderInput | SortOrder
-    image?: SortOrderInput | SortOrder
     language?: SortOrder
     notificationPreference?: SortOrder
     preferredCheckInTime?: SortOrder
@@ -7358,18 +11941,22 @@ export namespace Prisma {
     stressors?: SortOrderInput | SortOrder
     trackingPreferences?: SortOrderInput | SortOrder
     emergencyContacts?: SortOrderInput | SortOrder
+    baselineMood?: SortOrderInput | SortOrder
     baseline?: SortOrderInput | SortOrder
+    joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     lastActive?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
-    verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    conversations?: ConversationOrderByRelationAggregateInput
+    moodEntries?: MoodEntryOrderByRelationAggregateInput
     assessments?: AssessmentOrderByRelationAggregateInput
-    moods?: MoodOrderByRelationAggregateInput
-    chatMessages?: ChatMessageOrderByRelationAggregateInput
+    aiInteractions?: AIInteractionOrderByRelationAggregateInput
+    crisisLogs?: CrisisLogOrderByRelationAggregateInput
+    usageLogs?: UsageLogOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7382,36 +11969,41 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isAnonymous?: BoolFilter<"User"> | boolean
+    verificationToken?: StringNullableFilter<"User"> | string | null
+    image?: StringNullableFilter<"User"> | string | null
     displayName?: StringNullableFilter<"User"> | string | null
-    university?: StringNullableFilter<"User"> | string | null
+    university?: EnumUniversityNullableFilter<"User"> | $Enums.University | null
     academicLevel?: IntNullableFilter<"User"> | number | null
     program?: StringNullableFilter<"User"> | string | null
-    image?: StringNullableFilter<"User"> | string | null
-    language?: StringFilter<"User"> | string
-    notificationPreference?: StringFilter<"User"> | string
-    preferredCheckInTime?: StringFilter<"User"> | string
-    concerns?: StringNullableListFilter<"User">
-    supportLevel?: StringFilter<"User"> | string
-    riskLevel?: StringFilter<"User"> | string
-    copingStyles?: StringNullableListFilter<"User">
-    faithLevel?: StringFilter<"User"> | string
-    approachPreference?: StringFilter<"User"> | string
-    goals?: StringNullableListFilter<"User">
+    language?: EnumLanguageFilter<"User"> | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFilter<"User"> | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFilter<"User"> | $Enums.TimeOfDay
+    concerns?: EnumConcernNullableListFilter<"User">
+    supportLevel?: EnumSupportLevelFilter<"User"> | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFilter<"User"> | $Enums.RiskLevel
+    copingStyles?: EnumCopingStyleNullableListFilter<"User">
+    faithLevel?: EnumFaithLevelFilter<"User"> | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFilter<"User"> | $Enums.ApproachPreference
+    goals?: EnumGoalNullableListFilter<"User">
     stressors?: JsonNullableFilter<"User">
     trackingPreferences?: JsonNullableFilter<"User">
     emergencyContacts?: JsonNullableFilter<"User">
+    baselineMood?: IntNullableFilter<"User"> | number | null
     baseline?: JsonNullableFilter<"User">
+    joinDate?: DateTimeFilter<"User"> | Date | string
     moodCheckInsCount?: IntFilter<"User"> | number
     conversationsCount?: IntFilter<"User"> | number
     lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: IntFilter<"User"> | number
     onboardingCompleted?: BoolFilter<"User"> | boolean
-    verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    conversations?: ConversationListRelationFilter
+    moodEntries?: MoodEntryListRelationFilter
     assessments?: AssessmentListRelationFilter
-    moods?: MoodListRelationFilter
-    chatMessages?: ChatMessageListRelationFilter
+    aiInteractions?: AIInteractionListRelationFilter
+    crisisLogs?: CrisisLogListRelationFilter
+    usageLogs?: UsageLogListRelationFilter
   }, "id" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
@@ -7421,11 +12013,12 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    verificationToken?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
     displayName?: SortOrderInput | SortOrder
     university?: SortOrderInput | SortOrder
     academicLevel?: SortOrderInput | SortOrder
     program?: SortOrderInput | SortOrder
-    image?: SortOrderInput | SortOrder
     language?: SortOrder
     notificationPreference?: SortOrder
     preferredCheckInTime?: SortOrder
@@ -7439,13 +12032,14 @@ export namespace Prisma {
     stressors?: SortOrderInput | SortOrder
     trackingPreferences?: SortOrderInput | SortOrder
     emergencyContacts?: SortOrderInput | SortOrder
+    baselineMood?: SortOrderInput | SortOrder
     baseline?: SortOrderInput | SortOrder
+    joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     lastActive?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
-    verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -7465,88 +12059,275 @@ export namespace Prisma {
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     isAnonymous?: BoolWithAggregatesFilter<"User"> | boolean
+    verificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    image?: StringNullableWithAggregatesFilter<"User"> | string | null
     displayName?: StringNullableWithAggregatesFilter<"User"> | string | null
-    university?: StringNullableWithAggregatesFilter<"User"> | string | null
+    university?: EnumUniversityNullableWithAggregatesFilter<"User"> | $Enums.University | null
     academicLevel?: IntNullableWithAggregatesFilter<"User"> | number | null
     program?: StringNullableWithAggregatesFilter<"User"> | string | null
-    image?: StringNullableWithAggregatesFilter<"User"> | string | null
-    language?: StringWithAggregatesFilter<"User"> | string
-    notificationPreference?: StringWithAggregatesFilter<"User"> | string
-    preferredCheckInTime?: StringWithAggregatesFilter<"User"> | string
-    concerns?: StringNullableListFilter<"User">
-    supportLevel?: StringWithAggregatesFilter<"User"> | string
-    riskLevel?: StringWithAggregatesFilter<"User"> | string
-    copingStyles?: StringNullableListFilter<"User">
-    faithLevel?: StringWithAggregatesFilter<"User"> | string
-    approachPreference?: StringWithAggregatesFilter<"User"> | string
-    goals?: StringNullableListFilter<"User">
+    language?: EnumLanguageWithAggregatesFilter<"User"> | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyWithAggregatesFilter<"User"> | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayWithAggregatesFilter<"User"> | $Enums.TimeOfDay
+    concerns?: EnumConcernNullableListFilter<"User">
+    supportLevel?: EnumSupportLevelWithAggregatesFilter<"User"> | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelWithAggregatesFilter<"User"> | $Enums.RiskLevel
+    copingStyles?: EnumCopingStyleNullableListFilter<"User">
+    faithLevel?: EnumFaithLevelWithAggregatesFilter<"User"> | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceWithAggregatesFilter<"User"> | $Enums.ApproachPreference
+    goals?: EnumGoalNullableListFilter<"User">
     stressors?: JsonNullableWithAggregatesFilter<"User">
     trackingPreferences?: JsonNullableWithAggregatesFilter<"User">
     emergencyContacts?: JsonNullableWithAggregatesFilter<"User">
+    baselineMood?: IntNullableWithAggregatesFilter<"User"> | number | null
     baseline?: JsonNullableWithAggregatesFilter<"User">
+    joinDate?: DateTimeWithAggregatesFilter<"User"> | Date | string
     moodCheckInsCount?: IntWithAggregatesFilter<"User"> | number
     conversationsCount?: IntWithAggregatesFilter<"User"> | number
     lastActive?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     onboardingStep?: IntWithAggregatesFilter<"User"> | number
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
-    verificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
-  export type ChatMessageWhereInput = {
-    AND?: ChatMessageWhereInput | ChatMessageWhereInput[]
-    OR?: ChatMessageWhereInput[]
-    NOT?: ChatMessageWhereInput | ChatMessageWhereInput[]
-    id?: StringFilter<"ChatMessage"> | string
-    userId?: StringFilter<"ChatMessage"> | string
-    content?: StringFilter<"ChatMessage"> | string
-    role?: StringFilter<"ChatMessage"> | string
-    createdAt?: DateTimeFilter<"ChatMessage"> | Date | string
+  export type ConversationWhereInput = {
+    AND?: ConversationWhereInput | ConversationWhereInput[]
+    OR?: ConversationWhereInput[]
+    NOT?: ConversationWhereInput | ConversationWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    userId?: StringFilter<"Conversation"> | string
+    startedAt?: DateTimeFilter<"Conversation"> | Date | string
+    lastMessageAt?: DateTimeFilter<"Conversation"> | Date | string
+    endedAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    metadata?: JsonNullableFilter<"Conversation">
+    summary?: StringNullableFilter<"Conversation"> | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    messages?: MessageListRelationFilter
+  }
+
+  export type ConversationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    startedAt?: SortOrder
+    lastMessageAt?: SortOrder
+    endedAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    messages?: MessageOrderByRelationAggregateInput
+  }
+
+  export type ConversationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ConversationWhereInput | ConversationWhereInput[]
+    OR?: ConversationWhereInput[]
+    NOT?: ConversationWhereInput | ConversationWhereInput[]
+    userId?: StringFilter<"Conversation"> | string
+    startedAt?: DateTimeFilter<"Conversation"> | Date | string
+    lastMessageAt?: DateTimeFilter<"Conversation"> | Date | string
+    endedAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    metadata?: JsonNullableFilter<"Conversation">
+    summary?: StringNullableFilter<"Conversation"> | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    messages?: MessageListRelationFilter
+  }, "id">
+
+  export type ConversationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    startedAt?: SortOrder
+    lastMessageAt?: SortOrder
+    endedAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ConversationCountOrderByAggregateInput
+    _max?: ConversationMaxOrderByAggregateInput
+    _min?: ConversationMinOrderByAggregateInput
+  }
+
+  export type ConversationScalarWhereWithAggregatesInput = {
+    AND?: ConversationScalarWhereWithAggregatesInput | ConversationScalarWhereWithAggregatesInput[]
+    OR?: ConversationScalarWhereWithAggregatesInput[]
+    NOT?: ConversationScalarWhereWithAggregatesInput | ConversationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Conversation"> | string
+    userId?: StringWithAggregatesFilter<"Conversation"> | string
+    startedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+    lastMessageAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+    endedAt?: DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
+    status?: EnumConversationStatusWithAggregatesFilter<"Conversation"> | $Enums.ConversationStatus
+    metadata?: JsonNullableWithAggregatesFilter<"Conversation">
+    summary?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+  }
+
+  export type MessageWhereInput = {
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    id?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
+    content?: StringFilter<"Message"> | string
+    timestamp?: DateTimeFilter<"Message"> | Date | string
+    metadata?: JsonNullableFilter<"Message">
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }
+
+  export type MessageOrderByWithRelationInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    timestamp?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    conversation?: ConversationOrderByWithRelationInput
+  }
+
+  export type MessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    conversationId?: StringFilter<"Message"> | string
+    role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
+    content?: StringFilter<"Message"> | string
+    timestamp?: DateTimeFilter<"Message"> | Date | string
+    metadata?: JsonNullableFilter<"Message">
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }, "id">
+
+  export type MessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    timestamp?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    _count?: MessageCountOrderByAggregateInput
+    _max?: MessageMaxOrderByAggregateInput
+    _min?: MessageMinOrderByAggregateInput
+  }
+
+  export type MessageScalarWhereWithAggregatesInput = {
+    AND?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    OR?: MessageScalarWhereWithAggregatesInput[]
+    NOT?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Message"> | string
+    conversationId?: StringWithAggregatesFilter<"Message"> | string
+    role?: EnumMessageRoleWithAggregatesFilter<"Message"> | $Enums.MessageRole
+    content?: StringWithAggregatesFilter<"Message"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+    metadata?: JsonNullableWithAggregatesFilter<"Message">
+  }
+
+  export type MoodEntryWhereInput = {
+    AND?: MoodEntryWhereInput | MoodEntryWhereInput[]
+    OR?: MoodEntryWhereInput[]
+    NOT?: MoodEntryWhereInput | MoodEntryWhereInput[]
+    id?: StringFilter<"MoodEntry"> | string
+    userId?: StringFilter<"MoodEntry"> | string
+    mood?: IntFilter<"MoodEntry"> | number
+    energy?: IntNullableFilter<"MoodEntry"> | number | null
+    sleep?: IntNullableFilter<"MoodEntry"> | number | null
+    social?: IntNullableFilter<"MoodEntry"> | number | null
+    anxiety?: IntNullableFilter<"MoodEntry"> | number | null
+    notes?: StringNullableFilter<"MoodEntry"> | string | null
+    tags?: StringNullableListFilter<"MoodEntry">
+    sentimentScore?: FloatNullableFilter<"MoodEntry"> | number | null
+    sentimentLabel?: StringNullableFilter<"MoodEntry"> | string | null
+    crisisFlag?: BoolFilter<"MoodEntry"> | boolean
+    createdAt?: DateTimeFilter<"MoodEntry"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type ChatMessageOrderByWithRelationInput = {
+  export type MoodEntryOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
-    role?: SortOrder
+    mood?: SortOrder
+    energy?: SortOrderInput | SortOrder
+    sleep?: SortOrderInput | SortOrder
+    social?: SortOrderInput | SortOrder
+    anxiety?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    sentimentScore?: SortOrderInput | SortOrder
+    sentimentLabel?: SortOrderInput | SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type ChatMessageWhereUniqueInput = Prisma.AtLeast<{
+  export type MoodEntryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: ChatMessageWhereInput | ChatMessageWhereInput[]
-    OR?: ChatMessageWhereInput[]
-    NOT?: ChatMessageWhereInput | ChatMessageWhereInput[]
-    userId?: StringFilter<"ChatMessage"> | string
-    content?: StringFilter<"ChatMessage"> | string
-    role?: StringFilter<"ChatMessage"> | string
-    createdAt?: DateTimeFilter<"ChatMessage"> | Date | string
+    AND?: MoodEntryWhereInput | MoodEntryWhereInput[]
+    OR?: MoodEntryWhereInput[]
+    NOT?: MoodEntryWhereInput | MoodEntryWhereInput[]
+    userId?: StringFilter<"MoodEntry"> | string
+    mood?: IntFilter<"MoodEntry"> | number
+    energy?: IntNullableFilter<"MoodEntry"> | number | null
+    sleep?: IntNullableFilter<"MoodEntry"> | number | null
+    social?: IntNullableFilter<"MoodEntry"> | number | null
+    anxiety?: IntNullableFilter<"MoodEntry"> | number | null
+    notes?: StringNullableFilter<"MoodEntry"> | string | null
+    tags?: StringNullableListFilter<"MoodEntry">
+    sentimentScore?: FloatNullableFilter<"MoodEntry"> | number | null
+    sentimentLabel?: StringNullableFilter<"MoodEntry"> | string | null
+    crisisFlag?: BoolFilter<"MoodEntry"> | boolean
+    createdAt?: DateTimeFilter<"MoodEntry"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type ChatMessageOrderByWithAggregationInput = {
+  export type MoodEntryOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
-    role?: SortOrder
+    mood?: SortOrder
+    energy?: SortOrderInput | SortOrder
+    sleep?: SortOrderInput | SortOrder
+    social?: SortOrderInput | SortOrder
+    anxiety?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    sentimentScore?: SortOrderInput | SortOrder
+    sentimentLabel?: SortOrderInput | SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
-    _count?: ChatMessageCountOrderByAggregateInput
-    _max?: ChatMessageMaxOrderByAggregateInput
-    _min?: ChatMessageMinOrderByAggregateInput
+    _count?: MoodEntryCountOrderByAggregateInput
+    _avg?: MoodEntryAvgOrderByAggregateInput
+    _max?: MoodEntryMaxOrderByAggregateInput
+    _min?: MoodEntryMinOrderByAggregateInput
+    _sum?: MoodEntrySumOrderByAggregateInput
   }
 
-  export type ChatMessageScalarWhereWithAggregatesInput = {
-    AND?: ChatMessageScalarWhereWithAggregatesInput | ChatMessageScalarWhereWithAggregatesInput[]
-    OR?: ChatMessageScalarWhereWithAggregatesInput[]
-    NOT?: ChatMessageScalarWhereWithAggregatesInput | ChatMessageScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ChatMessage"> | string
-    userId?: StringWithAggregatesFilter<"ChatMessage"> | string
-    content?: StringWithAggregatesFilter<"ChatMessage"> | string
-    role?: StringWithAggregatesFilter<"ChatMessage"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"ChatMessage"> | Date | string
+  export type MoodEntryScalarWhereWithAggregatesInput = {
+    AND?: MoodEntryScalarWhereWithAggregatesInput | MoodEntryScalarWhereWithAggregatesInput[]
+    OR?: MoodEntryScalarWhereWithAggregatesInput[]
+    NOT?: MoodEntryScalarWhereWithAggregatesInput | MoodEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MoodEntry"> | string
+    userId?: StringWithAggregatesFilter<"MoodEntry"> | string
+    mood?: IntWithAggregatesFilter<"MoodEntry"> | number
+    energy?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    sleep?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    social?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    anxiety?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    notes?: StringNullableWithAggregatesFilter<"MoodEntry"> | string | null
+    tags?: StringNullableListFilter<"MoodEntry">
+    sentimentScore?: FloatNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    sentimentLabel?: StringNullableWithAggregatesFilter<"MoodEntry"> | string | null
+    crisisFlag?: BoolWithAggregatesFilter<"MoodEntry"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"MoodEntry"> | Date | string
   }
 
   export type AssessmentWhereInput = {
@@ -7555,9 +12336,11 @@ export namespace Prisma {
     NOT?: AssessmentWhereInput | AssessmentWhereInput[]
     id?: StringFilter<"Assessment"> | string
     userId?: StringFilter<"Assessment"> | string
-    type?: StringFilter<"Assessment"> | string
+    type?: EnumAssessmentTypeFilter<"Assessment"> | $Enums.AssessmentType
+    responses?: JsonFilter<"Assessment">
     score?: IntFilter<"Assessment"> | number
-    severity?: StringFilter<"Assessment"> | string
+    severity?: EnumSeverityNullableFilter<"Assessment"> | $Enums.Severity | null
+    interpretation?: StringNullableFilter<"Assessment"> | string | null
     createdAt?: DateTimeFilter<"Assessment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -7566,8 +12349,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     type?: SortOrder
+    responses?: SortOrder
     score?: SortOrder
-    severity?: SortOrder
+    severity?: SortOrderInput | SortOrder
+    interpretation?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -7578,9 +12363,11 @@ export namespace Prisma {
     OR?: AssessmentWhereInput[]
     NOT?: AssessmentWhereInput | AssessmentWhereInput[]
     userId?: StringFilter<"Assessment"> | string
-    type?: StringFilter<"Assessment"> | string
+    type?: EnumAssessmentTypeFilter<"Assessment"> | $Enums.AssessmentType
+    responses?: JsonFilter<"Assessment">
     score?: IntFilter<"Assessment"> | number
-    severity?: StringFilter<"Assessment"> | string
+    severity?: EnumSeverityNullableFilter<"Assessment"> | $Enums.Severity | null
+    interpretation?: StringNullableFilter<"Assessment"> | string | null
     createdAt?: DateTimeFilter<"Assessment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -7589,8 +12376,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     type?: SortOrder
+    responses?: SortOrder
     score?: SortOrder
-    severity?: SortOrder
+    severity?: SortOrderInput | SortOrder
+    interpretation?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: AssessmentCountOrderByAggregateInput
     _avg?: AssessmentAvgOrderByAggregateInput
@@ -7605,141 +12394,238 @@ export namespace Prisma {
     NOT?: AssessmentScalarWhereWithAggregatesInput | AssessmentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Assessment"> | string
     userId?: StringWithAggregatesFilter<"Assessment"> | string
-    type?: StringWithAggregatesFilter<"Assessment"> | string
+    type?: EnumAssessmentTypeWithAggregatesFilter<"Assessment"> | $Enums.AssessmentType
+    responses?: JsonWithAggregatesFilter<"Assessment">
     score?: IntWithAggregatesFilter<"Assessment"> | number
-    severity?: StringWithAggregatesFilter<"Assessment"> | string
+    severity?: EnumSeverityNullableWithAggregatesFilter<"Assessment"> | $Enums.Severity | null
+    interpretation?: StringNullableWithAggregatesFilter<"Assessment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Assessment"> | Date | string
   }
 
-  export type MoodWhereInput = {
-    AND?: MoodWhereInput | MoodWhereInput[]
-    OR?: MoodWhereInput[]
-    NOT?: MoodWhereInput | MoodWhereInput[]
-    id?: StringFilter<"Mood"> | string
-    userId?: StringFilter<"Mood"> | string
-    value?: IntFilter<"Mood"> | number
-    note?: StringNullableFilter<"Mood"> | string | null
-    sentimentScore?: FloatNullableFilter<"Mood"> | number | null
-    sentimentLabel?: StringNullableFilter<"Mood"> | string | null
-    crisisFlag?: BoolFilter<"Mood"> | boolean
-    createdAt?: DateTimeFilter<"Mood"> | Date | string
+  export type AIInteractionWhereInput = {
+    AND?: AIInteractionWhereInput | AIInteractionWhereInput[]
+    OR?: AIInteractionWhereInput[]
+    NOT?: AIInteractionWhereInput | AIInteractionWhereInput[]
+    id?: StringFilter<"AIInteraction"> | string
+    userId?: StringFilter<"AIInteraction"> | string
+    userMessage?: StringFilter<"AIInteraction"> | string
+    aiResponse?: StringFilter<"AIInteraction"> | string
+    model?: StringNullableFilter<"AIInteraction"> | string | null
+    tokensUsed?: IntNullableFilter<"AIInteraction"> | number | null
+    crisisDetected?: BoolFilter<"AIInteraction"> | boolean
+    emotionalIntensity?: IntNullableFilter<"AIInteraction"> | number | null
+    responseTime?: IntNullableFilter<"AIInteraction"> | number | null
+    timestamp?: DateTimeFilter<"AIInteraction"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type MoodOrderByWithRelationInput = {
+  export type AIInteractionOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    value?: SortOrder
-    note?: SortOrderInput | SortOrder
-    sentimentScore?: SortOrderInput | SortOrder
-    sentimentLabel?: SortOrderInput | SortOrder
-    crisisFlag?: SortOrder
-    createdAt?: SortOrder
+    userMessage?: SortOrder
+    aiResponse?: SortOrder
+    model?: SortOrderInput | SortOrder
+    tokensUsed?: SortOrderInput | SortOrder
+    crisisDetected?: SortOrder
+    emotionalIntensity?: SortOrderInput | SortOrder
+    responseTime?: SortOrderInput | SortOrder
+    timestamp?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type MoodWhereUniqueInput = Prisma.AtLeast<{
+  export type AIInteractionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: MoodWhereInput | MoodWhereInput[]
-    OR?: MoodWhereInput[]
-    NOT?: MoodWhereInput | MoodWhereInput[]
-    userId?: StringFilter<"Mood"> | string
-    value?: IntFilter<"Mood"> | number
-    note?: StringNullableFilter<"Mood"> | string | null
-    sentimentScore?: FloatNullableFilter<"Mood"> | number | null
-    sentimentLabel?: StringNullableFilter<"Mood"> | string | null
-    crisisFlag?: BoolFilter<"Mood"> | boolean
-    createdAt?: DateTimeFilter<"Mood"> | Date | string
+    AND?: AIInteractionWhereInput | AIInteractionWhereInput[]
+    OR?: AIInteractionWhereInput[]
+    NOT?: AIInteractionWhereInput | AIInteractionWhereInput[]
+    userId?: StringFilter<"AIInteraction"> | string
+    userMessage?: StringFilter<"AIInteraction"> | string
+    aiResponse?: StringFilter<"AIInteraction"> | string
+    model?: StringNullableFilter<"AIInteraction"> | string | null
+    tokensUsed?: IntNullableFilter<"AIInteraction"> | number | null
+    crisisDetected?: BoolFilter<"AIInteraction"> | boolean
+    emotionalIntensity?: IntNullableFilter<"AIInteraction"> | number | null
+    responseTime?: IntNullableFilter<"AIInteraction"> | number | null
+    timestamp?: DateTimeFilter<"AIInteraction"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type MoodOrderByWithAggregationInput = {
+  export type AIInteractionOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    value?: SortOrder
-    note?: SortOrderInput | SortOrder
-    sentimentScore?: SortOrderInput | SortOrder
-    sentimentLabel?: SortOrderInput | SortOrder
-    crisisFlag?: SortOrder
-    createdAt?: SortOrder
-    _count?: MoodCountOrderByAggregateInput
-    _avg?: MoodAvgOrderByAggregateInput
-    _max?: MoodMaxOrderByAggregateInput
-    _min?: MoodMinOrderByAggregateInput
-    _sum?: MoodSumOrderByAggregateInput
+    userMessage?: SortOrder
+    aiResponse?: SortOrder
+    model?: SortOrderInput | SortOrder
+    tokensUsed?: SortOrderInput | SortOrder
+    crisisDetected?: SortOrder
+    emotionalIntensity?: SortOrderInput | SortOrder
+    responseTime?: SortOrderInput | SortOrder
+    timestamp?: SortOrder
+    _count?: AIInteractionCountOrderByAggregateInput
+    _avg?: AIInteractionAvgOrderByAggregateInput
+    _max?: AIInteractionMaxOrderByAggregateInput
+    _min?: AIInteractionMinOrderByAggregateInput
+    _sum?: AIInteractionSumOrderByAggregateInput
   }
 
-  export type MoodScalarWhereWithAggregatesInput = {
-    AND?: MoodScalarWhereWithAggregatesInput | MoodScalarWhereWithAggregatesInput[]
-    OR?: MoodScalarWhereWithAggregatesInput[]
-    NOT?: MoodScalarWhereWithAggregatesInput | MoodScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Mood"> | string
-    userId?: StringWithAggregatesFilter<"Mood"> | string
-    value?: IntWithAggregatesFilter<"Mood"> | number
-    note?: StringNullableWithAggregatesFilter<"Mood"> | string | null
-    sentimentScore?: FloatNullableWithAggregatesFilter<"Mood"> | number | null
-    sentimentLabel?: StringNullableWithAggregatesFilter<"Mood"> | string | null
-    crisisFlag?: BoolWithAggregatesFilter<"Mood"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"Mood"> | Date | string
+  export type AIInteractionScalarWhereWithAggregatesInput = {
+    AND?: AIInteractionScalarWhereWithAggregatesInput | AIInteractionScalarWhereWithAggregatesInput[]
+    OR?: AIInteractionScalarWhereWithAggregatesInput[]
+    NOT?: AIInteractionScalarWhereWithAggregatesInput | AIInteractionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AIInteraction"> | string
+    userId?: StringWithAggregatesFilter<"AIInteraction"> | string
+    userMessage?: StringWithAggregatesFilter<"AIInteraction"> | string
+    aiResponse?: StringWithAggregatesFilter<"AIInteraction"> | string
+    model?: StringNullableWithAggregatesFilter<"AIInteraction"> | string | null
+    tokensUsed?: IntNullableWithAggregatesFilter<"AIInteraction"> | number | null
+    crisisDetected?: BoolWithAggregatesFilter<"AIInteraction"> | boolean
+    emotionalIntensity?: IntNullableWithAggregatesFilter<"AIInteraction"> | number | null
+    responseTime?: IntNullableWithAggregatesFilter<"AIInteraction"> | number | null
+    timestamp?: DateTimeWithAggregatesFilter<"AIInteraction"> | Date | string
   }
 
-  export type AcademicEventWhereInput = {
-    AND?: AcademicEventWhereInput | AcademicEventWhereInput[]
-    OR?: AcademicEventWhereInput[]
-    NOT?: AcademicEventWhereInput | AcademicEventWhereInput[]
-    id?: StringFilter<"AcademicEvent"> | string
-    title?: StringFilter<"AcademicEvent"> | string
-    type?: StringFilter<"AcademicEvent"> | string
-    date?: DateTimeFilter<"AcademicEvent"> | Date | string
-    importance?: IntFilter<"AcademicEvent"> | number
-    createdAt?: DateTimeFilter<"AcademicEvent"> | Date | string
+  export type CrisisLogWhereInput = {
+    AND?: CrisisLogWhereInput | CrisisLogWhereInput[]
+    OR?: CrisisLogWhereInput[]
+    NOT?: CrisisLogWhereInput | CrisisLogWhereInput[]
+    id?: StringFilter<"CrisisLog"> | string
+    userId?: StringFilter<"CrisisLog"> | string
+    message?: StringFilter<"CrisisLog"> | string
+    severity?: IntFilter<"CrisisLog"> | number
+    categories?: JsonFilter<"CrisisLog">
+    responseProvided?: BoolFilter<"CrisisLog"> | boolean
+    resourcesShown?: BoolFilter<"CrisisLog"> | boolean
+    emergencyContactCalled?: BoolFilter<"CrisisLog"> | boolean
+    timestamp?: DateTimeFilter<"CrisisLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type AcademicEventOrderByWithRelationInput = {
+  export type CrisisLogOrderByWithRelationInput = {
     id?: SortOrder
-    title?: SortOrder
-    type?: SortOrder
-    date?: SortOrder
-    importance?: SortOrder
-    createdAt?: SortOrder
+    userId?: SortOrder
+    message?: SortOrder
+    severity?: SortOrder
+    categories?: SortOrder
+    responseProvided?: SortOrder
+    resourcesShown?: SortOrder
+    emergencyContactCalled?: SortOrder
+    timestamp?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
-  export type AcademicEventWhereUniqueInput = Prisma.AtLeast<{
+  export type CrisisLogWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: AcademicEventWhereInput | AcademicEventWhereInput[]
-    OR?: AcademicEventWhereInput[]
-    NOT?: AcademicEventWhereInput | AcademicEventWhereInput[]
-    title?: StringFilter<"AcademicEvent"> | string
-    type?: StringFilter<"AcademicEvent"> | string
-    date?: DateTimeFilter<"AcademicEvent"> | Date | string
-    importance?: IntFilter<"AcademicEvent"> | number
-    createdAt?: DateTimeFilter<"AcademicEvent"> | Date | string
+    AND?: CrisisLogWhereInput | CrisisLogWhereInput[]
+    OR?: CrisisLogWhereInput[]
+    NOT?: CrisisLogWhereInput | CrisisLogWhereInput[]
+    userId?: StringFilter<"CrisisLog"> | string
+    message?: StringFilter<"CrisisLog"> | string
+    severity?: IntFilter<"CrisisLog"> | number
+    categories?: JsonFilter<"CrisisLog">
+    responseProvided?: BoolFilter<"CrisisLog"> | boolean
+    resourcesShown?: BoolFilter<"CrisisLog"> | boolean
+    emergencyContactCalled?: BoolFilter<"CrisisLog"> | boolean
+    timestamp?: DateTimeFilter<"CrisisLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type AcademicEventOrderByWithAggregationInput = {
+  export type CrisisLogOrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
-    type?: SortOrder
-    date?: SortOrder
-    importance?: SortOrder
-    createdAt?: SortOrder
-    _count?: AcademicEventCountOrderByAggregateInput
-    _avg?: AcademicEventAvgOrderByAggregateInput
-    _max?: AcademicEventMaxOrderByAggregateInput
-    _min?: AcademicEventMinOrderByAggregateInput
-    _sum?: AcademicEventSumOrderByAggregateInput
+    userId?: SortOrder
+    message?: SortOrder
+    severity?: SortOrder
+    categories?: SortOrder
+    responseProvided?: SortOrder
+    resourcesShown?: SortOrder
+    emergencyContactCalled?: SortOrder
+    timestamp?: SortOrder
+    _count?: CrisisLogCountOrderByAggregateInput
+    _avg?: CrisisLogAvgOrderByAggregateInput
+    _max?: CrisisLogMaxOrderByAggregateInput
+    _min?: CrisisLogMinOrderByAggregateInput
+    _sum?: CrisisLogSumOrderByAggregateInput
   }
 
-  export type AcademicEventScalarWhereWithAggregatesInput = {
-    AND?: AcademicEventScalarWhereWithAggregatesInput | AcademicEventScalarWhereWithAggregatesInput[]
-    OR?: AcademicEventScalarWhereWithAggregatesInput[]
-    NOT?: AcademicEventScalarWhereWithAggregatesInput | AcademicEventScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"AcademicEvent"> | string
-    title?: StringWithAggregatesFilter<"AcademicEvent"> | string
-    type?: StringWithAggregatesFilter<"AcademicEvent"> | string
-    date?: DateTimeWithAggregatesFilter<"AcademicEvent"> | Date | string
-    importance?: IntWithAggregatesFilter<"AcademicEvent"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"AcademicEvent"> | Date | string
+  export type CrisisLogScalarWhereWithAggregatesInput = {
+    AND?: CrisisLogScalarWhereWithAggregatesInput | CrisisLogScalarWhereWithAggregatesInput[]
+    OR?: CrisisLogScalarWhereWithAggregatesInput[]
+    NOT?: CrisisLogScalarWhereWithAggregatesInput | CrisisLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CrisisLog"> | string
+    userId?: StringWithAggregatesFilter<"CrisisLog"> | string
+    message?: StringWithAggregatesFilter<"CrisisLog"> | string
+    severity?: IntWithAggregatesFilter<"CrisisLog"> | number
+    categories?: JsonWithAggregatesFilter<"CrisisLog">
+    responseProvided?: BoolWithAggregatesFilter<"CrisisLog"> | boolean
+    resourcesShown?: BoolWithAggregatesFilter<"CrisisLog"> | boolean
+    emergencyContactCalled?: BoolWithAggregatesFilter<"CrisisLog"> | boolean
+    timestamp?: DateTimeWithAggregatesFilter<"CrisisLog"> | Date | string
+  }
+
+  export type UsageLogWhereInput = {
+    AND?: UsageLogWhereInput | UsageLogWhereInput[]
+    OR?: UsageLogWhereInput[]
+    NOT?: UsageLogWhereInput | UsageLogWhereInput[]
+    id?: StringFilter<"UsageLog"> | string
+    userId?: StringFilter<"UsageLog"> | string
+    service?: EnumServiceFilter<"UsageLog"> | $Enums.Service
+    model?: StringNullableFilter<"UsageLog"> | string | null
+    tokensUsed?: IntNullableFilter<"UsageLog"> | number | null
+    finishReason?: StringNullableFilter<"UsageLog"> | string | null
+    timestamp?: DateTimeFilter<"UsageLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UsageLogOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    service?: SortOrder
+    model?: SortOrderInput | SortOrder
+    tokensUsed?: SortOrderInput | SortOrder
+    finishReason?: SortOrderInput | SortOrder
+    timestamp?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UsageLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UsageLogWhereInput | UsageLogWhereInput[]
+    OR?: UsageLogWhereInput[]
+    NOT?: UsageLogWhereInput | UsageLogWhereInput[]
+    userId?: StringFilter<"UsageLog"> | string
+    service?: EnumServiceFilter<"UsageLog"> | $Enums.Service
+    model?: StringNullableFilter<"UsageLog"> | string | null
+    tokensUsed?: IntNullableFilter<"UsageLog"> | number | null
+    finishReason?: StringNullableFilter<"UsageLog"> | string | null
+    timestamp?: DateTimeFilter<"UsageLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UsageLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    service?: SortOrder
+    model?: SortOrderInput | SortOrder
+    tokensUsed?: SortOrderInput | SortOrder
+    finishReason?: SortOrderInput | SortOrder
+    timestamp?: SortOrder
+    _count?: UsageLogCountOrderByAggregateInput
+    _avg?: UsageLogAvgOrderByAggregateInput
+    _max?: UsageLogMaxOrderByAggregateInput
+    _min?: UsageLogMinOrderByAggregateInput
+    _sum?: UsageLogSumOrderByAggregateInput
+  }
+
+  export type UsageLogScalarWhereWithAggregatesInput = {
+    AND?: UsageLogScalarWhereWithAggregatesInput | UsageLogScalarWhereWithAggregatesInput[]
+    OR?: UsageLogScalarWhereWithAggregatesInput[]
+    NOT?: UsageLogScalarWhereWithAggregatesInput | UsageLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UsageLog"> | string
+    userId?: StringWithAggregatesFilter<"UsageLog"> | string
+    service?: EnumServiceWithAggregatesFilter<"UsageLog"> | $Enums.Service
+    model?: StringNullableWithAggregatesFilter<"UsageLog"> | string | null
+    tokensUsed?: IntNullableWithAggregatesFilter<"UsageLog"> | number | null
+    finishReason?: StringNullableWithAggregatesFilter<"UsageLog"> | string | null
+    timestamp?: DateTimeWithAggregatesFilter<"UsageLog"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -7749,36 +12635,41 @@ export namespace Prisma {
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
     assessments?: AssessmentCreateNestedManyWithoutUserInput
-    moods?: MoodCreateNestedManyWithoutUserInput
-    chatMessages?: ChatMessageCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7788,36 +12679,41 @@ export namespace Prisma {
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
     assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
-    moods?: MoodUncheckedCreateNestedManyWithoutUserInput
-    chatMessages?: ChatMessageUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7827,36 +12723,41 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
     assessments?: AssessmentUpdateManyWithoutUserNestedInput
-    moods?: MoodUpdateManyWithoutUserNestedInput
-    chatMessages?: ChatMessageUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7866,36 +12767,41 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
     assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
-    moods?: MoodUncheckedUpdateManyWithoutUserNestedInput
-    chatMessages?: ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7905,31 +12811,33 @@ export namespace Prisma {
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7941,31 +12849,33 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7977,95 +12887,311 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ChatMessageCreateInput = {
+  export type ConversationCreateInput = {
     id?: string
-    content: string
-    role: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutChatMessagesInput
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
-  export type ChatMessageUncheckedCreateInput = {
-    id?: string
-    userId: string
-    content: string
-    role: string
-    createdAt?: Date | string
-  }
-
-  export type ChatMessageUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutChatMessagesNestedInput
-  }
-
-  export type ChatMessageUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ChatMessageCreateManyInput = {
+  export type ConversationUncheckedCreateInput = {
     id?: string
     userId: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationCreateManyInput = {
+    id?: string
+    userId: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateInput = {
+    id?: string
+    role: $Enums.MessageRole
     content: string
-    role: string
+    timestamp?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    conversation: ConversationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateInput = {
+    id?: string
+    conversationId: string
+    role: $Enums.MessageRole
+    content: string
+    timestamp?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageCreateManyInput = {
+    id?: string
+    conversationId: string
+    role: $Enums.MessageRole
+    content: string
+    timestamp?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    content?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MoodEntryCreateInput = {
+    id?: string
+    mood: number
+    energy?: number | null
+    sleep?: number | null
+    social?: number | null
+    anxiety?: number | null
+    notes?: string | null
+    tags?: MoodEntryCreatetagsInput | string[]
+    sentimentScore?: number | null
+    sentimentLabel?: string | null
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutMoodEntriesInput
+  }
+
+  export type MoodEntryUncheckedCreateInput = {
+    id?: string
+    userId: string
+    mood: number
+    energy?: number | null
+    sleep?: number | null
+    social?: number | null
+    anxiety?: number | null
+    notes?: string | null
+    tags?: MoodEntryCreatetagsInput | string[]
+    sentimentScore?: number | null
+    sentimentLabel?: string | null
+    crisisFlag?: boolean
     createdAt?: Date | string
   }
 
-  export type ChatMessageUpdateManyMutationInput = {
+  export type MoodEntryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMoodEntriesNestedInput
+  }
+
+  export type MoodEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ChatMessageUncheckedUpdateManyInput = {
+  export type MoodEntryCreateManyInput = {
+    id?: string
+    userId: string
+    mood: number
+    energy?: number | null
+    sleep?: number | null
+    social?: number | null
+    anxiety?: number | null
+    notes?: string | null
+    tags?: MoodEntryCreatetagsInput | string[]
+    sentimentScore?: number | null
+    sentimentLabel?: string | null
+    crisisFlag?: boolean
+    createdAt?: Date | string
+  }
+
+  export type MoodEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodEntryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssessmentCreateInput = {
     id?: string
-    type: string
+    type: $Enums.AssessmentType
+    responses: JsonNullValueInput | InputJsonValue
     score: number
-    severity: string
+    severity?: $Enums.Severity | null
+    interpretation?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutAssessmentsInput
   }
@@ -8073,17 +13199,21 @@ export namespace Prisma {
   export type AssessmentUncheckedCreateInput = {
     id?: string
     userId: string
-    type: string
+    type: $Enums.AssessmentType
+    responses: JsonNullValueInput | InputJsonValue
     score: number
-    severity: string
+    severity?: $Enums.Severity | null
+    interpretation?: string | null
     createdAt?: Date | string
   }
 
   export type AssessmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAssessmentsNestedInput
   }
@@ -8091,175 +13221,286 @@ export namespace Prisma {
   export type AssessmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssessmentCreateManyInput = {
     id?: string
     userId: string
-    type: string
+    type: $Enums.AssessmentType
+    responses: JsonNullValueInput | InputJsonValue
     score: number
-    severity: string
+    severity?: $Enums.Severity | null
+    interpretation?: string | null
     createdAt?: Date | string
   }
 
   export type AssessmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssessmentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MoodCreateInput = {
+  export type AIInteractionCreateInput = {
     id?: string
-    value: number
-    note?: string | null
-    sentimentScore?: number | null
-    sentimentLabel?: string | null
-    crisisFlag?: boolean
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutMoodsInput
+    userMessage: string
+    aiResponse: string
+    model?: string | null
+    tokensUsed?: number | null
+    crisisDetected?: boolean
+    emotionalIntensity?: number | null
+    responseTime?: number | null
+    timestamp?: Date | string
+    user: UserCreateNestedOneWithoutAiInteractionsInput
   }
 
-  export type MoodUncheckedCreateInput = {
-    id?: string
-    userId: string
-    value: number
-    note?: string | null
-    sentimentScore?: number | null
-    sentimentLabel?: string | null
-    crisisFlag?: boolean
-    createdAt?: Date | string
-  }
-
-  export type MoodUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMoodsNestedInput
-  }
-
-  export type MoodUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MoodCreateManyInput = {
+  export type AIInteractionUncheckedCreateInput = {
     id?: string
     userId: string
-    value: number
-    note?: string | null
-    sentimentScore?: number | null
-    sentimentLabel?: string | null
-    crisisFlag?: boolean
-    createdAt?: Date | string
+    userMessage: string
+    aiResponse: string
+    model?: string | null
+    tokensUsed?: number | null
+    crisisDetected?: boolean
+    emotionalIntensity?: number | null
+    responseTime?: number | null
+    timestamp?: Date | string
   }
 
-  export type MoodUpdateManyMutationInput = {
+  export type AIInteractionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAiInteractionsNestedInput
   }
 
-  export type MoodUncheckedUpdateManyInput = {
+  export type AIInteractionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AcademicEventCreateInput = {
+  export type AIInteractionCreateManyInput = {
     id?: string
-    title: string
-    type: string
-    date: Date | string
-    importance?: number
-    createdAt?: Date | string
+    userId: string
+    userMessage: string
+    aiResponse: string
+    model?: string | null
+    tokensUsed?: number | null
+    crisisDetected?: boolean
+    emotionalIntensity?: number | null
+    responseTime?: number | null
+    timestamp?: Date | string
   }
 
-  export type AcademicEventUncheckedCreateInput = {
+  export type AIInteractionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AIInteractionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisLogCreateInput = {
     id?: string
-    title: string
-    type: string
-    date: Date | string
-    importance?: number
-    createdAt?: Date | string
+    message: string
+    severity: number
+    categories: JsonNullValueInput | InputJsonValue
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: Date | string
+    user: UserCreateNestedOneWithoutCrisisLogsInput
   }
 
-  export type AcademicEventUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    importance?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AcademicEventUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    importance?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AcademicEventCreateManyInput = {
+  export type CrisisLogUncheckedCreateInput = {
     id?: string
-    title: string
-    type: string
-    date: Date | string
-    importance?: number
-    createdAt?: Date | string
+    userId: string
+    message: string
+    severity: number
+    categories: JsonNullValueInput | InputJsonValue
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: Date | string
   }
 
-  export type AcademicEventUpdateManyMutationInput = {
+  export type CrisisLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    importance?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCrisisLogsNestedInput
   }
 
-  export type AcademicEventUncheckedUpdateManyInput = {
+  export type CrisisLogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    importance?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisLogCreateManyInput = {
+    id?: string
+    userId: string
+    message: string
+    severity: number
+    categories: JsonNullValueInput | InputJsonValue
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: Date | string
+  }
+
+  export type CrisisLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageLogCreateInput = {
+    id?: string
+    service: $Enums.Service
+    model?: string | null
+    tokensUsed?: number | null
+    finishReason?: string | null
+    timestamp?: Date | string
+    user: UserCreateNestedOneWithoutUsageLogsInput
+  }
+
+  export type UsageLogUncheckedCreateInput = {
+    id?: string
+    userId: string
+    service: $Enums.Service
+    model?: string | null
+    tokensUsed?: number | null
+    finishReason?: string | null
+    timestamp?: Date | string
+  }
+
+  export type UsageLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUsageLogsNestedInput
+  }
+
+  export type UsageLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageLogCreateManyInput = {
+    id?: string
+    userId: string
+    service: $Enums.Service
+    model?: string | null
+    tokensUsed?: number | null
+    finishReason?: string | null
+    timestamp?: Date | string
+  }
+
+  export type UsageLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -8297,6 +13538,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumUniversityNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.University | EnumUniversityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUniversityNullableFilter<$PrismaModel> | $Enums.University | null
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8308,11 +13556,76 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+  export type EnumLanguageFilter<$PrismaModel = never> = {
+    equals?: $Enums.Language | EnumLanguageFieldRefInput<$PrismaModel>
+    in?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    not?: NestedEnumLanguageFilter<$PrismaModel> | $Enums.Language
+  }
+
+  export type EnumNotificationFrequencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationFrequency | EnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationFrequencyFilter<$PrismaModel> | $Enums.NotificationFrequency
+  }
+
+  export type EnumTimeOfDayFilter<$PrismaModel = never> = {
+    equals?: $Enums.TimeOfDay | EnumTimeOfDayFieldRefInput<$PrismaModel>
+    in?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeOfDayFilter<$PrismaModel> | $Enums.TimeOfDay
+  }
+
+  export type EnumConcernNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Concern | EnumConcernFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumSupportLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.SupportLevel | EnumSupportLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumSupportLevelFilter<$PrismaModel> | $Enums.SupportLevel
+  }
+
+  export type EnumRiskLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelFilter<$PrismaModel> | $Enums.RiskLevel
+  }
+
+  export type EnumCopingStyleNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.CopingStyle[] | ListEnumCopingStyleFieldRefInput<$PrismaModel> | null
+    has?: $Enums.CopingStyle | EnumCopingStyleFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.CopingStyle[] | ListEnumCopingStyleFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.CopingStyle[] | ListEnumCopingStyleFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumFaithLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.FaithLevel | EnumFaithLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumFaithLevelFilter<$PrismaModel> | $Enums.FaithLevel
+  }
+
+  export type EnumApproachPreferenceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApproachPreference | EnumApproachPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumApproachPreferenceFilter<$PrismaModel> | $Enums.ApproachPreference
+  }
+
+  export type EnumGoalNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.Goal[] | ListEnumGoalFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Goal | EnumGoalFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Goal[] | ListEnumGoalFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Goal[] | ListEnumGoalFieldRefInput<$PrismaModel>
     isEmpty?: boolean
   }
   export type JsonNullableFilter<$PrismaModel = never> = 
@@ -8338,6 +13651,17 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8360,15 +13684,16 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type ConversationListRelationFilter = {
+    every?: ConversationWhereInput
+    some?: ConversationWhereInput
+    none?: ConversationWhereInput
+  }
+
+  export type MoodEntryListRelationFilter = {
+    every?: MoodEntryWhereInput
+    some?: MoodEntryWhereInput
+    none?: MoodEntryWhereInput
   }
 
   export type AssessmentListRelationFilter = {
@@ -8377,16 +13702,22 @@ export namespace Prisma {
     none?: AssessmentWhereInput
   }
 
-  export type MoodListRelationFilter = {
-    every?: MoodWhereInput
-    some?: MoodWhereInput
-    none?: MoodWhereInput
+  export type AIInteractionListRelationFilter = {
+    every?: AIInteractionWhereInput
+    some?: AIInteractionWhereInput
+    none?: AIInteractionWhereInput
   }
 
-  export type ChatMessageListRelationFilter = {
-    every?: ChatMessageWhereInput
-    some?: ChatMessageWhereInput
-    none?: ChatMessageWhereInput
+  export type CrisisLogListRelationFilter = {
+    every?: CrisisLogWhereInput
+    some?: CrisisLogWhereInput
+    none?: CrisisLogWhereInput
+  }
+
+  export type UsageLogListRelationFilter = {
+    every?: UsageLogWhereInput
+    some?: UsageLogWhereInput
+    none?: UsageLogWhereInput
   }
 
   export type SortOrderInput = {
@@ -8394,15 +13725,27 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
+  export type ConversationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MoodEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AssessmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type MoodOrderByRelationAggregateInput = {
+  export type AIInteractionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ChatMessageOrderByRelationAggregateInput = {
+  export type CrisisLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UsageLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8413,11 +13756,12 @@ export namespace Prisma {
     googleId?: SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    verificationToken?: SortOrder
+    image?: SortOrder
     displayName?: SortOrder
     university?: SortOrder
     academicLevel?: SortOrder
     program?: SortOrder
-    image?: SortOrder
     language?: SortOrder
     notificationPreference?: SortOrder
     preferredCheckInTime?: SortOrder
@@ -8431,19 +13775,21 @@ export namespace Prisma {
     stressors?: SortOrder
     trackingPreferences?: SortOrder
     emergencyContacts?: SortOrder
+    baselineMood?: SortOrder
     baseline?: SortOrder
+    joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
-    verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     academicLevel?: SortOrder
+    baselineMood?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     onboardingStep?: SortOrder
@@ -8456,11 +13802,12 @@ export namespace Prisma {
     googleId?: SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    verificationToken?: SortOrder
+    image?: SortOrder
     displayName?: SortOrder
     university?: SortOrder
     academicLevel?: SortOrder
     program?: SortOrder
-    image?: SortOrder
     language?: SortOrder
     notificationPreference?: SortOrder
     preferredCheckInTime?: SortOrder
@@ -8468,12 +13815,13 @@ export namespace Prisma {
     riskLevel?: SortOrder
     faithLevel?: SortOrder
     approachPreference?: SortOrder
+    baselineMood?: SortOrder
+    joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
-    verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8485,11 +13833,12 @@ export namespace Prisma {
     googleId?: SortOrder
     isVerified?: SortOrder
     isAnonymous?: SortOrder
+    verificationToken?: SortOrder
+    image?: SortOrder
     displayName?: SortOrder
     university?: SortOrder
     academicLevel?: SortOrder
     program?: SortOrder
-    image?: SortOrder
     language?: SortOrder
     notificationPreference?: SortOrder
     preferredCheckInTime?: SortOrder
@@ -8497,18 +13846,20 @@ export namespace Prisma {
     riskLevel?: SortOrder
     faithLevel?: SortOrder
     approachPreference?: SortOrder
+    baselineMood?: SortOrder
+    joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
-    verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     academicLevel?: SortOrder
+    baselineMood?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
     onboardingStep?: SortOrder
@@ -8558,6 +13909,16 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumUniversityNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.University | EnumUniversityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUniversityNullableWithAggregatesFilter<$PrismaModel> | $Enums.University | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumUniversityNullableFilter<$PrismaModel>
+    _max?: NestedEnumUniversityNullableFilter<$PrismaModel>
+  }
+
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8572,6 +13933,76 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumLanguageWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Language | EnumLanguageFieldRefInput<$PrismaModel>
+    in?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    not?: NestedEnumLanguageWithAggregatesFilter<$PrismaModel> | $Enums.Language
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLanguageFilter<$PrismaModel>
+    _max?: NestedEnumLanguageFilter<$PrismaModel>
+  }
+
+  export type EnumNotificationFrequencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationFrequency | EnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationFrequencyWithAggregatesFilter<$PrismaModel> | $Enums.NotificationFrequency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationFrequencyFilter<$PrismaModel>
+    _max?: NestedEnumNotificationFrequencyFilter<$PrismaModel>
+  }
+
+  export type EnumTimeOfDayWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TimeOfDay | EnumTimeOfDayFieldRefInput<$PrismaModel>
+    in?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeOfDayWithAggregatesFilter<$PrismaModel> | $Enums.TimeOfDay
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTimeOfDayFilter<$PrismaModel>
+    _max?: NestedEnumTimeOfDayFilter<$PrismaModel>
+  }
+
+  export type EnumSupportLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SupportLevel | EnumSupportLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumSupportLevelWithAggregatesFilter<$PrismaModel> | $Enums.SupportLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSupportLevelFilter<$PrismaModel>
+    _max?: NestedEnumSupportLevelFilter<$PrismaModel>
+  }
+
+  export type EnumRiskLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel> | $Enums.RiskLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskLevelFilter<$PrismaModel>
+    _max?: NestedEnumRiskLevelFilter<$PrismaModel>
+  }
+
+  export type EnumFaithLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FaithLevel | EnumFaithLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumFaithLevelWithAggregatesFilter<$PrismaModel> | $Enums.FaithLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFaithLevelFilter<$PrismaModel>
+    _max?: NestedEnumFaithLevelFilter<$PrismaModel>
+  }
+
+  export type EnumApproachPreferenceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApproachPreference | EnumApproachPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumApproachPreferenceWithAggregatesFilter<$PrismaModel> | $Enums.ApproachPreference
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumApproachPreferenceFilter<$PrismaModel>
+    _max?: NestedEnumApproachPreferenceFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -8597,6 +14028,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8629,18 +14074,11 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type EnumConversationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusFilter<$PrismaModel> | $Enums.ConversationStatus
   }
 
   export type UserScalarRelationFilter = {
@@ -8648,63 +14086,116 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
-  export type ChatMessageCountOrderByAggregateInput = {
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
+    startedAt?: SortOrder
+    lastMessageAt?: SortOrder
+    endedAt?: SortOrder
+    status?: SortOrder
+    metadata?: SortOrder
+    summary?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    startedAt?: SortOrder
+    lastMessageAt?: SortOrder
+    endedAt?: SortOrder
+    status?: SortOrder
+    summary?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    startedAt?: SortOrder
+    lastMessageAt?: SortOrder
+    endedAt?: SortOrder
+    status?: SortOrder
+    summary?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumConversationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConversationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConversationStatusFilter<$PrismaModel>
+    _max?: NestedEnumConversationStatusFilter<$PrismaModel>
+  }
+
+  export type EnumMessageRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
+  }
+
+  export type ConversationScalarRelationFilter = {
+    is?: ConversationWhereInput
+    isNot?: ConversationWhereInput
+  }
+
+  export type MessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type ChatMessageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
     content?: SortOrder
-    role?: SortOrder
-    createdAt?: SortOrder
+    timestamp?: SortOrder
+    metadata?: SortOrder
   }
 
-  export type ChatMessageMinOrderByAggregateInput = {
+  export type MessageMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    conversationId?: SortOrder
+    role?: SortOrder
     content?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type MessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    conversationId?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    content?: SortOrder
+    timestamp?: SortOrder
   }
 
-  export type AssessmentCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    score?: SortOrder
-    severity?: SortOrder
-    createdAt?: SortOrder
+  export type EnumMessageRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel> | $Enums.MessageRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageRoleFilter<$PrismaModel>
+    _max?: NestedEnumMessageRoleFilter<$PrismaModel>
   }
 
-  export type AssessmentAvgOrderByAggregateInput = {
-    score?: SortOrder
-  }
-
-  export type AssessmentMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    score?: SortOrder
-    severity?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AssessmentMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    score?: SortOrder
-    severity?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AssessmentSumOrderByAggregateInput = {
-    score?: SortOrder
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -8718,46 +14209,67 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type MoodCountOrderByAggregateInput = {
+  export type MoodEntryCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    value?: SortOrder
-    note?: SortOrder
+    mood?: SortOrder
+    energy?: SortOrder
+    sleep?: SortOrder
+    social?: SortOrder
+    anxiety?: SortOrder
+    notes?: SortOrder
+    tags?: SortOrder
     sentimentScore?: SortOrder
     sentimentLabel?: SortOrder
     crisisFlag?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type MoodAvgOrderByAggregateInput = {
-    value?: SortOrder
+  export type MoodEntryAvgOrderByAggregateInput = {
+    mood?: SortOrder
+    energy?: SortOrder
+    sleep?: SortOrder
+    social?: SortOrder
+    anxiety?: SortOrder
     sentimentScore?: SortOrder
   }
 
-  export type MoodMaxOrderByAggregateInput = {
+  export type MoodEntryMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    value?: SortOrder
-    note?: SortOrder
+    mood?: SortOrder
+    energy?: SortOrder
+    sleep?: SortOrder
+    social?: SortOrder
+    anxiety?: SortOrder
+    notes?: SortOrder
     sentimentScore?: SortOrder
     sentimentLabel?: SortOrder
     crisisFlag?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type MoodMinOrderByAggregateInput = {
+  export type MoodEntryMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    value?: SortOrder
-    note?: SortOrder
+    mood?: SortOrder
+    energy?: SortOrder
+    sleep?: SortOrder
+    social?: SortOrder
+    anxiety?: SortOrder
+    notes?: SortOrder
     sentimentScore?: SortOrder
     sentimentLabel?: SortOrder
     crisisFlag?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type MoodSumOrderByAggregateInput = {
-    value?: SortOrder
+  export type MoodEntrySumOrderByAggregateInput = {
+    mood?: SortOrder
+    energy?: SortOrder
+    sleep?: SortOrder
+    social?: SortOrder
+    anxiety?: SortOrder
     sentimentScore?: SortOrder
   }
 
@@ -8777,51 +14289,298 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
-  export type AcademicEventCountOrderByAggregateInput = {
+  export type EnumAssessmentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssessmentType | EnumAssessmentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssessmentTypeFilter<$PrismaModel> | $Enums.AssessmentType
+  }
+  export type JsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EnumSeverityNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSeverityNullableFilter<$PrismaModel> | $Enums.Severity | null
+  }
+
+  export type AssessmentCountOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    userId?: SortOrder
     type?: SortOrder
-    date?: SortOrder
-    importance?: SortOrder
+    responses?: SortOrder
+    score?: SortOrder
+    severity?: SortOrder
+    interpretation?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type AcademicEventAvgOrderByAggregateInput = {
-    importance?: SortOrder
+  export type AssessmentAvgOrderByAggregateInput = {
+    score?: SortOrder
   }
 
-  export type AcademicEventMaxOrderByAggregateInput = {
+  export type AssessmentMaxOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    userId?: SortOrder
     type?: SortOrder
-    date?: SortOrder
-    importance?: SortOrder
+    score?: SortOrder
+    severity?: SortOrder
+    interpretation?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type AcademicEventMinOrderByAggregateInput = {
+  export type AssessmentMinOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    userId?: SortOrder
     type?: SortOrder
-    date?: SortOrder
-    importance?: SortOrder
+    score?: SortOrder
+    severity?: SortOrder
+    interpretation?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type AcademicEventSumOrderByAggregateInput = {
-    importance?: SortOrder
+  export type AssessmentSumOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type EnumAssessmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssessmentType | EnumAssessmentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssessmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.AssessmentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAssessmentTypeFilter<$PrismaModel>
+    _max?: NestedEnumAssessmentTypeFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type EnumSeverityNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSeverityNullableWithAggregatesFilter<$PrismaModel> | $Enums.Severity | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumSeverityNullableFilter<$PrismaModel>
+    _max?: NestedEnumSeverityNullableFilter<$PrismaModel>
+  }
+
+  export type AIInteractionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    userMessage?: SortOrder
+    aiResponse?: SortOrder
+    model?: SortOrder
+    tokensUsed?: SortOrder
+    crisisDetected?: SortOrder
+    emotionalIntensity?: SortOrder
+    responseTime?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type AIInteractionAvgOrderByAggregateInput = {
+    tokensUsed?: SortOrder
+    emotionalIntensity?: SortOrder
+    responseTime?: SortOrder
+  }
+
+  export type AIInteractionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    userMessage?: SortOrder
+    aiResponse?: SortOrder
+    model?: SortOrder
+    tokensUsed?: SortOrder
+    crisisDetected?: SortOrder
+    emotionalIntensity?: SortOrder
+    responseTime?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type AIInteractionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    userMessage?: SortOrder
+    aiResponse?: SortOrder
+    model?: SortOrder
+    tokensUsed?: SortOrder
+    crisisDetected?: SortOrder
+    emotionalIntensity?: SortOrder
+    responseTime?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type AIInteractionSumOrderByAggregateInput = {
+    tokensUsed?: SortOrder
+    emotionalIntensity?: SortOrder
+    responseTime?: SortOrder
+  }
+
+  export type CrisisLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    message?: SortOrder
+    severity?: SortOrder
+    categories?: SortOrder
+    responseProvided?: SortOrder
+    resourcesShown?: SortOrder
+    emergencyContactCalled?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type CrisisLogAvgOrderByAggregateInput = {
+    severity?: SortOrder
+  }
+
+  export type CrisisLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    message?: SortOrder
+    severity?: SortOrder
+    responseProvided?: SortOrder
+    resourcesShown?: SortOrder
+    emergencyContactCalled?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type CrisisLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    message?: SortOrder
+    severity?: SortOrder
+    responseProvided?: SortOrder
+    resourcesShown?: SortOrder
+    emergencyContactCalled?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type CrisisLogSumOrderByAggregateInput = {
+    severity?: SortOrder
+  }
+
+  export type EnumServiceFilter<$PrismaModel = never> = {
+    equals?: $Enums.Service | EnumServiceFieldRefInput<$PrismaModel>
+    in?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    not?: NestedEnumServiceFilter<$PrismaModel> | $Enums.Service
+  }
+
+  export type UsageLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    service?: SortOrder
+    model?: SortOrder
+    tokensUsed?: SortOrder
+    finishReason?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type UsageLogAvgOrderByAggregateInput = {
+    tokensUsed?: SortOrder
+  }
+
+  export type UsageLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    service?: SortOrder
+    model?: SortOrder
+    tokensUsed?: SortOrder
+    finishReason?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type UsageLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    service?: SortOrder
+    model?: SortOrder
+    tokensUsed?: SortOrder
+    finishReason?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type UsageLogSumOrderByAggregateInput = {
+    tokensUsed?: SortOrder
+  }
+
+  export type EnumServiceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Service | EnumServiceFieldRefInput<$PrismaModel>
+    in?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    not?: NestedEnumServiceWithAggregatesFilter<$PrismaModel> | $Enums.Service
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumServiceFilter<$PrismaModel>
+    _max?: NestedEnumServiceFilter<$PrismaModel>
   }
 
   export type UserCreateconcernsInput = {
-    set: string[]
+    set: $Enums.Concern[]
   }
 
   export type UserCreatecopingStylesInput = {
-    set: string[]
+    set: $Enums.CopingStyle[]
   }
 
   export type UserCreategoalsInput = {
-    set: string[]
+    set: $Enums.Goal[]
+  }
+
+  export type ConversationCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type MoodEntryCreateNestedManyWithoutUserInput = {
+    create?: XOR<MoodEntryCreateWithoutUserInput, MoodEntryUncheckedCreateWithoutUserInput> | MoodEntryCreateWithoutUserInput[] | MoodEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodEntryCreateOrConnectWithoutUserInput | MoodEntryCreateOrConnectWithoutUserInput[]
+    createMany?: MoodEntryCreateManyUserInputEnvelope
+    connect?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
   }
 
   export type AssessmentCreateNestedManyWithoutUserInput = {
@@ -8831,18 +14590,39 @@ export namespace Prisma {
     connect?: AssessmentWhereUniqueInput | AssessmentWhereUniqueInput[]
   }
 
-  export type MoodCreateNestedManyWithoutUserInput = {
-    create?: XOR<MoodCreateWithoutUserInput, MoodUncheckedCreateWithoutUserInput> | MoodCreateWithoutUserInput[] | MoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MoodCreateOrConnectWithoutUserInput | MoodCreateOrConnectWithoutUserInput[]
-    createMany?: MoodCreateManyUserInputEnvelope
-    connect?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
+  export type AIInteractionCreateNestedManyWithoutUserInput = {
+    create?: XOR<AIInteractionCreateWithoutUserInput, AIInteractionUncheckedCreateWithoutUserInput> | AIInteractionCreateWithoutUserInput[] | AIInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AIInteractionCreateOrConnectWithoutUserInput | AIInteractionCreateOrConnectWithoutUserInput[]
+    createMany?: AIInteractionCreateManyUserInputEnvelope
+    connect?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
   }
 
-  export type ChatMessageCreateNestedManyWithoutUserInput = {
-    create?: XOR<ChatMessageCreateWithoutUserInput, ChatMessageUncheckedCreateWithoutUserInput> | ChatMessageCreateWithoutUserInput[] | ChatMessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ChatMessageCreateOrConnectWithoutUserInput | ChatMessageCreateOrConnectWithoutUserInput[]
-    createMany?: ChatMessageCreateManyUserInputEnvelope
-    connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
+  export type CrisisLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<CrisisLogCreateWithoutUserInput, CrisisLogUncheckedCreateWithoutUserInput> | CrisisLogCreateWithoutUserInput[] | CrisisLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CrisisLogCreateOrConnectWithoutUserInput | CrisisLogCreateOrConnectWithoutUserInput[]
+    createMany?: CrisisLogCreateManyUserInputEnvelope
+    connect?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+  }
+
+  export type UsageLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<UsageLogCreateWithoutUserInput, UsageLogUncheckedCreateWithoutUserInput> | UsageLogCreateWithoutUserInput[] | UsageLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UsageLogCreateOrConnectWithoutUserInput | UsageLogCreateOrConnectWithoutUserInput[]
+    createMany?: UsageLogCreateManyUserInputEnvelope
+    connect?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type MoodEntryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MoodEntryCreateWithoutUserInput, MoodEntryUncheckedCreateWithoutUserInput> | MoodEntryCreateWithoutUserInput[] | MoodEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodEntryCreateOrConnectWithoutUserInput | MoodEntryCreateOrConnectWithoutUserInput[]
+    createMany?: MoodEntryCreateManyUserInputEnvelope
+    connect?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
   }
 
   export type AssessmentUncheckedCreateNestedManyWithoutUserInput = {
@@ -8852,18 +14632,25 @@ export namespace Prisma {
     connect?: AssessmentWhereUniqueInput | AssessmentWhereUniqueInput[]
   }
 
-  export type MoodUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MoodCreateWithoutUserInput, MoodUncheckedCreateWithoutUserInput> | MoodCreateWithoutUserInput[] | MoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MoodCreateOrConnectWithoutUserInput | MoodCreateOrConnectWithoutUserInput[]
-    createMany?: MoodCreateManyUserInputEnvelope
-    connect?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
+  export type AIInteractionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AIInteractionCreateWithoutUserInput, AIInteractionUncheckedCreateWithoutUserInput> | AIInteractionCreateWithoutUserInput[] | AIInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AIInteractionCreateOrConnectWithoutUserInput | AIInteractionCreateOrConnectWithoutUserInput[]
+    createMany?: AIInteractionCreateManyUserInputEnvelope
+    connect?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
   }
 
-  export type ChatMessageUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ChatMessageCreateWithoutUserInput, ChatMessageUncheckedCreateWithoutUserInput> | ChatMessageCreateWithoutUserInput[] | ChatMessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ChatMessageCreateOrConnectWithoutUserInput | ChatMessageCreateOrConnectWithoutUserInput[]
-    createMany?: ChatMessageCreateManyUserInputEnvelope
-    connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
+  export type CrisisLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CrisisLogCreateWithoutUserInput, CrisisLogUncheckedCreateWithoutUserInput> | CrisisLogCreateWithoutUserInput[] | CrisisLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CrisisLogCreateOrConnectWithoutUserInput | CrisisLogCreateOrConnectWithoutUserInput[]
+    createMany?: CrisisLogCreateManyUserInputEnvelope
+    connect?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+  }
+
+  export type UsageLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UsageLogCreateWithoutUserInput, UsageLogUncheckedCreateWithoutUserInput> | UsageLogCreateWithoutUserInput[] | UsageLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UsageLogCreateOrConnectWithoutUserInput | UsageLogCreateOrConnectWithoutUserInput[]
+    createMany?: UsageLogCreateManyUserInputEnvelope
+    connect?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8878,6 +14665,10 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type NullableEnumUniversityFieldUpdateOperationsInput = {
+    set?: $Enums.University | null
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -8886,19 +14677,51 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type EnumLanguageFieldUpdateOperationsInput = {
+    set?: $Enums.Language
+  }
+
+  export type EnumNotificationFrequencyFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationFrequency
+  }
+
+  export type EnumTimeOfDayFieldUpdateOperationsInput = {
+    set?: $Enums.TimeOfDay
+  }
+
   export type UserUpdateconcernsInput = {
-    set?: string[]
-    push?: string | string[]
+    set?: $Enums.Concern[]
+    push?: $Enums.Concern | $Enums.Concern[]
+  }
+
+  export type EnumSupportLevelFieldUpdateOperationsInput = {
+    set?: $Enums.SupportLevel
+  }
+
+  export type EnumRiskLevelFieldUpdateOperationsInput = {
+    set?: $Enums.RiskLevel
   }
 
   export type UserUpdatecopingStylesInput = {
-    set?: string[]
-    push?: string | string[]
+    set?: $Enums.CopingStyle[]
+    push?: $Enums.CopingStyle | $Enums.CopingStyle[]
+  }
+
+  export type EnumFaithLevelFieldUpdateOperationsInput = {
+    set?: $Enums.FaithLevel
+  }
+
+  export type EnumApproachPreferenceFieldUpdateOperationsInput = {
+    set?: $Enums.ApproachPreference
   }
 
   export type UserUpdategoalsInput = {
-    set?: string[]
-    push?: string | string[]
+    set?: $Enums.Goal[]
+    push?: $Enums.Goal | $Enums.Goal[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8913,8 +14736,32 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type ConversationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type MoodEntryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MoodEntryCreateWithoutUserInput, MoodEntryUncheckedCreateWithoutUserInput> | MoodEntryCreateWithoutUserInput[] | MoodEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodEntryCreateOrConnectWithoutUserInput | MoodEntryCreateOrConnectWithoutUserInput[]
+    upsert?: MoodEntryUpsertWithWhereUniqueWithoutUserInput | MoodEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MoodEntryCreateManyUserInputEnvelope
+    set?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    disconnect?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    delete?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    connect?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    update?: MoodEntryUpdateWithWhereUniqueWithoutUserInput | MoodEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MoodEntryUpdateManyWithWhereWithoutUserInput | MoodEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MoodEntryScalarWhereInput | MoodEntryScalarWhereInput[]
   }
 
   export type AssessmentUpdateManyWithoutUserNestedInput = {
@@ -8931,32 +14778,74 @@ export namespace Prisma {
     deleteMany?: AssessmentScalarWhereInput | AssessmentScalarWhereInput[]
   }
 
-  export type MoodUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MoodCreateWithoutUserInput, MoodUncheckedCreateWithoutUserInput> | MoodCreateWithoutUserInput[] | MoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MoodCreateOrConnectWithoutUserInput | MoodCreateOrConnectWithoutUserInput[]
-    upsert?: MoodUpsertWithWhereUniqueWithoutUserInput | MoodUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MoodCreateManyUserInputEnvelope
-    set?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    disconnect?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    delete?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    connect?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    update?: MoodUpdateWithWhereUniqueWithoutUserInput | MoodUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MoodUpdateManyWithWhereWithoutUserInput | MoodUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MoodScalarWhereInput | MoodScalarWhereInput[]
+  export type AIInteractionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AIInteractionCreateWithoutUserInput, AIInteractionUncheckedCreateWithoutUserInput> | AIInteractionCreateWithoutUserInput[] | AIInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AIInteractionCreateOrConnectWithoutUserInput | AIInteractionCreateOrConnectWithoutUserInput[]
+    upsert?: AIInteractionUpsertWithWhereUniqueWithoutUserInput | AIInteractionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AIInteractionCreateManyUserInputEnvelope
+    set?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    disconnect?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    delete?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    connect?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    update?: AIInteractionUpdateWithWhereUniqueWithoutUserInput | AIInteractionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AIInteractionUpdateManyWithWhereWithoutUserInput | AIInteractionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AIInteractionScalarWhereInput | AIInteractionScalarWhereInput[]
   }
 
-  export type ChatMessageUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ChatMessageCreateWithoutUserInput, ChatMessageUncheckedCreateWithoutUserInput> | ChatMessageCreateWithoutUserInput[] | ChatMessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ChatMessageCreateOrConnectWithoutUserInput | ChatMessageCreateOrConnectWithoutUserInput[]
-    upsert?: ChatMessageUpsertWithWhereUniqueWithoutUserInput | ChatMessageUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ChatMessageCreateManyUserInputEnvelope
-    set?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    disconnect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    delete?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    update?: ChatMessageUpdateWithWhereUniqueWithoutUserInput | ChatMessageUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ChatMessageUpdateManyWithWhereWithoutUserInput | ChatMessageUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ChatMessageScalarWhereInput | ChatMessageScalarWhereInput[]
+  export type CrisisLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CrisisLogCreateWithoutUserInput, CrisisLogUncheckedCreateWithoutUserInput> | CrisisLogCreateWithoutUserInput[] | CrisisLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CrisisLogCreateOrConnectWithoutUserInput | CrisisLogCreateOrConnectWithoutUserInput[]
+    upsert?: CrisisLogUpsertWithWhereUniqueWithoutUserInput | CrisisLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CrisisLogCreateManyUserInputEnvelope
+    set?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    disconnect?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    delete?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    connect?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    update?: CrisisLogUpdateWithWhereUniqueWithoutUserInput | CrisisLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CrisisLogUpdateManyWithWhereWithoutUserInput | CrisisLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CrisisLogScalarWhereInput | CrisisLogScalarWhereInput[]
+  }
+
+  export type UsageLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UsageLogCreateWithoutUserInput, UsageLogUncheckedCreateWithoutUserInput> | UsageLogCreateWithoutUserInput[] | UsageLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UsageLogCreateOrConnectWithoutUserInput | UsageLogCreateOrConnectWithoutUserInput[]
+    upsert?: UsageLogUpsertWithWhereUniqueWithoutUserInput | UsageLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UsageLogCreateManyUserInputEnvelope
+    set?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    disconnect?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    delete?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    connect?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    update?: UsageLogUpdateWithWhereUniqueWithoutUserInput | UsageLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UsageLogUpdateManyWithWhereWithoutUserInput | UsageLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UsageLogScalarWhereInput | UsageLogScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type MoodEntryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MoodEntryCreateWithoutUserInput, MoodEntryUncheckedCreateWithoutUserInput> | MoodEntryCreateWithoutUserInput[] | MoodEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodEntryCreateOrConnectWithoutUserInput | MoodEntryCreateOrConnectWithoutUserInput[]
+    upsert?: MoodEntryUpsertWithWhereUniqueWithoutUserInput | MoodEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MoodEntryCreateManyUserInputEnvelope
+    set?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    disconnect?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    delete?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    connect?: MoodEntryWhereUniqueInput | MoodEntryWhereUniqueInput[]
+    update?: MoodEntryUpdateWithWhereUniqueWithoutUserInput | MoodEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MoodEntryUpdateManyWithWhereWithoutUserInput | MoodEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MoodEntryScalarWhereInput | MoodEntryScalarWhereInput[]
   }
 
   export type AssessmentUncheckedUpdateManyWithoutUserNestedInput = {
@@ -8973,66 +14862,139 @@ export namespace Prisma {
     deleteMany?: AssessmentScalarWhereInput | AssessmentScalarWhereInput[]
   }
 
-  export type MoodUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MoodCreateWithoutUserInput, MoodUncheckedCreateWithoutUserInput> | MoodCreateWithoutUserInput[] | MoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MoodCreateOrConnectWithoutUserInput | MoodCreateOrConnectWithoutUserInput[]
-    upsert?: MoodUpsertWithWhereUniqueWithoutUserInput | MoodUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MoodCreateManyUserInputEnvelope
-    set?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    disconnect?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    delete?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    connect?: MoodWhereUniqueInput | MoodWhereUniqueInput[]
-    update?: MoodUpdateWithWhereUniqueWithoutUserInput | MoodUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MoodUpdateManyWithWhereWithoutUserInput | MoodUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MoodScalarWhereInput | MoodScalarWhereInput[]
+  export type AIInteractionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AIInteractionCreateWithoutUserInput, AIInteractionUncheckedCreateWithoutUserInput> | AIInteractionCreateWithoutUserInput[] | AIInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AIInteractionCreateOrConnectWithoutUserInput | AIInteractionCreateOrConnectWithoutUserInput[]
+    upsert?: AIInteractionUpsertWithWhereUniqueWithoutUserInput | AIInteractionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AIInteractionCreateManyUserInputEnvelope
+    set?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    disconnect?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    delete?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    connect?: AIInteractionWhereUniqueInput | AIInteractionWhereUniqueInput[]
+    update?: AIInteractionUpdateWithWhereUniqueWithoutUserInput | AIInteractionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AIInteractionUpdateManyWithWhereWithoutUserInput | AIInteractionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AIInteractionScalarWhereInput | AIInteractionScalarWhereInput[]
   }
 
-  export type ChatMessageUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ChatMessageCreateWithoutUserInput, ChatMessageUncheckedCreateWithoutUserInput> | ChatMessageCreateWithoutUserInput[] | ChatMessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ChatMessageCreateOrConnectWithoutUserInput | ChatMessageCreateOrConnectWithoutUserInput[]
-    upsert?: ChatMessageUpsertWithWhereUniqueWithoutUserInput | ChatMessageUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ChatMessageCreateManyUserInputEnvelope
-    set?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    disconnect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    delete?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-    update?: ChatMessageUpdateWithWhereUniqueWithoutUserInput | ChatMessageUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ChatMessageUpdateManyWithWhereWithoutUserInput | ChatMessageUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ChatMessageScalarWhereInput | ChatMessageScalarWhereInput[]
+  export type CrisisLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CrisisLogCreateWithoutUserInput, CrisisLogUncheckedCreateWithoutUserInput> | CrisisLogCreateWithoutUserInput[] | CrisisLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CrisisLogCreateOrConnectWithoutUserInput | CrisisLogCreateOrConnectWithoutUserInput[]
+    upsert?: CrisisLogUpsertWithWhereUniqueWithoutUserInput | CrisisLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CrisisLogCreateManyUserInputEnvelope
+    set?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    disconnect?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    delete?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    connect?: CrisisLogWhereUniqueInput | CrisisLogWhereUniqueInput[]
+    update?: CrisisLogUpdateWithWhereUniqueWithoutUserInput | CrisisLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CrisisLogUpdateManyWithWhereWithoutUserInput | CrisisLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CrisisLogScalarWhereInput | CrisisLogScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutChatMessagesInput = {
-    create?: XOR<UserCreateWithoutChatMessagesInput, UserUncheckedCreateWithoutChatMessagesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutChatMessagesInput
+  export type UsageLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UsageLogCreateWithoutUserInput, UsageLogUncheckedCreateWithoutUserInput> | UsageLogCreateWithoutUserInput[] | UsageLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UsageLogCreateOrConnectWithoutUserInput | UsageLogCreateOrConnectWithoutUserInput[]
+    upsert?: UsageLogUpsertWithWhereUniqueWithoutUserInput | UsageLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UsageLogCreateManyUserInputEnvelope
+    set?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    disconnect?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    delete?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    connect?: UsageLogWhereUniqueInput | UsageLogWhereUniqueInput[]
+    update?: UsageLogUpdateWithWhereUniqueWithoutUserInput | UsageLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UsageLogUpdateManyWithWhereWithoutUserInput | UsageLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UsageLogScalarWhereInput | UsageLogScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversationsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutChatMessagesNestedInput = {
-    create?: XOR<UserCreateWithoutChatMessagesInput, UserUncheckedCreateWithoutChatMessagesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutChatMessagesInput
-    upsert?: UserUpsertWithoutChatMessagesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChatMessagesInput, UserUpdateWithoutChatMessagesInput>, UserUncheckedUpdateWithoutChatMessagesInput>
+  export type MessageCreateNestedManyWithoutConversationInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
-  export type UserCreateNestedOneWithoutAssessmentsInput = {
-    create?: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAssessmentsInput
+  export type MessageUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type EnumConversationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ConversationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutConversationsNestedInput = {
+    create?: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversationsInput
+    upsert?: UserUpsertWithoutConversationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConversationsInput, UserUpdateWithoutConversationsInput>, UserUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type MessageUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput | MessageUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput | MessageUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ConversationCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutMessagesInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type EnumMessageRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MessageRole
+  }
+
+  export type ConversationUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutMessagesInput
+    upsert?: ConversationUpsertWithoutMessagesInput
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutMessagesInput, ConversationUpdateWithoutMessagesInput>, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type MoodEntryCreatetagsInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutMoodEntriesInput = {
+    create?: XOR<UserCreateWithoutMoodEntriesInput, UserUncheckedCreateWithoutMoodEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMoodEntriesInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutAssessmentsNestedInput = {
-    create?: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAssessmentsInput
-    upsert?: UserUpsertWithoutAssessmentsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssessmentsInput, UserUpdateWithoutAssessmentsInput>, UserUncheckedUpdateWithoutAssessmentsInput>
-  }
-
-  export type UserCreateNestedOneWithoutMoodsInput = {
-    create?: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMoodsInput
-    connect?: UserWhereUniqueInput
+  export type MoodEntryUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NullableFloatFieldUpdateOperationsInput = {
@@ -9043,12 +15005,80 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneRequiredWithoutMoodsNestedInput = {
-    create?: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMoodsInput
-    upsert?: UserUpsertWithoutMoodsInput
+  export type UserUpdateOneRequiredWithoutMoodEntriesNestedInput = {
+    create?: XOR<UserCreateWithoutMoodEntriesInput, UserUncheckedCreateWithoutMoodEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMoodEntriesInput
+    upsert?: UserUpsertWithoutMoodEntriesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMoodsInput, UserUpdateWithoutMoodsInput>, UserUncheckedUpdateWithoutMoodsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMoodEntriesInput, UserUpdateWithoutMoodEntriesInput>, UserUncheckedUpdateWithoutMoodEntriesInput>
+  }
+
+  export type UserCreateNestedOneWithoutAssessmentsInput = {
+    create?: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssessmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumAssessmentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.AssessmentType
+  }
+
+  export type NullableEnumSeverityFieldUpdateOperationsInput = {
+    set?: $Enums.Severity | null
+  }
+
+  export type UserUpdateOneRequiredWithoutAssessmentsNestedInput = {
+    create?: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssessmentsInput
+    upsert?: UserUpsertWithoutAssessmentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssessmentsInput, UserUpdateWithoutAssessmentsInput>, UserUncheckedUpdateWithoutAssessmentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutAiInteractionsInput = {
+    create?: XOR<UserCreateWithoutAiInteractionsInput, UserUncheckedCreateWithoutAiInteractionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAiInteractionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAiInteractionsNestedInput = {
+    create?: XOR<UserCreateWithoutAiInteractionsInput, UserUncheckedCreateWithoutAiInteractionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAiInteractionsInput
+    upsert?: UserUpsertWithoutAiInteractionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAiInteractionsInput, UserUpdateWithoutAiInteractionsInput>, UserUncheckedUpdateWithoutAiInteractionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCrisisLogsInput = {
+    create?: XOR<UserCreateWithoutCrisisLogsInput, UserUncheckedCreateWithoutCrisisLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCrisisLogsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCrisisLogsNestedInput = {
+    create?: XOR<UserCreateWithoutCrisisLogsInput, UserUncheckedCreateWithoutCrisisLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCrisisLogsInput
+    upsert?: UserUpsertWithoutCrisisLogsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCrisisLogsInput, UserUpdateWithoutCrisisLogsInput>, UserUncheckedUpdateWithoutCrisisLogsInput>
+  }
+
+  export type UserCreateNestedOneWithoutUsageLogsInput = {
+    create?: XOR<UserCreateWithoutUsageLogsInput, UserUncheckedCreateWithoutUsageLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsageLogsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumServiceFieldUpdateOperationsInput = {
+    set?: $Enums.Service
+  }
+
+  export type UserUpdateOneRequiredWithoutUsageLogsNestedInput = {
+    create?: XOR<UserCreateWithoutUsageLogsInput, UserUncheckedCreateWithoutUsageLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsageLogsInput
+    upsert?: UserUpsertWithoutUsageLogsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUsageLogsInput, UserUpdateWithoutUsageLogsInput>, UserUncheckedUpdateWithoutUsageLogsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9084,6 +15114,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumUniversityNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.University | EnumUniversityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUniversityNullableFilter<$PrismaModel> | $Enums.University | null
+  }
+
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9093,6 +15130,66 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumLanguageFilter<$PrismaModel = never> = {
+    equals?: $Enums.Language | EnumLanguageFieldRefInput<$PrismaModel>
+    in?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    not?: NestedEnumLanguageFilter<$PrismaModel> | $Enums.Language
+  }
+
+  export type NestedEnumNotificationFrequencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationFrequency | EnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationFrequencyFilter<$PrismaModel> | $Enums.NotificationFrequency
+  }
+
+  export type NestedEnumTimeOfDayFilter<$PrismaModel = never> = {
+    equals?: $Enums.TimeOfDay | EnumTimeOfDayFieldRefInput<$PrismaModel>
+    in?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeOfDayFilter<$PrismaModel> | $Enums.TimeOfDay
+  }
+
+  export type NestedEnumSupportLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.SupportLevel | EnumSupportLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumSupportLevelFilter<$PrismaModel> | $Enums.SupportLevel
+  }
+
+  export type NestedEnumRiskLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelFilter<$PrismaModel> | $Enums.RiskLevel
+  }
+
+  export type NestedEnumFaithLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.FaithLevel | EnumFaithLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumFaithLevelFilter<$PrismaModel> | $Enums.FaithLevel
+  }
+
+  export type NestedEnumApproachPreferenceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApproachPreference | EnumApproachPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumApproachPreferenceFilter<$PrismaModel> | $Enums.ApproachPreference
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -9115,17 +15212,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9170,6 +15256,16 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedEnumUniversityNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.University | EnumUniversityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.University[] | ListEnumUniversityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUniversityNullableWithAggregatesFilter<$PrismaModel> | $Enums.University | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumUniversityNullableFilter<$PrismaModel>
+    _max?: NestedEnumUniversityNullableFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9196,6 +15292,76 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
+
+  export type NestedEnumLanguageWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Language | EnumLanguageFieldRefInput<$PrismaModel>
+    in?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Language[] | ListEnumLanguageFieldRefInput<$PrismaModel>
+    not?: NestedEnumLanguageWithAggregatesFilter<$PrismaModel> | $Enums.Language
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLanguageFilter<$PrismaModel>
+    _max?: NestedEnumLanguageFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotificationFrequencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationFrequency | EnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    in?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NotificationFrequency[] | ListEnumNotificationFrequencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumNotificationFrequencyWithAggregatesFilter<$PrismaModel> | $Enums.NotificationFrequency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotificationFrequencyFilter<$PrismaModel>
+    _max?: NestedEnumNotificationFrequencyFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTimeOfDayWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TimeOfDay | EnumTimeOfDayFieldRefInput<$PrismaModel>
+    in?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TimeOfDay[] | ListEnumTimeOfDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeOfDayWithAggregatesFilter<$PrismaModel> | $Enums.TimeOfDay
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTimeOfDayFilter<$PrismaModel>
+    _max?: NestedEnumTimeOfDayFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSupportLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SupportLevel | EnumSupportLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SupportLevel[] | ListEnumSupportLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumSupportLevelWithAggregatesFilter<$PrismaModel> | $Enums.SupportLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSupportLevelFilter<$PrismaModel>
+    _max?: NestedEnumSupportLevelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel> | $Enums.RiskLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskLevelFilter<$PrismaModel>
+    _max?: NestedEnumRiskLevelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFaithLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FaithLevel | EnumFaithLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FaithLevel[] | ListEnumFaithLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumFaithLevelWithAggregatesFilter<$PrismaModel> | $Enums.FaithLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFaithLevelFilter<$PrismaModel>
+    _max?: NestedEnumFaithLevelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumApproachPreferenceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApproachPreference | EnumApproachPreferenceFieldRefInput<$PrismaModel>
+    in?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ApproachPreference[] | ListEnumApproachPreferenceFieldRefInput<$PrismaModel>
+    not?: NestedEnumApproachPreferenceWithAggregatesFilter<$PrismaModel> | $Enums.ApproachPreference
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumApproachPreferenceFilter<$PrismaModel>
+    _max?: NestedEnumApproachPreferenceFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -9217,6 +15383,20 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9260,18 +15440,38 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type NestedEnumConversationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusFilter<$PrismaModel> | $Enums.ConversationStatus
+  }
+
+  export type NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConversationStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedEnumConversationStatusFilter<$PrismaModel>
+    _max?: NestedEnumConversationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMessageRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
+  }
+
+  export type NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel> | $Enums.MessageRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageRoleFilter<$PrismaModel>
+    _max?: NestedEnumMessageRoleFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9290,19 +15490,172 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumAssessmentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssessmentType | EnumAssessmentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssessmentTypeFilter<$PrismaModel> | $Enums.AssessmentType
+  }
+
+  export type NestedEnumSeverityNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSeverityNullableFilter<$PrismaModel> | $Enums.Severity | null
+  }
+
+  export type NestedEnumAssessmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AssessmentType | EnumAssessmentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AssessmentType[] | ListEnumAssessmentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAssessmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.AssessmentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAssessmentTypeFilter<$PrismaModel>
+    _max?: NestedEnumAssessmentTypeFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumSeverityNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Severity | EnumSeverityFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Severity[] | ListEnumSeverityFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSeverityNullableWithAggregatesFilter<$PrismaModel> | $Enums.Severity | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumSeverityNullableFilter<$PrismaModel>
+    _max?: NestedEnumSeverityNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumServiceFilter<$PrismaModel = never> = {
+    equals?: $Enums.Service | EnumServiceFieldRefInput<$PrismaModel>
+    in?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    not?: NestedEnumServiceFilter<$PrismaModel> | $Enums.Service
+  }
+
+  export type NestedEnumServiceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Service | EnumServiceFieldRefInput<$PrismaModel>
+    in?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Service[] | ListEnumServiceFieldRefInput<$PrismaModel>
+    not?: NestedEnumServiceWithAggregatesFilter<$PrismaModel> | $Enums.Service
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumServiceFilter<$PrismaModel>
+    _max?: NestedEnumServiceFilter<$PrismaModel>
+  }
+
+  export type ConversationCreateWithoutUserInput = {
+    id?: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutUserInput = {
+    id?: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationCreateManyUserInputEnvelope = {
+    data: ConversationCreateManyUserInput | ConversationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MoodEntryCreateWithoutUserInput = {
+    id?: string
+    mood: number
+    energy?: number | null
+    sleep?: number | null
+    social?: number | null
+    anxiety?: number | null
+    notes?: string | null
+    tags?: MoodEntryCreatetagsInput | string[]
+    sentimentScore?: number | null
+    sentimentLabel?: string | null
+    crisisFlag?: boolean
+    createdAt?: Date | string
+  }
+
+  export type MoodEntryUncheckedCreateWithoutUserInput = {
+    id?: string
+    mood: number
+    energy?: number | null
+    sleep?: number | null
+    social?: number | null
+    anxiety?: number | null
+    notes?: string | null
+    tags?: MoodEntryCreatetagsInput | string[]
+    sentimentScore?: number | null
+    sentimentLabel?: string | null
+    crisisFlag?: boolean
+    createdAt?: Date | string
+  }
+
+  export type MoodEntryCreateOrConnectWithoutUserInput = {
+    where: MoodEntryWhereUniqueInput
+    create: XOR<MoodEntryCreateWithoutUserInput, MoodEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type MoodEntryCreateManyUserInputEnvelope = {
+    data: MoodEntryCreateManyUserInput | MoodEntryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AssessmentCreateWithoutUserInput = {
     id?: string
-    type: string
+    type: $Enums.AssessmentType
+    responses: JsonNullValueInput | InputJsonValue
     score: number
-    severity: string
+    severity?: $Enums.Severity | null
+    interpretation?: string | null
     createdAt?: Date | string
   }
 
   export type AssessmentUncheckedCreateWithoutUserInput = {
     id?: string
-    type: string
+    type: $Enums.AssessmentType
+    responses: JsonNullValueInput | InputJsonValue
     score: number
-    severity: string
+    severity?: $Enums.Severity | null
+    interpretation?: string | null
     createdAt?: Date | string
   }
 
@@ -9316,58 +15669,165 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MoodCreateWithoutUserInput = {
+  export type AIInteractionCreateWithoutUserInput = {
     id?: string
-    value: number
-    note?: string | null
-    sentimentScore?: number | null
-    sentimentLabel?: string | null
-    crisisFlag?: boolean
-    createdAt?: Date | string
+    userMessage: string
+    aiResponse: string
+    model?: string | null
+    tokensUsed?: number | null
+    crisisDetected?: boolean
+    emotionalIntensity?: number | null
+    responseTime?: number | null
+    timestamp?: Date | string
   }
 
-  export type MoodUncheckedCreateWithoutUserInput = {
+  export type AIInteractionUncheckedCreateWithoutUserInput = {
     id?: string
-    value: number
-    note?: string | null
-    sentimentScore?: number | null
-    sentimentLabel?: string | null
-    crisisFlag?: boolean
-    createdAt?: Date | string
+    userMessage: string
+    aiResponse: string
+    model?: string | null
+    tokensUsed?: number | null
+    crisisDetected?: boolean
+    emotionalIntensity?: number | null
+    responseTime?: number | null
+    timestamp?: Date | string
   }
 
-  export type MoodCreateOrConnectWithoutUserInput = {
-    where: MoodWhereUniqueInput
-    create: XOR<MoodCreateWithoutUserInput, MoodUncheckedCreateWithoutUserInput>
+  export type AIInteractionCreateOrConnectWithoutUserInput = {
+    where: AIInteractionWhereUniqueInput
+    create: XOR<AIInteractionCreateWithoutUserInput, AIInteractionUncheckedCreateWithoutUserInput>
   }
 
-  export type MoodCreateManyUserInputEnvelope = {
-    data: MoodCreateManyUserInput | MoodCreateManyUserInput[]
+  export type AIInteractionCreateManyUserInputEnvelope = {
+    data: AIInteractionCreateManyUserInput | AIInteractionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type ChatMessageCreateWithoutUserInput = {
+  export type CrisisLogCreateWithoutUserInput = {
     id?: string
-    content: string
-    role: string
-    createdAt?: Date | string
+    message: string
+    severity: number
+    categories: JsonNullValueInput | InputJsonValue
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: Date | string
   }
 
-  export type ChatMessageUncheckedCreateWithoutUserInput = {
+  export type CrisisLogUncheckedCreateWithoutUserInput = {
     id?: string
-    content: string
-    role: string
-    createdAt?: Date | string
+    message: string
+    severity: number
+    categories: JsonNullValueInput | InputJsonValue
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: Date | string
   }
 
-  export type ChatMessageCreateOrConnectWithoutUserInput = {
-    where: ChatMessageWhereUniqueInput
-    create: XOR<ChatMessageCreateWithoutUserInput, ChatMessageUncheckedCreateWithoutUserInput>
+  export type CrisisLogCreateOrConnectWithoutUserInput = {
+    where: CrisisLogWhereUniqueInput
+    create: XOR<CrisisLogCreateWithoutUserInput, CrisisLogUncheckedCreateWithoutUserInput>
   }
 
-  export type ChatMessageCreateManyUserInputEnvelope = {
-    data: ChatMessageCreateManyUserInput | ChatMessageCreateManyUserInput[]
+  export type CrisisLogCreateManyUserInputEnvelope = {
+    data: CrisisLogCreateManyUserInput | CrisisLogCreateManyUserInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UsageLogCreateWithoutUserInput = {
+    id?: string
+    service: $Enums.Service
+    model?: string | null
+    tokensUsed?: number | null
+    finishReason?: string | null
+    timestamp?: Date | string
+  }
+
+  export type UsageLogUncheckedCreateWithoutUserInput = {
+    id?: string
+    service: $Enums.Service
+    model?: string | null
+    tokensUsed?: number | null
+    finishReason?: string | null
+    timestamp?: Date | string
+  }
+
+  export type UsageLogCreateOrConnectWithoutUserInput = {
+    where: UsageLogWhereUniqueInput
+    create: XOR<UsageLogCreateWithoutUserInput, UsageLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type UsageLogCreateManyUserInputEnvelope = {
+    data: UsageLogCreateManyUserInput | UsageLogCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
+    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutUserInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConversationScalarWhereInput = {
+    AND?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    OR?: ConversationScalarWhereInput[]
+    NOT?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    userId?: StringFilter<"Conversation"> | string
+    startedAt?: DateTimeFilter<"Conversation"> | Date | string
+    lastMessageAt?: DateTimeFilter<"Conversation"> | Date | string
+    endedAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    metadata?: JsonNullableFilter<"Conversation">
+    summary?: StringNullableFilter<"Conversation"> | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+  }
+
+  export type MoodEntryUpsertWithWhereUniqueWithoutUserInput = {
+    where: MoodEntryWhereUniqueInput
+    update: XOR<MoodEntryUpdateWithoutUserInput, MoodEntryUncheckedUpdateWithoutUserInput>
+    create: XOR<MoodEntryCreateWithoutUserInput, MoodEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type MoodEntryUpdateWithWhereUniqueWithoutUserInput = {
+    where: MoodEntryWhereUniqueInput
+    data: XOR<MoodEntryUpdateWithoutUserInput, MoodEntryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MoodEntryUpdateManyWithWhereWithoutUserInput = {
+    where: MoodEntryScalarWhereInput
+    data: XOR<MoodEntryUpdateManyMutationInput, MoodEntryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MoodEntryScalarWhereInput = {
+    AND?: MoodEntryScalarWhereInput | MoodEntryScalarWhereInput[]
+    OR?: MoodEntryScalarWhereInput[]
+    NOT?: MoodEntryScalarWhereInput | MoodEntryScalarWhereInput[]
+    id?: StringFilter<"MoodEntry"> | string
+    userId?: StringFilter<"MoodEntry"> | string
+    mood?: IntFilter<"MoodEntry"> | number
+    energy?: IntNullableFilter<"MoodEntry"> | number | null
+    sleep?: IntNullableFilter<"MoodEntry"> | number | null
+    social?: IntNullableFilter<"MoodEntry"> | number | null
+    anxiety?: IntNullableFilter<"MoodEntry"> | number | null
+    notes?: StringNullableFilter<"MoodEntry"> | string | null
+    tags?: StringNullableListFilter<"MoodEntry">
+    sentimentScore?: FloatNullableFilter<"MoodEntry"> | number | null
+    sentimentLabel?: StringNullableFilter<"MoodEntry"> | string | null
+    crisisFlag?: BoolFilter<"MoodEntry"> | boolean
+    createdAt?: DateTimeFilter<"MoodEntry"> | Date | string
   }
 
   export type AssessmentUpsertWithWhereUniqueWithoutUserInput = {
@@ -9392,235 +15852,602 @@ export namespace Prisma {
     NOT?: AssessmentScalarWhereInput | AssessmentScalarWhereInput[]
     id?: StringFilter<"Assessment"> | string
     userId?: StringFilter<"Assessment"> | string
-    type?: StringFilter<"Assessment"> | string
+    type?: EnumAssessmentTypeFilter<"Assessment"> | $Enums.AssessmentType
+    responses?: JsonFilter<"Assessment">
     score?: IntFilter<"Assessment"> | number
-    severity?: StringFilter<"Assessment"> | string
+    severity?: EnumSeverityNullableFilter<"Assessment"> | $Enums.Severity | null
+    interpretation?: StringNullableFilter<"Assessment"> | string | null
     createdAt?: DateTimeFilter<"Assessment"> | Date | string
   }
 
-  export type MoodUpsertWithWhereUniqueWithoutUserInput = {
-    where: MoodWhereUniqueInput
-    update: XOR<MoodUpdateWithoutUserInput, MoodUncheckedUpdateWithoutUserInput>
-    create: XOR<MoodCreateWithoutUserInput, MoodUncheckedCreateWithoutUserInput>
+  export type AIInteractionUpsertWithWhereUniqueWithoutUserInput = {
+    where: AIInteractionWhereUniqueInput
+    update: XOR<AIInteractionUpdateWithoutUserInput, AIInteractionUncheckedUpdateWithoutUserInput>
+    create: XOR<AIInteractionCreateWithoutUserInput, AIInteractionUncheckedCreateWithoutUserInput>
   }
 
-  export type MoodUpdateWithWhereUniqueWithoutUserInput = {
-    where: MoodWhereUniqueInput
-    data: XOR<MoodUpdateWithoutUserInput, MoodUncheckedUpdateWithoutUserInput>
+  export type AIInteractionUpdateWithWhereUniqueWithoutUserInput = {
+    where: AIInteractionWhereUniqueInput
+    data: XOR<AIInteractionUpdateWithoutUserInput, AIInteractionUncheckedUpdateWithoutUserInput>
   }
 
-  export type MoodUpdateManyWithWhereWithoutUserInput = {
-    where: MoodScalarWhereInput
-    data: XOR<MoodUpdateManyMutationInput, MoodUncheckedUpdateManyWithoutUserInput>
+  export type AIInteractionUpdateManyWithWhereWithoutUserInput = {
+    where: AIInteractionScalarWhereInput
+    data: XOR<AIInteractionUpdateManyMutationInput, AIInteractionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type MoodScalarWhereInput = {
-    AND?: MoodScalarWhereInput | MoodScalarWhereInput[]
-    OR?: MoodScalarWhereInput[]
-    NOT?: MoodScalarWhereInput | MoodScalarWhereInput[]
-    id?: StringFilter<"Mood"> | string
-    userId?: StringFilter<"Mood"> | string
-    value?: IntFilter<"Mood"> | number
-    note?: StringNullableFilter<"Mood"> | string | null
-    sentimentScore?: FloatNullableFilter<"Mood"> | number | null
-    sentimentLabel?: StringNullableFilter<"Mood"> | string | null
-    crisisFlag?: BoolFilter<"Mood"> | boolean
-    createdAt?: DateTimeFilter<"Mood"> | Date | string
+  export type AIInteractionScalarWhereInput = {
+    AND?: AIInteractionScalarWhereInput | AIInteractionScalarWhereInput[]
+    OR?: AIInteractionScalarWhereInput[]
+    NOT?: AIInteractionScalarWhereInput | AIInteractionScalarWhereInput[]
+    id?: StringFilter<"AIInteraction"> | string
+    userId?: StringFilter<"AIInteraction"> | string
+    userMessage?: StringFilter<"AIInteraction"> | string
+    aiResponse?: StringFilter<"AIInteraction"> | string
+    model?: StringNullableFilter<"AIInteraction"> | string | null
+    tokensUsed?: IntNullableFilter<"AIInteraction"> | number | null
+    crisisDetected?: BoolFilter<"AIInteraction"> | boolean
+    emotionalIntensity?: IntNullableFilter<"AIInteraction"> | number | null
+    responseTime?: IntNullableFilter<"AIInteraction"> | number | null
+    timestamp?: DateTimeFilter<"AIInteraction"> | Date | string
   }
 
-  export type ChatMessageUpsertWithWhereUniqueWithoutUserInput = {
-    where: ChatMessageWhereUniqueInput
-    update: XOR<ChatMessageUpdateWithoutUserInput, ChatMessageUncheckedUpdateWithoutUserInput>
-    create: XOR<ChatMessageCreateWithoutUserInput, ChatMessageUncheckedCreateWithoutUserInput>
+  export type CrisisLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: CrisisLogWhereUniqueInput
+    update: XOR<CrisisLogUpdateWithoutUserInput, CrisisLogUncheckedUpdateWithoutUserInput>
+    create: XOR<CrisisLogCreateWithoutUserInput, CrisisLogUncheckedCreateWithoutUserInput>
   }
 
-  export type ChatMessageUpdateWithWhereUniqueWithoutUserInput = {
-    where: ChatMessageWhereUniqueInput
-    data: XOR<ChatMessageUpdateWithoutUserInput, ChatMessageUncheckedUpdateWithoutUserInput>
+  export type CrisisLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: CrisisLogWhereUniqueInput
+    data: XOR<CrisisLogUpdateWithoutUserInput, CrisisLogUncheckedUpdateWithoutUserInput>
   }
 
-  export type ChatMessageUpdateManyWithWhereWithoutUserInput = {
-    where: ChatMessageScalarWhereInput
-    data: XOR<ChatMessageUpdateManyMutationInput, ChatMessageUncheckedUpdateManyWithoutUserInput>
+  export type CrisisLogUpdateManyWithWhereWithoutUserInput = {
+    where: CrisisLogScalarWhereInput
+    data: XOR<CrisisLogUpdateManyMutationInput, CrisisLogUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ChatMessageScalarWhereInput = {
-    AND?: ChatMessageScalarWhereInput | ChatMessageScalarWhereInput[]
-    OR?: ChatMessageScalarWhereInput[]
-    NOT?: ChatMessageScalarWhereInput | ChatMessageScalarWhereInput[]
-    id?: StringFilter<"ChatMessage"> | string
-    userId?: StringFilter<"ChatMessage"> | string
-    content?: StringFilter<"ChatMessage"> | string
-    role?: StringFilter<"ChatMessage"> | string
-    createdAt?: DateTimeFilter<"ChatMessage"> | Date | string
+  export type CrisisLogScalarWhereInput = {
+    AND?: CrisisLogScalarWhereInput | CrisisLogScalarWhereInput[]
+    OR?: CrisisLogScalarWhereInput[]
+    NOT?: CrisisLogScalarWhereInput | CrisisLogScalarWhereInput[]
+    id?: StringFilter<"CrisisLog"> | string
+    userId?: StringFilter<"CrisisLog"> | string
+    message?: StringFilter<"CrisisLog"> | string
+    severity?: IntFilter<"CrisisLog"> | number
+    categories?: JsonFilter<"CrisisLog">
+    responseProvided?: BoolFilter<"CrisisLog"> | boolean
+    resourcesShown?: BoolFilter<"CrisisLog"> | boolean
+    emergencyContactCalled?: BoolFilter<"CrisisLog"> | boolean
+    timestamp?: DateTimeFilter<"CrisisLog"> | Date | string
   }
 
-  export type UserCreateWithoutChatMessagesInput = {
+  export type UsageLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: UsageLogWhereUniqueInput
+    update: XOR<UsageLogUpdateWithoutUserInput, UsageLogUncheckedUpdateWithoutUserInput>
+    create: XOR<UsageLogCreateWithoutUserInput, UsageLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type UsageLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: UsageLogWhereUniqueInput
+    data: XOR<UsageLogUpdateWithoutUserInput, UsageLogUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UsageLogUpdateManyWithWhereWithoutUserInput = {
+    where: UsageLogScalarWhereInput
+    data: XOR<UsageLogUpdateManyMutationInput, UsageLogUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UsageLogScalarWhereInput = {
+    AND?: UsageLogScalarWhereInput | UsageLogScalarWhereInput[]
+    OR?: UsageLogScalarWhereInput[]
+    NOT?: UsageLogScalarWhereInput | UsageLogScalarWhereInput[]
+    id?: StringFilter<"UsageLog"> | string
+    userId?: StringFilter<"UsageLog"> | string
+    service?: EnumServiceFilter<"UsageLog"> | $Enums.Service
+    model?: StringNullableFilter<"UsageLog"> | string | null
+    tokensUsed?: IntNullableFilter<"UsageLog"> | number | null
+    finishReason?: StringNullableFilter<"UsageLog"> | string | null
+    timestamp?: DateTimeFilter<"UsageLog"> | Date | string
+  }
+
+  export type UserCreateWithoutConversationsInput = {
     id?: string
     email: string
     password?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
     assessments?: AssessmentCreateNestedManyWithoutUserInput
-    moods?: MoodCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutChatMessagesInput = {
+  export type UserUncheckedCreateWithoutConversationsInput = {
     id?: string
     email: string
     password?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
     assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
-    moods?: MoodUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutChatMessagesInput = {
+  export type UserCreateOrConnectWithoutConversationsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutChatMessagesInput, UserUncheckedCreateWithoutChatMessagesInput>
+    create: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
   }
 
-  export type UserUpsertWithoutChatMessagesInput = {
-    update: XOR<UserUpdateWithoutChatMessagesInput, UserUncheckedUpdateWithoutChatMessagesInput>
-    create: XOR<UserCreateWithoutChatMessagesInput, UserUncheckedCreateWithoutChatMessagesInput>
+  export type MessageCreateWithoutConversationInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    timestamp?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageUncheckedCreateWithoutConversationInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    timestamp?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageCreateOrConnectWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput>
+  }
+
+  export type MessageCreateManyConversationInputEnvelope = {
+    data: MessageCreateManyConversationInput | MessageCreateManyConversationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutConversationsInput = {
+    update: XOR<UserUpdateWithoutConversationsInput, UserUncheckedUpdateWithoutConversationsInput>
+    create: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutChatMessagesInput = {
+  export type UserUpdateToOneWithWhereWithoutConversationsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutChatMessagesInput, UserUncheckedUpdateWithoutChatMessagesInput>
+    data: XOR<UserUpdateWithoutConversationsInput, UserUncheckedUpdateWithoutConversationsInput>
   }
 
-  export type UserUpdateWithoutChatMessagesInput = {
+  export type UserUpdateWithoutConversationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
     assessments?: AssessmentUpdateManyWithoutUserNestedInput
-    moods?: MoodUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutChatMessagesInput = {
+  export type UserUncheckedUpdateWithoutConversationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
     assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
-    moods?: MoodUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
+    create: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutConversationInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutConversationInput>
+  }
+
+  export type MessageScalarWhereInput = {
+    AND?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    OR?: MessageScalarWhereInput[]
+    NOT?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    id?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
+    content?: StringFilter<"Message"> | string
+    timestamp?: DateTimeFilter<"Message"> | Date | string
+    metadata?: JsonNullableFilter<"Message">
+  }
+
+  export type ConversationCreateWithoutMessagesInput = {
+    id?: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationsInput
+  }
+
+  export type ConversationUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    userId: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversationCreateOrConnectWithoutMessagesInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type ConversationUpsertWithoutMessagesInput = {
+    update: XOR<ConversationUpdateWithoutMessagesInput, ConversationUncheckedUpdateWithoutMessagesInput>
+    create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutMessagesInput, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ConversationUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutMoodEntriesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMoodEntriesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMoodEntriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMoodEntriesInput, UserUncheckedCreateWithoutMoodEntriesInput>
+  }
+
+  export type UserUpsertWithoutMoodEntriesInput = {
+    update: XOR<UserUpdateWithoutMoodEntriesInput, UserUncheckedUpdateWithoutMoodEntriesInput>
+    create: XOR<UserCreateWithoutMoodEntriesInput, UserUncheckedCreateWithoutMoodEntriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMoodEntriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMoodEntriesInput, UserUncheckedUpdateWithoutMoodEntriesInput>
+  }
+
+  export type UserUpdateWithoutMoodEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMoodEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAssessmentsInput = {
@@ -9630,35 +16457,40 @@ export namespace Prisma {
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    moods?: MoodCreateNestedManyWithoutUserInput
-    chatMessages?: ChatMessageCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssessmentsInput = {
@@ -9668,35 +16500,40 @@ export namespace Prisma {
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    moods?: MoodUncheckedCreateNestedManyWithoutUserInput
-    chatMessages?: ChatMessageUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssessmentsInput = {
@@ -9722,35 +16559,40 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    moods?: MoodUpdateManyWithoutUserNestedInput
-    chatMessages?: ChatMessageUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssessmentsInput = {
@@ -9760,303 +16602,914 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    moods?: MoodUncheckedUpdateManyWithoutUserNestedInput
-    chatMessages?: ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutMoodsInput = {
+  export type UserCreateWithoutAiInteractionsInput = {
     id?: string
     email: string
     password?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
     assessments?: AssessmentCreateNestedManyWithoutUserInput
-    chatMessages?: ChatMessageCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutMoodsInput = {
+  export type UserUncheckedCreateWithoutAiInteractionsInput = {
     id?: string
     email: string
     password?: string | null
     googleId?: string | null
     isVerified?: boolean
     isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
     displayName?: string | null
-    university?: string | null
+    university?: $Enums.University | null
     academicLevel?: number | null
     program?: string | null
-    image?: string | null
-    language?: string
-    notificationPreference?: string
-    preferredCheckInTime?: string
-    concerns?: UserCreateconcernsInput | string[]
-    supportLevel?: string
-    riskLevel?: string
-    copingStyles?: UserCreatecopingStylesInput | string[]
-    faithLevel?: string
-    approachPreference?: string
-    goals?: UserCreategoalsInput | string[]
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
-    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
     assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
-    chatMessages?: ChatMessageUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutMoodsInput = {
+  export type UserCreateOrConnectWithoutAiInteractionsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
+    create: XOR<UserCreateWithoutAiInteractionsInput, UserUncheckedCreateWithoutAiInteractionsInput>
   }
 
-  export type UserUpsertWithoutMoodsInput = {
-    update: XOR<UserUpdateWithoutMoodsInput, UserUncheckedUpdateWithoutMoodsInput>
-    create: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
+  export type UserUpsertWithoutAiInteractionsInput = {
+    update: XOR<UserUpdateWithoutAiInteractionsInput, UserUncheckedUpdateWithoutAiInteractionsInput>
+    create: XOR<UserCreateWithoutAiInteractionsInput, UserUncheckedCreateWithoutAiInteractionsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutMoodsInput = {
+  export type UserUpdateToOneWithWhereWithoutAiInteractionsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMoodsInput, UserUncheckedUpdateWithoutMoodsInput>
+    data: XOR<UserUpdateWithoutAiInteractionsInput, UserUncheckedUpdateWithoutAiInteractionsInput>
   }
 
-  export type UserUpdateWithoutMoodsInput = {
+  export type UserUpdateWithoutAiInteractionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
     assessments?: AssessmentUpdateManyWithoutUserNestedInput
-    chatMessages?: ChatMessageUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutMoodsInput = {
+  export type UserUncheckedUpdateWithoutAiInteractionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    university?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
     academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
     program?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    language?: StringFieldUpdateOperationsInput | string
-    notificationPreference?: StringFieldUpdateOperationsInput | string
-    preferredCheckInTime?: StringFieldUpdateOperationsInput | string
-    concerns?: UserUpdateconcernsInput | string[]
-    supportLevel?: StringFieldUpdateOperationsInput | string
-    riskLevel?: StringFieldUpdateOperationsInput | string
-    copingStyles?: UserUpdatecopingStylesInput | string[]
-    faithLevel?: StringFieldUpdateOperationsInput | string
-    approachPreference?: StringFieldUpdateOperationsInput | string
-    goals?: UserUpdategoalsInput | string[]
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
     stressors?: NullableJsonNullValueInput | InputJsonValue
     trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
     emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
     assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
-    chatMessages?: ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type AssessmentCreateManyUserInput = {
+  export type UserCreateWithoutCrisisLogsInput = {
     id?: string
-    type: string
-    score: number
-    severity: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
   }
 
-  export type MoodCreateManyUserInput = {
+  export type UserUncheckedCreateWithoutCrisisLogsInput = {
     id?: string
-    value: number
-    note?: string | null
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCrisisLogsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCrisisLogsInput, UserUncheckedCreateWithoutCrisisLogsInput>
+  }
+
+  export type UserUpsertWithoutCrisisLogsInput = {
+    update: XOR<UserUpdateWithoutCrisisLogsInput, UserUncheckedUpdateWithoutCrisisLogsInput>
+    create: XOR<UserCreateWithoutCrisisLogsInput, UserUncheckedCreateWithoutCrisisLogsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCrisisLogsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCrisisLogsInput, UserUncheckedUpdateWithoutCrisisLogsInput>
+  }
+
+  export type UserUpdateWithoutCrisisLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCrisisLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUsageLogsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUsageLogsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUsageLogsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUsageLogsInput, UserUncheckedCreateWithoutUsageLogsInput>
+  }
+
+  export type UserUpsertWithoutUsageLogsInput = {
+    update: XOR<UserUpdateWithoutUsageLogsInput, UserUncheckedUpdateWithoutUsageLogsInput>
+    create: XOR<UserCreateWithoutUsageLogsInput, UserUncheckedCreateWithoutUsageLogsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUsageLogsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUsageLogsInput, UserUncheckedUpdateWithoutUsageLogsInput>
+  }
+
+  export type UserUpdateWithoutUsageLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUsageLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ConversationCreateManyUserInput = {
+    id?: string
+    startedAt?: Date | string
+    lastMessageAt?: Date | string
+    endedAt?: Date | string | null
+    status?: $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MoodEntryCreateManyUserInput = {
+    id?: string
+    mood: number
+    energy?: number | null
+    sleep?: number | null
+    social?: number | null
+    anxiety?: number | null
+    notes?: string | null
+    tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
     sentimentLabel?: string | null
     crisisFlag?: boolean
     createdAt?: Date | string
   }
 
-  export type ChatMessageCreateManyUserInput = {
+  export type AssessmentCreateManyUserInput = {
     id?: string
-    content: string
-    role: string
+    type: $Enums.AssessmentType
+    responses: JsonNullValueInput | InputJsonValue
+    score: number
+    severity?: $Enums.Severity | null
+    interpretation?: string | null
     createdAt?: Date | string
+  }
+
+  export type AIInteractionCreateManyUserInput = {
+    id?: string
+    userMessage: string
+    aiResponse: string
+    model?: string | null
+    tokensUsed?: number | null
+    crisisDetected?: boolean
+    emotionalIntensity?: number | null
+    responseTime?: number | null
+    timestamp?: Date | string
+  }
+
+  export type CrisisLogCreateManyUserInput = {
+    id?: string
+    message: string
+    severity: number
+    categories: JsonNullValueInput | InputJsonValue
+    responseProvided?: boolean
+    resourcesShown?: boolean
+    emergencyContactCalled?: boolean
+    timestamp?: Date | string
+  }
+
+  export type UsageLogCreateManyUserInput = {
+    id?: string
+    service: $Enums.Service
+    model?: string | null
+    tokensUsed?: number | null
+    finishReason?: string | null
+    timestamp?: Date | string
+  }
+
+  export type ConversationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastMessageAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodEntryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodEntryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodEntryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
+    energy?: NullableIntFieldUpdateOperationsInput | number | null
+    sleep?: NullableIntFieldUpdateOperationsInput | number | null
+    social?: NullableIntFieldUpdateOperationsInput | number | null
+    anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: MoodEntryUpdatetagsInput | string[]
+    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
+    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssessmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssessmentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AssessmentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumAssessmentTypeFieldUpdateOperationsInput | $Enums.AssessmentType
+    responses?: JsonNullValueInput | InputJsonValue
     score?: IntFieldUpdateOperationsInput | number
-    severity?: StringFieldUpdateOperationsInput | string
+    severity?: NullableEnumSeverityFieldUpdateOperationsInput | $Enums.Severity | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MoodUpdateWithoutUserInput = {
+  export type AIInteractionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MoodUncheckedUpdateWithoutUserInput = {
+  export type AIInteractionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MoodUncheckedUpdateManyWithoutUserInput = {
+  export type AIInteractionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    sentimentLabel?: NullableStringFieldUpdateOperationsInput | string | null
-    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userMessage?: StringFieldUpdateOperationsInput | string
+    aiResponse?: StringFieldUpdateOperationsInput | string
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    crisisDetected?: BoolFieldUpdateOperationsInput | boolean
+    emotionalIntensity?: NullableIntFieldUpdateOperationsInput | number | null
+    responseTime?: NullableIntFieldUpdateOperationsInput | number | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ChatMessageUpdateWithoutUserInput = {
+  export type CrisisLogUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisLogUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CrisisLogUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    severity?: IntFieldUpdateOperationsInput | number
+    categories?: JsonNullValueInput | InputJsonValue
+    responseProvided?: BoolFieldUpdateOperationsInput | boolean
+    resourcesShown?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContactCalled?: BoolFieldUpdateOperationsInput | boolean
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageLogUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageLogUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageLogUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    service?: EnumServiceFieldUpdateOperationsInput | $Enums.Service
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    tokensUsed?: NullableIntFieldUpdateOperationsInput | number | null
+    finishReason?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateManyConversationInput = {
+    id?: string
+    role: $Enums.MessageRole
+    content: string
+    timestamp?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type MessageUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type ChatMessageUncheckedUpdateWithoutUserInput = {
+  export type MessageUncheckedUpdateWithoutConversationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type ChatMessageUncheckedUpdateManyWithoutUserInput = {
+  export type MessageUncheckedUpdateManyWithoutConversationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     content?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
 

@@ -8,7 +8,7 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
         const userId = req.user.userId;
 
         // 1. Mood Statistics
-        const moodStats = await prisma.mood.findMany({
+        const moodStats = await prisma.moodEntry.findMany({
             where: { userId },
             orderBy: { createdAt: 'desc' },
             take: 30
@@ -16,16 +16,16 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
 
         const totalMoods = moodStats.length;
         const averageMood = totalMoods > 0 
-            ? moodStats.reduce((acc, mood) => acc + mood.value, 0) / totalMoods 
+            ? moodStats.reduce((acc, entry) => acc + entry.mood, 0) / totalMoods 
             : 0;
 
         // 2. AI Interaction Statistics
-        const aiInteractions = await prisma.chatMessage.count({
+        const aiInteractions = await prisma.aIInteraction.count({
             where: { userId }
         });
 
         // 3. Crisis Incidents
-        const crisisCount = await prisma.mood.count({
+        const crisisCount = await prisma.moodEntry.count({
             where: { userId, crisisFlag: true }
         });
 
@@ -33,13 +33,13 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-        const recentActivity = await prisma.mood.groupBy({
+        const recentActivity = await prisma.moodEntry.groupBy({
             by: ['createdAt'],
             where: {
                 userId,
                 createdAt: { gte: sevenDaysAgo }
             },
-            _avg: { value: true },
+            _avg: { mood: true },
             _count: { id: true }
         });
 
@@ -51,7 +51,7 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
                 crisisCount
             },
             moodHistory: moodStats.map(m => ({
-                value: m.value,
+                value: m.mood,
                 date: m.createdAt
             })),
             isHighlyActive: aiInteractions > 20
