@@ -44,12 +44,12 @@ describe('MemoryManagerService', () => {
             const content = 'I love playing the piano';
             const mockEmbedding = [0.1, 0.2, 0.3];
             (embeddingsService.generateEmbedding as jest.Mock).mockResolvedValue(mockEmbedding);
-            (prisma.memoryEntry.create as jest.Mock).mockResolvedValue({ id: 'mem-1', content });
+            (prisma as any).memoryEntry.create.mockResolvedValue({ id: 'mem-1', content });
 
             const result = await memoryManager.saveMemory(mockUserId, content, { category: 'PERSONAL', importance: 8 });
 
             expect(embeddingsService.generateEmbedding).toHaveBeenCalledWith(content);
-            expect(prisma.memoryEntry.create).toHaveBeenCalledWith({
+            expect((prisma as any).memoryEntry.create).toHaveBeenCalledWith({
                 data: {
                     userId: mockUserId,
                     content,
@@ -72,7 +72,7 @@ describe('MemoryManagerService', () => {
             ];
 
             (embeddingsService.generateEmbedding as jest.Mock).mockResolvedValue(mockQueryVector);
-            (prisma.memoryEntry.findMany as jest.Mock).mockResolvedValue(mockMemories);
+            ((prisma as any).memoryEntry.findMany as jest.Mock).mockResolvedValue(mockMemories);
             (embeddingsService.cosineSimilarity as jest.Mock)
                 .mockReturnValueOnce(1.0) // Match for first
                 .mockReturnValueOnce(0.1); // No match for second
@@ -102,7 +102,7 @@ describe('MemoryManagerService', () => {
             await memoryManager.extractAndSaveFromConversation(mockUserId, messages);
 
             expect(geminiAdvanced.generateResponse).toHaveBeenCalled();
-            expect(prisma.memoryEntry.create).toHaveBeenCalledTimes(2);
+            expect((prisma as any).memoryEntry.create).toHaveBeenCalledTimes(2);
         });
     });
 });

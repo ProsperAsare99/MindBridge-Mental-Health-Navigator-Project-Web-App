@@ -16,7 +16,7 @@ export class MemoryManagerService {
         try {
             const embedding = await embeddingsService.generateEmbedding(content);
             
-            return await prisma.memoryEntry.create({
+            return await (prisma as any).memoryEntry.create({
                 data: {
                     userId,
                     content,
@@ -40,7 +40,7 @@ export class MemoryManagerService {
             
             // Fetch all user memories (for small enough sets, in-memory filtering is OK)
             // For production with thousands of entries per user, use pgvector extension
-            const memories = await prisma.memoryEntry.findMany({
+            const memories = await (prisma as any).memoryEntry.findMany({
                 where: { userId },
                 select: {
                     id: true,
@@ -54,12 +54,12 @@ export class MemoryManagerService {
 
             // Rank by similarity
             const ranked = memories
-                .map(m => ({
+                .map((m: any) => ({
                     ...m,
                     similarity: embeddingsService.cosineSimilarity(queryVector, m.embedding as number[])
                 }))
-                .filter(m => m.similarity > 0.7) // Threshold
-                .sort((a, b) => b.similarity - a.similarity)
+                .filter((m: any) => m.similarity > 0.7) // Threshold
+                .sort((a: any, b: any) => b.similarity - a.similarity)
                 .slice(0, limit);
 
             return ranked;
