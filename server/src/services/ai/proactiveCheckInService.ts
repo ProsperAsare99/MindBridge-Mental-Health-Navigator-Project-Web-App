@@ -1,7 +1,6 @@
 import prisma from '../../lib/prisma';
 import { geminiAdvanced } from './geminiAdvancedService';
 import { contextEngine } from './contextEngineService';
-import { GoalStatus } from '../../generated/client';
 
 export interface Nudge {
     message: string;
@@ -18,8 +17,8 @@ export class ProactiveCheckInService {
     async generateDailyNudge(userId: string): Promise<Nudge> {
         try {
             const context = await contextEngine.buildContext(userId);
-            const activeGoals = await prisma.userGoal.findMany({
-                where: { userId, status: GoalStatus.ACTIVE },
+            const activeGoals = await (prisma as any).userGoal.findMany({
+                where: { userId, status: 'ACTIVE' },
                 take: 2
             });
 

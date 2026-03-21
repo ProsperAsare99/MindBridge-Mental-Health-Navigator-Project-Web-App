@@ -3,6 +3,7 @@ import { mindBridgeMaster } from '../services/ai/mindbridgeMasterService';
 import { contextEngine } from '../services/ai/contextEngineService';
 import { conversationManager } from '../services/ai/conversationManagerService';
 import { geminiAdvanced } from '../services/ai/geminiAdvancedService';
+import { proactiveCheckIn } from '../services/ai/proactiveCheckInService';
 import { authenticateToken, AuthRequest } from '../middleware/auth';
 import { aiChatLimiter } from '../middleware/rate-limit';
 import prisma from '../lib/prisma';
@@ -51,6 +52,20 @@ router.post('/mood-insight', authenticateToken, async (req: AuthRequest, res: Re
         res.json({ insight: response });
     } catch (error) {
         res.status(500).json({ error: 'Failed to generate insight' });
+    }
+});
+
+/**
+ * GET /api/ai/nudge
+ * Get the daily proactive nudge
+ */
+router.get('/nudge', authenticateToken, async (req: AuthRequest, res: Response) => {
+    try {
+        const userId = req.userId!;
+        const nudge = await proactiveCheckIn.generateDailyNudge(userId);
+        res.json(nudge);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to generate nudge' });
     }
 });
 

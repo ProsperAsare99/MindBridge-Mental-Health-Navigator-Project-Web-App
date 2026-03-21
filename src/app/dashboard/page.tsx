@@ -27,6 +27,7 @@ import { DashboardContainer, DashboardItem } from "@/components/dashboard/dashbo
 import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
 import { ConversationHistory } from "@/components/dashboard/ConversationHistory";
 import { AIChatbot } from "@/components/dashboard/AIChatbot";
+import AINudge from "@/components/ai/AINudge";
 
 
 export default async function DashboardPage() {
@@ -41,12 +42,8 @@ export default async function DashboardPage() {
     let nudges = [];
 
     try {
-        const [statsData, nudgesData] = await Promise.all([
-            serverApi('/moods/stats'),
-            serverApi('/moods/nudges')
-        ]);
+        const statsData = await serverApi('/moods/stats');
         moodStats = statsData;
-        nudges = nudgesData;
     } catch (error) {
         console.error("Error fetching dashboard data on server:", error);
     }
@@ -124,33 +121,10 @@ export default async function DashboardPage() {
                     </Card>
                 </DashboardItem>
 
-                {/* Proactive Nudges Section */}
-                {nudges.length > 0 && (
-                    <DashboardItem className="space-y-4">
-                        <div className="flex items-center gap-2 px-1 ml-1">
-                            <Sparkles size={16} className="text-primary animate-pulse" />
-                            <h3 className="text-sm font-black uppercase tracking-widest text-foreground/70">Personalized Insights</h3>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {nudges.map((nudge: any, i: number) => (
-                                <div 
-                                    key={i}
-                                    className="glass rounded-[2rem] p-6 border border-primary/10 shadow-premium flex gap-4 items-start group hover:bg-primary/5 transition-all"
-                                >
-                                    <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                        {nudge.icon === 'CloudRain' ? <CloudRain className="text-primary" /> : 
-                                         nudge.icon === 'Sun' ? <Sun className="text-primary" /> : 
-                                         <Lightbulb className="text-primary" />}
-                                    </div>
-                                    <div className="space-y-1">
-                                        <p className="text-sm font-bold text-foreground/90 leading-tight">{nudge.message}</p>
-                                        <p className="text-[11px] text-muted-foreground font-medium leading-relaxed italic">{nudge.suggestion}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </DashboardItem>
-                )}
+                {/* Proactive Nudge */}
+                <DashboardItem>
+                    <AINudge />
+                </DashboardItem>
 
 
                 {/* Main Stats Grid */}
