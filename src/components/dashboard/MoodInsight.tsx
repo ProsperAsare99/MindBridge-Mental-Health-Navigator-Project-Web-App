@@ -45,7 +45,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
         setError(null);
 
         try {
-            const response = await api.post('/ai/mood-insight', {
+            const response = await api.post('/analytics/mood-insight', {
                 moodData: moods
             });
             setInsight(response.insight);
@@ -159,7 +159,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                             <Sparkles className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                            <h3 className="text-sm font-black text-foreground uppercase tracking-tight">AI Insights</h3>
+                            <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Smart Insights</h3>
                             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{stats?.total} recent entries</p>
                         </div>
                     </div>

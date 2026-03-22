@@ -109,7 +109,7 @@ export default function AboutPage() {
             },
             {
               title: "Our Commitment",
-              description: "We are committed to providing confidential, AI-powered guidance that respects the unique cultural and social context of Ghanaian students.",
+              description: "We are committed to providing confidential, advanced guidance that respects the unique cultural and social context of Ghanaian students.",
               icon: ShieldCheck,
               gradient: "from-foreground/5 to-transparent"
             }
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   Born from the realization that existing support systems often miss the subtle nuances of university life, MindBridge was built by students, for students.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed font-medium">
-                  We integrated advanced AI with years of student feedback to create a navigator that doesn't just provide answers, but fosters understanding.
+                  We integrated advanced analytics with years of student feedback to create a navigator that doesn't just provide answers, but fosters understanding.
                 </p>
               </div>
             </ParallaxSection>

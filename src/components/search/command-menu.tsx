@@ -38,7 +38,7 @@ export function CommandMenu() {
   useEffect(() => {
     if (query.length > 2) {
       const delayDebounce = setTimeout(() => {
-        searchAI();
+        searchGlobal();
       }, 300);
       return () => clearTimeout(delayDebounce);
     } else {
@@ -46,7 +46,7 @@ export function CommandMenu() {
     }
   }, [query]);
 
-  const searchAI = async () => {
+  const searchGlobal = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`/api/ai/search?q=${query}`, {
@@ -112,7 +112,7 @@ export function CommandMenu() {
                 {query.length > 2 && (
                   <section>
                     <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 mb-6 px-2 flex items-center gap-2">
-                      <Sparkles className="h-3 w-3" /> AI Search Results
+                       Search Results
                     </h3>
                     <div className="space-y-3">
                       {loading ? (
@@ -126,7 +126,7 @@ export function CommandMenu() {
                             onClick={() => {
                               if (result.type === 'GOAL') handleNavigate('/dashboard');
                               else if (result.type === 'MOOD') handleNavigate('/dashboard/mood');
-                              else handleNavigate('/oracle');
+                              else handleNavigate('/dashboard');
                             }}
                             className="w-full flex items-start gap-4 p-4 rounded-2xl hover:bg-primary/5 border border-white/5 hover:border-primary/10 transition-all group text-left"
                           >
@@ -197,7 +197,7 @@ export function CommandMenu() {
                 MindBridge Global Search
               </p>
               <div className="flex gap-4 items-center">
-                <span className="text-[10px] font-bold text-primary/60">Ghana's First Context-Aware AI Support</span>
+                <span className="text-[10px] font-bold text-primary/60">Ghana's First Context-Aware Mental Health Support</span>
               </div>
             </div>
           </motion.div>

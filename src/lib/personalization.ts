@@ -73,7 +73,7 @@ export class UserPersonalizationService {
       'talk': [
         "Message a trusted friend",
         "Join an anonymous support circle",
-        "Talk to our AI companion"
+        "Explore your growth tools"
       ],
       'pray': [
         "Take 5 minutes for prayer",
@@ -146,7 +146,7 @@ export class UserPersonalizationService {
   }
 
   /**
-   * Generates AI system prompt context for specific user.
+   * Generates profile context for specific user.
    */
   static getAIContext(user: any) {
     return {

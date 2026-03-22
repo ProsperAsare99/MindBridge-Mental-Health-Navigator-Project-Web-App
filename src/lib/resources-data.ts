@@ -160,7 +160,7 @@ export const RECOMMENDED_APPS = [
     { name: "Headspace", tag: "Meditation", icon: "Sparkles", desc: "Guided mindfulness for students.", url: "https://www.headspace.com" },
     { name: "7 Cups", tag: "Support", icon: "MessageSquare", desc: "24/7 chat with trained listeners.", url: "https://www.7cups.com" },
     { name: "Calm", tag: "Sleep", icon: "Moon", desc: "Sleep stories and relaxation music.", url: "https://www.calm.com" },
-    { name: "Woebot", tag: "AI CBT", icon: "Brain", desc: "Daily check-ins with an AI therapist.", url: "https://woebothealth.com" },
+    { name: "Wysa", tag: "Coping", icon: "MessageSquare", desc: "Emotional support and wellness tools.", url: "https://www.wysa.io" },
     { name: "Daylio", tag: "Mood", icon: "Smile", desc: "Track your mood without writing a word.", url: "https://daylio.net" },
     { name: "MindShift CBT", tag: "Anxiety", icon: "Lightbulb", desc: "Tools for panic and worry.", url: "https://www.anxietycanada.com/resources/mindshift-cbt/" },
     { name: "Happify", tag: "Happiness", icon: "Target", desc: "Science-based games for stress.", url: "https://www.happify.com" },

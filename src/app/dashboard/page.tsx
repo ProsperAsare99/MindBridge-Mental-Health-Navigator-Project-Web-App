@@ -83,7 +83,7 @@ export default async function DashboardPage() {
                                 </p>
                             </div>
                             <Link href="/dashboard/assessment" className="w-full md:w-auto">
-                                <Button variant="secondary" className="w-full rounded-xl font-bold h-12 px-8">
+                                <Button variant="primary" className="w-full rounded-xl font-bold h-12 px-8">
                                     Complete Assessment
                                 </Button>
                             </Link>
