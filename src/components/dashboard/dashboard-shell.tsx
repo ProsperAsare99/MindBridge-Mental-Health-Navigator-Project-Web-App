@@ -78,14 +78,13 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                 />
             </div>
 
-            {/* Mobile Sidebar Overlay */}
             <AnimatePresence>
                 {isSidebarOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+                        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden pointer-events-auto"
                         onClick={() => setIsSidebarOpen(false)}
                     />
                 )}
@@ -141,7 +140,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                                             : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
                                     )}
                                 >
-                                    <Icon className={cn("h-4.5 w-4.5", isActive ? "text-primary border-primary" : "opacity-60")} />
+                                    <Icon className={cn("h-4.5 w-4.5", isActive ? "text-primary border-primary" : "text-muted-foreground")} />
                                     <span>{item.label}</span>
                                     {isActive && (
                                         <motion.div

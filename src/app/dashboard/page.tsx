@@ -50,7 +50,7 @@ export default async function DashboardPage() {
                                 <ShieldCheck className="h-3 w-3" />
                                 Privacy-Validated
                             </div>
-                            <div className="text-[9px] font-bold text-muted-foreground/40 uppercase">Ghanaian Data Standards</div>
+                            <div className="text-[9px] font-bold text-muted-foreground uppercase">Ghanaian Data Standards</div>
                         </div>
                         <Link href="/dashboard/mood">
                             <Button className="rounded-2xl shadow-xl shadow-primary/20">
@@ -98,7 +98,7 @@ export default async function DashboardPage() {
                             </div>
                             <div className="space-y-1">
                                 <h4 className="text-2xl font-black">Supporting Minds</h4>
-                                <p className="text-xs font-bold text-muted-foreground/70 uppercase tracking-tight">At {user?.institution || "Your University"}</p>
+                                <p className="text-xs font-bold text-muted-foreground/90 uppercase tracking-tight">At {user?.institution || "Your University"}</p>
                             </div>
                             <p className="text-xs font-medium text-muted-foreground leading-relaxed italic">
                                 "You're not alone. Our community is built on collective well-being and shared support."
@@ -217,7 +217,7 @@ export default async function DashboardPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-6">
-                                <p className="text-sm font-medium leading-relaxed opacity-80">
+                                <p className="text-sm font-bold leading-relaxed">
                                     If you're feeling overwhelmed or in immediate distress, our crisis support team is here for you 24/7.
                                 </p>
                                 <Link href="/dashboard/crisis">

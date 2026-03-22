@@ -138,7 +138,7 @@ export default function SettingsPage() {
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
                                 <ShieldCheck size={12} /> Account Center
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
+                            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
                                 Profile <span className="text-primary">& Security</span>
                             </h1>
                         </div>
@@ -173,8 +173,8 @@ export default function SettingsPage() {
                                 <Sparkles className="h-6 w-6 text-primary" />
                             </div>
                             <div>
-                                <h3 className="text-2xl font-bold text-foreground/90">Personal Identity</h3>
-                                <p className="text-sm text-muted-foreground font-medium">Update your core profile information</p>
+                                <h3 className="text-2xl font-bold text-foreground">Personal Identity</h3>
+                                <p className="text-sm text-muted-foreground font-bold">Update your core profile information</p>
                             </div>
                         </div>
 
@@ -297,8 +297,8 @@ export default function SettingsPage() {
                                     <Lock className="h-6 w-6 text-secondary" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-bold text-foreground/90">Security Gate</h3>
-                                    <p className="text-sm text-muted-foreground font-medium">Update your secret credentials</p>
+                                    <h3 className="text-2xl font-bold text-foreground">Security Gate</h3>
+                                    <p className="text-sm text-muted-foreground font-bold">Update your secret credentials</p>
                                 </div>
                             </div>
 

@@ -35,7 +35,7 @@ export function GreetingHeader({ displayName }: GreetingHeaderProps) {
         <Calendar className="h-3 w-3" />
         {dateStr}
       </motion.div>
-      <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
+      <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
         {greeting}, <span className="text-primary">{displayName || "Student"}</span>
       </h1>
       <p className="text-muted-foreground font-medium max-w-md">

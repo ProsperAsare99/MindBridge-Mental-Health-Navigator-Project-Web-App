@@ -43,7 +43,7 @@
   --secondary-foreground: #0f172a;
 
   --muted: #f1f1f1; 
-  --muted-foreground: #52525b; /* Zinc 600 - Optimized for Parchment visibility */
+  --muted-foreground: #4b5563; /* Gray 600 - Darker for better contrast on Parchment */
 
   --accent: #e3d5ca; 
   --accent-foreground: #0f172a;
@@ -69,7 +69,7 @@
   --secondary-foreground: #d1d1c7;
 
   --muted: #1a1a1b; 
-  --muted-foreground: #8a8a8e; 
+  --muted-foreground: #9ca3af; /* Gray 400 - Lighter for better contrast on Carbon */
 
   --accent: #ae9164;
   --accent-foreground: #141415;

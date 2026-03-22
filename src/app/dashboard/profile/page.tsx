@@ -109,7 +109,7 @@ export default function ProfilePage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
                         <User size={12} /> My Profile
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
                         Manage <span className="text-primary">Identity</span>
                     </h1>
                 </motion.div>
@@ -176,7 +176,7 @@ export default function ProfilePage() {
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-3">
-                                        <h2 className="text-2xl font-black text-foreground/90">{user.displayName || "Student"}</h2>
+                                        <h2 className="text-2xl font-black text-foreground">{user.displayName || "Student"}</h2>
                                         <button 
                                             onClick={startEditing}
                                             className="p-1.5 rounded-lg bg-muted/40 hover:bg-primary/10 hover:text-primary transition-all opacity-0 group-hover/name:opacity-100"
@@ -213,7 +213,7 @@ export default function ProfilePage() {
                                         </div>
                                         <div className="space-y-0.5">
                                             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{field.label}</p>
-                                            <p className="text-sm font-bold text-foreground/90">{field.value}</p>
+                                            <p className="text-sm font-bold text-foreground">{field.value}</p>
                                         </div>
                                     </div>
                                 </div>

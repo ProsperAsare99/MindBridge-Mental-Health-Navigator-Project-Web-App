@@ -29,7 +29,7 @@ export default function ResourcesPage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
                         <BookOpen size={12} /> Resource Hub
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90 leading-tight">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
                         Wellness <span className="text-primary">Library</span> & Expansion
                     </h1>
                     <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">

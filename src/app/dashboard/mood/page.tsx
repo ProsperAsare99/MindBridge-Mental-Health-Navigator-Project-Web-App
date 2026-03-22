@@ -174,7 +174,7 @@ export default function MoodPage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
                         <TrendingUp size={12} /> Insight Engine
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
                         Emotional <span className="text-primary">Trends</span>
                     </h1>
                     <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
@@ -200,7 +200,7 @@ export default function MoodPage() {
                                     </div>
                                     <div>
                                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{stat.label}</p>
-                                        <p className="text-2xl font-bold text-foreground/90">{stat.value}</p>
+                                        <p className="text-2xl font-bold text-foreground">{stat.value}</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -217,7 +217,7 @@ export default function MoodPage() {
                             className="glass rounded-[2.5rem] p-8 md:p-10 shadow-premium space-y-10"
                         >
                             <div className="space-y-2">
-                                <h3 className="text-2xl font-bold text-foreground/90">How is your spirit today?</h3>
+                                <h3 className="text-2xl font-bold text-foreground">How is your spirit today?</h3>
                                 <p className="text-sm text-muted-foreground font-medium">Select the icon that best mirrors your current state.</p>
                             </div>
 
@@ -282,7 +282,7 @@ export default function MoodPage() {
                             className="glass rounded-[2.5rem] p-8 shadow-premium h-full space-y-8"
                         >
                             <div className="flex items-center justify-between">
-                                <h3 className="font-bold text-foreground/90 tracking-tight">Activity Flow</h3>
+                                <h3 className="font-bold text-foreground tracking-tight">Activity Flow</h3>
                                 <div className="flex bg-muted/80 rounded-full p-1 border border-border">
                                     {["Week", "Month"].map((t) => (
                                         <button
@@ -398,7 +398,7 @@ export default function MoodPage() {
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
-                                                        <p className="text-xs font-bold text-foreground/90">
+                                                        <p className="text-xs font-bold text-foreground">
                                                             {date.toLocaleDateString('en-US', { weekday: 'short' })}
                                                         </p>
                                                         {entry.sentimentLabel && (

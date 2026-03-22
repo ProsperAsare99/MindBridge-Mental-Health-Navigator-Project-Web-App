@@ -294,7 +294,7 @@ export default function CrisisPage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-600 text-[10px] font-bold uppercase tracking-widest border border-red-500/20 shadow-sm shadow-red-500/5">
                         <AlertTriangle size={12} className="animate-pulse" /> Immediate Assistance
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90 leading-[1.1]">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-[1.1]">
                         You are safe. <br /><span className="text-red-600">Help is here.</span>
                     </h1>
                     <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
@@ -322,7 +322,7 @@ export default function CrisisPage() {
                                     <btn.icon size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-90">{btn.name}</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest">{btn.name}</p>
                                     <p className="text-2xl font-black">Call {btn.num}</p>
                                 </div>
                             </div>
@@ -334,7 +334,7 @@ export default function CrisisPage() {
                 {/* Regional Helplines */}
                 <div className="space-y-6">
                     <div className="flex items-center justify-between ml-1">
-                        <h3 className="font-bold text-foreground/90">Mental Health Helplines</h3>
+                        <h3 className="font-bold text-foreground">Mental Health Helplines</h3>
                         <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Ghana National</span>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -349,7 +349,7 @@ export default function CrisisPage() {
                             >
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between">
-                                        <h4 className="font-bold text-foreground/90 text-sm group-hover:text-red-500 transition-colors">{line.name}</h4>
+                                        <h4 className="font-bold text-foreground text-sm group-hover:text-red-500 transition-colors">{line.name}</h4>
                                         <div className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-red-500 group-hover:text-white transition-all">
                                             <Phone size={14} />
                                         </div>
@@ -401,7 +401,7 @@ export default function CrisisPage() {
                                             <Users size={18} />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-foreground/90 text-sm">{uni.name}</h4>
+                                            <h4 className="font-bold text-foreground text-sm">{uni.name}</h4>
                                             <p className="text-[10px] font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-widest mt-0.5">
                                                 <MapPin size={10} /> {uni.location}
                                             </p>
@@ -451,7 +451,7 @@ export default function CrisisPage() {
                 {/* National Online Resources */}
                 <div className="space-y-6">
                     <div className="flex items-center justify-between ml-1">
-                        <h3 className="font-bold text-foreground/90">National Online Resources</h3>
+                        <h3 className="font-bold text-foreground">National Online Resources</h3>
                         <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Web & Chat Support</span>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -465,7 +465,7 @@ export default function CrisisPage() {
                             >
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between">
-                                        <h4 className="font-bold text-foreground/90 text-sm group-hover:text-primary transition-colors">{resource.name}</h4>
+                                        <h4 className="font-bold text-foreground text-sm group-hover:text-primary transition-colors">{resource.name}</h4>
                                         <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-all" />
                                     </div>
                                     <p className="text-xs text-muted-foreground font-medium leading-relaxed">{resource.description}</p>

@@ -55,7 +55,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
         }
         
         res.status(500).json({ 
-            error: 'Authentication process failed.', 
+            error: `Authentication process failed: ${error.message}`, 
             details: error.message 
         });
     }

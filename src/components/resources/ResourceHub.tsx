@@ -151,7 +151,7 @@ export function ResourceHub({
                                         </div>
                                         <div className="mt-6 space-y-2">
                                             <p className="text-[9px] font-bold text-primary uppercase tracking-widest">{article.category} • {article.readTime}</p>
-                                            <h3 className="text-xl font-bold text-foreground/90 group-hover:text-primary transition-colors">{article.title}</h3>
+                                            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{article.title}</h3>
                                             <p className="text-sm text-muted-foreground font-medium line-clamp-2">{article.description}</p>
                                         </div>
                                         <AnimatePresence>
@@ -193,7 +193,7 @@ export function ResourceHub({
 
             {/* Tools Section */}
             <div className="space-y-8">
-                <h2 className="text-2xl font-bold text-foreground/90 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-foreground flex items-center gap-3">
                     <Sparkles className="text-primary" /> Self-Help Toolkit
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -207,7 +207,7 @@ export function ResourceHub({
                                             <ToolIcon size={18} />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-sm text-foreground/90">{tool.title}</h4>
+                                            <h4 className="font-bold text-sm text-foreground">{tool.title}</h4>
                                             <p className="text-[10px] font-semibold text-muted-foreground">{tool.description}</p>
                                         </div>
                                     </div>
@@ -231,7 +231,7 @@ export function ResourceHub({
 
             {/* Apps Grid */}
             <div className="space-y-8">
-                <h2 className="text-2xl font-bold text-foreground/90 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-foreground flex items-center gap-3">
                     <Smartphone className="text-primary" /> Recommended Tools
                 </h2>
                 <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -252,7 +252,7 @@ export function ResourceHub({
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-primary/40 group-hover:text-primary transition-colors">{app.tag}</span>
                                 </div>
                                 <div className="space-y-1 flex-1">
-                                    <h4 className="font-bold text-foreground/90 flex items-center justify-between">
+                                    <h4 className="font-bold text-foreground flex items-center justify-between">
                                         {app.name}
                                         <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </h4>
@@ -269,7 +269,7 @@ export function ResourceHub({
 
             {/* Videos Section */}
             <div className="space-y-8">
-                <h2 className="text-2xl font-bold text-foreground/90 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-foreground flex items-center gap-3">
                     <Play className="text-primary" /> Watch & Learn
                 </h2>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -297,7 +297,7 @@ export function ResourceHub({
                                 )}
                             </div>
                             <div className="p-6 space-y-1">
-                                <h4 className="font-bold text-sm text-foreground/90">{v.title}</h4>
+                                <h4 className="font-bold text-sm text-foreground">{v.title}</h4>
                                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{v.speaker}</p>
                             </div>
                         </div>
@@ -307,7 +307,7 @@ export function ResourceHub({
 
             {/* Books Section */}
             <div className="space-y-8">
-                <h2 className="text-2xl font-bold text-foreground/90 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-foreground flex items-center gap-3">
                     <FileText className="text-primary" /> Free Books & Guides
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -319,7 +319,7 @@ export function ResourceHub({
                                         <Download size={20} />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-foreground/90">{book.title}</h4>
+                                        <h4 className="font-bold text-foreground">{book.title}</h4>
                                         <p className="text-xs text-muted-foreground font-medium">by {book.author}</p>
                                     </div>
                                 </div>

@@ -265,7 +265,7 @@ export default function AssessmentPage() {
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/10">
                                     <ClipboardList size={12} /> Diagnostic Center
                                 </div>
-                                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground/90">
+                                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
                                     Personal <span className="text-primary">Assessments</span>
                                 </h1>
                                 <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
@@ -321,7 +321,7 @@ export default function AssessmentPage() {
                                             </div>
 
                                             <div className="space-y-3">
-                                                <h3 className="text-2xl font-black text-foreground/90 tracking-tight group-hover:text-primary transition-colors duration-300">
+                                                <h3 className="text-2xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
                                                     {a.title}
                                                 </h3>
                                                 <p className="text-sm text-muted-foreground leading-relaxed font-medium line-clamp-2">
@@ -489,7 +489,7 @@ export default function AssessmentPage() {
                                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary bg-primary/5 px-4 py-2 rounded-full border border-primary/10">
                                         Question {currentStep + 1} of {activeAssessment.questions.length}
                                     </span>
-                                    <h2 className="text-3xl md:text-4xl font-black tracking-tight text-foreground/90 leading-tight">
+                                    <h2 className="text-3xl md:text-4xl font-black tracking-tight text-foreground leading-tight">
                                         {activeAssessment.questions[currentStep]}
                                     </h2>
                                     <p className="text-muted-foreground font-medium">Over the last 2 weeks, how often have you been bothered by this?</p>

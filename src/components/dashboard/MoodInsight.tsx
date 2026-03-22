@@ -217,7 +217,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                         ) : error ? (
                             <p className="text-[11px] text-red-500 font-medium">{error}</p>
                         ) : (
-                            <p className="text-[11px] text-foreground/80 leading-relaxed font-medium">
+                            <p className="text-[11px] text-foreground leading-relaxed font-bold">
                                 {insight || "Analyzing your mood patterns to provide personalized guidance..."}
                             </p>
                         )}
