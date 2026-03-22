@@ -11,20 +11,25 @@ import {
     School,
     BookOpen,
     Phone,
+    Hash,
     ShieldCheck,
     Camera,
     MapPin,
     Calendar,
     Sparkles,
     Edit3,
-    Loader2
+    Loader2,
+    X
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function ProfilePage() {
-    const { user, updateAvatar } = useAuth();
+    const { user, updateAvatar, updateProfile } = useAuth();
     const router = useRouter();
     const [uploading, setUploading] = useState(false);
+    const [isEditingName, setIsEditingName] = useState(false);
+    const [tempName, setTempName] = useState("");
+    const [savingName, setSavingName] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     if (!user) return null;
@@ -43,12 +48,34 @@ export default function ProfilePage() {
         }
     };
 
+    const handleSaveName = async () => {
+        if (!tempName.trim() || tempName === (user.displayName)) {
+            setIsEditingName(false);
+            return;
+        }
+
+        setSavingName(true);
+        try {
+            await updateProfile({ displayName: tempName });
+            setIsEditingName(false);
+        } catch (error) {
+            console.error('Failed to update name:', error);
+        } finally {
+            setSavingName(false);
+        }
+    };
+
+    const startEditing = () => {
+        setTempName(user.displayName || "");
+        setIsEditingName(true);
+    };
+
     const profileFields = [
-        { icon: Mail, label: "Email Address", value: user.email },
-        { icon: School, label: "Institution", value: user.institution || "Not specified" },
-        { icon: BookOpen, label: "Course / Major", value: user.course || "Not specified" },
-        { icon: ShieldCheck, label: "Student ID", value: user.studentId || "Not specified" },
-        { icon: Phone, label: "Phone Number", value: user.phoneNumber || "Not specified" },
+        { icon: Mail, label: "Email", value: user.email },
+        { icon: School, label: "Institution", value: user.university || "Not specified" },
+        { icon: BookOpen, label: "Program", value: user.program || "Not specified" },
+        { icon: Hash, label: "Student ID", value: user.studentId || "Not specified" },
+        { icon: Phone, label: "Phone", value: user.phoneNumber || "Not specified" },
     ];
 
     const avatarUrl = user.image
@@ -97,7 +124,7 @@ export default function ProfilePage() {
                         <div className="absolute -bottom-12 left-8 p-1 rounded-[2rem] bg-background border border-border shadow-xl">
                             <div className="h-24 w-24 rounded-[1.8rem] bg-primary/10 border border-border flex items-center justify-center text-primary text-3xl font-black overflow-hidden relative group">
                                 {avatarUrl ? (
-                                    <Image src={avatarUrl} alt={user.name || "Avatar"} width={96} height={96} priority unoptimized className="h-full w-full object-cover" sizes="96px" />
+                                    <Image src={avatarUrl} alt={user.displayName || "Avatar"} width={96} height={96} priority unoptimized className="h-full w-full object-cover" sizes="96px" />
                                 ) : (
                                     user.displayName ? user.displayName[0].toUpperCase() : "U"
                                 )}
@@ -119,8 +146,45 @@ export default function ProfilePage() {
 
                     <div className="pt-16 pb-12 px-8 space-y-8">
                         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                            <div className="space-y-1">
-                                <h2 className="text-2xl font-black text-foreground/90">{user.displayName || user.name || "Student"}</h2>
+                            <div className="space-y-1 group/name relative">
+                                {isEditingName ? (
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="text"
+                                            value={tempName}
+                                            onChange={(e) => setTempName(e.target.value)}
+                                            autoFocus
+                                            onKeyDown={(e) => e.key === 'Enter' && handleSaveName()}
+                                            className="text-2xl font-black text-foreground bg-muted/30 border border-primary/20 rounded-xl px-3 py-1 outline-none focus:ring-2 focus:ring-primary/20 w-full max-w-sm"
+                                        />
+                                        <Button 
+                                            size="sm" 
+                                            onClick={handleSaveName}
+                                            disabled={savingName}
+                                            className="rounded-xl h-10 px-4"
+                                        >
+                                            {savingName ? <Loader2 className="h-4 w-4 animate-spin" /> : "Save"}
+                                        </Button>
+                                        <Button 
+                                            variant="ghost" 
+                                            size="sm" 
+                                            onClick={() => setIsEditingName(false)}
+                                            className="rounded-xl h-10 w-10 p-0"
+                                        >
+                                            <X size={16} />
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center gap-3">
+                                        <h2 className="text-2xl font-black text-foreground/90">{user.displayName || "Student"}</h2>
+                                        <button 
+                                            onClick={startEditing}
+                                            className="p-1.5 rounded-lg bg-muted/40 hover:bg-primary/10 hover:text-primary transition-all opacity-0 group-hover/name:opacity-100"
+                                        >
+                                            <Edit3 size={14} />
+                                        </button>
+                                    </div>
+                                )}
                                 <div className="flex items-center gap-4 text-muted-foreground font-medium text-xs">
                                     <div className="flex items-center gap-1.5 uppercase tracking-widest font-bold">
                                         <div className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />

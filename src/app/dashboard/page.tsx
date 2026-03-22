@@ -66,7 +66,7 @@ export default async function DashboardPage() {
                 {/* Persuasive Task Support: Next Best Action & Praise */}
                 <DashboardItem className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="md:col-span-2 p-1 rounded-[2rem] bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20">
-                        <div className="h-full w-full glass rounded-[1.9rem] p-8 flex flex-col md:flex-row items-center gap-8 border-none">
+                        <div className="h-full w-full glass rounded-[1.9rem] p-8 flex flex-col md:flex-row items-center gap-8 border border-primary/5">
                             <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
                                 <Flame className="h-8 w-8 text-primary" />
                             </div>
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
                             ].map((res) => (
                                 <div
                                     key={res.title}
-                                    className={`p-5 rounded-2xl border border-border glass ${res.color} group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-500`}
+                                    className={`p-5 rounded-2xl border border-primary/10 glass ${res.color} group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-500`}
                                 >
                                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{res.time} Read</span>
                                     <h4 className="text-base font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{res.title}</h4>
@@ -209,7 +209,7 @@ export default async function DashboardPage() {
                     </div>
 
                     <div className="md:col-span-2">
-                        <Card className="h-full glass border-red-500/20 bg-red-500/5 text-red-600 dark:text-red-400 shadow-xl shadow-red-500/5 relative overflow-hidden group">
+                        <Card className="h-full glass border-red-500/10 bg-red-500/5 text-red-600 dark:text-red-400 shadow-xl shadow-red-500/5 relative overflow-hidden group">
                             <CardHeader>
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <AlertCircle className="h-5 w-5" />

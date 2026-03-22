@@ -7,6 +7,7 @@ import { api } from '@/lib/api';
 export interface User {
     id: string;
     email: string;
+    name?: string;
     displayName?: string;
     university?: string;
     academicLevel?: number; // 100, 200, 300, 400
@@ -33,6 +34,8 @@ export interface User {
     isAnonymous?: boolean;
     image?: string;
     googleId?: string;
+    phoneNumber?: string;
+    studentId?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
