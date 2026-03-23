@@ -10,10 +10,24 @@ const crypto_1 = __importDefault(require("crypto"));
 const prisma_1 = __importDefault(require("../lib/prisma"));
 const emailService_1 = require("../utils/emailService");
 const google_auth_library_1 = require("google-auth-library");
+const client_new_1 = require("../generated/client_new");
 const googleClient = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_for_development';
+if (JWT_SECRET === 'your_fallback_secret_for_development') {
+    console.warn('[AUTH CONTROLLER WARNING] JWT_SECRET is using the fallback value.');
+}
+else {
+    console.log('[AUTH CONTROLLER INFO] JWT_SECRET loaded from environment.');
+}
 const register = async (req, res) => {
     const { email, password, name, institution, studentId, course, phoneNumber } = req.body;
+    if (!phoneNumber) {
+        return res.status(400).json({ error: 'Phone number is required' });
+    }
+    // Basic format validation
+    if (!/^\+?[\d\s-]{8,20}$/.test(phoneNumber)) {
+        return res.status(400).json({ error: 'Invalid phone number format' });
+    }
     try {
         const existingUser = await prisma_1.default.user.findUnique({ where: { email } });
         if (existingUser) {
@@ -24,16 +38,23 @@ const register = async (req, res) => {
             data: {
                 email,
                 password: hashedPassword,
-                name,
-                institution,
+                displayName: name,
+                university: mapInstitutionToUniversity(institution),
                 studentId,
-                course,
+                program: course,
                 phoneNumber,
                 isVerified: true
             }
         });
         const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
-        res.status(201).json({ user, token });
+        res.status(201).json({
+            user: {
+                ...user,
+                onboardingStep: user.onboardingStep,
+                onboardingCompleted: user.onboardingCompleted
+            },
+            token
+        });
     }
     catch (error) {
         console.error(error);
@@ -60,11 +81,24 @@ const login = async (req, res) => {
             });
         }
         const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
-        res.json({ user, token });
+        res.json({
+            user: {
+                ...user,
+                onboardingStep: user.onboardingStep,
+                onboardingCompleted: user.onboardingCompleted
+            },
+            token
+        });
     }
     catch (error) {
+        const errorMsg = `[LOGIN ERROR] ${new Date().toISOString()}: ${error.message}\n${error.stack}\n\n`;
+        require('fs').appendFileSync('error_debug.log', errorMsg);
         console.error("DETAILED LOGIN ERROR:", error);
-        res.status(500).json({ error: 'Server error during login' });
+        res.status(500).json({
+            error: 'Server error during login',
+            details: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
     }
 };
 exports.login = login;
@@ -97,7 +131,7 @@ const googleLogin = async (req, res) => {
                 data: {
                     email,
                     googleId,
-                    name,
+                    displayName: name,
                     isVerified: true, // Google emails are already verified
                 }
             });
@@ -112,7 +146,14 @@ const googleLogin = async (req, res) => {
             }
         }
         const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
-        res.json({ user, token });
+        res.json({
+            user: {
+                ...user,
+                onboardingStep: user.onboardingStep,
+                onboardingCompleted: user.onboardingCompleted
+            },
+            token
+        });
     }
     catch (error) {
         console.error('Google Auth Error:', error);
@@ -127,16 +168,23 @@ const anonymousLogin = async (req, res) => {
         const user = await prisma_1.default.user.create({
             data: {
                 email,
-                name: "Guest User",
+                displayName: "Guest User",
                 isAnonymous: true,
                 isVerified: true
             }
         });
         const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email, isAnonymous: true }, JWT_SECRET, { expiresIn: '1d' });
-        res.json({ user, token });
+        res.json({
+            user: {
+                ...user,
+                onboardingStep: user.onboardingStep,
+                onboardingCompleted: user.onboardingCompleted
+            },
+            token
+        });
     }
     catch (error) {
-        console.error('Anonymous Login Error:', error);
+        console.error('DETAILED ANONYMOUS LOGIN ERROR:', error);
         res.status(500).json({ error: 'Server error during anonymous login' });
     }
 };
@@ -197,12 +245,16 @@ const getMe = async (req, res) => {
         if (!req.user)
             return res.status(401).json({ error: 'Not authenticated' });
         const user = await prisma_1.default.user.findUnique({
-            where: { id: req.user.userId },
+            where: { id: req.userId },
             include: { assessments: true }
         });
         if (!user)
             return res.status(404).json({ error: 'User not found' });
-        res.json(user);
+        res.json({
+            ...user,
+            onboardingStep: user.onboardingStep,
+            onboardingCompleted: user.onboardingCompleted
+        });
     }
     catch (error) {
         console.error(error);
@@ -223,16 +275,20 @@ const updateProfile = async (req, res) => {
             return res.status(400).json({ error: 'Name is too long' });
         }
         const user = await prisma_1.default.user.update({
-            where: { id: req.user.userId },
+            where: { id: req.userId },
             data: {
-                name,
-                institution,
+                displayName: name,
+                university: institution ? mapInstitutionToUniversity(institution) : undefined,
                 studentId,
-                course,
+                program: course,
                 phoneNumber
             }
         });
-        res.json(user);
+        res.json({
+            ...user,
+            onboardingStep: user.onboardingStep,
+            onboardingCompleted: user.onboardingCompleted
+        });
     }
     catch (error) {
         console.error('Update Profile Error:', error);
@@ -248,10 +304,17 @@ const uploadAvatar = async (req, res) => {
             return res.status(400).json({ error: 'No file uploaded' });
         const imageUrl = `/uploads/avatars/${req.file.filename}`;
         const user = await prisma_1.default.user.update({
-            where: { id: req.user.userId },
+            where: { id: req.userId },
             data: { image: imageUrl }
         });
-        res.json({ user, imageUrl });
+        res.json({
+            user: {
+                ...user,
+                onboardingStep: user.onboardingStep,
+                onboardingCompleted: user.onboardingCompleted
+            },
+            imageUrl
+        });
     }
     catch (error) {
         console.error('Avatar Upload Error:', error);
@@ -264,7 +327,7 @@ const changePassword = async (req, res) => {
     try {
         if (!req.user)
             return res.status(401).json({ error: 'Not authenticated' });
-        const user = await prisma_1.default.user.findUnique({ where: { id: req.user.userId } });
+        const user = await prisma_1.default.user.findUnique({ where: { id: req.userId } });
         if (!user || !user.password)
             return res.status(404).json({ error: 'User not found' });
         const isMatch = await bcryptjs_1.default.compare(currentPassword, user.password);
@@ -273,7 +336,7 @@ const changePassword = async (req, res) => {
         }
         const hashedPassword = await bcryptjs_1.default.hash(newPassword, 10);
         await prisma_1.default.user.update({
-            where: { id: req.user.userId },
+            where: { id: req.userId },
             data: { password: hashedPassword }
         });
         res.json({ message: 'Password updated successfully' });
@@ -289,11 +352,18 @@ const verifyToken = async (req, res) => {
         if (!req.user)
             return res.status(401).json({ error: 'Invalid or expired token' });
         const user = await prisma_1.default.user.findUnique({
-            where: { id: req.user.userId }
+            where: { id: req.userId }
         });
         if (!user)
             return res.status(404).json({ error: 'User not found' });
-        res.json({ user, token: req.header('Authorization')?.split(' ')[1] });
+        res.json({
+            user: {
+                ...user,
+                onboardingStep: user.onboardingStep,
+                onboardingCompleted: user.onboardingCompleted
+            },
+            token: req.header('Authorization')?.split(' ')[1]
+        });
     }
     catch (error) {
         console.error(error);
@@ -301,4 +371,20 @@ const verifyToken = async (req, res) => {
     }
 };
 exports.verifyToken = verifyToken;
+const mapInstitutionToUniversity = (institution) => {
+    if (!institution)
+        return client_new_1.University.OTHER;
+    const inst = institution.toLowerCase();
+    if (inst.includes('knust'))
+        return client_new_1.University.KNUST;
+    if (inst.includes('university of ghana') || inst.includes('legon'))
+        return client_new_1.University.UNIVERSITY_OF_GHANA;
+    if (inst.includes('cape coast') || inst.includes('ucc'))
+        return client_new_1.University.UNIVERSITY_OF_CAPE_COAST;
+    if (inst.includes('ashesi'))
+        return client_new_1.University.ASHESI_UNIVERSITY;
+    if (inst.includes('gimpa'))
+        return client_new_1.University.GIMPA;
+    return client_new_1.University.OTHER;
+};
 //# sourceMappingURL=authController.js.map

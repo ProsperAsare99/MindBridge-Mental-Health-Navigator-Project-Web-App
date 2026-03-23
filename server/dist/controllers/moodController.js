@@ -7,10 +7,11 @@ exports.getProactiveNudges = exports.getMoodStats = exports.getUserMoods = expor
 const prisma_1 = __importDefault(require("../lib/prisma"));
 const genkit_config_1 = require("../lib/genkit-config");
 const createMood = async (req, res) => {
-    const { value, note } = req.body;
+    const { value, note, energy, sleep, social, anxiety, emotion, emotionIntensity, physicalSymptoms, weather, location } = req.body;
     try {
-        if (!req.user)
+        if (!req.user || !req.userId)
             return res.status(401).json({ error: 'Not authenticated' });
+        const userId = req.userId;
         let sentimentScore = null;
         let sentimentLabel = null;
         let crisisFlag = false;
@@ -25,7 +26,6 @@ const createMood = async (req, res) => {
                     
                     Entry: "${note}"`
                 });
-                // Extract JSON from response (handling potential markdown)
                 const text = result.text.replace(/```json|```/g, '').trim();
                 const analysis = JSON.parse(text);
                 sentimentScore = analysis.score;
@@ -36,11 +36,30 @@ const createMood = async (req, res) => {
                 console.error('Sentiment Analysis Error:', aiError);
             }
         }
-        const mood = await prisma_1.default.mood.create({
+        // Handle File Uploads
+        const files = req.files;
+        const photoUrl = files?.moodPhoto ? `/uploads/mood/photos/${files.moodPhoto[0].filename}` : undefined;
+        const audioUrl = files?.moodAudio ? `/uploads/mood/audio/${files.moodAudio[0].filename}` : undefined;
+        // Parse JSON fields if they are strings
+        const parsedWeather = typeof weather === 'string' ? JSON.parse(weather) : weather;
+        const parsedLocation = typeof location === 'string' ? JSON.parse(location) : location;
+        const parsedSymptoms = Array.isArray(physicalSymptoms) ? physicalSymptoms : (physicalSymptoms ? [physicalSymptoms] : []);
+        const mood = await prisma_1.default.moodEntry.create({
             data: {
-                userId: req.user.userId,
-                value: parseInt(value),
-                note,
+                userId,
+                mood: parseInt(value),
+                energy: energy ? parseInt(energy) : null,
+                sleep: sleep ? parseInt(sleep) : null,
+                social: social ? parseInt(social) : null,
+                anxiety: anxiety ? parseInt(anxiety) : null,
+                emotion: emotion,
+                emotionIntensity: emotionIntensity ? parseFloat(emotionIntensity) : null,
+                physicalSymptoms: parsedSymptoms,
+                photoUrl,
+                audioUrl,
+                weather: parsedWeather,
+                location: parsedLocation,
+                notes: note,
                 sentimentScore,
                 sentimentLabel,
                 crisisFlag
@@ -56,10 +75,10 @@ const createMood = async (req, res) => {
 exports.createMood = createMood;
 const getUserMoods = async (req, res) => {
     try {
-        if (!req.user)
+        if (!req.user || !req.userId)
             return res.status(401).json({ error: 'Not authenticated' });
-        const moods = await prisma_1.default.mood.findMany({
-            where: { userId: req.user.userId },
+        const moods = await prisma_1.default.moodEntry.findMany({
+            where: { userId: req.userId },
             orderBy: { createdAt: 'desc' },
             take: 30 // Last 30 entries
         });
@@ -73,16 +92,16 @@ const getUserMoods = async (req, res) => {
 exports.getUserMoods = getUserMoods;
 const getMoodStats = async (req, res) => {
     try {
-        if (!req.user)
+        if (!req.user || !req.userId)
             return res.status(401).json({ error: 'Not authenticated' });
-        const moods = await prisma_1.default.mood.findMany({
-            where: { userId: req.user.userId },
+        const moods = await prisma_1.default.moodEntry.findMany({
+            where: { userId: req.userId },
             orderBy: { createdAt: 'desc' }
         });
         if (moods.length === 0) {
             return res.json({ average: 0, count: 0, streak: 0 });
         }
-        const average = moods.reduce((acc, curr) => acc + curr.value, 0) / moods.length;
+        const average = moods.reduce((acc, curr) => acc + curr.mood, 0) / moods.length;
         // Simple streak calculation (daily)
         let streak = 0;
         const today = new Date();
@@ -122,10 +141,10 @@ const getMoodStats = async (req, res) => {
 exports.getMoodStats = getMoodStats;
 const getProactiveNudges = async (req, res) => {
     try {
-        if (!req.user)
+        if (!req.user || !req.userId)
             return res.status(401).json({ error: 'Not authenticated' });
-        const moods = await prisma_1.default.mood.findMany({
-            where: { userId: req.user.userId },
+        const moods = await prisma_1.default.moodEntry.findMany({
+            where: { userId: req.userId },
             orderBy: { createdAt: 'desc' },
             take: 100
         });
@@ -137,7 +156,7 @@ const getProactiveNudges = async (req, res) => {
                 const day = new Date(m.createdAt).getDay();
                 if (!dayScores[day])
                     dayScores[day] = { sum: 0, count: 0 };
-                dayScores[day].sum += m.value;
+                dayScores[day].sum += m.mood;
                 dayScores[day].count++;
             });
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -161,7 +180,7 @@ const getProactiveNudges = async (req, res) => {
                 const bucket = Math.floor(hour / 6); // 0: night, 1: morning, 2: afternoon, 3: evening
                 if (!hourScores[bucket])
                     hourScores[bucket] = { sum: 0, count: 0 };
-                hourScores[bucket].sum += m.value;
+                hourScores[bucket].sum += m.mood;
                 hourScores[bucket].count++;
             });
             const bucketNames = ["late nights", "mornings", "afternoons", "evenings"];

@@ -1,0 +1,11 @@
+import { Response } from 'express';
+import { AuthRequest } from '../middleware/auth';
+export declare const getCircles: (req: AuthRequest, res: Response) => Promise<void>;
+export declare const joinCircle: (req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
+export declare const getPosts: (req: AuthRequest, res: Response) => Promise<void>;
+export declare const createPost: (req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
+export declare const getStories: (req: AuthRequest, res: Response) => Promise<void>;
+export declare const createStory: (req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
+export declare const sendEncouragement: (req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
+export declare const requestMentor: (req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>;
+export declare const initializeCircles: () => Promise<void>;

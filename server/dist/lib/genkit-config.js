@@ -5,6 +5,6 @@ const genkit_1 = require("genkit");
 const googleai_1 = require("@genkit-ai/googleai");
 exports.ai = (0, genkit_1.genkit)({
     plugins: [(0, googleai_1.googleAI)({ apiKey: process.env.GEMINI_API_KEY })],
-    model: 'googleai/gemini-2.0-flash',
+    model: 'googleai/gemini-1.5-pro',
 });
 //# sourceMappingURL=genkit-config.js.map

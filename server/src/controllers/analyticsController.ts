@@ -86,13 +86,13 @@ export const getMoodInsight = async (req: AuthRequest, res: Response) => {
         const volatility = Math.sqrt(variance);
 
         // Analyze Vitals
-        const avgSleep = recentEntries.filter(e => e.sleepRating !== null).reduce((a, b) => a + (b.sleepRating || 0), 0) / (recentEntries.filter(e => e.sleepRating !== null).length || 1);
-        const avgEnergy = recentEntries.filter(e => e.energyLevel !== null).reduce((a, b) => a + (b.energyLevel || 0), 0) / (recentEntries.filter(e => e.energyLevel !== null).length || 1);
-        const avgSocial = recentEntries.filter(e => e.socialInteraction !== null).reduce((a, b) => a + (b.socialInteraction || 0), 0) / (recentEntries.filter(e => e.socialInteraction !== null).length || 1);
+        const avgSleep = recentEntries.filter(e => e.sleep !== null).reduce((a, b) => a + (b.sleep || 0), 0) / (recentEntries.filter(e => e.sleep !== null).length || 1);
+        const avgEnergy = recentEntries.filter(e => e.energy !== null).reduce((a, b) => a + (b.energy || 0), 0) / (recentEntries.filter(e => e.energy !== null).length || 1);
+        const avgSocial = recentEntries.filter(e => e.social !== null).reduce((a, b) => a + (b.social || 0), 0) / (recentEntries.filter(e => e.social !== null).length || 1);
 
         // Find Correlations (Example: Sleep effect on Mood)
-        const sleepMoodCorr = recentEntries.filter(e => e.sleepRating !== null && e.sleepRating >= 4).reduce((a, b) => a + b.mood, 0) / (recentEntries.filter(e => e.sleepRating !== null && e.sleepRating >= 4).length || 1);
-        const baseMood = recentEntries.filter(e => e.sleepRating !== null && e.sleepRating < 4).reduce((a, b) => a + b.mood, 0) / (recentEntries.filter(e => e.sleepRating !== null && e.sleepRating < 4).length || 1);
+        const sleepMoodCorr = recentEntries.filter(e => e.sleep !== null && e.sleep >= 4).reduce((a, b) => a + b.mood, 0) / (recentEntries.filter(e => e.sleep !== null && e.sleep >= 4).length || 1);
+        const baseMood = recentEntries.filter(e => e.sleep !== null && e.sleep < 4).reduce((a, b) => a + b.mood, 0) / (recentEntries.filter(e => e.sleep !== null && e.sleep < 4).length || 1);
         
         let correlationLabel = "";
         if (Math.abs(sleepMoodCorr - baseMood) > 0.5) {

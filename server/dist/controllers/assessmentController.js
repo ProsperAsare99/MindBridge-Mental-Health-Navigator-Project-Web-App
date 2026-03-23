@@ -8,14 +8,16 @@ const prisma_1 = __importDefault(require("../lib/prisma"));
 const createAssessment = async (req, res) => {
     const { type, score, severity } = req.body;
     try {
-        if (!req.user)
+        if (!req.user || !req.userId)
             return res.status(401).json({ error: 'Not authenticated' });
+        const userId = req.userId;
         const assessment = await prisma_1.default.assessment.create({
             data: {
-                userId: req.user.userId,
-                type,
+                userId,
+                type: type.toUpperCase().replace(/[- ]/g, ''),
                 score,
-                severity
+                severity: severity ? severity.toUpperCase().replace(/[- ]/g, '_') : undefined,
+                responses: req.body.responses || []
             }
         });
         res.status(201).json(assessment);
@@ -31,7 +33,7 @@ const getUserAssessments = async (req, res) => {
         if (!req.user)
             return res.status(401).json({ error: 'Not authenticated' });
         const assessments = await prisma_1.default.assessment.findMany({
-            where: { userId: req.user.userId },
+            where: { userId: req.userId },
             orderBy: { createdAt: 'desc' }
         });
         res.json(assessments);
