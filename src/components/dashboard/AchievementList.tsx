@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Trophy, Star, ShieldCheck, Award, Activity } from 'lucide-react';
+import { Trophy, Medal, ShieldCheck, Award, Activity } from 'lucide-react';
 
 interface Achievement {
     id: string;
@@ -20,7 +20,7 @@ interface AchievementListProps {
 
 const ICON_MAP: Record<string, any> = {
     'Trophy': Trophy,
-    'Star': Star,
+    'Medal': Medal,
     'ShieldCheck': ShieldCheck,
     'Award': Award,
     'Activity': Activity

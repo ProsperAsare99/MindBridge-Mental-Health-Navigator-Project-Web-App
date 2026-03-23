@@ -1,8 +1,8 @@
 /**
- * Personalization Utilities for AI Oracle
- * Translates user data into contextually rich strings for the AI prompt.
+ * Personalization Utilities for Smart Insights
+ * Translates user data into contextually rich strings for personalized guidance.
  */
-export const getAICoreContext = (user: any) => {
+export const getPersonalizationContext = (user: any) => {
   const rawName = user.displayName || 'Student';
   // Always use first name only, properly capitalized
   const name = rawName.split(' ')[0].charAt(0).toUpperCase() + rawName.split(' ')[0].slice(1).toLowerCase();

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import { Search, Command, X, ArrowRight, MessageSquare, BookOpen, ShieldAlert, Target, History, BrainCircuit, Lightbulb, GraduationCap } from "lucide-react";
+import { Search, Command, X, ArrowRight, MessageSquare, BookOpen, ShieldAlert, Target, History, HeartPulse, Lightbulb, GraduationCap } from "lucide-react";
 import { useSearch } from "@/components/providers/SearchProvider";
 import { useRouter } from "next/navigation";
 
@@ -49,7 +49,7 @@ export function CommandMenu() {
   const searchGlobal = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`/api/ai/search?q=${query}`, {
+      const response = await axios.get(`/api/search?q=${query}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       setResults(response.data);
@@ -115,10 +115,11 @@ export function CommandMenu() {
                        Search Results
                     </h3>
                     <div className="space-y-3">
-                        <div className="p-4 bg-primary/5 rounded-2xl animate-pulse flex items-center justify-center">
-                          <Search className="h-4 w-4 text-primary/20 animate-pulse" />
-                        </div>
-                      ) : results.length > 0 ? (
+                        {loading ? (
+                          <div className="p-4 bg-primary/5 rounded-2xl animate-pulse flex items-center justify-center">
+                            <Search className="h-4 w-4 text-primary/20 animate-pulse" />
+                          </div>
+                        ) : results.length > 0 ? (
                         results.map((result, i) => (
                           <button
                             key={i}
@@ -132,7 +133,7 @@ export function CommandMenu() {
                             <div className={`h-10 w-10 rounded-xl bg-primary/5 flex items-center justify-center`}>
                               {result.type === 'GOAL' ? <Target className="h-5 w-5 text-primary" /> :
                                result.type === 'MOOD' ? <History className="h-5 w-5 text-primary" /> :
-                               <BrainCircuit className="h-5 w-5 text-primary" />}
+                               <HeartPulse className="h-5 w-5 text-primary" />}
                             </div>
                             <div className="flex-1">
                               <div className="text-sm font-bold text-foreground">
