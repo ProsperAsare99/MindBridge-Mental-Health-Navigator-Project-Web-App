@@ -133,17 +133,17 @@
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(197, 160, 89, 0.08); /* Softer Antique Gold border */
-  box-shadow: 0 8px 32px 0 rgba(197, 160, 89, 0.03);
+  background: rgba(253, 252, 249, 0.85); /* Parchment-inspired soft fill */
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(197, 160, 89, 0.25); /* More visible Antique Gold outline */
+  box-shadow: 0 12px 40px 0 rgba(197, 160, 89, 0.05);
 }
 
 .dark .glass {
-  background: rgba(24, 24, 27, 0.45); 
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(174, 145, 100, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: rgba(26, 26, 27, 0.85); /* Carbon-inspired soft fill */
+  backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(174, 145, 100, 0.3); /* Clearer Gold outline in dark mode */
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
 body {

@@ -25,6 +25,8 @@ import { MoodInsight } from "@/components/dashboard/MoodInsight";
 import { TrendingUp } from "lucide-react";
 
 
+import { DailyPerspective } from "@/components/dashboard/daily-perspective";
+
 export default async function DashboardPage() {
     const session = await getAuthSession();
     
@@ -49,7 +51,7 @@ export default async function DashboardPage() {
     return (
         <div className="min-h-screen pb-20 px-4 md:px-10 pt-24 md:pt-10 max-w-7xl mx-auto selection:bg-primary/20">
             <DashboardContainer>
-                {/* Clean Header Section */}
+                {/* 1. Header & Quick Status */}
                 <DashboardItem className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                     <GreetingHeader displayName={user?.name?.split(" ")[0]} />
                     <div className="flex items-center gap-3">
@@ -61,7 +63,7 @@ export default async function DashboardPage() {
                             <div className="text-[9px] font-bold text-muted-foreground uppercase">Ghanaian Data Standards</div>
                         </div>
                         <Link href="/dashboard/mood">
-                            <Button className="rounded-2xl shadow-xl shadow-primary/20">
+                            <Button className="rounded-2xl shadow-xl shadow-primary/20 bg-primary hover:bg-primary/90">
                                 <PlusCircle className="mr-2 h-4 w-4" />
                                 Log New Mood
                             </Button>
@@ -69,91 +71,14 @@ export default async function DashboardPage() {
                     </div>
                 </DashboardItem>
 
-                {/* Primary Insights Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Mood Trend Chart */}
-                    <DashboardItem className="lg:col-span-2 space-y-6">
-                        <Card className="h-full glass border-primary/10 bg-primary/5 p-8 overflow-hidden relative group">
-                            <div className="relative z-10 space-y-6">
-                                <div className="flex items-center justify-between">
-                                    <div className="space-y-1">
-                                        <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Activity Flow</h3>
-                                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Last 7 Days</p>
-                                    </div>
-                                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-primary/10 border border-primary/10 text-primary text-[10px] font-black uppercase">
-                                        <Activity size={12} strokeWidth={3} /> {moodStats.count} Logs
-                                    </div>
-                                </div>
-                                <div className="h-[250px]">
-                                    <MoodTrendChart moodHistory={moodHistory} />
-                                </div>
-                            </div>
-                            <div className="absolute -bottom-10 -right-10 opacity-[0.02] pointer-events-none group-hover:opacity-[0.05] transition-opacity">
-                                <TrendingUp size={240} className="text-primary" />
-                            </div>
-                        </Card>
-                    </DashboardItem>
-
-                    {/* Daily Wins */}
-                    <DashboardItem>
-                        <Card className="h-full glass border-secondary/10 bg-secondary/5 p-8 relative overflow-hidden group">
-                            <div className="relative z-10">
-                                <DailyWins />
-                            </div>
-                            <div className="absolute -bottom-6 -right-6 opacity-[0.03] pointer-events-none">
-                                <CheckCircle2 size={120} className="text-secondary" />
-                            </div>
-                        </Card>
-                    </DashboardItem>
-                </div>
-
-                {/* Secondary Grid Section */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {/* Quick Actions */}
-                    <DashboardItem className="lg:col-span-1">
-                        <Card className="h-full glass border-border/40 p-8">
-                            <QuickActions />
-                        </Card>
-                    </DashboardItem>
-
-                    {/* Mood Insight (AI feedback) */}
-                    <DashboardItem className="lg:col-span-2">
-                        <MoodInsight moods={moodHistory} className="h-full border-primary/20 shadow-none" />
-                    </DashboardItem>
-
-                    {/* Mood Streak Stats */}
-                    <DashboardItem>
-                        <Link href="/dashboard/mood">
-                            <Card className="h-full group hover:shadow-2xl transition-all duration-500 glass border-secondary/20 bg-secondary/5 cursor-pointer overflow-hidden relative">
-                                <CardHeader className="pb-2">
-                                    <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Continuity</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex flex-col justify-between pt-2 h-[calc(100%-80px)]">
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-6xl font-black text-primary">{moodStats.streak}</span>
-                                        <span className="text-sm font-bold text-muted-foreground uppercase">Days</span>
-                                    </div>
-                                    <div className="mt-8 flex flex-col gap-4">
-                                        <div className="flex items-center gap-1.5 text-xs font-bold text-primary">
-                                            <Flame className="h-3 w-3" />
-                                            {moodStats.streak > 0 ? "You're on fire! Keep it up." : "Start your streak today."}
-                                        </div>
-                                        <Button size="sm" variant="outline" className="rounded-xl w-full h-10 font-bold border-primary/10 bg-primary/5 hover:bg-primary/10">
-                                            View Logs
-                                        </Button>
-                                    </div>
-                                </CardContent>
-                                <div className="absolute top-[-10%] right-[-10%] opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
-                                    <Flame size={120} className="text-primary" />
-                                </div>
-                            </Card>
-                        </Link>
-                    </DashboardItem>
-                </div>
-
-                {/* Motivational Section */}
+                {/* 2. Top Impact Board - Elevated necessary info */}
                 <DashboardItem>
-                    <Card className="glass border-primary/20 bg-primary/5 overflow-hidden group">
+                    <DailyPerspective moodStats={moodStats} />
+                </DashboardItem>
+
+                {/* 3. Daily Reflections - Moved from bottom to top */}
+                <DashboardItem>
+                    <Card className="glass overflow-hidden group shadow-premium rounded-[2.5rem]">
                         <CardHeader className="pb-2">
                             <CardTitle className="text-lg flex items-center gap-2">
                                 <BrainCircuit className="h-5 w-5 text-primary" />
@@ -167,7 +92,89 @@ export default async function DashboardPage() {
                     </Card>
                 </DashboardItem>
 
-                {/* Bottom Featured Row */}
+                {/* 4. Analytics & Flow Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Activity Flow - Enhanced visuals */}
+                    <DashboardItem className="lg:col-span-2 space-y-6">
+                        <Card className="h-full glass p-8 overflow-hidden relative group rounded-[2.5rem]">
+                            <div className="relative z-10 space-y-6">
+                                <div className="flex items-center justify-between">
+                                    <div className="space-y-1">
+                                        <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Activity Flow</h3>
+                                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Your Weekly Trajectory</p>
+                                    </div>
+                                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-primary/10 border border-primary/10 text-primary text-[10px] font-black uppercase">
+                                        <Activity size={12} strokeWidth={3} /> {moodStats.count} Total Logs
+                                    </div>
+                                </div>
+                                <div className="h-[280px]">
+                                    <MoodTrendChart moodHistory={moodHistory} />
+                                </div>
+                            </div>
+                            <div className="absolute -bottom-10 -right-10 opacity-[0.02] pointer-events-none group-hover:opacity-[0.05] transition-opacity">
+                                <TrendingUp size={240} className="text-primary" />
+                            </div>
+                        </Card>
+                    </DashboardItem>
+
+                    {/* Daily Wins */}
+                    <DashboardItem>
+                        <Card className="h-full glass p-8 relative overflow-hidden group rounded-[2.5rem]">
+                            <div className="relative z-10">
+                                <DailyWins />
+                            </div>
+                            <div className="absolute -bottom-6 -right-6 opacity-[0.03] pointer-events-none">
+                                <CheckCircle2 size={120} className="text-secondary" />
+                            </div>
+                        </Card>
+                    </DashboardItem>
+                </div>
+
+                {/* 5. Utility & Insight Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Quick Actions */}
+                    <DashboardItem className="lg:col-span-1">
+                        <Card className="h-full glass p-8 rounded-[2.5rem]">
+                            <QuickActions />
+                        </Card>
+                    </DashboardItem>
+
+                    {/* Mood Insight - Now even more prominent */}
+                    <DashboardItem className="lg:col-span-2">
+                        <MoodInsight moods={moodHistory} className="h-full shadow-premium" />
+                    </DashboardItem>
+
+                    {/* Continuity Card */}
+                    <DashboardItem>
+                        <Link href="/dashboard/mood">
+                            <Card className="h-full group hover:shadow-2xl transition-all duration-500 glass cursor-pointer overflow-hidden relative rounded-[2.5rem]">
+                                <CardHeader className="pb-2">
+                                    <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Continuity</CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex flex-col justify-between pt-2 h-[calc(100%-80px)]">
+                                    <div className="flex items-baseline gap-2">
+                                        <span className="text-6xl font-black text-primary">{moodStats.streak}</span>
+                                        <span className="text-sm font-bold text-muted-foreground uppercase">Days</span>
+                                    </div>
+                                    <div className="mt-8 flex flex-col gap-4">
+                                        <div className="flex items-center gap-1.5 text-xs font-bold text-primary">
+                                            <Flame className="h-3 w-3" />
+                                            {moodStats.streak > 0 ? "You're on fire! Keep it up." : "Start your streak today."}
+                                        </div>
+                                        <Button size="sm" variant="outline" className="rounded-xl w-full h-10 font-bold border-primary/10 bg-primary/5 hover:bg-primary/10 transition-all">
+                                            View Logs
+                                        </Button>
+                                    </div>
+                                </CardContent>
+                                <div className="absolute top-[-10%] right-[-10%] opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                                    <Flame size={120} className="text-primary" />
+                                </div>
+                            </Card>
+                        </Link>
+                    </DashboardItem>
+                </div>
+
+                {/* 6. Support & Resources */}
                 <DashboardItem className="grid md:grid-cols-5 gap-8">
                     <div className="md:col-span-3 space-y-6">
                         <div className="flex items-center justify-between">
@@ -193,7 +200,7 @@ export default async function DashboardPage() {
                     </div>
 
                     <div className="md:col-span-2">
-                        <Card className="h-full glass border-red-500/10 bg-red-500/5 text-red-600 dark:text-red-400 shadow-xl shadow-red-500/5 relative overflow-hidden group">
+                        <Card className="h-full glass text-red-600 dark:text-red-400 shadow-xl shadow-red-500/5 relative overflow-hidden group rounded-[2.5rem]">
                             <CardHeader>
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <AlertCircle className="h-5 w-5" />

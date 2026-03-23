@@ -109,7 +109,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={cn("p-6 bg-card border border-border/40 rounded-[2.5rem] shadow-premium space-y-4", className)}
+                className={cn("glass p-6 rounded-[2.5rem] shadow-premium space-y-4", className)}
             >
                 <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
@@ -147,7 +147,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className={cn(
-                "bg-card border border-border/40 rounded-[2.5rem] shadow-premium overflow-hidden",
+                "glass rounded-[2.5rem] shadow-premium overflow-hidden",
                 className
             )}
         >
@@ -209,17 +209,20 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                     </div>
                     <div className="flex-1">
                         {loading ? (
-                            <div className="space-y-2 animate-pulse">
-                                <div className="h-2 bg-muted rounded-full w-full" />
-                                <div className="h-2 bg-muted rounded-full w-5/6" />
-                                <div className="h-2 bg-muted rounded-full w-4/6" />
+                            <div className="space-y-3 animate-pulse">
+                                <div className="h-3 bg-primary/10 rounded-full w-full" />
+                                <div className="h-3 bg-primary/10 rounded-full w-5/6" />
+                                <div className="h-3 bg-primary/10 rounded-full w-4/6" />
                             </div>
                         ) : error ? (
-                            <p className="text-[11px] text-red-500 font-medium">{error}</p>
+                            <p className="text-sm text-red-500 font-bold">{error}</p>
                         ) : (
-                            <p className="text-[11px] text-foreground leading-relaxed font-bold">
-                                {insight || "Analyzing your mood patterns to provide personalized guidance..."}
-                            </p>
+                            <div className="relative">
+                                <div className="absolute -left-4 top-0 bottom-0 w-1 bg-primary/20 rounded-full" />
+                                <p className="text-sm md:text-base text-foreground leading-relaxed font-black tracking-tight pl-2">
+                                    {insight || "Analyzing your mood patterns to provide personalized guidance..."}
+                                </p>
+                            </div>
                         )}
                     </div>
                 </div>

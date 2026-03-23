@@ -67,25 +67,32 @@ export function MoodTrendChart({ moodHistory }: MoodTrendChartProps) {
                 <AreaChart data={chartData}>
                     <defs>
                         <linearGradient id="moodTrendGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
-                            <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                            <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.6} />
+                            <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.1} />
                         </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted-foreground))" className="opacity-[0.1]" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--primary)" className="opacity-[0.2]" />
                     <XAxis
                         dataKey="name"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 10, fontWeight: 700, fill: "hsl(var(--muted-foreground))" }}
+                        tick={{ fontSize: 10, fontWeight: 900, fill: "var(--foreground)" }}
                         dy={10}
                     />
                     <Tooltip
+                        cursor={{ stroke: 'var(--primary)', strokeWidth: 2, strokeDasharray: '5 5' }}
                         content={({ active, payload, label }) => {
                             if (active && payload && payload.length) {
                                 return (
-                                    <div className="glass p-3 rounded-2xl border border-primary/20 shadow-xl">
-                                        <p className="text-[10px] font-black text-primary uppercase">{label}</p>
-                                        <p className="text-lg font-black text-foreground">{payload[0].value}/5</p>
+                                    <div className="glass p-4 rounded-3xl border border-primary/40 shadow-2xl backdrop-blur-md">
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                                            <p className="text-[10px] font-black text-primary uppercase tracking-widest">{label}</p>
+                                        </div>
+                                        <div className="flex items-baseline gap-1">
+                                            <p className="text-2xl font-black text-foreground">{payload[0].value}</p>
+                                            <p className="text-[10px] font-bold text-muted-foreground uppercase">/ 5.0</p>
+                                        </div>
                                     </div>
                                 );
                             }
@@ -95,11 +102,24 @@ export function MoodTrendChart({ moodHistory }: MoodTrendChartProps) {
                     <Area
                         type="monotone"
                         dataKey="mood"
-                        stroke="hsl(var(--primary))"
-                        strokeWidth={4}
+                        stroke="var(--primary)"
+                        strokeWidth={6}
                         fillOpacity={1}
                         fill="url(#moodTrendGradient)"
-                        animationDuration={1500}
+                        animationDuration={2000}
+                        dot={{ 
+                            r: 6, 
+                            fill: 'var(--primary)', 
+                            stroke: 'var(--background)', 
+                            strokeWidth: 2,
+                            fillOpacity: 1
+                        }}
+                        activeDot={{ 
+                            r: 9, 
+                            fill: 'var(--primary)', 
+                            stroke: 'var(--background)', 
+                            strokeWidth: 3
+                        }}
                     />
                 </AreaChart>
             </ResponsiveContainer>
