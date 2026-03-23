@@ -16,7 +16,7 @@ import {
     MapPin,
     Mail,
     ArrowUpRight,
-    Sparkles,
+    HeartPulse,
     Quote
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -481,7 +481,7 @@ export default function CrisisPage() {
                 {/* Coping Grounding */}
                 <div className="bg-primary/5 rounded-[2.5rem] p-8 md:p-10 border border-primary/10 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-8 opacity-[0.05] pointer-events-none group-hover:scale-110 transition-transform duration-700">
-                        <Sparkles size={120} />
+                        <HeartPulse size={120} />
                     </div>
                     <div className="relative z-10 space-y-6">
                         <div className="space-y-2">

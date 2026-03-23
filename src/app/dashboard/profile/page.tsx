@@ -16,7 +16,8 @@ import {
     Camera,
     MapPin,
     Calendar,
-    Sparkles,
+    Award,
+    ChevronRight,
     Edit3,
     Loader2,
     X
@@ -230,7 +231,7 @@ export default function ProfilePage() {
                         className="glass border border-border rounded-[2.5rem] p-8 space-y-6 relative overflow-hidden group"
                     >
                         <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:rotate-12 transition-transform duration-700">
-                            <Sparkles size={80} />
+                            <Award size={80} />
                         </div>
                         <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
                             <Calendar className="h-5 w-5 text-primary" /> Activity Summary

@@ -17,7 +17,7 @@ import {
     Eye,
     EyeOff,
     X,
-    Sparkles,
+    Lightbulb, // Replaced Sparkles with Lightbulb
     ShieldCheck
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -170,7 +170,7 @@ export default function SettingsPage() {
 
                         <div className="flex items-center gap-4 mb-4">
                             <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                <Sparkles className="h-6 w-6 text-primary" />
+                                <Lightbulb className="h-6 w-6 text-primary" />
                             </div>
                             <div>
                                 <h3 className="text-2xl font-bold text-foreground">Personal Identity</h3>

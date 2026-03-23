@@ -24,7 +24,7 @@ export default function PrivacyPage() {
     },
     {
       title: "How We Use Data",
-      content: "Your data is used exclusively to train our context-aware AI on general student trends—never to identify you individually. We never sell your personal information.",
+      content: "Your data is used exclusively to train our context-aware analytics engine on general student trends—never to identify you individually. We never sell your personal information.",
       icon: FileText
     },
     {

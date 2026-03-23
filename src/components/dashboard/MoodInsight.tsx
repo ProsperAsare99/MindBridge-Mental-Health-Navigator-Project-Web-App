@@ -230,7 +230,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                 </div>
             </div>
 
-            {/* AI Insight Paragraph */}
+            {/* Personalized Insight Paragraph */}
             <div className="p-6 space-y-6 relative z-10">
                 <div className="relative">
                     {loading ? (

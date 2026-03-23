@@ -108,7 +108,7 @@ export function CommandMenu() {
 
             <div className="p-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
               <div className="space-y-8 p-4">
-                {/* AI Search Results Section */}
+                {/* Smart Search Results Section */}
                 {query.length > 2 && (
                   <section>
                     <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 mb-6 px-2 flex items-center gap-2">

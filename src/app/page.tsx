@@ -41,8 +41,8 @@ export default function Home() {
       color: "bg-primary/10 text-primary"
     },
     {
-      title: "AI Guidance",
-      description: "Personalized support paths derived from context-aware AI. Our engine understands the unique stressors of your institution.",
+      title: "Personalized Guidance",
+      description: "Smart support paths derived from context-aware analytics. Our engine understands the unique stressors of your institution.",
       icon: Brain,
       color: "bg-blue-500/10 text-blue-400"
     },
@@ -220,7 +220,7 @@ export default function Home() {
               className="md:col-span-5 space-y-10"
             >
               <p className="text-base font-bold text-foreground/50 uppercase tracking-[0.2em] leading-relaxed">
-                We combine deep institutional knowledge with advanced AI to provide support that actually understands your environment.
+                We combine deep institutional knowledge with smart insights to provide support that actually understands your environment.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
                 <Link href="/register" className="w-full sm:w-auto">
