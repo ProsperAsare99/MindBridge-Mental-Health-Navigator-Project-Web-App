@@ -13,7 +13,7 @@ interface MetricSliderProps {
   color: string;
 }
 
-function MetricSlider({ label, icon: Icon, value, onChange, color }: MetricSliderProps) {
+const MetricSlider: React.FC<MetricSliderProps> = ({ label, icon: Icon, value, onChange, color }) => {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">

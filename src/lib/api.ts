@@ -23,18 +23,18 @@ class ApiClient {
         return response.data;
     }
 
-    async post(endpoint: string, body: any) {
-        const response = await axiosInstance.post(endpoint, body);
+    async post(endpoint: string, body: any, config?: any) {
+        const response = await axiosInstance.post(endpoint, body, config);
         return response.data;
     }
 
-    async put(endpoint: string, body: any) {
-        const response = await axiosInstance.put(endpoint, body);
+    async put(endpoint: string, body: any, config?: any) {
+        const response = await axiosInstance.put(endpoint, body, config);
         return response.data;
     }
 
-    async delete(endpoint: string) {
-        const response = await axiosInstance.delete(endpoint);
+    async delete(endpoint: string, config?: any) {
+        const response = await axiosInstance.delete(endpoint, config);
         return response.data;
     }
 }
