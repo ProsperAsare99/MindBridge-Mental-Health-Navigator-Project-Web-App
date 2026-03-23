@@ -8,10 +8,10 @@ const createPrismaClient = () => {
     console.log(`[STABILITY FIX] Initializing Prisma with PG Driver Adapter...`);
     
     const pool = new Pool({ 
-        connectionString,
-        max: 2, // Low limit to avoid Neon "Authentication timed out"
-        idleTimeoutMillis: 10000,
-        connectionTimeoutMillis: 10000,
+        connectionString: connectionString.replace(/connection_limit=\d+/, 'connection_limit=10'),
+        max: 10, // Increased to handle concurrent dashboard widgets
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 30000,
         keepAlive: true
     });
 
