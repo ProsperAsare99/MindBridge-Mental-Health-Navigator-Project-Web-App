@@ -286,6 +286,46 @@ exports.Prisma.CarePlanScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AchievementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  icon: 'icon',
+  unlockedAt: 'unlockedAt'
+};
+
+exports.Prisma.ChallengeScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  durationDays: 'durationDays',
+  type: 'type',
+  isCommunity: 'isCommunity',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ChallengeParticipationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  challengeId: 'challengeId',
+  startDate: 'startDate',
+  progress: 'progress',
+  isCompleted: 'isCompleted',
+  lastUpdate: 'lastUpdate'
+};
+
+exports.Prisma.MoodGardenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  growthLevel: 'growthLevel',
+  plantType: 'plantType',
+  healthScore: 'healthScore',
+  lastWateredAt: 'lastWateredAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -457,7 +497,11 @@ exports.Prisma.ModelName = {
   MemoryEntry: 'MemoryEntry',
   AcademicEvent: 'AcademicEvent',
   UserGoal: 'UserGoal',
-  CarePlan: 'CarePlan'
+  CarePlan: 'CarePlan',
+  Achievement: 'Achievement',
+  Challenge: 'Challenge',
+  ChallengeParticipation: 'ChallengeParticipation',
+  MoodGarden: 'MoodGarden'
 };
 
 /**
