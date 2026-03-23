@@ -401,25 +401,106 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
             <AnimatePresence>
                 {showSuccess && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="absolute inset-0 z-[100] flex items-center justify-center p-8 text-center bg-background/80 backdrop-blur-xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-[100] flex items-center justify-center p-8 bg-background/40 backdrop-blur-[20px]"
                     >
-                        <div className="space-y-6">
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ type: "spring", damping: 10, stiffness: 100, delay: 0.2 }}
-                                className="h-24 w-24 bg-primary rounded-full flex items-center justify-center mx-auto shadow-2xl shadow-primary/40"
-                            >
-                                <CheckCircle2 size={48} className="text-white" />
-                            </motion.div>
-                            <div className="space-y-2">
-                                <h2 className="text-3xl font-black text-foreground tracking-tight uppercase">Mood logged successfully</h2>
-                                <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest italic">Your resilience has been noted. keep growing.</p>
+                        <motion.div 
+                            initial={{ scale: 0.8, opacity: 0, y: 40 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            transition={{ type: "spring", damping: 15, stiffness: 100 }}
+                            className="glass p-12 rounded-[3.5rem] bg-white/10 border-white/20 shadow-[0_32px_80px_-20px_rgba(0,119,182,0.3)] text-center relative overflow-hidden group"
+                        >
+                            {/* Animated Background Glow */}
+                            <motion.div 
+                                animate={{ 
+                                    scale: [1, 1.2, 1],
+                                    opacity: [0.3, 0.5, 0.3] 
+                                }}
+                                transition={{ duration: 4, repeat: Infinity }}
+                                className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 blur-[60px] rounded-full"
+                            />
+                            
+                            <div className="relative z-10 space-y-8">
+                                <div className="relative flex items-center justify-center">
+                                    <motion.div
+                                        initial={{ scale: 0, rotate: -45 }}
+                                        animate={{ scale: 1, rotate: 0 }}
+                                        transition={{ 
+                                            type: "spring", 
+                                            damping: 12, 
+                                            stiffness: 200,
+                                            delay: 0.1 
+                                        }}
+                                        className="h-28 w-28 bg-gradient-to-tr from-primary to-sky-400 rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-primary/40 rotate-12"
+                                    >
+                                        <motion.svg 
+                                            viewBox="0 0 24 24" 
+                                            className="h-16 w-16 text-white"
+                                            initial={{ pathLength: 0 }}
+                                            animate={{ pathLength: 1 }}
+                                            transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
+                                        >
+                                            <motion.path
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="3"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M5 13l4 4L19 7"
+                                                initial={{ pathLength: 0 }}
+                                                animate={{ pathLength: 1 }}
+                                            />
+                                        </motion.svg>
+                                    </motion.div>
+                                    
+                                    {/* Particle Bursts */}
+                                    {[...Array(6)].map((_, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ scale: 0, opacity: 1, x: 0, y: 0 }}
+                                            animate={{ 
+                                                scale: [0, 1.2, 0],
+                                                opacity: [1, 1, 0],
+                                                x: Math.cos(i * 60 * Math.PI / 180) * 80,
+                                                y: Math.sin(i * 60 * Math.PI / 180) * 80
+                                            }}
+                                            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                                            className="absolute h-2 w-2 rounded-full bg-primary/40"
+                                        />
+                                    ))}
+                                </div>
+
+                                <div className="space-y-3">
+                                    <motion.h2 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.3 }}
+                                        className="text-4xl font-black text-foreground tracking-tighter uppercase leading-none"
+                                    >
+                                        Resilience <span className="text-primary italic">Logged.</span>
+                                    </motion.h2>
+                                    <motion.p 
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 0.5 }}
+                                        className="text-[11px] font-black text-muted-foreground uppercase tracking-[0.3em] max-w-[240px] mx-auto leading-relaxed"
+                                    >
+                                        Your self-awareness journey continues. premium growth detected.
+                                    </motion.p>
+                                </div>
+
+                                <motion.div 
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ duration: 2.5, ease: "linear" }}
+                                    className="h-1 bg-primary/20 rounded-full overflow-hidden absolute bottom-0 left-0"
+                                >
+                                    <div className="h-full bg-primary" />
+                                </motion.div>
                             </div>
-                        </div>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
