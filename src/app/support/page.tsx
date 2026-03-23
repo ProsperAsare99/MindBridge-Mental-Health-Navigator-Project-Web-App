@@ -15,8 +15,7 @@ import {
   Search,
   BookOpen,
   Settings,
-  ShieldAlert,
-  Sparkles
+  ShieldAlert
 } from "lucide-react";
 import { AuroraBackground } from "@/components/animations/aurora-background";
 

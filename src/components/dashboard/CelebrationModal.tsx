@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, Star, X, Sparkles, Award } from 'lucide-react';
+import { Trophy, Award, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -92,13 +92,13 @@ export const CelebrationModal = ({ isOpen, onClose, achievement }: CelebrationMo
                                 <Trophy className="h-12 w-12 text-white" />
                             </motion.div>
 
-                            {/* Floating Stars */}
+                            {/* Floating Awards */}
                             <motion.div
                                 animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                                 className="absolute -top-2 left-1/4 text-amber-400"
                             >
-                                <Star size={20} fill="currentColor" />
+                                <Award size={20} fill="currentColor" />
                             </motion.div>
                         </div>
 

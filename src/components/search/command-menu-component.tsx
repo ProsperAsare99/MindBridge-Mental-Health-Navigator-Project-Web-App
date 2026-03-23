@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Command, X, ArrowRight, MessageSquare, BookOpen, ShieldAlert, Sparkles } from "lucide-react";
+import { Search, Command, X, ArrowRight, MessageSquare, BookOpen, ShieldAlert, Lightbulb, GraduationCap } from "lucide-react";
 import { useSearch } from "@/components/providers/SearchProvider";
 import { useRouter } from "next/navigation";
 
@@ -10,7 +10,7 @@ const QUICK_LINKS = [
   { title: "Crisis Support", href: "/dashboard/crisis", icon: ShieldAlert, color: "text-red-500", bg: "bg-red-500/10" },
   { title: "Mental Health Resources", href: "/dashboard/resources", icon: BookOpen, color: "text-blue-500", bg: "bg-blue-500/10" },
   { title: "Live Chat Support", href: "/support", icon: MessageSquare, color: "text-primary", bg: "bg-primary/10" },
-  { title: "University Services", href: "/dashboard", icon: Sparkles, color: "text-secondary", bg: "bg-secondary/10" },
+  { title: "University Services", href: "/dashboard", icon: GraduationCap, color: "text-secondary", bg: "bg-secondary/10" },
 ];
 
 export default function CommandMenu() {
@@ -110,10 +110,10 @@ export default function CommandMenu() {
                 {/* Helpful Tip Section */}
                 <section className="p-6 rounded-3xl bg-primary/5 border border-primary/10 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-4 opacity-10 blur-sm group-hover:opacity-20 transition-opacity">
-                    <Sparkles size={100} className="text-primary" />
+                    <Lightbulb size={100} className="text-primary" />
                   </div>
                   <h4 className="text-sm font-black uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
-                    <Sparkles className="h-4 w-4" /> Pro Tip
+                    <Lightbulb className="h-4 w-4" /> Pro Tip
                   </h4>
                   <p className="text-sm text-foreground/70 font-medium leading-relaxed">
                     Try searching for things like "Exam anxiety", "Better sleep", or "Talk to a counselor" for instant recommendations.
@@ -127,7 +127,7 @@ export default function CommandMenu() {
                 MindBridge Global Search
               </p>
               <div className="flex gap-4 items-center">
-                <span className="text-[10px] font-bold text-primary/60">Ghana's First Context-Aware AI Support</span>
+                <span className="text-[10px] font-bold text-primary/60">Ghana's First Context-Aware Smart Support</span>
               </div>
             </div>
           </motion.div>

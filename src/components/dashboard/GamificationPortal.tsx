@@ -7,7 +7,7 @@ import { MoodGarden } from './MoodGarden';
 import { StreakCard } from './StreakCard';
 import { AchievementList } from './AchievementList';
 import { CelebrationModal } from './CelebrationModal';
-import { RefreshCw, Trophy, Target, Sparkles, ChevronRight } from 'lucide-react';
+import { RefreshCw, Trophy, Target, Activity, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 

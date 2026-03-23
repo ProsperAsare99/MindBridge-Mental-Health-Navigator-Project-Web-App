@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Globe, Sparkles, BookOpen, Compass } from "lucide-react";
+import { Heart, Globe, Compass, BookOpen } from "lucide-react";
 
 const spiritualityOptions = [
   "Very important - I'd like faith-based resources",

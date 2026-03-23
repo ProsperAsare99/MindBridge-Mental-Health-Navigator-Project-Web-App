@@ -12,7 +12,6 @@ import {
   Heart, 
   Brain, 
   Moon, 
-  Zap,
   GraduationCap,
   Users,
   Battery,
@@ -29,7 +28,7 @@ const frequencyOptions = [
 
 const metricOptions = [
   { label: "Mood/Emotions", key: "mood", icon: Heart },
-  { label: "Stress/Anxiety", key: "anxiety", icon: Zap },
+  { label: "Stress/Anxiety", key: "anxiety", icon: Activity },
   { label: "Sleep Quality", key: "sleep", icon: Moon },
   { label: "Academic Pressure", key: "academic", icon: GraduationCap },
   { label: "Social Interactions", key: "social", icon: Users },

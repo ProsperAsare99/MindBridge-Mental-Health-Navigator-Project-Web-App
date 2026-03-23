@@ -16,7 +16,6 @@ import {
     Settings,
     Heart,
     ClipboardList,
-    Sparkles,
     Search,
     ShieldCheck,
     Info

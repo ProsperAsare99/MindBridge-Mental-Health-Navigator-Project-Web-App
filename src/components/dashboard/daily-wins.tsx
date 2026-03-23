@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, Circle, Sparkles } from "lucide-react";
+import { CheckCircle2, Circle, Trophy } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -100,9 +100,9 @@ export function DailyWins() {
                         className="p-4 rounded-[1.5rem] bg-muted/20 border border-border/40 text-center"
                     >
                         <div className="flex items-center justify-center gap-2 mb-1">
-                            <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                            <Trophy className="h-4 w-4 text-primary animate-bounce-slow" />
                             <p className="text-xs font-black text-foreground uppercase tracking-widest">Mastery Achieved!</p>
-                            <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                            <Trophy className="h-4 w-4 text-primary animate-bounce-slow" />
                         </div>
                         <p className="text-[10px] font-bold text-muted-foreground/80 lowercase italic"> consistency is the ultimate superpower. keep going! </p>
                     </motion.div>

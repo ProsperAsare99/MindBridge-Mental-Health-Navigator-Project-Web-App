@@ -11,7 +11,7 @@ import {
   Search, 
   ArrowLeft,
   Brain,
-  Zap,
+  Activity,
   GraduationCap,
   Lightbulb,
   Moon,
@@ -21,7 +21,7 @@ import {
   Heart,
   ChevronDown,
   ChevronUp,
-  Sparkles,
+  Lightbulb,
   Play,
   ArrowUpRight,
   Download,
@@ -46,7 +46,7 @@ const ARTICLES = [
     {
         title: "The Burnout Cycle",
         description: "How to recognize academic exhaustion before it leads to a total collapse.",
-        icon: Zap,
+        icon: Activity,
         category: "Academic Stress",
         readTime: "6 min read",
         content: [

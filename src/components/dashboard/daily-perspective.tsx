@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
-    Sparkles, 
-    Zap, 
+    Activity, 
     Target, 
     ChevronRight,
-    BrainCircuit,
+    Brain,
     HeartPulse
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -53,7 +52,7 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
         >
             {/* Background Graphic Watermark */}
             <div className="absolute -right-12 -top-12 opacity-10 pointer-events-none transform rotate-12 transition-transform duration-1000 group-hover:rotate-6">
-                <BrainCircuit size={180} className="text-muted-foreground" />
+                <Brain size={180} className="text-muted-foreground" />
             </div>
 
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
@@ -77,7 +76,7 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
 
                     <div className="flex flex-wrap gap-4 pt-2">
                         <div className="flex items-center gap-2 bg-muted/40 px-3 py-2 rounded-xl border border-border/50 text-muted-foreground">
-                            <Zap className="h-4 w-4" />
+                            <Activity className="h-4 w-4" />
                             <span className="text-xs font-black uppercase tracking-tight">{moodStats.streak} Day Streak</span>
                         </div>
                         <div className="flex items-center gap-2 bg-secondary/5 px-3 py-2 rounded-xl border border-secondary/10 text-secondary">

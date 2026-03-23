@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
-import { Target, Users, Calendar, ChevronRight, CheckCircle2, Clock, Zap } from 'lucide-react';
+import { Target, Users, Calendar, ChevronRight, CheckCircle2, Clock, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -150,7 +150,7 @@ export const ChallengesDashboard = () => {
 
                             {/* Background decoration */}
                             <div className="absolute -bottom-6 -right-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity pointer-events-none">
-                                <Zap size={120} />
+                                <Trophy size={120} />
                             </div>
                         </motion.div>
                     );

@@ -8,7 +8,7 @@ import ParallaxSection from "@/components/parallax-section";
 import dynamic from "next/dynamic";
 import {
   Heart,
-  Sparkles,
+  TrendingUp,
   ChevronRight,
   Activity,
   Brain,
@@ -55,7 +55,7 @@ export default function Home() {
     {
       title: "Predictive Insights",
       description: "Uncovering hidden patterns within your wellness journey. Stay ahead of academic burnout with visual trend analytics.",
-      icon: Sparkles,
+      icon: TrendingUp,
       color: "bg-amber-500/10 text-amber-400"
     }
   ], []);
@@ -396,7 +396,7 @@ export default function Home() {
                       {/* Micro Stats Grid */}
                       <div className="grid grid-cols-3 gap-3 mb-8 relative z-10">
                         {[
-                          { label: 'Energy', value: 'High', icon: Sparkles, color: 'text-amber-400' },
+                          { label: 'Energy', value: 'High', icon: Activity, color: 'text-amber-400' },
                           { label: 'Focus', value: 'Prime', icon: Brain, color: 'text-primary' },
                           { label: 'Mood', value: 'Stable', icon: Heart, color: 'text-rose-400' }
                         ].map((stat, i) => (

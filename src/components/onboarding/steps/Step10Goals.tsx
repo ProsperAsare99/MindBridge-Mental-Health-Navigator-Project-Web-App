@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Target, TrendingUp, Shield, BookOpen, Moon, Activity, Users, FileText, Sparkles, Brain } from "lucide-react";
+import { Target, TrendingUp, Shield, BookOpen, Moon, Activity, Users, FileText, Leaf, Brain } from "lucide-react";
 
 const goalOptions = [
   { label: "Understand emotions & improve mood", value: "IMPROVE_MOOD", icon: Brain },
@@ -9,7 +9,7 @@ const goalOptions = [
   { label: "Build resilience", value: "BUILD_RESILIENCE", icon: Activity },
   { label: "Improve academic performance", value: "IMPROVE_ACADEMICS", icon: BookOpen },
   { label: "Better sleep", value: "BETTER_SLEEP", icon: Moon },
-  { label: "Develop healthy habits", value: "DEVELOP_HABITS", icon: Sparkles },
+  { label: "Develop healthy habits", value: "DEVELOP_HABITS", icon: Leaf },
   { label: "Connect with support", value: "CONNECT_SUPPORT", icon: Users },
   { label: "Track my mental health journey", value: "TRACK_JOURNEY", icon: FileText },
   { label: "Prepare for counseling", value: "PREPARE_COUNSELING", icon: Target },

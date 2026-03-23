@@ -8,7 +8,7 @@ import {
     TrendingDown,
     Minus,
     RefreshCw,
-    Zap,
+    Activity,
     Calendar,
     BarChart3,
     AlertCircle
@@ -131,7 +131,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                 <div className="text-center py-6 space-y-4 relative z-10">
                     <Calendar className="h-12 w-12 text-muted-foreground/20 mx-auto" />
                     <p className="text-[11px] font-medium text-muted-foreground max-w-[180px] mx-auto leading-relaxed">
-                        Track your mood for a few more days to unlock Advanced Analytics.
+                        Track your mood for a few more days to unlock Deep Insights.
                     </p>
                     <div className="flex items-center justify-center gap-2">
                         <div className="flex gap-1">
@@ -182,11 +182,11 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                             }}
                             className="h-10 w-10 rounded-2xl bg-white/50 backdrop-blur-sm flex items-center justify-center border border-border/50 shadow-sm"
                         >
-                            <Zap className="h-5 w-5 text-primary" />
+                            <Activity className="h-5 w-5 text-primary" />
                         </motion.div>
                         <div>
                             <div className="flex items-center gap-2">
-                                <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Clinical Spirit Analysis</h3>
+                                <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Core Mood Analysis</h3>
                                 <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                             </div>
                             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{stats?.total} observations synthesized</p>
