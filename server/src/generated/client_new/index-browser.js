@@ -326,6 +326,64 @@ exports.Prisma.MoodGardenScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SupportCircleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CircleMembershipScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  circleId: 'circleId',
+  joinedAt: 'joinedAt',
+  role: 'role'
+};
+
+exports.Prisma.CirclePostScalarFieldEnum = {
+  id: 'id',
+  circleId: 'circleId',
+  authorId: 'authorId',
+  content: 'content',
+  isAnonymous: 'isAnonymous',
+  isApproved: 'isApproved',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupportStoryScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  title: 'title',
+  content: 'content',
+  category: 'category',
+  isApproved: 'isApproved',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupportEncouragementScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  content: 'content',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MentorMatchScalarFieldEnum = {
+  id: 'id',
+  mentorId: 'mentorId',
+  menteeId: 'menteeId',
+  status: 'status',
+  topic: 'topic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -485,6 +543,18 @@ exports.GoalStatus = exports.$Enums.GoalStatus = {
   ARCHIVED: 'ARCHIVED'
 };
 
+exports.CircleRole = exports.$Enums.CircleRole = {
+  MEMBER: 'MEMBER',
+  MODERATOR: 'MODERATOR'
+};
+
+exports.MatchStatus = exports.$Enums.MatchStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  DECLINED: 'DECLINED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Conversation: 'Conversation',
@@ -501,7 +571,13 @@ exports.Prisma.ModelName = {
   Achievement: 'Achievement',
   Challenge: 'Challenge',
   ChallengeParticipation: 'ChallengeParticipation',
-  MoodGarden: 'MoodGarden'
+  MoodGarden: 'MoodGarden',
+  SupportCircle: 'SupportCircle',
+  CircleMembership: 'CircleMembership',
+  CirclePost: 'CirclePost',
+  SupportStory: 'SupportStory',
+  SupportEncouragement: 'SupportEncouragement',
+  MentorMatch: 'MentorMatch'
 };
 
 /**
