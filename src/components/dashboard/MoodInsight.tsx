@@ -104,21 +104,31 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
         return '😢';
     };
 
+    const getGlowStyle = (trend: string) => {
+        if (!trend) return 'shadow-premium';
+        if (trend === 'improving') return 'shadow-[0_0_40px_-10px_rgba(16,185,129,0.15)] border-emerald-500/30';
+        if (trend === 'declining') return 'shadow-[0_0_40px_-10px_rgba(239,68,68,0.15)] border-red-500/30';
+        return 'shadow-[0_0_40px_-10px_rgba(197,160,89,0.15)] border-primary/30';
+    };
+
     if (!moods || moods.length < 3) {
         return (
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={cn("glass p-6 rounded-[2.5rem] shadow-premium space-y-4", className)}
+                className={cn("glass p-6 rounded-[2.5rem] shadow-premium space-y-4 relative overflow-hidden", className)}
             >
-                <div className="flex items-center gap-3">
+                {/* Background Ambient Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(197,160,89,0.05),transparent)] pointer-events-none" />
+                
+                <div className="flex items-center gap-3 relative z-10">
                     <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
                         <BarChart3 className="h-5 w-5 text-primary" />
                     </div>
                     <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Mood Insights</h3>
                 </div>
                 
-                <div className="text-center py-6 space-y-4">
+                <div className="text-center py-6 space-y-4 relative z-10">
                     <Calendar className="h-12 w-12 text-muted-foreground/20 mx-auto" />
                     <p className="text-[11px] font-medium text-muted-foreground max-w-[180px] mx-auto leading-relaxed">
                         Track your mood for a few more days to unlock AI-powered insights.
@@ -147,20 +157,39 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className={cn(
-                "glass rounded-[2.5rem] shadow-premium overflow-hidden",
+                "glass rounded-[2.5rem] overflow-hidden relative transition-all duration-700",
+                getGlowStyle(stats?.trend),
                 className
             )}
         >
+            {/* Background Ambient Accents */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(197,160,89,0.03),transparent)] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-full h-full bg-[grid-white-5%/10%] [mask-image:radial-gradient(white,transparent_70%)] pointer-events-none opacity-20" />
+
             {/* Header */}
-            <div className="p-6 bg-gradient-to-br from-primary/5 to-transparent border-b border-border/40">
+            <div className="p-6 bg-gradient-to-br from-primary/5 to-transparent border-b border-border/40 relative z-10">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-2xl bg-white/50 backdrop-blur-sm flex items-center justify-center border border-primary/10 shadow-sm">
+                        <motion.div 
+                            animate={{ 
+                                scale: [1, 1.1, 1],
+                                opacity: [0.8, 1, 0.8]
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="h-10 w-10 rounded-2xl bg-white/50 backdrop-blur-sm flex items-center justify-center border border-primary/20 shadow-sm"
+                        >
                             <Sparkles className="h-5 w-5 text-primary" />
-                        </div>
+                        </motion.div>
                         <div>
-                            <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Smart Insights</h3>
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{stats?.total} recent entries</p>
+                            <div className="flex items-center gap-2">
+                                <h3 className="text-sm font-black text-foreground uppercase tracking-tight">AI Spirit Analysis</h3>
+                                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            </div>
+                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{stats?.total} observations synthesized</p>
                         </div>
                     </div>
                     
@@ -175,89 +204,108 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-3 p-6 border-b border-border/40 bg-muted/10">
+            <div className="grid grid-cols-3 gap-3 p-6 border-b border-border/40 bg-muted/10 relative z-10">
                 <div className="text-center space-y-1">
-                    <div className="text-2xl">{getMoodEmoji(parseFloat(stats?.average || "3"))}</div>
-                    <div className="text-lg font-black text-foreground">{stats?.average}</div>
-                    <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">Average</p>
+                    <div className="text-2xl transform hover:scale-125 transition-transform cursor-default">{getMoodEmoji(parseFloat(stats?.average || "3"))}</div>
+                    <div className="text-xl font-black text-foreground">{stats?.average}</div>
+                    <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">Global Spirit</p>
                 </div>
 
                 <div className="text-center space-y-1">
                     <div className={cn(
-                        "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl border text-[10px] font-black uppercase tracking-tight",
+                        "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl border text-[10px] font-black uppercase tracking-tight transition-all",
                         getTrendColor(stats?.trend)
                     )}>
                         {getTrendIcon(stats?.trend)}
                         {stats?.trend}
                     </div>
-                    <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Trend</p>
+                    <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Movement</p>
                 </div>
 
                 <div className="text-center space-y-1">
                     <div className="text-sm font-black text-foreground pt-1">
                         {stats?.lowest} <span className="text-muted-foreground/40 mx-0.5">→</span> {stats?.highest}
                     </div>
-                    <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest pt-1">Range</p>
+                    <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest pt-1">Thresholds</p>
                 </div>
             </div>
 
             {/* AI Insight Paragraph */}
-            <div className="p-6 space-y-4">
-                <div className="flex gap-3">
-                    <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                        <Sparkles className="h-3 w-3 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                        {loading ? (
-                            <div className="space-y-3 animate-pulse">
-                                <div className="h-3 bg-primary/10 rounded-full w-full" />
-                                <div className="h-3 bg-primary/10 rounded-full w-5/6" />
-                                <div className="h-3 bg-primary/10 rounded-full w-4/6" />
-                            </div>
-                        ) : error ? (
+            <div className="p-6 space-y-6 relative z-10">
+                <div className="relative">
+                    {loading ? (
+                        <div className="space-y-4 py-2">
+                            <div className="h-4 bg-primary/10 rounded-full w-full animate-pulse" />
+                            <div className="h-4 bg-primary/10 rounded-full w-5/6 animate-pulse" />
+                            <div className="h-4 bg-primary/10 rounded-full w-4/6 animate-pulse" />
+                            {/* Scanning Line Effect */}
+                            <motion.div 
+                                animate={{ top: ['0%', '100%', '0%'] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                className="absolute left-0 right-0 h-px bg-primary/40 shadow-[0_0_10px_var(--primary)] pointer-events-none"
+                            />
+                        </div>
+                    ) : error ? (
+                        <div className="p-4 rounded-2xl bg-red-500/5 border border-red-500/10 flex items-center gap-3">
+                            <AlertCircle className="h-5 w-5 text-red-500" />
                             <p className="text-sm text-red-500 font-bold">{error}</p>
-                        ) : (
-                            <div className="relative">
-                                <div className="absolute -left-4 top-0 bottom-0 w-1 bg-primary/20 rounded-full" />
-                                <p className="text-sm md:text-base text-foreground leading-relaxed font-black tracking-tight pl-2">
-                                    {insight || "Analyzing your mood patterns to provide personalized guidance..."}
-                                </p>
-                            </div>
-                        )}
-                    </div>
+                        </div>
+                    ) : (
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="relative group lg:p-2"
+                        >
+                            <div className="absolute -left-4 top-0 bottom-0 w-1.5 bg-primary/30 rounded-full group-hover:bg-primary transition-colors" />
+                            <p className="text-base md:text-xl text-foreground leading-relaxed font-black tracking-tight pl-2 decoration-primary/20 underline-offset-8">
+                                {insight || "Analyzing your mood patterns to provide personalized guidance..."}
+                            </p>
+                        </motion.div>
+                    )}
                 </div>
 
                 {/* Warnings Section */}
                 <AnimatePresence>
-                    {stats && parseFloat(stats.volatility) > 1.5 && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            className="p-3 rounded-2xl bg-amber-500/5 border border-amber-500/10 space-y-1"
+                    {(parseFloat(stats?.volatility) > 1.5 || parseFloat(stats?.average) < 2.5) && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="space-y-3"
                         >
-                            <div className="flex items-center gap-2">
-                                <AlertCircle className="h-3 w-3 text-amber-500" />
-                                <p className="text-[10px] font-bold text-amber-600 uppercase tracking-tight">High Variability</p>
-                            </div>
-                            <p className="text-[9px] text-amber-600/80 font-medium leading-normal">
-                                Your mood has been fluctuating. This is normal, but consider a breathing exercise.
-                            </p>
-                        </motion.div>
-                    )}
+                            <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] ml-1">Critical Awareness</p>
+                            <div className="grid gap-3 sm:grid-cols-2">
+                                {parseFloat(stats.volatility) > 1.5 && (
+                                    <motion.div
+                                        className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 space-y-2 backdrop-blur-sm"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <div className="h-6 w-6 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                                                <AlertCircle className="h-3.5 w-3.5 text-amber-500" />
+                                            </div>
+                                            <p className="text-[10px] font-black text-amber-600 uppercase tracking-tight">High Variability</p>
+                                        </div>
+                                        <p className="text-[9px] text-amber-700 font-bold leading-normal italic">
+                                            Emotional fluctuations detected. Grounding exercises recommended.
+                                        </p>
+                                    </motion.div>
+                                )}
 
-                    {stats && parseFloat(stats.average) < 2.5 && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            className="p-3 rounded-2xl bg-red-500/5 border border-red-500/10 space-y-1"
-                        >
-                            <div className="flex items-center gap-2">
-                                <TrendingDown className="h-3 w-3 text-red-500" />
-                                <p className="text-[10px] font-bold text-red-600 uppercase tracking-tight">Low Mood Alert</p>
+                                {parseFloat(stats.average) < 2.5 && (
+                                    <motion.div
+                                        className="p-4 rounded-2xl bg-red-500/5 border border-red-500/20 space-y-2 backdrop-blur-sm"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <div className="h-6 w-6 rounded-lg bg-red-500/10 flex items-center justify-center">
+                                                <TrendingDown className="h-3.5 w-3.5 text-red-500" />
+                                            </div>
+                                            <p className="text-[10px] font-black text-red-600 uppercase tracking-tight">Depletion Alert</p>
+                                        </div>
+                                        <p className="text-[9px] text-red-700 font-bold leading-normal italic">
+                                            Sustained low mood. Prioritize self-connection or outreach.
+                                        </p>
+                                    </motion.div>
+                                )}
                             </div>
-                            <p className="text-[9px] text-red-600/80 font-medium leading-normal">
-                                You&apos;ve been feeling down. Consider speaking with a counselor or reachable friend.
-                            </p>
                         </motion.div>
                     )}
                 </AnimatePresence>

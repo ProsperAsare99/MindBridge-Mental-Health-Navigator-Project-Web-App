@@ -22,7 +22,6 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-surface-above: var(--surface-above);
-  --color-ash-grey: var(--ash-grey);
 
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
@@ -36,7 +35,6 @@
   /* MindBridge Antique Gold Theme - Light Mode (PARCHMENT & GOLD) */
   --background: #edede9; /* Parchment - Base surface */
   --foreground: #0f172a; /* Slate 900 for better contrast than pure black */
-  --ash-grey: #94a3b8; /* Soft Ash Grey */
 
   --primary: #c5a059; /* Antique Gold */
   --primary-foreground: #ffffff;
@@ -63,7 +61,6 @@
   /* MindBridge Antique Gold Theme - Dark Mode (CARBON & GOLD) */
   --background: #141415; /* Deeper, softer Carbon */
   --foreground: #d1d1c7; /* Muted Parchment for softer contrast */
-  --ash-grey: #64748b; /* Muted Ash Grey */
 
   --primary: #ae9164; /* Muted Gold */
   --primary-foreground: #141415;
