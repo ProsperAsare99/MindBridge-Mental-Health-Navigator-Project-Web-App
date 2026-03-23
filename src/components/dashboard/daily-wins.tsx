@@ -25,16 +25,16 @@ export function DailyWins() {
     const progress = (completed.length / DEFAULT_WINS.length) * 100;
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 group/wins">
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
                     <div>
                         <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Daily Micro-Wins</h3>
                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{completed.length}/{DEFAULT_WINS.length} completed</p>
                     </div>
-                    <div className="text-right">
-                        <span className="text-2xl font-black text-primary leading-none">{Math.round(progress)}%</span>
-                        <p className="text-[8px] font-black text-primary/40 uppercase tracking-tighter">Day Progress</p>
+                    <div className="flex flex-col items-center justify-center h-16 w-16 rounded-full border border-primary/20 bg-primary/5 shadow-inner transition-transform group-hover/wins:scale-105">
+                        <span className="text-xl font-black text-primary leading-none">{Math.round(progress)}%</span>
+                        <p className="text-[7px] font-black text-primary/40 uppercase tracking-tighter mt-0.5">Progress</p>
                     </div>
                 </div>
                 
