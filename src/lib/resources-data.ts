@@ -16,7 +16,7 @@ export const ARTICLES = [
     {
         title: "The Burnout Cycle",
         description: "How to recognize academic exhaustion before it leads to a total collapse.",
-        icon: "Zap",
+        icon: "Activity",
         category: "Academic Stress",
         readTime: "6 min read",
         content: [
@@ -157,7 +157,7 @@ export const SELF_HELP_TOOLS = [
 ];
 
 export const RECOMMENDED_APPS = [
-    { name: "Headspace", tag: "Meditation", icon: "Sparkles", desc: "Guided mindfulness for students.", url: "https://www.headspace.com" },
+    { name: "Headspace", tag: "Meditation", icon: "Moon", desc: "Guided mindfulness for students.", url: "https://www.headspace.com" },
     { name: "7 Cups", tag: "Support", icon: "MessageSquare", desc: "24/7 chat with trained listeners.", url: "https://www.7cups.com" },
     { name: "Calm", tag: "Sleep", icon: "Moon", desc: "Sleep stories and relaxation music.", url: "https://www.calm.com" },
     { name: "Wysa", tag: "Coping", icon: "MessageSquare", desc: "Emotional support and wellness tools.", url: "https://www.wysa.io" },

@@ -1,4 +1,4 @@
-import { Brain, Heart, Zap, GraduationCap, Users, Activity, Battery, HeartPulse, Compass, Shield, Target, BookOpen, Moon, FileText, Sparkles } from "lucide-react";
+import { Brain, Heart, GraduationCap, Users, Activity, Battery, HeartPulse, Compass, Shield, Target, BookOpen, Moon, FileText, Lightbulb } from "lucide-react";
 
 /**
  * UserPersonalizationService

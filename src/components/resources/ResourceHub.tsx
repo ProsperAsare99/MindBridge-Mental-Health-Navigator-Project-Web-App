@@ -16,9 +16,8 @@ import {
     Check,
     ArrowUpRight,
     SearchX,
-    Sparkles,
     Brain,
-    Zap,
+    Activity,
     GraduationCap,
     Lightbulb,
     Moon,
@@ -33,12 +32,13 @@ import {
     Smile,
     MessageSquare,
     Target,
-    Stethoscope
+    Stethoscope,
+    ShieldCheck
 } from "lucide-react";
 
 const IconMap: Record<string, any> = {
-    Brain, Zap, GraduationCap, Lightbulb, Moon, Users, Leaf, Dumbbell, Heart,
-    Wind, Repeat, Timer, PenLine, Smile, MessageSquare, Target, Stethoscope, Sparkles
+    Brain, Activity, GraduationCap, Lightbulb, Moon, Users, Leaf, Dumbbell, Heart,
+    Wind, Repeat, Timer, PenLine, Smile, MessageSquare, Target, Stethoscope, ShieldCheck
 };
 
 interface ResourceHubProps {
@@ -194,7 +194,7 @@ export function ResourceHub({
             {/* Tools Section */}
             <div className="space-y-8">
                 <h2 className="text-2xl font-bold text-foreground flex items-center gap-3">
-                    <Sparkles className="text-primary" /> Self-Help Toolkit
+                    <ShieldCheck className="text-primary" /> Self-Help Toolkit
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {selfHelpTools.map((tool, i) => {
@@ -360,7 +360,7 @@ export function ResourceHub({
                         exit={{ opacity: 0, y: 20, scale: 0.9 }}
                         className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-primary/90 text-white px-6 py-3 rounded-2xl shadow-2xl backdrop-blur-md flex items-center gap-3 border border-white/20"
                     >
-                        <Sparkles className="h-4 w-4 animate-pulse" />
+                        <Activity className="h-4 w-4 animate-pulse" />
                         <span className="text-xs font-bold uppercase tracking-widest">{resourceStatus}</span>
                     </motion.div>
                 )}
