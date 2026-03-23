@@ -45,25 +45,19 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
                 className
             )}
         >
-           <div className="flex flex-col h-full space-y-6">
-            <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                    <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Growth Outlook</h3>
-                    <p className="text-[10px] font-bold text-grey-500 dark:text-grey-400 uppercase tracking-widest">Perspective on your progress</p>
-                </div>
-                <div className="h-10 w-10 rounded-2xl bg-grey-50 dark:bg-grey-800 border border-grey-200 dark:border-grey-700 flex items-center justify-center">
-                    <BrainCircuit className={cn("h-5 w-5", status.color)} />
-                </div>
+            {/* Background Graphic Watermark */}
+            <div className="absolute -right-12 -top-12 opacity-10 pointer-events-none transform rotate-12 transition-transform duration-1000 group-hover:rotate-6">
+                <BrainCircuit size={180} className="text-muted-foreground" />
             </div>
 
-            <div className="flex-1 flex flex-col justify-center p-6 rounded-[2rem] bg-grey-50 dark:bg-grey-800/40 border border-grey-100 dark:border-grey-800 relative overflow-hidden group">
-                <div className="relative z-10 space-y-4">
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div className="space-y-4 max-w-xl">
                     <div className="flex items-center gap-3">
-                        <div className={cn("px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter", status.bg, status.color)}>
+                        <div className={cn("px-4 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-current/20", status.color, status.bg)}>
                             {status.label}
                         </div>
-                        <span className="text-[10px] font-black text-grey-400 dark:text-grey-500 uppercase tracking-widest italic flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold text-grey-400 dark:text-grey-500 uppercase tracking-widest">Live Performance</span>
+                        <div className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-pulse" />
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Live Performance</span>
                     </div>
                     
                     <div className="space-y-2">

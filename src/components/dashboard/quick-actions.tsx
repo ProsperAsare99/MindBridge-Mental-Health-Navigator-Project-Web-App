@@ -46,13 +46,13 @@ export function QuickActions() {
                     );
                 })}
             </div>
-            <div className="p-4 rounded-2xl bg-grey-50 dark:bg-grey-900 border border-grey-200 dark:border-grey-700 flex items-center gap-4">
-                <div className="h-10 w-10 rounded-xl bg-grey-100 dark:bg-grey-800 flex items-center justify-center text-grey-600 dark:text-grey-300">
+            <div className="p-4 rounded-2xl bg-secondary/5 border border-secondary/10 flex items-center gap-4">
+                <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
                     <Brain size={20} />
                 </div>
                 <div className="flex-1">
                     <span className="text-sm font-black uppercase tracking-[0.2em] text-foreground">Pro Tip</span>
-                    <p className="text-[9px] font-bold text-grey-500 dark:text-grey-400 leading-tight italic">
+                    <p className="text-[9px] font-bold text-muted-foreground leading-tight italic">
                         regular check-ins increase self-awareness by 40%. keep tracking!
                     </p>
                 </div>

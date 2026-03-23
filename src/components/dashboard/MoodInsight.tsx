@@ -140,7 +140,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                                     key={i}
                                     className={cn(
                                         "h-1.5 w-6 rounded-full transition-colors",
-                                        i <= (moods?.length || 0) ? "bg-primary" : "bg-grey-100 dark:bg-grey-800"
+                                        i <= (moods?.length || 0) ? "bg-primary" : "bg-muted"
                                     )}
                                 />
                             ))}
@@ -196,7 +196,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                     <button
                         onClick={() => { fetchInsight(); onRefresh?.(); }}
                         disabled={loading}
-                        className="h-8 w-8 rounded-full bg-white/50 dark:bg-grey-800/50 backdrop-blur-sm flex items-center justify-center border border-grey-200 dark:border-grey-700 hover:bg-grey-100 dark:hover:bg-grey-700 transition-all disabled:opacity-50"
+                        className="h-8 w-8 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center border border-border/50 hover:bg-primary/5 transition-all disabled:opacity-50"
                     >
                         <RefreshCw className={cn("h-4 w-4 text-muted-foreground", loading && "animate-spin")} />
                     </button>
@@ -235,9 +235,9 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                 <div className="relative">
                     {loading ? (
                         <div className="space-y-4 py-2">
-                            <div className="h-4 bg-grey-100 dark:bg-grey-800 rounded-full w-full animate-pulse" />
-                            <div className="h-4 bg-grey-100 dark:bg-grey-800 rounded-full w-5/6 animate-pulse" />
-                            <div className="h-4 bg-grey-100 dark:bg-grey-800 rounded-full w-4/6 animate-pulse" />
+                            <div className="h-4 bg-primary/10 rounded-full w-full animate-pulse" />
+                            <div className="h-4 bg-primary/10 rounded-full w-5/6 animate-pulse" />
+                            <div className="h-4 bg-primary/10 rounded-full w-4/6 animate-pulse" />
                             {/* Scanning Line Effect */}
                             <motion.div
                                 animate={{ top: ['0%', '100%', '0%'] }}

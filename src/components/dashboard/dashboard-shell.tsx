@@ -92,7 +92,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
 
             {/* Sidebar */}
             <aside className={cn(
-                "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-grey-200 dark:border-grey-800 bg-background/80 backdrop-blur-2xl transition-all duration-500 ease-[0.23,1,0.32,1] lg:translate-x-0",
+                "fixed inset-y-0 left-0 z-50 w-64 transform border-r border-border/50 bg-background/80 backdrop-blur-2xl transition-all duration-500 ease-[0.23,1,0.32,1] lg:translate-x-0",
                 isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             )}>
                 <div className="flex h-20 items-center justify-between px-6">
@@ -109,7 +109,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                     <div className="px-4 mb-4">
                         <Button 
                             variant="outline" 
-                            className="w-full justify-start gap-4 h-12 rounded-2xl bg-grey-50 dark:bg-grey-800 border-grey-200 dark:border-grey-700 hover:bg-grey-100 dark:hover:bg-grey-700 hover:border-grey-300 dark:hover:border-grey-600 text-muted-foreground hover:text-foreground transition-all group"
+                            className="w-full justify-start gap-4 h-12 rounded-2xl bg-muted/30 border-border/50 hover:bg-muted/50 hover:border-border/80 text-muted-foreground hover:text-foreground transition-all group"
                             onClick={() => {
                                 setIsSidebarOpen(false);
                                 toggle();
@@ -136,8 +136,8 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                                     className={cn(
                                         "flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 relative group",
                                         isActive
-                                            ? "text-foreground bg-grey-100 dark:bg-grey-800 shadow-sm"
-                                            : "text-muted-foreground hover:text-foreground hover:bg-grey-50 dark:hover:bg-grey-800/50"
+                                            ? "text-foreground bg-muted shadow-sm"
+                                            : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
                                     )}
                                 >
                                     <Icon className={cn("h-4.5 w-4.5", isActive ? "text-primary" : "text-muted-foreground")} />
@@ -154,15 +154,15 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                     </div>
 
                     {/* Bottom Fixed Area */}
-                    <div className="p-4 space-y-4 border-t border-grey-100 dark:border-grey-800">
+                    <div className="p-4 space-y-4 border-t border-primary/5">
                         {/* Profile Card Mini - Hide for anonymous or no user */}
                         {user && !user.isAnonymous && (
-                            <div className="p-3 rounded-2xl bg-grey-50 dark:bg-grey-800/40 border border-grey-200 dark:border-grey-700 backdrop-blur-md hover:bg-grey-100 dark:hover:bg-grey-800 transition-all duration-300 group">
+                            <div className="p-3 rounded-2xl bg-muted/40 border border-border/50 backdrop-blur-md hover:bg-muted/60 hover:border-border/80 transition-all duration-300 group">
                                 <div
                                     onClick={() => router.push("/dashboard/profile")}
                                     className="flex items-center gap-3 mb-3 cursor-pointer"
                                 >
-                                    <div className="h-9 w-9 rounded-xl bg-grey-100 dark:bg-grey-700 border border-grey-200 dark:border-grey-600 flex items-center justify-center text-foreground font-bold group-hover:scale-105 transition-transform overflow-hidden">
+                                    <div className="h-9 w-9 rounded-xl bg-muted border border-border/50 flex items-center justify-center text-foreground font-bold group-hover:scale-105 transition-transform overflow-hidden">
                                         {user.image ? (
                                             <img
                                                 src={user.image.startsWith('http') ? user.image : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000'}${user.image}`}
@@ -195,7 +195,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                             </div>
                         )}
 
-                        <div className="flex flex-wrap gap-x-4 gap-y-1 px-4 text-[10px] font-bold text-muted-foreground/50 uppercase tracking-widest border-t border-grey-100 dark:border-grey-800 pt-4">
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 px-4 text-[10px] font-bold text-muted-foreground/50 uppercase tracking-widest border-t border-primary/5 pt-4">
                             <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
                             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
                             <Link href="/support" className="hover:text-foreground transition-colors">Support</Link>
@@ -217,7 +217,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
             {/* Main Content */}
             <div className="lg:pl-64 relative z-10 min-h-screen transition-all duration-500">
                 {/* Topbar (Mobile) */}
-                <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-background/80 px-8 backdrop-blur-2xl border-b border-grey-100 dark:border-grey-800 lg:hidden">
+                <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-background/80 px-8 backdrop-blur-2xl border-b border-primary/5 lg:hidden">
                     <button onClick={() => setIsSidebarOpen(true)} className="text-foreground">
                         <Menu className="h-6 w-6" />
                     </button>
