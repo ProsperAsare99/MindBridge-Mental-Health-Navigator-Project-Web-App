@@ -2,7 +2,7 @@ import { Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { ai } from '../lib/genkit-config';
-import { MessageRole, University } from '../generated/client';
+import { MessageRole, University } from '../generated/client_new';
 
 export const createMood = async (req: AuthRequest, res: Response) => {
     const { value, note } = req.body;

@@ -27,7 +27,7 @@ jest.mock('../../lib/prisma', () => ({
 }));
 
 // Mock Generated Client Enums
-jest.mock('../../generated/client', () => ({
+jest.mock('../../generated/client_new', () => ({
     University: { KNUST: 'KNUST', UNIVERSITY_OF_GHANA: 'UNIVERSITY_OF_GHANA', OTHER: 'OTHER' },
     Language: { ENGLISH: 'ENGLISH', TWI: 'TWI' },
     SupportLevel: { SOMEWHAT: 'SOMEWHAT', HIGH: 'HIGH', LOW: 'LOW' },
