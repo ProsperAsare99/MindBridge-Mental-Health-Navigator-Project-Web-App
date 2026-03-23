@@ -321,8 +321,7 @@ export default function AssessmentPage() {
                             </div>
 
                             {view === "list" ? (
-                                <>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {assessments.map((a, i) => (
                                         <motion.div
                                             key={a.id}
@@ -421,7 +420,7 @@ export default function AssessmentPage() {
                                                             <ClipboardList size={24} />
                                                         </div>
                                                         <div>
-                                                            <h4 className="font-bold text-lg">{ASSESSMENT_DATA[record.type as keyof typeof ASSESSMENT_DATA]?.title || record.type}</h4>
+                                                            <h4 className="font-bold text-lg">{ (ASSESSMENT_DATA as any)[record.type]?.title || record.type}</h4>
                                                             <p className="text-xs text-muted-foreground font-medium">{new Date(record.createdAt).toLocaleDateString()} at {new Date(record.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                                                         </div>
                                                     </div>
@@ -442,7 +441,6 @@ export default function AssessmentPage() {
                                             ))}
                                         </div>
                                     )}
-                                </div>
                                 </div>
                             )}
 

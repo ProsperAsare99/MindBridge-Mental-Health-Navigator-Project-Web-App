@@ -436,7 +436,7 @@ export default function MoodPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                 >
-                    <MoodInsight moodHistory={moodHistory} />
+                    <MoodInsight moods={moodHistory} />
                 </motion.div>
             </div>
         </div>
