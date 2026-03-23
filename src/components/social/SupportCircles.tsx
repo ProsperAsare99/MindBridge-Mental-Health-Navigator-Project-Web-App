@@ -1,17 +1,22 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Users, MessageSquare, Heart, Shield, ChevronRight, Lock, Plus, Info } from 'lucide-react';
-import api from '@/lib/axios-config';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { 
+    Users, 
+    MessageCircle, 
+    ChevronRight, 
+    Loader2,
+    PlusCircle
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import api from '@/lib/api';
 
 interface Circle {
     id: string;
     name: string;
-    description: string | null;
+    description: string;
     category: string;
     _count: {
         members: number;
@@ -19,263 +24,119 @@ interface Circle {
     };
 }
 
-interface Post {
-    id: string;
-    content: string;
-    isAnonymous: boolean;
-    createdAt: string;
-    author: {
-        displayName: string;
-        image: string | null;
-    };
-    _count: {
-        encouragements: number;
-    };
-}
-
 export function SupportCircles() {
     const [circles, setCircles] = useState<Circle[]>([]);
-    const [selectedCircle, setSelectedCircle] = useState<Circle | null>(null);
-    const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
-    const [newPost, setNewPost] = useState('');
-    const [isPosting, setIsPosting] = useState(false);
 
     useEffect(() => {
+        const fetchCircles = async () => {
+            try {
+                const data = await api.get('/social/circles');
+                setCircles(data);
+            } catch (error) {
+                console.error('Failed to fetch circles:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchCircles();
     }, []);
 
-    const fetchCircles = async () => {
-        try {
-            const res = await api.get('/social/circles');
-            setCircles(res.data);
-            setLoading(false);
-        } catch (error) {
-            console.error('Failed to fetch circles:', error);
-            setLoading(false);
-        }
-    };
-
-    const fetchPosts = async (circleId: string) => {
-        try {
-            const res = await api.get(`/social/circles/${circleId}/posts`);
-            setPosts(res.data);
-        } catch (error) {
-            console.error('Failed to fetch posts:', error);
-        }
-    };
-
-    const handleJoinCircle = async (circleId: string) => {
-        try {
-            await api.post(`/social/circles/${circleId}/join`);
-            // Refresh to update counts or show joined state
-            fetchCircles();
-        } catch (error) {
-            console.error('Failed to join circle:', error);
-        }
-    };
-
-    const handleCreatePost = async () => {
-        if (!selectedCircle || !newPost.trim()) return;
-        setIsPosting(true);
-        try {
-            await api.post(`/social/circles/${selectedCircle.id}/posts`, {
-                content: newPost,
-                isAnonymous: true
-            });
-            setNewPost('');
-            fetchPosts(selectedCircle.id);
-        } catch (error) {
-            console.error('Failed to create post:', error);
-        } finally {
-            setIsPosting(false);
-        }
-    };
-
-    if (loading) return <div className="h-40 flex items-center justify-center">Loading circles...</div>;
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center py-20 gap-4">
+                <Loader2 className="h-10 w-10 text-primary animate-spin" />
+                <p className="text-sm font-black uppercase tracking-widest text-muted-foreground">Gathering Communities...</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="space-y-8">
-            <div className="flex items-center justify-between">
-                <div>
-                    <h2 className="text-2xl font-black text-foreground tracking-tight flex items-center gap-2">
-                        <Users className="w-6 h-6 text-primary" />
-                        Support Circles
-                    </h2>
-                    <p className="text-sm text-muted-foreground font-medium">Safe, moderated spaces for peer connection.</p>
-                </div>
-                <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 gap-1 px-3 py-1">
-                    <Shield className="w-3 h-3" />
-                    Secure & Anonymous
-                </Badge>
-            </div>
+        <div className="space-y-12">
+            {/* Featured Section */}
+            <div className="grid md:grid-cols-2 gap-6">
+                {circles.map((circle, i) => (
+                    <motion.div
+                        key={circle.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="group glass rounded-[2.5rem] p-8 hover:bg-white hover:shadow-2xl hover:shadow-primary/5 border border-border/40 transition-all flex flex-col justify-between min-h-[250px] relative overflow-hidden"
+                    >
+                        <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                            <Users size={120} />
+                        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <AnimatePresence mode="popLayout">
-                    {circles.map((circle) => (
-                        <motion.div
-                            key={circle.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            whileHover={{ y: -4 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        >
-                            <Card className={cn(
-                                "group p-6 h-full border-primary/10 bg-card hover:border-primary/30 transition-all cursor-pointer relative overflow-hidden",
-                                selectedCircle?.id === circle.id && "ring-2 ring-primary border-transparent"
-                            )}
-                            onClick={() => {
-                                setSelectedCircle(circle);
-                                fetchPosts(circle.id);
-                            }}>
-                                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                                    <Users className="w-20 h-20" />
+                        <div className="space-y-4 relative z-10">
+                            <div className="flex items-center justify-between">
+                                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <Users size={24} />
                                 </div>
-                                
-                                <Badge className="mb-4 bg-primary/10 text-primary border-none uppercase text-[10px] tracking-widest font-black">
-                                    {circle.category.replace('_', ' ')}
-                                </Badge>
-                                
-                                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{circle.name}</h3>
-                                <p className="text-sm text-muted-foreground line-clamp-2 mb-6 min-h-[40px]">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/50 text-[10px] font-black uppercase tracking-tight">
+                                        <Users size={12} className="text-primary" />
+                                        {circle._count.members} Members
+                                    </div>
+                                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/50 text-[10px] font-black uppercase tracking-tight">
+                                        <MessageCircle size={12} className="text-primary" />
+                                        {circle._count.posts} Posts
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 className="text-2xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors">{circle.name}</h3>
+                                <p className="text-sm text-muted-foreground font-medium leading-relaxed mt-2 uppercase tracking-tight">
                                     {circle.description}
                                 </p>
+                            </div>
+                        </div>
 
-                                <div className="flex items-center justify-between mt-auto pt-4 border-t border-primary/5">
-                                    <div className="flex gap-4">
-                                        <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
-                                            <Users className="w-3.5 h-3.5" />
-                                            {circle._count.members}
-                                        </div>
-                                        <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
-                                            <MessageSquare className="w-3.5 h-3.5" />
-                                            {circle._count.posts}
-                                        </div>
-                                    </div>
-                                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-full hover:bg-primary/10 hover:text-primary">
-                                        <ChevronRight className="w-5 h-5" />
-                                    </Button>
-                                </div>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </AnimatePresence>
-            </div>
-
-            {selectedCircle && (
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 border-t border-primary/10"
-                >
-                    {/* Circle Interaction Sidebar */}
-                    <div className="lg:col-span-1 space-y-6">
-                        <div className="p-6 rounded-2xl bg-primary/5 border border-primary/10 space-y-4">
-                            <h4 className="font-black text-sm uppercase tracking-wider text-primary">Your Safe Space</h4>
-                            <p className="text-xs text-muted-foreground leading-relaxed">
-                                You are viewing <span className="font-bold text-foreground">{selectedCircle.name}</span>. 
-                                Everything shared here is anonymous by default. Supportive interactions are encouraged!
-                            </p>
-                            <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold" onClick={() => handleJoinCircle(selectedCircle.id)}>
-                                Join Circle
+                        <div className="flex gap-3 pt-6 relative z-10">
+                            <Button className="flex-1 h-12 rounded-2xl bg-primary shadow-lg shadow-primary/20 text-xs font-black uppercase tracking-[0.2em]">
+                                Enter Circle
+                            </Button>
+                            <Button variant="outline" className="h-12 w-12 rounded-2xl border-border/40 hover:bg-primary/5 hover:border-primary/30 p-0">
+                                <PlusCircle size={20} className="text-muted-foreground" />
                             </Button>
                         </div>
+                    </motion.div>
+                ))}
+            </div>
 
-                        <div className="p-6 rounded-2xl border border-primary/10 space-y-4 bg-white/50 backdrop-blur-sm">
-                            <h4 className="font-black text-sm uppercase tracking-wider">Guidelines</h4>
-                            <ul className="space-y-3">
-                                {[
-                                    'Respect privacy & anonymity',
-                                    'Offer kindness & encouragement',
-                                    'No professional medical advice',
-                                    'Report concerning behavior'
-                                ].map((rule, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                                        <div className="w-1 h-1 rounded-full bg-primary mt-1.5" />
-                                        {rule}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+            {/* Discovery Section */}
+            <div className="pt-8 border-t border-border/40">
+                <div className="flex items-center justify-between mb-8">
+                    <div className="space-y-1">
+                        <h4 className="text-xs font-black uppercase tracking-[0.3em] text-primary">Discovery</h4>
+                        <p className="text-2xl font-black text-foreground tracking-tighter">Explore Niche Groups</p>
                     </div>
+                    <Button variant="ghost" className="text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-primary">
+                        View All <ChevronRight size={14} className="ml-1" />
+                    </Button>
+                </div>
 
-                    {/* Posts Feed */}
-                    <div className="lg:col-span-2 space-y-6">
-                        {/* Create Post */}
-                        <Card className="p-6 border-primary/20 shadow-sm">
-                            <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
-                                <Plus className="w-4 h-4 text-primary" />
-                                Share an anonymous reflection
-                            </h4>
-                            <textarea
-                                value={newPost}
-                                onChange={(e) => setNewPost(e.target.value)}
-                                placeholder="What's on your mind? Pay it forward with a supportive thought..."
-                                className="w-full h-24 p-4 rounded-xl bg-muted/30 border-none focus:ring-1 ring-primary/30 resize-none text-sm placeholder:text-muted-foreground"
-                            />
-                            <div className="flex items-center justify-between mt-4">
-                                <span className="text-[10px] font-bold text-muted-foreground uppercase flex items-center gap-1.5">
-                                    <Lock className="w-3 h-3" />
-                                    Posting as Anonymous Peer
+                <div className="flex gap-4 overflow-x-auto no-scrollbar pb-6 px-1">
+                    {['Exam Anxiety', 'Study Group 101', 'Thesis Support', 'Meditation Club', 'Late Night Reflection'].map((name, i) => (
+                        <div 
+                            key={i}
+                            className="flex-shrink-0 w-64 glass rounded-[2rem] p-6 space-y-4 hover:border-primary/30 transition-all group cursor-pointer"
+                        >
+                            <div className="flex items-center justify-between">
+                                <span className={cn(
+                                    "h-8 w-8 rounded-xl flex items-center justify-center text-white",
+                                    i % 2 === 0 ? "bg-amber-400" : "bg-blue-400"
+                                )}>
+                                    <Users size={16} />
                                 </span>
-                                <Button 
-                                    className="px-6 font-bold" 
-                                    size="sm" 
-                                    disabled={isPosting || !newPost.trim()}
-                                    onClick={handleCreatePost}
-                                >
-                                    {isPosting ? 'Sharing...' : 'Post Message'}
-                                </Button>
+                                <span className="text-[10px] font-black text-muted-foreground uppercase opacity-40 group-hover:opacity-100 transition-opacity">NEW</span>
                             </div>
-                        </Card>
-
-                        {/* Feed */}
-                        <div className="space-y-4">
-                            {posts.length === 0 ? (
-                                <div className="p-12 text-center text-muted-foreground bg-muted/10 rounded-3xl border-2 border-dashed border-primary/5">
-                                    <MessageSquare className="w-8 h-8 mx-auto mb-3 opacity-20" />
-                                    <p className="text-sm font-medium">No posts here yet. Be the first to share!</p>
-                                </div>
-                            ) : (
-                                posts.map((post) => (
-                                    <motion.div
-                                        key={post.id}
-                                        initial={{ opacity: 0, x: -10 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                    >
-                                        <Card className="p-6 border-primary/5 hover:border-primary/20 transition-all bg-white/80">
-                                            <div className="flex items-center justify-between mb-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-xs">
-                                                        {post.author.displayName.charAt(0)}
-                                                    </div>
-                                                    <div>
-                                                        <h5 className="text-xs font-black">{post.author.displayName}</h5>
-                                                        <p className="text-[10px] text-muted-foreground font-bold">{new Date(post.createdAt).toLocaleDateString()}</p>
-                                                    </div>
-                                                </div>
-                                                <Button variant="ghost" size="sm" className="h-8 gap-1.5 text-primary hover:bg-primary/10 rounded-full font-bold">
-                                                    <Heart className="w-4 h-4" />
-                                                    <span className="text-xs">{post._count.encouragements}</span>
-                                                </Button>
-                                            </div>
-                                            <p className="text-sm leading-relaxed text-foreground/80">
-                                                {post.content}
-                                            </p>
-                                        </Card>
-                                    </motion.div>
-                                ))
-                            )}
+                            <p className="text-lg font-black text-foreground tracking-tight leading-tight">{name}</p>
+                            <div className="h-1 w-12 bg-primary/20 rounded-full group-hover:w-full transition-all duration-500" />
                         </div>
-                    </div>
-                </motion.div>
-            )}
+                    ))}
+                </div>
+            </div>
         </div>
     );
-}
-
-// Helper utility (if locally defined for missing imports)
-function cn(...classes: any[]) {
-    return classes.filter(Boolean).join(' ');
 }

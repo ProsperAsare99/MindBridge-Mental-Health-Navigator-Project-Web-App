@@ -8,6 +8,7 @@ import {
     Heart, 
     Search, 
     Plus,
+    Filter,
     ShieldCheck
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -28,8 +29,8 @@ export default function CommunityPage() {
     return (
         <div className="min-h-screen bg-background pb-20">
             {/* Cinematic Header */}
-            <div className="relative h-[250px] overflow-hidden flex flex-col justify-end px-6 pb-12 md:px-12 md:pb-16 bg-gradient-to-t from-background via-background/40 to-transparent">
-                <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
+            <div className="relative h-[350px] overflow-hidden flex flex-col justify-end px-6 pb-12 md:px-12 md:pb-16 bg-gradient-to-t from-background via-background/40 to-transparent">
+                <div className="absolute inset-0 bg-[#0077b6]/5 pointer-events-none" />
                 <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
                 
                 <motion.div 
@@ -38,7 +39,7 @@ export default function CommunityPage() {
                     className="max-w-7xl mx-auto w-full space-y-4"
                 >
                     <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 md:h-12 md:w-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform hover:scale-110">
+                        <div className="h-10 w-10 md:h-12 md:w-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
                             <Users size={24} />
                         </div>
                         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
@@ -47,10 +48,10 @@ export default function CommunityPage() {
                         </div>
                     </div>
                     
-                    <h1 className="text-4xl md:text-5xl font-black text-foreground tracking-tighter leading-none">
+                    <h1 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-none">
                         Community <span className="text-primary italic">Pulse.</span>
                     </h1>
-                    <p className="text-sm md:text-base text-muted-foreground font-medium max-w-2xl leading-relaxed">
+                    <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-2xl leading-relaxed">
                         An anonymous sanctuary for shared resilience. Connect with peers who understand your journey.
                     </p>
                 </motion.div>
@@ -73,7 +74,7 @@ export default function CommunityPage() {
                                     )}
                                 >
                                     <Icon size={18} className={cn("transition-transform", isActive ? "scale-110" : "group-hover:scale-110")} />
-                                    <span className="text-[10px] font-black uppercase tracking-widest leading-none">{tab.label}</span>
+                                    <span className="text-xs font-black uppercase tracking-widest">{tab.label}</span>
                                     {isActive && (
                                         <motion.div 
                                             layoutId="tab-pill"
@@ -86,9 +87,17 @@ export default function CommunityPage() {
                     </div>
 
                     <div className="flex items-center gap-3">
+                        <div className="hidden lg:flex items-center h-12 bg-muted/30 border border-border/40 rounded-2xl px-4 w-64 group focus-within:ring-4 focus-within:ring-primary/10 transition-all">
+                            <Search size={16} className="text-muted-foreground" />
+                            <input 
+                                type="text" 
+                                placeholder="Search community..." 
+                                className="bg-transparent border-none focus:ring-0 text-xs font-medium w-full ml-2"
+                            />
+                        </div>
                         <Button className="h-12 w-12 rounded-2xl bg-primary shadow-lg shadow-primary/20 p-0 lg:px-6 lg:w-auto">
                             <Plus size={20} className="lg:mr-2" />
-                            <span className="hidden lg:inline text-[10px] font-black uppercase tracking-widest">Share My Voice</span>
+                            <span className="hidden lg:inline text-xs font-black uppercase tracking-widest">Share My Voice</span>
                         </Button>
                     </div>
                 </div>
