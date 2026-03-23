@@ -132,10 +132,35 @@ export default async function DashboardPage() {
                     </DashboardItem>
                 </div>
 
-                {/* 5. Wellness Journey (Gamification Portal) */}
-                <div className="mb-10">
-                    <DashboardItem>
+                {/* 5. Wellness Journey & Community Pulse */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+                    <DashboardItem className="lg:col-span-8">
                         <GamificationPortal />
+                    </DashboardItem>
+                    
+                    <DashboardItem className="lg:col-span-4 h-full">
+                        <Link href="/dashboard/community" className="block h-full">
+                            <Card className="h-full glass p-8 border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent rounded-[2.5rem] hover:bg-white hover:shadow-2xl transition-all group overflow-hidden relative">
+                                <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                                    <Users size={120} className="text-primary" />
+                                </div>
+                                <div className="relative z-10 space-y-4">
+                                    <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                        <Users size={24} />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <h3 className="text-xl font-black text-foreground tracking-tight">Community Pulse</h3>
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Anonymous Peer Support</p>
+                                    </div>
+                                    <p className="text-xs font-medium text-muted-foreground leading-relaxed">
+                                        Join support circles and share your resilience journey anonymously with peers who understand.
+                                    </p>
+                                    <div className="flex items-center gap-2 pt-2 text-primary text-[10px] font-black uppercase tracking-widest group-hover:translate-x-2 transition-transform">
+                                        Enter Hub <ArrowUpRight size={14} />
+                                    </div>
+                                </div>
+                            </Card>
+                        </Link>
                     </DashboardItem>
                 </div>
 

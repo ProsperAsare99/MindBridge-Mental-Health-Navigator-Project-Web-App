@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import api from '@/lib/api';
+import { api } from '@/lib/api';
 
 export function MyNetwork() {
     const [encouragements, setEncouragements] = useState<any[]>([]);
