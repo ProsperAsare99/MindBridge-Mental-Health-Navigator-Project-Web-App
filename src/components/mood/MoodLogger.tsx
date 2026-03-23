@@ -35,19 +35,103 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
     const [location, setLocation] = useState<any>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    // Live Media States
+    const [isRecording, setIsRecording] = useState(false);
+    const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+    const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
+    
+    const [isCameraOpen, setIsCameraOpen] = useState(false);
+    const videoRef = React.useRef<HTMLVideoElement>(null);
+    const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
     useEffect(() => {
-        // Fetch Location & Sync Weather
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 const { latitude, longitude } = pos.coords;
                 setLocation({ lat: latitude, lng: longitude });
-                
-                // For demo, we'll mock weather or use a simple free API if available
-                // Let's assume a healthy default for now or a simple mock
                 setWeather({ temp: 21, condition: "Partly Cloudy", icon: "Cloud" });
             });
         }
     }, []);
+
+    // Audio Logic
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new (window as any).MediaRecorder(stream);
+            setMediaRecorder(recorder);
+            setAudioChunks([]);
+            
+            recorder.ondataavailable = (e) => {
+                if (e.data.size > 0) setAudioChunks((prev) => [...prev, e.data]);
+            };
+
+            recorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+                const audioFile = new File([audioBlob], `mood-audio-${Date.now()}.mp3`, { type: 'audio/mpeg' });
+                setAudio(audioFile);
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            recorder.start();
+            setIsRecording(true);
+        } catch (err) {
+            console.error("Mic access denied:", err);
+            alert("Could not access microphone.");
+        }
+    };
+
+    const stopRecording = () => {
+        if (mediaRecorder && isRecording) {
+            mediaRecorder.stop();
+            setIsRecording(false);
+        }
+    };
+
+    // Camera Logic
+    const openCamera = async () => {
+        setIsCameraOpen(true);
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            if (videoRef.current) {
+                (videoRef.current as any).srcObject = stream;
+            }
+        } catch (err) {
+            console.error("Camera access denied:", err);
+            alert("Could not access camera.");
+            setIsCameraOpen(false);
+        }
+    };
+
+    const capturePhoto = () => {
+        if (videoRef.current && canvasRef.current) {
+            const canvas = canvasRef.current;
+            const video = videoRef.current;
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx?.drawImage(video, 0, 0);
+            
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    const photoFile = new File([blob], `mood-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
+                    setPhoto(photoFile);
+                    // Stop tracks
+                    const stream = video.srcObject as MediaStream;
+                    stream.getTracks().forEach(track => track.stop());
+                    setIsCameraOpen(false);
+                }
+            }, 'image/jpeg');
+        }
+    };
+
+    const closeCamera = () => {
+        if (videoRef.current && (videoRef.current as any).srcObject) {
+            const stream = (videoRef.current as any).srcObject as MediaStream;
+            stream.getTracks().forEach(track => track.stop());
+        }
+        setIsCameraOpen(false);
+    };
 
     const handleLog = async () => {
         if (mood === null) return;
@@ -76,7 +160,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
             onComplete();
         } catch (error) {
             console.error("Mood Logging Error:", error);
-            alert("Failed to sync your mood. Please check your connection.");
+            alert("Failed to sync your mood.");
         } finally {
             setIsSubmitting(false);
         }
@@ -86,7 +170,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
     const prevStep = () => setStep(prev => prev - 1);
 
     return (
-        <div className="glass rounded-[2.5rem] p-8 md:p-10 shadow-premium min-h-[500px] flex flex-col justify-between overflow-hidden relative">
+        <div className="glass rounded-[2.5rem] p-8 md:p-10 shadow-premium min-h-[650px] flex flex-col justify-between overflow-hidden relative border border-white/10">
             <AnimatePresence mode="wait">
                 {step === 1 && (
                     <motion.div 
@@ -97,7 +181,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                         className="space-y-10"
                     >
                         <div className="space-y-2 text-center">
-                            <h3 className="text-3xl font-black text-foreground italic tracking-tight italic">Core Energy</h3>
+                            <h3 className="text-3xl font-black text-foreground tracking-tight">Core Energy</h3>
                             <p className="text-sm text-muted-foreground font-bold uppercase tracking-widest">How is your spirit pulsating right now?</p>
                         </div>
                         <div className="grid grid-cols-5 gap-4">
@@ -150,7 +234,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                         className="space-y-8"
                     >
                         <div className="space-y-2">
-                            <h3 className="text-2xl font-black text-foreground tracking-tight italic">Vital Dimensions</h3>
+                            <h3 className="text-2xl font-black text-foreground tracking-tight">Vital Dimensions</h3>
                             <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Rest, Movement, and Connection</p>
                         </div>
                         
@@ -177,7 +261,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                         className="space-y-6"
                     >
                         <div className="space-y-2">
-                            <h3 className="text-2xl font-black text-foreground italic">Journaling</h3>
+                            <h3 className="text-2xl font-black text-foreground">Journaling</h3>
                             <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Capture your voice and surroundings</p>
                         </div>
 
@@ -189,16 +273,57 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                         />
 
                         <div className="grid grid-cols-2 gap-4">
-                            <label className="flex items-center justify-center gap-2 p-4 rounded-2xl border-2 border-dashed border-border/40 hover:border-primary/40 transition-all cursor-pointer">
-                                <Camera size={18} className={photo ? "text-primary" : "text-muted-foreground"} />
-                                <span className={cn("text-[9px] font-black uppercase", photo ? "text-primary" : "text-muted-foreground")}>{photo ? "Photo Attached" : "Capture Photo"}</span>
-                                <input type="file" accept="image/*" className="hidden" onChange={(e) => setPhoto(e.target.files?.[0] || null)} />
-                            </label>
-                            <label className="flex items-center justify-center gap-2 p-4 rounded-2xl border-2 border-dashed border-border/40 hover:border-secondary/40 transition-all cursor-pointer">
-                                <Mic size={18} className={audio ? "text-secondary" : "text-muted-foreground"} />
-                                <span className={cn("text-[9px] font-black uppercase", audio ? "text-secondary" : "text-muted-foreground")}>{audio ? "Audio Recorded" : "Voice Memo"}</span>
-                                <input type="file" accept="audio/*" className="hidden" onChange={(e) => setAudio(e.target.files?.[0] || null)} />
-                            </label>
+                            {/* Camera Action */}
+                            <div className="relative">
+                                {isCameraOpen ? (
+                                    <div className="flex flex-col gap-2">
+                                        <video ref={videoRef} autoPlay className="w-full rounded-2xl bg-black aspect-video object-cover" />
+                                        <div className="flex gap-2">
+                                            <Button size="sm" onClick={capturePhoto} className="flex-1 text-[8px] font-black uppercase">Snap</Button>
+                                            <Button size="sm" variant="ghost" onClick={closeCamera} className="text-[8px] font-black uppercase text-red-500">Close</Button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col gap-2">
+                                        <button 
+                                            onClick={openCamera}
+                                            className={cn(
+                                                "flex items-center justify-center gap-2 p-4 rounded-2xl border-2 border-dashed border-border/40 hover:border-primary/40 transition-all w-full",
+                                                photo ? "border-primary bg-primary/5" : ""
+                                            )}
+                                        >
+                                            <Camera size={18} className={photo ? "text-primary" : "text-muted-foreground"} />
+                                            <span className={cn("text-[9px] font-black uppercase", photo ? "text-primary" : "text-muted-foreground")}>
+                                                {photo ? "Photo Captured" : "Live Camera"}
+                                            </span>
+                                        </button>
+                                        <label className="flex items-center justify-center gap-2 p-2 rounded-xl bg-muted/30 text-[8px] font-black uppercase cursor-pointer hover:bg-muted/50">
+                                            <span>Or Upload File</span>
+                                            <input type="file" accept="image/*" className="hidden" onChange={(e) => setPhoto(e.target.files?.[0] || null)} />
+                                        </label>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Mic Action */}
+                            <div className="flex flex-col gap-2">
+                                <button 
+                                    onClick={isRecording ? stopRecording : startRecording}
+                                    className={cn(
+                                        "flex items-center justify-center gap-2 p-4 rounded-2xl border-2 border-dashed border-border/40 hover:border-secondary/40 transition-all w-full",
+                                        isRecording ? "animate-pulse border-red-500 bg-red-500/5" : (audio ? "border-secondary bg-secondary/5" : "")
+                                    )}
+                                >
+                                    <Mic size={18} className={isRecording ? "text-red-500" : (audio ? "text-secondary" : "text-muted-foreground")} />
+                                    <span className={cn("text-[9px] font-black uppercase", isRecording ? "text-red-500" : (audio ? "text-secondary" : "text-muted-foreground") )}>
+                                        {isRecording ? "Recording..." : (audio ? "Memo Captured" : "Record Voice")}
+                                    </span>
+                                </button>
+                                <label className="flex items-center justify-center gap-2 p-2 rounded-xl bg-muted/30 text-[8px] font-black uppercase cursor-pointer hover:bg-muted/50">
+                                    <span>Or Upload File</span>
+                                    <input type="file" accept="audio/*" className="hidden" onChange={(e) => setAudio(e.target.files?.[0] || null)} />
+                                </label>
+                            </div>
                         </div>
 
                         {location && (
@@ -224,7 +349,8 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                 )}
             </AnimatePresence>
 
-            {/* Progress Mini Bar */}
+            <canvas ref={canvasRef} className="hidden" />
+
             <div className="absolute top-0 left-0 w-full h-1 flex gap-1 px-1">
                 {[1, 2, 3, 4].map(s => (
                     <div key={s} className={cn("flex-1 h-full rounded-full transition-all duration-500", s <= step ? "bg-primary" : "bg-muted")} />
