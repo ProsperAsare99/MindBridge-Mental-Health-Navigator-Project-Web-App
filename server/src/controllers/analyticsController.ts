@@ -145,7 +145,7 @@ export const getActivityFeed = async (req: AuthRequest, res: Response) => {
         const userId = req.userId;
 
         // 1. Fetch all relevant activities
-        const [moods, assessments, achievements, participants] = await Promise.all([
+        const [moods, assessments, achievements, participants, logs] = await Promise.all([
             prisma.moodEntry.findMany({
                 where: { userId },
                 orderBy: { createdAt: 'desc' },
@@ -166,6 +166,14 @@ export const getActivityFeed = async (req: AuthRequest, res: Response) => {
                 include: { challenge: true },
                 orderBy: { startDate: 'desc' },
                 take: 10
+            }),
+            prisma.usageLog.findMany({
+                where: { 
+                    userId,
+                    model: { startsWith: 'RESOURCE:' }
+                },
+                orderBy: { timestamp: 'desc' },
+                take: 30
             })
         ]);
 
@@ -204,6 +212,13 @@ export const getActivityFeed = async (req: AuthRequest, res: Response) => {
                 title: `Joined ${p.challenge.title}`,
                 description: p.challenge.description,
                 timestamp: p.startDate
+            })),
+            ...logs.map(l => ({
+                id: l.id,
+                type: 'resource',
+                title: 'Accessed Resource',
+                description: l.model?.split('RESOURCE:')[1] || 'Wellness Guide',
+                timestamp: l.timestamp
             }))
         ];
 
@@ -214,5 +229,29 @@ export const getActivityFeed = async (req: AuthRequest, res: Response) => {
     } catch (error) {
         console.error('Activity Feed Error:', error);
         res.status(500).json({ error: 'Failed to fetch your unified activity feed.' });
+    }
+};
+
+export const logActivity = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.userId) return res.status(401).json({ error: 'Not authenticated' });
+        const { service, model } = req.body;
+
+        // Ensure service is a valid enum member or default to CHAT
+        const validServices = ['GEMINI', 'CHAT', 'MOOD', 'ASSESSMENT'];
+        const serviceType = validServices.includes(service) ? service : 'CHAT';
+
+        const log = await prisma.usageLog.create({
+            data: {
+                userId: req.userId,
+                service: serviceType as any,
+                model: model || 'GENERAL_ACTIVITY'
+            }
+        });
+
+        res.status(201).json(log);
+    } catch (error) {
+        console.error('Log Activity Error:', error);
+        res.status(500).json({ error: 'Failed to record activity.' });
     }
 };

@@ -25,7 +25,7 @@ import Link from "next/link";
 
 interface ActivityItem {
     id: string;
-    type: 'mood' | 'assessment' | 'achievement' | 'challenge';
+    type: 'mood' | 'assessment' | 'achievement' | 'challenge' | 'resource';
     title: string;
     description?: string;
     value?: number;
@@ -75,6 +75,7 @@ export default function ActivityPage() {
             case 'assessment': return <ClipboardList className="text-amber-500" size={20} />;
             case 'achievement': return <Award className="text-secondary" size={20} />;
             case 'challenge': return <Zap className="text-emerald-500" size={20} />;
+            case 'resource': return <BookOpen className="text-primary" size={20} />;
             default: return <History className="text-muted-foreground" size={20} />;
         }
     };
@@ -85,6 +86,7 @@ export default function ActivityPage() {
             case 'assessment': return 'bg-amber-500/10 border-amber-500/20';
             case 'achievement': return 'bg-secondary/10 border-secondary/20';
             case 'challenge': return 'bg-emerald-500/10 border-emerald-500/20';
+            case 'resource': return 'bg-primary/5 border-primary/10';
             default: return 'bg-muted border-border';
         }
     };
@@ -118,7 +120,7 @@ export default function ActivityPage() {
                 {/* Filters & Search */}
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between glass p-4 rounded-[2rem] border border-border shadow-premium">
                     <div className="flex overflow-x-auto pb-2 md:pb-0 w-full md:w-auto scrollbar-hide gap-2">
-                        {["all", "mood", "assessment", "achievement", "challenge"].map((f) => (
+                        {["all", "mood", "assessment", "achievement", "challenge", "resource"].map((f) => (
                             <button
                                 key={f}
                                 onClick={() => setFilter(f)}
