@@ -1,52 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ActivityIndicator, View } from 'react-native';
 
 import LoginScreen from './src/screens/LoginScreen';
 import DashboardScreen from './src/screens/DashboardScreen';
+import SplashScreen from './src/screens/SplashScreen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userToken, setUserToken] = useState(null);
-
-  useEffect(() => {
-    // Check for existing session
-    const checkToken = async () => {
-      try {
-        const token = await AsyncStorage.getItem('userToken');
-        setUserToken(token);
-      } catch (e) {
-        console.error('Session check error', e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkToken();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0f172a' }}>
-        <ActivityIndicator size="large" color="#8b5cf6" />
-      </View>
-    );
-  }
+  const [isLoading, setIsLoading] = React.useState(false); // No longer needed as we use the SplashScreen for flow
+  const [initialRoute, setInitialRoute] = React.useState("Splash");
 
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName={userToken ? "Dashboard" : "Login"}
+        initialRouteName="Splash"
         screenOptions={{
           headerShown: false,
-          cardStyle: { backgroundColor: '#0f172a' }
+          cardStyle: { backgroundColor: '#0a2e36' }
         }}
       >
+        <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
       </Stack.Navigator>
