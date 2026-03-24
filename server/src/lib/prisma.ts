@@ -12,8 +12,8 @@ const createPrismaClient = () => {
             .replace(/connection_limit=\d+/, 'connection_limit=10')
             .replace(/sslmode=[^&]+/, 'sslmode=verify-full'),
         max: 10,
-        idleTimeoutMillis: 30000, // Increased back to 30s
-        connectionTimeoutMillis: 30000, // Increased back to 30s
+        idleTimeoutMillis: 10000, // Reduced from 30s to 10s to close idle connections faster
+        connectionTimeoutMillis: 60000, // Increased to 60s for slow hotspot handshakes
         keepAlive: true
     });
 
@@ -42,6 +42,7 @@ const createPrismaClient = () => {
                             error.message?.includes('ECONNRESET') || 
                             error.message?.includes('ETIMEDOUT') ||
                             error.message?.includes('ENOTFOUND') ||
+                            error.message?.includes('terminated unexpectedly') ||
                             error.code === 'ECONNRESET' ||
                             error.code === 'ETIMEDOUT' ||
                             error.code === 'ENOTFOUND' ||
