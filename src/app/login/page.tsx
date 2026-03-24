@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-static";
+
 import { SunIcon as Sunburst, ArrowLeft, Loader2, ShieldCheck, Mail, Lock, UserCircle, PlusCircle, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

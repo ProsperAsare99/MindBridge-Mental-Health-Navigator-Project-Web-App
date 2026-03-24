@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-static";
+
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/api";

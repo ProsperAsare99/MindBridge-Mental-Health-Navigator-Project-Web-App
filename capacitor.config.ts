@@ -5,8 +5,7 @@ const config: CapacitorConfig = {
   appName: 'MindBridge',
   webDir: 'out',
   server: {
-    // Replace with your local IP to see changes instantly on your phone
-    url: 'http://10.44.20.111:3000', 
+    // url: 'http://192.168.0.197:3000', 
     cleartext: true
   }
 };
