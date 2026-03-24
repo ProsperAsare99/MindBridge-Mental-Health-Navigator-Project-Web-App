@@ -41,8 +41,13 @@ const createPrismaClient = () => {
                         const isTransient = 
                             error.message?.includes('ECONNRESET') || 
                             error.message?.includes('ETIMEDOUT') ||
+                            error.message?.includes('ENOTFOUND') ||
+                            error.code === 'ECONNRESET' ||
+                            error.code === 'ETIMEDOUT' ||
+                            error.code === 'ENOTFOUND' ||
                             error.code === 'P1001' ||
-                            error.code === 'P1017'; // Server closed the connection
+                            error.code === 'P1017' ||
+                            error.code === 'P2024'; // Connection timeout
 
                         if (isTransient && retries > 1) {
                             retries--;
