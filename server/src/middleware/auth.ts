@@ -45,13 +45,27 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
         req.userId = user.id;
         next();
     } catch (error: any) {
-        console.error('Authentication Error:', error);
+        // Detailed error logging for stability monitoring
+        console.error(`[AUTH FAILURE] ${new Date().toISOString()}:`, {
+            name: error.name,
+            message: error.message,
+            code: error.code,
+            stack: error.stack?.split('\n')[1] // Just the first line of trace
+        });
         
         if (error.name === 'JsonWebTokenError') {
             return res.status(403).json({ error: 'Invalid token.' });
         }
         if (error.name === 'TokenExpiredError') {
             return res.status(401).json({ error: 'Token expired.' });
+        }
+
+        // Handle Database connection issues specifically
+        if (error.message?.includes('ECONNRESET') || error.code?.startsWith('P')) {
+            return res.status(503).json({ 
+                error: 'Service temporarily unavailable due to database connectivity. Please try again in a moment.',
+                details: 'DB_CONNECTION_FAILURE'
+            });
         }
         
         res.status(500).json({ 

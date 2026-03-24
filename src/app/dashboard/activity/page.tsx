@@ -17,7 +17,8 @@ import {
     Image as ImageIcon,
     ChevronRight,
     ArrowUpRight,
-    Loader2
+    Loader2,
+    BookOpen
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

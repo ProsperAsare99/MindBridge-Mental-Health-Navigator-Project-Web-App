@@ -12,8 +12,8 @@ const createPrismaClient = () => {
             .replace(/connection_limit=\d+/, 'connection_limit=10')
             .replace(/sslmode=[^&]+/, 'sslmode=verify-full'),
         max: 10,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 30000,
+        idleTimeoutMillis: 10000, // Reduced from 30s to 10s to avoid stale connections
+        connectionTimeoutMillis: 15000,
         keepAlive: true
     });
 
@@ -23,12 +23,40 @@ const createPrismaClient = () => {
     
     const adapter = new PrismaPg(pool);
     
+    // Base client
     const client = new PrismaClient({ 
         adapter,
         log: ['error', 'warn']
     });
 
-    return client;
+    // Stability Extension: Automatic Retries for transient connection errors
+    return client.$extends({
+        query: {
+            $allOperations: async ({ model, operation, args, query }) => {
+                let retries = 3;
+                while (retries > 0) {
+                    try {
+                        return await query(args);
+                    } catch (error: any) {
+                        const isTransient = 
+                            error.message?.includes('ECONNRESET') || 
+                            error.message?.includes('ETIMEDOUT') ||
+                            error.code === 'P1001' ||
+                            error.code === 'P1017'; // Server closed the connection
+
+                        if (isTransient && retries > 1) {
+                            retries--;
+                            const delay = (3 - retries) * 1000;
+                            console.warn(`[PRISMA RETRY] ${operation} on ${model} failed (Transient: ${error.message}). Retrying in ${delay}ms... (${retries} retries left)`);
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            continue;
+                        }
+                        throw error;
+                    }
+                }
+            },
+        },
+    }) as unknown as PrismaClient;
 };
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };

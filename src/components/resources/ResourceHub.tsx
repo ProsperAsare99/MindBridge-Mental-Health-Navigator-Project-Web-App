@@ -76,6 +76,12 @@ export function ResourceHub({
         setResourceStatus(`Accessing "${title}"...`);
         const searchUrl = url || `https://www.google.com/search?q=${encodeURIComponent(`${title} ${author} book pdf free`)}`;
 
+        // Log the activity to the unified history
+        api.post('/analytics/log-activity', {
+            service: 'CHAT', // Using CHAT as base since RESOURCE enum isn't available
+            model: `RESOURCE: ${title}`
+        }).catch(err => console.error("Logging error:", err));
+
         setTimeout(() => {
             setResourceStatus(`"${title}" is ready! Opening in a new tab...`);
             window.open(searchUrl, '_blank');
