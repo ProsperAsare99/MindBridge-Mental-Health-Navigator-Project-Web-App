@@ -3,8 +3,10 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-outfit);
-  --font-mono: var(--font-outfit);
+  --font-sans: var(--font-outfit, "Outfit", system-ui, sans-serif);
+  --font-mono: var(--font-outfit, "Outfit", monospace);
+
+  --font-outfit: "Outfit", system-ui, sans-serif;
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);

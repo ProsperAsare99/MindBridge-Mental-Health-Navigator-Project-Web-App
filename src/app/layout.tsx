@@ -6,11 +6,13 @@ import { AuthProvider } from "@/components/providers/SessionProvider";
 import { SearchProvider } from "@/components/providers/SearchProvider";
 import { CommandMenu } from "@/components/search/command-menu";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
+// const outfit = Outfit({
+//   variable: "--font-outfit",
+//   subsets: ["latin"],
+//   display: "swap",
+// });
+
+const outfit = { variable: "font-outfit" }; 
 
 export const metadata: Metadata = {
   title: "MindBridge - Mental Health Navigator",

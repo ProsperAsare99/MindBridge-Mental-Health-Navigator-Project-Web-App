@@ -21,7 +21,6 @@ import {
   Heart,
   ChevronDown,
   ChevronUp,
-  Lightbulb,
   Play,
   ArrowUpRight,
   Download,
