@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middleware/auth';
-import { calculateOrder } from '../utils/order'; // Wait, I don't have this, I'll use standard logic
 import { calculateStreak, ACHIEVEMENTS } from '../utils/gamification';
 
 export const getGamificationStats = async (req: AuthRequest, res: Response) => {
