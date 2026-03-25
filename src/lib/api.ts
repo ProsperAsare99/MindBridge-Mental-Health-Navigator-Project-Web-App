@@ -18,8 +18,8 @@ class ApiClient {
         return null;
     }
 
-    async get(endpoint: string) {
-        const response = await axiosInstance.get(endpoint);
+    async get(endpoint: string, config?: any) {
+        const response = await axiosInstance.get(endpoint, config);
         return response.data;
     }
 

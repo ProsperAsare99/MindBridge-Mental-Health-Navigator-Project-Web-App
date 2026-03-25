@@ -1,31 +1,30 @@
 import { Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
-import { calculateStreak, ACHIEVEMENTS } from '../utils/gamification';
+import { calculateStreak } from '../utils/gamification';
+import { GamificationService } from '../services/gamificationService';
 
 export const getGamificationStats = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.userId) return res.status(401).json({ error: 'Not authenticated' });
         const userId = req.userId;
 
-        // 1. Get all mood entries for streak calculation
-        const moods = await prisma.moodEntry.findMany({
-            where: { userId },
-            orderBy: { createdAt: 'desc' }
+        // 1. Get user data with XP and level
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            include: { 
+                moodEntries: { orderBy: { createdAt: 'desc' }, take: 100 },
+                achievements: true,
+                moodGarden: true
+            }
         });
 
-        const currentStreak = calculateStreak(moods);
+        if (!user) return res.status(404).json({ error: 'User not found' });
 
-        // 2. Get achievements
-        const achievements = await prisma.achievement.findMany({
-            where: { userId }
-        });
+        const currentStreak = calculateStreak(user.moodEntries);
 
-        // 3. Get or Create Mood Garden
-        let garden = await prisma.moodGarden.findUnique({
-            where: { userId }
-        });
-
+        // 2. Garden Evolution (Rule-based)
+        let garden = user.moodGarden;
         if (!garden) {
             garden = await prisma.moodGarden.create({
                 data: {
@@ -37,37 +36,8 @@ export const getGamificationStats = async (req: AuthRequest, res: Response) => {
             });
         }
 
-        // 4. Achievement Logic (Auto-unlock)
-        const unlockedTypes = achievements.map(a => a.type);
-        const newAchievements = [];
-
-        for (const ach of ACHIEVEMENTS) {
-            if (!unlockedTypes.includes(ach.type)) {
-                let unlocked = false;
-                if (ach.type.startsWith('milestone_') && currentStreak >= ach.threshold) {
-                    unlocked = true;
-                } else if (ach.type === 'self_awareness_champion' && moods.length >= ach.threshold) {
-                    unlocked = true;
-                }
-
-                if (unlocked) {
-                    const newAch = await prisma.achievement.create({
-                        data: {
-                            userId,
-                            type: ach.type,
-                            title: ach.title,
-                            description: ach.description,
-                            icon: ach.icon || 'Star'
-                        }
-                    });
-                    newAchievements.push(newAch);
-                }
-            }
-        }
-
-        // 5. Garden Evolution (Rule-based)
-        const avgMood = moods.length > 0 
-            ? moods.slice(0, 5).reduce((acc, curr) => acc + curr.mood, 0) / Math.min(moods.length, 5) 
+        const avgMood = user.moodEntries.length > 0 
+            ? user.moodEntries.slice(0, 5).reduce((acc, curr) => acc + curr.mood, 0) / Math.min(user.moodEntries.length, 5) 
             : 3;
         
         const newGrowthLevel = Math.min(5, Math.ceil(currentStreak / 7) + (avgMood >= 4 ? 1 : 0));
@@ -81,9 +51,12 @@ export const getGamificationStats = async (req: AuthRequest, res: Response) => {
 
         res.json({
             streak: currentStreak,
-            achievements: [...achievements, ...newAchievements],
+            longestStreak: user.longestStreak,
+            wellnessLevel: user.wellnessLevel,
+            wellnessXP: user.wellnessXP,
+            achievements: user.achievements,
             garden,
-            totalCheckIns: moods.length
+            totalCheckIns: user.moodEntries.length
         });
 
     } catch (error) {
@@ -114,7 +87,7 @@ export const joinChallenge = async (req: AuthRequest, res: Response) => {
         const participation = await prisma.challengeParticipation.create({
             data: {
                 userId: req.userId!,
-                challengeId,
+                challengeId: challengeId as string,
                 startDate: new Date(),
                 progress: 0
             }

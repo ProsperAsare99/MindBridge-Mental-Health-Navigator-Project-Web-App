@@ -7,11 +7,12 @@ import { Flame, CheckCircle2, Circle } from 'lucide-react';
 
 interface StreakCardProps {
     streak: number;
+    longestStreak?: number;
     totalCheckIns: number;
     className?: string;
 }
 
-export const StreakCard = ({ streak, totalCheckIns, className }: StreakCardProps) => {
+export const StreakCard = ({ streak, longestStreak, totalCheckIns, className }: StreakCardProps) => {
     // Generate last 7 days visual
     const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     const today = new Date().getDay(); // 0-6 (Sun-Sat)
@@ -39,9 +40,12 @@ export const StreakCard = ({ streak, totalCheckIns, className }: StreakCardProps
                     </div>
                 </div>
 
-                <div className="text-right">
+                <div className="text-right space-y-1">
                     <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">{totalCheckIns} Total Logs</p>
-                    <div className="h-1.5 w-24 bg-muted rounded-full mt-2 overflow-hidden">
+                    {longestStreak !== undefined && (
+                        <p className="text-[8px] font-black text-primary/60 uppercase tracking-tighter">Best: {longestStreak} Days</p>
+                    )}
+                    <div className="h-1.5 w-24 bg-muted rounded-full mt-2 overflow-hidden ml-auto">
                         <motion.div 
                             initial={{ width: 0 }}
                             animate={{ width: `${Math.min(100, (streak / 30) * 100)}%` }}

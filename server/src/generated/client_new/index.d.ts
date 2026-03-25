@@ -3394,6 +3394,9 @@ export namespace Prisma {
     baselineMood: number | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     onboardingStep: number | null
   }
 
@@ -3402,6 +3405,9 @@ export namespace Prisma {
     baselineMood: number | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     onboardingStep: number | null
   }
 
@@ -3431,6 +3437,9 @@ export namespace Prisma {
     joinDate: Date | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     lastActive: Date | null
     onboardingStep: number | null
     onboardingCompleted: boolean | null
@@ -3464,6 +3473,9 @@ export namespace Prisma {
     joinDate: Date | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     lastActive: Date | null
     onboardingStep: number | null
     onboardingCompleted: boolean | null
@@ -3504,6 +3516,9 @@ export namespace Prisma {
     joinDate: number
     moodCheckInsCount: number
     conversationsCount: number
+    wellnessXP: number
+    wellnessLevel: number
+    longestStreak: number
     lastActive: number
     onboardingStep: number
     onboardingCompleted: number
@@ -3518,6 +3533,9 @@ export namespace Prisma {
     baselineMood?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     onboardingStep?: true
   }
 
@@ -3526,6 +3544,9 @@ export namespace Prisma {
     baselineMood?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     onboardingStep?: true
   }
 
@@ -3555,6 +3576,9 @@ export namespace Prisma {
     joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -3588,6 +3612,9 @@ export namespace Prisma {
     joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -3628,6 +3655,9 @@ export namespace Prisma {
     joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -3755,6 +3785,9 @@ export namespace Prisma {
     joinDate: Date
     moodCheckInsCount: number
     conversationsCount: number
+    wellnessXP: number
+    wellnessLevel: number
+    longestStreak: number
     lastActive: Date | null
     onboardingStep: number
     onboardingCompleted: boolean
@@ -3814,6 +3847,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3874,6 +3910,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3914,6 +3953,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3954,6 +3996,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3961,7 +4006,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "verificationToken" | "image" | "displayName" | "university" | "academicLevel" | "program" | "phoneNumber" | "studentId" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baselineMood" | "baseline" | "joinDate" | "moodCheckInsCount" | "conversationsCount" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "verificationToken" | "image" | "displayName" | "university" | "academicLevel" | "program" | "phoneNumber" | "studentId" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baselineMood" | "baseline" | "joinDate" | "moodCheckInsCount" | "conversationsCount" | "wellnessXP" | "wellnessLevel" | "longestStreak" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversations?: boolean | User$conversationsArgs<ExtArgs>
     moodEntries?: boolean | User$moodEntriesArgs<ExtArgs>
@@ -4043,6 +4088,9 @@ export namespace Prisma {
       joinDate: Date
       moodCheckInsCount: number
       conversationsCount: number
+      wellnessXP: number
+      wellnessLevel: number
+      longestStreak: number
       lastActive: Date | null
       onboardingStep: number
       onboardingCompleted: boolean
@@ -4522,6 +4570,9 @@ export namespace Prisma {
     readonly joinDate: FieldRef<"User", 'DateTime'>
     readonly moodCheckInsCount: FieldRef<"User", 'Int'>
     readonly conversationsCount: FieldRef<"User", 'Int'>
+    readonly wellnessXP: FieldRef<"User", 'Int'>
+    readonly wellnessLevel: FieldRef<"User", 'Int'>
+    readonly longestStreak: FieldRef<"User", 'Int'>
     readonly lastActive: FieldRef<"User", 'DateTime'>
     readonly onboardingStep: FieldRef<"User", 'Int'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
@@ -28778,6 +28829,9 @@ export namespace Prisma {
     joinDate: 'joinDate',
     moodCheckInsCount: 'moodCheckInsCount',
     conversationsCount: 'conversationsCount',
+    wellnessXP: 'wellnessXP',
+    wellnessLevel: 'wellnessLevel',
+    longestStreak: 'longestStreak',
     lastActive: 'lastActive',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
@@ -29513,6 +29567,9 @@ export namespace Prisma {
     joinDate?: DateTimeFilter<"User"> | Date | string
     moodCheckInsCount?: IntFilter<"User"> | number
     conversationsCount?: IntFilter<"User"> | number
+    wellnessXP?: IntFilter<"User"> | number
+    wellnessLevel?: IntFilter<"User"> | number
+    longestStreak?: IntFilter<"User"> | number
     lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: IntFilter<"User"> | number
     onboardingCompleted?: BoolFilter<"User"> | boolean
@@ -29572,6 +29629,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -29634,6 +29694,9 @@ export namespace Prisma {
     joinDate?: DateTimeFilter<"User"> | Date | string
     moodCheckInsCount?: IntFilter<"User"> | number
     conversationsCount?: IntFilter<"User"> | number
+    wellnessXP?: IntFilter<"User"> | number
+    wellnessLevel?: IntFilter<"User"> | number
+    longestStreak?: IntFilter<"User"> | number
     lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: IntFilter<"User"> | number
     onboardingCompleted?: BoolFilter<"User"> | boolean
@@ -29693,6 +29756,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -29741,6 +29807,9 @@ export namespace Prisma {
     joinDate?: DateTimeWithAggregatesFilter<"User"> | Date | string
     moodCheckInsCount?: IntWithAggregatesFilter<"User"> | number
     conversationsCount?: IntWithAggregatesFilter<"User"> | number
+    wellnessXP?: IntWithAggregatesFilter<"User"> | number
+    wellnessLevel?: IntWithAggregatesFilter<"User"> | number
+    longestStreak?: IntWithAggregatesFilter<"User"> | number
     lastActive?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     onboardingStep?: IntWithAggregatesFilter<"User"> | number
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
@@ -31318,6 +31387,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -31377,6 +31449,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -31436,6 +31511,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31495,6 +31573,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31554,6 +31635,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -31594,6 +31678,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31634,6 +31721,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33659,6 +33749,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -33671,6 +33764,9 @@ export namespace Prisma {
     baselineMood?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     onboardingStep?: SortOrder
   }
 
@@ -33700,6 +33796,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -33733,6 +33832,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -33745,6 +33847,9 @@ export namespace Prisma {
     baselineMood?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     onboardingStep?: SortOrder
   }
 
@@ -38349,6 +38454,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -38407,6 +38515,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -38507,6 +38618,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -38565,6 +38679,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -38719,6 +38836,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -38777,6 +38897,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -38851,6 +38974,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -38909,6 +39035,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -38967,6 +39096,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39025,6 +39157,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39099,6 +39234,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39157,6 +39295,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39215,6 +39356,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39273,6 +39417,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39347,6 +39494,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39405,6 +39555,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39463,6 +39616,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39521,6 +39677,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39595,6 +39754,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39653,6 +39815,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39711,6 +39876,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39769,6 +39937,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -39843,6 +40014,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39901,6 +40075,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39959,6 +40136,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40017,6 +40197,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40091,6 +40274,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40149,6 +40335,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40207,6 +40396,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40265,6 +40457,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40339,6 +40534,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40397,6 +40595,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40455,6 +40656,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40513,6 +40717,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40587,6 +40794,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40645,6 +40855,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40703,6 +40916,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40761,6 +40977,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -40835,6 +41054,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40893,6 +41115,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40995,6 +41220,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -41053,6 +41281,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -41152,6 +41383,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41210,6 +41444,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41299,6 +41536,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -41357,6 +41597,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -41431,6 +41674,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41489,6 +41735,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41635,6 +41884,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -41693,6 +41945,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -41792,6 +42047,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41850,6 +42108,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41964,6 +42225,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42022,6 +42286,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42153,6 +42420,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42211,6 +42481,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42285,6 +42558,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42343,6 +42619,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42417,6 +42696,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42475,6 +42757,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42560,6 +42845,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42618,6 +42906,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42681,6 +42972,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42739,6 +43033,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -42846,6 +43143,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42904,6 +43204,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42973,6 +43276,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43031,6 +43337,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43089,6 +43398,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -43147,6 +43459,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -43210,6 +43525,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -43268,6 +43586,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -43342,6 +43663,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43400,6 +43724,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43469,6 +43796,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43527,6 +43857,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean

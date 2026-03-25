@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import { useActivityDetection } from "@/hooks/use-activity-detection";
+
 interface DailyPerspectiveProps {
     moodStats: { average: number; count: number; streak: number };
     className?: string;
@@ -26,14 +28,19 @@ const TIPS = [
 
 export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps) {
     const [randomTip, setRandomTip] = useState(TIPS[0]);
+    const { isInactive, suggestion, actionLabel, actionType, magnitude, usageFrequency } = useActivityDetection();
 
     useEffect(() => {
         const selectedTip = TIPS[Math.floor(Math.random() * TIPS.length)];
         setRandomTip(selectedTip);
     }, []);
 
+    const displayTip = suggestion || randomTip;
+
     // Determine a "status" message based on stats
     const getStatusInfo = () => {
+        if (isInactive) return { label: "Low Activity Detected", color: "text-amber-500", bg: "bg-amber-500/10" };
+        if (usageFrequency === 'high') return { label: "High Engagement", color: "text-primary", bg: "bg-primary/10" };
         if (moodStats.streak > 5) return { label: "Exceptional Momentum", color: "text-amber-500", bg: "bg-amber-500/10" };
         if (moodStats.count > 0) return { label: "Steady Progress", color: "text-primary", bg: "bg-primary/10" };
         return { label: "Fresh Start", color: "text-emerald-500", bg: "bg-emerald-500/10" };
@@ -61,17 +68,48 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
                         <div className={cn("px-4 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-current/20", status.color, status.bg)}>
                             {status.label}
                         </div>
-                        <div className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-pulse" />
+                        
+                        {/* Real-time Activity Pulse */}
+                        <div className="flex items-center gap-1 bg-muted/30 px-2 py-1 rounded-lg border border-border/50">
+                            <motion.div 
+                                animate={{ 
+                                    scale: 1 + (magnitude * 0.5),
+                                    opacity: 0.3 + (magnitude * 0.7)
+                                }}
+                                className="h-1.5 w-1.5 rounded-full bg-primary" 
+                            />
+                            <span className="text-[8px] font-black uppercase text-muted-foreground tracking-tighter">Live Pulse</span>
+                        </div>
+
                         <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Live Performance</span>
                     </div>
                     
-                    <div className="space-y-2">
-                        <h2 className="text-3xl font-black text-foreground leading-tight">
-                            Today&apos;s Perspective
-                        </h2>
-                        <p className="text-sm md:text-base font-bold text-muted-foreground leading-relaxed">
-                            {randomTip}
-                        </p>
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <h2 className="text-3xl font-black text-foreground leading-tight">
+                                Today&apos;s Perspective
+                            </h2>
+                            <p className={cn(
+                                "text-sm md:text-base font-bold leading-relaxed transition-all duration-300",
+                                suggestion ? "text-primary animate-in fade-in slide-in-from-left-4" : "text-muted-foreground"
+                            )}>
+                                {displayTip}
+                            </p>
+                        </div>
+
+                        {suggestion && actionLabel && (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                            >
+                                <Link 
+                                    href={actionType === 'social' ? '/dashboard/community' : '/dashboard/resources'}
+                                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg shadow-primary/10 active:scale-95"
+                                >
+                                    {actionLabel} <ChevronRight size={14} />
+                                </Link>
+                            </motion.div>
+                        )}
                     </div>
 
                     <div className="flex flex-wrap gap-4 pt-2">
@@ -81,7 +119,7 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
                         </div>
                         <div className="flex items-center gap-2 bg-secondary/5 px-3 py-2 rounded-xl border border-secondary/10 text-secondary">
                             <Target className="h-4 w-4" />
-                            <span className="text-xs font-black uppercase tracking-tight">Next Goal: Log Mood</span>
+                            <span className="text-xs font-black uppercase tracking-tight">Usage: {usageFrequency}</span>
                         </div>
                     </div>
                 </div>
@@ -110,12 +148,12 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
                             </p>
                             <div className="flex items-center gap-2">
                                 <p className="text-sm font-black text-foreground/90 tracking-tight">
-                                    Stably Improving
+                                    {isInactive ? "Time for a Break" : "Stably Improving"}
                                 </p>
                                 <div className="flex gap-0.5 opacity-60">
-                                    <div className="h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.3s]" />
-                                    <div className="h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.15s]" />
-                                    <div className="h-1 w-1 rounded-full bg-emerald-500 animate-bounce" />
+                                    <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.3s]", isInactive && "bg-amber-500")} />
+                                    <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.15s]", isInactive && "bg-amber-500")} />
+                                    <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce", isInactive && "bg-amber-500")} />
                                 </div>
                             </div>
                         </div>

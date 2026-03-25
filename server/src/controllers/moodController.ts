@@ -3,6 +3,7 @@ import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { ai } from '../lib/genkit-config';
 import { MessageRole, University } from '../generated/client_new';
+import { GamificationService } from '../services/gamificationService';
 
 export const createMood = async (req: AuthRequest, res: Response) => {
     const { 
@@ -82,7 +83,11 @@ export const createMood = async (req: AuthRequest, res: Response) => {
             }
         });
 
-        res.status(201).json(mood);
+        // Gamification: Reward XP and Check for Achievements
+        await GamificationService.rewardXP(userId, 'MOOD_LOG');
+        const newAchievements = await GamificationService.checkAchievements(userId);
+
+        res.status(201).json({ ...mood, newAchievements });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error logging mood' });

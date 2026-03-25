@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -9,14 +10,30 @@ const axiosInstance = axios.create({
 
 // Request interceptor for adding JWT token
 axiosInstance.interceptors.request.use(
-    (config) => {
+    async (config) => {
         if (typeof window !== 'undefined') {
+            // Priority 1: Explicitly provided Authorization header
+            if (config.headers.Authorization) {
+                return config;
+            }
+
+            // Priority 2: Get token directly from the NextAuth session (most reliable)
+            try {
+                const session = await getSession();
+                const sessionToken = (session?.user as any)?.accessToken;
+                
+                if (sessionToken) {
+                    config.headers.Authorization = `Bearer ${sessionToken}`;
+                    return config;
+                }
+            } catch (sessionError) {
+                console.warn('[AXIOS DEBUG] Failed to get session:', sessionError);
+            }
+
+            // Priority 3: Fallback to localStorage (legacy/guest support)
             const token = localStorage.getItem('token');
             if (token) {
-                console.log('[AXIOS DEBUG] Sending token:', token.substring(0, 10) + '...');
                 config.headers.Authorization = `Bearer ${token}`;
-            } else {
-                console.warn('[AXIOS DEBUG] No token found in localStorage');
             }
         }
         return config;
