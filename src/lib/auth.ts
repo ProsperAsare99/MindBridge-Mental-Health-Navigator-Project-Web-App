@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials) {
                 try {
                     // Check if we have an explicit access token (e.g. from anonymous login)
-                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://10.12.56.68:5000/api';
+                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
                     
                     if (credentials?.accessToken) {
                         const response = await fetch(`${apiUrl}/auth/verify-token`, {

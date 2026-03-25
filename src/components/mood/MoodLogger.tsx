@@ -13,8 +13,6 @@ import { EmotionWheel } from "./EmotionWheel";
 import { SymptomTracker } from "./SymptomTracker";
 import { AdvancedMoodTracker } from "./AdvancedMoodTracker";
 import { api } from "@/lib/api";
-import { NativeService } from "@/lib/native-service";
-import { ImpactStyle } from "@capacitor/haptics";
 
 const MOODS = [
     { value: 1, icon: CloudRain, label: "Awful", color: "text-slate-500", bgColor: "bg-slate-500/10" },
@@ -117,18 +115,6 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
 
     // Camera Logic
     const openCamera = async () => {
-        if (NativeService.isNative()) {
-            const photoPath = await NativeService.takePhoto();
-            if (photoPath) {
-                const response = await fetch(photoPath);
-                const blob = await response.blob();
-                const photoFile = new File([blob], `mood-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
-                setPhoto(photoFile);
-                NativeService.hapticImpact(ImpactStyle.Medium);
-            }
-            return;
-        }
-
         setIsCameraOpen(true);
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -196,8 +182,6 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
             if (res.crisisFlag) {
                 alert("We noticed some concerning patterns. Please remember that crisis support is available 24/7 in the side menu.");
             }
-            
-            NativeService.hapticImpact(ImpactStyle.Heavy);
             setShowSuccess(true);
             setTimeout(() => {
                 onComplete();
@@ -211,11 +195,9 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
     };
 
     const nextStep = () => {
-        NativeService.hapticImpact(ImpactStyle.Light);
         setStep(prev => prev + 1);
     };
     const prevStep = () => {
-        NativeService.hapticImpact(ImpactStyle.Light);
         setStep(prev => prev - 1);
     };
 

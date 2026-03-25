@@ -34,10 +34,7 @@ export default function Home() {
   const { toggle } = useSearch();
 
   useEffect(() => {
-    // Redirect mobile app users straight to login/onboarding
-    if ((window as any).Capacitor) {
-      router.push("/login");
-    }
+    // Standard initialization
   }, [router]);
 
   // Performance: Memoize static data
