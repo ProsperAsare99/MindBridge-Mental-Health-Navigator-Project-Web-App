@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'MindBridge',
   webDir: 'out',
   server: {
-    // url: 'http://192.168.0.197:3000', 
+    url: 'http://10.12.56.68:3000', 
     cleartext: true
   }
 };
