@@ -8,6 +8,8 @@ import { GamificationService } from '../services/gamificationService';
 import fs from 'fs';
 import path from 'path';
 
+import { isHighStressPeriod, getTimeContext } from '../utils/time';
+
 export const createMood = async (req: AuthRequest, res: Response) => {
     const { 
         value, 
@@ -46,6 +48,7 @@ export const createMood = async (req: AuthRequest, res: Response) => {
                 const result = await ai.generate({
                     prompt: `
                     Current System Time: ${timeContext}
+                    High Stress (Exam) Period: ${isHighStressPeriod()}
                     
                     Analyze the following journal entry for sentiment and potential crisis. 
                     Provide the result as a JSON object with:
@@ -193,6 +196,9 @@ export const getProactiveNudges = async (req: AuthRequest, res: Response) => {
         });
 
         const nudges = [];
+        const isExamSeason = isHighStressPeriod();
+        const now = new Date();
+        const currentHour = now.getHours();
 
         if (moods.length >= 5) {
             // Pattern 1: Day of week dips
@@ -219,7 +225,7 @@ export const getProactiveNudges = async (req: AuthRequest, res: Response) => {
                 }
             }
 
-            // Pattern 2: Time of day dips
+            // Pattern 2: Time of day dips & Contextual Nudges
             const hourScores: Record<number, { sum: number, count: number }> = {};
             moods.forEach(m => {
                 const hour = new Date(m.createdAt).getHours();
@@ -229,18 +235,39 @@ export const getProactiveNudges = async (req: AuthRequest, res: Response) => {
                 hourScores[bucket].count++;
             });
 
-            const bucketNames = ["late nights", "mornings", "afternoons", "evenings"];
+            // Priority Nudge: Late Night Awareness (23:00 - 04:00)
+            if (currentHour >= 23 || currentHour < 4) {
+                nudges.push({
+                    type: 'time_context',
+                    message: "It’s late — consider getting some rest.",
+                    suggestion: "Would you like a quick relaxation exercise?",
+                    icon: 'Moon',
+                    actionType: 'EXERCISE'
+                });
+            }
+
+            // Priority Nudge: Exam Period Stress
+            if (isExamSeason) {
+                nudges.push({
+                    type: 'stress_period',
+                    message: "It's currently exam season.",
+                    suggestion: "Feeling stressed? Try this quick breathing exercise.",
+                    icon: 'Zap',
+                    actionType: 'EXERCISE'
+                });
+            }
+
             for (let i = 0; i < 4; i++) {
                 if (hourScores[i] && hourScores[i].count >= 3) {
                     const avg = hourScores[i].sum / hourScores[i].count;
-                    if (avg < 2.5) {
+                    if (avg < 2.5 && !nudges.some(n => n.type === 'time_context')) {
                         nudges.push({
                             type: 'time_pattern',
                             message: `Mornings seem to be a bit challenging for you lately.`,
                             suggestion: 'Maybe a 5-minute sunlight ritual or a favorite song could help?',
                             icon: 'Sun'
                         });
-                        break; // Only one time nudge for now
+                        break; 
                     }
                 }
             }

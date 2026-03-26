@@ -2,8 +2,8 @@ import { Response } from 'express';
 import type { Concern } from '@prisma/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
-// import { Concern } from '@prisma/client';
 import { ai } from '../lib/genkit-config';
+import { isHighStressPeriod, getTimeContext } from '../utils/time';
 
 const detectCrisis = async (content: string) => {
     const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead', 'dying', 'goodbye world'];
@@ -11,20 +11,13 @@ const detectCrisis = async (content: string) => {
     
     if (hasKeyword) return true;
 
-    const now = new Date();
-    const timeContext = now.toLocaleString('en-US', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric', 
-        hour: '2-digit', 
-        minute: '2-digit' 
-    });
+    const timeContext = getTimeContext();
 
     try {
         const result = await ai.generate({
             prompt: `
             Current System Time: ${timeContext}
+            High Stress (Exam) Period: ${isHighStressPeriod()}
             
             Analyze the following student community post for immediate mental health crisis, suicidal ideation, or severe self-harm intent.
             The platform is MindBridge, a mental health navigator for university students.
