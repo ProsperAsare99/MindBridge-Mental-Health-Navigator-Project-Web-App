@@ -7,6 +7,8 @@ import {
     getStories, 
     createStory, 
     sendEncouragement, 
+    getMyEncouragements,
+    getMentors,
     requestMentor 
 } from '../controllers/socialController';
 import { authenticateToken } from '../middlewares/auth';
@@ -25,6 +27,8 @@ router.post('/stories', authenticateToken, createStory);
 
 // Encouragement & Mentorship
 router.post('/encourage', authenticateToken, sendEncouragement);
+router.get('/encourage/my', authenticateToken, getMyEncouragements);
+router.get('/mentors', authenticateToken, getMentors);
 router.post('/mentor/request', authenticateToken, requestMentor);
 
 export default router;

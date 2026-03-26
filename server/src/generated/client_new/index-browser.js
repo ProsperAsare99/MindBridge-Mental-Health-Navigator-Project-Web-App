@@ -360,6 +360,7 @@ exports.Prisma.CirclePostScalarFieldEnum = {
   content: 'content',
   isAnonymous: 'isAnonymous',
   isApproved: 'isApproved',
+  crisisFlag: 'crisisFlag',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -371,6 +372,7 @@ exports.Prisma.SupportStoryScalarFieldEnum = {
   content: 'content',
   category: 'category',
   isApproved: 'isApproved',
+  crisisFlag: 'crisisFlag',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

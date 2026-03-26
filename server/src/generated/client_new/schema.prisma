@@ -66,6 +66,9 @@ model User {
   // Usage Metrics
   moodCheckInsCount  Int       @default(0)
   conversationsCount Int       @default(0)
+  wellnessXP         Int       @default(0)
+  wellnessLevel      Int       @default(1)
+  longestStreak      Int       @default(0)
   lastActive         DateTime?
 
   // Onboarding Status (Retained)
@@ -437,6 +440,7 @@ model CirclePost {
   content     String  @db.Text
   isAnonymous Boolean @default(true)
   isApproved  Boolean @default(false)
+  crisisFlag  Boolean @default(false)
 
   encouragements SupportEncouragement[]
 
@@ -455,6 +459,7 @@ model SupportStory {
   content    String  @db.Text
   category   Concern
   isApproved Boolean @default(false)
+  crisisFlag Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -644,5 +649,4 @@ enum Service {
   CHAT
   MOOD
   ASSESSMENT
-  RESOURCE
 }

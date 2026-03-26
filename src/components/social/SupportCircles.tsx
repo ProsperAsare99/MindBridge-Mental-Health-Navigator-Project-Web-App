@@ -102,7 +102,24 @@ export function SupportCircles() {
                             >
                                 Enter Circle
                             </Button>
-                            <Button variant="outline" className="h-12 w-12 rounded-2xl border-border/40 hover:bg-primary/5 hover:border-primary/30 p-0">
+                            <Button 
+                                variant="outline" 
+                                className="h-12 w-12 rounded-2xl border-border/40 hover:bg-primary/5 hover:border-primary/30 p-0"
+                                onClick={async () => {
+                                    try {
+                                        await api.post(`/social/circles/${circle.id}/join`, {});
+                                        alert(`You have joined ${circle.name}!`);
+                                        // Update local state to reflect new member count
+                                        setCircles(prev => prev.map(c => 
+                                            c.id === circle.id 
+                                                ? { ...c, _count: { ...c._count, members: c._count.members + 1 } }
+                                                : c
+                                        ));
+                                    } catch (err) {
+                                        console.error('Failed to join circle:', err);
+                                    }
+                                }}
+                            >
                                 <PlusCircle size={20} className="text-muted-foreground" />
                             </Button>
                         </div>

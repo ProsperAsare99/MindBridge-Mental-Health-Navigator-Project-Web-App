@@ -97,3 +97,41 @@ export const joinChallenge = async (req: AuthRequest, res: Response) => {
         res.status(500).json({ error: 'Failed to join challenge.' });
     }
 };
+
+export const initializeChallenges = async () => {
+    try {
+        const count = await prisma.challenge.count();
+        if (count === 0) {
+            const initialChallenges = [
+                {
+                    title: 'Gratitude Journey',
+                    description: 'Note 3 things you are thankful for every day to boost your mood and perspective.',
+                    durationDays: 30,
+                    type: 'GRATITUDE',
+                    isCommunity: true
+                },
+                {
+                    title: 'Mindfulness Month',
+                    description: 'Complete a 5-minute breathing or meditation exercise daily to build focus and calm.',
+                    durationDays: 30,
+                    type: 'MINDFULNESS',
+                    isCommunity: false
+                },
+                {
+                    title: 'Active Resiliency',
+                    description: 'Take a 15-minute walk outside every day to connect with nature and clear your mind.',
+                    durationDays: 14,
+                    type: 'EXERCISE',
+                    isCommunity: true
+                }
+            ];
+
+            for (const challenge of initialChallenges) {
+                await prisma.challenge.create({ data: challenge });
+            }
+            console.log('[GAMIFICATION] Initial challenges seeded successfully.');
+        }
+    } catch (error: any) {
+        console.error('[GAMIFICATION] Challenge seeding failed:', error.message);
+    }
+};

@@ -24,14 +24,12 @@ export function MyNetwork() {
     useEffect(() => {
         const fetchNetwork = async () => {
             try {
-                // In a real app, these would be separate endpoints
-                // For now, we'll simulate fetching if endpoints aren't fully ready
-                const data = await api.get('/social/circles'); // Placeholder to check connection
-                setEncouragements([
-                    { id: '1', content: "You've got this! Remember how far you've come.", createdAt: new Date().toISOString(), from: 'Anonymous Peer' },
-                    { id: '2', content: "Sending strength for your upcoming exams. You are more than your grades.", createdAt: new Date().toISOString(), from: 'Anonymous Peer' }
+                const [encouragementData, mentorData] = await Promise.all([
+                    api.get('/social/encourage/my'),
+                    api.get('/social/mentors')
                 ]);
-                setMentors([]);
+                setEncouragements(encouragementData);
+                setMentors(mentorData);
             } catch (error) {
                 console.error('Failed to fetch network:', error);
             } finally {
@@ -125,8 +123,53 @@ export function MyNetwork() {
                     </div>
                 </div>
 
-                {/* Simulated Mentor Feed if any */}
-                {mentors.length === 0 && (
+                {/* Real Mentor Feed */}
+                {mentors.length > 0 ? (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                        {mentors.map((mentor, i) => (
+                            <motion.div 
+                                key={mentor.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                className="glass rounded-[2rem] p-8 border border-border/40 group hover:border-primary/40 hover:bg-white hover:shadow-2xl transition-all cursor-pointer"
+                                onClick={async () => {
+                                    try {
+                                        await api.post('/social/mentor/request', {
+                                            mentorId: mentor.id,
+                                            topic: 'ACADEMIC_STRESS' // Default topic or we could show a dialog
+                                        });
+                                        alert(`Request sent to ${mentor.displayName}!`);
+                                    } catch (err) {
+                                        console.error('Failed to request mentor:', err);
+                                    }
+                                }}
+                            >
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-black uppercase shadow-inner">
+                                        {mentor.displayName[0]}
+                                    </div>
+                                    <div className="space-y-0.5 text-left">
+                                        <div className="text-sm font-black text-foreground uppercase tracking-tight">{mentor.displayName}</div>
+                                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{mentor.program}</div>
+                                    </div>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="flex items-center gap-2">
+                                        <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600">Level {mentor.wellnessLevel} Guide</span>
+                                    </div>
+                                    <p className="text-[11px] font-medium text-muted-foreground leading-relaxed uppercase tracking-tight">
+                                        Expert at navigating {mentor.university} and managing student well-being.
+                                    </p>
+                                </div>
+                                <div className="pt-6 flex justify-end">
+                                    <ArrowRight size={20} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                ) : (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                         {[1, 2].map((_, i) => (
                             <div key={i} className="glass rounded-[2rem] p-8 border border-border/40 opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer">

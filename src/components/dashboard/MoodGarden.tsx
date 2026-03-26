@@ -3,26 +3,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Sprout, TreePine, Leaf, Flower2, Droplets } from 'lucide-react';
+import { Droplets } from 'lucide-react';
 
 interface MoodGardenProps {
     level: number; // 1-5
     health: number; // 0-100
+    plantType?: string; // 'oak', 'baobab', etc.
     className?: string;
 }
 
-export const MoodGarden = ({ level, health, className }: MoodGardenProps) => {
+export const MoodGarden = ({ level, health, plantType = 'oak', className }: MoodGardenProps) => {
     // Stage configurations
     const stages = [
-        { icon: Sprout, label: 'Sapling', color: 'text-emerald-400' },
-        { icon: Leaf, label: 'Sprouts', color: 'text-emerald-500' },
-        { icon: Flower2, label: 'Flowering', color: 'text-sky-400' },
-        { icon: TreePine, label: 'Young Oak', color: 'text-sky-500' },
-        { icon: TreePine, label: 'Ancient Oak', color: 'text-primary' }
+        { label: 'Seedling', color: 'text-emerald-400' },
+        { label: 'Sapling', color: 'text-emerald-500' },
+        { label: 'Growth', color: 'text-sky-400' },
+        { label: 'Mature', color: 'text-sky-500' },
+        { label: 'Ancient', color: 'text-primary' }
     ];
 
     const currentStage = stages[Math.min(level - 1, 4)];
-    const Icon = currentStage.icon;
+    const imagePath = `/images/garden/${plantType}/stage${Math.min(level, 5)}.png`;
 
     return (
         <div className={cn("relative group cursor-pointer", className)}>
@@ -35,21 +36,36 @@ export const MoodGarden = ({ level, health, className }: MoodGardenProps) => {
 
                 {/* The Plant */}
                 <motion.div
-                    key={level}
-                    initial={{ scale: 0, y: 20, rotate: -10 }}
-                    animate={{ scale: 1, y: 0, rotate: 0 }}
-                    transition={{ type: 'spring', damping: 15, stiffness: 100 }}
+                    key={`${plantType}-${level}`}
+                    initial={{ scale: 0.5, y: 20, opacity: 0 }}
+                    animate={{ scale: 1, y: 0, opacity: 1 }}
+                    transition={{ type: 'spring', damping: 20, stiffness: 100 }}
                     className="relative"
                 >
-                    <Icon className={cn("h-24 w-24 md:h-32 md:w-32 transition-all duration-700 filter drop-shadow-[0_0_15px_rgba(0,119,182,0.2)]", currentStage.color)} />
+                    <img 
+                        src={imagePath} 
+                        alt={currentStage.label}
+                        className={cn(
+                            "h-56 w-56 md:h-72 md:w-72 object-contain transition-all duration-1000",
+                            health < 40 && "grayscale-[40%] opacity-80",
+                            level === 5 && "drop-shadow-[0_0_30px_rgba(0,119,182,0.4)]"
+                        )}
+                    />
                     
-                    {/* Floating Orbs for Health */}
-                    {health > 70 && (
-                        <motion.div
-                            animate={{ y: [-10, -30, -10], opacity: [0.3, 0.7, 0.3] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -top-4 -right-2 h-4 w-4 bg-sky-300/30 rounded-full blur-md"
-                        />
+                    {/* Floating Vitality Orbs */}
+                    {health > 60 && (
+                        <>
+                            <motion.div
+                                animate={{ y: [-10, -40, -10], opacity: [0, 0.6, 0] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute top-1/4 -right-4 h-6 w-6 bg-sky-400/20 rounded-full blur-xl"
+                            />
+                            <motion.div
+                                animate={{ y: [0, -60, 0], opacity: [0, 0.4, 0] }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                className="absolute top-1/2 -left-8 h-8 w-8 bg-primary/20 rounded-full blur-xl"
+                            />
+                        </>
                     )}
                 </motion.div>
 

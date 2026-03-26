@@ -85,6 +85,7 @@ export const createMood = async (req: AuthRequest, res: Response) => {
 
         // Gamification: Reward XP and Check for Achievements
         await GamificationService.rewardXP(userId, 'MOOD_LOG');
+        await GamificationService.updateMoodGarden(userId);
         const newAchievements = await GamificationService.checkAchievements(userId);
 
         res.status(201).json({ ...mood, newAchievements });

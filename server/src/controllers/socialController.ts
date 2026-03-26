@@ -2,6 +2,24 @@ import { Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { Concern } from '../generated/client_new';
+import { ai } from '../lib/genkit-config';
+
+const detectCrisis = async (content: string) => {
+    const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead'];
+    const hasKeyword = crisisKeywords.some(kw => content.toLowerCase().includes(kw));
+    
+    if (hasKeyword) return true;
+
+    try {
+        const result = await ai.generate({
+            prompt: `Determine if the following text indicates an immediate crisis like self-harm, suicidal ideation, or severe clinical distress. Respond with ONLY 'true' or 'false'.
+            Text: "${content}"`
+        });
+        return result.text.trim().toLowerCase().includes('true');
+    } catch (e) {
+        return false;
+    }
+};
 
 // ============================================
 // SUPPORT CIRCLES
@@ -81,13 +99,16 @@ export const createPost = async (req: AuthRequest, res: Response) => {
     if (!userId) return res.status(401).json({ error: 'Unauthorized' });
 
     try {
+        const crisisFlag = await detectCrisis(content);
+        
         const post = await prisma.circlePost.create({
             data: {
                 circleId,
                 authorId: userId,
                 content,
                 isAnonymous: isAnonymous ?? true,
-                isApproved: true // Auto-approve for now (can be changed to false for full moderation)
+                isApproved: !crisisFlag, // Require moderation for crisis content
+                crisisFlag
             }
         });
         res.status(201).json(post);
@@ -124,13 +145,16 @@ export const createStory = async (req: AuthRequest, res: Response) => {
     if (!userId) return res.status(401).json({ error: 'Unauthorized' });
 
     try {
+        const crisisFlag = await detectCrisis(content);
+
         const story = await prisma.supportStory.create({
             data: {
                 authorId: userId,
                 title,
                 content,
                 category: category as Concern,
-                isApproved: true // Auto-approve for now
+                isApproved: !crisisFlag, // Hide and flag if crisis
+                crisisFlag
             }
         });
         res.status(201).json(story);
@@ -161,6 +185,58 @@ export const sendEncouragement = async (req: AuthRequest, res: Response) => {
         res.status(201).json(encouragement);
     } catch (error: any) {
         res.status(500).json({ error: 'Failed to send encouragement', details: error.message });
+    }
+};
+
+export const getMyEncouragements = async (req: AuthRequest, res: Response) => {
+    const userId = req.userId;
+    if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+        const encouragements = await prisma.supportEncouragement.findMany({
+            where: { receiverId: userId },
+            include: {
+                sender: { select: { displayName: true } }
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        
+        // Map to a simpler format for the UI
+        const sanitized = encouragements.map(e => ({
+            id: e.id,
+            content: e.content,
+            createdAt: e.createdAt,
+            from: 'Anonymous Peer' // Always anonymous for now for safety
+        }));
+
+        res.json(sanitized);
+    } catch (error: any) {
+        res.status(500).json({ error: 'Failed to fetch encouragements', details: error.message });
+    }
+};
+
+export const getMentors = async (req: AuthRequest, res: Response) => {
+    try {
+        // Simple logic: users with high wellnessLevel or those who have signed up as mentors
+        // For now, let's just return users who have been active recently and have a high level
+        const mentors = await prisma.user.findMany({
+            where: {
+                wellnessLevel: { gte: 3 },
+                onboardingCompleted: true,
+                // In a real app, we'd have a 'isMentor' flag
+            },
+            select: {
+                id: true,
+                displayName: true,
+                program: true,
+                university: true,
+                wellnessLevel: true
+            },
+            take: 10
+        });
+        res.json(mentors);
+    } catch (error: any) {
+        res.status(500).json({ error: 'Failed to fetch mentors', details: error.message });
     }
 };
 

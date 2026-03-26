@@ -79,4 +79,52 @@ export class GamificationService {
 
         return newAchievements;
     }
+
+    static async updateMoodGarden(userId: string) {
+        try {
+            const user = await prisma.user.findUnique({
+                where: { id: userId },
+                include: { 
+                    moodEntries: { orderBy: { createdAt: 'desc' }, take: 10 },
+                    moodGarden: true
+                }
+            });
+
+            if (!user) return;
+
+            let garden = user.moodGarden;
+            if (!garden) {
+                garden = await prisma.moodGarden.create({
+                    data: {
+                        userId,
+                        growthLevel: 1,
+                        plantType: 'oak',
+                        healthScore: 50.0
+                    }
+                });
+            }
+
+            const currentStreak = calculateStreak(user.moodEntries as any);
+            const avgMood = user.moodEntries.length > 0 
+                ? user.moodEntries.reduce((acc, curr) => acc + curr.mood, 0) / user.moodEntries.length 
+                : 3;
+            
+            // Growth Level: Based on streak
+            // L1: 0-7 days, L2: 8-14 days, L3: 15-21 days, L4: 22-28 days, L5: 29+ days
+            const newGrowthLevel = Math.min(5, Math.floor(currentStreak / 7) + 1);
+            
+            // Health Score: Based on recent mood average (1-5 scale to 0-100)
+            const newHealthScore = Math.min(100, Math.max(10, (avgMood / 5) * 100));
+
+            await prisma.moodGarden.update({
+                where: { userId },
+                data: { 
+                    growthLevel: newGrowthLevel,
+                    healthScore: newHealthScore
+                }
+            });
+        } catch (error) {
+            console.error('[GAMIFICATION] Garden update failed:', error);
+        }
+    }
 }

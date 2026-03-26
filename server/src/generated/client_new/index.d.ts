@@ -24398,6 +24398,7 @@ export namespace Prisma {
     content: string | null
     isAnonymous: boolean | null
     isApproved: boolean | null
+    crisisFlag: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -24409,6 +24410,7 @@ export namespace Prisma {
     content: string | null
     isAnonymous: boolean | null
     isApproved: boolean | null
+    crisisFlag: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -24420,6 +24422,7 @@ export namespace Prisma {
     content: number
     isAnonymous: number
     isApproved: number
+    crisisFlag: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -24433,6 +24436,7 @@ export namespace Prisma {
     content?: true
     isAnonymous?: true
     isApproved?: true
+    crisisFlag?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -24444,6 +24448,7 @@ export namespace Prisma {
     content?: true
     isAnonymous?: true
     isApproved?: true
+    crisisFlag?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -24455,6 +24460,7 @@ export namespace Prisma {
     content?: true
     isAnonymous?: true
     isApproved?: true
+    crisisFlag?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -24539,6 +24545,7 @@ export namespace Prisma {
     content: string
     isAnonymous: boolean
     isApproved: boolean
+    crisisFlag: boolean
     createdAt: Date
     updatedAt: Date
     _count: CirclePostCountAggregateOutputType | null
@@ -24567,6 +24574,7 @@ export namespace Prisma {
     content?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
@@ -24582,6 +24590,7 @@ export namespace Prisma {
     content?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
@@ -24595,6 +24604,7 @@ export namespace Prisma {
     content?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
@@ -24608,11 +24618,12 @@ export namespace Prisma {
     content?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CirclePostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "circleId" | "authorId" | "content" | "isAnonymous" | "isApproved" | "createdAt" | "updatedAt", ExtArgs["result"]["circlePost"]>
+  export type CirclePostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "circleId" | "authorId" | "content" | "isAnonymous" | "isApproved" | "crisisFlag" | "createdAt" | "updatedAt", ExtArgs["result"]["circlePost"]>
   export type CirclePostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -24642,6 +24653,7 @@ export namespace Prisma {
       content: string
       isAnonymous: boolean
       isApproved: boolean
+      crisisFlag: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["circlePost"]>
@@ -25076,6 +25088,7 @@ export namespace Prisma {
     readonly content: FieldRef<"CirclePost", 'String'>
     readonly isAnonymous: FieldRef<"CirclePost", 'Boolean'>
     readonly isApproved: FieldRef<"CirclePost", 'Boolean'>
+    readonly crisisFlag: FieldRef<"CirclePost", 'Boolean'>
     readonly createdAt: FieldRef<"CirclePost", 'DateTime'>
     readonly updatedAt: FieldRef<"CirclePost", 'DateTime'>
   }
@@ -25521,6 +25534,7 @@ export namespace Prisma {
     content: string | null
     category: $Enums.Concern | null
     isApproved: boolean | null
+    crisisFlag: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -25532,6 +25546,7 @@ export namespace Prisma {
     content: string | null
     category: $Enums.Concern | null
     isApproved: boolean | null
+    crisisFlag: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -25543,6 +25558,7 @@ export namespace Prisma {
     content: number
     category: number
     isApproved: number
+    crisisFlag: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -25556,6 +25572,7 @@ export namespace Prisma {
     content?: true
     category?: true
     isApproved?: true
+    crisisFlag?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -25567,6 +25584,7 @@ export namespace Prisma {
     content?: true
     category?: true
     isApproved?: true
+    crisisFlag?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -25578,6 +25596,7 @@ export namespace Prisma {
     content?: true
     category?: true
     isApproved?: true
+    crisisFlag?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -25662,6 +25681,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved: boolean
+    crisisFlag: boolean
     createdAt: Date
     updatedAt: Date
     _count: SupportStoryCountAggregateOutputType | null
@@ -25690,6 +25710,7 @@ export namespace Prisma {
     content?: boolean
     category?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -25702,6 +25723,7 @@ export namespace Prisma {
     content?: boolean
     category?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -25714,6 +25736,7 @@ export namespace Prisma {
     content?: boolean
     category?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -25726,11 +25749,12 @@ export namespace Prisma {
     content?: boolean
     category?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SupportStoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "title" | "content" | "category" | "isApproved" | "createdAt" | "updatedAt", ExtArgs["result"]["supportStory"]>
+  export type SupportStoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "title" | "content" | "category" | "isApproved" | "crisisFlag" | "createdAt" | "updatedAt", ExtArgs["result"]["supportStory"]>
   export type SupportStoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -25753,6 +25777,7 @@ export namespace Prisma {
       content: string
       category: $Enums.Concern
       isApproved: boolean
+      crisisFlag: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["supportStory"]>
@@ -26185,6 +26210,7 @@ export namespace Prisma {
     readonly content: FieldRef<"SupportStory", 'String'>
     readonly category: FieldRef<"SupportStory", 'Concern'>
     readonly isApproved: FieldRef<"SupportStory", 'Boolean'>
+    readonly crisisFlag: FieldRef<"SupportStory", 'Boolean'>
     readonly createdAt: FieldRef<"SupportStory", 'DateTime'>
     readonly updatedAt: FieldRef<"SupportStory", 'DateTime'>
   }
@@ -29093,6 +29119,7 @@ export namespace Prisma {
     content: 'content',
     isAnonymous: 'isAnonymous',
     isApproved: 'isApproved',
+    crisisFlag: 'crisisFlag',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -29107,6 +29134,7 @@ export namespace Prisma {
     content: 'content',
     category: 'category',
     isApproved: 'isApproved',
+    crisisFlag: 'crisisFlag',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -31084,6 +31112,7 @@ export namespace Prisma {
     content?: StringFilter<"CirclePost"> | string
     isAnonymous?: BoolFilter<"CirclePost"> | boolean
     isApproved?: BoolFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolFilter<"CirclePost"> | boolean
     createdAt?: DateTimeFilter<"CirclePost"> | Date | string
     updatedAt?: DateTimeFilter<"CirclePost"> | Date | string
     circle?: XOR<SupportCircleScalarRelationFilter, SupportCircleWhereInput>
@@ -31098,6 +31127,7 @@ export namespace Prisma {
     content?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     circle?: SupportCircleOrderByWithRelationInput
@@ -31115,6 +31145,7 @@ export namespace Prisma {
     content?: StringFilter<"CirclePost"> | string
     isAnonymous?: BoolFilter<"CirclePost"> | boolean
     isApproved?: BoolFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolFilter<"CirclePost"> | boolean
     createdAt?: DateTimeFilter<"CirclePost"> | Date | string
     updatedAt?: DateTimeFilter<"CirclePost"> | Date | string
     circle?: XOR<SupportCircleScalarRelationFilter, SupportCircleWhereInput>
@@ -31129,6 +31160,7 @@ export namespace Prisma {
     content?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CirclePostCountOrderByAggregateInput
@@ -31146,6 +31178,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"CirclePost"> | string
     isAnonymous?: BoolWithAggregatesFilter<"CirclePost"> | boolean
     isApproved?: BoolWithAggregatesFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolWithAggregatesFilter<"CirclePost"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"CirclePost"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CirclePost"> | Date | string
   }
@@ -31160,6 +31193,7 @@ export namespace Prisma {
     content?: StringFilter<"SupportStory"> | string
     category?: EnumConcernFilter<"SupportStory"> | $Enums.Concern
     isApproved?: BoolFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolFilter<"SupportStory"> | boolean
     createdAt?: DateTimeFilter<"SupportStory"> | Date | string
     updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -31172,6 +31206,7 @@ export namespace Prisma {
     content?: SortOrder
     category?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     author?: UserOrderByWithRelationInput
@@ -31187,6 +31222,7 @@ export namespace Prisma {
     content?: StringFilter<"SupportStory"> | string
     category?: EnumConcernFilter<"SupportStory"> | $Enums.Concern
     isApproved?: BoolFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolFilter<"SupportStory"> | boolean
     createdAt?: DateTimeFilter<"SupportStory"> | Date | string
     updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -31199,6 +31235,7 @@ export namespace Prisma {
     content?: SortOrder
     category?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SupportStoryCountOrderByAggregateInput
@@ -31216,6 +31253,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"SupportStory"> | string
     category?: EnumConcernWithAggregatesFilter<"SupportStory"> | $Enums.Concern
     isApproved?: BoolWithAggregatesFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolWithAggregatesFilter<"SupportStory"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SupportStory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SupportStory"> | Date | string
   }
@@ -33087,6 +33125,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     circle: SupportCircleCreateNestedOneWithoutPostsInput
@@ -33101,6 +33140,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutPostInput
@@ -33111,6 +33151,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     circle?: SupportCircleUpdateOneRequiredWithoutPostsNestedInput
@@ -33125,6 +33166,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     encouragements?: SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput
@@ -33137,6 +33179,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33146,6 +33189,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33157,6 +33201,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33167,6 +33212,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutStoriesInput
@@ -33179,6 +33225,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33189,6 +33236,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutStoriesNestedInput
@@ -33201,6 +33249,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33212,6 +33261,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33222,6 +33272,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33233,6 +33284,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35053,6 +35105,7 @@ export namespace Prisma {
     content?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -35064,6 +35117,7 @@ export namespace Prisma {
     content?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -35075,6 +35129,7 @@ export namespace Prisma {
     content?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -35086,6 +35141,7 @@ export namespace Prisma {
     content?: SortOrder
     category?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -35097,6 +35153,7 @@ export namespace Prisma {
     content?: SortOrder
     category?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -35108,6 +35165,7 @@ export namespace Prisma {
     content?: SortOrder
     category?: SortOrder
     isApproved?: SortOrder
+    crisisFlag?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -37704,6 +37762,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     circle: SupportCircleCreateNestedOneWithoutPostsInput
@@ -37716,6 +37775,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutPostInput
@@ -37737,6 +37797,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -37747,6 +37808,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38298,6 +38360,7 @@ export namespace Prisma {
     content?: StringFilter<"CirclePost"> | string
     isAnonymous?: BoolFilter<"CirclePost"> | boolean
     isApproved?: BoolFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolFilter<"CirclePost"> | boolean
     createdAt?: DateTimeFilter<"CirclePost"> | Date | string
     updatedAt?: DateTimeFilter<"CirclePost"> | Date | string
   }
@@ -38328,6 +38391,7 @@ export namespace Prisma {
     content?: StringFilter<"SupportStory"> | string
     category?: EnumConcernFilter<"SupportStory"> | $Enums.Concern
     isApproved?: BoolFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolFilter<"SupportStory"> | boolean
     createdAt?: DateTimeFilter<"SupportStory"> | Date | string
     updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
   }
@@ -41792,6 +41856,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCirclePostsInput
@@ -41804,6 +41869,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutPostInput
@@ -42790,6 +42856,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     circle: SupportCircleCreateNestedOneWithoutPostsInput
@@ -42803,6 +42870,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43082,6 +43150,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     circle?: SupportCircleUpdateOneRequiredWithoutPostsNestedInput
@@ -43095,6 +43164,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44025,6 +44095,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -44035,6 +44106,7 @@ export namespace Prisma {
     content: string
     category: $Enums.Concern
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -44482,6 +44554,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     circle?: SupportCircleUpdateOneRequiredWithoutPostsNestedInput
@@ -44494,6 +44567,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     encouragements?: SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput
@@ -44505,6 +44579,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44515,6 +44590,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44525,6 +44601,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44535,6 +44612,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44722,6 +44800,7 @@ export namespace Prisma {
     content: string
     isAnonymous?: boolean
     isApproved?: boolean
+    crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -44752,6 +44831,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCirclePostsNestedInput
@@ -44764,6 +44844,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     encouragements?: SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput
@@ -44775,6 +44856,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
