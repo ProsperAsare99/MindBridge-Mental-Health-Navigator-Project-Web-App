@@ -1,9 +1,11 @@
+// 1. Initialize environment BEFORE any other imports
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
-import app from './app';
-import { initializeCircles } from './controllers/socialController';
-import { initializeChallenges } from './controllers/gamificationController';
+// 2. Import app after environment is guaranteed
+const app = require('./app').default;
+const { initializeCircles } = require('./controllers/socialController');
+const { initializeChallenges } = require('./controllers/gamificationController');
 
 const PORT = Number(process.env.PORT) || 5000;
 const HOST = '0.0.0.0';

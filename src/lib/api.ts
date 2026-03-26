@@ -20,26 +20,26 @@ class ApiClient {
         return null;
     }
 
-    async get(endpoint: string, config?: any) {
+    async get<T = any>(endpoint: string, config?: any): Promise<T> {
         // Default to 2 retries for GET requests
         const finalConfig = { retry: 2, ...config };
         const response = await axiosInstance.get(endpoint, finalConfig);
         return response.data;
     }
 
-    async post(endpoint: string, body: any, config?: any) {
+    async post<T = any>(endpoint: string, body: any, config?: any): Promise<T> {
         // High-stakes requests (POST/PUT/DELETE) usually shouldn't auto-retry unless safe
         // But we allow passing the retry option via config if needed
         const response = await axiosInstance.post(endpoint, body, config);
         return response.data;
     }
 
-    async put(endpoint: string, body: any, config?: any) {
+    async put<T = any>(endpoint: string, body: any, config?: any): Promise<T> {
         const response = await axiosInstance.put(endpoint, body, config);
         return response.data;
     }
 
-    async delete(endpoint: string, config?: any) {
+    async delete<T = any>(endpoint: string, config?: any): Promise<T> {
         const response = await axiosInstance.delete(endpoint, config);
         return response.data;
     }

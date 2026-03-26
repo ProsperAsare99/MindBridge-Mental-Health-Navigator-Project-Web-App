@@ -11,7 +11,6 @@ const axiosInstance = axios.create({
 // Request interceptor for adding JWT token
 axiosInstance.interceptors.request.use(
     async (config) => {
-        console.log(`[AXIOS] Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
         if (typeof window !== 'undefined') {
             // Priority 1: Explicitly provided Authorization header
             if (config.headers.Authorization) {

@@ -10,13 +10,7 @@ import type { University } from '@prisma/client';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_for_development';
-
-if (JWT_SECRET === 'your_fallback_secret_for_development') {
-    console.warn('[AUTH CONTROLLER WARNING] JWT_SECRET is using the fallback value.');
-} else {
-    console.log('[AUTH CONTROLLER INFO] JWT_SECRET loaded from environment.');
-}
+import { AuthRequest, getJwtSecret } from '../middlewares/auth';
 
 export const register = async (req: Request, res: Response) => {
     const { email, password, name, institution, studentId, course, phoneNumber } = req.body;

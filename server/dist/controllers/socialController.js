@@ -5,26 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initializeCircles = exports.requestMentor = exports.getMentors = exports.getMyEncouragements = exports.sendEncouragement = exports.createStory = exports.getStories = exports.createPost = exports.getPosts = exports.joinCircle = exports.getCircles = void 0;
 const prisma_1 = __importDefault(require("../lib/prisma"));
-// import { Concern } from '@prisma/client';
 const genkit_config_1 = require("../lib/genkit-config");
+const time_1 = require("../utils/time");
 const detectCrisis = async (content) => {
     const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead', 'dying', 'goodbye world'];
     const hasKeyword = crisisKeywords.some(kw => content.toLowerCase().includes(kw));
     if (hasKeyword)
         return true;
-    const now = new Date();
-    const timeContext = now.toLocaleString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
+    const timeContext = (0, time_1.getTimeContext)();
     try {
         const result = await genkit_config_1.ai.generate({
             prompt: `
             Current System Time: ${timeContext}
+            High Stress (Exam) Period: ${(0, time_1.isHighStressPeriod)()}
             
             Analyze the following student community post for immediate mental health crisis, suicidal ideation, or severe self-harm intent.
             The platform is MindBridge, a mental health navigator for university students.

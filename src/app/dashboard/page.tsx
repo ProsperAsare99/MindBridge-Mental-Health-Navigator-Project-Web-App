@@ -33,6 +33,7 @@ import { MoodInsight } from "@/components/dashboard/MoodInsight";
 import { TrendingUp } from "lucide-react";
 import { GamificationPortal } from "@/components/dashboard/GamificationPortal";
 import { DailyPerspective } from "@/components/dashboard/daily-perspective";
+import { PersonalizedRecommendations } from "@/components/dashboard/PersonalizedRecommendations";
 
 export default function DashboardPage() {
     const { data: session, status } = useSession();
@@ -210,25 +211,30 @@ export default function DashboardPage() {
                     </DashboardItem>
                 </div>
 
-                {/* 6. Support & Resources */}
+                {/* 7. Personalized Recommendations */}
+                <DashboardItem>
+                    <PersonalizedRecommendations />
+                </DashboardItem>
+
+                {/* 8. Support & Crisis */}
                 <DashboardItem className="grid md:grid-cols-5 gap-8">
                     <div className="md:col-span-3 space-y-6">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-extrabold text-foreground/80 tracking-tight">Recommended Resources</h2>
+                            <h2 className="text-xl font-extrabold text-foreground/80 tracking-tight">University Support Resources</h2>
                             <Link href="/dashboard/resources" className="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
                                 Explore All <ArrowUpRight className="h-3 w-3" />
                             </Link>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
                             {[
-                                { title: "Exam Stress Survival", time: "5 min", color: "bg-primary/5" },
-                                { title: "The Power of Sleep", time: "8 min", color: "bg-secondary/5" }
+                                { title: "Counseling Center", time: "University", color: "bg-primary/5" },
+                                { title: "Wellness Workshops", time: "Weekly", color: "bg-secondary/5" }
                             ].map((res) => (
                                 <div
                                     key={res.title}
                                     className={`p-6 rounded-[2rem] border border-primary/10 glass ${res.color} group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-500`}
                                 >
-                                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{res.time} Read</span>
+                                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{res.time} Info</span>
                                     <h4 className="text-base font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{res.title}</h4>
                                 </div>
                             ))}

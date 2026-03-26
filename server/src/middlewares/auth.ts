@@ -2,13 +2,18 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import prisma from '../lib/prisma';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_for_development';
-
-if (JWT_SECRET === 'your_fallback_secret_for_development') {
-    console.warn('[AUTH WARNING] JWT_SECRET is using the fallback value. This will cause authentication failures if NextAuth is using a different secret.');
-} else {
-    console.log('[AUTH INFO] JWT_SECRET loaded from environment.');
-}
+export const getJwtSecret = () => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret || secret === 'your_fallback_secret_for_development') {
+        // Only warn once
+        if (!(global as any).__jwt_warned) {
+            console.warn('[AUTH WARNING] JWT_SECRET is missing or using fallback. Checking environment synchronization...');
+            (global as any).__jwt_warned = true;
+        }
+        return 'your_fallback_secret_for_development';
+    }
+    return secret;
+};
 
 export interface AuthRequest extends Request {
     user?: any;
@@ -24,7 +29,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
     }
 
     try {
-        const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string };
+        const decoded = jwt.verify(token, getJwtSecret()) as { userId: string; email: string };
         
         // Find user to verify they still exist
         const user = await prisma.user.findUnique({

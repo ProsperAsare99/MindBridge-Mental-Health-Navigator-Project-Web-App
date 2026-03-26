@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logActivity = exports.getActivityFeed = exports.getMoodInsight = exports.getUserAnalytics = void 0;
+exports.getRecommendations = exports.logActivity = exports.getActivityFeed = exports.getMoodInsight = exports.getUserAnalytics = void 0;
 const prisma_1 = __importDefault(require("../lib/prisma"));
+const recommendationService_1 = require("../services/recommendationService");
 // AI imports removed to maintain "Advanced Analytics" identity
 const getUserAnalytics = async (req, res) => {
     try {
@@ -244,4 +245,17 @@ const logActivity = async (req, res) => {
     }
 };
 exports.logActivity = logActivity;
+const getRecommendations = async (req, res) => {
+    try {
+        if (!req.userId)
+            return res.status(401).json({ error: 'Not authenticated' });
+        const recommendations = await recommendationService_1.RecommendationService.getPersonalizedRecommendations(req.userId);
+        res.json(recommendations);
+    }
+    catch (error) {
+        console.error('Recommendations Error:', error);
+        res.status(500).json({ error: 'Failed to fetch personalized recommendations.' });
+    }
+};
+exports.getRecommendations = getRecommendations;
 //# sourceMappingURL=analyticsController.js.map

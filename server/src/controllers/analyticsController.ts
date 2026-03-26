@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
+import { RecommendationService } from '../services/recommendationService';
 // AI imports removed to maintain "Advanced Analytics" identity
 
 export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
@@ -253,5 +254,17 @@ export const logActivity = async (req: AuthRequest, res: Response) => {
     } catch (error) {
         console.error('Log Activity Error:', error);
         res.status(500).json({ error: 'Failed to record activity.' });
+    }
+};
+
+export const getRecommendations = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.userId) return res.status(401).json({ error: 'Not authenticated' });
+        
+        const recommendations = await RecommendationService.getPersonalizedRecommendations(req.userId);
+        res.json(recommendations);
+    } catch (error) {
+        console.error('Recommendations Error:', error);
+        res.status(500).json({ error: 'Failed to fetch personalized recommendations.' });
     }
 };
