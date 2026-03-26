@@ -36,7 +36,7 @@
   "dependencies": {
     "@genkit-ai/googleai": "^1.28.0",
     "@google/generative-ai": "^0.24.1",
-    "@prisma/adapter-pg": "^5.22.0",
+    "@prisma/adapter-pg": "^6.2.1",
     "@prisma/client": "^6.2.1",
     "@types/multer": "^2.1.0",
     "@types/pg": "^8.18.0",

@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import type { MessageRole } from '../generated/client';
+import type { MessageRole } from '../../prisma/generated/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { ai } from '../lib/genkit-config';

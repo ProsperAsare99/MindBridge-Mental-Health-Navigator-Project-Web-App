@@ -15,7 +15,15 @@ import {
     CheckCircle2,
     Info,
     AlertCircle,
-    RotateCcw
+    RotateCcw,
+    Users,
+    Wind,
+    PhoneCall,
+    Clock,
+    Moon,
+    Star,
+    Zap,
+    ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -181,6 +189,7 @@ export default function AssessmentPage() {
     const [history, setHistory] = useState<any[]>([]);
     const [view, setView] = useState<"list" | "history">("list");
     const [loading, setLoading] = useState(false);
+    const [recommendations, setRecommendations] = useState<any[]>([]);
 
     const activeAssessment = activeId ? (ASSESSMENT_DATA as any)[activeId] : null;
 
@@ -236,6 +245,7 @@ export default function AssessmentPage() {
         setCurrentStep(0);
         setAnswers([]);
         setIsFinished(false);
+        setRecommendations([]);
         fetchHistory(); // Refresh history
     };
 
@@ -245,11 +255,14 @@ export default function AssessmentPage() {
     const saveAssessment = async () => {
         if (!activeId || !analysis) return;
         try {
-            await api.post('/assessments', {
+            const response = await api.post('/assessments', {
                 type: activeId,
                 score,
                 severity: analysis.level
             });
+            if (response.recommendations) {
+                setRecommendations(response.recommendations);
+            }
             console.log("Assessment saved successfully");
             fetchHistory(); // Update history immediately
         } catch (error) {
@@ -506,6 +519,52 @@ export default function AssessmentPage() {
                                         "{analysis.desc}"
                                     </p>
                                 </div>
+
+                                {recommendations.length > 0 && (
+                                    <div className="space-y-6 pt-6">
+                                        <div className="flex items-center gap-3 justify-center md:justify-start">
+                                            <div className="h-1 bg-primary w-8 rounded-full" />
+                                            <h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground">Recommended for You</h3>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {recommendations.map((rec, idx) => (
+                                                <motion.div
+                                                    key={rec.id}
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: 0.1 * idx }}
+                                                    className="group relative glass p-6 rounded-3xl border border-border hover:border-primary/20 transition-all text-left"
+                                                >
+                                                    <div className="flex gap-4 items-start">
+                                                        <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                                            {rec.icon === 'Users' && <Users size={20} />}
+                                                            {rec.icon === 'Wind' && <Wind size={20} />}
+                                                            {rec.icon === 'PhoneCall' && <PhoneCall size={20} />}
+                                                            {rec.icon === 'Clock' && <Clock size={20} />}
+                                                            {rec.icon === 'Moon' && <Moon size={20} />}
+                                                            {rec.icon === 'Star' && <Star size={20} />}
+                                                            {rec.icon === 'Zap' && <Zap size={20} />}
+                                                        </div>
+                                                        <div className="space-y-1 pr-6">
+                                                            <h4 className="font-bold text-sm text-foreground">{rec.title}</h4>
+                                                            <p className="text-xs text-muted-foreground leading-tight">{rec.description}</p>
+                                                        </div>
+                                                        {rec.link && (
+                                                            <a 
+                                                                href={rec.link} 
+                                                                target={rec.link.startsWith('http') ? "_blank" : "_self"}
+                                                                rel="noopener noreferrer"
+                                                                className="absolute right-4 top-6 text-muted-foreground hover:text-primary transition-colors"
+                                                            >
+                                                                <ExternalLink size={14} />
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div className="flex flex-col sm:flex-row gap-4 pt-6">
                                     <Button

@@ -1,0 +1,659 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  output          = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER MODEL
+// ============================================
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String?
+
+  // Authentication Extras (Retained)
+  googleId          String? @unique
+  isVerified        Boolean @default(false)
+  isAnonymous       Boolean @default(false)
+  verificationToken String?
+  image             String?
+
+  // Basic Profile
+  displayName   String?
+  university    University?
+  academicLevel Int?
+  program       String?
+  phoneNumber   String?
+  studentId     String?
+
+  // Communication Preferences
+  language               Language              @default(ENGLISH)
+  notificationPreference NotificationFrequency @default(DAILY)
+  preferredCheckInTime   TimeOfDay             @default(MORNING)
+
+  // Mental Health Context
+  concerns     Concern[]    @default([])
+  supportLevel SupportLevel @default(SOMEWHAT)
+  riskLevel    RiskLevel    @default(LOW)
+
+  // Personalization
+  copingStyles       CopingStyle[]      @default([])
+  faithLevel         FaithLevel         @default(SOMEWHAT_IMPORTANT)
+  approachPreference ApproachPreference @default(HOLISTIC)
+  goals              Goal[]             @default([])
+
+  // Academic Stressors (JSON for flexibility)
+  stressors Json? // { exams: 3, assignments: 4, financial: 5, ... }
+
+  // Tracking Preferences (JSON)
+  trackingPreferences Json? // { mood: true, sleep: false, ... }
+
+  // Emergency Contacts (JSON array)
+  emergencyContacts Json? // [{ name: "", relationship: "", phone: "" }]
+
+  // Baseline Data
+  baselineMood Int?
+  baseline     Json? // Retained for existing complex baseline data
+  joinDate     DateTime @default(now())
+
+  // Usage Metrics
+  moodCheckInsCount  Int       @default(0)
+  conversationsCount Int       @default(0)
+  wellnessXP         Int       @default(0)
+  wellnessLevel      Int       @default(1)
+  longestStreak      Int       @default(0)
+  lastActive         DateTime?
+
+  // Onboarding Status (Retained)
+  onboardingStep      Int     @default(1)
+  onboardingCompleted Boolean @default(false)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  conversations  Conversation[]
+  moodEntries    MoodEntry[]
+  assessments    Assessment[]
+  aiInteractions AIInteraction[]
+  crisisLogs     CrisisLog[]
+  usageLogs      UsageLog[]
+  memoryEntries  MemoryEntry[]
+  userGoals      UserGoal[]
+  carePlans      CarePlan[]
+  achievements   Achievement[]
+  challenges     ChallengeParticipation[]
+  moodGarden     MoodGarden?
+
+  // Community Relations
+  circleMemberships      CircleMembership[]
+  circlePosts            CirclePost[]
+  stories                SupportStory[]
+  sentEncouragements     SupportEncouragement[] @relation("SentEncouragement")
+  receivedEncouragements SupportEncouragement[] @relation("ReceivedEncouragement")
+  mentorMatches          MentorMatch[]          @relation("Mentor")
+  menteeMatches          MentorMatch[]          @relation("Mentee")
+
+  @@index([email])
+  @@index([university, academicLevel])
+  @@index([riskLevel])
+}
+
+// ============================================
+// CONVERSATION MODEL
+// ============================================
+model Conversation {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  startedAt     DateTime  @default(now())
+  lastMessageAt DateTime  @default(now())
+  endedAt       DateTime?
+
+  status ConversationStatus @default(ACTIVE)
+
+  // Metadata (JSON)
+  metadata Json? // { userRiskLevel: "LOW", initialMood: 3, context: "" }
+
+  summary String?
+
+  // Relations
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, startedAt(sort: Desc)])
+  @@index([status])
+}
+
+// ============================================
+// MESSAGE MODEL
+// ============================================
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  role      MessageRole
+  content   String      @db.Text
+  timestamp DateTime    @default(now())
+
+  // Metadata (JSON)
+  metadata Json? // { model: "", tokensUsed: 0, crisisDetected: false, ... }
+
+  @@index([conversationId, timestamp(sort: Desc)])
+}
+
+// ============================================
+// MOOD ENTRY MODEL
+// ============================================
+model MoodEntry {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  mood    Int // 1-5 scale
+  energy  Int? // 1-5 scale
+  sleep   Int? // 1-5 scale
+  social  Int? // 1-5 scale
+  anxiety Int? // 1-10 scale
+
+  // Advanced Tracking
+  emotion          String? // Nuanced emotion (e.g., "Radiant", "Serene")
+  emotionIntensity Float? // 0.0 to 1.0
+  physicalSymptoms String[] // Array of symptoms (e.g., ["Headache", "Fatigue"])
+
+  // Media Journaling
+  photoUrl String?
+  audioUrl String?
+
+  // Environmental Context
+  weather  Json? // { temp, condition, icon }
+  location Json? // { city, country, lat, lng }
+
+  notes          String?
+  tags           String[] // Array of tags
+  sentimentScore Float?
+  sentimentLabel String?
+  crisisFlag     Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt(sort: Desc)])
+}
+
+// ============================================
+// ASSESSMENT MODEL
+// ============================================
+model Assessment {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type           AssessmentType
+  responses      Json // Array of { question: "", answer: "" }
+  score          Int
+  severity       Severity?
+  interpretation String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, type, createdAt(sort: Desc)])
+}
+
+// ============================================
+// AI INTERACTION LOG
+// ============================================
+model AIInteraction {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userMessage        String  @db.Text
+  aiResponse         String  @db.Text
+  model              String?
+  tokensUsed         Int?
+  crisisDetected     Boolean @default(false)
+  emotionalIntensity Int?
+  responseTime       Int? // milliseconds
+
+  timestamp DateTime @default(now())
+
+  @@index([userId, timestamp(sort: Desc)])
+  @@index([crisisDetected])
+}
+
+// ============================================
+// CRISIS LOG
+// ============================================
+model CrisisLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  message    String @db.Text
+  severity   Int // 1-10 scale
+  categories Json // Array of { category: "", matches: [], severity: 0 }
+
+  responseProvided       Boolean @default(false)
+  resourcesShown         Boolean @default(false)
+  emergencyContactCalled Boolean @default(false)
+
+  timestamp DateTime @default(now())
+
+  @@index([userId, timestamp(sort: Desc)])
+  @@index([severity(sort: Desc)])
+}
+
+// ============================================
+// USAGE LOG
+// ============================================
+model UsageLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  service      Service
+  model        String?
+  tokensUsed   Int?
+  finishReason String?
+
+  timestamp DateTime @default(now())
+
+  @@index([userId, timestamp(sort: Desc)])
+  @@index([service])
+}
+
+model MemoryEntry {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  content    String  @db.Text
+  importance Int     @default(1) // 1-10 scale
+  category   String? // ACADEMIC, PERSONAL, MEDICAL, GOAL
+
+  // Vector embedding stored as JSON array of numbers
+  embedding Json?
+
+  timestamp DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([category])
+}
+
+model AcademicEvent {
+  id         String   @id @default(uuid())
+  title      String
+  type       String
+  date       DateTime
+  importance Int      @default(1)
+  createdAt  DateTime @default(now())
+}
+
+model UserGoal {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title    String
+  type     Goal
+  status   GoalStatus @default(ACTIVE)
+  progress Int        @default(0) // 0-100
+
+  targetDate DateTime?
+  milestones Json? // Array of { title: string, completed: boolean }
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+model CarePlan {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  weekNumber Int
+  year       Int
+
+  summary      String @db.Text
+  moodAnalysis Json? // e.g., { avgMood: number, trend: string }
+  growthTasks  Json // Array of { task: string, reason: string, completed: boolean }
+
+  generatedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, weekNumber, year])
+  @@index([userId])
+}
+
+model Achievement {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type        String // milestone_7, milestone_30, resilience_builder, etc.
+  title       String
+  description String?
+  icon        String?
+  unlockedAt  DateTime @default(now())
+
+  @@unique([userId, type])
+  @@index([userId])
+}
+
+model Challenge {
+  id           String  @id @default(uuid())
+  title        String
+  description  String
+  durationDays Int     @default(30)
+  type         String // GRATITUDE, MINDFULNESS, etc.
+  isCommunity  Boolean @default(false)
+
+  participants ChallengeParticipation[]
+
+  createdAt DateTime @default(now())
+}
+
+model ChallengeParticipation {
+  id          String    @id @default(uuid())
+  userId      String
+  challengeId String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  startDate   DateTime  @default(now())
+  progress    Int       @default(0) // Number of days completed
+  isCompleted Boolean   @default(false)
+  lastUpdate  DateTime?
+
+  @@unique([userId, challengeId])
+}
+
+model MoodGarden {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  growthLevel   Int      @default(1) // 1-5
+  plantType     String   @default("OAK")
+  healthScore   Float    @default(50.0) // 0-100
+  lastWateredAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// SOCIAL & COMMUNITY MODELS
+// ============================================
+
+model SupportCircle {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  category    Concern // Uses existing Concern enum
+
+  members CircleMembership[]
+  posts   CirclePost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+}
+
+model CircleMembership {
+  id       String        @id @default(uuid())
+  userId   String
+  circleId String
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  circle   SupportCircle @relation(fields: [circleId], references: [id], onDelete: Cascade)
+
+  joinedAt DateTime   @default(now())
+  role     CircleRole @default(MEMBER)
+
+  @@unique([userId, circleId])
+}
+
+model CirclePost {
+  id       String        @id @default(uuid())
+  circleId String
+  circle   SupportCircle @relation(fields: [circleId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  content     String  @db.Text
+  isAnonymous Boolean @default(true)
+  isApproved  Boolean @default(false)
+  crisisFlag  Boolean @default(false)
+
+  encouragements SupportEncouragement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([circleId])
+}
+
+model SupportStory {
+  id       String @id @default(uuid())
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  title      String
+  content    String  @db.Text
+  category   Concern
+  isApproved Boolean @default(false)
+  crisisFlag Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([authorId])
+}
+
+model SupportEncouragement {
+  id     String      @id @default(uuid())
+  postId String?
+  post   CirclePost? @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  senderId String
+  sender   User   @relation("SentEncouragement", fields: [senderId], references: [id], onDelete: Cascade)
+
+  receiverId String?
+  receiver   User?   @relation("ReceivedEncouragement", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+  @@index([receiverId])
+}
+
+model MentorMatch {
+  id       String @id @default(uuid())
+  mentorId String
+  mentor   User   @relation("Mentor", fields: [mentorId], references: [id], onDelete: Cascade)
+
+  menteeId String
+  mentee   User   @relation("Mentee", fields: [menteeId], references: [id], onDelete: Cascade)
+
+  status MatchStatus @default(PENDING)
+  topic  Concern
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mentorId])
+  @@index([menteeId])
+  @@index([status])
+}
+
+enum CircleRole {
+  MEMBER
+  MODERATOR
+}
+
+enum MatchStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  DECLINED
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum University {
+  KNUST
+  UNIVERSITY_OF_GHANA
+  UNIVERSITY_OF_CAPE_COAST
+  ASHESI_UNIVERSITY
+  GIMPA
+  OTHER
+}
+
+enum Language {
+  ENGLISH
+  TWI
+  GA
+  EWE
+}
+
+enum NotificationFrequency {
+  DAILY
+  WEEKLY
+  ONLY_WHEN_NEEDED
+  NONE
+}
+
+enum TimeOfDay {
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+}
+
+enum Concern {
+  ACADEMIC_STRESS
+  ANXIETY
+  DEPRESSION
+  LONELINESS
+  RELATIONSHIP_ISSUES
+  FINANCIAL_STRESS
+  FAMILY_PRESSURE
+  OTHER
+}
+
+enum SupportLevel {
+  ALONE
+  SOMEWHAT
+  STRONG
+}
+
+enum RiskLevel {
+  LOW
+  MODERATE
+  HIGH
+  CRITICAL
+}
+
+enum CopingStyle {
+  EXERCISE
+  JOURNAL
+  PRAY
+  TALK
+  MUSIC
+  SLEEP
+  MEDITATE
+  OTHER
+}
+
+enum FaithLevel {
+  VERY_IMPORTANT
+  SOMEWHAT_IMPORTANT
+  NOT_IMPORTANT
+}
+
+enum ApproachPreference {
+  CLINICAL
+  HOLISTIC
+  CULTURAL
+  MIXED
+}
+
+enum Goal {
+  REDUCE_STRESS
+  IMPROVE_MOOD
+  BUILD_RESILIENCE
+  BETTER_SLEEP
+  DEVELOP_HABITS
+  CONNECT_SUPPORT
+  TRACK_JOURNEY
+  PREPARE_COUNSELING
+  BE_MINDFUL
+  IMPROVE_ACADEMICS
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum ConversationStatus {
+  ACTIVE
+  ENDED
+  ARCHIVED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+enum AssessmentType {
+  PHQ9
+  GAD7
+  PSS
+  STRESS
+  SLEEP
+  AIS
+  CUSTOM
+}
+
+enum Severity {
+  MINIMAL
+  MILD
+  MODERATE
+  MODERATELY_SEVERE
+  SEVERE
+  LOW
+  HIGH
+  GOOD
+  FAIR
+  POOR
+}
+
+enum Service {
+  GEMINI
+  CHAT
+  MOOD
+  ASSESSMENT
+}

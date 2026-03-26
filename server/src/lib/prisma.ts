@@ -1,9 +1,9 @@
-import type { PrismaClient as PrismaClientType } from '../generated/client';
+import type { PrismaClient as PrismaClientType } from '../../prisma/generated/client';
 
 let _prisma: PrismaClientType | null = null;
 
 const createPrismaClient = (): PrismaClientType => {
-    const { PrismaClient } = require('../generated/client');
+    const { PrismaClient } = require('../../prisma/generated/client');
     const { Pool } = require('pg');
     const { PrismaPg } = require('@prisma/adapter-pg');
     
@@ -11,9 +11,15 @@ const createPrismaClient = (): PrismaClientType => {
     const pool = new Pool({ 
         connectionString: process.env.DATABASE_URL,
         ssl: {
-            rejectUnauthorized: false // Necessary for Neon depending on environment
+            rejectUnauthorized: false
         }
     });
+
+    pool.on('error', (err: any) => {
+        console.error('[PRISMA POOL ERROR] Unexpected error on idle client:', err.message);
+    });
+    
+    console.log('[PRISMA] Database pool initialized.');
     
     const adapter = new PrismaPg(pool);
     return new PrismaClient({

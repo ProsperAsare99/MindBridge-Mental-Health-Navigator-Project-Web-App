@@ -1,4 +1,4 @@
-import { MoodEntry } from '../generated/client';
+import { MoodEntry } from '../../prisma/generated/client';
 
 export const XP_REWARDS = {
     MOOD_LOG: 15,

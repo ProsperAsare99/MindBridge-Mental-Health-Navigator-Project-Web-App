@@ -1,5 +1,5 @@
 import prisma from '../lib/prisma';
-import { AssessmentType, Severity } from '../generated/client';
+import { AssessmentType, Severity } from '../../prisma/generated/client';
 import { isHighStressPeriod } from '../utils/time';
 
 export interface Recommendation {

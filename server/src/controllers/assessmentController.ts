@@ -1,7 +1,8 @@
 import { Response } from 'express';
-import type { AssessmentType, Severity } from '../generated/client';
+import type { AssessmentType, Severity } from '../../prisma/generated/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
+import { RecommendationService } from '../services/recommendationService';
 // import { AssessmentType, Severity } from '@prisma/client';
 
 export const createAssessment = async (req: AuthRequest, res: Response) => {
@@ -41,7 +42,6 @@ export const createAssessment = async (req: AuthRequest, res: Response) => {
         });
 
         // Generate personalized recommendations
-        const { RecommendationService } = require('../services/recommendationService');
         const recommendations = await RecommendationService.getPersonalizedRecommendations(userId);
 
         res.status(201).json({ assessment, recommendations });
