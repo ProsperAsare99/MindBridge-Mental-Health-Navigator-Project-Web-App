@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+export declare const getJwtSecret: () => string;
 export interface AuthRequest extends Request {
     user?: any;
     userId?: string;

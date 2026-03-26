@@ -8,16 +8,10 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const crypto_1 = __importDefault(require("crypto"));
 const prisma_1 = __importDefault(require("../lib/prisma"));
+const auth_1 = require("../middlewares/auth");
 const emailService_1 = require("../utils/emailService");
 const google_auth_library_1 = require("google-auth-library");
 const googleClient = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_for_development';
-if (JWT_SECRET === 'your_fallback_secret_for_development') {
-    console.warn('[AUTH CONTROLLER WARNING] JWT_SECRET is using the fallback value.');
-}
-else {
-    console.log('[AUTH CONTROLLER INFO] JWT_SECRET loaded from environment.');
-}
 const register = async (req, res) => {
     const { email, password, name, institution, studentId, course, phoneNumber } = req.body;
     if (!phoneNumber) {
@@ -45,7 +39,7 @@ const register = async (req, res) => {
                 isVerified: true
             }
         });
-        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, (0, auth_1.getJwtSecret)(), { expiresIn: '7d' });
         res.status(201).json({
             user: {
                 ...user,
@@ -80,7 +74,7 @@ const login = async (req, res) => {
                 data: { isVerified: true }
             });
         }
-        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, (0, auth_1.getJwtSecret)(), { expiresIn: '7d' });
         res.json({
             user: {
                 ...user,
@@ -145,7 +139,7 @@ const googleLogin = async (req, res) => {
                 });
             }
         }
-        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email }, (0, auth_1.getJwtSecret)(), { expiresIn: '7d' });
         res.json({
             user: {
                 ...user,
@@ -173,7 +167,7 @@ const anonymousLogin = async (req, res) => {
                 isVerified: true
             }
         });
-        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email, isAnonymous: true }, JWT_SECRET, { expiresIn: '1d' });
+        const token = jsonwebtoken_1.default.sign({ userId: user.id, email: user.email, isAnonymous: true }, (0, auth_1.getJwtSecret)(), { expiresIn: '1d' });
         res.json({
             user: {
                 ...user,

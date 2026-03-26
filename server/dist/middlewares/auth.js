@@ -3,16 +3,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authenticateToken = void 0;
+exports.authenticateToken = exports.getJwtSecret = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const prisma_1 = __importDefault(require("../lib/prisma"));
-const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_for_development';
-if (JWT_SECRET === 'your_fallback_secret_for_development') {
-    console.warn('[AUTH WARNING] JWT_SECRET is using the fallback value. This will cause authentication failures if NextAuth is using a different secret.');
-}
-else {
-    console.log('[AUTH INFO] JWT_SECRET loaded from environment.');
-}
+const getJwtSecret = () => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret || secret === 'your_fallback_secret_for_development') {
+        // Only warn once
+        if (!global.__jwt_warned) {
+            console.warn('[AUTH WARNING] JWT_SECRET is missing or using fallback. Checking environment synchronization...');
+            global.__jwt_warned = true;
+        }
+        return 'your_fallback_secret_for_development';
+    }
+    return secret;
+};
+exports.getJwtSecret = getJwtSecret;
 const authenticateToken = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -20,7 +26,7 @@ const authenticateToken = async (req, res, next) => {
         return res.status(401).json({ error: 'Access denied. No token provided.' });
     }
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
+        const decoded = jsonwebtoken_1.default.verify(token, (0, exports.getJwtSecret)());
         // Find user to verify they still exist
         const user = await prisma_1.default.user.findUnique({
             where: { id: decoded.userId }

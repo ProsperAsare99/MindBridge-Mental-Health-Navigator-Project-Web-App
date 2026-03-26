@@ -3,14 +3,12 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import prisma from '../lib/prisma';
-import { AuthRequest } from '../middlewares/auth';
+import { AuthRequest, getJwtSecret } from '../middlewares/auth';
 import { sendVerificationEmail } from '../utils/emailService';
 import { OAuth2Client } from 'google-auth-library';
 import type { University } from '@prisma/client';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-import { AuthRequest, getJwtSecret } from '../middlewares/auth';
 
 export const register = async (req: Request, res: Response) => {
     const { email, password, name, institution, studentId, course, phoneNumber } = req.body;
@@ -45,7 +43,7 @@ export const register = async (req: Request, res: Response) => {
             }
         });
 
-        const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ userId: user.id, email: user.email }, getJwtSecret(), { expiresIn: '7d' });
 
         res.status(201).json({ 
             user: {
@@ -84,7 +82,7 @@ export const login = async (req: Request, res: Response) => {
             });
         }
 
-        const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ userId: user.id, email: user.email }, getJwtSecret(), { expiresIn: '7d' });
 
         res.json({ 
             user: {
@@ -155,7 +153,7 @@ export const googleLogin = async (req: Request, res: Response) => {
             }
         }
 
-        const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ userId: user.id, email: user.email }, getJwtSecret(), { expiresIn: '7d' });
 
         res.json({ 
             user: {
@@ -185,7 +183,7 @@ export const anonymousLogin = async (req: Request, res: Response) => {
             }
         });
 
-        const token = jwt.sign({ userId: user.id, email: user.email, isAnonymous: true }, JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign({ userId: user.id, email: user.email, isAnonymous: true }, getJwtSecret(), { expiresIn: '1d' });
 
         res.json({ 
             user: {
