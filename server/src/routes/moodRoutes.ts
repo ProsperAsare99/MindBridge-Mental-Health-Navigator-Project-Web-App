@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createMood, getUserMoods, getMoodStats, getProactiveNudges } from '../controllers/moodController';
+import { createMood, getUserMoods, getMoodStats, getProactiveNudges, deleteMood, deleteMedia } from '../controllers/moodController';
 import { authenticateToken } from '../middlewares/auth';
 import { upload } from '../middlewares/upload';
 

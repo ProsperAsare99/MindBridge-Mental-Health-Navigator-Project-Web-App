@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserAssessments = exports.createAssessment = void 0;
 const prisma_1 = __importDefault(require("../lib/prisma"));
+// import { AssessmentType, Severity } from '@prisma/client';
 const createAssessment = async (req, res) => {
     const { type, score, severity } = req.body;
     try {

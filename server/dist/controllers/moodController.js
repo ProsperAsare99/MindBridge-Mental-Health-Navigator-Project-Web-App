@@ -5,7 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteMedia = exports.deleteMood = exports.getProactiveNudges = exports.getMoodStats = exports.getUserMoods = exports.createMood = void 0;
 const prisma_1 = __importDefault(require("../lib/prisma"));
-const genkit_config_1 = require("../lib/genkit-config");
+// import { ai } from '../lib/genkit-config';
+// import { MessageRole, University } from '@prisma/client';
 const gamificationService_1 = require("../services/gamificationService");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
@@ -18,27 +19,28 @@ const createMood = async (req, res) => {
         let sentimentScore = null;
         let sentimentLabel = null;
         let crisisFlag = false;
-        if (note && note.trim().length > 0) {
-            try {
-                const result = await genkit_config_1.ai.generate({
-                    prompt: `Analyze the following journal entry for sentiment and potential crisis. 
-                    Provide the result as a JSON object with:
-                    - score: a float between -1.0 (very negative) and 1.0 (very positive)
-                    - label: a short string (e.g., "Positive", "Neutral", "Concerned", "Distressed")
-                    - crisis: boolean, true if the text indicates immediate self-harm or severe clinical distress.
-                    
-                    Entry: "${note}"`
-                });
-                const text = result.text.replace(/```json|```/g, '').trim();
-                const analysis = JSON.parse(text);
-                sentimentScore = analysis.score;
-                sentimentLabel = analysis.label;
-                crisisFlag = analysis.crisis || false;
-            }
-            catch (aiError) {
-                console.error('Sentiment Analysis Error:', aiError);
-            }
-        }
+        // if (note && note.trim().length > 0) {
+        //     try {
+        //         const result = await ai.generate({
+        //             prompt: `Analyze the following journal entry for sentiment and potential crisis. 
+        //             Provide the result as a JSON object with:
+        //             - score: a float between -1.0 (very negative) and 1.0 (very positive)
+        //             - label: a short string (e.g., "Positive", "Neutral", "Concerned", "Distressed")
+        //             - crisis: boolean, true if the text indicates immediate self-harm or severe clinical distress.
+        //             
+        //             Entry: "${note}"`
+        //         });
+        // 
+        //         const text = result.text.replace(/```json|```/g, '').trim();
+        //         const analysis = JSON.parse(text);
+        //         
+        //         sentimentScore = analysis.score;
+        //         sentimentLabel = analysis.label;
+        //         crisisFlag = analysis.crisis || false;
+        //     } catch (aiError) {
+        //         console.error('Sentiment Analysis Error:', aiError);
+        //     }
+        // }
         // Handle File Uploads
         const files = req.files;
         const photoUrl = files?.moodPhoto ? `/uploads/mood/photos/${files.moodPhoto[0].filename}` : undefined;
@@ -229,7 +231,7 @@ const deleteMood = async (req, res) => {
             return res.status(401).json({ error: 'Not authenticated' });
         const { id } = req.params;
         const mood = await prisma_1.default.moodEntry.findUnique({
-            where: { id, userId: req.userId }
+            where: { id: id, userId: req.userId }
         });
         if (!mood)
             return res.status(404).json({ error: 'Mood entry not found' });
@@ -245,7 +247,7 @@ const deleteMood = async (req, res) => {
                 fs_1.default.unlinkSync(fullPath);
         }
         await prisma_1.default.moodEntry.delete({
-            where: { id }
+            where: { id: id }
         });
         res.json({ message: 'Mood entry and associated media deleted successfully' });
     }
@@ -261,7 +263,7 @@ const deleteMedia = async (req, res) => {
             return res.status(401).json({ error: 'Not authenticated' });
         const { id, type } = req.params; // type: 'photo' | 'audio'
         const mood = await prisma_1.default.moodEntry.findUnique({
-            where: { id, userId: req.userId }
+            where: { id: id, userId: req.userId }
         });
         if (!mood)
             return res.status(404).json({ error: 'Mood entry not found' });
@@ -284,11 +286,11 @@ const deleteMedia = async (req, res) => {
             if (fs_1.default.existsSync(fullPath))
                 fs_1.default.unlinkSync(fullPath);
         }
-        await prisma_1.default.moodEntry.update({
-            where: { id },
+        const updatedMood = await prisma_1.default.moodEntry.update({
+            where: { id: id },
             data: updateData
         });
-        res.json({ message: `${type} deleted successfully`, updatedEntry: mood });
+        res.json({ message: `${type} deleted successfully`, updatedEntry: updatedMood });
     }
     catch (error) {
         console.error(error);

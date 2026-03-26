@@ -6,7 +6,7 @@ import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { sendVerificationEmail } from '../utils/emailService';
 import { OAuth2Client } from 'google-auth-library';
-import { University } from '@prisma/client';
+import type { University } from '@prisma/client';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -401,16 +401,16 @@ export const verifyToken = async (req: AuthRequest, res: Response) => {
     }
 };
 
-const mapInstitutionToUniversity = (institution: string): University => {
-    if (!institution) return University.OTHER;
+const mapInstitutionToUniversity = (institution: string): any => {
+    if (!institution) return 'OTHER';
     
     const inst = institution.toLowerCase();
     
-    if (inst.includes('knust')) return University.KNUST;
-    if (inst.includes('university of ghana') || inst.includes('legon')) return University.UNIVERSITY_OF_GHANA;
-    if (inst.includes('cape coast') || inst.includes('ucc')) return University.UNIVERSITY_OF_CAPE_COAST;
-    if (inst.includes('ashesi')) return University.ASHESI_UNIVERSITY;
-    if (inst.includes('gimpa')) return University.GIMPA;
+    if (inst.includes('knust')) return 'KNUST';
+    if (inst.includes('university of ghana') || inst.includes('legon')) return 'UNIVERSITY_OF_GHANA';
+    if (inst.includes('cape coast') || inst.includes('ucc')) return 'UNIVERSITY_OF_CAPE_COAST';
+    if (inst.includes('ashesi')) return 'ASHESI_UNIVERSITY';
+    if (inst.includes('gimpa')) return 'GIMPA';
     
-    return University.OTHER;
+    return 'OTHER';
 };

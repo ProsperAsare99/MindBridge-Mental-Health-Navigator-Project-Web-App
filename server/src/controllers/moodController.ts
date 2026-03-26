@@ -1,8 +1,9 @@
 import { Response } from 'express';
+import type { MessageRole } from '@prisma/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
-import { ai } from '../lib/genkit-config';
-import { MessageRole, University } from '@prisma/client';
+// import { ai } from '../lib/genkit-config';
+// import { MessageRole, University } from '@prisma/client';
 import { GamificationService } from '../services/gamificationService';
 import fs from 'fs';
 import path from 'path';
@@ -30,28 +31,28 @@ export const createMood = async (req: AuthRequest, res: Response) => {
         let sentimentLabel = null;
         let crisisFlag = false;
 
-        if (note && note.trim().length > 0) {
-            try {
-                const result = await ai.generate({
-                    prompt: `Analyze the following journal entry for sentiment and potential crisis. 
-                    Provide the result as a JSON object with:
-                    - score: a float between -1.0 (very negative) and 1.0 (very positive)
-                    - label: a short string (e.g., "Positive", "Neutral", "Concerned", "Distressed")
-                    - crisis: boolean, true if the text indicates immediate self-harm or severe clinical distress.
-                    
-                    Entry: "${note}"`
-                });
-
-                const text = result.text.replace(/```json|```/g, '').trim();
-                const analysis = JSON.parse(text);
-                
-                sentimentScore = analysis.score;
-                sentimentLabel = analysis.label;
-                crisisFlag = analysis.crisis || false;
-            } catch (aiError) {
-                console.error('Sentiment Analysis Error:', aiError);
-            }
-        }
+        // if (note && note.trim().length > 0) {
+        //     try {
+        //         const result = await ai.generate({
+        //             prompt: `Analyze the following journal entry for sentiment and potential crisis. 
+        //             Provide the result as a JSON object with:
+        //             - score: a float between -1.0 (very negative) and 1.0 (very positive)
+        //             - label: a short string (e.g., "Positive", "Neutral", "Concerned", "Distressed")
+        //             - crisis: boolean, true if the text indicates immediate self-harm or severe clinical distress.
+        //             
+        //             Entry: "${note}"`
+        //         });
+        // 
+        //         const text = result.text.replace(/```json|```/g, '').trim();
+        //         const analysis = JSON.parse(text);
+        //         
+        //         sentimentScore = analysis.score;
+        //         sentimentLabel = analysis.label;
+        //         crisisFlag = analysis.crisis || false;
+        //     } catch (aiError) {
+        //         console.error('Sentiment Analysis Error:', aiError);
+        //     }
+        // }
 
         // Handle File Uploads
         const files = req.files as { [fieldname: string]: Express.Multer.File[] };
@@ -255,7 +256,7 @@ export const deleteMood = async (req: AuthRequest, res: Response) => {
         const { id } = req.params;
 
         const mood = await prisma.moodEntry.findUnique({
-            where: { id, userId: req.userId }
+            where: { id: id as any, userId: req.userId }
         });
 
         if (!mood) return res.status(404).json({ error: 'Mood entry not found' });
@@ -271,7 +272,7 @@ export const deleteMood = async (req: AuthRequest, res: Response) => {
         }
 
         await prisma.moodEntry.delete({
-            where: { id }
+            where: { id: id as any }
         });
 
         res.json({ message: 'Mood entry and associated media deleted successfully' });
@@ -287,7 +288,7 @@ export const deleteMedia = async (req: AuthRequest, res: Response) => {
         const { id, type } = req.params; // type: 'photo' | 'audio'
 
         const mood = await prisma.moodEntry.findUnique({
-            where: { id, userId: req.userId }
+            where: { id: id as any, userId: req.userId }
         });
 
         if (!mood) return res.status(404).json({ error: 'Mood entry not found' });
@@ -311,12 +312,12 @@ export const deleteMedia = async (req: AuthRequest, res: Response) => {
             if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
         }
 
-        await prisma.moodEntry.update({
-            where: { id },
+        const updatedMood = await prisma.moodEntry.update({
+            where: { id: id as any },
             data: updateData
         });
 
-        res.json({ message: `${type} deleted successfully`, updatedEntry: mood });
+        res.json({ message: `${type} deleted successfully`, updatedEntry: updatedMood });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error deleting media' });

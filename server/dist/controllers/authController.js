@@ -10,7 +10,6 @@ const crypto_1 = __importDefault(require("crypto"));
 const prisma_1 = __importDefault(require("../lib/prisma"));
 const emailService_1 = require("../utils/emailService");
 const google_auth_library_1 = require("google-auth-library");
-const client_1 = require("@prisma/client");
 const googleClient = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_for_development';
 if (JWT_SECRET === 'your_fallback_secret_for_development') {
@@ -374,18 +373,18 @@ const verifyToken = async (req, res) => {
 exports.verifyToken = verifyToken;
 const mapInstitutionToUniversity = (institution) => {
     if (!institution)
-        return client_1.University.OTHER;
+        return 'OTHER';
     const inst = institution.toLowerCase();
     if (inst.includes('knust'))
-        return client_1.University.KNUST;
+        return 'KNUST';
     if (inst.includes('university of ghana') || inst.includes('legon'))
-        return client_1.University.UNIVERSITY_OF_GHANA;
+        return 'UNIVERSITY_OF_GHANA';
     if (inst.includes('cape coast') || inst.includes('ucc'))
-        return client_1.University.UNIVERSITY_OF_CAPE_COAST;
+        return 'UNIVERSITY_OF_CAPE_COAST';
     if (inst.includes('ashesi'))
-        return client_1.University.ASHESI_UNIVERSITY;
+        return 'ASHESI_UNIVERSITY';
     if (inst.includes('gimpa'))
-        return client_1.University.GIMPA;
-    return client_1.University.OTHER;
+        return 'GIMPA';
+    return 'OTHER';
 };
 //# sourceMappingURL=authController.js.map

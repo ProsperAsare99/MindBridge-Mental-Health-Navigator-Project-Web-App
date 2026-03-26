@@ -12,7 +12,7 @@ router.post('/', auth_1.authenticateToken, upload_1.upload.fields([
 router.get('/', auth_1.authenticateToken, moodController_1.getUserMoods);
 router.get('/stats', auth_1.authenticateToken, moodController_1.getMoodStats);
 router.get('/nudges', auth_1.authenticateToken, moodController_1.getProactiveNudges);
-router.delete('/:id', auth_1.authenticateToken, deleteMood);
-router.delete('/:id/media/:type', auth_1.authenticateToken, deleteMedia);
+router.delete('/:id', auth_1.authenticateToken, moodController_1.deleteMood);
+router.delete('/:id/media/:type', auth_1.authenticateToken, moodController_1.deleteMedia);
 exports.default = router;
 //# sourceMappingURL=moodRoutes.js.map

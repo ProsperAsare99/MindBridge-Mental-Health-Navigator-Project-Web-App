@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import type { SupportLevel, RiskLevel, Concern, CopingStyle, FaithLevel, ApproachPreference, Goal } from '@prisma/client';
 import { AuthRequest } from '../middlewares/auth';
 import prisma from '../lib/prisma';
 import { University } from '@prisma/client';

@@ -1,8 +1,9 @@
 import { Response } from 'express';
+import type { Concern } from '@prisma/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
-import { Concern } from '@prisma/client';
-import { ai } from '../lib/genkit-config';
+// import { Concern } from '@prisma/client';
+// import { ai } from '../lib/genkit-config';
 
 const detectCrisis = async (content: string) => {
     const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead', 'dying', 'goodbye world'];
@@ -10,30 +11,31 @@ const detectCrisis = async (content: string) => {
     
     if (hasKeyword) return true;
 
-    try {
-        const result = await ai.generate({
-            prompt: `
-            Analyze the following student community post for immediate mental health crisis, suicidal ideation, or severe self-harm intent.
-            The platform is MindBridge, a mental health navigator for university students.
-            
-            Look for:
-            1. Direct threats of self-harm or suicide.
-            2. Expressions of hopelessness and lack of reason to live.
-            3. Finality statements (e.g., "I'm done", "Goodbye everyone").
-            4. Severe clinical distress that requires immediate human intervention.
-            
-            Contextual nuance: Students mapping exam stress or typical academic frustration should NOT be flagged unless they transition into hopeless/self-destructive territory.
-            
-            Respond with ONLY 'true' if a crisis/intervention is needed, or 'false' otherwise.
-            
-            Text: "${content}"`
-        });
-        const responseText = result.text.trim().toLowerCase();
-        return responseText.includes('true') && !responseText.includes('false');
-    } catch (e) {
-        console.error("AI Crisis Detection Error:", e);
-        return false;
-    }
+    // try {
+    //     const result = await ai.generate({
+    //         prompt: `
+    //         Analyze the following student community post for immediate mental health crisis, suicidal ideation, or severe self-harm intent.
+    //         The platform is MindBridge, a mental health navigator for university students.
+    //         
+    //         Look for:
+    //         1. Direct threats of self-harm or suicide.
+    //         2. Expressions of hopelessness and lack of reason to live.
+    //         3. Finality statements (e.g., "I'm done", "Goodbye everyone").
+    //         4. Severe clinical distress that requires immediate human intervention.
+    //         
+    //         Contextual nuance: Students mapping exam stress or typical academic frustration should NOT be flagged unless they transition into hopeless/self-destructive territory.
+    //         
+    //         Respond with ONLY 'true' if a crisis/intervention is needed, or 'false' otherwise.
+    //         
+    //         Text: "${content}"`
+    //     });
+    //     const responseText = result.text.trim().toLowerCase();
+    //     return responseText.includes('true') && !responseText.includes('false');
+    // } catch (e) {
+    //     console.error("AI Crisis Detection Error:", e);
+    //     return false;
+    // }
+    return false;
 };
 
 // ============================================
@@ -282,10 +284,10 @@ export const initializeCircles = async () => {
         const count = await prisma.supportCircle.count();
         if (count === 0) {
             const initialCircles = [
-                { name: 'Academic Stress Circle', description: 'Share strategies for managing exams, deadlines, and study pressure.', category: Concern.ACADEMIC_STRESS },
-                { name: 'Anxiety Support', description: 'A safe space to talk about coping with anxiety and finding calm.', category: Concern.ANXIETY },
-                { name: 'Growth & Resilience', description: 'Focus on building strength and overcoming personal challenges.', category: Concern.OTHER },
-                { name: 'Loneliness & Connection', description: 'Find community and share experiences of navigated university life.', category: Concern.LONELINESS },
+                { name: 'Academic Stress Circle', description: 'Share strategies for managing exams, deadlines, and study pressure.', category: 'ACADEMIC_STRESS' as any },
+                { name: 'Anxiety Support', description: 'A safe space to talk about coping with anxiety and finding calm.', category: 'ANXIETY' as any },
+                { name: 'Growth & Resilience', description: 'Focus on building strength and overcoming personal challenges.', category: 'OTHER' as any },
+                { name: 'Loneliness & Connection', description: 'Find community and share experiences of navigated university life.', category: 'LONELINESS' as any },
             ];
 
             for (const circle of initialCircles) {

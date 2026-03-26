@@ -15,13 +15,15 @@ console.log(`[DEBUG] Attempting to listen on ${HOST}:${PORT}...`);
 app.listen(PORT, HOST, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
     
-    // Background initialization - don't block the server startup
-    console.log(`[SERVER] Initializing background tasks...`);
+    // Background initialization disabled to prevent exit on network errors
+    console.log(`[SERVER] Background tasks disabled for stability.`);
+    /*
     initializeCircles().catch((error: any) => {
         console.warn('[SERVER WARNING] Circles initialization failed:', error.message);
     });
     initializeChallenges().catch((error: any) => {
         console.warn('[SERVER WARNING] Challenges initialization failed:', error.message);
     });
+    */
 });
 
