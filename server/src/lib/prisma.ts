@@ -4,7 +4,20 @@ let _prisma: PrismaClientType | null = null;
 
 const createPrismaClient = (): PrismaClientType => {
     const { PrismaClient } = require('@prisma/client');
+    const { Pool } = require('pg');
+    const { PrismaPg } = require('@prisma/adapter-pg');
+    
+    // Configure pool for Neon compatibility
+    const pool = new Pool({ 
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false // Necessary for Neon depending on environment
+        }
+    });
+    
+    const adapter = new PrismaPg(pool);
     return new PrismaClient({
+        adapter,
         log: ['error', 'warn']
     });
 };

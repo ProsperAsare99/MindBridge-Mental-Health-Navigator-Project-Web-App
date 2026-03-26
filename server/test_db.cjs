@@ -1,7 +1,6 @@
-require('dotenv').config();
-const { PrismaClient } = require('@prisma/client');
+const { getPrisma } = require('./src/lib/prisma');
 console.log('Using DATABASE_URL:', process.env.DATABASE_URL ? 'FOUND' : 'MISSING');
-const prisma = new PrismaClient();
+const prisma = getPrisma();
 
 async function test() {
     try {
