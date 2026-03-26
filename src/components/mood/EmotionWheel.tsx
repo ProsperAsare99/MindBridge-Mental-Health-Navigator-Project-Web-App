@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const EMOTIONS = [
-  { label: "Radiant", color: "fill-yellow-400", stroke: "stroke-yellow-500", bg: "bg-yellow-400", description: "Joy & Energy" },
-  { label: "Serene", color: "fill-emerald-400", stroke: "stroke-emerald-500", bg: "bg-emerald-400", description: "Peace & Calm" },
-  { label: "Melancholy", color: "fill-blue-400", stroke: "stroke-blue-500", bg: "bg-blue-400", description: "Reflection" },
-  { label: "Anxious", color: "fill-amber-400", stroke: "stroke-amber-500", bg: "bg-amber-400", description: "Tension" },
-  { label: "Frustrated", color: "fill-orange-400", stroke: "stroke-orange-500", bg: "bg-orange-400", description: "Impatience" },
-  { label: "Grateful", color: "fill-pink-400", stroke: "stroke-pink-500", bg: "bg-pink-400", description: "Warmth" },
-  { label: "Empty", color: "fill-slate-400", stroke: "stroke-slate-500", bg: "bg-slate-400", description: "Low Drive" },
-  { label: "Empowered", color: "fill-indigo-400", stroke: "stroke-indigo-500", bg: "bg-indigo-400", description: "Strength" },
+  { label: "Radiant", color: "fill-amber-400", stroke: "stroke-amber-600", bg: "bg-amber-400", description: "Joy & Energy" },
+  { label: "Serene", color: "fill-emerald-500", stroke: "stroke-emerald-700", bg: "bg-emerald-500", description: "Peace & Calm" },
+  { label: "Melancholy", color: "fill-indigo-500", stroke: "stroke-indigo-700", bg: "bg-indigo-500", description: "Reflection" },
+  { label: "Anxious", color: "fill-orange-500", stroke: "stroke-orange-700", bg: "bg-orange-500", description: "Tension" },
+  { label: "Frustrated", color: "fill-rose-500", stroke: "stroke-rose-700", bg: "bg-rose-500", description: "Impatience" },
+  { label: "Grateful", color: "fill-pink-500", stroke: "stroke-pink-700", bg: "bg-pink-500", description: "Warmth" },
+  { label: "Empty", color: "fill-slate-500", stroke: "stroke-slate-700", bg: "bg-slate-500", description: "Low Drive" },
+  { label: "Empowered", color: "fill-violet-600", stroke: "stroke-violet-800", bg: "bg-violet-600", description: "Strength" },
 ];
 
 interface EmotionWheelProps {
@@ -67,17 +67,20 @@ export function EmotionWheel({ onSelect, selectedEmotion }: EmotionWheelProps) {
                 <motion.path
                   d={`M ${x1} ${y1} L ${ox1} ${oy1} A ${outerRadius} ${outerRadius} 0 0 1 ${ox2} ${oy2} L ${x2} ${y2} A ${radius} ${radius} 0 0 0 ${x1} ${y1} Z`}
                   className={cn(
-                    "cursor-pointer transition-all duration-300 stroke-[3px]",
+                    "cursor-pointer transition-all duration-300 stroke-[4px]",
                     emotion.color,
                     emotion.stroke,
-                    isSelected || isHovered ? "opacity-100 scale-[1.05]" : "opacity-30 hover:opacity-100"
+                    isSelected || isHovered ? "opacity-100 scale-[1.05] shadow-xl" : "opacity-60 hover:opacity-100"
                   )}
-                  style={{ transformOrigin: `${centerX}px ${centerY}px` }}
+                  style={{ 
+                    transformOrigin: `${centerX}px ${centerY}px`,
+                    filter: isSelected || isHovered ? "drop-shadow(0 0 8px rgba(0,0,0,0.2))" : "none"
+                  }}
                   onMouseEnter={() => setHovered(emotion.label)}
                   onMouseLeave={() => setHovered(null)}
                   onClick={() => onSelect(emotion.label)}
                   initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: isSelected || isHovered ? 1 : 0.3 }}
+                  animate={{ scale: 1, opacity: isSelected || isHovered ? 1 : 0.6 }}
                   transition={{ delay: i * 0.05, type: "spring", stiffness: 120 }}
                 />
                 
@@ -88,8 +91,8 @@ export function EmotionWheel({ onSelect, selectedEmotion }: EmotionWheelProps) {
                   textAnchor="middle"
                   dominantBaseline="middle"
                   className={cn(
-                    "font-black text-[9px] uppercase tracking-tighter transition-all duration-300 pointer-events-none",
-                    isSelected || isHovered ? "fill-foreground scale-110" : "fill-muted-foreground/30"
+                    "font-extrabold text-[10px] uppercase tracking-tighter transition-all duration-300 pointer-events-none drop-shadow-sm",
+                    isSelected || isHovered ? "fill-foreground scale-110" : "fill-muted-foreground/60"
                   )}
                   style={{ 
                     transform: `rotate(${22.5}deg)`,
@@ -108,14 +111,14 @@ export function EmotionWheel({ onSelect, selectedEmotion }: EmotionWheelProps) {
             cy={centerY} 
             r={radius - 5} 
             className={cn(
-              "transition-colors duration-500 stroke-[4px] stroke-background shadow-2xl",
-              selectedData ? selectedData.color : "fill-muted/20"
+              "transition-colors duration-500 stroke-[5px] stroke-background shadow-premium",
+              selectedData ? selectedData.color : "fill-muted/10"
             )}
             animate={{ 
-              scale: currentSelection ? [1, 1.05, 1] : 1,
-              opacity: currentSelection ? 1 : 0.5 
+              scale: currentSelection ? [1, 1.03, 1] : 1,
+              opacity: currentSelection ? 1 : 0.8 
             }}
-            transition={{ repeat: currentSelection ? Infinity : 0, duration: 2 }}
+            transition={{ repeat: currentSelection ? Infinity : 0, duration: 3 }}
           />
 
           <text 
@@ -123,7 +126,10 @@ export function EmotionWheel({ onSelect, selectedEmotion }: EmotionWheelProps) {
             y={centerY} 
             textAnchor="middle" 
             dominantBaseline="middle" 
-            className="fill-white font-black text-[12px] uppercase tracking-[0.3em] transform rotate-[22.5deg] shadow-sm pointer-events-none"
+            className={cn(
+               "font-black text-[12px] uppercase tracking-[0.3em] transform rotate-[22.5deg] shadow-sm pointer-events-none transition-colors duration-300",
+               selectedData ? "fill-white" : "fill-muted-foreground/40"
+            )}
           >
             {currentSelection ? "" : "Select"}
           </text>
@@ -140,10 +146,10 @@ export function EmotionWheel({ onSelect, selectedEmotion }: EmotionWheelProps) {
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
             >
               <div className="text-center space-y-0.5 transform rotate-[22.5deg]">
-                <p className="text-xs font-black text-white uppercase tracking-widest drop-shadow-md">
+                <p className="text-sm font-black text-white uppercase tracking-[0.2em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
                    {currentSelection}
                 </p>
-                <p className="text-[7px] font-black text-white/80 uppercase tracking-tighter drop-shadow-sm">
+                <p className="text-[8px] font-black text-white/90 uppercase tracking-tighter drop-shadow-md">
                    {selectedData?.description}
                 </p>
               </div>

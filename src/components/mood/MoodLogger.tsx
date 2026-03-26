@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { 
     CloudRain, Frown, Meh, Smile, Sun, 
     ChevronRight, ChevronLeft, Camera, Mic, 
-    MapPin, Cloud, ArrowRight, CheckCircle2 
+    MapPin, Cloud, ArrowRight, CheckCircle2, X 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EmotionWheel } from "./EmotionWheel";
@@ -328,7 +328,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="flex flex-col gap-2">
+                                    <div className="flex flex-col gap-2 relative">
                                         <button 
                                             onClick={openCamera}
                                             className={cn(
@@ -341,6 +341,14 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                                                 {photo ? "Photo Captured" : "Live Camera"}
                                             </span>
                                         </button>
+                                        {photo && (
+                                            <button 
+                                                onClick={() => setPhoto(null)}
+                                                className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 shadow-lg z-10"
+                                            >
+                                                <X size={12} />
+                                            </button>
+                                        )}
                                         <label className="flex items-center justify-center gap-2 p-2 rounded-xl bg-muted/30 text-[8px] font-black uppercase cursor-pointer hover:bg-muted/50">
                                             <span>Or Upload File</span>
                                             <input type="file" accept="image/*" className="hidden" onChange={(e) => setPhoto(e.target.files?.[0] || null)} />
@@ -350,7 +358,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                             </div>
 
                             {/* Mic Action */}
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 relative">
                                 <button 
                                     onClick={isRecording ? stopRecording : startRecording}
                                     className={cn(
@@ -363,6 +371,14 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                                         {isRecording ? "Recording..." : (audio ? "Memo Captured" : "Record Voice")}
                                     </span>
                                 </button>
+                                {audio && (
+                                    <button 
+                                        onClick={() => setAudio(null)}
+                                        className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 shadow-lg z-10"
+                                    >
+                                        <X size={12} />
+                                    </button>
+                                )}
                                 <label className="flex items-center justify-center gap-2 p-2 rounded-xl bg-muted/30 text-[8px] font-black uppercase cursor-pointer hover:bg-muted/50">
                                     <span>Or Upload File</span>
                                     <input type="file" accept="audio/*" className="hidden" onChange={(e) => setAudio(e.target.files?.[0] || null)} />

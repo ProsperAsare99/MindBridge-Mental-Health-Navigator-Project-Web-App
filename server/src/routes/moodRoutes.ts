@@ -12,6 +12,8 @@ router.post('/', authenticateToken, upload.fields([
 router.get('/', authenticateToken, getUserMoods);
 router.get('/stats', authenticateToken, getMoodStats);
 router.get('/nudges', authenticateToken, getProactiveNudges);
+router.delete('/:id', authenticateToken, deleteMood);
+router.delete('/:id/media/:type', authenticateToken, deleteMedia);
 
 export default router;
 

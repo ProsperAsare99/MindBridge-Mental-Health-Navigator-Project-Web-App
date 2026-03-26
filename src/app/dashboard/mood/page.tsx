@@ -338,7 +338,7 @@ export default function MoodPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
                 >
-                    <MoodTimeline entries={moodHistory} />
+                    <MoodTimeline entries={moodHistory} onRefresh={fetchMoodData} />
                 </motion.div>
             </div>
         </div>

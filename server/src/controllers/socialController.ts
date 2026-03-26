@@ -5,18 +5,33 @@ import { Concern } from '../generated/client_new';
 import { ai } from '../lib/genkit-config';
 
 const detectCrisis = async (content: string) => {
-    const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead'];
+    const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead', 'dying', 'goodbye world'];
     const hasKeyword = crisisKeywords.some(kw => content.toLowerCase().includes(kw));
     
     if (hasKeyword) return true;
 
     try {
         const result = await ai.generate({
-            prompt: `Determine if the following text indicates an immediate crisis like self-harm, suicidal ideation, or severe clinical distress. Respond with ONLY 'true' or 'false'.
+            prompt: `
+            Analyze the following student community post for immediate mental health crisis, suicidal ideation, or severe self-harm intent.
+            The platform is MindBridge, a mental health navigator for university students.
+            
+            Look for:
+            1. Direct threats of self-harm or suicide.
+            2. Expressions of hopelessness and lack of reason to live.
+            3. Finality statements (e.g., "I'm done", "Goodbye everyone").
+            4. Severe clinical distress that requires immediate human intervention.
+            
+            Contextual nuance: Students mapping exam stress or typical academic frustration should NOT be flagged unless they transition into hopeless/self-destructive territory.
+            
+            Respond with ONLY 'true' if a crisis/intervention is needed, or 'false' otherwise.
+            
             Text: "${content}"`
         });
-        return result.text.trim().toLowerCase().includes('true');
+        const responseText = result.text.trim().toLowerCase();
+        return responseText.includes('true') && !responseText.includes('false');
     } catch (e) {
+        console.error("AI Crisis Detection Error:", e);
         return false;
     }
 };

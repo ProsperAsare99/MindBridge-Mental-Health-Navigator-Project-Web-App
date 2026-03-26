@@ -9,7 +9,9 @@ import {
     Heart, 
     MessageCircle,
     Shield,
-    Loader2
+    Loader2,
+    AlertTriangle,
+    ShieldAlert
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -41,6 +43,7 @@ export function CircleDialog({ circleId, circleName, isOpen, onClose }: CircleDi
     const [loading, setLoading] = useState(true);
     const [newPost, setNewPost] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showSafetyWarning, setShowSafetyWarning] = useState(false);
 
     useEffect(() => {
         if (isOpen) {
@@ -64,12 +67,18 @@ export function CircleDialog({ circleId, circleName, isOpen, onClose }: CircleDi
         if (!newPost.trim() || isSubmitting) return;
         setIsSubmitting(true);
         try {
-            await api.post(`/social/circles/${circleId}/posts`, {
+            const res = await api.post(`/social/circles/${circleId}/posts`, {
                 content: newPost,
                 isAnonymous: true
             });
-            setNewPost('');
-            fetchPosts();
+            
+            if (res.crisisFlag) {
+                setShowSafetyWarning(true);
+                setNewPost('');
+            } else {
+                setNewPost('');
+                fetchPosts();
+            }
         } catch (error) {
             console.error('Failed to create post:', error);
         } finally {
@@ -115,7 +124,38 @@ export function CircleDialog({ circleId, circleName, isOpen, onClose }: CircleDi
                         </div>
 
                         {/* Feed */}
-                        <div className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-muted/5">
+                        <div className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-muted/5 relative">
+                            {/* Safety Warning Overlay */}
+                            <AnimatePresence>
+                                {showSafetyWarning && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: -20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        className="absolute inset-0 z-[110] p-8 flex items-center justify-center bg-background/80 backdrop-blur-xl"
+                                    >
+                                        <div className="max-w-md w-full glass p-10 rounded-[2.5rem] border-2 border-amber-500/30 text-center space-y-6 shadow-2xl">
+                                            <div className="h-20 w-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto text-amber-500">
+                                                <ShieldAlert size={40} />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <h3 className="text-2xl font-black text-foreground tracking-tight">Sharing with Care</h3>
+                                                <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                                                    We noticed your message contains some concerning themes. To keep our community safe, this post has been flagged for peer-moderation. 
+                                                </p>
+                                            </div>
+                                            <div className="p-4 rounded-2xl bg-primary/5 border border-primary/10 text-xs font-bold text-primary italic">
+                                                Remember, you're not alone. Our 24/7 Crisis Support team is just a tap away in the menu.
+                                            </div>
+                                            <div className="flex flex-col gap-3">
+                                                <Button className="w-full rounded-2xl bg-primary text-[10px] font-black uppercase tracking-widest h-12">Talk to Someone Now</Button>
+                                                <Button variant="ghost" onClick={() => setShowSafetyWarning(false)} className="w-full text-[10px] font-black uppercase tracking-widest h-12 text-muted-foreground">Continue to Circle</Button>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
                             {loading ? (
                                 <div className="h-full flex flex-col items-center justify-center gap-4 py-20">
                                     <Loader2 className="h-10 w-10 text-primary animate-spin" />
