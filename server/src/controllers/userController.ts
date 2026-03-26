@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import prisma from '../lib/prisma';
-import { University } from '@prisma/client';
+import { University } from '../generated/client';
 
 // Define the schema for input validation
 const createUserSchema = z.object({

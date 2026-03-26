@@ -93,12 +93,60 @@ export type ChallengeParticipation = $Result.DefaultSelection<Prisma.$ChallengeP
  * 
  */
 export type MoodGarden = $Result.DefaultSelection<Prisma.$MoodGardenPayload>
+/**
+ * Model SupportCircle
+ * 
+ */
+export type SupportCircle = $Result.DefaultSelection<Prisma.$SupportCirclePayload>
+/**
+ * Model CircleMembership
+ * 
+ */
+export type CircleMembership = $Result.DefaultSelection<Prisma.$CircleMembershipPayload>
+/**
+ * Model CirclePost
+ * 
+ */
+export type CirclePost = $Result.DefaultSelection<Prisma.$CirclePostPayload>
+/**
+ * Model SupportStory
+ * 
+ */
+export type SupportStory = $Result.DefaultSelection<Prisma.$SupportStoryPayload>
+/**
+ * Model SupportEncouragement
+ * 
+ */
+export type SupportEncouragement = $Result.DefaultSelection<Prisma.$SupportEncouragementPayload>
+/**
+ * Model MentorMatch
+ * 
+ */
+export type MentorMatch = $Result.DefaultSelection<Prisma.$MentorMatchPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const University: {
+  export const CircleRole: {
+  MEMBER: 'MEMBER',
+  MODERATOR: 'MODERATOR'
+};
+
+export type CircleRole = (typeof CircleRole)[keyof typeof CircleRole]
+
+
+export const MatchStatus: {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  DECLINED: 'DECLINED'
+};
+
+export type MatchStatus = (typeof MatchStatus)[keyof typeof MatchStatus]
+
+
+export const University: {
   KNUST: 'KNUST',
   UNIVERSITY_OF_GHANA: 'UNIVERSITY_OF_GHANA',
   UNIVERSITY_OF_CAPE_COAST: 'UNIVERSITY_OF_CAPE_COAST',
@@ -252,6 +300,9 @@ export const AssessmentType: {
   PHQ9: 'PHQ9',
   GAD7: 'GAD7',
   PSS: 'PSS',
+  STRESS: 'STRESS',
+  SLEEP: 'SLEEP',
+  AIS: 'AIS',
   CUSTOM: 'CUSTOM'
 };
 
@@ -263,7 +314,12 @@ export const Severity: {
   MILD: 'MILD',
   MODERATE: 'MODERATE',
   MODERATELY_SEVERE: 'MODERATELY_SEVERE',
-  SEVERE: 'SEVERE'
+  SEVERE: 'SEVERE',
+  LOW: 'LOW',
+  HIGH: 'HIGH',
+  GOOD: 'GOOD',
+  FAIR: 'FAIR',
+  POOR: 'POOR'
 };
 
 export type Severity = (typeof Severity)[keyof typeof Severity]
@@ -279,6 +335,14 @@ export const Service: {
 export type Service = (typeof Service)[keyof typeof Service]
 
 }
+
+export type CircleRole = $Enums.CircleRole
+
+export const CircleRole: typeof $Enums.CircleRole
+
+export type MatchStatus = $Enums.MatchStatus
+
+export const MatchStatus: typeof $Enums.MatchStatus
 
 export type University = $Enums.University
 
@@ -632,6 +696,66 @@ export class PrismaClient<
     * ```
     */
   get moodGarden(): Prisma.MoodGardenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.supportCircle`: Exposes CRUD operations for the **SupportCircle** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupportCircles
+    * const supportCircles = await prisma.supportCircle.findMany()
+    * ```
+    */
+  get supportCircle(): Prisma.SupportCircleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.circleMembership`: Exposes CRUD operations for the **CircleMembership** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CircleMemberships
+    * const circleMemberships = await prisma.circleMembership.findMany()
+    * ```
+    */
+  get circleMembership(): Prisma.CircleMembershipDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.circlePost`: Exposes CRUD operations for the **CirclePost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CirclePosts
+    * const circlePosts = await prisma.circlePost.findMany()
+    * ```
+    */
+  get circlePost(): Prisma.CirclePostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.supportStory`: Exposes CRUD operations for the **SupportStory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupportStories
+    * const supportStories = await prisma.supportStory.findMany()
+    * ```
+    */
+  get supportStory(): Prisma.SupportStoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.supportEncouragement`: Exposes CRUD operations for the **SupportEncouragement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupportEncouragements
+    * const supportEncouragements = await prisma.supportEncouragement.findMany()
+    * ```
+    */
+  get supportEncouragement(): Prisma.SupportEncouragementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mentorMatch`: Exposes CRUD operations for the **MentorMatch** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MentorMatches
+    * const mentorMatches = await prisma.mentorMatch.findMany()
+    * ```
+    */
+  get mentorMatch(): Prisma.MentorMatchDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1087,7 +1211,13 @@ export namespace Prisma {
     Achievement: 'Achievement',
     Challenge: 'Challenge',
     ChallengeParticipation: 'ChallengeParticipation',
-    MoodGarden: 'MoodGarden'
+    MoodGarden: 'MoodGarden',
+    SupportCircle: 'SupportCircle',
+    CircleMembership: 'CircleMembership',
+    CirclePost: 'CirclePost',
+    SupportStory: 'SupportStory',
+    SupportEncouragement: 'SupportEncouragement',
+    MentorMatch: 'MentorMatch'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1103,7 +1233,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "conversation" | "message" | "moodEntry" | "assessment" | "aIInteraction" | "crisisLog" | "usageLog" | "memoryEntry" | "academicEvent" | "userGoal" | "carePlan" | "achievement" | "challenge" | "challengeParticipation" | "moodGarden"
+      modelProps: "user" | "conversation" | "message" | "moodEntry" | "assessment" | "aIInteraction" | "crisisLog" | "usageLog" | "memoryEntry" | "academicEvent" | "userGoal" | "carePlan" | "achievement" | "challenge" | "challengeParticipation" | "moodGarden" | "supportCircle" | "circleMembership" | "circlePost" | "supportStory" | "supportEncouragement" | "mentorMatch"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2291,6 +2421,450 @@ export namespace Prisma {
           }
         }
       }
+      SupportCircle: {
+        payload: Prisma.$SupportCirclePayload<ExtArgs>
+        fields: Prisma.SupportCircleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SupportCircleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SupportCircleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>
+          }
+          findFirst: {
+            args: Prisma.SupportCircleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SupportCircleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>
+          }
+          findMany: {
+            args: Prisma.SupportCircleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>[]
+          }
+          create: {
+            args: Prisma.SupportCircleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>
+          }
+          createMany: {
+            args: Prisma.SupportCircleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupportCircleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>[]
+          }
+          delete: {
+            args: Prisma.SupportCircleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>
+          }
+          update: {
+            args: Prisma.SupportCircleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>
+          }
+          deleteMany: {
+            args: Prisma.SupportCircleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SupportCircleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SupportCircleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>[]
+          }
+          upsert: {
+            args: Prisma.SupportCircleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportCirclePayload>
+          }
+          aggregate: {
+            args: Prisma.SupportCircleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportCircle>
+          }
+          groupBy: {
+            args: Prisma.SupportCircleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportCircleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SupportCircleCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportCircleCountAggregateOutputType> | number
+          }
+        }
+      }
+      CircleMembership: {
+        payload: Prisma.$CircleMembershipPayload<ExtArgs>
+        fields: Prisma.CircleMembershipFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CircleMembershipFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CircleMembershipFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>
+          }
+          findFirst: {
+            args: Prisma.CircleMembershipFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CircleMembershipFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>
+          }
+          findMany: {
+            args: Prisma.CircleMembershipFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>[]
+          }
+          create: {
+            args: Prisma.CircleMembershipCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>
+          }
+          createMany: {
+            args: Prisma.CircleMembershipCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CircleMembershipCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>[]
+          }
+          delete: {
+            args: Prisma.CircleMembershipDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>
+          }
+          update: {
+            args: Prisma.CircleMembershipUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>
+          }
+          deleteMany: {
+            args: Prisma.CircleMembershipDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CircleMembershipUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CircleMembershipUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>[]
+          }
+          upsert: {
+            args: Prisma.CircleMembershipUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CircleMembershipPayload>
+          }
+          aggregate: {
+            args: Prisma.CircleMembershipAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCircleMembership>
+          }
+          groupBy: {
+            args: Prisma.CircleMembershipGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CircleMembershipGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CircleMembershipCountArgs<ExtArgs>
+            result: $Utils.Optional<CircleMembershipCountAggregateOutputType> | number
+          }
+        }
+      }
+      CirclePost: {
+        payload: Prisma.$CirclePostPayload<ExtArgs>
+        fields: Prisma.CirclePostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CirclePostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CirclePostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>
+          }
+          findFirst: {
+            args: Prisma.CirclePostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CirclePostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>
+          }
+          findMany: {
+            args: Prisma.CirclePostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>[]
+          }
+          create: {
+            args: Prisma.CirclePostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>
+          }
+          createMany: {
+            args: Prisma.CirclePostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CirclePostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>[]
+          }
+          delete: {
+            args: Prisma.CirclePostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>
+          }
+          update: {
+            args: Prisma.CirclePostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>
+          }
+          deleteMany: {
+            args: Prisma.CirclePostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CirclePostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CirclePostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>[]
+          }
+          upsert: {
+            args: Prisma.CirclePostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CirclePostPayload>
+          }
+          aggregate: {
+            args: Prisma.CirclePostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCirclePost>
+          }
+          groupBy: {
+            args: Prisma.CirclePostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CirclePostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CirclePostCountArgs<ExtArgs>
+            result: $Utils.Optional<CirclePostCountAggregateOutputType> | number
+          }
+        }
+      }
+      SupportStory: {
+        payload: Prisma.$SupportStoryPayload<ExtArgs>
+        fields: Prisma.SupportStoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SupportStoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SupportStoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>
+          }
+          findFirst: {
+            args: Prisma.SupportStoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SupportStoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>
+          }
+          findMany: {
+            args: Prisma.SupportStoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>[]
+          }
+          create: {
+            args: Prisma.SupportStoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>
+          }
+          createMany: {
+            args: Prisma.SupportStoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupportStoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>[]
+          }
+          delete: {
+            args: Prisma.SupportStoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>
+          }
+          update: {
+            args: Prisma.SupportStoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.SupportStoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SupportStoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SupportStoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.SupportStoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportStoryPayload>
+          }
+          aggregate: {
+            args: Prisma.SupportStoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportStory>
+          }
+          groupBy: {
+            args: Prisma.SupportStoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportStoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SupportStoryCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportStoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      SupportEncouragement: {
+        payload: Prisma.$SupportEncouragementPayload<ExtArgs>
+        fields: Prisma.SupportEncouragementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SupportEncouragementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SupportEncouragementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>
+          }
+          findFirst: {
+            args: Prisma.SupportEncouragementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SupportEncouragementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>
+          }
+          findMany: {
+            args: Prisma.SupportEncouragementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>[]
+          }
+          create: {
+            args: Prisma.SupportEncouragementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>
+          }
+          createMany: {
+            args: Prisma.SupportEncouragementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupportEncouragementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>[]
+          }
+          delete: {
+            args: Prisma.SupportEncouragementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>
+          }
+          update: {
+            args: Prisma.SupportEncouragementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>
+          }
+          deleteMany: {
+            args: Prisma.SupportEncouragementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SupportEncouragementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SupportEncouragementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>[]
+          }
+          upsert: {
+            args: Prisma.SupportEncouragementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportEncouragementPayload>
+          }
+          aggregate: {
+            args: Prisma.SupportEncouragementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportEncouragement>
+          }
+          groupBy: {
+            args: Prisma.SupportEncouragementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportEncouragementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SupportEncouragementCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportEncouragementCountAggregateOutputType> | number
+          }
+        }
+      }
+      MentorMatch: {
+        payload: Prisma.$MentorMatchPayload<ExtArgs>
+        fields: Prisma.MentorMatchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MentorMatchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MentorMatchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>
+          }
+          findFirst: {
+            args: Prisma.MentorMatchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MentorMatchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>
+          }
+          findMany: {
+            args: Prisma.MentorMatchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>[]
+          }
+          create: {
+            args: Prisma.MentorMatchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>
+          }
+          createMany: {
+            args: Prisma.MentorMatchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MentorMatchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>[]
+          }
+          delete: {
+            args: Prisma.MentorMatchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>
+          }
+          update: {
+            args: Prisma.MentorMatchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>
+          }
+          deleteMany: {
+            args: Prisma.MentorMatchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MentorMatchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MentorMatchUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>[]
+          }
+          upsert: {
+            args: Prisma.MentorMatchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorMatchPayload>
+          }
+          aggregate: {
+            args: Prisma.MentorMatchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMentorMatch>
+          }
+          groupBy: {
+            args: Prisma.MentorMatchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MentorMatchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MentorMatchCountArgs<ExtArgs>
+            result: $Utils.Optional<MentorMatchCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2395,6 +2969,12 @@ export namespace Prisma {
     challenge?: ChallengeOmit
     challengeParticipation?: ChallengeParticipationOmit
     moodGarden?: MoodGardenOmit
+    supportCircle?: SupportCircleOmit
+    circleMembership?: CircleMembershipOmit
+    circlePost?: CirclePostOmit
+    supportStory?: SupportStoryOmit
+    supportEncouragement?: SupportEncouragementOmit
+    mentorMatch?: MentorMatchOmit
   }
 
   /* Types for Logging */
@@ -2500,6 +3080,13 @@ export namespace Prisma {
     carePlans: number
     achievements: number
     challenges: number
+    circleMemberships: number
+    circlePosts: number
+    stories: number
+    sentEncouragements: number
+    receivedEncouragements: number
+    mentorMatches: number
+    menteeMatches: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2514,6 +3101,13 @@ export namespace Prisma {
     carePlans?: boolean | UserCountOutputTypeCountCarePlansArgs
     achievements?: boolean | UserCountOutputTypeCountAchievementsArgs
     challenges?: boolean | UserCountOutputTypeCountChallengesArgs
+    circleMemberships?: boolean | UserCountOutputTypeCountCircleMembershipsArgs
+    circlePosts?: boolean | UserCountOutputTypeCountCirclePostsArgs
+    stories?: boolean | UserCountOutputTypeCountStoriesArgs
+    sentEncouragements?: boolean | UserCountOutputTypeCountSentEncouragementsArgs
+    receivedEncouragements?: boolean | UserCountOutputTypeCountReceivedEncouragementsArgs
+    mentorMatches?: boolean | UserCountOutputTypeCountMentorMatchesArgs
+    menteeMatches?: boolean | UserCountOutputTypeCountMenteeMatchesArgs
   }
 
   // Custom InputTypes
@@ -2604,6 +3198,55 @@ export namespace Prisma {
     where?: ChallengeParticipationWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCircleMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CircleMembershipWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCirclePostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CirclePostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportStoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSentEncouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportEncouragementWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReceivedEncouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportEncouragementWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMentorMatchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MentorMatchWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMenteeMatchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MentorMatchWhereInput
+  }
+
 
   /**
    * Count Type ConversationCountOutputType
@@ -2668,6 +3311,77 @@ export namespace Prisma {
 
 
   /**
+   * Count Type SupportCircleCountOutputType
+   */
+
+  export type SupportCircleCountOutputType = {
+    members: number
+    posts: number
+  }
+
+  export type SupportCircleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    members?: boolean | SupportCircleCountOutputTypeCountMembersArgs
+    posts?: boolean | SupportCircleCountOutputTypeCountPostsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SupportCircleCountOutputType without action
+   */
+  export type SupportCircleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircleCountOutputType
+     */
+    select?: SupportCircleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SupportCircleCountOutputType without action
+   */
+  export type SupportCircleCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CircleMembershipWhereInput
+  }
+
+  /**
+   * SupportCircleCountOutputType without action
+   */
+  export type SupportCircleCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CirclePostWhereInput
+  }
+
+
+  /**
+   * Count Type CirclePostCountOutputType
+   */
+
+  export type CirclePostCountOutputType = {
+    encouragements: number
+  }
+
+  export type CirclePostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encouragements?: boolean | CirclePostCountOutputTypeCountEncouragementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CirclePostCountOutputType without action
+   */
+  export type CirclePostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePostCountOutputType
+     */
+    select?: CirclePostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CirclePostCountOutputType without action
+   */
+  export type CirclePostCountOutputTypeCountEncouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportEncouragementWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2688,6 +3402,9 @@ export namespace Prisma {
     baselineMood: number | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     onboardingStep: number | null
   }
 
@@ -2696,6 +3413,9 @@ export namespace Prisma {
     baselineMood: number | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     onboardingStep: number | null
   }
 
@@ -2725,6 +3445,9 @@ export namespace Prisma {
     joinDate: Date | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     lastActive: Date | null
     onboardingStep: number | null
     onboardingCompleted: boolean | null
@@ -2758,6 +3481,9 @@ export namespace Prisma {
     joinDate: Date | null
     moodCheckInsCount: number | null
     conversationsCount: number | null
+    wellnessXP: number | null
+    wellnessLevel: number | null
+    longestStreak: number | null
     lastActive: Date | null
     onboardingStep: number | null
     onboardingCompleted: boolean | null
@@ -2798,6 +3524,9 @@ export namespace Prisma {
     joinDate: number
     moodCheckInsCount: number
     conversationsCount: number
+    wellnessXP: number
+    wellnessLevel: number
+    longestStreak: number
     lastActive: number
     onboardingStep: number
     onboardingCompleted: number
@@ -2812,6 +3541,9 @@ export namespace Prisma {
     baselineMood?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     onboardingStep?: true
   }
 
@@ -2820,6 +3552,9 @@ export namespace Prisma {
     baselineMood?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     onboardingStep?: true
   }
 
@@ -2849,6 +3584,9 @@ export namespace Prisma {
     joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -2882,6 +3620,9 @@ export namespace Prisma {
     joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -2922,6 +3663,9 @@ export namespace Prisma {
     joinDate?: true
     moodCheckInsCount?: true
     conversationsCount?: true
+    wellnessXP?: true
+    wellnessLevel?: true
+    longestStreak?: true
     lastActive?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -3049,6 +3793,9 @@ export namespace Prisma {
     joinDate: Date
     moodCheckInsCount: number
     conversationsCount: number
+    wellnessXP: number
+    wellnessLevel: number
+    longestStreak: number
     lastActive: Date | null
     onboardingStep: number
     onboardingCompleted: boolean
@@ -3108,6 +3855,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3125,6 +3875,13 @@ export namespace Prisma {
     achievements?: boolean | User$achievementsArgs<ExtArgs>
     challenges?: boolean | User$challengesArgs<ExtArgs>
     moodGarden?: boolean | User$moodGardenArgs<ExtArgs>
+    circleMemberships?: boolean | User$circleMembershipsArgs<ExtArgs>
+    circlePosts?: boolean | User$circlePostsArgs<ExtArgs>
+    stories?: boolean | User$storiesArgs<ExtArgs>
+    sentEncouragements?: boolean | User$sentEncouragementsArgs<ExtArgs>
+    receivedEncouragements?: boolean | User$receivedEncouragementsArgs<ExtArgs>
+    mentorMatches?: boolean | User$mentorMatchesArgs<ExtArgs>
+    menteeMatches?: boolean | User$menteeMatchesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3161,6 +3918,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3201,6 +3961,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3241,6 +4004,9 @@ export namespace Prisma {
     joinDate?: boolean
     moodCheckInsCount?: boolean
     conversationsCount?: boolean
+    wellnessXP?: boolean
+    wellnessLevel?: boolean
+    longestStreak?: boolean
     lastActive?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3248,7 +4014,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "verificationToken" | "image" | "displayName" | "university" | "academicLevel" | "program" | "phoneNumber" | "studentId" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baselineMood" | "baseline" | "joinDate" | "moodCheckInsCount" | "conversationsCount" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "googleId" | "isVerified" | "isAnonymous" | "verificationToken" | "image" | "displayName" | "university" | "academicLevel" | "program" | "phoneNumber" | "studentId" | "language" | "notificationPreference" | "preferredCheckInTime" | "concerns" | "supportLevel" | "riskLevel" | "copingStyles" | "faithLevel" | "approachPreference" | "goals" | "stressors" | "trackingPreferences" | "emergencyContacts" | "baselineMood" | "baseline" | "joinDate" | "moodCheckInsCount" | "conversationsCount" | "wellnessXP" | "wellnessLevel" | "longestStreak" | "lastActive" | "onboardingStep" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversations?: boolean | User$conversationsArgs<ExtArgs>
     moodEntries?: boolean | User$moodEntriesArgs<ExtArgs>
@@ -3262,6 +4028,13 @@ export namespace Prisma {
     achievements?: boolean | User$achievementsArgs<ExtArgs>
     challenges?: boolean | User$challengesArgs<ExtArgs>
     moodGarden?: boolean | User$moodGardenArgs<ExtArgs>
+    circleMemberships?: boolean | User$circleMembershipsArgs<ExtArgs>
+    circlePosts?: boolean | User$circlePostsArgs<ExtArgs>
+    stories?: boolean | User$storiesArgs<ExtArgs>
+    sentEncouragements?: boolean | User$sentEncouragementsArgs<ExtArgs>
+    receivedEncouragements?: boolean | User$receivedEncouragementsArgs<ExtArgs>
+    mentorMatches?: boolean | User$mentorMatchesArgs<ExtArgs>
+    menteeMatches?: boolean | User$menteeMatchesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3282,6 +4055,13 @@ export namespace Prisma {
       achievements: Prisma.$AchievementPayload<ExtArgs>[]
       challenges: Prisma.$ChallengeParticipationPayload<ExtArgs>[]
       moodGarden: Prisma.$MoodGardenPayload<ExtArgs> | null
+      circleMemberships: Prisma.$CircleMembershipPayload<ExtArgs>[]
+      circlePosts: Prisma.$CirclePostPayload<ExtArgs>[]
+      stories: Prisma.$SupportStoryPayload<ExtArgs>[]
+      sentEncouragements: Prisma.$SupportEncouragementPayload<ExtArgs>[]
+      receivedEncouragements: Prisma.$SupportEncouragementPayload<ExtArgs>[]
+      mentorMatches: Prisma.$MentorMatchPayload<ExtArgs>[]
+      menteeMatches: Prisma.$MentorMatchPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3316,6 +4096,9 @@ export namespace Prisma {
       joinDate: Date
       moodCheckInsCount: number
       conversationsCount: number
+      wellnessXP: number
+      wellnessLevel: number
+      longestStreak: number
       lastActive: Date | null
       onboardingStep: number
       onboardingCompleted: boolean
@@ -3727,6 +4510,13 @@ export namespace Prisma {
     achievements<T extends User$achievementsArgs<ExtArgs> = {}>(args?: Subset<T, User$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     challenges<T extends User$challengesArgs<ExtArgs> = {}>(args?: Subset<T, User$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeParticipationPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     moodGarden<T extends User$moodGardenArgs<ExtArgs> = {}>(args?: Subset<T, User$moodGardenArgs<ExtArgs>>): Prisma__MoodGardenClient<$Result.GetResult<Prisma.$MoodGardenPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    circleMemberships<T extends User$circleMembershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$circleMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    circlePosts<T extends User$circlePostsArgs<ExtArgs> = {}>(args?: Subset<T, User$circlePostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    stories<T extends User$storiesArgs<ExtArgs> = {}>(args?: Subset<T, User$storiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    sentEncouragements<T extends User$sentEncouragementsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentEncouragementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    receivedEncouragements<T extends User$receivedEncouragementsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedEncouragementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    mentorMatches<T extends User$mentorMatchesArgs<ExtArgs> = {}>(args?: Subset<T, User$mentorMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    menteeMatches<T extends User$menteeMatchesArgs<ExtArgs> = {}>(args?: Subset<T, User$menteeMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3788,6 +4578,9 @@ export namespace Prisma {
     readonly joinDate: FieldRef<"User", 'DateTime'>
     readonly moodCheckInsCount: FieldRef<"User", 'Int'>
     readonly conversationsCount: FieldRef<"User", 'Int'>
+    readonly wellnessXP: FieldRef<"User", 'Int'>
+    readonly wellnessLevel: FieldRef<"User", 'Int'>
+    readonly longestStreak: FieldRef<"User", 'Int'>
     readonly lastActive: FieldRef<"User", 'DateTime'>
     readonly onboardingStep: FieldRef<"User", 'Int'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
@@ -4449,6 +5242,174 @@ export namespace Prisma {
      */
     include?: MoodGardenInclude<ExtArgs> | null
     where?: MoodGardenWhereInput
+  }
+
+  /**
+   * User.circleMemberships
+   */
+  export type User$circleMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    where?: CircleMembershipWhereInput
+    orderBy?: CircleMembershipOrderByWithRelationInput | CircleMembershipOrderByWithRelationInput[]
+    cursor?: CircleMembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CircleMembershipScalarFieldEnum | CircleMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * User.circlePosts
+   */
+  export type User$circlePostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    where?: CirclePostWhereInput
+    orderBy?: CirclePostOrderByWithRelationInput | CirclePostOrderByWithRelationInput[]
+    cursor?: CirclePostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CirclePostScalarFieldEnum | CirclePostScalarFieldEnum[]
+  }
+
+  /**
+   * User.stories
+   */
+  export type User$storiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    where?: SupportStoryWhereInput
+    orderBy?: SupportStoryOrderByWithRelationInput | SupportStoryOrderByWithRelationInput[]
+    cursor?: SupportStoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportStoryScalarFieldEnum | SupportStoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.sentEncouragements
+   */
+  export type User$sentEncouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    where?: SupportEncouragementWhereInput
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    cursor?: SupportEncouragementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
+   * User.receivedEncouragements
+   */
+  export type User$receivedEncouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    where?: SupportEncouragementWhereInput
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    cursor?: SupportEncouragementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
+   * User.mentorMatches
+   */
+  export type User$mentorMatchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    where?: MentorMatchWhereInput
+    orderBy?: MentorMatchOrderByWithRelationInput | MentorMatchOrderByWithRelationInput[]
+    cursor?: MentorMatchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MentorMatchScalarFieldEnum | MentorMatchScalarFieldEnum[]
+  }
+
+  /**
+   * User.menteeMatches
+   */
+  export type User$menteeMatchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    where?: MentorMatchWhereInput
+    orderBy?: MentorMatchOrderByWithRelationInput | MentorMatchOrderByWithRelationInput[]
+    cursor?: MentorMatchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MentorMatchScalarFieldEnum | MentorMatchScalarFieldEnum[]
   }
 
   /**
@@ -6680,6 +7641,7 @@ export namespace Prisma {
     sleep: number | null
     social: number | null
     anxiety: number | null
+    emotionIntensity: number | null
     sentimentScore: number | null
   }
 
@@ -6689,6 +7651,7 @@ export namespace Prisma {
     sleep: number | null
     social: number | null
     anxiety: number | null
+    emotionIntensity: number | null
     sentimentScore: number | null
   }
 
@@ -6700,6 +7663,10 @@ export namespace Prisma {
     sleep: number | null
     social: number | null
     anxiety: number | null
+    emotion: string | null
+    emotionIntensity: number | null
+    photoUrl: string | null
+    audioUrl: string | null
     notes: string | null
     sentimentScore: number | null
     sentimentLabel: string | null
@@ -6715,6 +7682,10 @@ export namespace Prisma {
     sleep: number | null
     social: number | null
     anxiety: number | null
+    emotion: string | null
+    emotionIntensity: number | null
+    photoUrl: string | null
+    audioUrl: string | null
     notes: string | null
     sentimentScore: number | null
     sentimentLabel: string | null
@@ -6730,6 +7701,13 @@ export namespace Prisma {
     sleep: number
     social: number
     anxiety: number
+    emotion: number
+    emotionIntensity: number
+    physicalSymptoms: number
+    photoUrl: number
+    audioUrl: number
+    weather: number
+    location: number
     notes: number
     tags: number
     sentimentScore: number
@@ -6746,6 +7724,7 @@ export namespace Prisma {
     sleep?: true
     social?: true
     anxiety?: true
+    emotionIntensity?: true
     sentimentScore?: true
   }
 
@@ -6755,6 +7734,7 @@ export namespace Prisma {
     sleep?: true
     social?: true
     anxiety?: true
+    emotionIntensity?: true
     sentimentScore?: true
   }
 
@@ -6766,6 +7746,10 @@ export namespace Prisma {
     sleep?: true
     social?: true
     anxiety?: true
+    emotion?: true
+    emotionIntensity?: true
+    photoUrl?: true
+    audioUrl?: true
     notes?: true
     sentimentScore?: true
     sentimentLabel?: true
@@ -6781,6 +7765,10 @@ export namespace Prisma {
     sleep?: true
     social?: true
     anxiety?: true
+    emotion?: true
+    emotionIntensity?: true
+    photoUrl?: true
+    audioUrl?: true
     notes?: true
     sentimentScore?: true
     sentimentLabel?: true
@@ -6796,6 +7784,13 @@ export namespace Prisma {
     sleep?: true
     social?: true
     anxiety?: true
+    emotion?: true
+    emotionIntensity?: true
+    physicalSymptoms?: true
+    photoUrl?: true
+    audioUrl?: true
+    weather?: true
+    location?: true
     notes?: true
     tags?: true
     sentimentScore?: true
@@ -6899,6 +7894,13 @@ export namespace Prisma {
     sleep: number | null
     social: number | null
     anxiety: number | null
+    emotion: string | null
+    emotionIntensity: number | null
+    physicalSymptoms: string[]
+    photoUrl: string | null
+    audioUrl: string | null
+    weather: JsonValue | null
+    location: JsonValue | null
     notes: string | null
     tags: string[]
     sentimentScore: number | null
@@ -6934,6 +7936,13 @@ export namespace Prisma {
     sleep?: boolean
     social?: boolean
     anxiety?: boolean
+    emotion?: boolean
+    emotionIntensity?: boolean
+    physicalSymptoms?: boolean
+    photoUrl?: boolean
+    audioUrl?: boolean
+    weather?: boolean
+    location?: boolean
     notes?: boolean
     tags?: boolean
     sentimentScore?: boolean
@@ -6951,6 +7960,13 @@ export namespace Prisma {
     sleep?: boolean
     social?: boolean
     anxiety?: boolean
+    emotion?: boolean
+    emotionIntensity?: boolean
+    physicalSymptoms?: boolean
+    photoUrl?: boolean
+    audioUrl?: boolean
+    weather?: boolean
+    location?: boolean
     notes?: boolean
     tags?: boolean
     sentimentScore?: boolean
@@ -6968,6 +7984,13 @@ export namespace Prisma {
     sleep?: boolean
     social?: boolean
     anxiety?: boolean
+    emotion?: boolean
+    emotionIntensity?: boolean
+    physicalSymptoms?: boolean
+    photoUrl?: boolean
+    audioUrl?: boolean
+    weather?: boolean
+    location?: boolean
     notes?: boolean
     tags?: boolean
     sentimentScore?: boolean
@@ -6985,6 +8008,13 @@ export namespace Prisma {
     sleep?: boolean
     social?: boolean
     anxiety?: boolean
+    emotion?: boolean
+    emotionIntensity?: boolean
+    physicalSymptoms?: boolean
+    photoUrl?: boolean
+    audioUrl?: boolean
+    weather?: boolean
+    location?: boolean
     notes?: boolean
     tags?: boolean
     sentimentScore?: boolean
@@ -6993,7 +8023,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type MoodEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "mood" | "energy" | "sleep" | "social" | "anxiety" | "notes" | "tags" | "sentimentScore" | "sentimentLabel" | "crisisFlag" | "createdAt", ExtArgs["result"]["moodEntry"]>
+  export type MoodEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "mood" | "energy" | "sleep" | "social" | "anxiety" | "emotion" | "emotionIntensity" | "physicalSymptoms" | "photoUrl" | "audioUrl" | "weather" | "location" | "notes" | "tags" | "sentimentScore" | "sentimentLabel" | "crisisFlag" | "createdAt", ExtArgs["result"]["moodEntry"]>
   export type MoodEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -7017,6 +8047,13 @@ export namespace Prisma {
       sleep: number | null
       social: number | null
       anxiety: number | null
+      emotion: string | null
+      emotionIntensity: number | null
+      physicalSymptoms: string[]
+      photoUrl: string | null
+      audioUrl: string | null
+      weather: Prisma.JsonValue | null
+      location: Prisma.JsonValue | null
       notes: string | null
       tags: string[]
       sentimentScore: number | null
@@ -7454,6 +8491,13 @@ export namespace Prisma {
     readonly sleep: FieldRef<"MoodEntry", 'Int'>
     readonly social: FieldRef<"MoodEntry", 'Int'>
     readonly anxiety: FieldRef<"MoodEntry", 'Int'>
+    readonly emotion: FieldRef<"MoodEntry", 'String'>
+    readonly emotionIntensity: FieldRef<"MoodEntry", 'Float'>
+    readonly physicalSymptoms: FieldRef<"MoodEntry", 'String[]'>
+    readonly photoUrl: FieldRef<"MoodEntry", 'String'>
+    readonly audioUrl: FieldRef<"MoodEntry", 'String'>
+    readonly weather: FieldRef<"MoodEntry", 'Json'>
+    readonly location: FieldRef<"MoodEntry", 'Json'>
     readonly notes: FieldRef<"MoodEntry", 'String'>
     readonly tags: FieldRef<"MoodEntry", 'String[]'>
     readonly sentimentScore: FieldRef<"MoodEntry", 'Float'>
@@ -21193,6 +22237,6586 @@ export namespace Prisma {
 
 
   /**
+   * Model SupportCircle
+   */
+
+  export type AggregateSupportCircle = {
+    _count: SupportCircleCountAggregateOutputType | null
+    _min: SupportCircleMinAggregateOutputType | null
+    _max: SupportCircleMaxAggregateOutputType | null
+  }
+
+  export type SupportCircleMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    category: $Enums.Concern | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportCircleMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    category: $Enums.Concern | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportCircleCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    category: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SupportCircleMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    category?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportCircleMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    category?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportCircleCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    category?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SupportCircleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportCircle to aggregate.
+     */
+    where?: SupportCircleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportCircles to fetch.
+     */
+    orderBy?: SupportCircleOrderByWithRelationInput | SupportCircleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportCircleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportCircles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportCircles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportCircles
+    **/
+    _count?: true | SupportCircleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportCircleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportCircleMaxAggregateInputType
+  }
+
+  export type GetSupportCircleAggregateType<T extends SupportCircleAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportCircle]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportCircle[P]>
+      : GetScalarType<T[P], AggregateSupportCircle[P]>
+  }
+
+
+
+
+  export type SupportCircleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportCircleWhereInput
+    orderBy?: SupportCircleOrderByWithAggregationInput | SupportCircleOrderByWithAggregationInput[]
+    by: SupportCircleScalarFieldEnum[] | SupportCircleScalarFieldEnum
+    having?: SupportCircleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportCircleCountAggregateInputType | true
+    _min?: SupportCircleMinAggregateInputType
+    _max?: SupportCircleMaxAggregateInputType
+  }
+
+  export type SupportCircleGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    category: $Enums.Concern
+    createdAt: Date
+    updatedAt: Date
+    _count: SupportCircleCountAggregateOutputType | null
+    _min: SupportCircleMinAggregateOutputType | null
+    _max: SupportCircleMaxAggregateOutputType | null
+  }
+
+  type GetSupportCircleGroupByPayload<T extends SupportCircleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportCircleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportCircleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportCircleGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportCircleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportCircleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    category?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    members?: boolean | SupportCircle$membersArgs<ExtArgs>
+    posts?: boolean | SupportCircle$postsArgs<ExtArgs>
+    _count?: boolean | SupportCircleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportCircle"]>
+
+  export type SupportCircleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    category?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["supportCircle"]>
+
+  export type SupportCircleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    category?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["supportCircle"]>
+
+  export type SupportCircleSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    category?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SupportCircleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "category" | "createdAt" | "updatedAt", ExtArgs["result"]["supportCircle"]>
+  export type SupportCircleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    members?: boolean | SupportCircle$membersArgs<ExtArgs>
+    posts?: boolean | SupportCircle$postsArgs<ExtArgs>
+    _count?: boolean | SupportCircleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SupportCircleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SupportCircleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $SupportCirclePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportCircle"
+    objects: {
+      members: Prisma.$CircleMembershipPayload<ExtArgs>[]
+      posts: Prisma.$CirclePostPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      category: $Enums.Concern
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["supportCircle"]>
+    composites: {}
+  }
+
+  type SupportCircleGetPayload<S extends boolean | null | undefined | SupportCircleDefaultArgs> = $Result.GetResult<Prisma.$SupportCirclePayload, S>
+
+  type SupportCircleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SupportCircleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SupportCircleCountAggregateInputType | true
+    }
+
+  export interface SupportCircleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportCircle'], meta: { name: 'SupportCircle' } }
+    /**
+     * Find zero or one SupportCircle that matches the filter.
+     * @param {SupportCircleFindUniqueArgs} args - Arguments to find a SupportCircle
+     * @example
+     * // Get one SupportCircle
+     * const supportCircle = await prisma.supportCircle.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportCircleFindUniqueArgs>(args: SelectSubset<T, SupportCircleFindUniqueArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one SupportCircle that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SupportCircleFindUniqueOrThrowArgs} args - Arguments to find a SupportCircle
+     * @example
+     * // Get one SupportCircle
+     * const supportCircle = await prisma.supportCircle.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportCircleFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportCircleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SupportCircle that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleFindFirstArgs} args - Arguments to find a SupportCircle
+     * @example
+     * // Get one SupportCircle
+     * const supportCircle = await prisma.supportCircle.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportCircleFindFirstArgs>(args?: SelectSubset<T, SupportCircleFindFirstArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SupportCircle that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleFindFirstOrThrowArgs} args - Arguments to find a SupportCircle
+     * @example
+     * // Get one SupportCircle
+     * const supportCircle = await prisma.supportCircle.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportCircleFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportCircleFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more SupportCircles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportCircles
+     * const supportCircles = await prisma.supportCircle.findMany()
+     * 
+     * // Get first 10 SupportCircles
+     * const supportCircles = await prisma.supportCircle.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supportCircleWithIdOnly = await prisma.supportCircle.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SupportCircleFindManyArgs>(args?: SelectSubset<T, SupportCircleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a SupportCircle.
+     * @param {SupportCircleCreateArgs} args - Arguments to create a SupportCircle.
+     * @example
+     * // Create one SupportCircle
+     * const SupportCircle = await prisma.supportCircle.create({
+     *   data: {
+     *     // ... data to create a SupportCircle
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportCircleCreateArgs>(args: SelectSubset<T, SupportCircleCreateArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many SupportCircles.
+     * @param {SupportCircleCreateManyArgs} args - Arguments to create many SupportCircles.
+     * @example
+     * // Create many SupportCircles
+     * const supportCircle = await prisma.supportCircle.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportCircleCreateManyArgs>(args?: SelectSubset<T, SupportCircleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupportCircles and returns the data saved in the database.
+     * @param {SupportCircleCreateManyAndReturnArgs} args - Arguments to create many SupportCircles.
+     * @example
+     * // Create many SupportCircles
+     * const supportCircle = await prisma.supportCircle.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupportCircles and only return the `id`
+     * const supportCircleWithIdOnly = await prisma.supportCircle.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SupportCircleCreateManyAndReturnArgs>(args?: SelectSubset<T, SupportCircleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a SupportCircle.
+     * @param {SupportCircleDeleteArgs} args - Arguments to delete one SupportCircle.
+     * @example
+     * // Delete one SupportCircle
+     * const SupportCircle = await prisma.supportCircle.delete({
+     *   where: {
+     *     // ... filter to delete one SupportCircle
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportCircleDeleteArgs>(args: SelectSubset<T, SupportCircleDeleteArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one SupportCircle.
+     * @param {SupportCircleUpdateArgs} args - Arguments to update one SupportCircle.
+     * @example
+     * // Update one SupportCircle
+     * const supportCircle = await prisma.supportCircle.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportCircleUpdateArgs>(args: SelectSubset<T, SupportCircleUpdateArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more SupportCircles.
+     * @param {SupportCircleDeleteManyArgs} args - Arguments to filter SupportCircles to delete.
+     * @example
+     * // Delete a few SupportCircles
+     * const { count } = await prisma.supportCircle.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportCircleDeleteManyArgs>(args?: SelectSubset<T, SupportCircleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportCircles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportCircles
+     * const supportCircle = await prisma.supportCircle.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportCircleUpdateManyArgs>(args: SelectSubset<T, SupportCircleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportCircles and returns the data updated in the database.
+     * @param {SupportCircleUpdateManyAndReturnArgs} args - Arguments to update many SupportCircles.
+     * @example
+     * // Update many SupportCircles
+     * const supportCircle = await prisma.supportCircle.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SupportCircles and only return the `id`
+     * const supportCircleWithIdOnly = await prisma.supportCircle.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SupportCircleUpdateManyAndReturnArgs>(args: SelectSubset<T, SupportCircleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one SupportCircle.
+     * @param {SupportCircleUpsertArgs} args - Arguments to update or create a SupportCircle.
+     * @example
+     * // Update or create a SupportCircle
+     * const supportCircle = await prisma.supportCircle.upsert({
+     *   create: {
+     *     // ... data to create a SupportCircle
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportCircle we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportCircleUpsertArgs>(args: SelectSubset<T, SupportCircleUpsertArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of SupportCircles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleCountArgs} args - Arguments to filter SupportCircles to count.
+     * @example
+     * // Count the number of SupportCircles
+     * const count = await prisma.supportCircle.count({
+     *   where: {
+     *     // ... the filter for the SupportCircles we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportCircleCountArgs>(
+      args?: Subset<T, SupportCircleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportCircleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportCircle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportCircleAggregateArgs>(args: Subset<T, SupportCircleAggregateArgs>): Prisma.PrismaPromise<GetSupportCircleAggregateType<T>>
+
+    /**
+     * Group by SupportCircle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportCircleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportCircleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportCircleGroupByArgs['orderBy'] }
+        : { orderBy?: SupportCircleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportCircleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportCircleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportCircle model
+   */
+  readonly fields: SupportCircleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportCircle.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportCircleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    members<T extends SupportCircle$membersArgs<ExtArgs> = {}>(args?: Subset<T, SupportCircle$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    posts<T extends SupportCircle$postsArgs<ExtArgs> = {}>(args?: Subset<T, SupportCircle$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportCircle model
+   */ 
+  interface SupportCircleFieldRefs {
+    readonly id: FieldRef<"SupportCircle", 'String'>
+    readonly name: FieldRef<"SupportCircle", 'String'>
+    readonly description: FieldRef<"SupportCircle", 'String'>
+    readonly category: FieldRef<"SupportCircle", 'Concern'>
+    readonly createdAt: FieldRef<"SupportCircle", 'DateTime'>
+    readonly updatedAt: FieldRef<"SupportCircle", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportCircle findUnique
+   */
+  export type SupportCircleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportCircle to fetch.
+     */
+    where: SupportCircleWhereUniqueInput
+  }
+
+  /**
+   * SupportCircle findUniqueOrThrow
+   */
+  export type SupportCircleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportCircle to fetch.
+     */
+    where: SupportCircleWhereUniqueInput
+  }
+
+  /**
+   * SupportCircle findFirst
+   */
+  export type SupportCircleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportCircle to fetch.
+     */
+    where?: SupportCircleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportCircles to fetch.
+     */
+    orderBy?: SupportCircleOrderByWithRelationInput | SupportCircleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportCircles.
+     */
+    cursor?: SupportCircleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportCircles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportCircles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportCircles.
+     */
+    distinct?: SupportCircleScalarFieldEnum | SupportCircleScalarFieldEnum[]
+  }
+
+  /**
+   * SupportCircle findFirstOrThrow
+   */
+  export type SupportCircleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportCircle to fetch.
+     */
+    where?: SupportCircleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportCircles to fetch.
+     */
+    orderBy?: SupportCircleOrderByWithRelationInput | SupportCircleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportCircles.
+     */
+    cursor?: SupportCircleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportCircles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportCircles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportCircles.
+     */
+    distinct?: SupportCircleScalarFieldEnum | SupportCircleScalarFieldEnum[]
+  }
+
+  /**
+   * SupportCircle findMany
+   */
+  export type SupportCircleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportCircles to fetch.
+     */
+    where?: SupportCircleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportCircles to fetch.
+     */
+    orderBy?: SupportCircleOrderByWithRelationInput | SupportCircleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportCircles.
+     */
+    cursor?: SupportCircleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportCircles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportCircles.
+     */
+    skip?: number
+    distinct?: SupportCircleScalarFieldEnum | SupportCircleScalarFieldEnum[]
+  }
+
+  /**
+   * SupportCircle create
+   */
+  export type SupportCircleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SupportCircle.
+     */
+    data: XOR<SupportCircleCreateInput, SupportCircleUncheckedCreateInput>
+  }
+
+  /**
+   * SupportCircle createMany
+   */
+  export type SupportCircleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportCircles.
+     */
+    data: SupportCircleCreateManyInput | SupportCircleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportCircle createManyAndReturn
+   */
+  export type SupportCircleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * The data used to create many SupportCircles.
+     */
+    data: SupportCircleCreateManyInput | SupportCircleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportCircle update
+   */
+  export type SupportCircleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SupportCircle.
+     */
+    data: XOR<SupportCircleUpdateInput, SupportCircleUncheckedUpdateInput>
+    /**
+     * Choose, which SupportCircle to update.
+     */
+    where: SupportCircleWhereUniqueInput
+  }
+
+  /**
+   * SupportCircle updateMany
+   */
+  export type SupportCircleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportCircles.
+     */
+    data: XOR<SupportCircleUpdateManyMutationInput, SupportCircleUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportCircles to update
+     */
+    where?: SupportCircleWhereInput
+  }
+
+  /**
+   * SupportCircle updateManyAndReturn
+   */
+  export type SupportCircleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * The data used to update SupportCircles.
+     */
+    data: XOR<SupportCircleUpdateManyMutationInput, SupportCircleUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportCircles to update
+     */
+    where?: SupportCircleWhereInput
+  }
+
+  /**
+   * SupportCircle upsert
+   */
+  export type SupportCircleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SupportCircle to update in case it exists.
+     */
+    where: SupportCircleWhereUniqueInput
+    /**
+     * In case the SupportCircle found by the `where` argument doesn't exist, create a new SupportCircle with this data.
+     */
+    create: XOR<SupportCircleCreateInput, SupportCircleUncheckedCreateInput>
+    /**
+     * In case the SupportCircle was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportCircleUpdateInput, SupportCircleUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportCircle delete
+   */
+  export type SupportCircleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+    /**
+     * Filter which SupportCircle to delete.
+     */
+    where: SupportCircleWhereUniqueInput
+  }
+
+  /**
+   * SupportCircle deleteMany
+   */
+  export type SupportCircleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportCircles to delete
+     */
+    where?: SupportCircleWhereInput
+  }
+
+  /**
+   * SupportCircle.members
+   */
+  export type SupportCircle$membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    where?: CircleMembershipWhereInput
+    orderBy?: CircleMembershipOrderByWithRelationInput | CircleMembershipOrderByWithRelationInput[]
+    cursor?: CircleMembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CircleMembershipScalarFieldEnum | CircleMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * SupportCircle.posts
+   */
+  export type SupportCircle$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    where?: CirclePostWhereInput
+    orderBy?: CirclePostOrderByWithRelationInput | CirclePostOrderByWithRelationInput[]
+    cursor?: CirclePostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CirclePostScalarFieldEnum | CirclePostScalarFieldEnum[]
+  }
+
+  /**
+   * SupportCircle without action
+   */
+  export type SupportCircleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportCircle
+     */
+    select?: SupportCircleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportCircle
+     */
+    omit?: SupportCircleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportCircleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CircleMembership
+   */
+
+  export type AggregateCircleMembership = {
+    _count: CircleMembershipCountAggregateOutputType | null
+    _min: CircleMembershipMinAggregateOutputType | null
+    _max: CircleMembershipMaxAggregateOutputType | null
+  }
+
+  export type CircleMembershipMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    circleId: string | null
+    joinedAt: Date | null
+    role: $Enums.CircleRole | null
+  }
+
+  export type CircleMembershipMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    circleId: string | null
+    joinedAt: Date | null
+    role: $Enums.CircleRole | null
+  }
+
+  export type CircleMembershipCountAggregateOutputType = {
+    id: number
+    userId: number
+    circleId: number
+    joinedAt: number
+    role: number
+    _all: number
+  }
+
+
+  export type CircleMembershipMinAggregateInputType = {
+    id?: true
+    userId?: true
+    circleId?: true
+    joinedAt?: true
+    role?: true
+  }
+
+  export type CircleMembershipMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    circleId?: true
+    joinedAt?: true
+    role?: true
+  }
+
+  export type CircleMembershipCountAggregateInputType = {
+    id?: true
+    userId?: true
+    circleId?: true
+    joinedAt?: true
+    role?: true
+    _all?: true
+  }
+
+  export type CircleMembershipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CircleMembership to aggregate.
+     */
+    where?: CircleMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CircleMemberships to fetch.
+     */
+    orderBy?: CircleMembershipOrderByWithRelationInput | CircleMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CircleMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CircleMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CircleMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CircleMemberships
+    **/
+    _count?: true | CircleMembershipCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CircleMembershipMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CircleMembershipMaxAggregateInputType
+  }
+
+  export type GetCircleMembershipAggregateType<T extends CircleMembershipAggregateArgs> = {
+        [P in keyof T & keyof AggregateCircleMembership]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCircleMembership[P]>
+      : GetScalarType<T[P], AggregateCircleMembership[P]>
+  }
+
+
+
+
+  export type CircleMembershipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CircleMembershipWhereInput
+    orderBy?: CircleMembershipOrderByWithAggregationInput | CircleMembershipOrderByWithAggregationInput[]
+    by: CircleMembershipScalarFieldEnum[] | CircleMembershipScalarFieldEnum
+    having?: CircleMembershipScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CircleMembershipCountAggregateInputType | true
+    _min?: CircleMembershipMinAggregateInputType
+    _max?: CircleMembershipMaxAggregateInputType
+  }
+
+  export type CircleMembershipGroupByOutputType = {
+    id: string
+    userId: string
+    circleId: string
+    joinedAt: Date
+    role: $Enums.CircleRole
+    _count: CircleMembershipCountAggregateOutputType | null
+    _min: CircleMembershipMinAggregateOutputType | null
+    _max: CircleMembershipMaxAggregateOutputType | null
+  }
+
+  type GetCircleMembershipGroupByPayload<T extends CircleMembershipGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CircleMembershipGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CircleMembershipGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CircleMembershipGroupByOutputType[P]>
+            : GetScalarType<T[P], CircleMembershipGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CircleMembershipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    circleId?: boolean
+    joinedAt?: boolean
+    role?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["circleMembership"]>
+
+  export type CircleMembershipSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    circleId?: boolean
+    joinedAt?: boolean
+    role?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["circleMembership"]>
+
+  export type CircleMembershipSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    circleId?: boolean
+    joinedAt?: boolean
+    role?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["circleMembership"]>
+
+  export type CircleMembershipSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    circleId?: boolean
+    joinedAt?: boolean
+    role?: boolean
+  }
+
+  export type CircleMembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "circleId" | "joinedAt" | "role", ExtArgs["result"]["circleMembership"]>
+  export type CircleMembershipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+  }
+  export type CircleMembershipIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+  }
+  export type CircleMembershipIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+  }
+
+  export type $CircleMembershipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CircleMembership"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      circle: Prisma.$SupportCirclePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      circleId: string
+      joinedAt: Date
+      role: $Enums.CircleRole
+    }, ExtArgs["result"]["circleMembership"]>
+    composites: {}
+  }
+
+  type CircleMembershipGetPayload<S extends boolean | null | undefined | CircleMembershipDefaultArgs> = $Result.GetResult<Prisma.$CircleMembershipPayload, S>
+
+  type CircleMembershipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CircleMembershipFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CircleMembershipCountAggregateInputType | true
+    }
+
+  export interface CircleMembershipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CircleMembership'], meta: { name: 'CircleMembership' } }
+    /**
+     * Find zero or one CircleMembership that matches the filter.
+     * @param {CircleMembershipFindUniqueArgs} args - Arguments to find a CircleMembership
+     * @example
+     * // Get one CircleMembership
+     * const circleMembership = await prisma.circleMembership.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CircleMembershipFindUniqueArgs>(args: SelectSubset<T, CircleMembershipFindUniqueArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one CircleMembership that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CircleMembershipFindUniqueOrThrowArgs} args - Arguments to find a CircleMembership
+     * @example
+     * // Get one CircleMembership
+     * const circleMembership = await prisma.circleMembership.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CircleMembershipFindUniqueOrThrowArgs>(args: SelectSubset<T, CircleMembershipFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CircleMembership that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipFindFirstArgs} args - Arguments to find a CircleMembership
+     * @example
+     * // Get one CircleMembership
+     * const circleMembership = await prisma.circleMembership.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CircleMembershipFindFirstArgs>(args?: SelectSubset<T, CircleMembershipFindFirstArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CircleMembership that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipFindFirstOrThrowArgs} args - Arguments to find a CircleMembership
+     * @example
+     * // Get one CircleMembership
+     * const circleMembership = await prisma.circleMembership.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CircleMembershipFindFirstOrThrowArgs>(args?: SelectSubset<T, CircleMembershipFindFirstOrThrowArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more CircleMemberships that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CircleMemberships
+     * const circleMemberships = await prisma.circleMembership.findMany()
+     * 
+     * // Get first 10 CircleMemberships
+     * const circleMemberships = await prisma.circleMembership.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const circleMembershipWithIdOnly = await prisma.circleMembership.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CircleMembershipFindManyArgs>(args?: SelectSubset<T, CircleMembershipFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a CircleMembership.
+     * @param {CircleMembershipCreateArgs} args - Arguments to create a CircleMembership.
+     * @example
+     * // Create one CircleMembership
+     * const CircleMembership = await prisma.circleMembership.create({
+     *   data: {
+     *     // ... data to create a CircleMembership
+     *   }
+     * })
+     * 
+     */
+    create<T extends CircleMembershipCreateArgs>(args: SelectSubset<T, CircleMembershipCreateArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many CircleMemberships.
+     * @param {CircleMembershipCreateManyArgs} args - Arguments to create many CircleMemberships.
+     * @example
+     * // Create many CircleMemberships
+     * const circleMembership = await prisma.circleMembership.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CircleMembershipCreateManyArgs>(args?: SelectSubset<T, CircleMembershipCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CircleMemberships and returns the data saved in the database.
+     * @param {CircleMembershipCreateManyAndReturnArgs} args - Arguments to create many CircleMemberships.
+     * @example
+     * // Create many CircleMemberships
+     * const circleMembership = await prisma.circleMembership.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CircleMemberships and only return the `id`
+     * const circleMembershipWithIdOnly = await prisma.circleMembership.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CircleMembershipCreateManyAndReturnArgs>(args?: SelectSubset<T, CircleMembershipCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a CircleMembership.
+     * @param {CircleMembershipDeleteArgs} args - Arguments to delete one CircleMembership.
+     * @example
+     * // Delete one CircleMembership
+     * const CircleMembership = await prisma.circleMembership.delete({
+     *   where: {
+     *     // ... filter to delete one CircleMembership
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CircleMembershipDeleteArgs>(args: SelectSubset<T, CircleMembershipDeleteArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one CircleMembership.
+     * @param {CircleMembershipUpdateArgs} args - Arguments to update one CircleMembership.
+     * @example
+     * // Update one CircleMembership
+     * const circleMembership = await prisma.circleMembership.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CircleMembershipUpdateArgs>(args: SelectSubset<T, CircleMembershipUpdateArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more CircleMemberships.
+     * @param {CircleMembershipDeleteManyArgs} args - Arguments to filter CircleMemberships to delete.
+     * @example
+     * // Delete a few CircleMemberships
+     * const { count } = await prisma.circleMembership.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CircleMembershipDeleteManyArgs>(args?: SelectSubset<T, CircleMembershipDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CircleMemberships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CircleMemberships
+     * const circleMembership = await prisma.circleMembership.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CircleMembershipUpdateManyArgs>(args: SelectSubset<T, CircleMembershipUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CircleMemberships and returns the data updated in the database.
+     * @param {CircleMembershipUpdateManyAndReturnArgs} args - Arguments to update many CircleMemberships.
+     * @example
+     * // Update many CircleMemberships
+     * const circleMembership = await prisma.circleMembership.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CircleMemberships and only return the `id`
+     * const circleMembershipWithIdOnly = await prisma.circleMembership.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CircleMembershipUpdateManyAndReturnArgs>(args: SelectSubset<T, CircleMembershipUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one CircleMembership.
+     * @param {CircleMembershipUpsertArgs} args - Arguments to update or create a CircleMembership.
+     * @example
+     * // Update or create a CircleMembership
+     * const circleMembership = await prisma.circleMembership.upsert({
+     *   create: {
+     *     // ... data to create a CircleMembership
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CircleMembership we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CircleMembershipUpsertArgs>(args: SelectSubset<T, CircleMembershipUpsertArgs<ExtArgs>>): Prisma__CircleMembershipClient<$Result.GetResult<Prisma.$CircleMembershipPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of CircleMemberships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipCountArgs} args - Arguments to filter CircleMemberships to count.
+     * @example
+     * // Count the number of CircleMemberships
+     * const count = await prisma.circleMembership.count({
+     *   where: {
+     *     // ... the filter for the CircleMemberships we want to count
+     *   }
+     * })
+    **/
+    count<T extends CircleMembershipCountArgs>(
+      args?: Subset<T, CircleMembershipCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CircleMembershipCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CircleMembership.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CircleMembershipAggregateArgs>(args: Subset<T, CircleMembershipAggregateArgs>): Prisma.PrismaPromise<GetCircleMembershipAggregateType<T>>
+
+    /**
+     * Group by CircleMembership.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CircleMembershipGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CircleMembershipGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CircleMembershipGroupByArgs['orderBy'] }
+        : { orderBy?: CircleMembershipGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CircleMembershipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCircleMembershipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CircleMembership model
+   */
+  readonly fields: CircleMembershipFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CircleMembership.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CircleMembershipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    circle<T extends SupportCircleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupportCircleDefaultArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CircleMembership model
+   */ 
+  interface CircleMembershipFieldRefs {
+    readonly id: FieldRef<"CircleMembership", 'String'>
+    readonly userId: FieldRef<"CircleMembership", 'String'>
+    readonly circleId: FieldRef<"CircleMembership", 'String'>
+    readonly joinedAt: FieldRef<"CircleMembership", 'DateTime'>
+    readonly role: FieldRef<"CircleMembership", 'CircleRole'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CircleMembership findUnique
+   */
+  export type CircleMembershipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which CircleMembership to fetch.
+     */
+    where: CircleMembershipWhereUniqueInput
+  }
+
+  /**
+   * CircleMembership findUniqueOrThrow
+   */
+  export type CircleMembershipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which CircleMembership to fetch.
+     */
+    where: CircleMembershipWhereUniqueInput
+  }
+
+  /**
+   * CircleMembership findFirst
+   */
+  export type CircleMembershipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which CircleMembership to fetch.
+     */
+    where?: CircleMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CircleMemberships to fetch.
+     */
+    orderBy?: CircleMembershipOrderByWithRelationInput | CircleMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CircleMemberships.
+     */
+    cursor?: CircleMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CircleMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CircleMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CircleMemberships.
+     */
+    distinct?: CircleMembershipScalarFieldEnum | CircleMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * CircleMembership findFirstOrThrow
+   */
+  export type CircleMembershipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which CircleMembership to fetch.
+     */
+    where?: CircleMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CircleMemberships to fetch.
+     */
+    orderBy?: CircleMembershipOrderByWithRelationInput | CircleMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CircleMemberships.
+     */
+    cursor?: CircleMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CircleMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CircleMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CircleMemberships.
+     */
+    distinct?: CircleMembershipScalarFieldEnum | CircleMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * CircleMembership findMany
+   */
+  export type CircleMembershipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which CircleMemberships to fetch.
+     */
+    where?: CircleMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CircleMemberships to fetch.
+     */
+    orderBy?: CircleMembershipOrderByWithRelationInput | CircleMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CircleMemberships.
+     */
+    cursor?: CircleMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CircleMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CircleMemberships.
+     */
+    skip?: number
+    distinct?: CircleMembershipScalarFieldEnum | CircleMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * CircleMembership create
+   */
+  export type CircleMembershipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CircleMembership.
+     */
+    data: XOR<CircleMembershipCreateInput, CircleMembershipUncheckedCreateInput>
+  }
+
+  /**
+   * CircleMembership createMany
+   */
+  export type CircleMembershipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CircleMemberships.
+     */
+    data: CircleMembershipCreateManyInput | CircleMembershipCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CircleMembership createManyAndReturn
+   */
+  export type CircleMembershipCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * The data used to create many CircleMemberships.
+     */
+    data: CircleMembershipCreateManyInput | CircleMembershipCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CircleMembership update
+   */
+  export type CircleMembershipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CircleMembership.
+     */
+    data: XOR<CircleMembershipUpdateInput, CircleMembershipUncheckedUpdateInput>
+    /**
+     * Choose, which CircleMembership to update.
+     */
+    where: CircleMembershipWhereUniqueInput
+  }
+
+  /**
+   * CircleMembership updateMany
+   */
+  export type CircleMembershipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CircleMemberships.
+     */
+    data: XOR<CircleMembershipUpdateManyMutationInput, CircleMembershipUncheckedUpdateManyInput>
+    /**
+     * Filter which CircleMemberships to update
+     */
+    where?: CircleMembershipWhereInput
+  }
+
+  /**
+   * CircleMembership updateManyAndReturn
+   */
+  export type CircleMembershipUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * The data used to update CircleMemberships.
+     */
+    data: XOR<CircleMembershipUpdateManyMutationInput, CircleMembershipUncheckedUpdateManyInput>
+    /**
+     * Filter which CircleMemberships to update
+     */
+    where?: CircleMembershipWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CircleMembership upsert
+   */
+  export type CircleMembershipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CircleMembership to update in case it exists.
+     */
+    where: CircleMembershipWhereUniqueInput
+    /**
+     * In case the CircleMembership found by the `where` argument doesn't exist, create a new CircleMembership with this data.
+     */
+    create: XOR<CircleMembershipCreateInput, CircleMembershipUncheckedCreateInput>
+    /**
+     * In case the CircleMembership was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CircleMembershipUpdateInput, CircleMembershipUncheckedUpdateInput>
+  }
+
+  /**
+   * CircleMembership delete
+   */
+  export type CircleMembershipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+    /**
+     * Filter which CircleMembership to delete.
+     */
+    where: CircleMembershipWhereUniqueInput
+  }
+
+  /**
+   * CircleMembership deleteMany
+   */
+  export type CircleMembershipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CircleMemberships to delete
+     */
+    where?: CircleMembershipWhereInput
+  }
+
+  /**
+   * CircleMembership without action
+   */
+  export type CircleMembershipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CircleMembership
+     */
+    select?: CircleMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CircleMembership
+     */
+    omit?: CircleMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CircleMembershipInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CirclePost
+   */
+
+  export type AggregateCirclePost = {
+    _count: CirclePostCountAggregateOutputType | null
+    _min: CirclePostMinAggregateOutputType | null
+    _max: CirclePostMaxAggregateOutputType | null
+  }
+
+  export type CirclePostMinAggregateOutputType = {
+    id: string | null
+    circleId: string | null
+    authorId: string | null
+    content: string | null
+    isAnonymous: boolean | null
+    isApproved: boolean | null
+    crisisFlag: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CirclePostMaxAggregateOutputType = {
+    id: string | null
+    circleId: string | null
+    authorId: string | null
+    content: string | null
+    isAnonymous: boolean | null
+    isApproved: boolean | null
+    crisisFlag: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CirclePostCountAggregateOutputType = {
+    id: number
+    circleId: number
+    authorId: number
+    content: number
+    isAnonymous: number
+    isApproved: number
+    crisisFlag: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CirclePostMinAggregateInputType = {
+    id?: true
+    circleId?: true
+    authorId?: true
+    content?: true
+    isAnonymous?: true
+    isApproved?: true
+    crisisFlag?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CirclePostMaxAggregateInputType = {
+    id?: true
+    circleId?: true
+    authorId?: true
+    content?: true
+    isAnonymous?: true
+    isApproved?: true
+    crisisFlag?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CirclePostCountAggregateInputType = {
+    id?: true
+    circleId?: true
+    authorId?: true
+    content?: true
+    isAnonymous?: true
+    isApproved?: true
+    crisisFlag?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CirclePostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CirclePost to aggregate.
+     */
+    where?: CirclePostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CirclePosts to fetch.
+     */
+    orderBy?: CirclePostOrderByWithRelationInput | CirclePostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CirclePostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CirclePosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CirclePosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CirclePosts
+    **/
+    _count?: true | CirclePostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CirclePostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CirclePostMaxAggregateInputType
+  }
+
+  export type GetCirclePostAggregateType<T extends CirclePostAggregateArgs> = {
+        [P in keyof T & keyof AggregateCirclePost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCirclePost[P]>
+      : GetScalarType<T[P], AggregateCirclePost[P]>
+  }
+
+
+
+
+  export type CirclePostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CirclePostWhereInput
+    orderBy?: CirclePostOrderByWithAggregationInput | CirclePostOrderByWithAggregationInput[]
+    by: CirclePostScalarFieldEnum[] | CirclePostScalarFieldEnum
+    having?: CirclePostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CirclePostCountAggregateInputType | true
+    _min?: CirclePostMinAggregateInputType
+    _max?: CirclePostMaxAggregateInputType
+  }
+
+  export type CirclePostGroupByOutputType = {
+    id: string
+    circleId: string
+    authorId: string
+    content: string
+    isAnonymous: boolean
+    isApproved: boolean
+    crisisFlag: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: CirclePostCountAggregateOutputType | null
+    _min: CirclePostMinAggregateOutputType | null
+    _max: CirclePostMaxAggregateOutputType | null
+  }
+
+  type GetCirclePostGroupByPayload<T extends CirclePostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CirclePostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CirclePostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CirclePostGroupByOutputType[P]>
+            : GetScalarType<T[P], CirclePostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CirclePostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    circleId?: boolean
+    authorId?: boolean
+    content?: boolean
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    encouragements?: boolean | CirclePost$encouragementsArgs<ExtArgs>
+    _count?: boolean | CirclePostCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["circlePost"]>
+
+  export type CirclePostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    circleId?: boolean
+    authorId?: boolean
+    content?: boolean
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["circlePost"]>
+
+  export type CirclePostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    circleId?: boolean
+    authorId?: boolean
+    content?: boolean
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["circlePost"]>
+
+  export type CirclePostSelectScalar = {
+    id?: boolean
+    circleId?: boolean
+    authorId?: boolean
+    content?: boolean
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CirclePostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "circleId" | "authorId" | "content" | "isAnonymous" | "isApproved" | "crisisFlag" | "createdAt" | "updatedAt", ExtArgs["result"]["circlePost"]>
+  export type CirclePostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    encouragements?: boolean | CirclePost$encouragementsArgs<ExtArgs>
+    _count?: boolean | CirclePostCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CirclePostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CirclePostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    circle?: boolean | SupportCircleDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CirclePostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CirclePost"
+    objects: {
+      circle: Prisma.$SupportCirclePayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs>
+      encouragements: Prisma.$SupportEncouragementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      circleId: string
+      authorId: string
+      content: string
+      isAnonymous: boolean
+      isApproved: boolean
+      crisisFlag: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["circlePost"]>
+    composites: {}
+  }
+
+  type CirclePostGetPayload<S extends boolean | null | undefined | CirclePostDefaultArgs> = $Result.GetResult<Prisma.$CirclePostPayload, S>
+
+  type CirclePostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CirclePostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CirclePostCountAggregateInputType | true
+    }
+
+  export interface CirclePostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CirclePost'], meta: { name: 'CirclePost' } }
+    /**
+     * Find zero or one CirclePost that matches the filter.
+     * @param {CirclePostFindUniqueArgs} args - Arguments to find a CirclePost
+     * @example
+     * // Get one CirclePost
+     * const circlePost = await prisma.circlePost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CirclePostFindUniqueArgs>(args: SelectSubset<T, CirclePostFindUniqueArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one CirclePost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CirclePostFindUniqueOrThrowArgs} args - Arguments to find a CirclePost
+     * @example
+     * // Get one CirclePost
+     * const circlePost = await prisma.circlePost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CirclePostFindUniqueOrThrowArgs>(args: SelectSubset<T, CirclePostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CirclePost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostFindFirstArgs} args - Arguments to find a CirclePost
+     * @example
+     * // Get one CirclePost
+     * const circlePost = await prisma.circlePost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CirclePostFindFirstArgs>(args?: SelectSubset<T, CirclePostFindFirstArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CirclePost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostFindFirstOrThrowArgs} args - Arguments to find a CirclePost
+     * @example
+     * // Get one CirclePost
+     * const circlePost = await prisma.circlePost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CirclePostFindFirstOrThrowArgs>(args?: SelectSubset<T, CirclePostFindFirstOrThrowArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more CirclePosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CirclePosts
+     * const circlePosts = await prisma.circlePost.findMany()
+     * 
+     * // Get first 10 CirclePosts
+     * const circlePosts = await prisma.circlePost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const circlePostWithIdOnly = await prisma.circlePost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CirclePostFindManyArgs>(args?: SelectSubset<T, CirclePostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a CirclePost.
+     * @param {CirclePostCreateArgs} args - Arguments to create a CirclePost.
+     * @example
+     * // Create one CirclePost
+     * const CirclePost = await prisma.circlePost.create({
+     *   data: {
+     *     // ... data to create a CirclePost
+     *   }
+     * })
+     * 
+     */
+    create<T extends CirclePostCreateArgs>(args: SelectSubset<T, CirclePostCreateArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many CirclePosts.
+     * @param {CirclePostCreateManyArgs} args - Arguments to create many CirclePosts.
+     * @example
+     * // Create many CirclePosts
+     * const circlePost = await prisma.circlePost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CirclePostCreateManyArgs>(args?: SelectSubset<T, CirclePostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CirclePosts and returns the data saved in the database.
+     * @param {CirclePostCreateManyAndReturnArgs} args - Arguments to create many CirclePosts.
+     * @example
+     * // Create many CirclePosts
+     * const circlePost = await prisma.circlePost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CirclePosts and only return the `id`
+     * const circlePostWithIdOnly = await prisma.circlePost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CirclePostCreateManyAndReturnArgs>(args?: SelectSubset<T, CirclePostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a CirclePost.
+     * @param {CirclePostDeleteArgs} args - Arguments to delete one CirclePost.
+     * @example
+     * // Delete one CirclePost
+     * const CirclePost = await prisma.circlePost.delete({
+     *   where: {
+     *     // ... filter to delete one CirclePost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CirclePostDeleteArgs>(args: SelectSubset<T, CirclePostDeleteArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one CirclePost.
+     * @param {CirclePostUpdateArgs} args - Arguments to update one CirclePost.
+     * @example
+     * // Update one CirclePost
+     * const circlePost = await prisma.circlePost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CirclePostUpdateArgs>(args: SelectSubset<T, CirclePostUpdateArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more CirclePosts.
+     * @param {CirclePostDeleteManyArgs} args - Arguments to filter CirclePosts to delete.
+     * @example
+     * // Delete a few CirclePosts
+     * const { count } = await prisma.circlePost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CirclePostDeleteManyArgs>(args?: SelectSubset<T, CirclePostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CirclePosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CirclePosts
+     * const circlePost = await prisma.circlePost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CirclePostUpdateManyArgs>(args: SelectSubset<T, CirclePostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CirclePosts and returns the data updated in the database.
+     * @param {CirclePostUpdateManyAndReturnArgs} args - Arguments to update many CirclePosts.
+     * @example
+     * // Update many CirclePosts
+     * const circlePost = await prisma.circlePost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CirclePosts and only return the `id`
+     * const circlePostWithIdOnly = await prisma.circlePost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CirclePostUpdateManyAndReturnArgs>(args: SelectSubset<T, CirclePostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one CirclePost.
+     * @param {CirclePostUpsertArgs} args - Arguments to update or create a CirclePost.
+     * @example
+     * // Update or create a CirclePost
+     * const circlePost = await prisma.circlePost.upsert({
+     *   create: {
+     *     // ... data to create a CirclePost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CirclePost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CirclePostUpsertArgs>(args: SelectSubset<T, CirclePostUpsertArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of CirclePosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostCountArgs} args - Arguments to filter CirclePosts to count.
+     * @example
+     * // Count the number of CirclePosts
+     * const count = await prisma.circlePost.count({
+     *   where: {
+     *     // ... the filter for the CirclePosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends CirclePostCountArgs>(
+      args?: Subset<T, CirclePostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CirclePostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CirclePost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CirclePostAggregateArgs>(args: Subset<T, CirclePostAggregateArgs>): Prisma.PrismaPromise<GetCirclePostAggregateType<T>>
+
+    /**
+     * Group by CirclePost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CirclePostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CirclePostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CirclePostGroupByArgs['orderBy'] }
+        : { orderBy?: CirclePostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CirclePostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCirclePostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CirclePost model
+   */
+  readonly fields: CirclePostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CirclePost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CirclePostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    circle<T extends SupportCircleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupportCircleDefaultArgs<ExtArgs>>): Prisma__SupportCircleClient<$Result.GetResult<Prisma.$SupportCirclePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    encouragements<T extends CirclePost$encouragementsArgs<ExtArgs> = {}>(args?: Subset<T, CirclePost$encouragementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CirclePost model
+   */ 
+  interface CirclePostFieldRefs {
+    readonly id: FieldRef<"CirclePost", 'String'>
+    readonly circleId: FieldRef<"CirclePost", 'String'>
+    readonly authorId: FieldRef<"CirclePost", 'String'>
+    readonly content: FieldRef<"CirclePost", 'String'>
+    readonly isAnonymous: FieldRef<"CirclePost", 'Boolean'>
+    readonly isApproved: FieldRef<"CirclePost", 'Boolean'>
+    readonly crisisFlag: FieldRef<"CirclePost", 'Boolean'>
+    readonly createdAt: FieldRef<"CirclePost", 'DateTime'>
+    readonly updatedAt: FieldRef<"CirclePost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CirclePost findUnique
+   */
+  export type CirclePostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * Filter, which CirclePost to fetch.
+     */
+    where: CirclePostWhereUniqueInput
+  }
+
+  /**
+   * CirclePost findUniqueOrThrow
+   */
+  export type CirclePostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * Filter, which CirclePost to fetch.
+     */
+    where: CirclePostWhereUniqueInput
+  }
+
+  /**
+   * CirclePost findFirst
+   */
+  export type CirclePostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * Filter, which CirclePost to fetch.
+     */
+    where?: CirclePostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CirclePosts to fetch.
+     */
+    orderBy?: CirclePostOrderByWithRelationInput | CirclePostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CirclePosts.
+     */
+    cursor?: CirclePostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CirclePosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CirclePosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CirclePosts.
+     */
+    distinct?: CirclePostScalarFieldEnum | CirclePostScalarFieldEnum[]
+  }
+
+  /**
+   * CirclePost findFirstOrThrow
+   */
+  export type CirclePostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * Filter, which CirclePost to fetch.
+     */
+    where?: CirclePostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CirclePosts to fetch.
+     */
+    orderBy?: CirclePostOrderByWithRelationInput | CirclePostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CirclePosts.
+     */
+    cursor?: CirclePostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CirclePosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CirclePosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CirclePosts.
+     */
+    distinct?: CirclePostScalarFieldEnum | CirclePostScalarFieldEnum[]
+  }
+
+  /**
+   * CirclePost findMany
+   */
+  export type CirclePostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * Filter, which CirclePosts to fetch.
+     */
+    where?: CirclePostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CirclePosts to fetch.
+     */
+    orderBy?: CirclePostOrderByWithRelationInput | CirclePostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CirclePosts.
+     */
+    cursor?: CirclePostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CirclePosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CirclePosts.
+     */
+    skip?: number
+    distinct?: CirclePostScalarFieldEnum | CirclePostScalarFieldEnum[]
+  }
+
+  /**
+   * CirclePost create
+   */
+  export type CirclePostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CirclePost.
+     */
+    data: XOR<CirclePostCreateInput, CirclePostUncheckedCreateInput>
+  }
+
+  /**
+   * CirclePost createMany
+   */
+  export type CirclePostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CirclePosts.
+     */
+    data: CirclePostCreateManyInput | CirclePostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CirclePost createManyAndReturn
+   */
+  export type CirclePostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * The data used to create many CirclePosts.
+     */
+    data: CirclePostCreateManyInput | CirclePostCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CirclePost update
+   */
+  export type CirclePostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CirclePost.
+     */
+    data: XOR<CirclePostUpdateInput, CirclePostUncheckedUpdateInput>
+    /**
+     * Choose, which CirclePost to update.
+     */
+    where: CirclePostWhereUniqueInput
+  }
+
+  /**
+   * CirclePost updateMany
+   */
+  export type CirclePostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CirclePosts.
+     */
+    data: XOR<CirclePostUpdateManyMutationInput, CirclePostUncheckedUpdateManyInput>
+    /**
+     * Filter which CirclePosts to update
+     */
+    where?: CirclePostWhereInput
+  }
+
+  /**
+   * CirclePost updateManyAndReturn
+   */
+  export type CirclePostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * The data used to update CirclePosts.
+     */
+    data: XOR<CirclePostUpdateManyMutationInput, CirclePostUncheckedUpdateManyInput>
+    /**
+     * Filter which CirclePosts to update
+     */
+    where?: CirclePostWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CirclePost upsert
+   */
+  export type CirclePostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CirclePost to update in case it exists.
+     */
+    where: CirclePostWhereUniqueInput
+    /**
+     * In case the CirclePost found by the `where` argument doesn't exist, create a new CirclePost with this data.
+     */
+    create: XOR<CirclePostCreateInput, CirclePostUncheckedCreateInput>
+    /**
+     * In case the CirclePost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CirclePostUpdateInput, CirclePostUncheckedUpdateInput>
+  }
+
+  /**
+   * CirclePost delete
+   */
+  export type CirclePostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    /**
+     * Filter which CirclePost to delete.
+     */
+    where: CirclePostWhereUniqueInput
+  }
+
+  /**
+   * CirclePost deleteMany
+   */
+  export type CirclePostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CirclePosts to delete
+     */
+    where?: CirclePostWhereInput
+  }
+
+  /**
+   * CirclePost.encouragements
+   */
+  export type CirclePost$encouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    where?: SupportEncouragementWhereInput
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    cursor?: SupportEncouragementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
+   * CirclePost without action
+   */
+  export type CirclePostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SupportStory
+   */
+
+  export type AggregateSupportStory = {
+    _count: SupportStoryCountAggregateOutputType | null
+    _min: SupportStoryMinAggregateOutputType | null
+    _max: SupportStoryMaxAggregateOutputType | null
+  }
+
+  export type SupportStoryMinAggregateOutputType = {
+    id: string | null
+    authorId: string | null
+    title: string | null
+    content: string | null
+    category: $Enums.Concern | null
+    isApproved: boolean | null
+    crisisFlag: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportStoryMaxAggregateOutputType = {
+    id: string | null
+    authorId: string | null
+    title: string | null
+    content: string | null
+    category: $Enums.Concern | null
+    isApproved: boolean | null
+    crisisFlag: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportStoryCountAggregateOutputType = {
+    id: number
+    authorId: number
+    title: number
+    content: number
+    category: number
+    isApproved: number
+    crisisFlag: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SupportStoryMinAggregateInputType = {
+    id?: true
+    authorId?: true
+    title?: true
+    content?: true
+    category?: true
+    isApproved?: true
+    crisisFlag?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportStoryMaxAggregateInputType = {
+    id?: true
+    authorId?: true
+    title?: true
+    content?: true
+    category?: true
+    isApproved?: true
+    crisisFlag?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportStoryCountAggregateInputType = {
+    id?: true
+    authorId?: true
+    title?: true
+    content?: true
+    category?: true
+    isApproved?: true
+    crisisFlag?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SupportStoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportStory to aggregate.
+     */
+    where?: SupportStoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportStories to fetch.
+     */
+    orderBy?: SupportStoryOrderByWithRelationInput | SupportStoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportStoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportStories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportStories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportStories
+    **/
+    _count?: true | SupportStoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportStoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportStoryMaxAggregateInputType
+  }
+
+  export type GetSupportStoryAggregateType<T extends SupportStoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportStory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportStory[P]>
+      : GetScalarType<T[P], AggregateSupportStory[P]>
+  }
+
+
+
+
+  export type SupportStoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportStoryWhereInput
+    orderBy?: SupportStoryOrderByWithAggregationInput | SupportStoryOrderByWithAggregationInput[]
+    by: SupportStoryScalarFieldEnum[] | SupportStoryScalarFieldEnum
+    having?: SupportStoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportStoryCountAggregateInputType | true
+    _min?: SupportStoryMinAggregateInputType
+    _max?: SupportStoryMaxAggregateInputType
+  }
+
+  export type SupportStoryGroupByOutputType = {
+    id: string
+    authorId: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved: boolean
+    crisisFlag: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: SupportStoryCountAggregateOutputType | null
+    _min: SupportStoryMinAggregateOutputType | null
+    _max: SupportStoryMaxAggregateOutputType | null
+  }
+
+  type GetSupportStoryGroupByPayload<T extends SupportStoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportStoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportStoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportStoryGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportStoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportStorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    authorId?: boolean
+    title?: boolean
+    content?: boolean
+    category?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportStory"]>
+
+  export type SupportStorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    authorId?: boolean
+    title?: boolean
+    content?: boolean
+    category?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportStory"]>
+
+  export type SupportStorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    authorId?: boolean
+    title?: boolean
+    content?: boolean
+    category?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportStory"]>
+
+  export type SupportStorySelectScalar = {
+    id?: boolean
+    authorId?: boolean
+    title?: boolean
+    content?: boolean
+    category?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SupportStoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "title" | "content" | "category" | "isApproved" | "crisisFlag" | "createdAt" | "updatedAt", ExtArgs["result"]["supportStory"]>
+  export type SupportStoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SupportStoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SupportStoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SupportStoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportStory"
+    objects: {
+      author: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      authorId: string
+      title: string
+      content: string
+      category: $Enums.Concern
+      isApproved: boolean
+      crisisFlag: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["supportStory"]>
+    composites: {}
+  }
+
+  type SupportStoryGetPayload<S extends boolean | null | undefined | SupportStoryDefaultArgs> = $Result.GetResult<Prisma.$SupportStoryPayload, S>
+
+  type SupportStoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SupportStoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SupportStoryCountAggregateInputType | true
+    }
+
+  export interface SupportStoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportStory'], meta: { name: 'SupportStory' } }
+    /**
+     * Find zero or one SupportStory that matches the filter.
+     * @param {SupportStoryFindUniqueArgs} args - Arguments to find a SupportStory
+     * @example
+     * // Get one SupportStory
+     * const supportStory = await prisma.supportStory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportStoryFindUniqueArgs>(args: SelectSubset<T, SupportStoryFindUniqueArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one SupportStory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SupportStoryFindUniqueOrThrowArgs} args - Arguments to find a SupportStory
+     * @example
+     * // Get one SupportStory
+     * const supportStory = await prisma.supportStory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportStoryFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportStoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SupportStory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryFindFirstArgs} args - Arguments to find a SupportStory
+     * @example
+     * // Get one SupportStory
+     * const supportStory = await prisma.supportStory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportStoryFindFirstArgs>(args?: SelectSubset<T, SupportStoryFindFirstArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SupportStory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryFindFirstOrThrowArgs} args - Arguments to find a SupportStory
+     * @example
+     * // Get one SupportStory
+     * const supportStory = await prisma.supportStory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportStoryFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportStoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more SupportStories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportStories
+     * const supportStories = await prisma.supportStory.findMany()
+     * 
+     * // Get first 10 SupportStories
+     * const supportStories = await prisma.supportStory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supportStoryWithIdOnly = await prisma.supportStory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SupportStoryFindManyArgs>(args?: SelectSubset<T, SupportStoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a SupportStory.
+     * @param {SupportStoryCreateArgs} args - Arguments to create a SupportStory.
+     * @example
+     * // Create one SupportStory
+     * const SupportStory = await prisma.supportStory.create({
+     *   data: {
+     *     // ... data to create a SupportStory
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportStoryCreateArgs>(args: SelectSubset<T, SupportStoryCreateArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many SupportStories.
+     * @param {SupportStoryCreateManyArgs} args - Arguments to create many SupportStories.
+     * @example
+     * // Create many SupportStories
+     * const supportStory = await prisma.supportStory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportStoryCreateManyArgs>(args?: SelectSubset<T, SupportStoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupportStories and returns the data saved in the database.
+     * @param {SupportStoryCreateManyAndReturnArgs} args - Arguments to create many SupportStories.
+     * @example
+     * // Create many SupportStories
+     * const supportStory = await prisma.supportStory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupportStories and only return the `id`
+     * const supportStoryWithIdOnly = await prisma.supportStory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SupportStoryCreateManyAndReturnArgs>(args?: SelectSubset<T, SupportStoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a SupportStory.
+     * @param {SupportStoryDeleteArgs} args - Arguments to delete one SupportStory.
+     * @example
+     * // Delete one SupportStory
+     * const SupportStory = await prisma.supportStory.delete({
+     *   where: {
+     *     // ... filter to delete one SupportStory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportStoryDeleteArgs>(args: SelectSubset<T, SupportStoryDeleteArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one SupportStory.
+     * @param {SupportStoryUpdateArgs} args - Arguments to update one SupportStory.
+     * @example
+     * // Update one SupportStory
+     * const supportStory = await prisma.supportStory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportStoryUpdateArgs>(args: SelectSubset<T, SupportStoryUpdateArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more SupportStories.
+     * @param {SupportStoryDeleteManyArgs} args - Arguments to filter SupportStories to delete.
+     * @example
+     * // Delete a few SupportStories
+     * const { count } = await prisma.supportStory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportStoryDeleteManyArgs>(args?: SelectSubset<T, SupportStoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportStories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportStories
+     * const supportStory = await prisma.supportStory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportStoryUpdateManyArgs>(args: SelectSubset<T, SupportStoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportStories and returns the data updated in the database.
+     * @param {SupportStoryUpdateManyAndReturnArgs} args - Arguments to update many SupportStories.
+     * @example
+     * // Update many SupportStories
+     * const supportStory = await prisma.supportStory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SupportStories and only return the `id`
+     * const supportStoryWithIdOnly = await prisma.supportStory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SupportStoryUpdateManyAndReturnArgs>(args: SelectSubset<T, SupportStoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one SupportStory.
+     * @param {SupportStoryUpsertArgs} args - Arguments to update or create a SupportStory.
+     * @example
+     * // Update or create a SupportStory
+     * const supportStory = await prisma.supportStory.upsert({
+     *   create: {
+     *     // ... data to create a SupportStory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportStory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportStoryUpsertArgs>(args: SelectSubset<T, SupportStoryUpsertArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of SupportStories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryCountArgs} args - Arguments to filter SupportStories to count.
+     * @example
+     * // Count the number of SupportStories
+     * const count = await prisma.supportStory.count({
+     *   where: {
+     *     // ... the filter for the SupportStories we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportStoryCountArgs>(
+      args?: Subset<T, SupportStoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportStoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportStory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportStoryAggregateArgs>(args: Subset<T, SupportStoryAggregateArgs>): Prisma.PrismaPromise<GetSupportStoryAggregateType<T>>
+
+    /**
+     * Group by SupportStory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportStoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportStoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportStoryGroupByArgs['orderBy'] }
+        : { orderBy?: SupportStoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportStoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportStoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportStory model
+   */
+  readonly fields: SupportStoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportStory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportStoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportStory model
+   */ 
+  interface SupportStoryFieldRefs {
+    readonly id: FieldRef<"SupportStory", 'String'>
+    readonly authorId: FieldRef<"SupportStory", 'String'>
+    readonly title: FieldRef<"SupportStory", 'String'>
+    readonly content: FieldRef<"SupportStory", 'String'>
+    readonly category: FieldRef<"SupportStory", 'Concern'>
+    readonly isApproved: FieldRef<"SupportStory", 'Boolean'>
+    readonly crisisFlag: FieldRef<"SupportStory", 'Boolean'>
+    readonly createdAt: FieldRef<"SupportStory", 'DateTime'>
+    readonly updatedAt: FieldRef<"SupportStory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportStory findUnique
+   */
+  export type SupportStoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportStory to fetch.
+     */
+    where: SupportStoryWhereUniqueInput
+  }
+
+  /**
+   * SupportStory findUniqueOrThrow
+   */
+  export type SupportStoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportStory to fetch.
+     */
+    where: SupportStoryWhereUniqueInput
+  }
+
+  /**
+   * SupportStory findFirst
+   */
+  export type SupportStoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportStory to fetch.
+     */
+    where?: SupportStoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportStories to fetch.
+     */
+    orderBy?: SupportStoryOrderByWithRelationInput | SupportStoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportStories.
+     */
+    cursor?: SupportStoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportStories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportStories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportStories.
+     */
+    distinct?: SupportStoryScalarFieldEnum | SupportStoryScalarFieldEnum[]
+  }
+
+  /**
+   * SupportStory findFirstOrThrow
+   */
+  export type SupportStoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportStory to fetch.
+     */
+    where?: SupportStoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportStories to fetch.
+     */
+    orderBy?: SupportStoryOrderByWithRelationInput | SupportStoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportStories.
+     */
+    cursor?: SupportStoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportStories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportStories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportStories.
+     */
+    distinct?: SupportStoryScalarFieldEnum | SupportStoryScalarFieldEnum[]
+  }
+
+  /**
+   * SupportStory findMany
+   */
+  export type SupportStoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportStories to fetch.
+     */
+    where?: SupportStoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportStories to fetch.
+     */
+    orderBy?: SupportStoryOrderByWithRelationInput | SupportStoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportStories.
+     */
+    cursor?: SupportStoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportStories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportStories.
+     */
+    skip?: number
+    distinct?: SupportStoryScalarFieldEnum | SupportStoryScalarFieldEnum[]
+  }
+
+  /**
+   * SupportStory create
+   */
+  export type SupportStoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SupportStory.
+     */
+    data: XOR<SupportStoryCreateInput, SupportStoryUncheckedCreateInput>
+  }
+
+  /**
+   * SupportStory createMany
+   */
+  export type SupportStoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportStories.
+     */
+    data: SupportStoryCreateManyInput | SupportStoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportStory createManyAndReturn
+   */
+  export type SupportStoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many SupportStories.
+     */
+    data: SupportStoryCreateManyInput | SupportStoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SupportStory update
+   */
+  export type SupportStoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SupportStory.
+     */
+    data: XOR<SupportStoryUpdateInput, SupportStoryUncheckedUpdateInput>
+    /**
+     * Choose, which SupportStory to update.
+     */
+    where: SupportStoryWhereUniqueInput
+  }
+
+  /**
+   * SupportStory updateMany
+   */
+  export type SupportStoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportStories.
+     */
+    data: XOR<SupportStoryUpdateManyMutationInput, SupportStoryUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportStories to update
+     */
+    where?: SupportStoryWhereInput
+  }
+
+  /**
+   * SupportStory updateManyAndReturn
+   */
+  export type SupportStoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * The data used to update SupportStories.
+     */
+    data: XOR<SupportStoryUpdateManyMutationInput, SupportStoryUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportStories to update
+     */
+    where?: SupportStoryWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SupportStory upsert
+   */
+  export type SupportStoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SupportStory to update in case it exists.
+     */
+    where: SupportStoryWhereUniqueInput
+    /**
+     * In case the SupportStory found by the `where` argument doesn't exist, create a new SupportStory with this data.
+     */
+    create: XOR<SupportStoryCreateInput, SupportStoryUncheckedCreateInput>
+    /**
+     * In case the SupportStory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportStoryUpdateInput, SupportStoryUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportStory delete
+   */
+  export type SupportStoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    /**
+     * Filter which SupportStory to delete.
+     */
+    where: SupportStoryWhereUniqueInput
+  }
+
+  /**
+   * SupportStory deleteMany
+   */
+  export type SupportStoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportStories to delete
+     */
+    where?: SupportStoryWhereInput
+  }
+
+  /**
+   * SupportStory without action
+   */
+  export type SupportStoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SupportEncouragement
+   */
+
+  export type AggregateSupportEncouragement = {
+    _count: SupportEncouragementCountAggregateOutputType | null
+    _min: SupportEncouragementMinAggregateOutputType | null
+    _max: SupportEncouragementMaxAggregateOutputType | null
+  }
+
+  export type SupportEncouragementMinAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    senderId: string | null
+    receiverId: string | null
+    content: string | null
+    createdAt: Date | null
+  }
+
+  export type SupportEncouragementMaxAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    senderId: string | null
+    receiverId: string | null
+    content: string | null
+    createdAt: Date | null
+  }
+
+  export type SupportEncouragementCountAggregateOutputType = {
+    id: number
+    postId: number
+    senderId: number
+    receiverId: number
+    content: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SupportEncouragementMinAggregateInputType = {
+    id?: true
+    postId?: true
+    senderId?: true
+    receiverId?: true
+    content?: true
+    createdAt?: true
+  }
+
+  export type SupportEncouragementMaxAggregateInputType = {
+    id?: true
+    postId?: true
+    senderId?: true
+    receiverId?: true
+    content?: true
+    createdAt?: true
+  }
+
+  export type SupportEncouragementCountAggregateInputType = {
+    id?: true
+    postId?: true
+    senderId?: true
+    receiverId?: true
+    content?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SupportEncouragementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportEncouragement to aggregate.
+     */
+    where?: SupportEncouragementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportEncouragements to fetch.
+     */
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportEncouragementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportEncouragements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportEncouragements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportEncouragements
+    **/
+    _count?: true | SupportEncouragementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportEncouragementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportEncouragementMaxAggregateInputType
+  }
+
+  export type GetSupportEncouragementAggregateType<T extends SupportEncouragementAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportEncouragement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportEncouragement[P]>
+      : GetScalarType<T[P], AggregateSupportEncouragement[P]>
+  }
+
+
+
+
+  export type SupportEncouragementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportEncouragementWhereInput
+    orderBy?: SupportEncouragementOrderByWithAggregationInput | SupportEncouragementOrderByWithAggregationInput[]
+    by: SupportEncouragementScalarFieldEnum[] | SupportEncouragementScalarFieldEnum
+    having?: SupportEncouragementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportEncouragementCountAggregateInputType | true
+    _min?: SupportEncouragementMinAggregateInputType
+    _max?: SupportEncouragementMaxAggregateInputType
+  }
+
+  export type SupportEncouragementGroupByOutputType = {
+    id: string
+    postId: string | null
+    senderId: string
+    receiverId: string | null
+    content: string
+    createdAt: Date
+    _count: SupportEncouragementCountAggregateOutputType | null
+    _min: SupportEncouragementMinAggregateOutputType | null
+    _max: SupportEncouragementMaxAggregateOutputType | null
+  }
+
+  type GetSupportEncouragementGroupByPayload<T extends SupportEncouragementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportEncouragementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportEncouragementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportEncouragementGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportEncouragementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportEncouragementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    post?: boolean | SupportEncouragement$postArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+  }, ExtArgs["result"]["supportEncouragement"]>
+
+  export type SupportEncouragementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    post?: boolean | SupportEncouragement$postArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+  }, ExtArgs["result"]["supportEncouragement"]>
+
+  export type SupportEncouragementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    post?: boolean | SupportEncouragement$postArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+  }, ExtArgs["result"]["supportEncouragement"]>
+
+  export type SupportEncouragementSelectScalar = {
+    id?: boolean
+    postId?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    content?: boolean
+    createdAt?: boolean
+  }
+
+  export type SupportEncouragementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "senderId" | "receiverId" | "content" | "createdAt", ExtArgs["result"]["supportEncouragement"]>
+  export type SupportEncouragementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | SupportEncouragement$postArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+  }
+  export type SupportEncouragementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | SupportEncouragement$postArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+  }
+  export type SupportEncouragementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | SupportEncouragement$postArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+  }
+
+  export type $SupportEncouragementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportEncouragement"
+    objects: {
+      post: Prisma.$CirclePostPayload<ExtArgs> | null
+      sender: Prisma.$UserPayload<ExtArgs>
+      receiver: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      postId: string | null
+      senderId: string
+      receiverId: string | null
+      content: string
+      createdAt: Date
+    }, ExtArgs["result"]["supportEncouragement"]>
+    composites: {}
+  }
+
+  type SupportEncouragementGetPayload<S extends boolean | null | undefined | SupportEncouragementDefaultArgs> = $Result.GetResult<Prisma.$SupportEncouragementPayload, S>
+
+  type SupportEncouragementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SupportEncouragementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SupportEncouragementCountAggregateInputType | true
+    }
+
+  export interface SupportEncouragementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportEncouragement'], meta: { name: 'SupportEncouragement' } }
+    /**
+     * Find zero or one SupportEncouragement that matches the filter.
+     * @param {SupportEncouragementFindUniqueArgs} args - Arguments to find a SupportEncouragement
+     * @example
+     * // Get one SupportEncouragement
+     * const supportEncouragement = await prisma.supportEncouragement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportEncouragementFindUniqueArgs>(args: SelectSubset<T, SupportEncouragementFindUniqueArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one SupportEncouragement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SupportEncouragementFindUniqueOrThrowArgs} args - Arguments to find a SupportEncouragement
+     * @example
+     * // Get one SupportEncouragement
+     * const supportEncouragement = await prisma.supportEncouragement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportEncouragementFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportEncouragementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SupportEncouragement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementFindFirstArgs} args - Arguments to find a SupportEncouragement
+     * @example
+     * // Get one SupportEncouragement
+     * const supportEncouragement = await prisma.supportEncouragement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportEncouragementFindFirstArgs>(args?: SelectSubset<T, SupportEncouragementFindFirstArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SupportEncouragement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementFindFirstOrThrowArgs} args - Arguments to find a SupportEncouragement
+     * @example
+     * // Get one SupportEncouragement
+     * const supportEncouragement = await prisma.supportEncouragement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportEncouragementFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportEncouragementFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more SupportEncouragements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportEncouragements
+     * const supportEncouragements = await prisma.supportEncouragement.findMany()
+     * 
+     * // Get first 10 SupportEncouragements
+     * const supportEncouragements = await prisma.supportEncouragement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supportEncouragementWithIdOnly = await prisma.supportEncouragement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SupportEncouragementFindManyArgs>(args?: SelectSubset<T, SupportEncouragementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a SupportEncouragement.
+     * @param {SupportEncouragementCreateArgs} args - Arguments to create a SupportEncouragement.
+     * @example
+     * // Create one SupportEncouragement
+     * const SupportEncouragement = await prisma.supportEncouragement.create({
+     *   data: {
+     *     // ... data to create a SupportEncouragement
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportEncouragementCreateArgs>(args: SelectSubset<T, SupportEncouragementCreateArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many SupportEncouragements.
+     * @param {SupportEncouragementCreateManyArgs} args - Arguments to create many SupportEncouragements.
+     * @example
+     * // Create many SupportEncouragements
+     * const supportEncouragement = await prisma.supportEncouragement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportEncouragementCreateManyArgs>(args?: SelectSubset<T, SupportEncouragementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupportEncouragements and returns the data saved in the database.
+     * @param {SupportEncouragementCreateManyAndReturnArgs} args - Arguments to create many SupportEncouragements.
+     * @example
+     * // Create many SupportEncouragements
+     * const supportEncouragement = await prisma.supportEncouragement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupportEncouragements and only return the `id`
+     * const supportEncouragementWithIdOnly = await prisma.supportEncouragement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SupportEncouragementCreateManyAndReturnArgs>(args?: SelectSubset<T, SupportEncouragementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a SupportEncouragement.
+     * @param {SupportEncouragementDeleteArgs} args - Arguments to delete one SupportEncouragement.
+     * @example
+     * // Delete one SupportEncouragement
+     * const SupportEncouragement = await prisma.supportEncouragement.delete({
+     *   where: {
+     *     // ... filter to delete one SupportEncouragement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportEncouragementDeleteArgs>(args: SelectSubset<T, SupportEncouragementDeleteArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one SupportEncouragement.
+     * @param {SupportEncouragementUpdateArgs} args - Arguments to update one SupportEncouragement.
+     * @example
+     * // Update one SupportEncouragement
+     * const supportEncouragement = await prisma.supportEncouragement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportEncouragementUpdateArgs>(args: SelectSubset<T, SupportEncouragementUpdateArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more SupportEncouragements.
+     * @param {SupportEncouragementDeleteManyArgs} args - Arguments to filter SupportEncouragements to delete.
+     * @example
+     * // Delete a few SupportEncouragements
+     * const { count } = await prisma.supportEncouragement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportEncouragementDeleteManyArgs>(args?: SelectSubset<T, SupportEncouragementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportEncouragements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportEncouragements
+     * const supportEncouragement = await prisma.supportEncouragement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportEncouragementUpdateManyArgs>(args: SelectSubset<T, SupportEncouragementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportEncouragements and returns the data updated in the database.
+     * @param {SupportEncouragementUpdateManyAndReturnArgs} args - Arguments to update many SupportEncouragements.
+     * @example
+     * // Update many SupportEncouragements
+     * const supportEncouragement = await prisma.supportEncouragement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SupportEncouragements and only return the `id`
+     * const supportEncouragementWithIdOnly = await prisma.supportEncouragement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SupportEncouragementUpdateManyAndReturnArgs>(args: SelectSubset<T, SupportEncouragementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one SupportEncouragement.
+     * @param {SupportEncouragementUpsertArgs} args - Arguments to update or create a SupportEncouragement.
+     * @example
+     * // Update or create a SupportEncouragement
+     * const supportEncouragement = await prisma.supportEncouragement.upsert({
+     *   create: {
+     *     // ... data to create a SupportEncouragement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportEncouragement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportEncouragementUpsertArgs>(args: SelectSubset<T, SupportEncouragementUpsertArgs<ExtArgs>>): Prisma__SupportEncouragementClient<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of SupportEncouragements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementCountArgs} args - Arguments to filter SupportEncouragements to count.
+     * @example
+     * // Count the number of SupportEncouragements
+     * const count = await prisma.supportEncouragement.count({
+     *   where: {
+     *     // ... the filter for the SupportEncouragements we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportEncouragementCountArgs>(
+      args?: Subset<T, SupportEncouragementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportEncouragementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportEncouragement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportEncouragementAggregateArgs>(args: Subset<T, SupportEncouragementAggregateArgs>): Prisma.PrismaPromise<GetSupportEncouragementAggregateType<T>>
+
+    /**
+     * Group by SupportEncouragement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportEncouragementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportEncouragementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportEncouragementGroupByArgs['orderBy'] }
+        : { orderBy?: SupportEncouragementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportEncouragementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportEncouragementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportEncouragement model
+   */
+  readonly fields: SupportEncouragementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportEncouragement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportEncouragementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    post<T extends SupportEncouragement$postArgs<ExtArgs> = {}>(args?: Subset<T, SupportEncouragement$postArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    receiver<T extends SupportEncouragement$receiverArgs<ExtArgs> = {}>(args?: Subset<T, SupportEncouragement$receiverArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportEncouragement model
+   */ 
+  interface SupportEncouragementFieldRefs {
+    readonly id: FieldRef<"SupportEncouragement", 'String'>
+    readonly postId: FieldRef<"SupportEncouragement", 'String'>
+    readonly senderId: FieldRef<"SupportEncouragement", 'String'>
+    readonly receiverId: FieldRef<"SupportEncouragement", 'String'>
+    readonly content: FieldRef<"SupportEncouragement", 'String'>
+    readonly createdAt: FieldRef<"SupportEncouragement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportEncouragement findUnique
+   */
+  export type SupportEncouragementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportEncouragement to fetch.
+     */
+    where: SupportEncouragementWhereUniqueInput
+  }
+
+  /**
+   * SupportEncouragement findUniqueOrThrow
+   */
+  export type SupportEncouragementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportEncouragement to fetch.
+     */
+    where: SupportEncouragementWhereUniqueInput
+  }
+
+  /**
+   * SupportEncouragement findFirst
+   */
+  export type SupportEncouragementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportEncouragement to fetch.
+     */
+    where?: SupportEncouragementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportEncouragements to fetch.
+     */
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportEncouragements.
+     */
+    cursor?: SupportEncouragementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportEncouragements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportEncouragements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportEncouragements.
+     */
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
+   * SupportEncouragement findFirstOrThrow
+   */
+  export type SupportEncouragementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportEncouragement to fetch.
+     */
+    where?: SupportEncouragementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportEncouragements to fetch.
+     */
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportEncouragements.
+     */
+    cursor?: SupportEncouragementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportEncouragements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportEncouragements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportEncouragements.
+     */
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
+   * SupportEncouragement findMany
+   */
+  export type SupportEncouragementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportEncouragements to fetch.
+     */
+    where?: SupportEncouragementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportEncouragements to fetch.
+     */
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportEncouragements.
+     */
+    cursor?: SupportEncouragementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportEncouragements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportEncouragements.
+     */
+    skip?: number
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
+   * SupportEncouragement create
+   */
+  export type SupportEncouragementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SupportEncouragement.
+     */
+    data: XOR<SupportEncouragementCreateInput, SupportEncouragementUncheckedCreateInput>
+  }
+
+  /**
+   * SupportEncouragement createMany
+   */
+  export type SupportEncouragementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportEncouragements.
+     */
+    data: SupportEncouragementCreateManyInput | SupportEncouragementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportEncouragement createManyAndReturn
+   */
+  export type SupportEncouragementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * The data used to create many SupportEncouragements.
+     */
+    data: SupportEncouragementCreateManyInput | SupportEncouragementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SupportEncouragement update
+   */
+  export type SupportEncouragementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SupportEncouragement.
+     */
+    data: XOR<SupportEncouragementUpdateInput, SupportEncouragementUncheckedUpdateInput>
+    /**
+     * Choose, which SupportEncouragement to update.
+     */
+    where: SupportEncouragementWhereUniqueInput
+  }
+
+  /**
+   * SupportEncouragement updateMany
+   */
+  export type SupportEncouragementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportEncouragements.
+     */
+    data: XOR<SupportEncouragementUpdateManyMutationInput, SupportEncouragementUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportEncouragements to update
+     */
+    where?: SupportEncouragementWhereInput
+  }
+
+  /**
+   * SupportEncouragement updateManyAndReturn
+   */
+  export type SupportEncouragementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * The data used to update SupportEncouragements.
+     */
+    data: XOR<SupportEncouragementUpdateManyMutationInput, SupportEncouragementUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportEncouragements to update
+     */
+    where?: SupportEncouragementWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SupportEncouragement upsert
+   */
+  export type SupportEncouragementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SupportEncouragement to update in case it exists.
+     */
+    where: SupportEncouragementWhereUniqueInput
+    /**
+     * In case the SupportEncouragement found by the `where` argument doesn't exist, create a new SupportEncouragement with this data.
+     */
+    create: XOR<SupportEncouragementCreateInput, SupportEncouragementUncheckedCreateInput>
+    /**
+     * In case the SupportEncouragement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportEncouragementUpdateInput, SupportEncouragementUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportEncouragement delete
+   */
+  export type SupportEncouragementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    /**
+     * Filter which SupportEncouragement to delete.
+     */
+    where: SupportEncouragementWhereUniqueInput
+  }
+
+  /**
+   * SupportEncouragement deleteMany
+   */
+  export type SupportEncouragementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportEncouragements to delete
+     */
+    where?: SupportEncouragementWhereInput
+  }
+
+  /**
+   * SupportEncouragement.post
+   */
+  export type SupportEncouragement$postArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CirclePost
+     */
+    select?: CirclePostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CirclePost
+     */
+    omit?: CirclePostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CirclePostInclude<ExtArgs> | null
+    where?: CirclePostWhereInput
+  }
+
+  /**
+   * SupportEncouragement.receiver
+   */
+  export type SupportEncouragement$receiverArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * SupportEncouragement without action
+   */
+  export type SupportEncouragementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MentorMatch
+   */
+
+  export type AggregateMentorMatch = {
+    _count: MentorMatchCountAggregateOutputType | null
+    _min: MentorMatchMinAggregateOutputType | null
+    _max: MentorMatchMaxAggregateOutputType | null
+  }
+
+  export type MentorMatchMinAggregateOutputType = {
+    id: string | null
+    mentorId: string | null
+    menteeId: string | null
+    status: $Enums.MatchStatus | null
+    topic: $Enums.Concern | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MentorMatchMaxAggregateOutputType = {
+    id: string | null
+    mentorId: string | null
+    menteeId: string | null
+    status: $Enums.MatchStatus | null
+    topic: $Enums.Concern | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MentorMatchCountAggregateOutputType = {
+    id: number
+    mentorId: number
+    menteeId: number
+    status: number
+    topic: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MentorMatchMinAggregateInputType = {
+    id?: true
+    mentorId?: true
+    menteeId?: true
+    status?: true
+    topic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MentorMatchMaxAggregateInputType = {
+    id?: true
+    mentorId?: true
+    menteeId?: true
+    status?: true
+    topic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MentorMatchCountAggregateInputType = {
+    id?: true
+    mentorId?: true
+    menteeId?: true
+    status?: true
+    topic?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MentorMatchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MentorMatch to aggregate.
+     */
+    where?: MentorMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorMatches to fetch.
+     */
+    orderBy?: MentorMatchOrderByWithRelationInput | MentorMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MentorMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MentorMatches
+    **/
+    _count?: true | MentorMatchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MentorMatchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MentorMatchMaxAggregateInputType
+  }
+
+  export type GetMentorMatchAggregateType<T extends MentorMatchAggregateArgs> = {
+        [P in keyof T & keyof AggregateMentorMatch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMentorMatch[P]>
+      : GetScalarType<T[P], AggregateMentorMatch[P]>
+  }
+
+
+
+
+  export type MentorMatchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MentorMatchWhereInput
+    orderBy?: MentorMatchOrderByWithAggregationInput | MentorMatchOrderByWithAggregationInput[]
+    by: MentorMatchScalarFieldEnum[] | MentorMatchScalarFieldEnum
+    having?: MentorMatchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MentorMatchCountAggregateInputType | true
+    _min?: MentorMatchMinAggregateInputType
+    _max?: MentorMatchMaxAggregateInputType
+  }
+
+  export type MentorMatchGroupByOutputType = {
+    id: string
+    mentorId: string
+    menteeId: string
+    status: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt: Date
+    updatedAt: Date
+    _count: MentorMatchCountAggregateOutputType | null
+    _min: MentorMatchMinAggregateOutputType | null
+    _max: MentorMatchMaxAggregateOutputType | null
+  }
+
+  type GetMentorMatchGroupByPayload<T extends MentorMatchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MentorMatchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MentorMatchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MentorMatchGroupByOutputType[P]>
+            : GetScalarType<T[P], MentorMatchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MentorMatchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mentorId?: boolean
+    menteeId?: boolean
+    status?: boolean
+    topic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    mentor?: boolean | UserDefaultArgs<ExtArgs>
+    mentee?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mentorMatch"]>
+
+  export type MentorMatchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mentorId?: boolean
+    menteeId?: boolean
+    status?: boolean
+    topic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    mentor?: boolean | UserDefaultArgs<ExtArgs>
+    mentee?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mentorMatch"]>
+
+  export type MentorMatchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mentorId?: boolean
+    menteeId?: boolean
+    status?: boolean
+    topic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    mentor?: boolean | UserDefaultArgs<ExtArgs>
+    mentee?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mentorMatch"]>
+
+  export type MentorMatchSelectScalar = {
+    id?: boolean
+    mentorId?: boolean
+    menteeId?: boolean
+    status?: boolean
+    topic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MentorMatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mentorId" | "menteeId" | "status" | "topic" | "createdAt" | "updatedAt", ExtArgs["result"]["mentorMatch"]>
+  export type MentorMatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mentor?: boolean | UserDefaultArgs<ExtArgs>
+    mentee?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MentorMatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mentor?: boolean | UserDefaultArgs<ExtArgs>
+    mentee?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MentorMatchIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mentor?: boolean | UserDefaultArgs<ExtArgs>
+    mentee?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MentorMatchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MentorMatch"
+    objects: {
+      mentor: Prisma.$UserPayload<ExtArgs>
+      mentee: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      mentorId: string
+      menteeId: string
+      status: $Enums.MatchStatus
+      topic: $Enums.Concern
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mentorMatch"]>
+    composites: {}
+  }
+
+  type MentorMatchGetPayload<S extends boolean | null | undefined | MentorMatchDefaultArgs> = $Result.GetResult<Prisma.$MentorMatchPayload, S>
+
+  type MentorMatchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MentorMatchFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MentorMatchCountAggregateInputType | true
+    }
+
+  export interface MentorMatchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MentorMatch'], meta: { name: 'MentorMatch' } }
+    /**
+     * Find zero or one MentorMatch that matches the filter.
+     * @param {MentorMatchFindUniqueArgs} args - Arguments to find a MentorMatch
+     * @example
+     * // Get one MentorMatch
+     * const mentorMatch = await prisma.mentorMatch.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MentorMatchFindUniqueArgs>(args: SelectSubset<T, MentorMatchFindUniqueArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one MentorMatch that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MentorMatchFindUniqueOrThrowArgs} args - Arguments to find a MentorMatch
+     * @example
+     * // Get one MentorMatch
+     * const mentorMatch = await prisma.mentorMatch.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MentorMatchFindUniqueOrThrowArgs>(args: SelectSubset<T, MentorMatchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MentorMatch that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchFindFirstArgs} args - Arguments to find a MentorMatch
+     * @example
+     * // Get one MentorMatch
+     * const mentorMatch = await prisma.mentorMatch.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MentorMatchFindFirstArgs>(args?: SelectSubset<T, MentorMatchFindFirstArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MentorMatch that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchFindFirstOrThrowArgs} args - Arguments to find a MentorMatch
+     * @example
+     * // Get one MentorMatch
+     * const mentorMatch = await prisma.mentorMatch.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MentorMatchFindFirstOrThrowArgs>(args?: SelectSubset<T, MentorMatchFindFirstOrThrowArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more MentorMatches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MentorMatches
+     * const mentorMatches = await prisma.mentorMatch.findMany()
+     * 
+     * // Get first 10 MentorMatches
+     * const mentorMatches = await prisma.mentorMatch.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mentorMatchWithIdOnly = await prisma.mentorMatch.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MentorMatchFindManyArgs>(args?: SelectSubset<T, MentorMatchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a MentorMatch.
+     * @param {MentorMatchCreateArgs} args - Arguments to create a MentorMatch.
+     * @example
+     * // Create one MentorMatch
+     * const MentorMatch = await prisma.mentorMatch.create({
+     *   data: {
+     *     // ... data to create a MentorMatch
+     *   }
+     * })
+     * 
+     */
+    create<T extends MentorMatchCreateArgs>(args: SelectSubset<T, MentorMatchCreateArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many MentorMatches.
+     * @param {MentorMatchCreateManyArgs} args - Arguments to create many MentorMatches.
+     * @example
+     * // Create many MentorMatches
+     * const mentorMatch = await prisma.mentorMatch.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MentorMatchCreateManyArgs>(args?: SelectSubset<T, MentorMatchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MentorMatches and returns the data saved in the database.
+     * @param {MentorMatchCreateManyAndReturnArgs} args - Arguments to create many MentorMatches.
+     * @example
+     * // Create many MentorMatches
+     * const mentorMatch = await prisma.mentorMatch.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MentorMatches and only return the `id`
+     * const mentorMatchWithIdOnly = await prisma.mentorMatch.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MentorMatchCreateManyAndReturnArgs>(args?: SelectSubset<T, MentorMatchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a MentorMatch.
+     * @param {MentorMatchDeleteArgs} args - Arguments to delete one MentorMatch.
+     * @example
+     * // Delete one MentorMatch
+     * const MentorMatch = await prisma.mentorMatch.delete({
+     *   where: {
+     *     // ... filter to delete one MentorMatch
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MentorMatchDeleteArgs>(args: SelectSubset<T, MentorMatchDeleteArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one MentorMatch.
+     * @param {MentorMatchUpdateArgs} args - Arguments to update one MentorMatch.
+     * @example
+     * // Update one MentorMatch
+     * const mentorMatch = await prisma.mentorMatch.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MentorMatchUpdateArgs>(args: SelectSubset<T, MentorMatchUpdateArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more MentorMatches.
+     * @param {MentorMatchDeleteManyArgs} args - Arguments to filter MentorMatches to delete.
+     * @example
+     * // Delete a few MentorMatches
+     * const { count } = await prisma.mentorMatch.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MentorMatchDeleteManyArgs>(args?: SelectSubset<T, MentorMatchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MentorMatches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MentorMatches
+     * const mentorMatch = await prisma.mentorMatch.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MentorMatchUpdateManyArgs>(args: SelectSubset<T, MentorMatchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MentorMatches and returns the data updated in the database.
+     * @param {MentorMatchUpdateManyAndReturnArgs} args - Arguments to update many MentorMatches.
+     * @example
+     * // Update many MentorMatches
+     * const mentorMatch = await prisma.mentorMatch.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MentorMatches and only return the `id`
+     * const mentorMatchWithIdOnly = await prisma.mentorMatch.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MentorMatchUpdateManyAndReturnArgs>(args: SelectSubset<T, MentorMatchUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one MentorMatch.
+     * @param {MentorMatchUpsertArgs} args - Arguments to update or create a MentorMatch.
+     * @example
+     * // Update or create a MentorMatch
+     * const mentorMatch = await prisma.mentorMatch.upsert({
+     *   create: {
+     *     // ... data to create a MentorMatch
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MentorMatch we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MentorMatchUpsertArgs>(args: SelectSubset<T, MentorMatchUpsertArgs<ExtArgs>>): Prisma__MentorMatchClient<$Result.GetResult<Prisma.$MentorMatchPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of MentorMatches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchCountArgs} args - Arguments to filter MentorMatches to count.
+     * @example
+     * // Count the number of MentorMatches
+     * const count = await prisma.mentorMatch.count({
+     *   where: {
+     *     // ... the filter for the MentorMatches we want to count
+     *   }
+     * })
+    **/
+    count<T extends MentorMatchCountArgs>(
+      args?: Subset<T, MentorMatchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MentorMatchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MentorMatch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MentorMatchAggregateArgs>(args: Subset<T, MentorMatchAggregateArgs>): Prisma.PrismaPromise<GetMentorMatchAggregateType<T>>
+
+    /**
+     * Group by MentorMatch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorMatchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MentorMatchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MentorMatchGroupByArgs['orderBy'] }
+        : { orderBy?: MentorMatchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MentorMatchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMentorMatchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MentorMatch model
+   */
+  readonly fields: MentorMatchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MentorMatch.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MentorMatchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    mentor<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    mentee<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MentorMatch model
+   */ 
+  interface MentorMatchFieldRefs {
+    readonly id: FieldRef<"MentorMatch", 'String'>
+    readonly mentorId: FieldRef<"MentorMatch", 'String'>
+    readonly menteeId: FieldRef<"MentorMatch", 'String'>
+    readonly status: FieldRef<"MentorMatch", 'MatchStatus'>
+    readonly topic: FieldRef<"MentorMatch", 'Concern'>
+    readonly createdAt: FieldRef<"MentorMatch", 'DateTime'>
+    readonly updatedAt: FieldRef<"MentorMatch", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MentorMatch findUnique
+   */
+  export type MentorMatchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which MentorMatch to fetch.
+     */
+    where: MentorMatchWhereUniqueInput
+  }
+
+  /**
+   * MentorMatch findUniqueOrThrow
+   */
+  export type MentorMatchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which MentorMatch to fetch.
+     */
+    where: MentorMatchWhereUniqueInput
+  }
+
+  /**
+   * MentorMatch findFirst
+   */
+  export type MentorMatchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which MentorMatch to fetch.
+     */
+    where?: MentorMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorMatches to fetch.
+     */
+    orderBy?: MentorMatchOrderByWithRelationInput | MentorMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MentorMatches.
+     */
+    cursor?: MentorMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MentorMatches.
+     */
+    distinct?: MentorMatchScalarFieldEnum | MentorMatchScalarFieldEnum[]
+  }
+
+  /**
+   * MentorMatch findFirstOrThrow
+   */
+  export type MentorMatchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which MentorMatch to fetch.
+     */
+    where?: MentorMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorMatches to fetch.
+     */
+    orderBy?: MentorMatchOrderByWithRelationInput | MentorMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MentorMatches.
+     */
+    cursor?: MentorMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MentorMatches.
+     */
+    distinct?: MentorMatchScalarFieldEnum | MentorMatchScalarFieldEnum[]
+  }
+
+  /**
+   * MentorMatch findMany
+   */
+  export type MentorMatchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which MentorMatches to fetch.
+     */
+    where?: MentorMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorMatches to fetch.
+     */
+    orderBy?: MentorMatchOrderByWithRelationInput | MentorMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MentorMatches.
+     */
+    cursor?: MentorMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorMatches.
+     */
+    skip?: number
+    distinct?: MentorMatchScalarFieldEnum | MentorMatchScalarFieldEnum[]
+  }
+
+  /**
+   * MentorMatch create
+   */
+  export type MentorMatchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MentorMatch.
+     */
+    data: XOR<MentorMatchCreateInput, MentorMatchUncheckedCreateInput>
+  }
+
+  /**
+   * MentorMatch createMany
+   */
+  export type MentorMatchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MentorMatches.
+     */
+    data: MentorMatchCreateManyInput | MentorMatchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MentorMatch createManyAndReturn
+   */
+  export type MentorMatchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * The data used to create many MentorMatches.
+     */
+    data: MentorMatchCreateManyInput | MentorMatchCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MentorMatch update
+   */
+  export type MentorMatchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MentorMatch.
+     */
+    data: XOR<MentorMatchUpdateInput, MentorMatchUncheckedUpdateInput>
+    /**
+     * Choose, which MentorMatch to update.
+     */
+    where: MentorMatchWhereUniqueInput
+  }
+
+  /**
+   * MentorMatch updateMany
+   */
+  export type MentorMatchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MentorMatches.
+     */
+    data: XOR<MentorMatchUpdateManyMutationInput, MentorMatchUncheckedUpdateManyInput>
+    /**
+     * Filter which MentorMatches to update
+     */
+    where?: MentorMatchWhereInput
+  }
+
+  /**
+   * MentorMatch updateManyAndReturn
+   */
+  export type MentorMatchUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * The data used to update MentorMatches.
+     */
+    data: XOR<MentorMatchUpdateManyMutationInput, MentorMatchUncheckedUpdateManyInput>
+    /**
+     * Filter which MentorMatches to update
+     */
+    where?: MentorMatchWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MentorMatch upsert
+   */
+  export type MentorMatchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MentorMatch to update in case it exists.
+     */
+    where: MentorMatchWhereUniqueInput
+    /**
+     * In case the MentorMatch found by the `where` argument doesn't exist, create a new MentorMatch with this data.
+     */
+    create: XOR<MentorMatchCreateInput, MentorMatchUncheckedCreateInput>
+    /**
+     * In case the MentorMatch was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MentorMatchUpdateInput, MentorMatchUncheckedUpdateInput>
+  }
+
+  /**
+   * MentorMatch delete
+   */
+  export type MentorMatchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+    /**
+     * Filter which MentorMatch to delete.
+     */
+    where: MentorMatchWhereUniqueInput
+  }
+
+  /**
+   * MentorMatch deleteMany
+   */
+  export type MentorMatchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MentorMatches to delete
+     */
+    where?: MentorMatchWhereInput
+  }
+
+  /**
+   * MentorMatch without action
+   */
+  export type MentorMatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorMatch
+     */
+    select?: MentorMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorMatch
+     */
+    omit?: MentorMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorMatchInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21239,6 +28863,9 @@ export namespace Prisma {
     joinDate: 'joinDate',
     moodCheckInsCount: 'moodCheckInsCount',
     conversationsCount: 'conversationsCount',
+    wellnessXP: 'wellnessXP',
+    wellnessLevel: 'wellnessLevel',
+    longestStreak: 'longestStreak',
     lastActive: 'lastActive',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
@@ -21285,6 +28912,13 @@ export namespace Prisma {
     sleep: 'sleep',
     social: 'social',
     anxiety: 'anxiety',
+    emotion: 'emotion',
+    emotionIntensity: 'emotionIntensity',
+    physicalSymptoms: 'physicalSymptoms',
+    photoUrl: 'photoUrl',
+    audioUrl: 'audioUrl',
+    weather: 'weather',
+    location: 'location',
     notes: 'notes',
     tags: 'tags',
     sentimentScore: 'sentimentScore',
@@ -21461,6 +29095,84 @@ export namespace Prisma {
   };
 
   export type MoodGardenScalarFieldEnum = (typeof MoodGardenScalarFieldEnum)[keyof typeof MoodGardenScalarFieldEnum]
+
+
+  export const SupportCircleScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    category: 'category',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SupportCircleScalarFieldEnum = (typeof SupportCircleScalarFieldEnum)[keyof typeof SupportCircleScalarFieldEnum]
+
+
+  export const CircleMembershipScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    circleId: 'circleId',
+    joinedAt: 'joinedAt',
+    role: 'role'
+  };
+
+  export type CircleMembershipScalarFieldEnum = (typeof CircleMembershipScalarFieldEnum)[keyof typeof CircleMembershipScalarFieldEnum]
+
+
+  export const CirclePostScalarFieldEnum: {
+    id: 'id',
+    circleId: 'circleId',
+    authorId: 'authorId',
+    content: 'content',
+    isAnonymous: 'isAnonymous',
+    isApproved: 'isApproved',
+    crisisFlag: 'crisisFlag',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CirclePostScalarFieldEnum = (typeof CirclePostScalarFieldEnum)[keyof typeof CirclePostScalarFieldEnum]
+
+
+  export const SupportStoryScalarFieldEnum: {
+    id: 'id',
+    authorId: 'authorId',
+    title: 'title',
+    content: 'content',
+    category: 'category',
+    isApproved: 'isApproved',
+    crisisFlag: 'crisisFlag',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SupportStoryScalarFieldEnum = (typeof SupportStoryScalarFieldEnum)[keyof typeof SupportStoryScalarFieldEnum]
+
+
+  export const SupportEncouragementScalarFieldEnum: {
+    id: 'id',
+    postId: 'postId',
+    senderId: 'senderId',
+    receiverId: 'receiverId',
+    content: 'content',
+    createdAt: 'createdAt'
+  };
+
+  export type SupportEncouragementScalarFieldEnum = (typeof SupportEncouragementScalarFieldEnum)[keyof typeof SupportEncouragementScalarFieldEnum]
+
+
+  export const MentorMatchScalarFieldEnum: {
+    id: 'id',
+    mentorId: 'mentorId',
+    menteeId: 'menteeId',
+    status: 'status',
+    topic: 'topic',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MentorMatchScalarFieldEnum = (typeof MentorMatchScalarFieldEnum)[keyof typeof MentorMatchScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -21822,6 +29534,34 @@ export namespace Prisma {
    */
   export type ListEnumGoalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GoalStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'CircleRole'
+   */
+  export type EnumCircleRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CircleRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'CircleRole[]'
+   */
+  export type ListEnumCircleRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CircleRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MatchStatus'
+   */
+  export type EnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'MatchStatus[]'
+   */
+  export type ListEnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchStatus[]'>
+    
   /**
    * Deep Input Types
    */
@@ -21863,6 +29603,9 @@ export namespace Prisma {
     joinDate?: DateTimeFilter<"User"> | Date | string
     moodCheckInsCount?: IntFilter<"User"> | number
     conversationsCount?: IntFilter<"User"> | number
+    wellnessXP?: IntFilter<"User"> | number
+    wellnessLevel?: IntFilter<"User"> | number
+    longestStreak?: IntFilter<"User"> | number
     lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: IntFilter<"User"> | number
     onboardingCompleted?: BoolFilter<"User"> | boolean
@@ -21880,6 +29623,13 @@ export namespace Prisma {
     achievements?: AchievementListRelationFilter
     challenges?: ChallengeParticipationListRelationFilter
     moodGarden?: XOR<MoodGardenNullableScalarRelationFilter, MoodGardenWhereInput> | null
+    circleMemberships?: CircleMembershipListRelationFilter
+    circlePosts?: CirclePostListRelationFilter
+    stories?: SupportStoryListRelationFilter
+    sentEncouragements?: SupportEncouragementListRelationFilter
+    receivedEncouragements?: SupportEncouragementListRelationFilter
+    mentorMatches?: MentorMatchListRelationFilter
+    menteeMatches?: MentorMatchListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -21915,6 +29665,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -21932,6 +29685,13 @@ export namespace Prisma {
     achievements?: AchievementOrderByRelationAggregateInput
     challenges?: ChallengeParticipationOrderByRelationAggregateInput
     moodGarden?: MoodGardenOrderByWithRelationInput
+    circleMemberships?: CircleMembershipOrderByRelationAggregateInput
+    circlePosts?: CirclePostOrderByRelationAggregateInput
+    stories?: SupportStoryOrderByRelationAggregateInput
+    sentEncouragements?: SupportEncouragementOrderByRelationAggregateInput
+    receivedEncouragements?: SupportEncouragementOrderByRelationAggregateInput
+    mentorMatches?: MentorMatchOrderByRelationAggregateInput
+    menteeMatches?: MentorMatchOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -21970,6 +29730,9 @@ export namespace Prisma {
     joinDate?: DateTimeFilter<"User"> | Date | string
     moodCheckInsCount?: IntFilter<"User"> | number
     conversationsCount?: IntFilter<"User"> | number
+    wellnessXP?: IntFilter<"User"> | number
+    wellnessLevel?: IntFilter<"User"> | number
+    longestStreak?: IntFilter<"User"> | number
     lastActive?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: IntFilter<"User"> | number
     onboardingCompleted?: BoolFilter<"User"> | boolean
@@ -21987,6 +29750,13 @@ export namespace Prisma {
     achievements?: AchievementListRelationFilter
     challenges?: ChallengeParticipationListRelationFilter
     moodGarden?: XOR<MoodGardenNullableScalarRelationFilter, MoodGardenWhereInput> | null
+    circleMemberships?: CircleMembershipListRelationFilter
+    circlePosts?: CirclePostListRelationFilter
+    stories?: SupportStoryListRelationFilter
+    sentEncouragements?: SupportEncouragementListRelationFilter
+    receivedEncouragements?: SupportEncouragementListRelationFilter
+    mentorMatches?: MentorMatchListRelationFilter
+    menteeMatches?: MentorMatchListRelationFilter
   }, "id" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
@@ -22022,6 +29792,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -22070,6 +29843,9 @@ export namespace Prisma {
     joinDate?: DateTimeWithAggregatesFilter<"User"> | Date | string
     moodCheckInsCount?: IntWithAggregatesFilter<"User"> | number
     conversationsCount?: IntWithAggregatesFilter<"User"> | number
+    wellnessXP?: IntWithAggregatesFilter<"User"> | number
+    wellnessLevel?: IntWithAggregatesFilter<"User"> | number
+    longestStreak?: IntWithAggregatesFilter<"User"> | number
     lastActive?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     onboardingStep?: IntWithAggregatesFilter<"User"> | number
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
@@ -22231,6 +30007,13 @@ export namespace Prisma {
     sleep?: IntNullableFilter<"MoodEntry"> | number | null
     social?: IntNullableFilter<"MoodEntry"> | number | null
     anxiety?: IntNullableFilter<"MoodEntry"> | number | null
+    emotion?: StringNullableFilter<"MoodEntry"> | string | null
+    emotionIntensity?: FloatNullableFilter<"MoodEntry"> | number | null
+    physicalSymptoms?: StringNullableListFilter<"MoodEntry">
+    photoUrl?: StringNullableFilter<"MoodEntry"> | string | null
+    audioUrl?: StringNullableFilter<"MoodEntry"> | string | null
+    weather?: JsonNullableFilter<"MoodEntry">
+    location?: JsonNullableFilter<"MoodEntry">
     notes?: StringNullableFilter<"MoodEntry"> | string | null
     tags?: StringNullableListFilter<"MoodEntry">
     sentimentScore?: FloatNullableFilter<"MoodEntry"> | number | null
@@ -22248,6 +30031,13 @@ export namespace Prisma {
     sleep?: SortOrderInput | SortOrder
     social?: SortOrderInput | SortOrder
     anxiety?: SortOrderInput | SortOrder
+    emotion?: SortOrderInput | SortOrder
+    emotionIntensity?: SortOrderInput | SortOrder
+    physicalSymptoms?: SortOrder
+    photoUrl?: SortOrderInput | SortOrder
+    audioUrl?: SortOrderInput | SortOrder
+    weather?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     tags?: SortOrder
     sentimentScore?: SortOrderInput | SortOrder
@@ -22268,6 +30058,13 @@ export namespace Prisma {
     sleep?: IntNullableFilter<"MoodEntry"> | number | null
     social?: IntNullableFilter<"MoodEntry"> | number | null
     anxiety?: IntNullableFilter<"MoodEntry"> | number | null
+    emotion?: StringNullableFilter<"MoodEntry"> | string | null
+    emotionIntensity?: FloatNullableFilter<"MoodEntry"> | number | null
+    physicalSymptoms?: StringNullableListFilter<"MoodEntry">
+    photoUrl?: StringNullableFilter<"MoodEntry"> | string | null
+    audioUrl?: StringNullableFilter<"MoodEntry"> | string | null
+    weather?: JsonNullableFilter<"MoodEntry">
+    location?: JsonNullableFilter<"MoodEntry">
     notes?: StringNullableFilter<"MoodEntry"> | string | null
     tags?: StringNullableListFilter<"MoodEntry">
     sentimentScore?: FloatNullableFilter<"MoodEntry"> | number | null
@@ -22285,6 +30082,13 @@ export namespace Prisma {
     sleep?: SortOrderInput | SortOrder
     social?: SortOrderInput | SortOrder
     anxiety?: SortOrderInput | SortOrder
+    emotion?: SortOrderInput | SortOrder
+    emotionIntensity?: SortOrderInput | SortOrder
+    physicalSymptoms?: SortOrder
+    photoUrl?: SortOrderInput | SortOrder
+    audioUrl?: SortOrderInput | SortOrder
+    weather?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     tags?: SortOrder
     sentimentScore?: SortOrderInput | SortOrder
@@ -22309,6 +30113,13 @@ export namespace Prisma {
     sleep?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
     social?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
     anxiety?: IntNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    emotion?: StringNullableWithAggregatesFilter<"MoodEntry"> | string | null
+    emotionIntensity?: FloatNullableWithAggregatesFilter<"MoodEntry"> | number | null
+    physicalSymptoms?: StringNullableListFilter<"MoodEntry">
+    photoUrl?: StringNullableWithAggregatesFilter<"MoodEntry"> | string | null
+    audioUrl?: StringNullableWithAggregatesFilter<"MoodEntry"> | string | null
+    weather?: JsonNullableWithAggregatesFilter<"MoodEntry">
+    location?: JsonNullableWithAggregatesFilter<"MoodEntry">
     notes?: StringNullableWithAggregatesFilter<"MoodEntry"> | string | null
     tags?: StringNullableListFilter<"MoodEntry">
     sentimentScore?: FloatNullableWithAggregatesFilter<"MoodEntry"> | number | null
@@ -23177,6 +30988,418 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"MoodGarden"> | Date | string
   }
 
+  export type SupportCircleWhereInput = {
+    AND?: SupportCircleWhereInput | SupportCircleWhereInput[]
+    OR?: SupportCircleWhereInput[]
+    NOT?: SupportCircleWhereInput | SupportCircleWhereInput[]
+    id?: StringFilter<"SupportCircle"> | string
+    name?: StringFilter<"SupportCircle"> | string
+    description?: StringNullableFilter<"SupportCircle"> | string | null
+    category?: EnumConcernFilter<"SupportCircle"> | $Enums.Concern
+    createdAt?: DateTimeFilter<"SupportCircle"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportCircle"> | Date | string
+    members?: CircleMembershipListRelationFilter
+    posts?: CirclePostListRelationFilter
+  }
+
+  export type SupportCircleOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    category?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    members?: CircleMembershipOrderByRelationAggregateInput
+    posts?: CirclePostOrderByRelationAggregateInput
+  }
+
+  export type SupportCircleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SupportCircleWhereInput | SupportCircleWhereInput[]
+    OR?: SupportCircleWhereInput[]
+    NOT?: SupportCircleWhereInput | SupportCircleWhereInput[]
+    name?: StringFilter<"SupportCircle"> | string
+    description?: StringNullableFilter<"SupportCircle"> | string | null
+    category?: EnumConcernFilter<"SupportCircle"> | $Enums.Concern
+    createdAt?: DateTimeFilter<"SupportCircle"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportCircle"> | Date | string
+    members?: CircleMembershipListRelationFilter
+    posts?: CirclePostListRelationFilter
+  }, "id">
+
+  export type SupportCircleOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    category?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SupportCircleCountOrderByAggregateInput
+    _max?: SupportCircleMaxOrderByAggregateInput
+    _min?: SupportCircleMinOrderByAggregateInput
+  }
+
+  export type SupportCircleScalarWhereWithAggregatesInput = {
+    AND?: SupportCircleScalarWhereWithAggregatesInput | SupportCircleScalarWhereWithAggregatesInput[]
+    OR?: SupportCircleScalarWhereWithAggregatesInput[]
+    NOT?: SupportCircleScalarWhereWithAggregatesInput | SupportCircleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SupportCircle"> | string
+    name?: StringWithAggregatesFilter<"SupportCircle"> | string
+    description?: StringNullableWithAggregatesFilter<"SupportCircle"> | string | null
+    category?: EnumConcernWithAggregatesFilter<"SupportCircle"> | $Enums.Concern
+    createdAt?: DateTimeWithAggregatesFilter<"SupportCircle"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SupportCircle"> | Date | string
+  }
+
+  export type CircleMembershipWhereInput = {
+    AND?: CircleMembershipWhereInput | CircleMembershipWhereInput[]
+    OR?: CircleMembershipWhereInput[]
+    NOT?: CircleMembershipWhereInput | CircleMembershipWhereInput[]
+    id?: StringFilter<"CircleMembership"> | string
+    userId?: StringFilter<"CircleMembership"> | string
+    circleId?: StringFilter<"CircleMembership"> | string
+    joinedAt?: DateTimeFilter<"CircleMembership"> | Date | string
+    role?: EnumCircleRoleFilter<"CircleMembership"> | $Enums.CircleRole
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    circle?: XOR<SupportCircleScalarRelationFilter, SupportCircleWhereInput>
+  }
+
+  export type CircleMembershipOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    circleId?: SortOrder
+    joinedAt?: SortOrder
+    role?: SortOrder
+    user?: UserOrderByWithRelationInput
+    circle?: SupportCircleOrderByWithRelationInput
+  }
+
+  export type CircleMembershipWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_circleId?: CircleMembershipUserIdCircleIdCompoundUniqueInput
+    AND?: CircleMembershipWhereInput | CircleMembershipWhereInput[]
+    OR?: CircleMembershipWhereInput[]
+    NOT?: CircleMembershipWhereInput | CircleMembershipWhereInput[]
+    userId?: StringFilter<"CircleMembership"> | string
+    circleId?: StringFilter<"CircleMembership"> | string
+    joinedAt?: DateTimeFilter<"CircleMembership"> | Date | string
+    role?: EnumCircleRoleFilter<"CircleMembership"> | $Enums.CircleRole
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    circle?: XOR<SupportCircleScalarRelationFilter, SupportCircleWhereInput>
+  }, "id" | "userId_circleId">
+
+  export type CircleMembershipOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    circleId?: SortOrder
+    joinedAt?: SortOrder
+    role?: SortOrder
+    _count?: CircleMembershipCountOrderByAggregateInput
+    _max?: CircleMembershipMaxOrderByAggregateInput
+    _min?: CircleMembershipMinOrderByAggregateInput
+  }
+
+  export type CircleMembershipScalarWhereWithAggregatesInput = {
+    AND?: CircleMembershipScalarWhereWithAggregatesInput | CircleMembershipScalarWhereWithAggregatesInput[]
+    OR?: CircleMembershipScalarWhereWithAggregatesInput[]
+    NOT?: CircleMembershipScalarWhereWithAggregatesInput | CircleMembershipScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CircleMembership"> | string
+    userId?: StringWithAggregatesFilter<"CircleMembership"> | string
+    circleId?: StringWithAggregatesFilter<"CircleMembership"> | string
+    joinedAt?: DateTimeWithAggregatesFilter<"CircleMembership"> | Date | string
+    role?: EnumCircleRoleWithAggregatesFilter<"CircleMembership"> | $Enums.CircleRole
+  }
+
+  export type CirclePostWhereInput = {
+    AND?: CirclePostWhereInput | CirclePostWhereInput[]
+    OR?: CirclePostWhereInput[]
+    NOT?: CirclePostWhereInput | CirclePostWhereInput[]
+    id?: StringFilter<"CirclePost"> | string
+    circleId?: StringFilter<"CirclePost"> | string
+    authorId?: StringFilter<"CirclePost"> | string
+    content?: StringFilter<"CirclePost"> | string
+    isAnonymous?: BoolFilter<"CirclePost"> | boolean
+    isApproved?: BoolFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolFilter<"CirclePost"> | boolean
+    createdAt?: DateTimeFilter<"CirclePost"> | Date | string
+    updatedAt?: DateTimeFilter<"CirclePost"> | Date | string
+    circle?: XOR<SupportCircleScalarRelationFilter, SupportCircleWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    encouragements?: SupportEncouragementListRelationFilter
+  }
+
+  export type CirclePostOrderByWithRelationInput = {
+    id?: SortOrder
+    circleId?: SortOrder
+    authorId?: SortOrder
+    content?: SortOrder
+    isAnonymous?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    circle?: SupportCircleOrderByWithRelationInput
+    author?: UserOrderByWithRelationInput
+    encouragements?: SupportEncouragementOrderByRelationAggregateInput
+  }
+
+  export type CirclePostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CirclePostWhereInput | CirclePostWhereInput[]
+    OR?: CirclePostWhereInput[]
+    NOT?: CirclePostWhereInput | CirclePostWhereInput[]
+    circleId?: StringFilter<"CirclePost"> | string
+    authorId?: StringFilter<"CirclePost"> | string
+    content?: StringFilter<"CirclePost"> | string
+    isAnonymous?: BoolFilter<"CirclePost"> | boolean
+    isApproved?: BoolFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolFilter<"CirclePost"> | boolean
+    createdAt?: DateTimeFilter<"CirclePost"> | Date | string
+    updatedAt?: DateTimeFilter<"CirclePost"> | Date | string
+    circle?: XOR<SupportCircleScalarRelationFilter, SupportCircleWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    encouragements?: SupportEncouragementListRelationFilter
+  }, "id">
+
+  export type CirclePostOrderByWithAggregationInput = {
+    id?: SortOrder
+    circleId?: SortOrder
+    authorId?: SortOrder
+    content?: SortOrder
+    isAnonymous?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CirclePostCountOrderByAggregateInput
+    _max?: CirclePostMaxOrderByAggregateInput
+    _min?: CirclePostMinOrderByAggregateInput
+  }
+
+  export type CirclePostScalarWhereWithAggregatesInput = {
+    AND?: CirclePostScalarWhereWithAggregatesInput | CirclePostScalarWhereWithAggregatesInput[]
+    OR?: CirclePostScalarWhereWithAggregatesInput[]
+    NOT?: CirclePostScalarWhereWithAggregatesInput | CirclePostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CirclePost"> | string
+    circleId?: StringWithAggregatesFilter<"CirclePost"> | string
+    authorId?: StringWithAggregatesFilter<"CirclePost"> | string
+    content?: StringWithAggregatesFilter<"CirclePost"> | string
+    isAnonymous?: BoolWithAggregatesFilter<"CirclePost"> | boolean
+    isApproved?: BoolWithAggregatesFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolWithAggregatesFilter<"CirclePost"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"CirclePost"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CirclePost"> | Date | string
+  }
+
+  export type SupportStoryWhereInput = {
+    AND?: SupportStoryWhereInput | SupportStoryWhereInput[]
+    OR?: SupportStoryWhereInput[]
+    NOT?: SupportStoryWhereInput | SupportStoryWhereInput[]
+    id?: StringFilter<"SupportStory"> | string
+    authorId?: StringFilter<"SupportStory"> | string
+    title?: StringFilter<"SupportStory"> | string
+    content?: StringFilter<"SupportStory"> | string
+    category?: EnumConcernFilter<"SupportStory"> | $Enums.Concern
+    isApproved?: BoolFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolFilter<"SupportStory"> | boolean
+    createdAt?: DateTimeFilter<"SupportStory"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type SupportStoryOrderByWithRelationInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    category?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    author?: UserOrderByWithRelationInput
+  }
+
+  export type SupportStoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SupportStoryWhereInput | SupportStoryWhereInput[]
+    OR?: SupportStoryWhereInput[]
+    NOT?: SupportStoryWhereInput | SupportStoryWhereInput[]
+    authorId?: StringFilter<"SupportStory"> | string
+    title?: StringFilter<"SupportStory"> | string
+    content?: StringFilter<"SupportStory"> | string
+    category?: EnumConcernFilter<"SupportStory"> | $Enums.Concern
+    isApproved?: BoolFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolFilter<"SupportStory"> | boolean
+    createdAt?: DateTimeFilter<"SupportStory"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type SupportStoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    category?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SupportStoryCountOrderByAggregateInput
+    _max?: SupportStoryMaxOrderByAggregateInput
+    _min?: SupportStoryMinOrderByAggregateInput
+  }
+
+  export type SupportStoryScalarWhereWithAggregatesInput = {
+    AND?: SupportStoryScalarWhereWithAggregatesInput | SupportStoryScalarWhereWithAggregatesInput[]
+    OR?: SupportStoryScalarWhereWithAggregatesInput[]
+    NOT?: SupportStoryScalarWhereWithAggregatesInput | SupportStoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SupportStory"> | string
+    authorId?: StringWithAggregatesFilter<"SupportStory"> | string
+    title?: StringWithAggregatesFilter<"SupportStory"> | string
+    content?: StringWithAggregatesFilter<"SupportStory"> | string
+    category?: EnumConcernWithAggregatesFilter<"SupportStory"> | $Enums.Concern
+    isApproved?: BoolWithAggregatesFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolWithAggregatesFilter<"SupportStory"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"SupportStory"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SupportStory"> | Date | string
+  }
+
+  export type SupportEncouragementWhereInput = {
+    AND?: SupportEncouragementWhereInput | SupportEncouragementWhereInput[]
+    OR?: SupportEncouragementWhereInput[]
+    NOT?: SupportEncouragementWhereInput | SupportEncouragementWhereInput[]
+    id?: StringFilter<"SupportEncouragement"> | string
+    postId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    senderId?: StringFilter<"SupportEncouragement"> | string
+    receiverId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    content?: StringFilter<"SupportEncouragement"> | string
+    createdAt?: DateTimeFilter<"SupportEncouragement"> | Date | string
+    post?: XOR<CirclePostNullableScalarRelationFilter, CirclePostWhereInput> | null
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    receiver?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type SupportEncouragementOrderByWithRelationInput = {
+    id?: SortOrder
+    postId?: SortOrderInput | SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrderInput | SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    post?: CirclePostOrderByWithRelationInput
+    sender?: UserOrderByWithRelationInput
+    receiver?: UserOrderByWithRelationInput
+  }
+
+  export type SupportEncouragementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SupportEncouragementWhereInput | SupportEncouragementWhereInput[]
+    OR?: SupportEncouragementWhereInput[]
+    NOT?: SupportEncouragementWhereInput | SupportEncouragementWhereInput[]
+    postId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    senderId?: StringFilter<"SupportEncouragement"> | string
+    receiverId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    content?: StringFilter<"SupportEncouragement"> | string
+    createdAt?: DateTimeFilter<"SupportEncouragement"> | Date | string
+    post?: XOR<CirclePostNullableScalarRelationFilter, CirclePostWhereInput> | null
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    receiver?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type SupportEncouragementOrderByWithAggregationInput = {
+    id?: SortOrder
+    postId?: SortOrderInput | SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrderInput | SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    _count?: SupportEncouragementCountOrderByAggregateInput
+    _max?: SupportEncouragementMaxOrderByAggregateInput
+    _min?: SupportEncouragementMinOrderByAggregateInput
+  }
+
+  export type SupportEncouragementScalarWhereWithAggregatesInput = {
+    AND?: SupportEncouragementScalarWhereWithAggregatesInput | SupportEncouragementScalarWhereWithAggregatesInput[]
+    OR?: SupportEncouragementScalarWhereWithAggregatesInput[]
+    NOT?: SupportEncouragementScalarWhereWithAggregatesInput | SupportEncouragementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SupportEncouragement"> | string
+    postId?: StringNullableWithAggregatesFilter<"SupportEncouragement"> | string | null
+    senderId?: StringWithAggregatesFilter<"SupportEncouragement"> | string
+    receiverId?: StringNullableWithAggregatesFilter<"SupportEncouragement"> | string | null
+    content?: StringWithAggregatesFilter<"SupportEncouragement"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SupportEncouragement"> | Date | string
+  }
+
+  export type MentorMatchWhereInput = {
+    AND?: MentorMatchWhereInput | MentorMatchWhereInput[]
+    OR?: MentorMatchWhereInput[]
+    NOT?: MentorMatchWhereInput | MentorMatchWhereInput[]
+    id?: StringFilter<"MentorMatch"> | string
+    mentorId?: StringFilter<"MentorMatch"> | string
+    menteeId?: StringFilter<"MentorMatch"> | string
+    status?: EnumMatchStatusFilter<"MentorMatch"> | $Enums.MatchStatus
+    topic?: EnumConcernFilter<"MentorMatch"> | $Enums.Concern
+    createdAt?: DateTimeFilter<"MentorMatch"> | Date | string
+    updatedAt?: DateTimeFilter<"MentorMatch"> | Date | string
+    mentor?: XOR<UserScalarRelationFilter, UserWhereInput>
+    mentee?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MentorMatchOrderByWithRelationInput = {
+    id?: SortOrder
+    mentorId?: SortOrder
+    menteeId?: SortOrder
+    status?: SortOrder
+    topic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    mentor?: UserOrderByWithRelationInput
+    mentee?: UserOrderByWithRelationInput
+  }
+
+  export type MentorMatchWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MentorMatchWhereInput | MentorMatchWhereInput[]
+    OR?: MentorMatchWhereInput[]
+    NOT?: MentorMatchWhereInput | MentorMatchWhereInput[]
+    mentorId?: StringFilter<"MentorMatch"> | string
+    menteeId?: StringFilter<"MentorMatch"> | string
+    status?: EnumMatchStatusFilter<"MentorMatch"> | $Enums.MatchStatus
+    topic?: EnumConcernFilter<"MentorMatch"> | $Enums.Concern
+    createdAt?: DateTimeFilter<"MentorMatch"> | Date | string
+    updatedAt?: DateTimeFilter<"MentorMatch"> | Date | string
+    mentor?: XOR<UserScalarRelationFilter, UserWhereInput>
+    mentee?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type MentorMatchOrderByWithAggregationInput = {
+    id?: SortOrder
+    mentorId?: SortOrder
+    menteeId?: SortOrder
+    status?: SortOrder
+    topic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MentorMatchCountOrderByAggregateInput
+    _max?: MentorMatchMaxOrderByAggregateInput
+    _min?: MentorMatchMinOrderByAggregateInput
+  }
+
+  export type MentorMatchScalarWhereWithAggregatesInput = {
+    AND?: MentorMatchScalarWhereWithAggregatesInput | MentorMatchScalarWhereWithAggregatesInput[]
+    OR?: MentorMatchScalarWhereWithAggregatesInput[]
+    NOT?: MentorMatchScalarWhereWithAggregatesInput | MentorMatchScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MentorMatch"> | string
+    mentorId?: StringWithAggregatesFilter<"MentorMatch"> | string
+    menteeId?: StringWithAggregatesFilter<"MentorMatch"> | string
+    status?: EnumMatchStatusWithAggregatesFilter<"MentorMatch"> | $Enums.MatchStatus
+    topic?: EnumConcernWithAggregatesFilter<"MentorMatch"> | $Enums.Concern
+    createdAt?: DateTimeWithAggregatesFilter<"MentorMatch"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MentorMatch"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -23210,6 +31433,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -23227,6 +31453,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -23262,6 +31495,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -23279,6 +31515,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUpdateInput = {
@@ -23314,6 +31557,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -23331,6 +31577,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -23366,6 +31619,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -23383,6 +31639,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -23418,6 +31681,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -23458,6 +31724,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -23498,6 +31767,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -23668,6 +31940,13 @@ export namespace Prisma {
     sleep?: number | null
     social?: number | null
     anxiety?: number | null
+    emotion?: string | null
+    emotionIntensity?: number | null
+    physicalSymptoms?: MoodEntryCreatephysicalSymptomsInput | string[]
+    photoUrl?: string | null
+    audioUrl?: string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
@@ -23685,6 +31964,13 @@ export namespace Prisma {
     sleep?: number | null
     social?: number | null
     anxiety?: number | null
+    emotion?: string | null
+    emotionIntensity?: number | null
+    physicalSymptoms?: MoodEntryCreatephysicalSymptomsInput | string[]
+    photoUrl?: string | null
+    audioUrl?: string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
@@ -23700,6 +31986,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -23717,6 +32010,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -23733,6 +32033,13 @@ export namespace Prisma {
     sleep?: number | null
     social?: number | null
     anxiety?: number | null
+    emotion?: string | null
+    emotionIntensity?: number | null
+    physicalSymptoms?: MoodEntryCreatephysicalSymptomsInput | string[]
+    photoUrl?: string | null
+    audioUrl?: string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
@@ -23748,6 +32055,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -23764,6 +32078,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -24682,6 +33003,428 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SupportCircleCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: CircleMembershipCreateNestedManyWithoutCircleInput
+    posts?: CirclePostCreateNestedManyWithoutCircleInput
+  }
+
+  export type SupportCircleUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: CircleMembershipUncheckedCreateNestedManyWithoutCircleInput
+    posts?: CirclePostUncheckedCreateNestedManyWithoutCircleInput
+  }
+
+  export type SupportCircleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: CircleMembershipUpdateManyWithoutCircleNestedInput
+    posts?: CirclePostUpdateManyWithoutCircleNestedInput
+  }
+
+  export type SupportCircleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: CircleMembershipUncheckedUpdateManyWithoutCircleNestedInput
+    posts?: CirclePostUncheckedUpdateManyWithoutCircleNestedInput
+  }
+
+  export type SupportCircleCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportCircleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportCircleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CircleMembershipCreateInput = {
+    id?: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+    user: UserCreateNestedOneWithoutCircleMembershipsInput
+    circle: SupportCircleCreateNestedOneWithoutMembersInput
+  }
+
+  export type CircleMembershipUncheckedCreateInput = {
+    id?: string
+    userId: string
+    circleId: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+  }
+
+  export type CircleMembershipUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+    user?: UserUpdateOneRequiredWithoutCircleMembershipsNestedInput
+    circle?: SupportCircleUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type CircleMembershipUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CircleMembershipCreateManyInput = {
+    id?: string
+    userId: string
+    circleId: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+  }
+
+  export type CircleMembershipUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CircleMembershipUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CirclePostCreateInput = {
+    id?: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    circle: SupportCircleCreateNestedOneWithoutPostsInput
+    author: UserCreateNestedOneWithoutCirclePostsInput
+    encouragements?: SupportEncouragementCreateNestedManyWithoutPostInput
+  }
+
+  export type CirclePostUncheckedCreateInput = {
+    id?: string
+    circleId: string
+    authorId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type CirclePostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    circle?: SupportCircleUpdateOneRequiredWithoutPostsNestedInput
+    author?: UserUpdateOneRequiredWithoutCirclePostsNestedInput
+    encouragements?: SupportEncouragementUpdateManyWithoutPostNestedInput
+  }
+
+  export type CirclePostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encouragements?: SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type CirclePostCreateManyInput = {
+    id?: string
+    circleId: string
+    authorId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CirclePostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CirclePostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportStoryCreateInput = {
+    id?: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutStoriesInput
+  }
+
+  export type SupportStoryUncheckedCreateInput = {
+    id?: string
+    authorId: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportStoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutStoriesNestedInput
+  }
+
+  export type SupportStoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportStoryCreateManyInput = {
+    id?: string
+    authorId: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportStoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportStoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementCreateInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    post?: CirclePostCreateNestedOneWithoutEncouragementsInput
+    sender: UserCreateNestedOneWithoutSentEncouragementsInput
+    receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+  }
+
+  export type SupportEncouragementUncheckedCreateInput = {
+    id?: string
+    postId?: string | null
+    senderId: string
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
+    sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
+    receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+  }
+
+  export type SupportEncouragementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementCreateManyInput = {
+    id?: string
+    postId?: string | null
+    senderId: string
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchCreateInput = {
+    id?: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mentor: UserCreateNestedOneWithoutMentorMatchesInput
+    mentee: UserCreateNestedOneWithoutMenteeMatchesInput
+  }
+
+  export type MentorMatchUncheckedCreateInput = {
+    id?: string
+    mentorId: string
+    menteeId: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MentorMatchUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mentor?: UserUpdateOneRequiredWithoutMentorMatchesNestedInput
+    mentee?: UserUpdateOneRequiredWithoutMenteeMatchesNestedInput
+  }
+
+  export type MentorMatchUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mentorId?: StringFieldUpdateOperationsInput | string
+    menteeId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchCreateManyInput = {
+    id?: string
+    mentorId: string
+    menteeId: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MentorMatchUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mentorId?: StringFieldUpdateOperationsInput | string
+    menteeId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24934,6 +33677,36 @@ export namespace Prisma {
     isNot?: MoodGardenWhereInput | null
   }
 
+  export type CircleMembershipListRelationFilter = {
+    every?: CircleMembershipWhereInput
+    some?: CircleMembershipWhereInput
+    none?: CircleMembershipWhereInput
+  }
+
+  export type CirclePostListRelationFilter = {
+    every?: CirclePostWhereInput
+    some?: CirclePostWhereInput
+    none?: CirclePostWhereInput
+  }
+
+  export type SupportStoryListRelationFilter = {
+    every?: SupportStoryWhereInput
+    some?: SupportStoryWhereInput
+    none?: SupportStoryWhereInput
+  }
+
+  export type SupportEncouragementListRelationFilter = {
+    every?: SupportEncouragementWhereInput
+    some?: SupportEncouragementWhereInput
+    none?: SupportEncouragementWhereInput
+  }
+
+  export type MentorMatchListRelationFilter = {
+    every?: MentorMatchWhereInput
+    some?: MentorMatchWhereInput
+    none?: MentorMatchWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -24983,6 +33756,26 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CircleMembershipOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CirclePostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SupportStoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SupportEncouragementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MentorMatchOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -25016,6 +33809,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -25028,6 +33824,9 @@ export namespace Prisma {
     baselineMood?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     onboardingStep?: SortOrder
   }
 
@@ -25057,6 +33856,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -25090,6 +33892,9 @@ export namespace Prisma {
     joinDate?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     lastActive?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -25102,6 +33907,9 @@ export namespace Prisma {
     baselineMood?: SortOrder
     moodCheckInsCount?: SortOrder
     conversationsCount?: SortOrder
+    wellnessXP?: SortOrder
+    wellnessLevel?: SortOrder
+    longestStreak?: SortOrder
     onboardingStep?: SortOrder
   }
 
@@ -25430,14 +34238,6 @@ export namespace Prisma {
     _max?: NestedEnumMessageRoleFilter<$PrismaModel>
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type FloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -25449,6 +34249,14 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type MoodEntryCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -25457,6 +34265,13 @@ export namespace Prisma {
     sleep?: SortOrder
     social?: SortOrder
     anxiety?: SortOrder
+    emotion?: SortOrder
+    emotionIntensity?: SortOrder
+    physicalSymptoms?: SortOrder
+    photoUrl?: SortOrder
+    audioUrl?: SortOrder
+    weather?: SortOrder
+    location?: SortOrder
     notes?: SortOrder
     tags?: SortOrder
     sentimentScore?: SortOrder
@@ -25471,6 +34286,7 @@ export namespace Prisma {
     sleep?: SortOrder
     social?: SortOrder
     anxiety?: SortOrder
+    emotionIntensity?: SortOrder
     sentimentScore?: SortOrder
   }
 
@@ -25482,6 +34298,10 @@ export namespace Prisma {
     sleep?: SortOrder
     social?: SortOrder
     anxiety?: SortOrder
+    emotion?: SortOrder
+    emotionIntensity?: SortOrder
+    photoUrl?: SortOrder
+    audioUrl?: SortOrder
     notes?: SortOrder
     sentimentScore?: SortOrder
     sentimentLabel?: SortOrder
@@ -25497,6 +34317,10 @@ export namespace Prisma {
     sleep?: SortOrder
     social?: SortOrder
     anxiety?: SortOrder
+    emotion?: SortOrder
+    emotionIntensity?: SortOrder
+    photoUrl?: SortOrder
+    audioUrl?: SortOrder
     notes?: SortOrder
     sentimentScore?: SortOrder
     sentimentLabel?: SortOrder
@@ -25510,6 +34334,7 @@ export namespace Prisma {
     sleep?: SortOrder
     social?: SortOrder
     anxiety?: SortOrder
+    emotionIntensity?: SortOrder
     sentimentScore?: SortOrder
   }
 
@@ -26186,6 +35011,257 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type EnumConcernFilter<$PrismaModel = never> = {
+    equals?: $Enums.Concern | EnumConcernFieldRefInput<$PrismaModel>
+    in?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    not?: NestedEnumConcernFilter<$PrismaModel> | $Enums.Concern
+  }
+
+  export type SupportCircleCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportCircleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportCircleMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumConcernWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Concern | EnumConcernFieldRefInput<$PrismaModel>
+    in?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    not?: NestedEnumConcernWithAggregatesFilter<$PrismaModel> | $Enums.Concern
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConcernFilter<$PrismaModel>
+    _max?: NestedEnumConcernFilter<$PrismaModel>
+  }
+
+  export type EnumCircleRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.CircleRole | EnumCircleRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumCircleRoleFilter<$PrismaModel> | $Enums.CircleRole
+  }
+
+  export type SupportCircleScalarRelationFilter = {
+    is?: SupportCircleWhereInput
+    isNot?: SupportCircleWhereInput
+  }
+
+  export type CircleMembershipUserIdCircleIdCompoundUniqueInput = {
+    userId: string
+    circleId: string
+  }
+
+  export type CircleMembershipCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    circleId?: SortOrder
+    joinedAt?: SortOrder
+    role?: SortOrder
+  }
+
+  export type CircleMembershipMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    circleId?: SortOrder
+    joinedAt?: SortOrder
+    role?: SortOrder
+  }
+
+  export type CircleMembershipMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    circleId?: SortOrder
+    joinedAt?: SortOrder
+    role?: SortOrder
+  }
+
+  export type EnumCircleRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CircleRole | EnumCircleRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumCircleRoleWithAggregatesFilter<$PrismaModel> | $Enums.CircleRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCircleRoleFilter<$PrismaModel>
+    _max?: NestedEnumCircleRoleFilter<$PrismaModel>
+  }
+
+  export type CirclePostCountOrderByAggregateInput = {
+    id?: SortOrder
+    circleId?: SortOrder
+    authorId?: SortOrder
+    content?: SortOrder
+    isAnonymous?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CirclePostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    circleId?: SortOrder
+    authorId?: SortOrder
+    content?: SortOrder
+    isAnonymous?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CirclePostMinOrderByAggregateInput = {
+    id?: SortOrder
+    circleId?: SortOrder
+    authorId?: SortOrder
+    content?: SortOrder
+    isAnonymous?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportStoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    category?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportStoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    category?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportStoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    category?: SortOrder
+    isApproved?: SortOrder
+    crisisFlag?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CirclePostNullableScalarRelationFilter = {
+    is?: CirclePostWhereInput | null
+    isNot?: CirclePostWhereInput | null
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type SupportEncouragementCountOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SupportEncouragementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SupportEncouragementMinOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumMatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusFilter<$PrismaModel> | $Enums.MatchStatus
+  }
+
+  export type MentorMatchCountOrderByAggregateInput = {
+    id?: SortOrder
+    mentorId?: SortOrder
+    menteeId?: SortOrder
+    status?: SortOrder
+    topic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MentorMatchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    mentorId?: SortOrder
+    menteeId?: SortOrder
+    status?: SortOrder
+    topic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MentorMatchMinOrderByAggregateInput = {
+    id?: SortOrder
+    mentorId?: SortOrder
+    menteeId?: SortOrder
+    status?: SortOrder
+    topic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumMatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.MatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumMatchStatusFilter<$PrismaModel>
+  }
+
   export type UserCreateconcernsInput = {
     set: $Enums.Concern[]
   }
@@ -26281,6 +35357,55 @@ export namespace Prisma {
     connect?: MoodGardenWhereUniqueInput
   }
 
+  export type CircleMembershipCreateNestedManyWithoutUserInput = {
+    create?: XOR<CircleMembershipCreateWithoutUserInput, CircleMembershipUncheckedCreateWithoutUserInput> | CircleMembershipCreateWithoutUserInput[] | CircleMembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutUserInput | CircleMembershipCreateOrConnectWithoutUserInput[]
+    createMany?: CircleMembershipCreateManyUserInputEnvelope
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+  }
+
+  export type CirclePostCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<CirclePostCreateWithoutAuthorInput, CirclePostUncheckedCreateWithoutAuthorInput> | CirclePostCreateWithoutAuthorInput[] | CirclePostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutAuthorInput | CirclePostCreateOrConnectWithoutAuthorInput[]
+    createMany?: CirclePostCreateManyAuthorInputEnvelope
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+  }
+
+  export type SupportStoryCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<SupportStoryCreateWithoutAuthorInput, SupportStoryUncheckedCreateWithoutAuthorInput> | SupportStoryCreateWithoutAuthorInput[] | SupportStoryUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: SupportStoryCreateOrConnectWithoutAuthorInput | SupportStoryCreateOrConnectWithoutAuthorInput[]
+    createMany?: SupportStoryCreateManyAuthorInputEnvelope
+    connect?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+  }
+
+  export type SupportEncouragementCreateNestedManyWithoutSenderInput = {
+    create?: XOR<SupportEncouragementCreateWithoutSenderInput, SupportEncouragementUncheckedCreateWithoutSenderInput> | SupportEncouragementCreateWithoutSenderInput[] | SupportEncouragementUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutSenderInput | SupportEncouragementCreateOrConnectWithoutSenderInput[]
+    createMany?: SupportEncouragementCreateManySenderInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type SupportEncouragementCreateNestedManyWithoutReceiverInput = {
+    create?: XOR<SupportEncouragementCreateWithoutReceiverInput, SupportEncouragementUncheckedCreateWithoutReceiverInput> | SupportEncouragementCreateWithoutReceiverInput[] | SupportEncouragementUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutReceiverInput | SupportEncouragementCreateOrConnectWithoutReceiverInput[]
+    createMany?: SupportEncouragementCreateManyReceiverInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type MentorMatchCreateNestedManyWithoutMentorInput = {
+    create?: XOR<MentorMatchCreateWithoutMentorInput, MentorMatchUncheckedCreateWithoutMentorInput> | MentorMatchCreateWithoutMentorInput[] | MentorMatchUncheckedCreateWithoutMentorInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMentorInput | MentorMatchCreateOrConnectWithoutMentorInput[]
+    createMany?: MentorMatchCreateManyMentorInputEnvelope
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+  }
+
+  export type MentorMatchCreateNestedManyWithoutMenteeInput = {
+    create?: XOR<MentorMatchCreateWithoutMenteeInput, MentorMatchUncheckedCreateWithoutMenteeInput> | MentorMatchCreateWithoutMenteeInput[] | MentorMatchUncheckedCreateWithoutMenteeInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMenteeInput | MentorMatchCreateOrConnectWithoutMenteeInput[]
+    createMany?: MentorMatchCreateManyMenteeInputEnvelope
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+  }
+
   export type ConversationUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
@@ -26362,6 +35487,55 @@ export namespace Prisma {
     create?: XOR<MoodGardenCreateWithoutUserInput, MoodGardenUncheckedCreateWithoutUserInput>
     connectOrCreate?: MoodGardenCreateOrConnectWithoutUserInput
     connect?: MoodGardenWhereUniqueInput
+  }
+
+  export type CircleMembershipUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CircleMembershipCreateWithoutUserInput, CircleMembershipUncheckedCreateWithoutUserInput> | CircleMembershipCreateWithoutUserInput[] | CircleMembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutUserInput | CircleMembershipCreateOrConnectWithoutUserInput[]
+    createMany?: CircleMembershipCreateManyUserInputEnvelope
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+  }
+
+  export type CirclePostUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<CirclePostCreateWithoutAuthorInput, CirclePostUncheckedCreateWithoutAuthorInput> | CirclePostCreateWithoutAuthorInput[] | CirclePostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutAuthorInput | CirclePostCreateOrConnectWithoutAuthorInput[]
+    createMany?: CirclePostCreateManyAuthorInputEnvelope
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+  }
+
+  export type SupportStoryUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<SupportStoryCreateWithoutAuthorInput, SupportStoryUncheckedCreateWithoutAuthorInput> | SupportStoryCreateWithoutAuthorInput[] | SupportStoryUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: SupportStoryCreateOrConnectWithoutAuthorInput | SupportStoryCreateOrConnectWithoutAuthorInput[]
+    createMany?: SupportStoryCreateManyAuthorInputEnvelope
+    connect?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+  }
+
+  export type SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<SupportEncouragementCreateWithoutSenderInput, SupportEncouragementUncheckedCreateWithoutSenderInput> | SupportEncouragementCreateWithoutSenderInput[] | SupportEncouragementUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutSenderInput | SupportEncouragementCreateOrConnectWithoutSenderInput[]
+    createMany?: SupportEncouragementCreateManySenderInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput = {
+    create?: XOR<SupportEncouragementCreateWithoutReceiverInput, SupportEncouragementUncheckedCreateWithoutReceiverInput> | SupportEncouragementCreateWithoutReceiverInput[] | SupportEncouragementUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutReceiverInput | SupportEncouragementCreateOrConnectWithoutReceiverInput[]
+    createMany?: SupportEncouragementCreateManyReceiverInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type MentorMatchUncheckedCreateNestedManyWithoutMentorInput = {
+    create?: XOR<MentorMatchCreateWithoutMentorInput, MentorMatchUncheckedCreateWithoutMentorInput> | MentorMatchCreateWithoutMentorInput[] | MentorMatchUncheckedCreateWithoutMentorInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMentorInput | MentorMatchCreateOrConnectWithoutMentorInput[]
+    createMany?: MentorMatchCreateManyMentorInputEnvelope
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+  }
+
+  export type MentorMatchUncheckedCreateNestedManyWithoutMenteeInput = {
+    create?: XOR<MentorMatchCreateWithoutMenteeInput, MentorMatchUncheckedCreateWithoutMenteeInput> | MentorMatchCreateWithoutMenteeInput[] | MentorMatchUncheckedCreateWithoutMenteeInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMenteeInput | MentorMatchCreateOrConnectWithoutMenteeInput[]
+    createMany?: MentorMatchCreateManyMenteeInputEnvelope
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -26611,6 +35785,104 @@ export namespace Prisma {
     update?: XOR<XOR<MoodGardenUpdateToOneWithWhereWithoutUserInput, MoodGardenUpdateWithoutUserInput>, MoodGardenUncheckedUpdateWithoutUserInput>
   }
 
+  export type CircleMembershipUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CircleMembershipCreateWithoutUserInput, CircleMembershipUncheckedCreateWithoutUserInput> | CircleMembershipCreateWithoutUserInput[] | CircleMembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutUserInput | CircleMembershipCreateOrConnectWithoutUserInput[]
+    upsert?: CircleMembershipUpsertWithWhereUniqueWithoutUserInput | CircleMembershipUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CircleMembershipCreateManyUserInputEnvelope
+    set?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    disconnect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    delete?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    update?: CircleMembershipUpdateWithWhereUniqueWithoutUserInput | CircleMembershipUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CircleMembershipUpdateManyWithWhereWithoutUserInput | CircleMembershipUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CircleMembershipScalarWhereInput | CircleMembershipScalarWhereInput[]
+  }
+
+  export type CirclePostUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<CirclePostCreateWithoutAuthorInput, CirclePostUncheckedCreateWithoutAuthorInput> | CirclePostCreateWithoutAuthorInput[] | CirclePostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutAuthorInput | CirclePostCreateOrConnectWithoutAuthorInput[]
+    upsert?: CirclePostUpsertWithWhereUniqueWithoutAuthorInput | CirclePostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: CirclePostCreateManyAuthorInputEnvelope
+    set?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    disconnect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    delete?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    update?: CirclePostUpdateWithWhereUniqueWithoutAuthorInput | CirclePostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: CirclePostUpdateManyWithWhereWithoutAuthorInput | CirclePostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: CirclePostScalarWhereInput | CirclePostScalarWhereInput[]
+  }
+
+  export type SupportStoryUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<SupportStoryCreateWithoutAuthorInput, SupportStoryUncheckedCreateWithoutAuthorInput> | SupportStoryCreateWithoutAuthorInput[] | SupportStoryUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: SupportStoryCreateOrConnectWithoutAuthorInput | SupportStoryCreateOrConnectWithoutAuthorInput[]
+    upsert?: SupportStoryUpsertWithWhereUniqueWithoutAuthorInput | SupportStoryUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: SupportStoryCreateManyAuthorInputEnvelope
+    set?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    disconnect?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    delete?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    connect?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    update?: SupportStoryUpdateWithWhereUniqueWithoutAuthorInput | SupportStoryUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: SupportStoryUpdateManyWithWhereWithoutAuthorInput | SupportStoryUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: SupportStoryScalarWhereInput | SupportStoryScalarWhereInput[]
+  }
+
+  export type SupportEncouragementUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutSenderInput, SupportEncouragementUncheckedCreateWithoutSenderInput> | SupportEncouragementCreateWithoutSenderInput[] | SupportEncouragementUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutSenderInput | SupportEncouragementCreateOrConnectWithoutSenderInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutSenderInput | SupportEncouragementUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: SupportEncouragementCreateManySenderInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutSenderInput | SupportEncouragementUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutSenderInput | SupportEncouragementUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type SupportEncouragementUpdateManyWithoutReceiverNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutReceiverInput, SupportEncouragementUncheckedCreateWithoutReceiverInput> | SupportEncouragementCreateWithoutReceiverInput[] | SupportEncouragementUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutReceiverInput | SupportEncouragementCreateOrConnectWithoutReceiverInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutReceiverInput | SupportEncouragementUpsertWithWhereUniqueWithoutReceiverInput[]
+    createMany?: SupportEncouragementCreateManyReceiverInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutReceiverInput | SupportEncouragementUpdateWithWhereUniqueWithoutReceiverInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutReceiverInput | SupportEncouragementUpdateManyWithWhereWithoutReceiverInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type MentorMatchUpdateManyWithoutMentorNestedInput = {
+    create?: XOR<MentorMatchCreateWithoutMentorInput, MentorMatchUncheckedCreateWithoutMentorInput> | MentorMatchCreateWithoutMentorInput[] | MentorMatchUncheckedCreateWithoutMentorInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMentorInput | MentorMatchCreateOrConnectWithoutMentorInput[]
+    upsert?: MentorMatchUpsertWithWhereUniqueWithoutMentorInput | MentorMatchUpsertWithWhereUniqueWithoutMentorInput[]
+    createMany?: MentorMatchCreateManyMentorInputEnvelope
+    set?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    disconnect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    delete?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    update?: MentorMatchUpdateWithWhereUniqueWithoutMentorInput | MentorMatchUpdateWithWhereUniqueWithoutMentorInput[]
+    updateMany?: MentorMatchUpdateManyWithWhereWithoutMentorInput | MentorMatchUpdateManyWithWhereWithoutMentorInput[]
+    deleteMany?: MentorMatchScalarWhereInput | MentorMatchScalarWhereInput[]
+  }
+
+  export type MentorMatchUpdateManyWithoutMenteeNestedInput = {
+    create?: XOR<MentorMatchCreateWithoutMenteeInput, MentorMatchUncheckedCreateWithoutMenteeInput> | MentorMatchCreateWithoutMenteeInput[] | MentorMatchUncheckedCreateWithoutMenteeInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMenteeInput | MentorMatchCreateOrConnectWithoutMenteeInput[]
+    upsert?: MentorMatchUpsertWithWhereUniqueWithoutMenteeInput | MentorMatchUpsertWithWhereUniqueWithoutMenteeInput[]
+    createMany?: MentorMatchCreateManyMenteeInputEnvelope
+    set?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    disconnect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    delete?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    update?: MentorMatchUpdateWithWhereUniqueWithoutMenteeInput | MentorMatchUpdateWithWhereUniqueWithoutMenteeInput[]
+    updateMany?: MentorMatchUpdateManyWithWhereWithoutMenteeInput | MentorMatchUpdateManyWithWhereWithoutMenteeInput[]
+    deleteMany?: MentorMatchScalarWhereInput | MentorMatchScalarWhereInput[]
+  }
+
   export type ConversationUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
@@ -26775,6 +36047,104 @@ export namespace Prisma {
     update?: XOR<XOR<MoodGardenUpdateToOneWithWhereWithoutUserInput, MoodGardenUpdateWithoutUserInput>, MoodGardenUncheckedUpdateWithoutUserInput>
   }
 
+  export type CircleMembershipUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CircleMembershipCreateWithoutUserInput, CircleMembershipUncheckedCreateWithoutUserInput> | CircleMembershipCreateWithoutUserInput[] | CircleMembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutUserInput | CircleMembershipCreateOrConnectWithoutUserInput[]
+    upsert?: CircleMembershipUpsertWithWhereUniqueWithoutUserInput | CircleMembershipUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CircleMembershipCreateManyUserInputEnvelope
+    set?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    disconnect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    delete?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    update?: CircleMembershipUpdateWithWhereUniqueWithoutUserInput | CircleMembershipUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CircleMembershipUpdateManyWithWhereWithoutUserInput | CircleMembershipUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CircleMembershipScalarWhereInput | CircleMembershipScalarWhereInput[]
+  }
+
+  export type CirclePostUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<CirclePostCreateWithoutAuthorInput, CirclePostUncheckedCreateWithoutAuthorInput> | CirclePostCreateWithoutAuthorInput[] | CirclePostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutAuthorInput | CirclePostCreateOrConnectWithoutAuthorInput[]
+    upsert?: CirclePostUpsertWithWhereUniqueWithoutAuthorInput | CirclePostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: CirclePostCreateManyAuthorInputEnvelope
+    set?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    disconnect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    delete?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    update?: CirclePostUpdateWithWhereUniqueWithoutAuthorInput | CirclePostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: CirclePostUpdateManyWithWhereWithoutAuthorInput | CirclePostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: CirclePostScalarWhereInput | CirclePostScalarWhereInput[]
+  }
+
+  export type SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<SupportStoryCreateWithoutAuthorInput, SupportStoryUncheckedCreateWithoutAuthorInput> | SupportStoryCreateWithoutAuthorInput[] | SupportStoryUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: SupportStoryCreateOrConnectWithoutAuthorInput | SupportStoryCreateOrConnectWithoutAuthorInput[]
+    upsert?: SupportStoryUpsertWithWhereUniqueWithoutAuthorInput | SupportStoryUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: SupportStoryCreateManyAuthorInputEnvelope
+    set?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    disconnect?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    delete?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    connect?: SupportStoryWhereUniqueInput | SupportStoryWhereUniqueInput[]
+    update?: SupportStoryUpdateWithWhereUniqueWithoutAuthorInput | SupportStoryUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: SupportStoryUpdateManyWithWhereWithoutAuthorInput | SupportStoryUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: SupportStoryScalarWhereInput | SupportStoryScalarWhereInput[]
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutSenderInput, SupportEncouragementUncheckedCreateWithoutSenderInput> | SupportEncouragementCreateWithoutSenderInput[] | SupportEncouragementUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutSenderInput | SupportEncouragementCreateOrConnectWithoutSenderInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutSenderInput | SupportEncouragementUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: SupportEncouragementCreateManySenderInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutSenderInput | SupportEncouragementUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutSenderInput | SupportEncouragementUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutReceiverInput, SupportEncouragementUncheckedCreateWithoutReceiverInput> | SupportEncouragementCreateWithoutReceiverInput[] | SupportEncouragementUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutReceiverInput | SupportEncouragementCreateOrConnectWithoutReceiverInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutReceiverInput | SupportEncouragementUpsertWithWhereUniqueWithoutReceiverInput[]
+    createMany?: SupportEncouragementCreateManyReceiverInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutReceiverInput | SupportEncouragementUpdateWithWhereUniqueWithoutReceiverInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutReceiverInput | SupportEncouragementUpdateManyWithWhereWithoutReceiverInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type MentorMatchUncheckedUpdateManyWithoutMentorNestedInput = {
+    create?: XOR<MentorMatchCreateWithoutMentorInput, MentorMatchUncheckedCreateWithoutMentorInput> | MentorMatchCreateWithoutMentorInput[] | MentorMatchUncheckedCreateWithoutMentorInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMentorInput | MentorMatchCreateOrConnectWithoutMentorInput[]
+    upsert?: MentorMatchUpsertWithWhereUniqueWithoutMentorInput | MentorMatchUpsertWithWhereUniqueWithoutMentorInput[]
+    createMany?: MentorMatchCreateManyMentorInputEnvelope
+    set?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    disconnect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    delete?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    update?: MentorMatchUpdateWithWhereUniqueWithoutMentorInput | MentorMatchUpdateWithWhereUniqueWithoutMentorInput[]
+    updateMany?: MentorMatchUpdateManyWithWhereWithoutMentorInput | MentorMatchUpdateManyWithWhereWithoutMentorInput[]
+    deleteMany?: MentorMatchScalarWhereInput | MentorMatchScalarWhereInput[]
+  }
+
+  export type MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput = {
+    create?: XOR<MentorMatchCreateWithoutMenteeInput, MentorMatchUncheckedCreateWithoutMenteeInput> | MentorMatchCreateWithoutMenteeInput[] | MentorMatchUncheckedCreateWithoutMenteeInput[]
+    connectOrCreate?: MentorMatchCreateOrConnectWithoutMenteeInput | MentorMatchCreateOrConnectWithoutMenteeInput[]
+    upsert?: MentorMatchUpsertWithWhereUniqueWithoutMenteeInput | MentorMatchUpsertWithWhereUniqueWithoutMenteeInput[]
+    createMany?: MentorMatchCreateManyMenteeInputEnvelope
+    set?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    disconnect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    delete?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    connect?: MentorMatchWhereUniqueInput | MentorMatchWhereUniqueInput[]
+    update?: MentorMatchUpdateWithWhereUniqueWithoutMenteeInput | MentorMatchUpdateWithWhereUniqueWithoutMenteeInput[]
+    updateMany?: MentorMatchUpdateManyWithWhereWithoutMenteeInput | MentorMatchUpdateManyWithWhereWithoutMenteeInput[]
+    deleteMany?: MentorMatchScalarWhereInput | MentorMatchScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutConversationsInput = {
     create?: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutConversationsInput
@@ -26853,6 +36223,10 @@ export namespace Prisma {
     update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutMessagesInput, ConversationUpdateWithoutMessagesInput>, ConversationUncheckedUpdateWithoutMessagesInput>
   }
 
+  export type MoodEntryCreatephysicalSymptomsInput = {
+    set: string[]
+  }
+
   export type MoodEntryCreatetagsInput = {
     set: string[]
   }
@@ -26863,17 +36237,22 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type MoodEntryUpdatetagsInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
   export type NullableFloatFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type MoodEntryUpdatephysicalSymptomsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type MoodEntryUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutMoodEntriesNestedInput = {
@@ -27106,6 +36485,288 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutMoodGardenInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMoodGardenInput, UserUpdateWithoutMoodGardenInput>, UserUncheckedUpdateWithoutMoodGardenInput>
+  }
+
+  export type CircleMembershipCreateNestedManyWithoutCircleInput = {
+    create?: XOR<CircleMembershipCreateWithoutCircleInput, CircleMembershipUncheckedCreateWithoutCircleInput> | CircleMembershipCreateWithoutCircleInput[] | CircleMembershipUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutCircleInput | CircleMembershipCreateOrConnectWithoutCircleInput[]
+    createMany?: CircleMembershipCreateManyCircleInputEnvelope
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+  }
+
+  export type CirclePostCreateNestedManyWithoutCircleInput = {
+    create?: XOR<CirclePostCreateWithoutCircleInput, CirclePostUncheckedCreateWithoutCircleInput> | CirclePostCreateWithoutCircleInput[] | CirclePostUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutCircleInput | CirclePostCreateOrConnectWithoutCircleInput[]
+    createMany?: CirclePostCreateManyCircleInputEnvelope
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+  }
+
+  export type CircleMembershipUncheckedCreateNestedManyWithoutCircleInput = {
+    create?: XOR<CircleMembershipCreateWithoutCircleInput, CircleMembershipUncheckedCreateWithoutCircleInput> | CircleMembershipCreateWithoutCircleInput[] | CircleMembershipUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutCircleInput | CircleMembershipCreateOrConnectWithoutCircleInput[]
+    createMany?: CircleMembershipCreateManyCircleInputEnvelope
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+  }
+
+  export type CirclePostUncheckedCreateNestedManyWithoutCircleInput = {
+    create?: XOR<CirclePostCreateWithoutCircleInput, CirclePostUncheckedCreateWithoutCircleInput> | CirclePostCreateWithoutCircleInput[] | CirclePostUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutCircleInput | CirclePostCreateOrConnectWithoutCircleInput[]
+    createMany?: CirclePostCreateManyCircleInputEnvelope
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+  }
+
+  export type EnumConcernFieldUpdateOperationsInput = {
+    set?: $Enums.Concern
+  }
+
+  export type CircleMembershipUpdateManyWithoutCircleNestedInput = {
+    create?: XOR<CircleMembershipCreateWithoutCircleInput, CircleMembershipUncheckedCreateWithoutCircleInput> | CircleMembershipCreateWithoutCircleInput[] | CircleMembershipUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutCircleInput | CircleMembershipCreateOrConnectWithoutCircleInput[]
+    upsert?: CircleMembershipUpsertWithWhereUniqueWithoutCircleInput | CircleMembershipUpsertWithWhereUniqueWithoutCircleInput[]
+    createMany?: CircleMembershipCreateManyCircleInputEnvelope
+    set?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    disconnect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    delete?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    update?: CircleMembershipUpdateWithWhereUniqueWithoutCircleInput | CircleMembershipUpdateWithWhereUniqueWithoutCircleInput[]
+    updateMany?: CircleMembershipUpdateManyWithWhereWithoutCircleInput | CircleMembershipUpdateManyWithWhereWithoutCircleInput[]
+    deleteMany?: CircleMembershipScalarWhereInput | CircleMembershipScalarWhereInput[]
+  }
+
+  export type CirclePostUpdateManyWithoutCircleNestedInput = {
+    create?: XOR<CirclePostCreateWithoutCircleInput, CirclePostUncheckedCreateWithoutCircleInput> | CirclePostCreateWithoutCircleInput[] | CirclePostUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutCircleInput | CirclePostCreateOrConnectWithoutCircleInput[]
+    upsert?: CirclePostUpsertWithWhereUniqueWithoutCircleInput | CirclePostUpsertWithWhereUniqueWithoutCircleInput[]
+    createMany?: CirclePostCreateManyCircleInputEnvelope
+    set?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    disconnect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    delete?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    update?: CirclePostUpdateWithWhereUniqueWithoutCircleInput | CirclePostUpdateWithWhereUniqueWithoutCircleInput[]
+    updateMany?: CirclePostUpdateManyWithWhereWithoutCircleInput | CirclePostUpdateManyWithWhereWithoutCircleInput[]
+    deleteMany?: CirclePostScalarWhereInput | CirclePostScalarWhereInput[]
+  }
+
+  export type CircleMembershipUncheckedUpdateManyWithoutCircleNestedInput = {
+    create?: XOR<CircleMembershipCreateWithoutCircleInput, CircleMembershipUncheckedCreateWithoutCircleInput> | CircleMembershipCreateWithoutCircleInput[] | CircleMembershipUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CircleMembershipCreateOrConnectWithoutCircleInput | CircleMembershipCreateOrConnectWithoutCircleInput[]
+    upsert?: CircleMembershipUpsertWithWhereUniqueWithoutCircleInput | CircleMembershipUpsertWithWhereUniqueWithoutCircleInput[]
+    createMany?: CircleMembershipCreateManyCircleInputEnvelope
+    set?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    disconnect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    delete?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    connect?: CircleMembershipWhereUniqueInput | CircleMembershipWhereUniqueInput[]
+    update?: CircleMembershipUpdateWithWhereUniqueWithoutCircleInput | CircleMembershipUpdateWithWhereUniqueWithoutCircleInput[]
+    updateMany?: CircleMembershipUpdateManyWithWhereWithoutCircleInput | CircleMembershipUpdateManyWithWhereWithoutCircleInput[]
+    deleteMany?: CircleMembershipScalarWhereInput | CircleMembershipScalarWhereInput[]
+  }
+
+  export type CirclePostUncheckedUpdateManyWithoutCircleNestedInput = {
+    create?: XOR<CirclePostCreateWithoutCircleInput, CirclePostUncheckedCreateWithoutCircleInput> | CirclePostCreateWithoutCircleInput[] | CirclePostUncheckedCreateWithoutCircleInput[]
+    connectOrCreate?: CirclePostCreateOrConnectWithoutCircleInput | CirclePostCreateOrConnectWithoutCircleInput[]
+    upsert?: CirclePostUpsertWithWhereUniqueWithoutCircleInput | CirclePostUpsertWithWhereUniqueWithoutCircleInput[]
+    createMany?: CirclePostCreateManyCircleInputEnvelope
+    set?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    disconnect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    delete?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    connect?: CirclePostWhereUniqueInput | CirclePostWhereUniqueInput[]
+    update?: CirclePostUpdateWithWhereUniqueWithoutCircleInput | CirclePostUpdateWithWhereUniqueWithoutCircleInput[]
+    updateMany?: CirclePostUpdateManyWithWhereWithoutCircleInput | CirclePostUpdateManyWithWhereWithoutCircleInput[]
+    deleteMany?: CirclePostScalarWhereInput | CirclePostScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCircleMembershipsInput = {
+    create?: XOR<UserCreateWithoutCircleMembershipsInput, UserUncheckedCreateWithoutCircleMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCircleMembershipsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SupportCircleCreateNestedOneWithoutMembersInput = {
+    create?: XOR<SupportCircleCreateWithoutMembersInput, SupportCircleUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: SupportCircleCreateOrConnectWithoutMembersInput
+    connect?: SupportCircleWhereUniqueInput
+  }
+
+  export type EnumCircleRoleFieldUpdateOperationsInput = {
+    set?: $Enums.CircleRole
+  }
+
+  export type UserUpdateOneRequiredWithoutCircleMembershipsNestedInput = {
+    create?: XOR<UserCreateWithoutCircleMembershipsInput, UserUncheckedCreateWithoutCircleMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCircleMembershipsInput
+    upsert?: UserUpsertWithoutCircleMembershipsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCircleMembershipsInput, UserUpdateWithoutCircleMembershipsInput>, UserUncheckedUpdateWithoutCircleMembershipsInput>
+  }
+
+  export type SupportCircleUpdateOneRequiredWithoutMembersNestedInput = {
+    create?: XOR<SupportCircleCreateWithoutMembersInput, SupportCircleUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: SupportCircleCreateOrConnectWithoutMembersInput
+    upsert?: SupportCircleUpsertWithoutMembersInput
+    connect?: SupportCircleWhereUniqueInput
+    update?: XOR<XOR<SupportCircleUpdateToOneWithWhereWithoutMembersInput, SupportCircleUpdateWithoutMembersInput>, SupportCircleUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type SupportCircleCreateNestedOneWithoutPostsInput = {
+    create?: XOR<SupportCircleCreateWithoutPostsInput, SupportCircleUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: SupportCircleCreateOrConnectWithoutPostsInput
+    connect?: SupportCircleWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCirclePostsInput = {
+    create?: XOR<UserCreateWithoutCirclePostsInput, UserUncheckedCreateWithoutCirclePostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCirclePostsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SupportEncouragementCreateNestedManyWithoutPostInput = {
+    create?: XOR<SupportEncouragementCreateWithoutPostInput, SupportEncouragementUncheckedCreateWithoutPostInput> | SupportEncouragementCreateWithoutPostInput[] | SupportEncouragementUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutPostInput | SupportEncouragementCreateOrConnectWithoutPostInput[]
+    createMany?: SupportEncouragementCreateManyPostInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type SupportEncouragementUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<SupportEncouragementCreateWithoutPostInput, SupportEncouragementUncheckedCreateWithoutPostInput> | SupportEncouragementCreateWithoutPostInput[] | SupportEncouragementUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutPostInput | SupportEncouragementCreateOrConnectWithoutPostInput[]
+    createMany?: SupportEncouragementCreateManyPostInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type SupportCircleUpdateOneRequiredWithoutPostsNestedInput = {
+    create?: XOR<SupportCircleCreateWithoutPostsInput, SupportCircleUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: SupportCircleCreateOrConnectWithoutPostsInput
+    upsert?: SupportCircleUpsertWithoutPostsInput
+    connect?: SupportCircleWhereUniqueInput
+    update?: XOR<XOR<SupportCircleUpdateToOneWithWhereWithoutPostsInput, SupportCircleUpdateWithoutPostsInput>, SupportCircleUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCirclePostsNestedInput = {
+    create?: XOR<UserCreateWithoutCirclePostsInput, UserUncheckedCreateWithoutCirclePostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCirclePostsInput
+    upsert?: UserUpsertWithoutCirclePostsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCirclePostsInput, UserUpdateWithoutCirclePostsInput>, UserUncheckedUpdateWithoutCirclePostsInput>
+  }
+
+  export type SupportEncouragementUpdateManyWithoutPostNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutPostInput, SupportEncouragementUncheckedCreateWithoutPostInput> | SupportEncouragementCreateWithoutPostInput[] | SupportEncouragementUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutPostInput | SupportEncouragementCreateOrConnectWithoutPostInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutPostInput | SupportEncouragementUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: SupportEncouragementCreateManyPostInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutPostInput | SupportEncouragementUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutPostInput | SupportEncouragementUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutPostInput, SupportEncouragementUncheckedCreateWithoutPostInput> | SupportEncouragementCreateWithoutPostInput[] | SupportEncouragementUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutPostInput | SupportEncouragementCreateOrConnectWithoutPostInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutPostInput | SupportEncouragementUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: SupportEncouragementCreateManyPostInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutPostInput | SupportEncouragementUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutPostInput | SupportEncouragementUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutStoriesInput = {
+    create?: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStoriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutStoriesNestedInput = {
+    create?: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStoriesInput
+    upsert?: UserUpsertWithoutStoriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStoriesInput, UserUpdateWithoutStoriesInput>, UserUncheckedUpdateWithoutStoriesInput>
+  }
+
+  export type CirclePostCreateNestedOneWithoutEncouragementsInput = {
+    create?: XOR<CirclePostCreateWithoutEncouragementsInput, CirclePostUncheckedCreateWithoutEncouragementsInput>
+    connectOrCreate?: CirclePostCreateOrConnectWithoutEncouragementsInput
+    connect?: CirclePostWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutSentEncouragementsInput = {
+    create?: XOR<UserCreateWithoutSentEncouragementsInput, UserUncheckedCreateWithoutSentEncouragementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentEncouragementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReceivedEncouragementsInput = {
+    create?: XOR<UserCreateWithoutReceivedEncouragementsInput, UserUncheckedCreateWithoutReceivedEncouragementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReceivedEncouragementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CirclePostUpdateOneWithoutEncouragementsNestedInput = {
+    create?: XOR<CirclePostCreateWithoutEncouragementsInput, CirclePostUncheckedCreateWithoutEncouragementsInput>
+    connectOrCreate?: CirclePostCreateOrConnectWithoutEncouragementsInput
+    upsert?: CirclePostUpsertWithoutEncouragementsInput
+    disconnect?: CirclePostWhereInput | boolean
+    delete?: CirclePostWhereInput | boolean
+    connect?: CirclePostWhereUniqueInput
+    update?: XOR<XOR<CirclePostUpdateToOneWithWhereWithoutEncouragementsInput, CirclePostUpdateWithoutEncouragementsInput>, CirclePostUncheckedUpdateWithoutEncouragementsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutSentEncouragementsNestedInput = {
+    create?: XOR<UserCreateWithoutSentEncouragementsInput, UserUncheckedCreateWithoutSentEncouragementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentEncouragementsInput
+    upsert?: UserUpsertWithoutSentEncouragementsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSentEncouragementsInput, UserUpdateWithoutSentEncouragementsInput>, UserUncheckedUpdateWithoutSentEncouragementsInput>
+  }
+
+  export type UserUpdateOneWithoutReceivedEncouragementsNestedInput = {
+    create?: XOR<UserCreateWithoutReceivedEncouragementsInput, UserUncheckedCreateWithoutReceivedEncouragementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReceivedEncouragementsInput
+    upsert?: UserUpsertWithoutReceivedEncouragementsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReceivedEncouragementsInput, UserUpdateWithoutReceivedEncouragementsInput>, UserUncheckedUpdateWithoutReceivedEncouragementsInput>
+  }
+
+  export type UserCreateNestedOneWithoutMentorMatchesInput = {
+    create?: XOR<UserCreateWithoutMentorMatchesInput, UserUncheckedCreateWithoutMentorMatchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMentorMatchesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMenteeMatchesInput = {
+    create?: XOR<UserCreateWithoutMenteeMatchesInput, UserUncheckedCreateWithoutMenteeMatchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMenteeMatchesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumMatchStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MatchStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutMentorMatchesNestedInput = {
+    create?: XOR<UserCreateWithoutMentorMatchesInput, UserUncheckedCreateWithoutMentorMatchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMentorMatchesInput
+    upsert?: UserUpsertWithoutMentorMatchesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMentorMatchesInput, UserUpdateWithoutMentorMatchesInput>, UserUncheckedUpdateWithoutMentorMatchesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMenteeMatchesNestedInput = {
+    create?: XOR<UserCreateWithoutMenteeMatchesInput, UserUncheckedCreateWithoutMenteeMatchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMenteeMatchesInput
+    upsert?: UserUpsertWithoutMenteeMatchesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMenteeMatchesInput, UserUpdateWithoutMenteeMatchesInput>, UserUncheckedUpdateWithoutMenteeMatchesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -27640,6 +37301,57 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedEnumConcernFilter<$PrismaModel = never> = {
+    equals?: $Enums.Concern | EnumConcernFieldRefInput<$PrismaModel>
+    in?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    not?: NestedEnumConcernFilter<$PrismaModel> | $Enums.Concern
+  }
+
+  export type NestedEnumConcernWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Concern | EnumConcernFieldRefInput<$PrismaModel>
+    in?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Concern[] | ListEnumConcernFieldRefInput<$PrismaModel>
+    not?: NestedEnumConcernWithAggregatesFilter<$PrismaModel> | $Enums.Concern
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConcernFilter<$PrismaModel>
+    _max?: NestedEnumConcernFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCircleRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.CircleRole | EnumCircleRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumCircleRoleFilter<$PrismaModel> | $Enums.CircleRole
+  }
+
+  export type NestedEnumCircleRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CircleRole | EnumCircleRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CircleRole[] | ListEnumCircleRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumCircleRoleWithAggregatesFilter<$PrismaModel> | $Enums.CircleRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCircleRoleFilter<$PrismaModel>
+    _max?: NestedEnumCircleRoleFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusFilter<$PrismaModel> | $Enums.MatchStatus
+  }
+
+  export type NestedEnumMatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MatchStatus | EnumMatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MatchStatus[] | ListEnumMatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.MatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumMatchStatusFilter<$PrismaModel>
+  }
+
   export type ConversationCreateWithoutUserInput = {
     id?: string
     startedAt?: Date | string
@@ -27683,6 +37395,13 @@ export namespace Prisma {
     sleep?: number | null
     social?: number | null
     anxiety?: number | null
+    emotion?: string | null
+    emotionIntensity?: number | null
+    physicalSymptoms?: MoodEntryCreatephysicalSymptomsInput | string[]
+    photoUrl?: string | null
+    audioUrl?: string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
@@ -27698,6 +37417,13 @@ export namespace Prisma {
     sleep?: number | null
     social?: number | null
     anxiety?: number | null
+    emotion?: string | null
+    emotionIntensity?: number | null
+    physicalSymptoms?: MoodEntryCreatephysicalSymptomsInput | string[]
+    photoUrl?: string | null
+    audioUrl?: string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
@@ -28015,6 +37741,204 @@ export namespace Prisma {
     create: XOR<MoodGardenCreateWithoutUserInput, MoodGardenUncheckedCreateWithoutUserInput>
   }
 
+  export type CircleMembershipCreateWithoutUserInput = {
+    id?: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+    circle: SupportCircleCreateNestedOneWithoutMembersInput
+  }
+
+  export type CircleMembershipUncheckedCreateWithoutUserInput = {
+    id?: string
+    circleId: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+  }
+
+  export type CircleMembershipCreateOrConnectWithoutUserInput = {
+    where: CircleMembershipWhereUniqueInput
+    create: XOR<CircleMembershipCreateWithoutUserInput, CircleMembershipUncheckedCreateWithoutUserInput>
+  }
+
+  export type CircleMembershipCreateManyUserInputEnvelope = {
+    data: CircleMembershipCreateManyUserInput | CircleMembershipCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CirclePostCreateWithoutAuthorInput = {
+    id?: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    circle: SupportCircleCreateNestedOneWithoutPostsInput
+    encouragements?: SupportEncouragementCreateNestedManyWithoutPostInput
+  }
+
+  export type CirclePostUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    circleId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type CirclePostCreateOrConnectWithoutAuthorInput = {
+    where: CirclePostWhereUniqueInput
+    create: XOR<CirclePostCreateWithoutAuthorInput, CirclePostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type CirclePostCreateManyAuthorInputEnvelope = {
+    data: CirclePostCreateManyAuthorInput | CirclePostCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SupportStoryCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportStoryUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportStoryCreateOrConnectWithoutAuthorInput = {
+    where: SupportStoryWhereUniqueInput
+    create: XOR<SupportStoryCreateWithoutAuthorInput, SupportStoryUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type SupportStoryCreateManyAuthorInputEnvelope = {
+    data: SupportStoryCreateManyAuthorInput | SupportStoryCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SupportEncouragementCreateWithoutSenderInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    post?: CirclePostCreateNestedOneWithoutEncouragementsInput
+    receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+  }
+
+  export type SupportEncouragementUncheckedCreateWithoutSenderInput = {
+    id?: string
+    postId?: string | null
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementCreateOrConnectWithoutSenderInput = {
+    where: SupportEncouragementWhereUniqueInput
+    create: XOR<SupportEncouragementCreateWithoutSenderInput, SupportEncouragementUncheckedCreateWithoutSenderInput>
+  }
+
+  export type SupportEncouragementCreateManySenderInputEnvelope = {
+    data: SupportEncouragementCreateManySenderInput | SupportEncouragementCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SupportEncouragementCreateWithoutReceiverInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    post?: CirclePostCreateNestedOneWithoutEncouragementsInput
+    sender: UserCreateNestedOneWithoutSentEncouragementsInput
+  }
+
+  export type SupportEncouragementUncheckedCreateWithoutReceiverInput = {
+    id?: string
+    postId?: string | null
+    senderId: string
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementCreateOrConnectWithoutReceiverInput = {
+    where: SupportEncouragementWhereUniqueInput
+    create: XOR<SupportEncouragementCreateWithoutReceiverInput, SupportEncouragementUncheckedCreateWithoutReceiverInput>
+  }
+
+  export type SupportEncouragementCreateManyReceiverInputEnvelope = {
+    data: SupportEncouragementCreateManyReceiverInput | SupportEncouragementCreateManyReceiverInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MentorMatchCreateWithoutMentorInput = {
+    id?: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mentee: UserCreateNestedOneWithoutMenteeMatchesInput
+  }
+
+  export type MentorMatchUncheckedCreateWithoutMentorInput = {
+    id?: string
+    menteeId: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MentorMatchCreateOrConnectWithoutMentorInput = {
+    where: MentorMatchWhereUniqueInput
+    create: XOR<MentorMatchCreateWithoutMentorInput, MentorMatchUncheckedCreateWithoutMentorInput>
+  }
+
+  export type MentorMatchCreateManyMentorInputEnvelope = {
+    data: MentorMatchCreateManyMentorInput | MentorMatchCreateManyMentorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MentorMatchCreateWithoutMenteeInput = {
+    id?: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mentor: UserCreateNestedOneWithoutMentorMatchesInput
+  }
+
+  export type MentorMatchUncheckedCreateWithoutMenteeInput = {
+    id?: string
+    mentorId: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MentorMatchCreateOrConnectWithoutMenteeInput = {
+    where: MentorMatchWhereUniqueInput
+    create: XOR<MentorMatchCreateWithoutMenteeInput, MentorMatchUncheckedCreateWithoutMenteeInput>
+  }
+
+  export type MentorMatchCreateManyMenteeInputEnvelope = {
+    data: MentorMatchCreateManyMenteeInput | MentorMatchCreateManyMenteeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ConversationUpsertWithWhereUniqueWithoutUserInput = {
     where: ConversationWhereUniqueInput
     update: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
@@ -28074,6 +37998,13 @@ export namespace Prisma {
     sleep?: IntNullableFilter<"MoodEntry"> | number | null
     social?: IntNullableFilter<"MoodEntry"> | number | null
     anxiety?: IntNullableFilter<"MoodEntry"> | number | null
+    emotion?: StringNullableFilter<"MoodEntry"> | string | null
+    emotionIntensity?: FloatNullableFilter<"MoodEntry"> | number | null
+    physicalSymptoms?: StringNullableListFilter<"MoodEntry">
+    photoUrl?: StringNullableFilter<"MoodEntry"> | string | null
+    audioUrl?: StringNullableFilter<"MoodEntry"> | string | null
+    weather?: JsonNullableFilter<"MoodEntry">
+    location?: JsonNullableFilter<"MoodEntry">
     notes?: StringNullableFilter<"MoodEntry"> | string | null
     tags?: StringNullableListFilter<"MoodEntry">
     sentimentScore?: FloatNullableFilter<"MoodEntry"> | number | null
@@ -28384,6 +38315,184 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CircleMembershipUpsertWithWhereUniqueWithoutUserInput = {
+    where: CircleMembershipWhereUniqueInput
+    update: XOR<CircleMembershipUpdateWithoutUserInput, CircleMembershipUncheckedUpdateWithoutUserInput>
+    create: XOR<CircleMembershipCreateWithoutUserInput, CircleMembershipUncheckedCreateWithoutUserInput>
+  }
+
+  export type CircleMembershipUpdateWithWhereUniqueWithoutUserInput = {
+    where: CircleMembershipWhereUniqueInput
+    data: XOR<CircleMembershipUpdateWithoutUserInput, CircleMembershipUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CircleMembershipUpdateManyWithWhereWithoutUserInput = {
+    where: CircleMembershipScalarWhereInput
+    data: XOR<CircleMembershipUpdateManyMutationInput, CircleMembershipUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CircleMembershipScalarWhereInput = {
+    AND?: CircleMembershipScalarWhereInput | CircleMembershipScalarWhereInput[]
+    OR?: CircleMembershipScalarWhereInput[]
+    NOT?: CircleMembershipScalarWhereInput | CircleMembershipScalarWhereInput[]
+    id?: StringFilter<"CircleMembership"> | string
+    userId?: StringFilter<"CircleMembership"> | string
+    circleId?: StringFilter<"CircleMembership"> | string
+    joinedAt?: DateTimeFilter<"CircleMembership"> | Date | string
+    role?: EnumCircleRoleFilter<"CircleMembership"> | $Enums.CircleRole
+  }
+
+  export type CirclePostUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: CirclePostWhereUniqueInput
+    update: XOR<CirclePostUpdateWithoutAuthorInput, CirclePostUncheckedUpdateWithoutAuthorInput>
+    create: XOR<CirclePostCreateWithoutAuthorInput, CirclePostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type CirclePostUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: CirclePostWhereUniqueInput
+    data: XOR<CirclePostUpdateWithoutAuthorInput, CirclePostUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type CirclePostUpdateManyWithWhereWithoutAuthorInput = {
+    where: CirclePostScalarWhereInput
+    data: XOR<CirclePostUpdateManyMutationInput, CirclePostUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type CirclePostScalarWhereInput = {
+    AND?: CirclePostScalarWhereInput | CirclePostScalarWhereInput[]
+    OR?: CirclePostScalarWhereInput[]
+    NOT?: CirclePostScalarWhereInput | CirclePostScalarWhereInput[]
+    id?: StringFilter<"CirclePost"> | string
+    circleId?: StringFilter<"CirclePost"> | string
+    authorId?: StringFilter<"CirclePost"> | string
+    content?: StringFilter<"CirclePost"> | string
+    isAnonymous?: BoolFilter<"CirclePost"> | boolean
+    isApproved?: BoolFilter<"CirclePost"> | boolean
+    crisisFlag?: BoolFilter<"CirclePost"> | boolean
+    createdAt?: DateTimeFilter<"CirclePost"> | Date | string
+    updatedAt?: DateTimeFilter<"CirclePost"> | Date | string
+  }
+
+  export type SupportStoryUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: SupportStoryWhereUniqueInput
+    update: XOR<SupportStoryUpdateWithoutAuthorInput, SupportStoryUncheckedUpdateWithoutAuthorInput>
+    create: XOR<SupportStoryCreateWithoutAuthorInput, SupportStoryUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type SupportStoryUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: SupportStoryWhereUniqueInput
+    data: XOR<SupportStoryUpdateWithoutAuthorInput, SupportStoryUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type SupportStoryUpdateManyWithWhereWithoutAuthorInput = {
+    where: SupportStoryScalarWhereInput
+    data: XOR<SupportStoryUpdateManyMutationInput, SupportStoryUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type SupportStoryScalarWhereInput = {
+    AND?: SupportStoryScalarWhereInput | SupportStoryScalarWhereInput[]
+    OR?: SupportStoryScalarWhereInput[]
+    NOT?: SupportStoryScalarWhereInput | SupportStoryScalarWhereInput[]
+    id?: StringFilter<"SupportStory"> | string
+    authorId?: StringFilter<"SupportStory"> | string
+    title?: StringFilter<"SupportStory"> | string
+    content?: StringFilter<"SupportStory"> | string
+    category?: EnumConcernFilter<"SupportStory"> | $Enums.Concern
+    isApproved?: BoolFilter<"SupportStory"> | boolean
+    crisisFlag?: BoolFilter<"SupportStory"> | boolean
+    createdAt?: DateTimeFilter<"SupportStory"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
+  }
+
+  export type SupportEncouragementUpsertWithWhereUniqueWithoutSenderInput = {
+    where: SupportEncouragementWhereUniqueInput
+    update: XOR<SupportEncouragementUpdateWithoutSenderInput, SupportEncouragementUncheckedUpdateWithoutSenderInput>
+    create: XOR<SupportEncouragementCreateWithoutSenderInput, SupportEncouragementUncheckedCreateWithoutSenderInput>
+  }
+
+  export type SupportEncouragementUpdateWithWhereUniqueWithoutSenderInput = {
+    where: SupportEncouragementWhereUniqueInput
+    data: XOR<SupportEncouragementUpdateWithoutSenderInput, SupportEncouragementUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type SupportEncouragementUpdateManyWithWhereWithoutSenderInput = {
+    where: SupportEncouragementScalarWhereInput
+    data: XOR<SupportEncouragementUpdateManyMutationInput, SupportEncouragementUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type SupportEncouragementScalarWhereInput = {
+    AND?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+    OR?: SupportEncouragementScalarWhereInput[]
+    NOT?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+    id?: StringFilter<"SupportEncouragement"> | string
+    postId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    senderId?: StringFilter<"SupportEncouragement"> | string
+    receiverId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    content?: StringFilter<"SupportEncouragement"> | string
+    createdAt?: DateTimeFilter<"SupportEncouragement"> | Date | string
+  }
+
+  export type SupportEncouragementUpsertWithWhereUniqueWithoutReceiverInput = {
+    where: SupportEncouragementWhereUniqueInput
+    update: XOR<SupportEncouragementUpdateWithoutReceiverInput, SupportEncouragementUncheckedUpdateWithoutReceiverInput>
+    create: XOR<SupportEncouragementCreateWithoutReceiverInput, SupportEncouragementUncheckedCreateWithoutReceiverInput>
+  }
+
+  export type SupportEncouragementUpdateWithWhereUniqueWithoutReceiverInput = {
+    where: SupportEncouragementWhereUniqueInput
+    data: XOR<SupportEncouragementUpdateWithoutReceiverInput, SupportEncouragementUncheckedUpdateWithoutReceiverInput>
+  }
+
+  export type SupportEncouragementUpdateManyWithWhereWithoutReceiverInput = {
+    where: SupportEncouragementScalarWhereInput
+    data: XOR<SupportEncouragementUpdateManyMutationInput, SupportEncouragementUncheckedUpdateManyWithoutReceiverInput>
+  }
+
+  export type MentorMatchUpsertWithWhereUniqueWithoutMentorInput = {
+    where: MentorMatchWhereUniqueInput
+    update: XOR<MentorMatchUpdateWithoutMentorInput, MentorMatchUncheckedUpdateWithoutMentorInput>
+    create: XOR<MentorMatchCreateWithoutMentorInput, MentorMatchUncheckedCreateWithoutMentorInput>
+  }
+
+  export type MentorMatchUpdateWithWhereUniqueWithoutMentorInput = {
+    where: MentorMatchWhereUniqueInput
+    data: XOR<MentorMatchUpdateWithoutMentorInput, MentorMatchUncheckedUpdateWithoutMentorInput>
+  }
+
+  export type MentorMatchUpdateManyWithWhereWithoutMentorInput = {
+    where: MentorMatchScalarWhereInput
+    data: XOR<MentorMatchUpdateManyMutationInput, MentorMatchUncheckedUpdateManyWithoutMentorInput>
+  }
+
+  export type MentorMatchScalarWhereInput = {
+    AND?: MentorMatchScalarWhereInput | MentorMatchScalarWhereInput[]
+    OR?: MentorMatchScalarWhereInput[]
+    NOT?: MentorMatchScalarWhereInput | MentorMatchScalarWhereInput[]
+    id?: StringFilter<"MentorMatch"> | string
+    mentorId?: StringFilter<"MentorMatch"> | string
+    menteeId?: StringFilter<"MentorMatch"> | string
+    status?: EnumMatchStatusFilter<"MentorMatch"> | $Enums.MatchStatus
+    topic?: EnumConcernFilter<"MentorMatch"> | $Enums.Concern
+    createdAt?: DateTimeFilter<"MentorMatch"> | Date | string
+    updatedAt?: DateTimeFilter<"MentorMatch"> | Date | string
+  }
+
+  export type MentorMatchUpsertWithWhereUniqueWithoutMenteeInput = {
+    where: MentorMatchWhereUniqueInput
+    update: XOR<MentorMatchUpdateWithoutMenteeInput, MentorMatchUncheckedUpdateWithoutMenteeInput>
+    create: XOR<MentorMatchCreateWithoutMenteeInput, MentorMatchUncheckedCreateWithoutMenteeInput>
+  }
+
+  export type MentorMatchUpdateWithWhereUniqueWithoutMenteeInput = {
+    where: MentorMatchWhereUniqueInput
+    data: XOR<MentorMatchUpdateWithoutMenteeInput, MentorMatchUncheckedUpdateWithoutMenteeInput>
+  }
+
+  export type MentorMatchUpdateManyWithWhereWithoutMenteeInput = {
+    where: MentorMatchScalarWhereInput
+    data: XOR<MentorMatchUpdateManyMutationInput, MentorMatchUncheckedUpdateManyWithoutMenteeInput>
+  }
+
   export type UserCreateWithoutConversationsInput = {
     id?: string
     email: string
@@ -28417,6 +38526,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -28433,6 +38545,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutConversationsInput = {
@@ -28468,6 +38587,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -28484,6 +38606,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutConversationsInput = {
@@ -28561,6 +38690,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28577,6 +38709,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -28612,6 +38751,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28628,6 +38770,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
@@ -28759,6 +38908,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -28775,6 +38927,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutMoodEntriesInput = {
@@ -28810,6 +38969,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -28826,6 +38988,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutMoodEntriesInput = {
@@ -28877,6 +39046,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28893,6 +39065,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMoodEntriesInput = {
@@ -28928,6 +39107,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28944,6 +39126,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutAssessmentsInput = {
@@ -28979,6 +39168,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -28995,6 +39187,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutAssessmentsInput = {
@@ -29030,6 +39229,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29046,6 +39248,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutAssessmentsInput = {
@@ -29097,6 +39306,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29113,6 +39325,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssessmentsInput = {
@@ -29148,6 +39367,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29164,6 +39386,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutAiInteractionsInput = {
@@ -29199,6 +39428,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29215,6 +39447,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutAiInteractionsInput = {
@@ -29250,6 +39489,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29266,6 +39508,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutAiInteractionsInput = {
@@ -29317,6 +39566,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29333,6 +39585,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAiInteractionsInput = {
@@ -29368,6 +39627,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29384,6 +39646,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutCrisisLogsInput = {
@@ -29419,6 +39688,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29435,6 +39707,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutCrisisLogsInput = {
@@ -29470,6 +39749,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29486,6 +39768,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutCrisisLogsInput = {
@@ -29537,6 +39826,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29553,6 +39845,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCrisisLogsInput = {
@@ -29588,6 +39887,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29604,6 +39906,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutUsageLogsInput = {
@@ -29639,6 +39948,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29655,6 +39967,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutUsageLogsInput = {
@@ -29690,6 +40009,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29706,6 +40028,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutUsageLogsInput = {
@@ -29757,6 +40086,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29773,6 +40105,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUsageLogsInput = {
@@ -29808,6 +40147,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29824,6 +40166,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutMemoryEntriesInput = {
@@ -29859,6 +40208,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29875,6 +40227,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutMemoryEntriesInput = {
@@ -29910,6 +40269,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -29926,6 +40288,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutMemoryEntriesInput = {
@@ -29977,6 +40346,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29993,6 +40365,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMemoryEntriesInput = {
@@ -30028,6 +40407,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30044,6 +40426,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutUserGoalsInput = {
@@ -30079,6 +40468,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30095,6 +40487,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutUserGoalsInput = {
@@ -30130,6 +40529,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30146,6 +40548,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutUserGoalsInput = {
@@ -30197,6 +40606,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30213,6 +40625,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserGoalsInput = {
@@ -30248,6 +40667,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30264,6 +40686,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutCarePlansInput = {
@@ -30299,6 +40728,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30315,6 +40747,13 @@ export namespace Prisma {
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutCarePlansInput = {
@@ -30350,6 +40789,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30366,6 +40808,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutCarePlansInput = {
@@ -30417,6 +40866,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30433,6 +40885,13 @@ export namespace Prisma {
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCarePlansInput = {
@@ -30468,6 +40927,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30484,6 +40946,13 @@ export namespace Prisma {
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserCreateWithoutAchievementsInput = {
@@ -30519,6 +40988,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30535,6 +41007,13 @@ export namespace Prisma {
     carePlans?: CarePlanCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -30570,6 +41049,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30586,6 +41068,13 @@ export namespace Prisma {
     carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -30637,6 +41126,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30653,6 +41145,13 @@ export namespace Prisma {
     carePlans?: CarePlanUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -30688,6 +41187,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30704,6 +41206,13 @@ export namespace Prisma {
     carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type ChallengeParticipationCreateWithoutChallengeInput = {
@@ -30783,6 +41292,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30799,6 +41311,13 @@ export namespace Prisma {
     carePlans?: CarePlanCreateNestedManyWithoutUserInput
     achievements?: AchievementCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutChallengesInput = {
@@ -30834,6 +41353,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -30850,6 +41372,13 @@ export namespace Prisma {
     carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutChallengesInput = {
@@ -30926,6 +41455,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30942,6 +41474,13 @@ export namespace Prisma {
     carePlans?: CarePlanUpdateManyWithoutUserNestedInput
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengesInput = {
@@ -30977,6 +41516,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30993,6 +41535,13 @@ export namespace Prisma {
     carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
   }
 
   export type ChallengeUpsertWithoutParticipantsInput = {
@@ -31059,6 +41608,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -31075,6 +41627,13 @@ export namespace Prisma {
     carePlans?: CarePlanCreateNestedManyWithoutUserInput
     achievements?: AchievementCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
   }
 
   export type UserUncheckedCreateWithoutMoodGardenInput = {
@@ -31110,6 +41669,9 @@ export namespace Prisma {
     joinDate?: Date | string
     moodCheckInsCount?: number
     conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
     lastActive?: Date | string | null
     onboardingStep?: number
     onboardingCompleted?: boolean
@@ -31126,6 +41688,13 @@ export namespace Prisma {
     carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
     achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
   }
 
   export type UserCreateOrConnectWithoutMoodGardenInput = {
@@ -31177,6 +41746,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31193,6 +41765,13 @@ export namespace Prisma {
     carePlans?: CarePlanUpdateManyWithoutUserNestedInput
     achievements?: AchievementUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMoodGardenInput = {
@@ -31228,6 +41807,9 @@ export namespace Prisma {
     joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
     moodCheckInsCount?: IntFieldUpdateOperationsInput | number
     conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
     lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: IntFieldUpdateOperationsInput | number
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31244,6 +41826,2141 @@ export namespace Prisma {
     carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
     achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type CircleMembershipCreateWithoutCircleInput = {
+    id?: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+    user: UserCreateNestedOneWithoutCircleMembershipsInput
+  }
+
+  export type CircleMembershipUncheckedCreateWithoutCircleInput = {
+    id?: string
+    userId: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+  }
+
+  export type CircleMembershipCreateOrConnectWithoutCircleInput = {
+    where: CircleMembershipWhereUniqueInput
+    create: XOR<CircleMembershipCreateWithoutCircleInput, CircleMembershipUncheckedCreateWithoutCircleInput>
+  }
+
+  export type CircleMembershipCreateManyCircleInputEnvelope = {
+    data: CircleMembershipCreateManyCircleInput | CircleMembershipCreateManyCircleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CirclePostCreateWithoutCircleInput = {
+    id?: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutCirclePostsInput
+    encouragements?: SupportEncouragementCreateNestedManyWithoutPostInput
+  }
+
+  export type CirclePostUncheckedCreateWithoutCircleInput = {
+    id?: string
+    authorId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type CirclePostCreateOrConnectWithoutCircleInput = {
+    where: CirclePostWhereUniqueInput
+    create: XOR<CirclePostCreateWithoutCircleInput, CirclePostUncheckedCreateWithoutCircleInput>
+  }
+
+  export type CirclePostCreateManyCircleInputEnvelope = {
+    data: CirclePostCreateManyCircleInput | CirclePostCreateManyCircleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CircleMembershipUpsertWithWhereUniqueWithoutCircleInput = {
+    where: CircleMembershipWhereUniqueInput
+    update: XOR<CircleMembershipUpdateWithoutCircleInput, CircleMembershipUncheckedUpdateWithoutCircleInput>
+    create: XOR<CircleMembershipCreateWithoutCircleInput, CircleMembershipUncheckedCreateWithoutCircleInput>
+  }
+
+  export type CircleMembershipUpdateWithWhereUniqueWithoutCircleInput = {
+    where: CircleMembershipWhereUniqueInput
+    data: XOR<CircleMembershipUpdateWithoutCircleInput, CircleMembershipUncheckedUpdateWithoutCircleInput>
+  }
+
+  export type CircleMembershipUpdateManyWithWhereWithoutCircleInput = {
+    where: CircleMembershipScalarWhereInput
+    data: XOR<CircleMembershipUpdateManyMutationInput, CircleMembershipUncheckedUpdateManyWithoutCircleInput>
+  }
+
+  export type CirclePostUpsertWithWhereUniqueWithoutCircleInput = {
+    where: CirclePostWhereUniqueInput
+    update: XOR<CirclePostUpdateWithoutCircleInput, CirclePostUncheckedUpdateWithoutCircleInput>
+    create: XOR<CirclePostCreateWithoutCircleInput, CirclePostUncheckedCreateWithoutCircleInput>
+  }
+
+  export type CirclePostUpdateWithWhereUniqueWithoutCircleInput = {
+    where: CirclePostWhereUniqueInput
+    data: XOR<CirclePostUpdateWithoutCircleInput, CirclePostUncheckedUpdateWithoutCircleInput>
+  }
+
+  export type CirclePostUpdateManyWithWhereWithoutCircleInput = {
+    where: CirclePostScalarWhereInput
+    data: XOR<CirclePostUpdateManyMutationInput, CirclePostUncheckedUpdateManyWithoutCircleInput>
+  }
+
+  export type UserCreateWithoutCircleMembershipsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserUncheckedCreateWithoutCircleMembershipsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserCreateOrConnectWithoutCircleMembershipsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCircleMembershipsInput, UserUncheckedCreateWithoutCircleMembershipsInput>
+  }
+
+  export type SupportCircleCreateWithoutMembersInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: CirclePostCreateNestedManyWithoutCircleInput
+  }
+
+  export type SupportCircleUncheckedCreateWithoutMembersInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: CirclePostUncheckedCreateNestedManyWithoutCircleInput
+  }
+
+  export type SupportCircleCreateOrConnectWithoutMembersInput = {
+    where: SupportCircleWhereUniqueInput
+    create: XOR<SupportCircleCreateWithoutMembersInput, SupportCircleUncheckedCreateWithoutMembersInput>
+  }
+
+  export type UserUpsertWithoutCircleMembershipsInput = {
+    update: XOR<UserUpdateWithoutCircleMembershipsInput, UserUncheckedUpdateWithoutCircleMembershipsInput>
+    create: XOR<UserCreateWithoutCircleMembershipsInput, UserUncheckedCreateWithoutCircleMembershipsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCircleMembershipsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCircleMembershipsInput, UserUncheckedUpdateWithoutCircleMembershipsInput>
+  }
+
+  export type UserUpdateWithoutCircleMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCircleMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type SupportCircleUpsertWithoutMembersInput = {
+    update: XOR<SupportCircleUpdateWithoutMembersInput, SupportCircleUncheckedUpdateWithoutMembersInput>
+    create: XOR<SupportCircleCreateWithoutMembersInput, SupportCircleUncheckedCreateWithoutMembersInput>
+    where?: SupportCircleWhereInput
+  }
+
+  export type SupportCircleUpdateToOneWithWhereWithoutMembersInput = {
+    where?: SupportCircleWhereInput
+    data: XOR<SupportCircleUpdateWithoutMembersInput, SupportCircleUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type SupportCircleUpdateWithoutMembersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: CirclePostUpdateManyWithoutCircleNestedInput
+  }
+
+  export type SupportCircleUncheckedUpdateWithoutMembersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: CirclePostUncheckedUpdateManyWithoutCircleNestedInput
+  }
+
+  export type SupportCircleCreateWithoutPostsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: CircleMembershipCreateNestedManyWithoutCircleInput
+  }
+
+  export type SupportCircleUncheckedCreateWithoutPostsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    category: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: CircleMembershipUncheckedCreateNestedManyWithoutCircleInput
+  }
+
+  export type SupportCircleCreateOrConnectWithoutPostsInput = {
+    where: SupportCircleWhereUniqueInput
+    create: XOR<SupportCircleCreateWithoutPostsInput, SupportCircleUncheckedCreateWithoutPostsInput>
+  }
+
+  export type UserCreateWithoutCirclePostsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserUncheckedCreateWithoutCirclePostsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserCreateOrConnectWithoutCirclePostsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCirclePostsInput, UserUncheckedCreateWithoutCirclePostsInput>
+  }
+
+  export type SupportEncouragementCreateWithoutPostInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutSentEncouragementsInput
+    receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+  }
+
+  export type SupportEncouragementUncheckedCreateWithoutPostInput = {
+    id?: string
+    senderId: string
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementCreateOrConnectWithoutPostInput = {
+    where: SupportEncouragementWhereUniqueInput
+    create: XOR<SupportEncouragementCreateWithoutPostInput, SupportEncouragementUncheckedCreateWithoutPostInput>
+  }
+
+  export type SupportEncouragementCreateManyPostInputEnvelope = {
+    data: SupportEncouragementCreateManyPostInput | SupportEncouragementCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SupportCircleUpsertWithoutPostsInput = {
+    update: XOR<SupportCircleUpdateWithoutPostsInput, SupportCircleUncheckedUpdateWithoutPostsInput>
+    create: XOR<SupportCircleCreateWithoutPostsInput, SupportCircleUncheckedCreateWithoutPostsInput>
+    where?: SupportCircleWhereInput
+  }
+
+  export type SupportCircleUpdateToOneWithWhereWithoutPostsInput = {
+    where?: SupportCircleWhereInput
+    data: XOR<SupportCircleUpdateWithoutPostsInput, SupportCircleUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type SupportCircleUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: CircleMembershipUpdateManyWithoutCircleNestedInput
+  }
+
+  export type SupportCircleUncheckedUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: CircleMembershipUncheckedUpdateManyWithoutCircleNestedInput
+  }
+
+  export type UserUpsertWithoutCirclePostsInput = {
+    update: XOR<UserUpdateWithoutCirclePostsInput, UserUncheckedUpdateWithoutCirclePostsInput>
+    create: XOR<UserCreateWithoutCirclePostsInput, UserUncheckedCreateWithoutCirclePostsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCirclePostsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCirclePostsInput, UserUncheckedUpdateWithoutCirclePostsInput>
+  }
+
+  export type UserUpdateWithoutCirclePostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCirclePostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type SupportEncouragementUpsertWithWhereUniqueWithoutPostInput = {
+    where: SupportEncouragementWhereUniqueInput
+    update: XOR<SupportEncouragementUpdateWithoutPostInput, SupportEncouragementUncheckedUpdateWithoutPostInput>
+    create: XOR<SupportEncouragementCreateWithoutPostInput, SupportEncouragementUncheckedCreateWithoutPostInput>
+  }
+
+  export type SupportEncouragementUpdateWithWhereUniqueWithoutPostInput = {
+    where: SupportEncouragementWhereUniqueInput
+    data: XOR<SupportEncouragementUpdateWithoutPostInput, SupportEncouragementUncheckedUpdateWithoutPostInput>
+  }
+
+  export type SupportEncouragementUpdateManyWithWhereWithoutPostInput = {
+    where: SupportEncouragementScalarWhereInput
+    data: XOR<SupportEncouragementUpdateManyMutationInput, SupportEncouragementUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type UserCreateWithoutStoriesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserUncheckedCreateWithoutStoriesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserCreateOrConnectWithoutStoriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
+  }
+
+  export type UserUpsertWithoutStoriesInput = {
+    update: XOR<UserUpdateWithoutStoriesInput, UserUncheckedUpdateWithoutStoriesInput>
+    create: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStoriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStoriesInput, UserUncheckedUpdateWithoutStoriesInput>
+  }
+
+  export type UserUpdateWithoutStoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type CirclePostCreateWithoutEncouragementsInput = {
+    id?: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    circle: SupportCircleCreateNestedOneWithoutPostsInput
+    author: UserCreateNestedOneWithoutCirclePostsInput
+  }
+
+  export type CirclePostUncheckedCreateWithoutEncouragementsInput = {
+    id?: string
+    circleId: string
+    authorId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CirclePostCreateOrConnectWithoutEncouragementsInput = {
+    where: CirclePostWhereUniqueInput
+    create: XOR<CirclePostCreateWithoutEncouragementsInput, CirclePostUncheckedCreateWithoutEncouragementsInput>
+  }
+
+  export type UserCreateWithoutSentEncouragementsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserUncheckedCreateWithoutSentEncouragementsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserCreateOrConnectWithoutSentEncouragementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSentEncouragementsInput, UserUncheckedCreateWithoutSentEncouragementsInput>
+  }
+
+  export type UserCreateWithoutReceivedEncouragementsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserUncheckedCreateWithoutReceivedEncouragementsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserCreateOrConnectWithoutReceivedEncouragementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReceivedEncouragementsInput, UserUncheckedCreateWithoutReceivedEncouragementsInput>
+  }
+
+  export type CirclePostUpsertWithoutEncouragementsInput = {
+    update: XOR<CirclePostUpdateWithoutEncouragementsInput, CirclePostUncheckedUpdateWithoutEncouragementsInput>
+    create: XOR<CirclePostCreateWithoutEncouragementsInput, CirclePostUncheckedCreateWithoutEncouragementsInput>
+    where?: CirclePostWhereInput
+  }
+
+  export type CirclePostUpdateToOneWithWhereWithoutEncouragementsInput = {
+    where?: CirclePostWhereInput
+    data: XOR<CirclePostUpdateWithoutEncouragementsInput, CirclePostUncheckedUpdateWithoutEncouragementsInput>
+  }
+
+  export type CirclePostUpdateWithoutEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    circle?: SupportCircleUpdateOneRequiredWithoutPostsNestedInput
+    author?: UserUpdateOneRequiredWithoutCirclePostsNestedInput
+  }
+
+  export type CirclePostUncheckedUpdateWithoutEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutSentEncouragementsInput = {
+    update: XOR<UserUpdateWithoutSentEncouragementsInput, UserUncheckedUpdateWithoutSentEncouragementsInput>
+    create: XOR<UserCreateWithoutSentEncouragementsInput, UserUncheckedCreateWithoutSentEncouragementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSentEncouragementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSentEncouragementsInput, UserUncheckedUpdateWithoutSentEncouragementsInput>
+  }
+
+  export type UserUpdateWithoutSentEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSentEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUpsertWithoutReceivedEncouragementsInput = {
+    update: XOR<UserUpdateWithoutReceivedEncouragementsInput, UserUncheckedUpdateWithoutReceivedEncouragementsInput>
+    create: XOR<UserCreateWithoutReceivedEncouragementsInput, UserUncheckedCreateWithoutReceivedEncouragementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReceivedEncouragementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReceivedEncouragementsInput, UserUncheckedUpdateWithoutReceivedEncouragementsInput>
+  }
+
+  export type UserUpdateWithoutReceivedEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReceivedEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserCreateWithoutMentorMatchesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    menteeMatches?: MentorMatchCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserUncheckedCreateWithoutMentorMatchesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    menteeMatches?: MentorMatchUncheckedCreateNestedManyWithoutMenteeInput
+  }
+
+  export type UserCreateOrConnectWithoutMentorMatchesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMentorMatchesInput, UserUncheckedCreateWithoutMentorMatchesInput>
+  }
+
+  export type UserCreateWithoutMenteeMatchesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryCreateNestedManyWithoutUserInput
+    assessments?: AssessmentCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanCreateNestedManyWithoutUserInput
+    achievements?: AchievementCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchCreateNestedManyWithoutMentorInput
+  }
+
+  export type UserUncheckedCreateWithoutMenteeMatchesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    isVerified?: boolean
+    isAnonymous?: boolean
+    verificationToken?: string | null
+    image?: string | null
+    displayName?: string | null
+    university?: $Enums.University | null
+    academicLevel?: number | null
+    program?: string | null
+    phoneNumber?: string | null
+    studentId?: string | null
+    language?: $Enums.Language
+    notificationPreference?: $Enums.NotificationFrequency
+    preferredCheckInTime?: $Enums.TimeOfDay
+    concerns?: UserCreateconcernsInput | $Enums.Concern[]
+    supportLevel?: $Enums.SupportLevel
+    riskLevel?: $Enums.RiskLevel
+    copingStyles?: UserCreatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: $Enums.FaithLevel
+    approachPreference?: $Enums.ApproachPreference
+    goals?: UserCreategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: Date | string
+    moodCheckInsCount?: number
+    conversationsCount?: number
+    wellnessXP?: number
+    wellnessLevel?: number
+    longestStreak?: number
+    lastActive?: Date | string | null
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    moodEntries?: MoodEntryUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentUncheckedCreateNestedManyWithoutUserInput
+    aiInteractions?: AIInteractionUncheckedCreateNestedManyWithoutUserInput
+    crisisLogs?: CrisisLogUncheckedCreateNestedManyWithoutUserInput
+    usageLogs?: UsageLogUncheckedCreateNestedManyWithoutUserInput
+    memoryEntries?: MemoryEntryUncheckedCreateNestedManyWithoutUserInput
+    userGoals?: UserGoalUncheckedCreateNestedManyWithoutUserInput
+    carePlans?: CarePlanUncheckedCreateNestedManyWithoutUserInput
+    achievements?: AchievementUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeParticipationUncheckedCreateNestedManyWithoutUserInput
+    moodGarden?: MoodGardenUncheckedCreateNestedOneWithoutUserInput
+    circleMemberships?: CircleMembershipUncheckedCreateNestedManyWithoutUserInput
+    circlePosts?: CirclePostUncheckedCreateNestedManyWithoutAuthorInput
+    stories?: SupportStoryUncheckedCreateNestedManyWithoutAuthorInput
+    sentEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutSenderInput
+    receivedEncouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutReceiverInput
+    mentorMatches?: MentorMatchUncheckedCreateNestedManyWithoutMentorInput
+  }
+
+  export type UserCreateOrConnectWithoutMenteeMatchesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMenteeMatchesInput, UserUncheckedCreateWithoutMenteeMatchesInput>
+  }
+
+  export type UserUpsertWithoutMentorMatchesInput = {
+    update: XOR<UserUpdateWithoutMentorMatchesInput, UserUncheckedUpdateWithoutMentorMatchesInput>
+    create: XOR<UserCreateWithoutMentorMatchesInput, UserUncheckedCreateWithoutMentorMatchesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMentorMatchesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMentorMatchesInput, UserUncheckedUpdateWithoutMentorMatchesInput>
+  }
+
+  export type UserUpdateWithoutMentorMatchesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    menteeMatches?: MentorMatchUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMentorMatchesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type UserUpsertWithoutMenteeMatchesInput = {
+    update: XOR<UserUpdateWithoutMenteeMatchesInput, UserUncheckedUpdateWithoutMenteeMatchesInput>
+    create: XOR<UserCreateWithoutMenteeMatchesInput, UserUncheckedCreateWithoutMenteeMatchesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMenteeMatchesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMenteeMatchesInput, UserUncheckedUpdateWithoutMenteeMatchesInput>
+  }
+
+  export type UserUpdateWithoutMenteeMatchesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUpdateManyWithoutMentorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMenteeMatchesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    university?: NullableEnumUniversityFieldUpdateOperationsInput | $Enums.University | null
+    academicLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+    notificationPreference?: EnumNotificationFrequencyFieldUpdateOperationsInput | $Enums.NotificationFrequency
+    preferredCheckInTime?: EnumTimeOfDayFieldUpdateOperationsInput | $Enums.TimeOfDay
+    concerns?: UserUpdateconcernsInput | $Enums.Concern[]
+    supportLevel?: EnumSupportLevelFieldUpdateOperationsInput | $Enums.SupportLevel
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    copingStyles?: UserUpdatecopingStylesInput | $Enums.CopingStyle[]
+    faithLevel?: EnumFaithLevelFieldUpdateOperationsInput | $Enums.FaithLevel
+    approachPreference?: EnumApproachPreferenceFieldUpdateOperationsInput | $Enums.ApproachPreference
+    goals?: UserUpdategoalsInput | $Enums.Goal[]
+    stressors?: NullableJsonNullValueInput | InputJsonValue
+    trackingPreferences?: NullableJsonNullValueInput | InputJsonValue
+    emergencyContacts?: NullableJsonNullValueInput | InputJsonValue
+    baselineMood?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableJsonNullValueInput | InputJsonValue
+    joinDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    moodCheckInsCount?: IntFieldUpdateOperationsInput | number
+    conversationsCount?: IntFieldUpdateOperationsInput | number
+    wellnessXP?: IntFieldUpdateOperationsInput | number
+    wellnessLevel?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastActive?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    moodEntries?: MoodEntryUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentUncheckedUpdateManyWithoutUserNestedInput
+    aiInteractions?: AIInteractionUncheckedUpdateManyWithoutUserNestedInput
+    crisisLogs?: CrisisLogUncheckedUpdateManyWithoutUserNestedInput
+    usageLogs?: UsageLogUncheckedUpdateManyWithoutUserNestedInput
+    memoryEntries?: MemoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    userGoals?: UserGoalUncheckedUpdateManyWithoutUserNestedInput
+    carePlans?: CarePlanUncheckedUpdateManyWithoutUserNestedInput
+    achievements?: AchievementUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeParticipationUncheckedUpdateManyWithoutUserNestedInput
+    moodGarden?: MoodGardenUncheckedUpdateOneWithoutUserNestedInput
+    circleMemberships?: CircleMembershipUncheckedUpdateManyWithoutUserNestedInput
+    circlePosts?: CirclePostUncheckedUpdateManyWithoutAuthorNestedInput
+    stories?: SupportStoryUncheckedUpdateManyWithoutAuthorNestedInput
+    sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
+    receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
+    mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
   }
 
   export type ConversationCreateManyUserInput = {
@@ -31265,6 +43982,13 @@ export namespace Prisma {
     sleep?: number | null
     social?: number | null
     anxiety?: number | null
+    emotion?: string | null
+    emotionIntensity?: number | null
+    physicalSymptoms?: MoodEntryCreatephysicalSymptomsInput | string[]
+    photoUrl?: string | null
+    audioUrl?: string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     tags?: MoodEntryCreatetagsInput | string[]
     sentimentScore?: number | null
@@ -31366,6 +44090,69 @@ export namespace Prisma {
     lastUpdate?: Date | string | null
   }
 
+  export type CircleMembershipCreateManyUserInput = {
+    id?: string
+    circleId: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+  }
+
+  export type CirclePostCreateManyAuthorInput = {
+    id?: string
+    circleId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportStoryCreateManyAuthorInput = {
+    id?: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportEncouragementCreateManySenderInput = {
+    id?: string
+    postId?: string | null
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementCreateManyReceiverInput = {
+    id?: string
+    postId?: string | null
+    senderId: string
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type MentorMatchCreateManyMentorInput = {
+    id?: string
+    menteeId: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MentorMatchCreateManyMenteeInput = {
+    id?: string
+    mentorId: string
+    status?: $Enums.MatchStatus
+    topic: $Enums.Concern
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ConversationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31411,6 +44198,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -31426,6 +44220,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -31441,6 +44242,13 @@ export namespace Prisma {
     sleep?: NullableIntFieldUpdateOperationsInput | number | null
     social?: NullableIntFieldUpdateOperationsInput | number | null
     anxiety?: NullableIntFieldUpdateOperationsInput | number | null
+    emotion?: NullableStringFieldUpdateOperationsInput | string | null
+    emotionIntensity?: NullableFloatFieldUpdateOperationsInput | number | null
+    physicalSymptoms?: MoodEntryUpdatephysicalSymptomsInput | string[]
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    audioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    weather?: NullableJsonNullValueInput | InputJsonValue
+    location?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MoodEntryUpdatetagsInput | string[]
     sentimentScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -31728,6 +44536,197 @@ export namespace Prisma {
     lastUpdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type CircleMembershipUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+    circle?: SupportCircleUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type CircleMembershipUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CircleMembershipUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CirclePostUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    circle?: SupportCircleUpdateOneRequiredWithoutPostsNestedInput
+    encouragements?: SupportEncouragementUpdateManyWithoutPostNestedInput
+  }
+
+  export type CirclePostUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encouragements?: SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type CirclePostUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    circleId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportStoryUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportStoryUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportStoryUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
+    receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+  }
+
+  export type SupportEncouragementUncheckedUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUpdateWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
+    sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
+  }
+
+  export type SupportEncouragementUncheckedUpdateWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    senderId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    senderId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchUpdateWithoutMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mentee?: UserUpdateOneRequiredWithoutMenteeMatchesNestedInput
+  }
+
+  export type MentorMatchUncheckedUpdateWithoutMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menteeId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchUncheckedUpdateManyWithoutMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menteeId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchUpdateWithoutMenteeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mentor?: UserUpdateOneRequiredWithoutMentorMatchesNestedInput
+  }
+
+  export type MentorMatchUncheckedUpdateWithoutMenteeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mentorId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MentorMatchUncheckedUpdateManyWithoutMenteeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mentorId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+    topic?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MessageCreateManyConversationInput = {
     id?: string
     role: $Enums.MessageRole
@@ -31794,6 +44793,112 @@ export namespace Prisma {
     progress?: IntFieldUpdateOperationsInput | number
     isCompleted?: BoolFieldUpdateOperationsInput | boolean
     lastUpdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CircleMembershipCreateManyCircleInput = {
+    id?: string
+    userId: string
+    joinedAt?: Date | string
+    role?: $Enums.CircleRole
+  }
+
+  export type CirclePostCreateManyCircleInput = {
+    id?: string
+    authorId: string
+    content: string
+    isAnonymous?: boolean
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CircleMembershipUpdateWithoutCircleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+    user?: UserUpdateOneRequiredWithoutCircleMembershipsNestedInput
+  }
+
+  export type CircleMembershipUncheckedUpdateWithoutCircleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CircleMembershipUncheckedUpdateManyWithoutCircleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumCircleRoleFieldUpdateOperationsInput | $Enums.CircleRole
+  }
+
+  export type CirclePostUpdateWithoutCircleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutCirclePostsNestedInput
+    encouragements?: SupportEncouragementUpdateManyWithoutPostNestedInput
+  }
+
+  export type CirclePostUncheckedUpdateWithoutCircleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encouragements?: SupportEncouragementUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type CirclePostUncheckedUpdateManyWithoutCircleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementCreateManyPostInput = {
+    id?: string
+    senderId: string
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
+    receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+  }
+
+  export type SupportEncouragementUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -5,9 +5,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // ============================================
@@ -66,6 +65,9 @@ model User {
   // Usage Metrics
   moodCheckInsCount  Int       @default(0)
   conversationsCount Int       @default(0)
+  wellnessXP         Int       @default(0)
+  wellnessLevel      Int       @default(1)
+  longestStreak      Int       @default(0)
   lastActive         DateTime?
 
   // Onboarding Status (Retained)
@@ -89,6 +91,15 @@ model User {
   achievements   Achievement[]
   challenges     ChallengeParticipation[]
   moodGarden     MoodGarden?
+
+  // Community Relations
+  circleMemberships      CircleMembership[]
+  circlePosts            CirclePost[]
+  stories                SupportStory[]
+  sentEncouragements     SupportEncouragement[] @relation("SentEncouragement")
+  receivedEncouragements SupportEncouragement[] @relation("ReceivedEncouragement")
+  mentorMatches          MentorMatch[]          @relation("Mentor")
+  menteeMatches          MentorMatch[]          @relation("Mentee")
 
   @@index([email])
   @@index([university, academicLevel])
@@ -155,6 +166,19 @@ model MoodEntry {
   sleep   Int? // 1-5 scale
   social  Int? // 1-5 scale
   anxiety Int? // 1-10 scale
+
+  // Advanced Tracking
+  emotion          String? // Nuanced emotion (e.g., "Radiant", "Serene")
+  emotionIntensity Float? // 0.0 to 1.0
+  physicalSymptoms String[] // Array of symptoms (e.g., ["Headache", "Fatigue"])
+
+  // Media Journaling
+  photoUrl String?
+  audioUrl String?
+
+  // Environmental Context
+  weather  Json? // { temp, condition, icon }
+  location Json? // { city, country, lat, lng }
 
   notes          String?
   tags           String[] // Array of tags
@@ -373,6 +397,126 @@ model MoodGarden {
 }
 
 // ============================================
+// SOCIAL & COMMUNITY MODELS
+// ============================================
+
+model SupportCircle {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  category    Concern // Uses existing Concern enum
+
+  members CircleMembership[]
+  posts   CirclePost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+}
+
+model CircleMembership {
+  id       String        @id @default(uuid())
+  userId   String
+  circleId String
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  circle   SupportCircle @relation(fields: [circleId], references: [id], onDelete: Cascade)
+
+  joinedAt DateTime   @default(now())
+  role     CircleRole @default(MEMBER)
+
+  @@unique([userId, circleId])
+}
+
+model CirclePost {
+  id       String        @id @default(uuid())
+  circleId String
+  circle   SupportCircle @relation(fields: [circleId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  content     String  @db.Text
+  isAnonymous Boolean @default(true)
+  isApproved  Boolean @default(false)
+  crisisFlag  Boolean @default(false)
+
+  encouragements SupportEncouragement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([circleId])
+}
+
+model SupportStory {
+  id       String @id @default(uuid())
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  title      String
+  content    String  @db.Text
+  category   Concern
+  isApproved Boolean @default(false)
+  crisisFlag Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([authorId])
+}
+
+model SupportEncouragement {
+  id     String      @id @default(uuid())
+  postId String?
+  post   CirclePost? @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  senderId String
+  sender   User   @relation("SentEncouragement", fields: [senderId], references: [id], onDelete: Cascade)
+
+  receiverId String?
+  receiver   User?   @relation("ReceivedEncouragement", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+  @@index([receiverId])
+}
+
+model MentorMatch {
+  id       String @id @default(uuid())
+  mentorId String
+  mentor   User   @relation("Mentor", fields: [mentorId], references: [id], onDelete: Cascade)
+
+  menteeId String
+  mentee   User   @relation("Mentee", fields: [menteeId], references: [id], onDelete: Cascade)
+
+  status MatchStatus @default(PENDING)
+  topic  Concern
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mentorId])
+  @@index([menteeId])
+  @@index([status])
+}
+
+enum CircleRole {
+  MEMBER
+  MODERATOR
+}
+
+enum MatchStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  DECLINED
+}
+
+// ============================================
 // ENUMS
 // ============================================
 
@@ -488,6 +632,9 @@ enum AssessmentType {
   PHQ9
   GAD7
   PSS
+  STRESS
+  SLEEP
+  AIS
   CUSTOM
 }
 
@@ -497,6 +644,11 @@ enum Severity {
   MODERATE
   MODERATELY_SEVERE
   SEVERE
+  LOW
+  HIGH
+  GOOD
+  FAIR
+  POOR
 }
 
 enum Service {

@@ -6,7 +6,7 @@ import prisma from '../lib/prisma';
 import { AuthRequest, getJwtSecret } from '../middlewares/auth';
 import { sendVerificationEmail } from '../utils/emailService';
 import { OAuth2Client } from 'google-auth-library';
-import type { University } from '@prisma/client';
+import type { University } from '../generated/client';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 

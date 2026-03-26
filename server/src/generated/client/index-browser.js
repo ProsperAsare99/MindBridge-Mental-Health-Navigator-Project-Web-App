@@ -150,6 +150,9 @@ exports.Prisma.UserScalarFieldEnum = {
   joinDate: 'joinDate',
   moodCheckInsCount: 'moodCheckInsCount',
   conversationsCount: 'conversationsCount',
+  wellnessXP: 'wellnessXP',
+  wellnessLevel: 'wellnessLevel',
+  longestStreak: 'longestStreak',
   lastActive: 'lastActive',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
@@ -187,6 +190,13 @@ exports.Prisma.MoodEntryScalarFieldEnum = {
   sleep: 'sleep',
   social: 'social',
   anxiety: 'anxiety',
+  emotion: 'emotion',
+  emotionIntensity: 'emotionIntensity',
+  physicalSymptoms: 'physicalSymptoms',
+  photoUrl: 'photoUrl',
+  audioUrl: 'audioUrl',
+  weather: 'weather',
+  location: 'location',
   notes: 'notes',
   tags: 'tags',
   sentimentScore: 'sentimentScore',
@@ -326,6 +336,66 @@ exports.Prisma.MoodGardenScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SupportCircleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CircleMembershipScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  circleId: 'circleId',
+  joinedAt: 'joinedAt',
+  role: 'role'
+};
+
+exports.Prisma.CirclePostScalarFieldEnum = {
+  id: 'id',
+  circleId: 'circleId',
+  authorId: 'authorId',
+  content: 'content',
+  isAnonymous: 'isAnonymous',
+  isApproved: 'isApproved',
+  crisisFlag: 'crisisFlag',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupportStoryScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  title: 'title',
+  content: 'content',
+  category: 'category',
+  isApproved: 'isApproved',
+  crisisFlag: 'crisisFlag',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupportEncouragementScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  content: 'content',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MentorMatchScalarFieldEnum = {
+  id: 'id',
+  mentorId: 'mentorId',
+  menteeId: 'menteeId',
+  status: 'status',
+  topic: 'topic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -461,6 +531,9 @@ exports.AssessmentType = exports.$Enums.AssessmentType = {
   PHQ9: 'PHQ9',
   GAD7: 'GAD7',
   PSS: 'PSS',
+  STRESS: 'STRESS',
+  SLEEP: 'SLEEP',
+  AIS: 'AIS',
   CUSTOM: 'CUSTOM'
 };
 
@@ -469,7 +542,12 @@ exports.Severity = exports.$Enums.Severity = {
   MILD: 'MILD',
   MODERATE: 'MODERATE',
   MODERATELY_SEVERE: 'MODERATELY_SEVERE',
-  SEVERE: 'SEVERE'
+  SEVERE: 'SEVERE',
+  LOW: 'LOW',
+  HIGH: 'HIGH',
+  GOOD: 'GOOD',
+  FAIR: 'FAIR',
+  POOR: 'POOR'
 };
 
 exports.Service = exports.$Enums.Service = {
@@ -483,6 +561,18 @@ exports.GoalStatus = exports.$Enums.GoalStatus = {
   ACTIVE: 'ACTIVE',
   COMPLETED: 'COMPLETED',
   ARCHIVED: 'ARCHIVED'
+};
+
+exports.CircleRole = exports.$Enums.CircleRole = {
+  MEMBER: 'MEMBER',
+  MODERATOR: 'MODERATOR'
+};
+
+exports.MatchStatus = exports.$Enums.MatchStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  DECLINED: 'DECLINED'
 };
 
 exports.Prisma.ModelName = {
@@ -501,7 +591,13 @@ exports.Prisma.ModelName = {
   Achievement: 'Achievement',
   Challenge: 'Challenge',
   ChallengeParticipation: 'ChallengeParticipation',
-  MoodGarden: 'MoodGarden'
+  MoodGarden: 'MoodGarden',
+  SupportCircle: 'SupportCircle',
+  CircleMembership: 'CircleMembership',
+  CirclePost: 'CirclePost',
+  SupportStory: 'SupportStory',
+  SupportEncouragement: 'SupportEncouragement',
+  MentorMatch: 'MentorMatch'
 };
 
 /**

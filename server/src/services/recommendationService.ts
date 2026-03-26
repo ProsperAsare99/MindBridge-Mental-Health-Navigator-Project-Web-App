@@ -1,5 +1,5 @@
 import prisma from '../lib/prisma';
-import { AssessmentType, Severity } from '@prisma/client';
+import { AssessmentType, Severity } from '../generated/client';
 
 export interface Recommendation {
     id: string;

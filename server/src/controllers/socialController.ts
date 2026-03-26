@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import type { Concern } from '@prisma/client';
+import type { Concern } from '../generated/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { ai } from '../lib/genkit-config';

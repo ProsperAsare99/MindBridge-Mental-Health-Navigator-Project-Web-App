@@ -1,8 +1,8 @@
 import { Response } from 'express';
-import type { SupportLevel, RiskLevel, Concern, CopingStyle, FaithLevel, ApproachPreference, Goal } from '@prisma/client';
+import type { SupportLevel, RiskLevel, Concern, CopingStyle, FaithLevel, ApproachPreference, Goal } from '../generated/client';
 import { AuthRequest } from '../middlewares/auth';
 import prisma from '../lib/prisma';
-import { University } from '@prisma/client';
+import { University } from '../generated/client';
 
 export const updateOnboarding = async (req: AuthRequest, res: Response) => {
     try {

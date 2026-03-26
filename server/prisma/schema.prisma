@@ -1,6 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
+  output          = "../src/generated/client"
 }
 
 datasource db {
@@ -632,6 +633,9 @@ enum AssessmentType {
   PHQ9
   GAD7
   PSS
+  STRESS
+  SLEEP
+  AIS
   CUSTOM
 }
  
@@ -641,6 +645,11 @@ enum Severity {
   MODERATE
   MODERATELY_SEVERE
   SEVERE
+  LOW
+  HIGH
+  GOOD
+  FAIR
+  POOR
 }
  
 enum Service {

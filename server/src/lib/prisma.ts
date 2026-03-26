@@ -1,9 +1,9 @@
-import type { PrismaClient as PrismaClientType } from '@prisma/client';
+import type { PrismaClient as PrismaClientType } from '../generated/client';
 
 let _prisma: PrismaClientType | null = null;
 
 const createPrismaClient = (): PrismaClientType => {
-    const { PrismaClient } = require('@prisma/client');
+    const { PrismaClient } = require('../generated/client');
     const { Pool } = require('pg');
     const { PrismaPg } = require('@prisma/adapter-pg');
     
