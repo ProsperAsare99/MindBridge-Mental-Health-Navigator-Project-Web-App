@@ -1,5 +1,6 @@
 import prisma from '../lib/prisma';
 import { AssessmentType, Severity } from '../generated/client';
+import { isHighStressPeriod } from '../utils/time';
 
 export interface Recommendation {
     id: string;
@@ -60,12 +61,54 @@ export class RecommendationService {
                         link: '/support/counseling'
                     });
                 }
+            } else if (assessment.type === 'STRESS') {
+                if (assessment.severity === 'HIGH' || assessment.severity === 'MODERATE') {
+                    recommendations.push({
+                        id: `stress-resource-${assessment.id}`,
+                        type: 'resource',
+                        title: 'Time Management Toolkit',
+                        description: 'Practical tools to regain control of your schedule and reduce academic overwhelm.',
+                        icon: 'Clock',
+                        link: '/resources/time-management'
+                    });
+                    recommendations.push({
+                        id: `stress-circle-${assessment.id}`,
+                        type: 'circle',
+                        title: 'Academic Stress Circle',
+                        description: 'Join a community sharing strategies for managing university pressure.',
+                        icon: 'Users',
+                        metadata: { category: 'ACADEMIC_STRESS' }
+                    });
+                }
+            } else if (assessment.type === 'SLEEP') {
+                if (assessment.severity === 'POOR' || assessment.severity === 'FAIR') {
+                    recommendations.push({
+                        id: `sleep-action-${assessment.id}`,
+                        type: 'action',
+                        title: 'Sleep Hygiene Routine',
+                        description: 'Personalized steps to improve your restorative cycles tonight.',
+                        icon: 'Moon',
+                        link: '/resources/sleep-hygiene'
+                    });
+                }
             }
         }
 
         // 3. Mood-Based Recommendations
         if (latestMoods.length > 0) {
             const avgMood = latestMoods.reduce((acc, curr) => acc + curr.mood, 0) / latestMoods.length;
+            const avgAnxiety = latestMoods.reduce((acc, curr) => acc + (curr.anxiety || 0), 0) / latestMoods.length;
+
+            if (avgAnxiety > 3) {
+                recommendations.push({
+                    id: 'anxiety-breathing',
+                    type: 'action',
+                    title: 'Guided Breathing',
+                    description: 'Take 2 minutes for a box-breathing exercise to lower your current anxiety.',
+                    icon: 'Wind',
+                    metadata: { action: 'BREATHE' }
+                });
+            }
             
             if (avgMood < 3) {
                 recommendations.push({
@@ -79,15 +122,14 @@ export class RecommendationService {
             }
         }
 
-        // 4. Academic Context (Mocked for now)
-        const isExamSeason = true; // Use shared utility in real implementation
-        if (isExamSeason) {
+        // 4. Academic Context
+        if (isHighStressPeriod()) {
             recommendations.push({
                 id: 'exam-circle',
                 type: 'circle',
-                title: 'Academic Stress Circle',
+                title: 'Exam Season Support',
                 description: 'Exam season is here. Share study tips and de-stress with others.',
-                icon: 'BookOpen',
+                icon: 'Zap',
                 metadata: { category: 'ACADEMIC_STRESS' }
             });
         }
