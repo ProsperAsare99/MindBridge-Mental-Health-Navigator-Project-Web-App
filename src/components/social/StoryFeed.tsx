@@ -26,6 +26,10 @@ interface Story {
         image?: string;
     };
     createdAt: string;
+    _count: {
+        encouragements: number;
+    };
+    encouragements: { id: string }[];
 }
 
 export function StoryFeed() {
@@ -69,6 +73,28 @@ export function StoryFeed() {
         }
     };
 
+    const handleToggleLike = async (storyId: string) => {
+        try {
+            const res = await api.post('/social/encourage/toggle', { storyId });
+            setStories(prev => prev.map(s => {
+                if (s.id === storyId) {
+                    const hasLiked = res.action === 'ADDED';
+                    return { 
+                        ...s, 
+                        _count: { 
+                            ...s._count, 
+                            encouragements: hasLiked ? s._count.encouragements + 1 : s._count.encouragements - 1 
+                        },
+                        encouragements: hasLiked ? [{ id: 'temp' }] : []
+                    };
+                }
+                return s;
+            }));
+        } catch (error) {
+            console.error('Failed to toggle like:', error);
+        }
+    };
+
     if (loading && stories.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center py-20 gap-4">
@@ -80,7 +106,7 @@ export function StoryFeed() {
 
     return (
         <div className="max-w-4xl mx-auto space-y-12">
-            {/* Share CTA */}
+            {/* ... CTA section ... */}
             <div className="glass rounded-[2.5rem] p-8 border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
                 <div className="absolute -left-4 -top-4 opacity-5 pointer-events-none">
                     <Quote size={120} className="text-primary" />
@@ -97,7 +123,7 @@ export function StoryFeed() {
                 </Button>
             </div>
 
-            {/* Sharing Form Modal (Inline Overlay for now) */}
+            {/* ... Modal section ... */}
             <AnimatePresence>
                 {isSharing && (
                     <motion.div
@@ -160,51 +186,61 @@ export function StoryFeed() {
                         <p className="text-sm font-black uppercase tracking-widest text-muted-foreground">The community is waiting for its first story.</p>
                     </div>
                 )}
-                {stories.map((story, i) => (
-                    <motion.div
-                        key={story.id}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="group glass rounded-[2.5rem] overflow-hidden border border-border/40 hover:border-primary/30 transition-all hover:bg-white hover:shadow-2xl hover:shadow-primary/5"
-                    >
-                        <div className="p-8 space-y-6">
-                            <div className="flex items-start justify-between">
-                                <div className="space-y-1">
-                                    <div className="flex items-center gap-2">
-                                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">{story.category}</span>
+                {stories.map((story, i) => {
+                    const hasLiked = story.encouragements?.length > 0;
+                    return (
+                        <motion.div
+                            key={story.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="group glass rounded-[2.5rem] overflow-hidden border border-border/40 hover:border-primary/30 transition-all hover:bg-white hover:shadow-2xl hover:shadow-primary/5"
+                        >
+                            <div className="p-8 space-y-6">
+                                <div className="flex items-start justify-between">
+                                    <div className="space-y-1">
+                                        <div className="flex items-center gap-2">
+                                            <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">{story.category}</span>
+                                        </div>
+                                        <h3 className="text-2xl font-black text-foreground tracking-tighter leading-tight group-hover:text-primary transition-colors cursor-pointer">{story.title}</h3>
                                     </div>
-                                    <h3 className="text-2xl font-black text-foreground tracking-tighter leading-tight group-hover:text-primary transition-colors cursor-pointer">{story.title}</h3>
+                                    <Button variant="ghost" className="h-10 w-10 p-0 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors">
+                                        <Share2 size={18} />
+                                    </Button>
                                 </div>
-                                <Button variant="ghost" className="h-10 w-10 p-0 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors">
-                                    <Share2 size={18} />
-                                </Button>
-                            </div>
 
-                            <div className="relative">
-                                <div className="absolute -left-1 opacity-20">
-                                    <Quote size={40} className="text-primary" />
+                                <div className="relative">
+                                    <div className="absolute -left-1 opacity-20">
+                                        <Quote size={40} className="text-primary" />
+                                    </div>
+                                    <p className="text-base font-medium text-foreground/80 leading-relaxed pl-8">
+                                        {story.content}
+                                    </p>
                                 </div>
-                                <p className="text-base font-medium text-foreground/80 leading-relaxed pl-8">
-                                    {story.content}
-                                </p>
-                            </div>
 
-                            <div className="flex items-center justify-between pt-6 border-t border-border/40 font-black uppercase text-[10px] tracking-widest">
-                                <div className="flex items-center gap-4">
-                                    <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-muted/50 text-muted-foreground hover:bg-red-500/10 hover:text-red-500 transition-all">
-                                        <Heart size={14} /> <span>Encourage</span>
-                                    </button>
-                                    <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-muted/50 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all">
-                                        <MessageSquare size={14} /> <span>Discuss</span>
-                                    </button>
+                                <div className="flex items-center justify-between pt-6 border-t border-border/40 font-black uppercase text-[10px] tracking-widest">
+                                    <div className="flex items-center gap-4">
+                                        <button 
+                                            onClick={() => handleToggleLike(story.id)}
+                                            className={cn(
+                                                "flex items-center gap-2 px-6 py-2.5 rounded-2xl transition-all active:scale-95 shadow-sm",
+                                                hasLiked ? "bg-red-500 text-white shadow-red-500/20" : "bg-muted/50 text-muted-foreground hover:bg-red-500/10 hover:text-red-500"
+                                            )}
+                                        >
+                                            <Heart size={14} className={cn(hasLiked && "fill-current")} /> 
+                                            <span>{story._count.encouragements} Support</span>
+                                        </button>
+                                        <button className="flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-muted/50 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all">
+                                            <MessageSquare size={14} /> <span>Discuss</span>
+                                        </button>
+                                    </div>
+                                    <span className="text-muted-foreground group-hover:text-foreground transition-colors">By Anonymous Peer • {new Date(story.createdAt).toLocaleDateString()}</span>
                                 </div>
-                                <span className="text-muted-foreground group-hover:text-foreground transition-colors">By Anonymous Peer • {new Date(story.createdAt).toLocaleDateString()}</span>
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+                        </motion.div>
+                    );
+                })}
             </div>
         </div>
     );

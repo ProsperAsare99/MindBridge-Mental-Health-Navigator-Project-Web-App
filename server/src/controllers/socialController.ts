@@ -109,6 +109,10 @@ export const getPosts = async (req: AuthRequest, res: Response) => {
                 },
                 _count: {
                     select: { encouragements: true }
+                },
+                encouragements: {
+                    where: { senderId: req.userId },
+                    select: { id: true }
                 }
             },
             orderBy: { createdAt: 'desc' }
@@ -176,6 +180,13 @@ export const getStories = async (req: AuthRequest, res: Response) => {
             include: {
                 author: {
                     select: { displayName: true, image: true }
+                },
+                _count: {
+                    select: { encouragements: true }
+                },
+                encouragements: {
+                    where: { senderId: req.userId },
+                    select: { id: true }
                 }
             },
             orderBy: { createdAt: 'desc' }
@@ -359,5 +370,47 @@ export const initializeCircles = async () => {
             console.error('[SOCIAL] Database seeding failed:', error.message);
         }
         // Do not rethrow, as this is a background task
+    }
+};
+
+export const toggleEncouragement = async (req: AuthRequest, res: Response) => {
+    const { postId, storyId } = req.body;
+    const senderId = req.userId;
+
+    if (!senderId) return res.status(401).json({ error: 'Unauthorized' });
+
+    try {
+        // Check if encouragement already exists
+        const existing = await prisma.supportEncouragement.findFirst({
+            where: {
+                senderId,
+                OR: [
+                    { postId: postId || undefined },
+                    { storyId: storyId || undefined }
+                ]
+            }
+        });
+
+        if (existing) {
+            await prisma.supportEncouragement.delete({ where: { id: existing.id } });
+            return res.json({ action: 'REMOVED' });
+        }
+
+        // Create new encouragement
+        const encouragement = await prisma.supportEncouragement.create({
+            data: {
+                senderId,
+                postId: postId || null,
+                storyId: storyId || null,
+                content: 'ENCOURAGEMENT' // Standard token
+            }
+        });
+
+        // Gamification: Reward XP for supporting others
+        await GamificationService.rewardXP(senderId, 'SOCIAL_ACTIVITY');
+
+        res.status(201).json({ action: 'ADDED', encouragement });
+    } catch (error: any) {
+        res.status(500).json({ error: 'Failed to toggle encouragement', details: error.message });
     }
 };

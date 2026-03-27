@@ -7,6 +7,7 @@ import {
     getStories, 
     createStory, 
     sendEncouragement, 
+    toggleEncouragement,
     getMyEncouragements,
     getMentors,
     requestMentor 
@@ -27,6 +28,7 @@ router.post('/stories', authenticateToken, createStory);
 
 // Encouragement & Mentorship
 router.post('/encourage', authenticateToken, sendEncouragement);
+router.post('/encourage/toggle', authenticateToken, toggleEncouragement);
 router.get('/encourage/my', authenticateToken, getMyEncouragements);
 router.get('/mentors', authenticateToken, getMentors);
 router.post('/mentor/request', authenticateToken, requestMentor);

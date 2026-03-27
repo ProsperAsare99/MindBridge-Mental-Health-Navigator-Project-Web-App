@@ -29,6 +29,7 @@ interface Post {
     _count: {
         encouragements: number;
     };
+    encouragements: { id: string }[];
 }
 
 interface CircleDialogProps {
@@ -60,6 +61,28 @@ export function CircleDialog({ circleId, circleName, isOpen, onClose }: CircleDi
             console.error('Failed to fetch circle posts:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleToggleLike = async (postId: string) => {
+        try {
+            const res = await api.post('/social/encourage/toggle', { postId });
+            setPosts(prev => prev.map(p => {
+                if (p.id === postId) {
+                    const hasLiked = res.action === 'ADDED';
+                    return { 
+                        ...p, 
+                        _count: { 
+                            ...p._count, 
+                            encouragements: hasLiked ? p._count.encouragements + 1 : p._count.encouragements - 1 
+                        },
+                        encouragements: hasLiked ? [{ id: 'temp' }] : []
+                    };
+                }
+                return p;
+            }));
+        } catch (error) {
+            console.error('Failed to toggle like:', error);
         }
     };
 
@@ -167,33 +190,44 @@ export function CircleDialog({ circleId, circleName, isOpen, onClose }: CircleDi
                                     <p className="text-sm font-black uppercase tracking-widest">No messages yet. Be the first to share.</p>
                                 </div>
                             ) : (
-                                posts.map((post, i) => (
-                                    <motion.div
-                                        key={post.id}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.05 }}
-                                        className="glass p-6 rounded-[2rem] border border-white/10 space-y-4 hover:bg-white/40 transition-all hover:translate-x-1"
-                                    >
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-3">
-                                                <div className="h-8 w-8 rounded-xl bg-muted border border-white/20 flex items-center justify-center text-foreground text-xs font-black">
-                                                    {post.author.displayName[0]}
+                                posts.map((post, i) => {
+                                    const hasLiked = post.encouragements?.length > 0;
+                                    const authorName = post.isAnonymous ? 'Anonymous Peer' : post.author.displayName;
+                                    
+                                    return (
+                                        <motion.div
+                                            key={post.id}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: i * 0.05 }}
+                                            className="glass p-6 rounded-[2rem] border border-white/10 space-y-4 hover:bg-white/40 transition-all hover:translate-x-1"
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="h-8 w-8 rounded-xl bg-muted border border-white/20 flex items-center justify-center text-foreground text-xs font-black">
+                                                        {authorName[0]}
+                                                    </div>
+                                                    <span className="text-xs font-black uppercase tracking-tight text-foreground">{authorName}</span>
                                                 </div>
-                                                <span className="text-xs font-black uppercase tracking-tight text-foreground">{post.author.displayName}</span>
+                                                <span className="text-[9px] font-bold text-muted-foreground uppercase">{new Date(post.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                             </div>
-                                            <span className="text-[9px] font-bold text-muted-foreground uppercase">{new Date(post.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                                        </div>
-                                        <p className="text-sm font-medium text-foreground/80 leading-relaxed uppercase tracking-tight">
-                                            {post.content}
-                                        </p>
-                                        <div className="flex items-center gap-4 pt-2">
-                                            <button className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-red-500 transition-colors">
-                                                <Heart size={12} /> {post._count.encouragements} Hugs
-                                            </button>
-                                        </div>
-                                    </motion.div>
-                                ))
+                                            <p className="text-sm font-medium text-foreground/80 leading-relaxed uppercase tracking-tight">
+                                                {post.content}
+                                            </p>
+                                            <div className="flex items-center gap-4 pt-2">
+                                                <button 
+                                                    onClick={() => handleToggleLike(post.id)}
+                                                    className={cn(
+                                                        "flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest transition-colors",
+                                                        hasLiked ? "text-red-500" : "text-muted-foreground hover:text-red-500"
+                                                    )}
+                                                >
+                                                    <Heart size={12} className={cn(hasLiked && "fill-current")} /> {post._count.encouragements} Hugs
+                                                </button>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })
                             )
                             }
                         </div>
