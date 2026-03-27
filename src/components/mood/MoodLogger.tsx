@@ -39,6 +39,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
     const [showSuccess, setShowSuccess] = useState(false);
     const [feedback, setFeedback] = useState<any>(null);
     const [recommendations, setRecommendations] = useState<any[]>([]);
+    const [streak, setStreak] = useState<number>(0);
 
     // Live Media States
     const [isRecording, setIsRecording] = useState(false);
@@ -214,6 +215,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
 
             if (res.feedback) setFeedback(res.feedback);
             if (res.recommendations) setRecommendations(res.recommendations);
+            if (res.streak !== undefined) setStreak(res.streak);
 
             if (res.crisisFlag) {
                 alert("We noticed some concerning patterns. Please remember that crisis support is available 24/7 in the side menu.");
@@ -489,7 +491,7 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                                         
                                         <div className="flex flex-col items-center mt-2 relative z-10">
                                             <span className="text-6xl font-black text-foreground tracking-tighter drop-shadow-sm">
-                                                {response?.streak || 1}
+                                                {streak || 1}
                                             </span>
                                             <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] opacity-80">
                                                 Day Streak
@@ -550,7 +552,3 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
         </div>
     );
 }
-
-// Add necessary imports if missing
-import { Clock, Moon, Star, Zap } from "lucide-react";
-
