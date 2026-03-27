@@ -9,7 +9,10 @@ import {
     Calendar, 
     AlertCircle,
     TrendingDown,
-    Minus
+    Minus,
+    ShieldCheck,
+    CheckCircle2,
+    AlertTriangle
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { api } from '@/lib/api';
@@ -79,7 +82,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
     }
 
     return (
-        <div className={cn("glass rounded-[2rem] overflow-hidden border border-border/50", className)}>
+        <div className={cn("glass rounded-[2rem] overflow-hidden border border-border", className)}>
             <div className="p-8 space-y-8">
                 {/* Header Section */}
                 <div className="flex items-center justify-between">
@@ -107,7 +110,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                 {metrics && (
                     <div className="space-y-6">
                         <div className="grid grid-cols-3 gap-3">
-                            <div className="p-5 rounded-[2rem] bg-muted/20 border border-border/40 space-y-2 group hover:bg-white transition-colors">
+                            <div className="p-5 rounded-[2rem] bg-muted/20 border border-border/60 space-y-2 group hover:bg-card/80 transition-all hover:shadow-sm">
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                     <Activity size={14} />
                                     <span className="text-[9px] font-black uppercase tracking-widest">Energy</span>
@@ -117,7 +120,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                                     <span className="text-[10px] text-muted-foreground font-bold">/5</span>
                                 </div>
                             </div>
-                            <div className="p-5 rounded-[2rem] bg-muted/20 border border-border/40 space-y-2 group hover:bg-white transition-colors">
+                            <div className="p-5 rounded-[2rem] bg-muted/20 border border-border/60 space-y-2 group hover:bg-card/80 transition-all hover:shadow-sm">
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                     <Calendar size={14} />
                                     <span className="text-[9px] font-black uppercase tracking-widest">Sleep</span>
@@ -127,7 +130,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
                                     <span className="text-[10px] text-muted-foreground font-bold">/5</span>
                                 </div>
                             </div>
-                            <div className="p-5 rounded-[2rem] bg-muted/20 border border-border/40 space-y-2 group hover:bg-white transition-colors">
+                            <div className="p-5 rounded-[2rem] bg-muted/20 border border-border/60 space-y-2 group hover:bg-card/80 transition-all hover:shadow-sm">
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                     <TrendingUp size={14} />
                                     <span className="text-[9px] font-black uppercase tracking-widest">Social</span>
@@ -141,13 +144,14 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
 
                         {/* Stability & Correlation */}
                         <div className="grid md:grid-cols-2 gap-4">
-                            <div className="p-6 rounded-[2rem] bg-muted/20 border border-border/40 space-y-4">
+                            <div className="p-6 rounded-[2rem] bg-muted/20 border border-border/60 space-y-4">
                                 <div className="flex justify-between items-center">
                                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Internal Stability</span>
                                     <span className={cn(
-                                        "text-[10px] font-black px-2 py-0.5 rounded-full uppercase",
-                                        metrics.volatility <= 0.8 ? "bg-emerald-100 text-emerald-700" : metrics.volatility <= 1.2 ? "bg-blue-100 text-blue-700" : "bg-orange-100 text-orange-700"
+                                        "text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-sm flex items-center gap-1.5",
+                                        metrics.volatility <= 0.8 ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20" : metrics.volatility <= 1.2 ? "bg-primary/10 text-primary border border-primary/20" : "bg-orange-500/10 text-orange-600 border border-orange-500/20"
                                     )}>
+                                        {metrics.volatility <= 0.8 ? <ShieldCheck size={12} /> : metrics.volatility <= 1.2 ? <CheckCircle2 size={12} /> : <AlertTriangle size={12} />}
                                         {metrics.volatility <= 0.8 ? 'Resilient' : metrics.volatility <= 1.2 ? 'Balanced' : 'Fluctuating'}
                                     </span>
                                 </div>

@@ -15,7 +15,7 @@ const Card = React.forwardRef<
         viewport={{ once: true }}
         transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
         className={cn(
-            "rounded-[2rem] bg-card border border-primary/10 shadow-premium",
+            "rounded-[2rem] bg-card border border-border shadow-premium transition-all",
             className
         )}
         {...props}

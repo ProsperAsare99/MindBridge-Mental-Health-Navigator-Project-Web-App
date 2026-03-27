@@ -84,17 +84,20 @@ export const PersonalizedRecommendations = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="glass border-primary/20 p-6 rounded-[2rem] flex flex-col md:flex-row items-center gap-6 mb-6"
+                        className="bg-card border-2 border-primary/20 p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 shadow-premium mb-10 relative overflow-hidden group"
                     >
-                        <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                            <Sparkles size={28} />
+                        {/* Soft ambient background tint inside the card */}
+                        <div className="absolute inset-0 bg-primary/5 -z-10 group-hover:bg-primary/10 transition-colors" />
+                        
+                        <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <Sparkles size={32} />
                         </div>
                         <div className="space-y-1 text-center md:text-left flex-1">
-                            <h3 className="text-lg font-black text-foreground tracking-tight">{feedback.message}</h3>
-                            <p className="text-sm text-muted-foreground font-medium">{feedback.description}</p>
+                            <h3 className="text-xl font-black text-foreground tracking-tight">{feedback.message}</h3>
+                            <p className="text-base text-foreground/90 font-semibold leading-relaxed">{feedback.description}</p>
                         </div>
                         <Button 
-                            className="rounded-xl px-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm"
+                            className="rounded-2xl px-10 h-14 text-base font-black bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
                             onClick={() => window.location.href = '/dashboard/mood'}
                         >
                             Daily Check-in
@@ -108,7 +111,7 @@ export const PersonalizedRecommendations = () => {
                     <Sparkles className="w-5 h-5 text-primary" />
                     <h2 className="text-xl font-bold tracking-tight">Suggested for You</h2>
                 </div>
-                <Badge variant="outline" className="text-xs font-normal border-border bg-muted/50 text-muted-foreground">
+                <Badge variant="outline" className="text-[10px] font-bold border-border bg-muted/50 text-foreground/60 uppercase tracking-widest">
                     Based on your journey
                 </Badge>
             </div>
@@ -124,20 +127,21 @@ export const PersonalizedRecommendations = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
                         >
-                            <Card className="glass p-4 h-full flex flex-col justify-between hover:shadow-lg transition-all border-border/50 group rounded-2xl">
+                            <Card className="bg-card p-5 h-full flex flex-col justify-between hover:shadow-premium transition-all border border-border/50 group rounded-3xl relative overflow-hidden">
+                                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/[0.02] transition-colors -z-10" />
                                 <div>
-                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${
+                                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${
                                         rec.type === 'circle' ? 'bg-primary/10 text-primary' :
                                         rec.type === 'challenge' ? 'bg-amber-500/10 text-amber-500' :
                                         rec.type === 'resource' ? 'bg-emerald-500/10 text-emerald-500' :
                                         'bg-purple-500/10 text-purple-500'
                                     }`}>
-                                        <Icon className="w-5 h-5" />
+                                        <Icon className="w-6 h-6" />
                                     </div>
-                                    <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors tracking-tight">
                                         {rec.title}
                                     </h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                                    <p className="text-sm font-semibold text-foreground/70 leading-relaxed mb-6 line-clamp-2">
                                         {rec.description}
                                     </p>
                                 </div>
@@ -145,7 +149,7 @@ export const PersonalizedRecommendations = () => {
                                 <Button 
                                     variant="ghost" 
                                     size="sm" 
-                                    className="w-full justify-between px-2 hover:bg-primary/10 hover:text-primary"
+                                    className="w-full justify-between px-3 h-11 rounded-xl hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20 transition-all font-bold"
                                     onClick={() => {
                                         if (rec.link) {
                                             if (rec.link.startsWith('/')) {
@@ -156,12 +160,12 @@ export const PersonalizedRecommendations = () => {
                                         }
                                     }}
                                 >
-                                    <span className="text-xs font-medium">
+                                    <span className="text-xs uppercase tracking-wider">
                                         {rec.type === 'circle' ? 'Join Circle' :
                                          rec.type === 'challenge' ? 'Start Challenge' :
                                          rec.type === 'action' ? 'Get Help' : 'View Guide'}
                                     </span>
-                                    <ArrowRight className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
+                                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </Card>
                         </motion.div>

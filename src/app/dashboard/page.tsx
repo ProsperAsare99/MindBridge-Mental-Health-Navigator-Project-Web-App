@@ -182,9 +182,9 @@ export default function DashboardPage() {
                                     </div>
                                     <div className="space-y-1">
                                         <h3 className="text-xl font-black text-foreground tracking-tight">Community Pulse</h3>
-                                        <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Anonymous Peer Support</p>
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-primary/80">Anonymous Peer Support</p>
                                     </div>
-                                    <p className="text-xs font-medium text-muted-foreground leading-relaxed">
+                                    <p className="text-[13px] font-semibold text-foreground/80 leading-relaxed">
                                         Join support circles and share your resilience journey anonymously with peers who understand.
                                     </p>
                                     <div className="flex items-center gap-2 pt-2 text-primary text-[10px] font-black uppercase tracking-widest group-hover:translate-x-2 transition-transform">

@@ -27,7 +27,9 @@ import {
     ArrowUpRight,
     Mic,
     MicOff,
-    AlertTriangle
+    AlertTriangle,
+    CheckCircle2,
+    AlertCircle
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoodInsight } from "@/components/dashboard/MoodInsight";
@@ -132,7 +134,7 @@ export default function MoodPage() {
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
                         Emotional <span className="text-primary">Trends</span>
                     </h1>
-                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                    <p className="text-foreground/90 text-sm md:text-lg leading-relaxed max-w-2xl font-semibold tracking-tight">
                         Visualize your mental landscape. Track daily fluctuations and discover the patterns that influence your well-being.
                     </p>
                 </motion.div>
@@ -251,10 +253,12 @@ export default function MoodPage() {
                                         <Area
                                             type="monotone"
                                             dataKey="mood"
-                                            stroke="var(--ash-stroke)"
+                                            stroke="var(--primary)"
                                             strokeWidth={4}
                                             fillOpacity={1}
                                             fill="url(#moodGradient)"
+                                            dot={{ r: 4, fill: "var(--primary)", strokeWidth: 2, stroke: "var(--card)" }}
+                                            activeDot={{ r: 6, strokeWidth: 0 }}
                                         />
                                         {/* Stress Points Overlay */}
                                         {weekData.map((d, i) => {
@@ -297,11 +301,14 @@ export default function MoodPage() {
                                                             {date.toLocaleDateString('en-US', { weekday: 'short' })}
                                                         </p>
                                                         {entry.sentimentLabel && (
-                                                            <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-widest ${entry.sentimentLabel === 'Positive' ? 'bg-emerald-500/10 text-emerald-500' :
-                                                                    entry.sentimentLabel === 'Concerned' ? 'bg-amber-500/10 text-amber-500' :
-                                                                        entry.sentimentLabel === 'Distressed' ? 'bg-[#D5BDAF]/10 text-[#D5BDAF]' :
-                                                                            'bg-slate-500/10 text-slate-500'
+                                                            <span className={`text-[8px] px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1 ${entry.sentimentLabel === 'Positive' ? 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20' :
+                                                                    entry.sentimentLabel === 'Concerned' ? 'bg-amber-500/10 text-amber-600 border border-amber-500/20' :
+                                                                        entry.sentimentLabel === 'Distressed' ? 'bg-orange-500/10 text-orange-600 border border-orange-500/20' :
+                                                                            'bg-slate-500/10 text-slate-500 border border-slate-500/20'
                                                                 }`}>
+                                                                {entry.sentimentLabel === 'Positive' ? <CheckCircle2 size={10} /> : 
+                                                                 entry.sentimentLabel === 'Concerned' ? <AlertCircle size={10} /> : 
+                                                                 entry.sentimentLabel === 'Distressed' ? <AlertTriangle size={10} /> : null}
                                                                 {entry.sentimentLabel}
                                                             </span>
                                                         )}

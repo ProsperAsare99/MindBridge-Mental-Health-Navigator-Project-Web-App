@@ -38,7 +38,7 @@ export function GreetingHeader({ displayName }: GreetingHeaderProps) {
       <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
         {greeting}, <span className="text-primary">{displayName || "Student"}</span>
       </h1>
-      <p className="text-muted-foreground font-medium max-w-md">
+      <p className="text-foreground/80 font-semibold max-w-md leading-relaxed">
         Welcome back. Here's how your mental well-being is trending today.
       </p>
     </div>
