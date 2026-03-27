@@ -123,9 +123,18 @@ export const createMood = async (req: AuthRequest, res: Response) => {
             }
         });
 
+        // Calculate current streak for immediate feedback
+        const allMoods = await prisma.moodEntry.findMany({
+            where: { userId },
+            orderBy: { createdAt: 'desc' },
+            take: 50
+        });
+        const currentStreak = calculateStreak(allMoods);
+
         res.status(201).json({ 
             ...mood, 
             newAchievements,
+            streak: currentStreak,
             recommendations: recommendationResult.recommendations,
             feedback: recommendationResult.feedback
         });

@@ -33,9 +33,14 @@ export const StreakCard = ({ streak, longestStreak, totalCheckIns, className }: 
                     </div>
                     <div>
                         <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Wellness Streak</h3>
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-black text-primary">{streak}</span>
-                            <span className="text-[10px] font-bold text-muted-foreground uppercase">Consecutive Days</span>
+                        <div className="flex items-baseline gap-2 mt-1">
+                            <span className="text-5xl font-black text-primary tracking-tighter tabular-nums drop-shadow-xl animate-in zoom-in-50 duration-500">
+                                {streak}
+                            </span>
+                            <div className="flex flex-col leading-[0.8]">
+                                <span className="text-[11px] font-black text-foreground/80 uppercase tracking-tighter">Day</span>
+                                <span className="text-[11px] font-black text-primary uppercase tracking-widest">Streak</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,8 +87,8 @@ export const StreakCard = ({ streak, longestStreak, totalCheckIns, className }: 
             </div>
 
             {/* Background Accent */}
-            <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Flame className="h-24 w-24 text-primary" />
+            <div className="absolute top-0 right-0 -mr-4 -mt-4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 select-none pointer-events-none">
+                <Flame className={cn("h-40 w-40", streak > 0 ? "text-primary animate-pulse" : "text-muted-foreground")} />
             </div>
         </div>
     );

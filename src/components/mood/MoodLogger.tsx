@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import { 
     CloudRain, Frown, Meh, Smile, Sun, 
     ChevronRight, ChevronLeft, Camera, Mic, 
-    MapPin, Cloud, ArrowRight, CheckCircle2, X 
+    MapPin, Cloud, ArrowRight, CheckCircle2, X,
+    Flame, Clock, Moon, Star, Zap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EmotionWheel } from "./EmotionWheel";
@@ -471,6 +472,30 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                                     <h2 className="text-3xl font-black text-foreground tracking-tight">
                                         Mood Sync Complete
                                     </h2>
+
+                                    {/* Bold Streak Counter */}
+                                    <motion.div 
+                                        initial={{ scale: 0.5, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        transition={{ type: "spring", damping: 15 }}
+                                        className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-orange-500/10 to-orange-500/5 rounded-[2.5rem] border border-orange-500/20 shadow-xl shadow-orange-500/5 relative overflow-hidden group"
+                                    >
+                                        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/10 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 -translate-x-full group-hover:translate-x-full" />
+                                        
+                                        <div className="relative">
+                                            <Flame size={48} className="text-orange-500 fill-orange-500 animate-pulse" />
+                                            <div className="absolute inset-0 bg-orange-500/40 blur-2xl rounded-full scale-150 animate-pulse" />
+                                        </div>
+                                        
+                                        <div className="flex flex-col items-center mt-2 relative z-10">
+                                            <span className="text-6xl font-black text-foreground tracking-tighter drop-shadow-sm">
+                                                {response?.streak || 1}
+                                            </span>
+                                            <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] opacity-80">
+                                                Day Streak
+                                            </span>
+                                        </div>
+                                    </motion.div>
                                     {feedback && (
                                         <div className="p-6 rounded-[2rem] bg-muted/30 border border-border space-y-2">
                                             <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-1">{feedback.message}</p>

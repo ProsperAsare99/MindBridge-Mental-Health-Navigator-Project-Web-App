@@ -8,7 +8,8 @@ import {
     Target, 
     ChevronRight,
     Brain,
-    HeartPulse
+    HeartPulse,
+    Flame
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -114,9 +115,24 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
                     </div>
 
                     <div className="flex flex-wrap gap-4 pt-2">
-                        <div className="flex items-center gap-2 bg-muted/40 px-3 py-2 rounded-xl border border-border/50 text-muted-foreground">
-                            <Activity className="h-4 w-4" />
-                            <span className="text-xs font-black uppercase tracking-tight">{moodStats.streak} Day Streak</span>
+                        <div className={cn(
+                            "flex items-center gap-3 px-4 py-2.5 rounded-2xl border transition-all duration-500 hover:scale-105",
+                            moodStats.streak > 0 
+                                ? "bg-orange-500/10 border-orange-500/30 text-orange-600 dark:text-orange-400 shadow-lg shadow-orange-500/5" 
+                                : "bg-muted/40 border-border/50 text-muted-foreground"
+                        )}>
+                            <Flame className={cn("h-6 w-6 transition-all duration-500", moodStats.streak > 0 ? "fill-orange-500 text-orange-500 animate-pulse" : "text-muted-foreground/40")} />
+                            <div className="flex flex-col leading-none">
+                                <span className={cn(
+                                    "text-2xl font-black tracking-tighter",
+                                    moodStats.streak > 0 ? "text-orange-600 dark:text-orange-400" : "text-muted-foreground"
+                                )}>
+                                    {moodStats.streak}
+                                </span>
+                                <span className="text-[9px] font-black uppercase tracking-[0.2em] opacity-80">
+                                    Day Streak
+                                </span>
+                            </div>
                         </div>
                         <div className="flex items-center gap-2 bg-secondary/5 px-3 py-2 rounded-xl border border-secondary/10 text-secondary">
                             <Target className="h-4 w-4" />
