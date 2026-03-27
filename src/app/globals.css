@@ -39,7 +39,7 @@
   color-scheme: light dark;
 
   /* MindBridge High-Clarity Light Theme (MATTE SLATE) */
-  --background: #e2e8f0; /* Slate 200 - Sinking the base to reduce glare */
+  --background: #f8fafc; /* Slate 50 - Very clean, low glare */
   --foreground: #020617; 
   --ash-grey: #f1f5f9; 
   --ash-stroke: #94a3b8; /* Slate 400 - Stronger definition */
@@ -69,7 +69,7 @@
 
 .dark {
   /* MindBridge Ocean Blue Theme - Dark Mode (CARBON & BLUE) */
-  --background: #141415; /* Deeper, softer Carbon */
+  --background: #0a0a0b; /* Deeper, cleaner Carbon for higher focus */
   --foreground: #d1d1c7; /* Muted Parchment for softer contrast */
   --ash-grey: #e2e8f0; /* Soft White Ash for Dark Mode (Slate 200) */
   --ash-stroke: #64748b; /* Stronger Ash for Dark Mode (Slate 500) */
@@ -103,7 +103,7 @@ html {
 }
 
 html[data-adaptive-mode="CALM"] {
-  --background: #ecfdf5; 
+  --background: #f0fdfa; /* Softer, lighter Mint */
   --primary: #0d9488; 
   --primary-foreground: #ffffff;
   --accent: #14b8a6;
@@ -122,7 +122,7 @@ html[data-adaptive-mode="CALM"] {
 }
 
 html.dark[data-adaptive-mode="CALM"] {
-  --background: #022c22;
+  --background: #021a14; /* Deeper Teal-Black */
   --dashboard-bg-gradient: linear-gradient(to bottom right, #042f2e, #022c22, #064e3b);
   --glass-bg: rgba(20, 20, 21, 0.85);
   --primary: #14b8a6; 
@@ -139,7 +139,7 @@ html.dark[data-adaptive-mode="CALM"] {
 }
 
 html[data-adaptive-mode="ENERGY"] {
-  --background: #f0f9ff; 
+  --background: #f0faff; /* Pure Sky White */
   --primary: #0284c7; 
   --primary-foreground: #ffffff;
   --accent: #0ea5e9;
@@ -158,7 +158,7 @@ html[data-adaptive-mode="ENERGY"] {
 }
 
 html.dark[data-adaptive-mode="ENERGY"] {
-  --background: #0c4a6e;
+  --background: #04243a; /* Deep Midnight Blue */
   --dashboard-bg-gradient: linear-gradient(to bottom right, #082f49, #0c4a6e, #075985);
   --glass-bg: rgba(20, 20, 21, 0.85);
   --primary: #0ea5e9; 
@@ -175,7 +175,7 @@ html.dark[data-adaptive-mode="ENERGY"] {
 }
 
 html[data-adaptive-mode="STABILITY"] {
-  --background: #f5f3ff;
+  --background: #f8f7ff; /* Very soft Lavender White */
   --primary: #6366f1; 
   --primary-foreground: #ffffff;
   --accent: #818cf8;
@@ -194,7 +194,7 @@ html[data-adaptive-mode="STABILITY"] {
 }
 
 html.dark[data-adaptive-mode="STABILITY"] {
-  --background: #1e1b4b;
+  --background: #0f0d2b; /* Deepened Indigo */
   --dashboard-bg-gradient: linear-gradient(to bottom right, #1e1b4b, #2e1065, #312e81);
   --glass-bg: rgba(20, 20, 21, 0.85);
   --primary: #818cf8; 

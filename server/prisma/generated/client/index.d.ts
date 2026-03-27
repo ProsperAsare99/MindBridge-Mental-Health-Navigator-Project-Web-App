@@ -3382,6 +3382,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type SupportStoryCountOutputType
+   */
+
+  export type SupportStoryCountOutputType = {
+    encouragements: number
+  }
+
+  export type SupportStoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    encouragements?: boolean | SupportStoryCountOutputTypeCountEncouragementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SupportStoryCountOutputType without action
+   */
+  export type SupportStoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStoryCountOutputType
+     */
+    select?: SupportStoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SupportStoryCountOutputType without action
+   */
+  export type SupportStoryCountOutputTypeCountEncouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportEncouragementWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -25735,6 +25766,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
+    encouragements?: boolean | SupportStory$encouragementsArgs<ExtArgs>
+    _count?: boolean | SupportStoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["supportStory"]>
 
   export type SupportStorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -25778,6 +25811,8 @@ export namespace Prisma {
   export type SupportStoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "title" | "content" | "category" | "isApproved" | "crisisFlag" | "createdAt" | "updatedAt", ExtArgs["result"]["supportStory"]>
   export type SupportStoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
+    encouragements?: boolean | SupportStory$encouragementsArgs<ExtArgs>
+    _count?: boolean | SupportStoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SupportStoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -25790,6 +25825,7 @@ export namespace Prisma {
     name: "SupportStory"
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
+      encouragements: Prisma.$SupportEncouragementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -26196,6 +26232,7 @@ export namespace Prisma {
   export interface Prisma__SupportStoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    encouragements<T extends SupportStory$encouragementsArgs<ExtArgs> = {}>(args?: Subset<T, SupportStory$encouragementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportEncouragementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26618,6 +26655,30 @@ export namespace Prisma {
   }
 
   /**
+   * SupportStory.encouragements
+   */
+  export type SupportStory$encouragementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportEncouragement
+     */
+    select?: SupportEncouragementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportEncouragement
+     */
+    omit?: SupportEncouragementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportEncouragementInclude<ExtArgs> | null
+    where?: SupportEncouragementWhereInput
+    orderBy?: SupportEncouragementOrderByWithRelationInput | SupportEncouragementOrderByWithRelationInput[]
+    cursor?: SupportEncouragementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportEncouragementScalarFieldEnum | SupportEncouragementScalarFieldEnum[]
+  }
+
+  /**
    * SupportStory without action
    */
   export type SupportStoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26651,6 +26712,7 @@ export namespace Prisma {
     postId: string | null
     senderId: string | null
     receiverId: string | null
+    storyId: string | null
     content: string | null
     createdAt: Date | null
   }
@@ -26660,6 +26722,7 @@ export namespace Prisma {
     postId: string | null
     senderId: string | null
     receiverId: string | null
+    storyId: string | null
     content: string | null
     createdAt: Date | null
   }
@@ -26669,6 +26732,7 @@ export namespace Prisma {
     postId: number
     senderId: number
     receiverId: number
+    storyId: number
     content: number
     createdAt: number
     _all: number
@@ -26680,6 +26744,7 @@ export namespace Prisma {
     postId?: true
     senderId?: true
     receiverId?: true
+    storyId?: true
     content?: true
     createdAt?: true
   }
@@ -26689,6 +26754,7 @@ export namespace Prisma {
     postId?: true
     senderId?: true
     receiverId?: true
+    storyId?: true
     content?: true
     createdAt?: true
   }
@@ -26698,6 +26764,7 @@ export namespace Prisma {
     postId?: true
     senderId?: true
     receiverId?: true
+    storyId?: true
     content?: true
     createdAt?: true
     _all?: true
@@ -26780,6 +26847,7 @@ export namespace Prisma {
     postId: string | null
     senderId: string
     receiverId: string | null
+    storyId: string | null
     content: string
     createdAt: Date
     _count: SupportEncouragementCountAggregateOutputType | null
@@ -26806,11 +26874,13 @@ export namespace Prisma {
     postId?: boolean
     senderId?: boolean
     receiverId?: boolean
+    storyId?: boolean
     content?: boolean
     createdAt?: boolean
     post?: boolean | SupportEncouragement$postArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+    story?: boolean | SupportEncouragement$storyArgs<ExtArgs>
   }, ExtArgs["result"]["supportEncouragement"]>
 
   export type SupportEncouragementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26818,11 +26888,13 @@ export namespace Prisma {
     postId?: boolean
     senderId?: boolean
     receiverId?: boolean
+    storyId?: boolean
     content?: boolean
     createdAt?: boolean
     post?: boolean | SupportEncouragement$postArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+    story?: boolean | SupportEncouragement$storyArgs<ExtArgs>
   }, ExtArgs["result"]["supportEncouragement"]>
 
   export type SupportEncouragementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26830,11 +26902,13 @@ export namespace Prisma {
     postId?: boolean
     senderId?: boolean
     receiverId?: boolean
+    storyId?: boolean
     content?: boolean
     createdAt?: boolean
     post?: boolean | SupportEncouragement$postArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+    story?: boolean | SupportEncouragement$storyArgs<ExtArgs>
   }, ExtArgs["result"]["supportEncouragement"]>
 
   export type SupportEncouragementSelectScalar = {
@@ -26842,25 +26916,29 @@ export namespace Prisma {
     postId?: boolean
     senderId?: boolean
     receiverId?: boolean
+    storyId?: boolean
     content?: boolean
     createdAt?: boolean
   }
 
-  export type SupportEncouragementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "senderId" | "receiverId" | "content" | "createdAt", ExtArgs["result"]["supportEncouragement"]>
+  export type SupportEncouragementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "senderId" | "receiverId" | "storyId" | "content" | "createdAt", ExtArgs["result"]["supportEncouragement"]>
   export type SupportEncouragementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | SupportEncouragement$postArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+    story?: boolean | SupportEncouragement$storyArgs<ExtArgs>
   }
   export type SupportEncouragementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | SupportEncouragement$postArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+    story?: boolean | SupportEncouragement$storyArgs<ExtArgs>
   }
   export type SupportEncouragementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | SupportEncouragement$postArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | SupportEncouragement$receiverArgs<ExtArgs>
+    story?: boolean | SupportEncouragement$storyArgs<ExtArgs>
   }
 
   export type $SupportEncouragementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26869,12 +26947,14 @@ export namespace Prisma {
       post: Prisma.$CirclePostPayload<ExtArgs> | null
       sender: Prisma.$UserPayload<ExtArgs>
       receiver: Prisma.$UserPayload<ExtArgs> | null
+      story: Prisma.$SupportStoryPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       postId: string | null
       senderId: string
       receiverId: string | null
+      storyId: string | null
       content: string
       createdAt: Date
     }, ExtArgs["result"]["supportEncouragement"]>
@@ -27274,6 +27354,7 @@ export namespace Prisma {
     post<T extends SupportEncouragement$postArgs<ExtArgs> = {}>(args?: Subset<T, SupportEncouragement$postArgs<ExtArgs>>): Prisma__CirclePostClient<$Result.GetResult<Prisma.$CirclePostPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     receiver<T extends SupportEncouragement$receiverArgs<ExtArgs> = {}>(args?: Subset<T, SupportEncouragement$receiverArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    story<T extends SupportEncouragement$storyArgs<ExtArgs> = {}>(args?: Subset<T, SupportEncouragement$storyArgs<ExtArgs>>): Prisma__SupportStoryClient<$Result.GetResult<Prisma.$SupportStoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27307,6 +27388,7 @@ export namespace Prisma {
     readonly postId: FieldRef<"SupportEncouragement", 'String'>
     readonly senderId: FieldRef<"SupportEncouragement", 'String'>
     readonly receiverId: FieldRef<"SupportEncouragement", 'String'>
+    readonly storyId: FieldRef<"SupportEncouragement", 'String'>
     readonly content: FieldRef<"SupportEncouragement", 'String'>
     readonly createdAt: FieldRef<"SupportEncouragement", 'DateTime'>
   }
@@ -27728,6 +27810,25 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
+  }
+
+  /**
+   * SupportEncouragement.story
+   */
+  export type SupportEncouragement$storyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportStory
+     */
+    select?: SupportStorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportStory
+     */
+    omit?: SupportStoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportStoryInclude<ExtArgs> | null
+    where?: SupportStoryWhereInput
   }
 
   /**
@@ -29169,6 +29270,7 @@ export namespace Prisma {
     postId: 'postId',
     senderId: 'senderId',
     receiverId: 'receiverId',
+    storyId: 'storyId',
     content: 'content',
     createdAt: 'createdAt'
   };
@@ -31224,6 +31326,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SupportStory"> | Date | string
     updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    encouragements?: SupportEncouragementListRelationFilter
   }
 
   export type SupportStoryOrderByWithRelationInput = {
@@ -31237,6 +31340,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     author?: UserOrderByWithRelationInput
+    encouragements?: SupportEncouragementOrderByRelationAggregateInput
   }
 
   export type SupportStoryWhereUniqueInput = Prisma.AtLeast<{
@@ -31253,6 +31357,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SupportStory"> | Date | string
     updatedAt?: DateTimeFilter<"SupportStory"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    encouragements?: SupportEncouragementListRelationFilter
   }, "id">
 
   export type SupportStoryOrderByWithAggregationInput = {
@@ -31293,11 +31398,13 @@ export namespace Prisma {
     postId?: StringNullableFilter<"SupportEncouragement"> | string | null
     senderId?: StringFilter<"SupportEncouragement"> | string
     receiverId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    storyId?: StringNullableFilter<"SupportEncouragement"> | string | null
     content?: StringFilter<"SupportEncouragement"> | string
     createdAt?: DateTimeFilter<"SupportEncouragement"> | Date | string
     post?: XOR<CirclePostNullableScalarRelationFilter, CirclePostWhereInput> | null
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    story?: XOR<SupportStoryNullableScalarRelationFilter, SupportStoryWhereInput> | null
   }
 
   export type SupportEncouragementOrderByWithRelationInput = {
@@ -31305,11 +31412,13 @@ export namespace Prisma {
     postId?: SortOrderInput | SortOrder
     senderId?: SortOrder
     receiverId?: SortOrderInput | SortOrder
+    storyId?: SortOrderInput | SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     post?: CirclePostOrderByWithRelationInput
     sender?: UserOrderByWithRelationInput
     receiver?: UserOrderByWithRelationInput
+    story?: SupportStoryOrderByWithRelationInput
   }
 
   export type SupportEncouragementWhereUniqueInput = Prisma.AtLeast<{
@@ -31320,11 +31429,13 @@ export namespace Prisma {
     postId?: StringNullableFilter<"SupportEncouragement"> | string | null
     senderId?: StringFilter<"SupportEncouragement"> | string
     receiverId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    storyId?: StringNullableFilter<"SupportEncouragement"> | string | null
     content?: StringFilter<"SupportEncouragement"> | string
     createdAt?: DateTimeFilter<"SupportEncouragement"> | Date | string
     post?: XOR<CirclePostNullableScalarRelationFilter, CirclePostWhereInput> | null
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    story?: XOR<SupportStoryNullableScalarRelationFilter, SupportStoryWhereInput> | null
   }, "id">
 
   export type SupportEncouragementOrderByWithAggregationInput = {
@@ -31332,6 +31443,7 @@ export namespace Prisma {
     postId?: SortOrderInput | SortOrder
     senderId?: SortOrder
     receiverId?: SortOrderInput | SortOrder
+    storyId?: SortOrderInput | SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     _count?: SupportEncouragementCountOrderByAggregateInput
@@ -31347,6 +31459,7 @@ export namespace Prisma {
     postId?: StringNullableWithAggregatesFilter<"SupportEncouragement"> | string | null
     senderId?: StringWithAggregatesFilter<"SupportEncouragement"> | string
     receiverId?: StringNullableWithAggregatesFilter<"SupportEncouragement"> | string | null
+    storyId?: StringNullableWithAggregatesFilter<"SupportEncouragement"> | string | null
     content?: StringWithAggregatesFilter<"SupportEncouragement"> | string
     createdAt?: DateTimeWithAggregatesFilter<"SupportEncouragement"> | Date | string
   }
@@ -33250,6 +33363,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutStoriesInput
+    encouragements?: SupportEncouragementCreateNestedManyWithoutStoryInput
   }
 
   export type SupportStoryUncheckedCreateInput = {
@@ -33262,6 +33376,7 @@ export namespace Prisma {
     crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutStoryInput
   }
 
   export type SupportStoryUpdateInput = {
@@ -33274,6 +33389,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutStoriesNestedInput
+    encouragements?: SupportEncouragementUpdateManyWithoutStoryNestedInput
   }
 
   export type SupportStoryUncheckedUpdateInput = {
@@ -33286,6 +33402,7 @@ export namespace Prisma {
     crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encouragements?: SupportEncouragementUncheckedUpdateManyWithoutStoryNestedInput
   }
 
   export type SupportStoryCreateManyInput = {
@@ -33330,6 +33447,7 @@ export namespace Prisma {
     post?: CirclePostCreateNestedOneWithoutEncouragementsInput
     sender: UserCreateNestedOneWithoutSentEncouragementsInput
     receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+    story?: SupportStoryCreateNestedOneWithoutEncouragementsInput
   }
 
   export type SupportEncouragementUncheckedCreateInput = {
@@ -33337,6 +33455,7 @@ export namespace Prisma {
     postId?: string | null
     senderId: string
     receiverId?: string | null
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -33348,6 +33467,7 @@ export namespace Prisma {
     post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
     sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
     receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+    story?: SupportStoryUpdateOneWithoutEncouragementsNestedInput
   }
 
   export type SupportEncouragementUncheckedUpdateInput = {
@@ -33355,6 +33475,7 @@ export namespace Prisma {
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33364,6 +33485,7 @@ export namespace Prisma {
     postId?: string | null
     senderId: string
     receiverId?: string | null
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -33379,6 +33501,7 @@ export namespace Prisma {
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35217,11 +35340,17 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
+  export type SupportStoryNullableScalarRelationFilter = {
+    is?: SupportStoryWhereInput | null
+    isNot?: SupportStoryWhereInput | null
+  }
+
   export type SupportEncouragementCountOrderByAggregateInput = {
     id?: SortOrder
     postId?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    storyId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
   }
@@ -35231,6 +35360,7 @@ export namespace Prisma {
     postId?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    storyId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
   }
@@ -35240,6 +35370,7 @@ export namespace Prisma {
     postId?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    storyId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
   }
@@ -36712,12 +36843,54 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type SupportEncouragementCreateNestedManyWithoutStoryInput = {
+    create?: XOR<SupportEncouragementCreateWithoutStoryInput, SupportEncouragementUncheckedCreateWithoutStoryInput> | SupportEncouragementCreateWithoutStoryInput[] | SupportEncouragementUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutStoryInput | SupportEncouragementCreateOrConnectWithoutStoryInput[]
+    createMany?: SupportEncouragementCreateManyStoryInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
+  export type SupportEncouragementUncheckedCreateNestedManyWithoutStoryInput = {
+    create?: XOR<SupportEncouragementCreateWithoutStoryInput, SupportEncouragementUncheckedCreateWithoutStoryInput> | SupportEncouragementCreateWithoutStoryInput[] | SupportEncouragementUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutStoryInput | SupportEncouragementCreateOrConnectWithoutStoryInput[]
+    createMany?: SupportEncouragementCreateManyStoryInputEnvelope
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutStoriesNestedInput = {
     create?: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutStoriesInput
     upsert?: UserUpsertWithoutStoriesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStoriesInput, UserUpdateWithoutStoriesInput>, UserUncheckedUpdateWithoutStoriesInput>
+  }
+
+  export type SupportEncouragementUpdateManyWithoutStoryNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutStoryInput, SupportEncouragementUncheckedCreateWithoutStoryInput> | SupportEncouragementCreateWithoutStoryInput[] | SupportEncouragementUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutStoryInput | SupportEncouragementCreateOrConnectWithoutStoryInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutStoryInput | SupportEncouragementUpsertWithWhereUniqueWithoutStoryInput[]
+    createMany?: SupportEncouragementCreateManyStoryInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutStoryInput | SupportEncouragementUpdateWithWhereUniqueWithoutStoryInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutStoryInput | SupportEncouragementUpdateManyWithWhereWithoutStoryInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutStoryNestedInput = {
+    create?: XOR<SupportEncouragementCreateWithoutStoryInput, SupportEncouragementUncheckedCreateWithoutStoryInput> | SupportEncouragementCreateWithoutStoryInput[] | SupportEncouragementUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: SupportEncouragementCreateOrConnectWithoutStoryInput | SupportEncouragementCreateOrConnectWithoutStoryInput[]
+    upsert?: SupportEncouragementUpsertWithWhereUniqueWithoutStoryInput | SupportEncouragementUpsertWithWhereUniqueWithoutStoryInput[]
+    createMany?: SupportEncouragementCreateManyStoryInputEnvelope
+    set?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    disconnect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    delete?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    connect?: SupportEncouragementWhereUniqueInput | SupportEncouragementWhereUniqueInput[]
+    update?: SupportEncouragementUpdateWithWhereUniqueWithoutStoryInput | SupportEncouragementUpdateWithWhereUniqueWithoutStoryInput[]
+    updateMany?: SupportEncouragementUpdateManyWithWhereWithoutStoryInput | SupportEncouragementUpdateManyWithWhereWithoutStoryInput[]
+    deleteMany?: SupportEncouragementScalarWhereInput | SupportEncouragementScalarWhereInput[]
   }
 
   export type CirclePostCreateNestedOneWithoutEncouragementsInput = {
@@ -36736,6 +36909,12 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutReceivedEncouragementsInput, UserUncheckedCreateWithoutReceivedEncouragementsInput>
     connectOrCreate?: UserCreateOrConnectWithoutReceivedEncouragementsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type SupportStoryCreateNestedOneWithoutEncouragementsInput = {
+    create?: XOR<SupportStoryCreateWithoutEncouragementsInput, SupportStoryUncheckedCreateWithoutEncouragementsInput>
+    connectOrCreate?: SupportStoryCreateOrConnectWithoutEncouragementsInput
+    connect?: SupportStoryWhereUniqueInput
   }
 
   export type CirclePostUpdateOneWithoutEncouragementsNestedInput = {
@@ -36764,6 +36943,16 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReceivedEncouragementsInput, UserUpdateWithoutReceivedEncouragementsInput>, UserUncheckedUpdateWithoutReceivedEncouragementsInput>
+  }
+
+  export type SupportStoryUpdateOneWithoutEncouragementsNestedInput = {
+    create?: XOR<SupportStoryCreateWithoutEncouragementsInput, SupportStoryUncheckedCreateWithoutEncouragementsInput>
+    connectOrCreate?: SupportStoryCreateOrConnectWithoutEncouragementsInput
+    upsert?: SupportStoryUpsertWithoutEncouragementsInput
+    disconnect?: SupportStoryWhereInput | boolean
+    delete?: SupportStoryWhereInput | boolean
+    connect?: SupportStoryWhereUniqueInput
+    update?: XOR<XOR<SupportStoryUpdateToOneWithWhereWithoutEncouragementsInput, SupportStoryUpdateWithoutEncouragementsInput>, SupportStoryUncheckedUpdateWithoutEncouragementsInput>
   }
 
   export type UserCreateNestedOneWithoutMentorMatchesInput = {
@@ -37839,6 +38028,7 @@ export namespace Prisma {
     crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    encouragements?: SupportEncouragementCreateNestedManyWithoutStoryInput
   }
 
   export type SupportStoryUncheckedCreateWithoutAuthorInput = {
@@ -37850,6 +38040,7 @@ export namespace Prisma {
     crisisFlag?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    encouragements?: SupportEncouragementUncheckedCreateNestedManyWithoutStoryInput
   }
 
   export type SupportStoryCreateOrConnectWithoutAuthorInput = {
@@ -37868,12 +38059,14 @@ export namespace Prisma {
     createdAt?: Date | string
     post?: CirclePostCreateNestedOneWithoutEncouragementsInput
     receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+    story?: SupportStoryCreateNestedOneWithoutEncouragementsInput
   }
 
   export type SupportEncouragementUncheckedCreateWithoutSenderInput = {
     id?: string
     postId?: string | null
     receiverId?: string | null
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -37894,12 +38087,14 @@ export namespace Prisma {
     createdAt?: Date | string
     post?: CirclePostCreateNestedOneWithoutEncouragementsInput
     sender: UserCreateNestedOneWithoutSentEncouragementsInput
+    story?: SupportStoryCreateNestedOneWithoutEncouragementsInput
   }
 
   export type SupportEncouragementUncheckedCreateWithoutReceiverInput = {
     id?: string
     postId?: string | null
     senderId: string
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -38460,6 +38655,7 @@ export namespace Prisma {
     postId?: StringNullableFilter<"SupportEncouragement"> | string | null
     senderId?: StringFilter<"SupportEncouragement"> | string
     receiverId?: StringNullableFilter<"SupportEncouragement"> | string | null
+    storyId?: StringNullableFilter<"SupportEncouragement"> | string | null
     content?: StringFilter<"SupportEncouragement"> | string
     createdAt?: DateTimeFilter<"SupportEncouragement"> | Date | string
   }
@@ -42431,12 +42627,14 @@ export namespace Prisma {
     createdAt?: Date | string
     sender: UserCreateNestedOneWithoutSentEncouragementsInput
     receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+    story?: SupportStoryCreateNestedOneWithoutEncouragementsInput
   }
 
   export type SupportEncouragementUncheckedCreateWithoutPostInput = {
     id?: string
     senderId: string
     receiverId?: string | null
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -42758,6 +42956,34 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
   }
 
+  export type SupportEncouragementCreateWithoutStoryInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    post?: CirclePostCreateNestedOneWithoutEncouragementsInput
+    sender: UserCreateNestedOneWithoutSentEncouragementsInput
+    receiver?: UserCreateNestedOneWithoutReceivedEncouragementsInput
+  }
+
+  export type SupportEncouragementUncheckedCreateWithoutStoryInput = {
+    id?: string
+    postId?: string | null
+    senderId: string
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementCreateOrConnectWithoutStoryInput = {
+    where: SupportEncouragementWhereUniqueInput
+    create: XOR<SupportEncouragementCreateWithoutStoryInput, SupportEncouragementUncheckedCreateWithoutStoryInput>
+  }
+
+  export type SupportEncouragementCreateManyStoryInputEnvelope = {
+    data: SupportEncouragementCreateManyStoryInput | SupportEncouragementCreateManyStoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutStoriesInput = {
     update: XOR<UserUpdateWithoutStoriesInput, UserUncheckedUpdateWithoutStoriesInput>
     create: XOR<UserCreateWithoutStoriesInput, UserUncheckedCreateWithoutStoriesInput>
@@ -42889,6 +43115,22 @@ export namespace Prisma {
     receivedEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutReceiverNestedInput
     mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
     menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type SupportEncouragementUpsertWithWhereUniqueWithoutStoryInput = {
+    where: SupportEncouragementWhereUniqueInput
+    update: XOR<SupportEncouragementUpdateWithoutStoryInput, SupportEncouragementUncheckedUpdateWithoutStoryInput>
+    create: XOR<SupportEncouragementCreateWithoutStoryInput, SupportEncouragementUncheckedCreateWithoutStoryInput>
+  }
+
+  export type SupportEncouragementUpdateWithWhereUniqueWithoutStoryInput = {
+    where: SupportEncouragementWhereUniqueInput
+    data: XOR<SupportEncouragementUpdateWithoutStoryInput, SupportEncouragementUncheckedUpdateWithoutStoryInput>
+  }
+
+  export type SupportEncouragementUpdateManyWithWhereWithoutStoryInput = {
+    where: SupportEncouragementScalarWhereInput
+    data: XOR<SupportEncouragementUpdateManyMutationInput, SupportEncouragementUncheckedUpdateManyWithoutStoryInput>
   }
 
   export type CirclePostCreateWithoutEncouragementsInput = {
@@ -43172,6 +43414,35 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutReceivedEncouragementsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutReceivedEncouragementsInput, UserUncheckedCreateWithoutReceivedEncouragementsInput>
+  }
+
+  export type SupportStoryCreateWithoutEncouragementsInput = {
+    id?: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutStoriesInput
+  }
+
+  export type SupportStoryUncheckedCreateWithoutEncouragementsInput = {
+    id?: string
+    authorId: string
+    title: string
+    content: string
+    category: $Enums.Concern
+    isApproved?: boolean
+    crisisFlag?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportStoryCreateOrConnectWithoutEncouragementsInput = {
+    where: SupportStoryWhereUniqueInput
+    create: XOR<SupportStoryCreateWithoutEncouragementsInput, SupportStoryUncheckedCreateWithoutEncouragementsInput>
   }
 
   export type CirclePostUpsertWithoutEncouragementsInput = {
@@ -43473,6 +43744,41 @@ export namespace Prisma {
     sentEncouragements?: SupportEncouragementUncheckedUpdateManyWithoutSenderNestedInput
     mentorMatches?: MentorMatchUncheckedUpdateManyWithoutMentorNestedInput
     menteeMatches?: MentorMatchUncheckedUpdateManyWithoutMenteeNestedInput
+  }
+
+  export type SupportStoryUpsertWithoutEncouragementsInput = {
+    update: XOR<SupportStoryUpdateWithoutEncouragementsInput, SupportStoryUncheckedUpdateWithoutEncouragementsInput>
+    create: XOR<SupportStoryCreateWithoutEncouragementsInput, SupportStoryUncheckedCreateWithoutEncouragementsInput>
+    where?: SupportStoryWhereInput
+  }
+
+  export type SupportStoryUpdateToOneWithWhereWithoutEncouragementsInput = {
+    where?: SupportStoryWhereInput
+    data: XOR<SupportStoryUpdateWithoutEncouragementsInput, SupportStoryUncheckedUpdateWithoutEncouragementsInput>
+  }
+
+  export type SupportStoryUpdateWithoutEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutStoriesNestedInput
+  }
+
+  export type SupportStoryUncheckedUpdateWithoutEncouragementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumConcernFieldUpdateOperationsInput | $Enums.Concern
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    crisisFlag?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutMentorMatchesInput = {
@@ -44156,6 +44462,7 @@ export namespace Prisma {
     id?: string
     postId?: string | null
     receiverId?: string | null
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -44164,6 +44471,7 @@ export namespace Prisma {
     id?: string
     postId?: string | null
     senderId: string
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -44637,6 +44945,7 @@ export namespace Prisma {
     crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encouragements?: SupportEncouragementUpdateManyWithoutStoryNestedInput
   }
 
   export type SupportStoryUncheckedUpdateWithoutAuthorInput = {
@@ -44648,6 +44957,7 @@ export namespace Prisma {
     crisisFlag?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encouragements?: SupportEncouragementUncheckedUpdateManyWithoutStoryNestedInput
   }
 
   export type SupportStoryUncheckedUpdateManyWithoutAuthorInput = {
@@ -44667,12 +44977,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
     receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+    story?: SupportStoryUpdateOneWithoutEncouragementsNestedInput
   }
 
   export type SupportEncouragementUncheckedUpdateWithoutSenderInput = {
     id?: StringFieldUpdateOperationsInput | string
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44681,6 +44993,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44691,12 +45004,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
     sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
+    story?: SupportStoryUpdateOneWithoutEncouragementsNestedInput
   }
 
   export type SupportEncouragementUncheckedUpdateWithoutReceiverInput = {
     id?: StringFieldUpdateOperationsInput | string
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     senderId?: StringFieldUpdateOperationsInput | string
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44705,6 +45020,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     senderId?: StringFieldUpdateOperationsInput | string
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44909,6 +45225,7 @@ export namespace Prisma {
     id?: string
     senderId: string
     receiverId?: string | null
+    storyId?: string | null
     content: string
     createdAt?: Date | string
   }
@@ -44919,18 +45236,57 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
     receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+    story?: SupportStoryUpdateOneWithoutEncouragementsNestedInput
   }
 
   export type SupportEncouragementUncheckedUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupportEncouragementUncheckedUpdateManyWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    storyId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementCreateManyStoryInput = {
+    id?: string
+    postId?: string | null
+    senderId: string
+    receiverId?: string | null
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type SupportEncouragementUpdateWithoutStoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: CirclePostUpdateOneWithoutEncouragementsNestedInput
+    sender?: UserUpdateOneRequiredWithoutSentEncouragementsNestedInput
+    receiver?: UserUpdateOneWithoutReceivedEncouragementsNestedInput
+  }
+
+  export type SupportEncouragementUncheckedUpdateWithoutStoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportEncouragementUncheckedUpdateManyWithoutStoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string

@@ -383,6 +383,7 @@ exports.Prisma.SupportEncouragementScalarFieldEnum = {
   postId: 'postId',
   senderId: 'senderId',
   receiverId: 'receiverId',
+  storyId: 'storyId',
   content: 'content',
   createdAt: 'createdAt'
 };

@@ -461,6 +461,8 @@ model SupportStory {
   isApproved      Boolean  @default(false)
   crisisFlag      Boolean  @default(false)
   
+  encouragements  SupportEncouragement[]
+  
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
  
@@ -479,10 +481,14 @@ model SupportEncouragement {
   receiverId      String?
   receiver        User?    @relation("ReceivedEncouragement", fields: [receiverId], references: [id], onDelete: Cascade)
   
+  storyId         String?
+  story           SupportStory? @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  
   content         String   @db.Text
   createdAt       DateTime @default(now())
  
   @@index([postId])
+  @@index([storyId])
   @@index([receiverId])
 }
  

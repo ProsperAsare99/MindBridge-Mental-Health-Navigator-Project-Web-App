@@ -149,3 +149,22 @@ export const initializeChallenges = async () => {
         console.error('[GAMIFICATION] Challenge seeding failed:', error.message);
     }
 };
+
+export const rewardXP = async (req: AuthRequest, res: Response) => {
+    try {
+        const { type, xp } = req.body;
+        const userId = req.userId!;
+
+        const result = await GamificationService.rewardXP(userId, type as any);
+        
+        // Also update garden health if it's a wellness activity
+        if (type === 'MEDITATION_COMPLETE') {
+            await GamificationService.updateMoodGarden(userId);
+        }
+
+        res.json(result);
+    } catch (error) {
+        console.error('Reward XP Error:', error);
+        res.status(500).json({ error: 'Failed to process wellness reward.' });
+    }
+};

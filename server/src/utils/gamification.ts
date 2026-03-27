@@ -7,7 +7,8 @@ export const XP_REWARDS = {
     STREAK_MILESTONE: 100,
     CHALLENGE_JOIN: 25,
     CHALLENGE_COMPLETE: 200,
-    ONBOARDING_COMPLETE: 100
+    ONBOARDING_COMPLETE: 100,
+    MEDITATION_COMPLETE: 50
 };
 
 export const calculateLevel = (xp: number): number => {
