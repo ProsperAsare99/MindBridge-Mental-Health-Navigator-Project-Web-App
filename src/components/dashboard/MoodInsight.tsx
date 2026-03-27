@@ -185,7 +185,7 @@ export function MoodInsight({ moods, className, onRefresh }: MoodInsightProps) {
             {/* Footer Metrics */}
             <div className="px-8 py-4 bg-muted/30 border-t border-border/40 flex items-center justify-between">
                 <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-                    <Activity size={12} className="text-primary/40" />
+                    <Activity size={12} className="text-primary/70" />
                     Dataset Size: {metrics?.totalChecks} Check-ins
                 </p>
                 {metrics?.topSymptom && (
