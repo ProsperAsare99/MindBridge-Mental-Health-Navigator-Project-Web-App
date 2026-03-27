@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -12,25 +11,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     async (config) => {
         if (typeof window !== 'undefined') {
-            // Priority 1: Explicitly provided Authorization header
-            if (config.headers.Authorization) {
-                return config;
-            }
-
-            // Priority 2: Get token directly from the NextAuth session (most reliable)
-            try {
-                const session = await getSession();
-                const sessionToken = (session?.user as any)?.accessToken;
-                
-                if (sessionToken) {
-                    config.headers.Authorization = `Bearer ${sessionToken}`;
-                    return config;
-                }
-            } catch (sessionError) {
-                console.warn('[AXIOS DEBUG] Failed to get session:', sessionError);
-            }
-
-            // Priority 3: Fallback to localStorage (legacy/guest support)
+            // Priority 2: Use token from localStorage (managed by SessionProvider/api.setToken)
             const token = localStorage.getItem('token');
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`;
