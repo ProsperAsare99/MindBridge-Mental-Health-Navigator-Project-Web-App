@@ -10,6 +10,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { isHighStressPeriod, getTimeContext } from '../utils/time';
+import { calculateStreak } from '../utils/gamification';
 
 export const createMood = async (req: AuthRequest, res: Response) => {
     const { 
@@ -166,33 +167,7 @@ export const getMoodStats = async (req: AuthRequest, res: Response) => {
         }
 
         const average = moods.reduce((acc, curr) => acc + curr.mood, 0) / moods.length;
-
-        // Simple streak calculation (daily)
-        let streak = 0;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        const uniqueDays = new Set(moods.map(m => {
-            const d = new Date(m.createdAt);
-            d.setHours(0, 0, 0, 0);
-            return d.getTime();
-        }));
-
-        const sortedDays = Array.from(uniqueDays).sort((a, b) => b - a);
-
-        let current = today.getTime();
-        if (sortedDays[0] < current - 86400000) {
-            streak = 0; // Missed today and yesterday
-        } else {
-            for (const day of sortedDays) {
-                if (day === current || day === current - 86400000) {
-                    streak++;
-                    current = day;
-                } else {
-                    break;
-                }
-            }
-        }
+        const streak = calculateStreak(moods);
 
         res.json({
             average: parseFloat(average.toFixed(1)),
