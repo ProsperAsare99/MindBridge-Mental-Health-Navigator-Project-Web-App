@@ -3,6 +3,7 @@ import type { AssessmentType, Severity } from '../../prisma/generated/client';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { RecommendationService } from '../services/recommendationService';
+import { GamificationService } from '../services/gamificationService';
 // import { AssessmentType, Severity } from '@prisma/client';
 
 export const createAssessment = async (req: AuthRequest, res: Response) => {
@@ -41,11 +42,25 @@ export const createAssessment = async (req: AuthRequest, res: Response) => {
             }
         });
 
+        // Gamification: Reward XP and Check for Achievements
+        await GamificationService.rewardXP(userId, 'ASSESSMENT_COMPLETE');
+        const newAchievements = await GamificationService.checkAchievements(userId);
+
         // Generate personalized recommendations
         const recommendationResult = await RecommendationService.getPersonalizedRecommendations(userId);
 
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId,
+                service: 'ASSESSMENT',
+                model: `${type}_ASSESSMENT`
+            }
+        });
+
         res.status(201).json({ 
             assessment, 
+            newAchievements,
             recommendations: recommendationResult.recommendations,
             feedback: recommendationResult.feedback
         });

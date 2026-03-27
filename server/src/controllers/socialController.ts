@@ -4,6 +4,7 @@ import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { ai } from '../lib/genkit-config';
 import { isHighStressPeriod, getTimeContext } from '../utils/time';
+import { GamificationService } from '../services/gamificationService';
 
 const detectCrisis = async (content: string) => {
     const crisisKeywords = ['suicide', 'self-harm', 'end it all', 'kill myself', 'no point living', 'hurt myself', 'better off dead', 'dying', 'goodbye world'];
@@ -75,6 +76,19 @@ export const joinCircle = async (req: AuthRequest, res: Response) => {
             create: { userId, circleId },
             update: {} // No change if already joined
         });
+
+        // Gamification: Reward XP for joining a community
+        await GamificationService.rewardXP(userId, 'SOCIAL_ACTIVITY');
+
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId,
+                service: 'CHAT',
+                model: `JOIN_CIRCLE: ${circleId}`
+            }
+        });
+
         res.json(membership);
     } catch (error: any) {
         res.status(500).json({ error: 'Failed to join circle', details: error.message });
@@ -132,6 +146,19 @@ export const createPost = async (req: AuthRequest, res: Response) => {
                 crisisFlag
             }
         });
+
+        // Gamification: Reward XP for contributing to the community
+        await GamificationService.rewardXP(userId, 'SOCIAL_ACTIVITY');
+
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId,
+                service: 'CHAT',
+                model: `CIRCLE_POST: ${circleId}`
+            }
+        });
+
         res.status(201).json(post);
     } catch (error: any) {
         res.status(500).json({ error: 'Failed to create post', details: error.message });
@@ -178,6 +205,19 @@ export const createStory = async (req: AuthRequest, res: Response) => {
                 crisisFlag
             }
         });
+
+        // Gamification: Reward XP for sharing experience
+        await GamificationService.rewardXP(userId, 'SOCIAL_ACTIVITY');
+
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId,
+                service: 'CHAT',
+                model: `SUPPORT_STORY: ${category}`
+            }
+        });
+
         res.status(201).json(story);
     } catch (error: any) {
         res.status(500).json({ error: 'Failed to share story', details: error.message });
@@ -203,6 +243,19 @@ export const sendEncouragement = async (req: AuthRequest, res: Response) => {
                 content
             }
         });
+
+        // Gamification: Reward XP for supporting others
+        await GamificationService.rewardXP(senderId, 'SOCIAL_ACTIVITY');
+
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId: senderId,
+                service: 'CHAT',
+                model: `ENCOURAGEMENT: ${receiverId}`
+            }
+        });
+
         res.status(201).json(encouragement);
     } catch (error: any) {
         res.status(500).json({ error: 'Failed to send encouragement', details: error.message });

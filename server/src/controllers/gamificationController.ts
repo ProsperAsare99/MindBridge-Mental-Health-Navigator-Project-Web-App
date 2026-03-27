@@ -84,14 +84,28 @@ export const getChallenges = async (req: AuthRequest, res: Response) => {
 export const joinChallenge = async (req: AuthRequest, res: Response) => {
     try {
         const { challengeId } = req.params;
+        const userId = req.userId!;
         const participation = await prisma.challengeParticipation.create({
             data: {
-                userId: req.userId!,
+                userId: userId,
                 challengeId: challengeId as string,
                 startDate: new Date(),
                 progress: 0
             }
         });
+
+        // Gamification: Reward XP for taking on a challenge
+        await GamificationService.rewardXP(userId, 'CHALLENGE_JOIN');
+
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId,
+                service: 'MOOD',
+                model: `JOIN_CHALLENGE: ${challengeId}`
+            }
+        });
+
         res.status(201).json(participation);
     } catch (error) {
         res.status(500).json({ error: 'Failed to join challenge.' });

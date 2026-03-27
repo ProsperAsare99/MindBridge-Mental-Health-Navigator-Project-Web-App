@@ -53,13 +53,7 @@ export class RecommendationService {
         });
 
         // 2. Behavioral Analysis (Soft Sensors)
-        const usageLogs = await prisma.usageLog.findMany({
-            where: { userId },
-            orderBy: { timestamp: 'desc' },
-            take: 1
-        });
-
-        const lastInteraction = usageLogs.length > 0 ? usageLogs[0].timestamp : (user?.joinDate || now);
+        const lastInteraction = user?.lastActive || user?.joinDate || now;
         const lastMood = latestMoods.length > 0 ? latestMoods[0].createdAt : (user?.joinDate || now);
         
         const lastActivityAt = new Date(Math.max(new Date(lastInteraction).getTime(), new Date(lastMood).getTime()));

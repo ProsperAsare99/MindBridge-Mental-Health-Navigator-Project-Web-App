@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { RecommendationService } from '../services/recommendationService';
+import { GamificationService } from '../services/gamificationService';
 // AI imports removed to maintain "Advanced Analytics" identity
 
 export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
@@ -266,6 +267,9 @@ export const logActivity = async (req: AuthRequest, res: Response) => {
                 model: model || 'GENERAL_ACTIVITY'
             }
         });
+        
+        // Reward small XP for engagement
+        await GamificationService.rewardXP(req.userId!, 'SOCIAL_ACTIVITY');
 
         res.status(201).json(log);
     } catch (error) {

@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma';
+// import prisma from '../lib/prisma'; // Reserved for when we move resources to the database
 
 export interface MentalHealthResource {
     id: string;

@@ -113,6 +113,15 @@ export const createMood = async (req: AuthRequest, res: Response) => {
         // Generate personalized recommendations
         const recommendationResult = await RecommendationService.getPersonalizedRecommendations(userId);
 
+        // Record Activity
+        await prisma.usageLog.create({
+            data: {
+                userId,
+                service: 'MOOD',
+                model: 'MOOD_LOG'
+            }
+        });
+
         res.status(201).json({ 
             ...mood, 
             newAchievements,
@@ -330,11 +339,11 @@ export const deleteMood = async (req: AuthRequest, res: Response) => {
 
         // Cleanup files
         if (mood.photoUrl) {
-            const fullPath = path.join(process.cwd(), 'public', mood.photoUrl);
+            const fullPath = path.join(process.cwd(), mood.photoUrl);
             if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
         }
         if (mood.audioUrl) {
-            const fullPath = path.join(process.cwd(), 'public', mood.audioUrl);
+            const fullPath = path.join(process.cwd(), mood.audioUrl);
             if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
         }
 
@@ -375,7 +384,7 @@ export const deleteMedia = async (req: AuthRequest, res: Response) => {
 
         // Physical cleanup
         if (fileToPulse) {
-            const fullPath = path.join(process.cwd(), 'public', fileToPulse);
+            const fullPath = path.join(process.cwd(), fileToPulse);
             if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
         }
 

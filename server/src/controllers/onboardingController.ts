@@ -3,6 +3,7 @@ import type { SupportLevel, RiskLevel, Concern, CopingStyle, FaithLevel, Approac
 import { AuthRequest } from '../middlewares/auth';
 import prisma from '../lib/prisma';
 import { University } from '../../prisma/generated/client';
+import { GamificationService } from '../services/gamificationService';
 
 export const updateOnboarding = async (req: AuthRequest, res: Response) => {
     try {
@@ -69,6 +70,20 @@ export const updateOnboarding = async (req: AuthRequest, res: Response) => {
             where: { id: userId },
             data: updateData
         });
+
+        // Gamification: Reward XP on onboarding completion
+        if (updateData.onboardingCompleted === true && userId) {
+            await GamificationService.rewardXP(userId, 'ONBOARDING_COMPLETE');
+            
+            // Record Activity
+            await prisma.usageLog.create({
+                data: {
+                    userId: userId,
+                    service: 'MOOD', // Using MOOD as base for profile stuff
+                    model: 'ONBOARDING_COMPLETE'
+                }
+            });
+        }
 
         res.json({
             message: 'Onboarding data updated successfully',
