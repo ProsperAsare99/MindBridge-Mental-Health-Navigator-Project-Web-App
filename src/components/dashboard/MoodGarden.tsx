@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Droplets } from 'lucide-react';
+import { Droplets, Lamp, Zap, Diamond, Sparkles as SparkleIcon } from 'lucide-react';
 
 interface MoodGardenProps {
     level: number; // 1-5
@@ -11,9 +11,10 @@ interface MoodGardenProps {
     plantType?: string; // 'oak', 'baobab', etc.
     className?: string;
     loading?: boolean;
+    artifacts?: string[]; // Array of artifact types
 }
 
-export const MoodGarden = ({ level, health, plantType = 'oak', className, loading }: MoodGardenProps) => {
+export const MoodGarden = ({ level, health, plantType = 'oak', className, loading, artifacts = [] }: MoodGardenProps) => {
     // Stage configurations
     const stages = [
         { label: 'Seedling', color: 'text-emerald-400' },
@@ -77,6 +78,57 @@ export const MoodGarden = ({ level, health, plantType = 'oak', className, loadin
                             />
                         </>
                     )}
+
+                    {/* Achievement Artifacts */}
+                    <div className="absolute inset-0 pointer-events-none">
+                        {artifacts.includes('GARDEN_ARTIFACT_LANTERN') && (
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="absolute -top-4 right-0"
+                            >
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-amber-500/40 blur-xl rounded-full animate-pulse" />
+                                    <div className="relative h-10 w-10 bg-amber-500/10 border border-amber-500/40 rounded-xl flex items-center justify-center text-amber-500 shadow-xl shadow-amber-500/20">
+                                        <Lamp size={18} />
+                                    </div>
+                                </div>
+                                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[7px] font-black uppercase text-amber-600/60 whitespace-nowrap">Resilience Luminary</span>
+                            </motion.div>
+                        )}
+
+                        {artifacts.includes('GARDEN_ARTIFACT_STONE') && (
+                            <motion.div 
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="absolute -bottom-4 -left-4"
+                            >
+                                <div className="h-12 w-12 bg-slate-400/10 border border-slate-400/40 rounded-[1.5rem] flex items-center justify-center text-slate-500 shadow-lg rotate-12">
+                                    <Diamond size={20} />
+                                </div>
+                                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[7px] font-black uppercase text-slate-500/60 whitespace-nowrap tracking-widest">Zen Foundation</span>
+                            </motion.div>
+                        )}
+
+                        {artifacts.includes('GARDEN_ARTIFACT_SPARK') && (
+                            <motion.div 
+                                animate={{ 
+                                    y: [0, -10, 0],
+                                    rotate: [0, 10, -10, 0],
+                                    scale: [1, 1.1, 1]
+                                }}
+                                transition={{ duration: 5, repeat: Infinity }}
+                                className="absolute top-1/2 right-1/2 translate-x-16"
+                            >
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-primary/30 blur-lg rounded-full animate-pulse" />
+                                    <div className="relative h-8 w-8 bg-primary/20 border border-primary/40 rounded-full flex items-center justify-center text-primary shadow-2xl">
+                                        <SparkleIcon size={14} className="animate-spin-slow" />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </div>
                 </motion.div>
 
                 {/* Stage Info */}

@@ -24,33 +24,40 @@ export const getNextLevelXP = (level: number): number => {
 export const calculateStreak = (moods: MoodEntry[]): number => {
     if (moods.length === 0) return 0;
 
-    const sortedMoods = [...moods].sort((a, b) => 
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-
-    const uniqueDays = new Set(sortedMoods.map(m => {
+    // 1. Extract unique UTC dates (YYYY-MM-DD)
+    const uniqueDates = new Set(moods.map(m => {
         const d = new Date(m.createdAt);
-        d.setHours(0, 0, 0, 0);
-        return d.getTime();
+        return d.toISOString().split('T')[0];
     }));
 
-    const days = Array.from(uniqueDays).sort((a, b) => b - a);
+    // 2. Sort dates descending
+    const sortedDates = Array.from(uniqueDates).sort((a, b) => b.localeCompare(a));
     
-    let streak = 0;
+    // 3. Current context
     const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    const today = now.getTime();
-    const yesterday = today - 86400000;
+    const todayStr = now.toISOString().split('T')[0];
+    
+    const yesterday = new Date(now);
+    yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
 
-    // If the latest check-in is not today or yesterday, streak is broken
-    if (days[0] < yesterday) return 0;
+    // 4. Check if streak is broken (must have logged today or yesterday)
+    const latestDate = sortedDates[0];
+    if (latestDate !== todayStr && latestDate !== yesterdayStr) {
+        return 0;
+    }
 
-    let currentExpected = days[0];
-    for (const day of days) {
-        if (day === currentExpected) {
+    // 5. Count consecutive days
+    let streak = 0;
+    let expectedDate = new Date(latestDate);
+
+    for (const dateStr of sortedDates) {
+        const currentExpectedStr = expectedDate.toISOString().split('T')[0];
+        if (dateStr === currentExpectedStr) {
             streak++;
-            currentExpected -= 86400000;
+            expectedDate.setUTCDate(expectedDate.getUTCDate() - 1);
         } else {
+            // Gap found
             break;
         }
     }

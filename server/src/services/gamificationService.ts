@@ -69,12 +69,31 @@ export class GamificationService {
             }
         }
 
-        // Update longest streak if needed
-        if (currentStreak > user.longestStreak) {
-            await prisma.user.update({
-                where: { id: userId },
-                data: { longestStreak: currentStreak }
+        // 3. Garden Specific Artifacts (Visual Ornaments)
+        if (currentStreak >= 10 && !unlockedTypes.includes('GARDEN_ARTIFACT_LANTERN')) {
+            const lantern = await prisma.achievement.create({
+                data: {
+                    userId,
+                    type: 'GARDEN_ARTIFACT_LANTERN',
+                    title: 'Resilience Luminary',
+                    description: 'A glowing lantern for maintaining a 10-day streak.',
+                    icon: 'Lamp'
+                }
             });
+            newAchievements.push(lantern);
+        }
+
+        if (user.moodEntries.length >= 50 && !unlockedTypes.includes('GARDEN_ARTIFACT_STONE')) {
+            const stone = await prisma.achievement.create({
+                data: {
+                    userId,
+                    type: 'GARDEN_ARTIFACT_STONE',
+                    title: 'Zen Foundation',
+                    description: 'A commemorative stone for 50 total check-ins.',
+                    icon: 'Diamond'
+                }
+            });
+            newAchievements.push(stone);
         }
 
         return newAchievements;
@@ -123,8 +142,30 @@ export class GamificationService {
                     healthScore: newHealthScore
                 }
             });
+
+            // Trigger achievement check
+            await this.checkAchievements(userId);
         } catch (error) {
             console.error('[GAMIFICATION] Garden update failed:', error);
+        }
+    }
+
+    static async awardCarePlanArtifact(userId: string) {
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            include: { achievements: true }
+        });
+
+        if (user && !user.achievements.some(a => a.type === 'GARDEN_ARTIFACT_SPARK')) {
+            await prisma.achievement.create({
+                data: {
+                    userId,
+                    type: 'GARDEN_ARTIFACT_SPARK',
+                    title: 'Growth Spark',
+                    description: 'Unlocked for completing your first weekly Care Plan.',
+                    icon: 'Zap'
+                }
+            });
         }
     }
 }

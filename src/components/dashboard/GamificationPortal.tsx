@@ -113,6 +113,7 @@ export const GamificationPortal = ({ className }: { className?: string }) => {
                         level={stats?.garden?.growthLevel || 1} 
                         health={stats?.garden?.healthScore || 50} 
                         loading={loading}
+                        artifacts={stats?.achievements?.filter((a: any) => a.type.startsWith('GARDEN_ARTIFACT_')).map((a: any) => a.type)}
                     />
                     
                     <div className="glass p-6 rounded-[2.5rem] bg-gradient-to-br from-primary/5 to-transparent border-primary/10">

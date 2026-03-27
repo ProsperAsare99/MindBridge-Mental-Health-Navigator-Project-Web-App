@@ -126,39 +126,43 @@ export function DailyPerspective({ moodStats, className }: DailyPerspectiveProps
                 </div>
 
                 <div className="flex flex-col gap-4 shrink-0">
-                    <Button className="h-12 px-8 rounded-2xl font-bold gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
-                        Deep Dive <ChevronRight size={18} />
-                    </Button>
+                    <Link href="/dashboard/analytics">
+                        <Button className="h-12 w-full px-8 rounded-2xl font-bold gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                            Deep Dive <ChevronRight size={18} />
+                        </Button>
+                    </Link>
                     
-                    <div className="group/wellness relative flex items-center gap-4 px-5 py-4 rounded-[2rem] bg-gradient-to-br from-white/30 to-white/5 dark:from-white/5 dark:to-transparent backdrop-blur-sm border border-white/10 shadow-lg overflow-hidden active:scale-95 transition-all duration-300 cursor-pointer">
-                        {/* Animated Background Glow - Toned down */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/2 to-emerald-500/0 opacity-0 group-hover/wellness:opacity-100 transition-opacity duration-700 -translate-x-full group-hover/wellness:translate-x-full" />
-                        
-                        {/* Icon Container with subtle Pulse */}
-                        <div className="relative flex-shrink-0">
-                            <div className="absolute inset-0 bg-emerald-500/10 blur-lg rounded-full scale-125 animate-pulse" />
-                            <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-br from-emerald-500/80 to-emerald-600/80 flex items-center justify-center text-white shadow-md shadow-emerald-500/10">
-                                <HeartPulse size={22} className="group-hover/wellness:scale-105 transition-transform duration-300" />
+                    <Link href="/dashboard/analytics">
+                        <div className="group/wellness relative flex items-center gap-4 px-5 py-4 rounded-[2rem] bg-gradient-to-br from-white/30 to-white/5 dark:from-white/5 dark:to-transparent backdrop-blur-sm border border-white/10 shadow-lg overflow-hidden active:scale-95 transition-all duration-300 cursor-pointer">
+                            {/* Animated Background Glow - Toned down */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/2 to-emerald-500/0 opacity-0 group-hover/wellness:opacity-100 transition-opacity duration-700 -translate-x-full group-hover/wellness:translate-x-full" />
+                            
+                            {/* Icon Container with subtle Pulse */}
+                            <div className="relative flex-shrink-0">
+                                <div className="absolute inset-0 bg-emerald-500/10 blur-lg rounded-full scale-125 animate-pulse" />
+                                <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-br from-emerald-500/80 to-emerald-600/80 flex items-center justify-center text-white shadow-md shadow-emerald-500/10">
+                                    <HeartPulse size={22} className="group-hover/wellness:scale-105 transition-transform duration-300" />
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Text Section */}
-                        <div className="relative z-10 space-y-0.5">
-                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600/60 dark:text-emerald-400/60 leading-none">
-                                Overall Wellness
-                            </p>
-                            <div className="flex items-center gap-2">
-                                <p className="text-sm font-black text-foreground/90 tracking-tight">
-                                    {isInactive ? "Time for a Break" : "Stably Improving"}
+                            {/* Text Section */}
+                            <div className="relative z-10 space-y-0.5">
+                                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600/60 dark:text-emerald-400/60 leading-none">
+                                    Overall Wellness
                                 </p>
-                                <div className="flex gap-0.5 opacity-60">
-                                    <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.3s]", isInactive && "bg-amber-500")} />
-                                    <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.15s]", isInactive && "bg-amber-500")} />
-                                    <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce", isInactive && "bg-amber-500")} />
+                                <div className="flex items-center gap-2">
+                                    <p className="text-sm font-black text-foreground/90 tracking-tight">
+                                        {isInactive ? "Time for a Break" : "Stably Improving"}
+                                    </p>
+                                    <div className="flex gap-0.5 opacity-60">
+                                        <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.3s]", isInactive && "bg-amber-500")} />
+                                        <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.15s]", isInactive && "bg-amber-500")} />
+                                        <div className={cn("h-1 w-1 rounded-full bg-emerald-500 animate-bounce", isInactive && "bg-amber-500")} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </motion.div>

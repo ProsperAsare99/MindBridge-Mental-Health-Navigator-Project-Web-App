@@ -34,6 +34,7 @@ import { TrendingUp } from "lucide-react";
 import { GamificationPortal } from "@/components/dashboard/GamificationPortal";
 import { DailyPerspective } from "@/components/dashboard/daily-perspective";
 import { PersonalizedRecommendations } from "@/components/dashboard/PersonalizedRecommendations";
+import { CarePlanTimeline } from "@/components/dashboard/CarePlanTimeline";
 
 export default function DashboardPage() {
     const { data: session, status } = useSession();
@@ -137,8 +138,15 @@ export default function DashboardPage() {
                                         <h3 className="text-sm font-black text-foreground uppercase tracking-tight">Activity Flow</h3>
                                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Your Weekly Trajectory</p>
                                     </div>
-                                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#6C757D]/10 border border-[#6C757D]/10 text-[#6C757D] text-[10px] font-black uppercase">
-                                        <Activity size={12} strokeWidth={3} /> {moodStats.count} Total Logs
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#6C757D]/10 border border-[#6C757D]/10 text-[#6C757D] text-[10px] font-black uppercase">
+                                            <Activity size={12} strokeWidth={3} /> {moodStats.count} Total Logs
+                                        </div>
+                                        <Link href="/dashboard/analytics">
+                                            <Button variant="ghost" className="h-8 px-3 rounded-xl text-[9px] font-black uppercase tracking-widest gap-1 hover:bg-primary/10 hover:text-primary transition-all">
+                                                Deep Dive <ArrowUpRight size={12} />
+                                            </Button>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="h-[280px]">
@@ -211,9 +219,9 @@ export default function DashboardPage() {
                     </DashboardItem>
                 </div>
 
-                {/* 7. Personalized Recommendations */}
+                {/* 7. Weekly Resilience Journey */}
                 <DashboardItem>
-                    <PersonalizedRecommendations />
+                    <CarePlanTimeline />
                 </DashboardItem>
 
                 {/* 8. Support & Crisis */}

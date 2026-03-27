@@ -13,6 +13,7 @@ import { EmotionWheel } from "./EmotionWheel";
 import { SymptomTracker } from "./SymptomTracker";
 import { AdvancedMoodTracker } from "./AdvancedMoodTracker";
 import { api } from "@/lib/api";
+import Link from "next/link";
 
 const MOODS = [
     { value: 1, icon: CloudRain, label: "Awful", color: "text-slate-500", bgColor: "bg-slate-500/10" },
@@ -487,22 +488,24 @@ export function MoodLogger({ onComplete }: { onComplete: () => void }) {
                                         </div>
                                         <div className="grid gap-3">
                                             {recommendations.slice(0, 2).map((rec: any) => (
-                                                <div key={rec.id} className="flex items-center gap-4 p-4 rounded-2xl bg-muted/20 border border-border group text-left transition-all hover:bg-muted/40">
-                                                    <div className="h-10 w-10 rounded-xl bg-background border border-border flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-110">
-                                                        {rec.icon === 'Users' && <Smile size={20} />}
-                                                        {rec.icon === 'Wind' && <Cloud size={20} />}
-                                                        {rec.icon === 'PhoneCall' && <CheckCircle2 size={20} />}
-                                                        {rec.icon === 'Clock' && <Clock size={20} />}
-                                                        {rec.icon === 'Moon' && <Moon size={20} />}
-                                                        {rec.icon === 'Star' && <Star size={20} />}
-                                                        {rec.icon === 'Zap' && <Zap size={20} />}
+                                                <Link key={rec.id} href={rec.link || "/dashboard"}>
+                                                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-muted/20 border border-border group text-left transition-all hover:bg-muted/40 cursor-pointer">
+                                                        <div className="h-10 w-10 rounded-xl bg-background border border-border flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-110">
+                                                            {rec.icon === 'Users' && <Smile size={20} />}
+                                                            {rec.icon === 'Wind' && <Cloud size={20} />}
+                                                            {rec.icon === 'PhoneCall' && <CheckCircle2 size={20} />}
+                                                            {rec.icon === 'Clock' && <Clock size={20} />}
+                                                            {rec.icon === 'Moon' && <Moon size={20} />}
+                                                            {rec.icon === 'Star' && <Star size={20} />}
+                                                            {rec.icon === 'Zap' && <Zap size={20} />}
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-xs font-bold text-foreground">{rec.title}</h4>
+                                                            <p className="text-[10px] text-muted-foreground line-clamp-1">{rec.description}</p>
+                                                        </div>
+                                                        <ArrowRight size={14} className="ml-auto text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                                                     </div>
-                                                    <div>
-                                                        <h4 className="text-xs font-bold text-foreground">{rec.title}</h4>
-                                                        <p className="text-[10px] text-muted-foreground line-clamp-1">{rec.description}</p>
-                                                    </div>
-                                                    <ArrowRight size={14} className="ml-auto text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                </div>
+                                                </Link>
                                             ))}
                                         </div>
                                     </div>

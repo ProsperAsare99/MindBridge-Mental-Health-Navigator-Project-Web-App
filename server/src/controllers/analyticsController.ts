@@ -3,6 +3,7 @@ import prisma from '../lib/prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { RecommendationService } from '../services/recommendationService';
 import { GamificationService } from '../services/gamificationService';
+import { CarePlanService } from '../services/carePlanService';
 // AI imports removed to maintain "Advanced Analytics" identity
 
 export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
@@ -287,5 +288,108 @@ export const getRecommendations = async (req: AuthRequest, res: Response) => {
     } catch (error) {
         console.error('Recommendations Error:', error);
         res.status(500).json({ error: 'Failed to fetch personalized recommendations.' });
+    }
+};
+
+export const getCurrentCarePlan = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.userId) return res.status(401).json({ error: 'Not authenticated' });
+        const plan = await CarePlanService.getOrCreateWeeklyPlan(req.userId);
+        res.json(plan);
+    } catch (error) {
+        console.error('Care Plan Error:', error);
+        res.status(500).json({ error: 'Failed to sync your interactive care plan.' });
+    }
+};
+
+export const toggleCarePlanTask = async (req: AuthRequest, res: Response) => {
+    try {
+        const { planId, taskId } = req.body;
+        if (!req.userId) return res.status(401).json({ error: 'Not authenticated' });
+        
+        const updatedPlan = await CarePlanService.toggleTaskCompletion(req.userId, planId, taskId);
+        
+        // Reward XP for completing a task
+        const tasks = updatedPlan.growthTasks as any[];
+        const task = tasks.find(t => t.id === taskId);
+        if (task && task.completed) {
+            await GamificationService.rewardXP(req.userId, 'CHALLENGE_COMPLETE');
+            
+            // If all tasks are completed, award a special garden artifact
+            const allCompleted = tasks.every(t => t.completed);
+            if (allCompleted) {
+                await GamificationService.awardCarePlanArtifact(req.userId);
+            }
+        }
+
+        res.json(updatedPlan);
+    } catch (error) {
+        console.error('Toggle Task Error:', error);
+        res.status(500).json({ error: 'Failed to update task progress.' });
+    }
+};
+export const getDeepDiveAnalytics = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.userId) return res.status(401).json({ error: 'Not authenticated' });
+        const userId = req.userId;
+
+        // 1. Fetch extensive data spans
+        const [moods, circlePosts, carePlans, usageLogs] = await Promise.all([
+            prisma.moodEntry.findMany({ where: { userId }, orderBy: { createdAt: 'desc' }, take: 50 }),
+            prisma.circlePost.findMany({ where: { authorId: userId }, orderBy: { createdAt: 'desc' } }),
+            prisma.carePlan.findMany({ where: { userId }, orderBy: { generatedAt: 'desc' } }),
+            prisma.usageLog.findMany({ where: { userId }, take: 100, orderBy: { timestamp: 'desc' } })
+        ]);
+
+        // 2. Correlation: Community vs Mood
+        // Compare mood on days with circle posts vs days without
+        const daysWithPosts = new Set(circlePosts.map(p => p.createdAt.toISOString().split('T')[0]));
+        const moodsWithPosts = moods.filter(m => daysWithPosts.has(m.createdAt.toISOString().split('T')[0]));
+        const moodsWithoutPosts = moods.filter(m => !daysWithPosts.has(m.createdAt.toISOString().split('T')[0]));
+
+        const avgWithPost = moodsWithPosts.length > 0 ? moodsWithPosts.reduce((a, b) => a + b.mood, 0) / moodsWithPosts.length : null;
+        const avgWithoutPost = moodsWithoutPosts.length > 0 ? moodsWithoutPosts.reduce((a, b) => a + b.mood, 0) / moodsWithoutPosts.length : null;
+
+        // 3. Correlation: Care Plan vs Anxiety
+        // Analyze if anxiety decreases as care plan tasks are completed
+        const recentPlan = carePlans[0];
+        const completedTasks = recentPlan ? (recentPlan.growthTasks as any[]).filter(t => t.completed).length : 0;
+        const totalTasks = recentPlan ? (recentPlan.growthTasks as any[]).length : 0;
+        const completionRate = totalTasks > 0 ? completedTasks / totalTasks : 0;
+
+        // 4. Synthesize Dashboard Insights
+        const correlations = [];
+        if (avgWithPost !== null && avgWithoutPost !== null) {
+            const diff = avgWithPost - avgWithoutPost;
+            correlations.push({
+                factor: 'Community Support',
+                impact: diff > 0 ? 'POSITIVE' : 'NEUTRAL',
+                description: `Days you share in circles show a ${Math.abs(diff).toFixed(1)}pt ${diff > 0 ? 'increase' : 'fluctuation'} in mood.`,
+                score: Math.min(100, Math.abs(diff) * 50)
+            });
+        }
+
+        if (completionRate > 0.5) {
+            correlations.push({
+                factor: 'Care Adherence',
+                impact: 'POSITIVE',
+                description: 'Completing over 50% of your Care Plan tasks is stabilizing your resilience trajectory.',
+                score: completionRate * 100
+            });
+        }
+
+        res.json({
+            correlations,
+            participationStats: {
+                totalCircleShares: circlePosts.length,
+                carePlanAdherence: Math.round(completionRate * 100),
+                meditationConsistency: usageLogs.filter(l => l.model === 'MEDITATION_COMPLETE').length
+            },
+            forecast: avgWithPost && avgWithPost > 4 ? 'STABLE' : 'TRANSITIONING'
+        });
+
+    } catch (error) {
+        console.error('Deep Dive Error:', error);
+        res.status(500).json({ error: 'Failed to synthesize deep-dive correlations.' });
     }
 };

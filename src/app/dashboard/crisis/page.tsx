@@ -283,6 +283,8 @@ const SELF_HELP_TIPS = [
     },
 ];
 
+import { CrisisBriefHandoff } from "@/components/dashboard/CrisisBriefHandoff";
+
 export default function CrisisPage() {
     const [expandedUni, setExpandedUni] = useState<number | null>(null);
     const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -294,7 +296,7 @@ export default function CrisisPage() {
         window.open(`tel:${number.replace(/\s/g, "")}`, "_self");
     };
 
-    // Haversine formula to calculate distance in KM
+    // ... rest of logic ...
     const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
         const R = 6371; // Radius of the earth in km
         const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -375,6 +377,9 @@ export default function CrisisPage() {
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-[1.1]">
                         You are safe. <br /><span className="text-red-600">Help is here.</span>
                     </h1>
+                    
+                    <CrisisBriefHandoff />
+
                     <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl font-medium">
                         If you are in a life-threatening situation or need immediate emergency care, please reach out to the services below. You are not alone.
                     </p>
