@@ -42,6 +42,7 @@ export default function RegisterPage() {
         try {
             const finalInstitution = institution === "Other" ? otherInstitution : institution;
             await register(email, password, name, finalInstitution, studentId, course, phoneNumber);
+            alert("MindBridge Account Initialized! Welcome to the network. Please sign in to continue.");
             router.push("/login?registered=true");
         } catch (err: any) {
             setError(err.message || "An error occurred during registration.");

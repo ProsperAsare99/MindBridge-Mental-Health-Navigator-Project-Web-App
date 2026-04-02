@@ -37,6 +37,7 @@ export default function LoginPage() {
         try {
             const result = await loginWithCredentials(email, password);
             if (result?.ok) {
+                alert("Welcome back! You have successfully signed in.");
                 window.location.href = "/dashboard";
             }
         } catch (err: any) {
