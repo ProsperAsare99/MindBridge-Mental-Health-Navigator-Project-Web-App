@@ -1,15 +1,16 @@
 "use client";
 
-import { SunIcon as Sunburst, ArrowLeft, Loader2, ShieldCheck, Mail, Lock, UserCircle, PlusCircle, User, School, Hash, BookOpen, Eye, EyeOff, ArrowRight, Phone } from "lucide-react";
-import { useState } from "react";
+import { SunIcon as Sunburst, ArrowLeft, Loader2, ShieldCheck, Mail, Lock, UserCircle, PlusCircle, User, School, Hash, BookOpen, Eye, EyeOff, ArrowRight, Phone, CheckCircle2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
-import { DotMap } from "@/components/auth/DotMap";
 import { INSTITUTION_OPTIONS } from "@/lib/constants";
 import { AnimatedSelect } from "@/components/ui/animated-select";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { cn } from "@/lib/utils";
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -25,14 +26,13 @@ export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const [showConsent, setShowConsent] = useState(true);
     const [hasConsented, setHasConsented] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
     const router = useRouter();
     const { register, loginWithGoogle, loginAnonymously } = useAuth() as any;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!hasConsented) {
-            setError("Please review and accept the informed consent to continue.");
+            setError("Security protocol: Please review and accept consent.");
             setShowConsent(true);
             return;
         }
@@ -42,87 +42,91 @@ export default function RegisterPage() {
         try {
             const finalInstitution = institution === "Other" ? otherInstitution : institution;
             await register(email, password, name, finalInstitution, studentId, course, phoneNumber);
-            alert("MindBridge Account Initialized! Welcome to the network. Please sign in to continue.");
             router.push("/login?registered=true");
         } catch (err: any) {
-            setError(err.message || "An error occurred during registration.");
+            setError(err.message || "Initialization failed. Check parameters.");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleGoogleLogin = async () => {
-        setLoading(true);
-        setError("");
-        try {
-            await loginWithGoogle();
-        } catch (err: any) {
-            setError(err.message || "Google Sign-In failed.");
-        } finally {
-            setLoading(false);
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.05, delayChildren: 0.1 }
         }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { y: 15, opacity: 0 },
+        visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] as any } }
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-primary/30">
-            {/* Informed Consent Modal omitted for brevity if unchanged, but I'll include form logic */}
-            {/* ... */}
+        <div className="min-h-screen w-full flex items-center justify-center bg-[#0a0a0b] selection:bg-primary/30 noise-bg overflow-hidden relative">
+            {/* Immersive Background */}
+            <div className="absolute inset-0 -z-10">
+                <div className="absolute top-[10%] right-[-10%] w-[60%] h-[60%] bg-primary/5 rounded-full blur-[140px] animate-pulse" />
+                <div className="absolute bottom-[10%] left-[-10%] w-[50%] h-[50%] bg-blue-500/5 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+            </div>
+
             <AnimatePresence>
                 {showConsent && (
                     <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/90 backdrop-blur-3xl"
                     >
                         <motion.div 
-                            initial={{ scale: 0.95, y: 20, opacity: 0 }}
+                            initial={{ scale: 0.98, y: 20, opacity: 0 }}
                             animate={{ scale: 1, y: 0, opacity: 1 }}
-                            className="max-w-xl w-full bg-card p-8 md:p-12 border border-border shadow-2xl space-y-8 relative overflow-hidden rounded-3xl"
+                            className="max-w-xl w-full glass-morphism p-10 md:p-14 border-white/5 shadow-2xl space-y-10 relative overflow-hidden rounded-[2.5rem]"
                         >
-                            <div className="space-y-4">
-                                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                                    <ShieldCheck className="h-6 w-6 text-primary" />
+                            <div className="space-y-6">
+                                <div className="h-14 w-14 rounded-[1.25rem] bg-primary/10 flex items-center justify-center border border-primary/20">
+                                    <ShieldCheck className="h-7 w-7 text-primary" />
                                 </div>
-                                <h2 className="text-2xl font-extrabold tracking-tight">System Commitment</h2>
-                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                    By proceeding with the MindBridge initialization, you acknowledge that this is a 
-                                    <span className="text-primary font-bold mx-1">supportive cognitive framework</span> 
-                                    and not a replacement for clinical emergency services.
+                                <h2 className="text-3xl font-black tracking-tight text-white">Security Protocol</h2>
+                                <p className="text-sm text-muted-foreground leading-relaxed font-medium">
+                                    MindBridge is an <span className="text-white font-bold">intelligent cognitive layer</span>. 
+                                    By continuing, you acknowledge that this system provides supportive insights and is not a 
+                                    replacement for emergency clinical care.
                                 </p>
                             </div>
 
-                            <div className="space-y-4 bg-muted/30 p-6 rounded-2xl border border-border/50">
-                                <h4 className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/60">Data Policy</h4>
-                                <ul className="space-y-3">
+                            <div className="space-y-4 bg-white/5 p-8 rounded-3xl border border-white/5">
+                                <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/40">Data Integrity</h4>
+                                <ul className="space-y-4">
                                     {[
-                                        "End-to-end encryption for all personal metrics",
-                                        "Anonymized data contribution for resilience research",
-                                        "Full ownership and right to immediate data erasure"
+                                        "End-to-end proprietary encryption.",
+                                        "Anonymized contribution to resilience metrics.",
+                                        "Right to complete data erasure."
                                     ].map((item, i) => (
-                                        <li key={i} className="flex items-start gap-3 text-xs font-semibold text-foreground/80">
-                                            <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                                        <li key={i} className="flex items-center gap-4 text-xs font-bold text-muted-foreground group">
+                                            <CheckCircle2 className="h-4 w-4 text-primary opacity-40 group-hover:opacity-100 transition-opacity" />
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
                             </div>
 
-                            <div className="flex flex-col gap-3 pt-4">
-                                <button 
+                            <div className="flex flex-col gap-4 pt-4">
+                                <MagneticButton 
                                     onClick={() => {
                                         setHasConsented(true);
                                         setShowConsent(false);
                                     }}
-                                    className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-extrabold text-[11px] uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-primary/10"
+                                    className="w-full h-14 bg-white text-black font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all"
                                 >
-                                    ACCEPT & PROCEED
-                                </button>
+                                    Establish Trust
+                                </MagneticButton>
                                 <button 
                                     onClick={() => router.push("/")}
-                                    className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/50 hover:text-red-500 transition-colors py-2"
+                                    className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/30 hover:text-red-500 transition-colors py-2"
                                 >
-                                    TERMINATE SESSION
+                                    Decline Connection
                                 </button>
                             </div>
                         </motion.div>
@@ -131,24 +135,29 @@ export default function RegisterPage() {
             </AnimatePresence>
 
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="w-full max-w-6xl h-screen md:h-[min(900px,95vh)] overflow-hidden flex flex-col md:flex-row bg-card shadow-2xl md:rounded-3xl border border-border/50"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] as any }}
+                className="w-full max-w-6xl h-screen md:h-[min(900px,92vh)] overflow-hidden flex flex-col md:flex-row glass-morphism md:rounded-[3rem] shadow-2xl border-white/5 relative z-10"
             >
-                {/* Left Panel: Brand & Visuals (unchanged) */}
-                <div className="hidden md:flex w-1/2 relative bg-[#141415] overflow-hidden flex-col justify-between p-12 border-r border-white/5">
-                    <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-40" />
-                        <DotMap />
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(197,160,89,0.05),transparent_70%)]" />
+                {/* Left Panel: Desktop Visual */}
+                <div className="hidden md:flex w-2/5 relative bg-secondary/10 overflow-hidden flex-col justify-between p-12 border-r border-white/5">
+                    <div className="absolute inset-0 opacity-10 pointer-events-none">
+                        {[...Array(20)].map((_, i) => (
+                           <motion.div 
+                             key={i}
+                             className="absolute h-px w-px bg-white rounded-full"
+                             initial={{ x: Math.random() * 100 + "%", y: Math.random() * 100 + "%", opacity: 0 }}
+                             animate={{ y: ["0%", "100%"], opacity: [0, 0.5, 0] }}
+                             transition={{ duration: Math.random() * 8 + 8, repeat: Infinity, ease: "linear", delay: Math.random() * 5 }}
+                           />
+                        ))}
                     </div>
 
-                    <div className="relative z-10 flex items-center gap-4 group cursor-default">
-                        <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all duration-500">
+                    <div className="relative z-10">
+                        <Link href="/">
                             <Logo iconOnly size="md" />
-                        </div>
-                        <span className="text-2xl font-extrabold tracking-tighter text-white">MindBridge</span>
+                        </Link>
                     </div>
 
                     <div className="relative z-10 space-y-6">
@@ -156,245 +165,162 @@ export default function RegisterPage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-white uppercase"
+                            className="text-4xl lg:text-5xl font-black leading-[0.95] tracking-tighter text-white"
                         >
-                            Your cognitive <span className="text-primary">resilience</span> starts here.
+                            Build Your <br />
+                            <span className="text-gradient">Resilience.</span>
                         </motion.h1>
-                        <motion.p 
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="text-lg text-zinc-400 font-medium leading-relaxed max-sm"
-                        >
-                            Join a community of students empowering themselves with intelligent wellness support.
-                        </motion.p>
+                        <p className="text-lg text-muted-foreground font-medium leading-relaxed max-w-[280px]">
+                            Join the next generation of academic wellness technology.
+                        </p>
                     </div>
 
-                    <div className="relative z-10 flex items-center gap-8 pt-8 border-t border-white/5">
-                        <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <ShieldCheck className="h-4 w-4 text-primary/50" />
-                            Privacy Centric
-                        </div>
-                        <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <PlusCircle className="h-4 w-4 text-primary/50" />
-                            Encrypted Data
+                    <div className="relative z-10 pt-8 border-t border-white/5">
+                        <div className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/30">
+                            Proprietary Secure Interface
                         </div>
                     </div>
                 </div>
 
-                {/* Right Panel: Register Form */}
-                <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-card relative z-10 overflow-y-auto custom-scrollbar">
-                    <div className="max-w-md mx-auto w-full space-y-8">
-                        <div className="space-y-2">
-                            <div className="md:hidden flex items-center gap-3 mb-8">
-                                <Logo iconOnly size="sm" />
-                                <span className="text-xl font-extrabold tracking-tighter">MindBridge</span>
-                            </div>
-                            <h2 className="text-3xl font-extrabold tracking-tight text-foreground">Initialize Profile</h2>
-                            <p className="text-sm font-semibold text-muted-foreground/60 uppercase tracking-widest">
-                                Welcome to the MindBridge Network
-                            </p>
-                        </div>
-
-                        {/* Social Auth (unchanged) */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <button onClick={handleGoogleLogin} disabled={loading} className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group">
-                                <svg className="h-4 w-4 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.27.81-.57z" fill="#FBBC05"/>
-                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                                </svg>
-                                Google
-                            </button>
-                            <button
-                                onClick={async () => {
-                                    setLoading(true);
-                                    try {
-                                        await loginAnonymously();
-                                    } catch (err: any) {
-                                        setError(err.message || "Guest access failed.");
-                                    } finally {
-                                        setLoading(false);
-                                    }
-                                }}
-                                disabled={loading}
-                                className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group"
-                            >
-                                <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-primary transition-colors" />
-                                Guest
-                            </button>
-                        </div>
-
-                        <div className="relative py-4 flex items-center justify-center">
-                            <div className="text-[12px] font-extrabold uppercase tracking-[.4em] text-muted-foreground/40">
-                                Standard Authentication
-                            </div>
+                {/* Right Panel: Form */}
+                <div className="w-full md:w-3/5 p-8 md:p-16 lg:p-20 flex flex-col justify-center relative overflow-y-auto custom-scrollbar">
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="max-w-[420px] mx-auto w-full space-y-12"
+                    >
+                        {/* Header */}
+                        <div className="space-y-4">
+                            <motion.h2 variants={itemVariants} className="text-4xl font-black text-white tracking-tight">Register</motion.h2>
+                            <motion.div variants={itemVariants} className="h-1 w-12 bg-primary rounded-full" />
                         </div>
 
                         {error && (
-                            <div className="p-4 bg-red-500/5 text-red-600 text-[10px] font-extrabold uppercase tracking-widest rounded-2xl border border-red-500/10 flex items-center gap-3">
-                                <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
+                            <motion.div 
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="p-4 bg-red-500/5 border border-red-500/10 rounded-2xl flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-red-500"
+                            >
+                                <div className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
                                 {error}
-                            </div>
+                            </motion.div>
                         )}
 
-                        <form className="space-y-4" onSubmit={handleSubmit}>
-                            <div className="space-y-4">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Full Name</label>
-                                    <div className="relative group">
-                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                        <form className="space-y-8" onSubmit={handleSubmit}>
+                            <motion.div variants={itemVariants} className="space-y-6">
+                                {/* Name Input */}
+                                <div className="group">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Full Identity</label>
+                                    <div className="relative">
+                                        <User className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type="text"
                                             required
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                             placeholder="Prosper Asare"
-                                            className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Phone Number</label>
-                                    <div className="relative group">
-                                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
-                                        <input
-                                            type="tel"
-                                            required
-                                            value={phoneNumber}
-                                            onChange={(e) => setPhoneNumber(e.target.value)}
-                                            placeholder="+233 123 456 789"
-                                            className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Institution Row - Moved to its own row for layout fix */}
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Institution</label>
+                                {/* Institution Select */}
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1">Learning Institution</label>
                                     <AnimatedSelect
                                         value={institution}
                                         onChange={setInstitution}
-                                        placeholder="Select Your Institution"
+                                        placeholder="Select Identity Node"
                                         options={INSTITUTION_OPTIONS}
                                         icon={<School className="h-4 w-4" />}
                                     />
-                                    <AnimatePresence>
-                                        {institution === "Other" && (
-                                            <motion.div
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: "auto" }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="mt-2"
-                                            >
-                                                <input
-                                                    type="text"
-                                                    required
-                                                    value={otherInstitution}
-                                                    onChange={(e) => setOtherInstitution(e.target.value)}
-                                                    placeholder="Enter your institution name"
-                                                    className="w-full py-3 px-4 border border-border/50 bg-background/50 rounded-xl text-sm font-medium focus:outline-none focus:border-orange-500/50"
-                                                />
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Student ID</label>
-                                        <div className="relative group">
-                                            <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                {/* Multi-row info */}
+                                <div className="grid grid-cols-2 gap-8">
+                                    <div className="group">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Digital ID</label>
+                                        <div className="relative">
+                                            <Hash className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                             <input
                                                 type="text"
                                                 required
                                                 value={studentId}
                                                 onChange={(e) => setStudentId(e.target.value)}
                                                 placeholder="10XXXXXX"
-                                                className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                                className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                             />
                                         </div>
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Course of Study</label>
-                                        <div className="relative group">
-                                            <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-orange-500 transition-colors" />
+                                    <div className="group">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Course node</label>
+                                        <div className="relative">
+                                            <BookOpen className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                             <input
                                                 type="text"
                                                 required
                                                 value={course}
                                                 onChange={(e) => setCourse(e.target.value)}
-                                                placeholder="Computer Science"
-                                                className="w-full py-4 px-12 border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-muted/30 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                                placeholder="CS / AI"
+                                                className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                             />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Email Address</label>
-                                    <div className="relative group">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                {/* Email & Pass */}
+                                <div className="group">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Connection Mail</label>
+                                    <div className="relative">
+                                        <Mail className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type="email"
                                             required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="name@university.edu"
-                                            className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Password</label>
-                                    <div className="relative group">
-                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                <div className="group">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Master Key</label>
+                                    <div className="relative">
+                                        <Lock className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             required
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             placeholder="••••••••"
-                                            className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                         />
-                                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30 hover:text-primary">
+                                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground/20 hover:text-primary">
                                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <motion.button
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.98 }}
-                                onHoverStart={() => setIsHovered(true)}
-                                onHoverEnd={() => setIsHovered(false)}
-                                type="submit"
-                                disabled={loading}
-                                className="w-full h-14 mt-4 bg-primary hover:bg-primary/90 text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-primary/5 disabled:opacity-50 relative overflow-hidden"
-                            >
-                                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>INITIALIZE PROFILE <ArrowRight className="h-4 w-4" /></>}
-                                {isHovered && !loading && (
-                                    <motion.div
-                                        initial={{ x: "-100%" }}
-                                        animate={{ x: "100%" }}
-                                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-                                    />
-                                )}
-                            </motion.button>
+                            <motion.div variants={itemVariants} className="pt-6">
+                                <MagneticButton
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full h-14 bg-white text-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-primary transition-colors disabled:opacity-50"
+                                >
+                                    {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Initialize Profile {'>'}</>}
+                                </MagneticButton>
+
+                                <div className="mt-8 text-center">
+                                    <Link href="/login" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 hover:text-white transition-colors">
+                                        Part of the network? <span className="text-primary ml-1">Sign In</span>
+                                    </Link>
+                                </div>
+                            </motion.div>
                         </form>
-
-                        <div className="text-center pt-6 text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40">
-                            Already part of the network?{" "}
-                            <Link href="/login" className="text-primary hover:underline">
-                                Log In
-                            </Link>
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
             </motion.div>
         </div>
