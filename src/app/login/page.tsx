@@ -2,14 +2,14 @@
 
 export const dynamic = "force-static";
 
-import { SunIcon as Sunburst, ArrowLeft, Loader2, ShieldCheck, Mail, Lock, UserCircle, PlusCircle, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { SunIcon as Sunburst, ArrowLeft, Loader2, ShieldCheck, Mail, Lock, UserCircle, PlusCircle, Eye, EyeOff, ArrowRight, Github } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
-import { DotMap } from "@/components/auth/DotMap";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -18,14 +18,13 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
-    const [isHovered, setIsHovered] = useState(false);
     const router = useRouter();
     const { loginWithGoogle, loginWithCredentials, loginAnonymously } = useAuth() as any;
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('registered') === 'true') {
-            setSuccessMessage("Account created successfully! You can now sign in.");
+            setSuccessMessage("Identity initialized. Please sign in.");
         }
     }, []);
 
@@ -37,247 +36,227 @@ export default function LoginPage() {
         try {
             const result = await loginWithCredentials(email, password);
             if (result?.ok) {
-                alert("Welcome back! You have successfully signed in.");
                 window.location.href = "/dashboard";
             }
         } catch (err: any) {
-            console.error('Login error detail:', err);
-            setError(err.message || "Failed to sign in. Please try again.");
+            setError(err.message || "Connection failed. Please re-verify.");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleGoogleLogin = async () => {
-        setLoading(true);
-        setError("");
-        try {
-            await loginWithGoogle();
-        } catch (err: any) {
-            setError(err.message || "Google Sign-In failed.");
-        } finally {
-            setLoading(false);
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
         }
+    };
+
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] } }
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-background p-0 md:p-4 selection:bg-primary/30">
+        <div className="min-h-screen w-full flex items-center justify-center bg-[#0a0a0b] selection:bg-primary/30 noise-bg overflow-hidden relative">
+            {/* Immersive Background */}
+            <div className="absolute inset-0 -z-10">
+                <div className="absolute top-[20%] left-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[140px] animate-pulse" />
+                <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+            </div>
+
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="w-full max-w-6xl h-screen md:h-[min(800px,90vh)] overflow-hidden flex flex-col md:flex-row bg-card shadow-2xl md:rounded-3xl border border-border/50"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+                className="w-full max-w-5xl h-screen md:h-[750px] flex flex-col md:flex-row glass-morphism md:rounded-[3rem] overflow-hidden border-white/5 shadow-2xl relative z-10"
             >
-                {/* Left Panel: Brand & Visuals */}
-                <div className="hidden md:flex w-1/2 relative bg-[#141415] overflow-hidden flex-col justify-between p-12 border-r border-white/5">
-                    {/* Background Layer */}
-                    <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-40" />
-                        <DotMap />
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(197,160,89,0.05),transparent_70%)]" />
+                {/* Left Visual Panel - Desktop */}
+                <div className="hidden md:flex w-2/5 relative bg-secondary/10 overflow-hidden flex-col justify-between p-12 touch-none">
+                    <div className="absolute inset-0 opacity-20 pointer-events-none">
+                        {[...Array(15)].map((_, i) => (
+                           <motion.div 
+                             key={i}
+                             className="absolute h-px w-px bg-white rounded-full"
+                             initial={{ x: Math.random() * 100 + "%", y: Math.random() * 100 + "%", opacity: 0 }}
+                             animate={{ y: ["0%", "100%"], opacity: [0, 1, 0] }}
+                             transition={{ duration: Math.random() * 5 + 5, repeat: Infinity, ease: "linear", delay: Math.random() * 5 }}
+                           />
+                        ))}
                     </div>
 
-                    {/* Logo Area */}
-                    <div className="relative z-10 flex items-center gap-4 group cursor-default">
-                        <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all duration-500">
+                    <div className="relative z-10">
+                        <Link href="/">
                             <Logo iconOnly size="md" />
-                        </div>
-                        <span className="text-2xl font-extrabold tracking-tighter text-white">MindBridge</span>
+                        </Link>
                     </div>
 
-                    {/* Narrative Text */}
-                    <div className="relative z-10 space-y-6">
-                        <motion.h1 
+                    <div className="relative z-10 space-y-4">
+                        <motion.h2 
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-white"
+                            transition={{ delay: 0.5, duration: 1 }}
+                            className="text-4xl lg:text-5xl font-black leading-[0.95] tracking-tighter text-white"
                         >
-                            Resume your journey with <span className="text-primary">intelligent support.</span>
-                        </motion.h1>
-                        <motion.p 
+                            Reconnect <br /> 
+                            <span className="text-gradient">MindBridge.</span>
+                        </h2>
+                        <motion.p
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="text-lg text-zinc-400 font-medium leading-relaxed max-w-sm"
+                            transition={{ delay: 0.6, duration: 1 }}
+                            className="text-muted-foreground font-medium text-lg leading-relaxed max-w-[250px]"
                         >
-                            Enter your credentials to access your personalized wellness workspace and neuro-navigator.
+                            Access your predictive wellness analytics portal.
                         </motion.p>
                     </div>
 
-                    {/* Trust Badges */}
-                    <div className="relative z-10 flex items-center gap-8 pt-8 border-t border-white/5">
-                        <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <ShieldCheck className="h-4 w-4 text-primary/50" />
-                            Privacy Validated
-                        </div>
-                        <div className="flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-widest text-zinc-500">
-                            <PlusCircle className="h-4 w-4 text-primary/50" />
-                            Secure Session
+                    <div className="relative z-10 pt-8 border-t border-white/5">
+                        <div className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/30">
+                            Institutional Intelligence Node
                         </div>
                     </div>
                 </div>
 
-                {/* Right Panel: Login Form */}
-                <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-card relative z-10">
-                    <div className="max-w-md mx-auto w-full space-y-8">
-                        {/* Header */}
-                        <div className="space-y-2">
-                            <div className="md:hidden flex items-center gap-3 mb-8">
-                                <Logo iconOnly size="sm" />
-                                <span className="text-xl font-extrabold tracking-tighter">MindBridge</span>
-                            </div>
-                            <h2 className="text-3xl font-extrabold tracking-tight text-foreground">Sign In</h2>
-                            <p className="text-sm font-semibold text-muted-foreground/60 uppercase tracking-widest">
-                                Initialize your session
-                            </p>
+                {/* Right Form Panel */}
+                <div className="w-full md:w-3/5 p-8 md:p-16 flex flex-col justify-center relative overflow-y-auto">
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="max-w-sm mx-auto w-full space-y-12"
+                    >
+                        {/* Mobile Header */}
+                        <div className="md:hidden flex justify-center mb-12">
+                            <Logo size="md" />
                         </div>
 
-                        {/* Social Auth */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <button
-                                onClick={handleGoogleLogin}
-                                disabled={loading}
-                                className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group"
-                            >
-                                <svg className="h-4 w-4 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.27.81-.57z" fill="#FBBC05"/>
-                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                                </svg>
-                                Google
-                            </button>
-                            <button
-                                onClick={() => {
-                                    setLoading(true);
-                                    loginAnonymously().catch((err: any) => setError(err.message || "Guest access failed"));
-                                }}
-                                disabled={loading}
-                                className="flex items-center justify-center gap-3 py-3 px-4 border border-border rounded-2xl hover:bg-muted/50 transition-all font-bold text-xs disabled:opacity-50 group"
-                            >
-                                <UserCircle className="h-4 w-4 text-muted-foreground/60 group-hover:text-primary transition-colors" />
-                                Guest
-                            </button>
+                        <div className="space-y-4">
+                            <motion.h1 variants={itemVariants} className="text-4xl font-black text-white tracking-tight">Sign In</motion.h1>
+                            <motion.div variants={itemVariants} className="h-1 w-12 bg-primary rounded-full" />
                         </div>
 
-                        <div className="relative py-4 flex items-center justify-center">
-                            <div className="text-[12px] font-extrabold uppercase tracking-[.4em] text-muted-foreground/40">
-                                Standard Authentication
-                            </div>
-                        </div>
-
-                        {/* Error/Success Notifications */}
+                        {/* Notifications */}
                         <AnimatePresence mode="wait">
-                            {error && (
+                            {(error || successMessage) && (
                                 <motion.div
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="p-4 bg-red-500/5 text-red-600 text-[11px] font-extrabold uppercase tracking-widest rounded-2xl border border-red-500/10 flex items-center gap-3"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    className={cn(
+                                        "p-4 rounded-2xl border text-[11px] font-black uppercase tracking-widest flex items-center gap-3",
+                                        error ? "bg-red-500/5 border-red-500/10 text-red-500" : "bg-primary/5 border-primary/10 text-primary"
+                                    )}
                                 >
-                                    <div className="h-1.5 w-1.5 rounded-full bg-red-600 animate-pulse" />
-                                    {error}
-                                </motion.div>
-                            )}
-                            {successMessage && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="p-4 bg-green-500/5 text-green-600 text-[11px] font-extrabold uppercase tracking-widest rounded-2xl border border-green-500/10 flex items-center gap-3"
-                                >
-                                    <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
-                                    {successMessage}
+                                    <div className={cn("h-1.5 w-1.5 rounded-full animate-pulse", error ? "bg-red-500" : "bg-primary")} />
+                                    {error || successMessage}
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
-                        {/* Login Form */}
-                        <form className="space-y-5" onSubmit={handleLogin}>
-                            <div className="space-y-4">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Email Address</label>
-                                    <div className="relative group">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                        <form className="space-y-8" onSubmit={handleLogin}>
+                            <motion.div variants={itemVariants} className="space-y-6">
+                                <div className="space-y-2 group">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Digital Identity</label>
+                                    <div className="relative">
+                                        <Mail className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type="email"
                                             required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="name@university.edu"
-                                            className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-xs font-extrabold uppercase tracking-widest text-foreground/70 ml-1">Password</label>
-                                    <div className="relative group">
-                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                <div className="space-y-2 group">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Access Key</label>
+                                    <div className="relative">
+                                        <Lock className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             required
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             placeholder="••••••••"
-                                            className="w-full py-4 px-12 border border-border/40 rounded-2xl focus:outline-none focus:ring-1 focus:ring-primary/20 bg-muted/20 text-sm font-bold transition-all placeholder:text-muted-foreground/20"
+                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30 hover:text-primary"
+                                            className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground/20 hover:text-primary"
                                         >
                                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <div className="flex items-center justify-between px-1">
-                                <button type="button" className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground/40 hover:text-primary transition-colors">
-                                    Recovery Key?
-                                </button>
-                                <Link href="/register" className="text-[10px] font-extrabold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors">
-                                    Create Profile
+                            <motion.div variants={itemVariants} className="flex items-center justify-between">
+                                <Link href="/register" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 hover:text-primary transition-colors">
+                                    Establish Profile
                                 </Link>
-                            </div>
+                                <button type="button" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/20 hover:text-primary transition-colors">
+                                    Lost access?
+                                </button>
+                            </motion.div>
 
-                            <motion.button
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.98 }}
-                                onHoverStart={() => setIsHovered(true)}
-                                onHoverEnd={() => setIsHovered(false)}
-                                type="submit"
-                                disabled={loading}
-                                className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-primary/5 disabled:opacity-50 relative overflow-hidden"
-                            >
-                                {loading ? (
-                                    <Loader2 className="h-5 w-5 animate-spin" />
-                                ) : (
-                                    <>
-                                        ESTABLISH CONNECTION
-                                        <ArrowRight className="h-4 w-4" />
-                                    </>
-                                )}
-                                {isHovered && !loading && (
-                                    <motion.div
-                                        initial={{ x: "-100%" }}
-                                        animate={{ x: "100%" }}
-                                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-                                    />
-                                )}
-                            </motion.button>
+                            <motion.div variants={itemVariants} className="pt-4 flex flex-col items-center gap-6">
+                                <MagneticButton
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full h-14 bg-white text-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-primary transition-colors disabled:opacity-50"
+                                >
+                                    {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Connect {'>'}</>}
+                                </MagneticButton>
+
+                                <div className="flex items-center gap-6 w-full">
+                                    <div className="h-px flex-1 bg-white/5" />
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/20">or</span>
+                                    <div className="h-px flex-1 bg-white/5" />
+                                </div>
+
+                                <div className="flex gap-4 w-full">
+                                    <button 
+                                        type="button"
+                                        onClick={handleGoogleLogin}
+                                        className="flex-1 h-12 rounded-xl border border-white/5 hover:bg-white/5 flex items-center justify-center gap-2 transition-all transition-colors group"
+                                    >
+                                        <svg className="h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24">
+                                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="currentColor"/>
+                                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="currentColor" opacity="0.5"/>
+                                        </svg>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">Google</span>
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        onClick={loginAnonymously}
+                                        className="flex-1 h-12 rounded-xl border border-white/5 hover:bg-white/5 flex items-center justify-center gap-2 transition-all transition-colors group"
+                                    >
+                                        <UserCircle className="h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">Guest</span>
+                                    </button>
+                                </div>
+                            </motion.div>
                         </form>
 
-                        <div className="pt-10 text-center">
-                            <Link href="/" className="inline-flex items-center gap-2.5 text-[10px] font-extrabold uppercase tracking-[0.2em] text-muted-foreground/30 hover:text-primary transition-all group">
-                                <ArrowLeft className="h-3 w-3 group-hover:-translate-x-1 transition-transform" />
-                                Return to Navigation Node
+                        <motion.div variants={itemVariants} className="pt-12 text-center">
+                            <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground/20 hover:text-primary transition-all">
+                                <ArrowLeft className="h-3 w-3" /> Back
                             </Link>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </motion.div>
         </div>
+    );
+}
+</div>
     );
 }
