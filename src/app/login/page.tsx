@@ -25,7 +25,7 @@ export default function LoginPage() {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('registered') === 'true') {
-            setSuccessMessage("Identity initialized. Please sign in.");
+            setSuccessMessage("Account created! Please sign in.");
         }
     }, []);
 
@@ -40,7 +40,7 @@ export default function LoginPage() {
                 window.location.href = "/dashboard";
             }
         } catch (err: any) {
-            setError(err.message || "Connection failed. Please re-verify.");
+            setError(err.message || "Login failed. Please check your details.");
         } finally {
             setLoading(false);
         }
@@ -70,7 +70,7 @@ export default function LoginPage() {
     };
 
     const itemVariants: Variants = {
-        hidden: { y: 20, opacity: 0 },
+        hidden: { y: 15, opacity: 0 },
         visible: { 
             y: 0, 
             opacity: 1, 
@@ -129,15 +129,15 @@ export default function LoginPage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.6, duration: 1 }}
-                            className="text-muted-foreground font-medium text-lg leading-relaxed max-w-[250px]"
+                            className="text-muted-foreground/90 font-medium text-lg leading-relaxed max-w-[250px]"
                         >
-                            Access your predictive wellness analytics portal.
+                            Your safe space for mental wellness and support.
                         </motion.p>
                     </div>
 
                     <div className="relative z-10 pt-8 border-t border-white/5">
                         <div className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/30">
-                            Institutional Intelligence Node
+                            University Community
                         </div>
                     </div>
                 </div>
@@ -181,36 +181,36 @@ export default function LoginPage() {
                         <form className="space-y-8" onSubmit={handleLogin}>
                             <motion.div variants={itemVariants} className="space-y-6">
                                 <div className="space-y-2 group">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Digital Identity</label>
+                                    <label className="text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground/80 ml-1 group-focus-within:text-primary transition-colors">Email Address</label>
                                     <div className="relative">
-                                        <Mail className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <Mail className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type="email"
                                             required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="name@university.edu"
-                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
+                                            className="w-full py-4 pl-8 border-b border-white/20 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/40"
                                         />
                                     </div>
                                 </div>
 
                                 <div className="space-y-2 group">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 ml-1 group-focus-within:text-primary transition-colors">Access Key</label>
+                                    <label className="text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground/80 ml-1 group-focus-within:text-primary transition-colors">Password</label>
                                     <div className="relative">
-                                        <Lock className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
+                                        <Lock className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             required
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             placeholder="••••••••"
-                                            className="w-full py-4 pl-8 border-b border-white/5 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/10"
+                                            className="w-full py-4 pl-8 border-b border-white/20 bg-transparent focus:outline-none focus:border-primary transition-all text-sm font-bold text-white placeholder:text-muted-foreground/40"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground/20 hover:text-primary"
+                                            className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-primary"
                                         >
                                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
@@ -219,11 +219,11 @@ export default function LoginPage() {
                             </motion.div>
 
                             <motion.div variants={itemVariants} className="flex items-center justify-between">
-                                <Link href="/register" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 hover:text-primary transition-colors">
-                                    Establish Profile
+                                <Link href="/register" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/70 hover:text-primary transition-colors">
+                                    Don't have an account? Sign Up
                                 </Link>
-                                <button type="button" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/20 hover:text-primary transition-colors">
-                                    Lost access?
+                                <button type="button" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/50 hover:text-primary transition-colors">
+                                    Forgot password?
                                 </button>
                             </motion.div>
 
@@ -233,7 +233,7 @@ export default function LoginPage() {
                                     disabled={loading}
                                     className="w-full h-14 bg-white text-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-primary transition-colors disabled:opacity-50"
                                 >
-                                    {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Connect {'>'}</>}
+                                    {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Sign In {'>'}</>}
                                 </MagneticButton>
 
                                 <div className="flex items-center gap-6 w-full">
@@ -254,15 +254,15 @@ export default function LoginPage() {
                                             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.27.81-.57z" fill="#FBBC05"/>
                                             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                                         </svg>
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">Google</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/80">Google</span>
                                     </button>
                                     <button 
                                         type="button"
                                         onClick={loginAnonymously}
                                         className="flex-1 h-12 rounded-xl border border-white/5 hover:bg-white/5 flex items-center justify-center gap-2 transition-all transition-colors group"
                                     >
-                                        <UserCircle className="h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">Guest</span>
+                                        <UserCircle className="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/80">Guest</span>
                                     </button>
                                 </div>
                             </motion.div>
