@@ -7,6 +7,7 @@ import { SearchProvider } from "@/components/providers/SearchProvider";
 import { AdaptiveThemeProvider } from "@/components/providers/AdaptiveThemeProvider";
 import { CommandMenu } from "@/components/search/command-menu";
 import { ConnectivityBanner } from "@/components/brand/ConnectivityBanner";
+import { FramerProvider } from "@/components/providers/FramerProvider";
 
 // const outfit = Outfit({
 //   variable: "--font-outfit",
@@ -35,7 +36,7 @@ export default function RootLayout({
         className={`${outfit.variable} antialiased`}
       >
         <AuthProvider>
-
+          <FramerProvider>
             <SearchProvider>
               <AdaptiveThemeProvider>
               <ThemeProvider
@@ -50,7 +51,7 @@ export default function RootLayout({
               </ThemeProvider>
               </AdaptiveThemeProvider>
             </SearchProvider>
-
+          </FramerProvider>
         </AuthProvider>
       </body>
     </html>
